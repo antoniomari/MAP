@@ -3,7 +3,7 @@ package items;
 import events.EventHandler;
 import events.GameEvent;
 
-public class Door extends Item implements Openable
+public class Door extends Item implements Openable, Lockable
 {
     public static int OPEN = 1;
     public static int CLOSED = 0;
@@ -54,5 +54,29 @@ public class Door extends Item implements Openable
     public int getState()
     {
         return this.state;
+    }
+
+    public void lock()
+    {
+        this.state = BLOCKED;
+    }
+
+    public void unlock(PickupableItem key)
+    {
+        if (this.state != BLOCKED)
+        {
+            return;
+        }
+
+        if (key.getName().equals("Chiave spicola"))
+        {
+            this.state = OPEN;
+
+            EventHandler.printEvent(new GameEvent(this, "la porta è sbloccata e aperta"));
+        }
+        else
+        {
+            EventHandler.printEvent(new GameEvent(this, "chiave non corretta"));
+        }
     }
 }
