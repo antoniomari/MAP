@@ -11,9 +11,9 @@ public class Door extends Item implements Openable
 
     private int state;
 
-    public Door(int state)
+    public Door(String name, int state)
     {
-        super("Una porta strana");
+        super(name, "Una porta strana");
         this.state = state;
     }
 
@@ -31,7 +31,7 @@ public class Door extends Item implements Openable
         else // if(this.state == BLOCKED)
             result = "La porta è bloccata, non si può aprire";
 
-        EventHandler.printEvent(new GameEvent(result));
+        EventHandler.printEvent(new GameEvent(this, result));
 
 
     }
@@ -46,7 +46,7 @@ public class Door extends Item implements Openable
             String result = "La porta è chiusa";
             this.state = CLOSED;
 
-            EventHandler.printEvent(new GameEvent(result));
+            EventHandler.printEvent(new GameEvent(this, result));
         }
 
     }
