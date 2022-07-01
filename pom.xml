@@ -13,6 +13,11 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE130</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
