@@ -22,7 +22,7 @@ public class DBManager
     public static void setupInventory() throws SQLException
     {
 
-        Connection conn = DriverManager.getConnection("jdbc:h2:./src/main/resources/test", "sa", "");
+        Connection conn = DriverManager.getConnection("jdbc:h2:./src/main/resources/gamedb", "sa", "");
         PreparedStatement pstm= conn.prepareStatement("SELECT nomeoggetto, descrizione FROM inventario");
         ResultSet rs= pstm.executeQuery();
         while(rs.next())
@@ -31,11 +31,12 @@ public class DBManager
         }
         rs.close();
         pstm.close();
+        conn.close();
     }
 
     public static Room loadRoom(String name) throws SQLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
     {
-        Connection conn = DriverManager.getConnection("jdbc:h2:./src/main/resources/test", "sa", "");
+        Connection conn = DriverManager.getConnection("jdbc:h2:./src/main/resources/gamedb", "sa", "");
         PreparedStatement pstm= conn.prepareStatement("SELECT O.nome, O.classe, O.descrizione, D.x, D.y FROM stanza S JOIN disposizione D ON S.nome = D.nomestanza" +
                 " JOIN oggetto O ON D.nomeoggetto = O.nome WHERE S.nome = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
         pstm.setString(1,name);
