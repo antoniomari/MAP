@@ -1,7 +1,5 @@
 package items;
 
-import javax.management.Descriptor;
-
 public class Item implements Observable
 {
     private String name;
@@ -30,4 +28,8 @@ public class Item implements Observable
         return this.name;
     }
 
+    public String getDescription()
+    {
+        return description;
+    }
 }

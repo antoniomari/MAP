@@ -23,4 +23,9 @@ public class PlayingCharacter extends GameCharacter
         inventory.add(i);
         EventHandler.printEvent(new GameEvent(this, " ha aggiunto all'inventario " + i.getName()));
     }
+
+    public List<PickupableItem> getInventory()
+    {
+        return inventory;
+    }
 }

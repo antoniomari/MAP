@@ -17,6 +17,11 @@ public class Door extends Item implements Openable, Lockable
         this.state = state;
     }
 
+    public Door(String name, String description)
+    {
+        super(name, description);
+        this.state = BLOCKED;
+    }
     public void open()
     {
         if(this.state == OPEN)

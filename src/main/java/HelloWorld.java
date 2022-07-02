@@ -1,28 +1,23 @@
 import characters.PlayingCharacter;
+import database.DBManager;
 import items.Door;
 import items.PickupableItem;
-import rooms.Coordinates;
 import rooms.Room;
+
 import java.util.Scanner;
 
 public class HelloWorld
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        PickupableItem a = new PickupableItem("oggetto strano", "fa cacare");
-        PickupableItem chiaveSpicoli = new PickupableItem("Chiave spicola","Apre la porta bruna");
 
-        PlayingCharacter.SPICOLO.addToInventory(a);
-        PlayingCharacter.SPICOLO.addToInventory(chiaveSpicoli);
+        DBManager.setupInventory();
 
-        Door door1 = new Door("Porta Spicola", Door.OPEN);
-        Door door2 = new Door("Porta Santora", Door.CLOSED);
-        Door door3 = new Door("Porta Bruna", Door.BLOCKED);
-        Room bagnoStrano = new Room();
-        bagnoStrano.addItem(door1, new Coordinates(100, 0));
-        bagnoStrano.addItem(door2, new Coordinates(200, 100));
-        bagnoStrano.addItem(door3, new Coordinates(400, 600));
-
+        Room cucina = DBManager.loadRoom("Cucina");
+        Door door1, door2, door3;
+        door1 = (Door) cucina.getItem(0);
+        door2 = (Door) cucina.getItem(1);
+        door3 = (Door) cucina.getItem(2);
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine();
@@ -46,11 +41,15 @@ public class HelloWorld
             else if(input.equals("CHIUDI 3"))
                 door3.close();
             else if(input.equals("APRI 3 oggetto strano"))
-                door3.unlock(a);
+                door3.unlock(PlayingCharacter.SPICOLO.getInventory().get(0));
             else if (input.equals("APRI 3 chiave spicola"))
-                door3.unlock(chiaveSpicoli);
+                door3.unlock(PlayingCharacter.SPICOLO.getInventory().get(1));
+            else if (input.equals("INV"))
+                for (PickupableItem p: PlayingCharacter.SPICOLO.getInventory())
+                    System.out.println(p.getName() + " || " + p.getDescription());
 
             input = scanner.nextLine();
+
         }
     }
 
