@@ -2,6 +2,7 @@ package items;
 
 import events.EventHandler;
 import events.GameEvent;
+import events.ItemInteractionEvent;
 
 public class Door extends Item implements Openable, Lockable
 {
@@ -36,7 +37,7 @@ public class Door extends Item implements Openable, Lockable
         else // if(this.state == BLOCKED)
             result = "La porta è bloccata, non si può aprire";
 
-        EventHandler.printEvent(new GameEvent(this, result));
+        EventHandler.printEvent(new ItemInteractionEvent(this, result));
 
 
     }
@@ -51,7 +52,7 @@ public class Door extends Item implements Openable, Lockable
             String result = "La porta è chiusa";
             this.state = CLOSED;
 
-            EventHandler.printEvent(new GameEvent(this, result));
+            EventHandler.printEvent(new ItemInteractionEvent(this, result));
         }
 
     }
@@ -77,11 +78,11 @@ public class Door extends Item implements Openable, Lockable
         {
             this.state = OPEN;
 
-            EventHandler.printEvent(new GameEvent(this, "la porta è sbloccata e aperta"));
+            EventHandler.printEvent(new ItemInteractionEvent(this, "la porta è sbloccata e aperta"));
         }
         else
         {
-            EventHandler.printEvent(new GameEvent(this, "chiave non corretta"));
+            EventHandler.printEvent(new ItemInteractionEvent(this, "chiave non corretta"));
         }
     }
 }
