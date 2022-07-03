@@ -16,6 +16,8 @@ public class Room
     private Room east;
     private List<Item> itemList;
 
+    private String backgroundPath;
+
     private Map<Item, Coordinates> itemMap;
 
     public Room(String name)
@@ -23,6 +25,12 @@ public class Room
         this.roomName = name;
         itemMap = new HashMap<>();
         itemList = new ArrayList<>();
+    }
+
+    public Room(String name, String path)
+    {
+        this(name);
+        backgroundPath = path;
     }
 
     public void addItem(Item item, Coordinates c)
@@ -36,5 +44,9 @@ public class Room
         return itemList.get(i);
     }
 
+    public String getBackgroundPath()
+    {
+        return backgroundPath;
+    }
 
 }
