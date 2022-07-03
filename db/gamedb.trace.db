@@ -214,3 +214,9 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 2022-07-02 16:50:27 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STANZA" not found; SQL statement:
 SELECT O.nome, O.classe, O.descrizione, D.x, D.y FROM stanza S JOIN disposizione D ON S.nome = D.nomestanza JOIN oggetto O ON D.nomeoggetto = O.nome WHERE S.nome = ? [42102-214]
+2022-07-03 12:04:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * [*]form stanza"; SQL statement:
+select * form stanza [42000-214]
+2022-07-03 12:05:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table stanza [*]create column path varchar(50)"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table stanza create column path varchar(50) [42001-214]
