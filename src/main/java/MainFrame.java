@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import database.DBManager;
+import items.Door;
+import rooms.Room;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +18,8 @@ import java.io.IOException;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private Room currentRoom;
+
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int) screenSize.getWidth();
     int height = (int) screenSize.getHeight();
@@ -23,13 +29,14 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame()
+    public MainFrame(Room initialRoom)
     {
+        currentRoom = initialRoom;
 
         Image im1;
         try
         {
-            im1 = ImageIO.read(getClass().getResource("/img/lab1.png"));
+            im1 = ImageIO.read(getClass().getResource(currentRoom.getBackgroundPath()));
             /*
             ComponentListener cl = new ComponentAdapter()
             {
@@ -117,7 +124,8 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -141,10 +149,18 @@ public class MainFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        DBManager.setupInventory();
+
+        Room cucina = DBManager.loadRoom("Cucina");
+        Door door1, door2, door3;
+        door1 = (Door) cucina.getItem(0);
+        door2 = (Door) cucina.getItem(1);
+        door3 = (Door) cucina.getItem(2);
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame(cucina).setVisible(true);
             }
         });
     }
