@@ -17,12 +17,37 @@ import java.sql.SQLException;
 public class DBManager
 {
 
-    private static  Connection conn;
+    private static Connection conn;
+    private final static String DATABASE_PATH = "jdbc:h2:./db/gamedb";
+
+
+    private static void startConnection() throws SQLException
+    {
+        if (conn == null || !conn.isValid(0))
+        {
+            conn = DriverManager.getConnection(DATABASE_PATH, "sa", "");
+        }
+    }
+
+    /*
+    private static void process(PreparedStatement pstm) throws SQLException
+    {
+        startConnection();
+        ResultSet rs = pstm.executeQuery();
+        while (rs.next())
+        {
+
+        }
+        rs.close();
+        pstm.close();
+        conn.close();
+    }
+    */
 
     public static void setupInventory() throws SQLException
     {
 
-        conn = DriverManager.getConnection("jdbc:h2:./db/gamedb", "sa", "");
+        startConnection();
         PreparedStatement pstm= conn.prepareStatement("SELECT nomeoggetto, descrizione FROM gamedb.inventario");
         ResultSet rs= pstm.executeQuery();
         while(rs.next())
@@ -36,7 +61,17 @@ public class DBManager
 
     public static Room loadRoom(String name) throws SQLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
     {
-        conn = DriverManager.getConnection("jdbc:h2:./db/gamedb", "sa", "");
+        startConnection();
+        PreparedStatement pstm1= conn.prepareStatement("SELECT path FROM gamedb.stanza WHERE nome = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+        pstm1.setString(1,name);
+        ResultSet rs1= pstm1.executeQuery();
+        if (!rs1.next())
+            return null;
+
+        Room room = new Room(name, rs1.getString(1));
+        rs1.close();
+        pstm1.close();
+
         PreparedStatement pstm= conn.prepareStatement("SELECT O.nome, O.classe, O.descrizione, D.x, D.y FROM gamedb.stanza S JOIN gamedb.disposizione D ON S.nome = D.nomestanza" +
                 " JOIN gamedb.oggetto O ON D.nomeoggetto = O.nome WHERE S.nome = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
         pstm.setString(1,name);
@@ -46,9 +81,7 @@ public class DBManager
 
         rs.beforeFirst();
 
-        Room room = new Room(name);
         Item item;
-
         Class itemClass;
 
         while(rs.next())
