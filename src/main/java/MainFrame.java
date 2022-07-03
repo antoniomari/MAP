@@ -10,53 +10,59 @@ import rooms.Room;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOError;
 import java.io.IOException;
 
 /**
  *
- * @author Agnese Ingegno
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private Room currentRoom;
+    private final Room currentRoom;
+    private Icon backgroundImg;
 
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int width = (int) screenSize.getWidth();
-    int height = (int) screenSize.getHeight();
-    Icon backgroundImg;
+    private final int screenWidth;
+    private final int screenHeight;
 
 
-    /**
-     * Creates new form MainFrame
-     */
     public MainFrame(Room initialRoom)
     {
         currentRoom = initialRoom;
 
-        Image im1;
+        // Calcolo delle dimensioni dello schermo
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenWidth = (int) screenSize.getWidth();
+        screenHeight = (int) screenSize.getHeight();
+
+        // inizializzazione immagine di sfondo
+        setupBackground();
+        // inizializzazione compoonenti
+        initComponents();
+        // attiva schermo intero
+        fullScreenOn();
+    }
+
+    private void setupBackground()
+    {
+        Image roomImage;
         try
         {
-            im1 = ImageIO.read(getClass().getResource(currentRoom.getBackgroundPath()));
-            /*
-            ComponentListener cl = new ComponentAdapter()
-            {
-                public void componentResized(ComponentEvent ce)
-                {
-                    Component c = ce.getComponent();
-                    backgroundImg = new ImageIcon(im1.getScaledInstance(c.getWidth(), c.getHeight(), Image.SCALE_SMOOTH));
-                }
-            };
-            */
-            backgroundImg = new ImageIcon(im1.getScaledInstance(width, height, Image.SCALE_SMOOTH));
+            roomImage = ImageIO.read(getClass().getResource(currentRoom.getBackgroundPath()));
+            int roomWidth = roomImage.getWidth(null);
+            int roomHeight = roomImage.getHeight(null);
+            double proportion = (double) screenWidth / roomWidth;
 
+            backgroundImg = new ImageIcon(roomImage.getScaledInstance(screenWidth, (int)(roomHeight * proportion), Image.SCALE_SMOOTH));
         }
         catch (IOException e)
         {
-            System.out.println("NetBEans merda");
+            // Errore caricamento background
+            throw new IOError(e);
         }
+    }
 
-        initComponents();
-
+    private void fullScreenOn()
+    {
         GraphicsDevice device = GraphicsEnvironment
                 .getLocalGraphicsEnvironment().getScreenDevices()[0];
         device.setFullScreenWindow(this);
@@ -77,7 +83,7 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Schwartz");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(width, height));
+        setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
 
         GamePanel.setPreferredSize(new java.awt.Dimension(1536, 768));
 
@@ -152,17 +158,9 @@ public class MainFrame extends javax.swing.JFrame {
         DBManager.setupInventory();
 
         Room cucina = DBManager.loadRoom("Cucina");
-        Door door1, door2, door3;
-        door1 = (Door) cucina.getItem(0);
-        door2 = (Door) cucina.getItem(1);
-        door3 = (Door) cucina.getItem(2);
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame(cucina).setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
