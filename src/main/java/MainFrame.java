@@ -9,6 +9,8 @@ import rooms.Room;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOError;
 import java.io.IOException;
 
@@ -27,6 +29,45 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel menuPanel;
 
+    // LISTENER FOR KEYS
+    private final MyKeyListener ESC_LISTENER;
+
+    public class MyKeyListener implements KeyListener
+    {
+        private int keyCode;
+
+        public MyKeyListener(int keyCode)
+        {
+            this.keyCode = keyCode;
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e)
+        {
+            if (e.getKeyCode() == keyCode)
+            {
+                System.out.println("a");
+            }
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e)
+        {
+            if (e.getKeyCode() == keyCode)
+            {
+                System.out.println("b");
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e)
+        {
+            if (e.getKeyCode() == keyCode)
+            {
+                System.out.println("c");
+            }
+        }
+    }
 
     public MainFrame(Room initialRoom)
     {
@@ -43,6 +84,8 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         // attiva schermo intero
         fullScreenOn();
+
+        this.ESC_LISTENER = new MyKeyListener(KeyEvent.VK_ESCAPE);
     }
 
     private void setupBackground()
@@ -74,7 +117,6 @@ public class MainFrame extends javax.swing.JFrame {
     // inizializzazione componenti JFrame
     private void initComponents()
     {
-
         //Creazione componenti
         mainPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
@@ -142,7 +184,9 @@ public class MainFrame extends javax.swing.JFrame {
         //                  SETUP MainFrame
         // -----------------------------------------------------
         add(mainPanel, BorderLayout.CENTER);
+        addKeyListener(ESC_LISTENER);
         pack();
+
     }
 
     public void showMenu(boolean b)
