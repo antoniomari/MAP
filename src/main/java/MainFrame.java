@@ -100,12 +100,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         // inizializzazione immagine di sfondo
         setupBackground();
-        // inizializzazione compoonenti
+        // inizializzazione componenti
         initComponents();
+        // inizializzazione cursore
+        initCursor();
         // attiva schermo intero
         fullScreenOn();
 
+    }
 
+    private void initCursor()
+    {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("src/main/resources/img/HUD/cursoreneon.png");
+        Cursor c = toolkit.createCustomCursor(image , new Point(getX(), getY()), "img");
+        setCursor(c);
     }
 
     private void setupBackground()
