@@ -34,20 +34,32 @@ public class MainFrame extends javax.swing.JFrame {
 
     public class MyKeyListener implements KeyListener
     {
-        private int keyCode;
+        private final int keyCode;
+        private boolean pressed;
+        private final Runnable pressAction;
+        private final Runnable releaseAction;
 
-        public MyKeyListener(int keyCode)
+        public MyKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction)
         {
             this.keyCode = keyCode;
+
+            if(pressAction == null)
+                this.pressAction = () -> {};
+            else
+                this.pressAction = pressAction;
+
+            if(releaseAction == null)
+                this.releaseAction = () -> {};
+            else
+                this.releaseAction = releaseAction;
+
+            this.pressed = false;
         }
 
         @Override
         public void keyTyped(KeyEvent e)
         {
-            if (e.getKeyCode() == keyCode)
-            {
-                System.out.println("a");
-            }
+            // vuoto
         }
 
         @Override
@@ -55,7 +67,12 @@ public class MainFrame extends javax.swing.JFrame {
         {
             if (e.getKeyCode() == keyCode)
             {
-                System.out.println("b");
+                if(!pressed)
+                {
+                    pressAction.run();
+                    pressed = true;
+                }
+
             }
         }
 
@@ -64,7 +81,8 @@ public class MainFrame extends javax.swing.JFrame {
         {
             if (e.getKeyCode() == keyCode)
             {
-                System.out.println("c");
+                releaseAction.run();
+                pressed = false;
             }
         }
     }
@@ -78,6 +96,8 @@ public class MainFrame extends javax.swing.JFrame {
         screenWidth = (int) screenSize.getWidth();
         screenHeight = (int) screenSize.getHeight();
 
+        this.ESC_LISTENER = new MyKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
+
         // inizializzazione immagine di sfondo
         setupBackground();
         // inizializzazione compoonenti
@@ -85,7 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
         // attiva schermo intero
         fullScreenOn();
 
-        this.ESC_LISTENER = new MyKeyListener(KeyEvent.VK_ESCAPE);
+
     }
 
     private void setupBackground()
