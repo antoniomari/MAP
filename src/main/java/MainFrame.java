@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import com.sun.tools.javac.Main;
 import database.DBManager;
-import items.Door;
 import rooms.Room;
 
 import javax.imageio.ImageIO;
@@ -14,9 +12,6 @@ import java.awt.*;
 import java.io.IOError;
 import java.io.IOException;
 
-/**
- *
- */
 public class MainFrame extends javax.swing.JFrame {
 
     private final Room currentRoom;
