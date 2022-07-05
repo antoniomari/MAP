@@ -13,24 +13,29 @@ import java.io.InputStream;
 
 public class Item implements Observable
 {
-    private String name;
-    private final static String DEFAULT_NAME = "Spicoli";
-    private String description;
-    private final static String DEFAULT_DESCRIPTION = "Un oggetto strano";
-    private final static String OBJECT_TILESET_PATH = "img/tileset/oggetti.png";
-    private final static String JSON_PATH = "img/tileset/oggetti.json";
-    private static BufferedImage TILESET;
-    private BufferedImage sprite;
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+    private final String name;
+    private final String description;
 
+    private final static String DEFAULT_NAME = "Spicoli";
+    private final static String DEFAULT_DESCRIPTION = "Un oggetto strano";
+
+    // PATH TILESET OGGETTI
+    private final static String OBJECT_SPRITESHEET_PATH = "/img/tileset/oggetti.png";
+    // PATH JSON RELATIVO AL TILESET
+    private final static String JSON_PATH = "/img/tileset/oggetti.json";
+
+    // SPRITESHEET OGGETTI
+    private static BufferedImage SPRITESHEET;
+
+    // SPRITE OGGETTO
+    private BufferedImage sprite;
+
+    // CARICAMENTO SPRITESHEET IN MEMORIA
     static
     {
         try
         {
-            TILESET = ImageIO.read(Item.class.getResource("img/tileset/oggetti.png"));
+            SPRITESHEET = ImageIO.read(Item.class.getResource(OBJECT_SPRITESHEET_PATH));
         }
         catch (IOException e)
         {
@@ -70,6 +75,7 @@ public class Item implements Observable
 
     private void extractSprite()
     {
+
         try
         {
             InputStream is = Item.class.getResourceAsStream(JSON_PATH);
@@ -78,12 +84,12 @@ public class Item implements Observable
 
             JSONObject itemJson = json.getJSONObject(this.name);
 
-            x = itemJson.getInt("x");
-            y = itemJson.getInt("y");
-            width = itemJson.getInt("width");
-            height = itemJson.getInt("height");
+            int x = itemJson.getInt("x");
+            int y = itemJson.getInt("y");
+            int width = itemJson.getInt("width");
+            int height = itemJson.getInt("height");
 
-            sprite = TILESET.getSubimage(x, y, width, height);
+            sprite = SPRITESHEET.getSubimage(x, y, width, height);
         }
         catch(JSONException e)
         {

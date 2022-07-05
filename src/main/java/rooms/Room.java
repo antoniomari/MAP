@@ -2,6 +2,10 @@ package rooms;
 
 import items.Item;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,20 +21,18 @@ public class Room
     private List<Item> itemList;
 
     private String backgroundPath;
+    private BufferedImage backgroundImage;
 
     private Map<Item, Coordinates> itemMap;
 
-    public Room(String name)
+
+    public Room(String name, String path)
     {
         this.roomName = name;
         itemMap = new HashMap<>();
         itemList = new ArrayList<>();
-    }
-
-    public Room(String name, String path)
-    {
-        this(name);
         backgroundPath = path;
+        loadBackgroundImage();
     }
 
     public void addItem(Item item, Coordinates c)
@@ -44,9 +46,21 @@ public class Room
         return itemList.get(i);
     }
 
-    public String getBackgroundPath()
+    private void loadBackgroundImage()
     {
-        return backgroundPath;
+        try
+        {
+            backgroundImage = ImageIO.read(getClass().getResource(backgroundPath));
+        }
+        catch(IOException e)
+        {
+            // Errore caricamento background
+            throw new IOError(e);
+        }
+    }
+    public BufferedImage getBackgroundImage()
+    {
+        return backgroundImage;
     }
 
 }

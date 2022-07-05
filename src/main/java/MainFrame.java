@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOError;
 import java.io.IOException;
+import java.nio.Buffer;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -22,6 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private final int screenWidth;
     private final int screenHeight;
+    private double rescalingFactor;
 
 
     // COMPONENTI SWING
@@ -120,21 +122,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void setupBackground()
     {
-        Image roomImage;
-        try
-        {
-            roomImage = ImageIO.read(getClass().getResource(currentRoom.getBackgroundPath()));
-            int roomWidth = roomImage.getWidth(null);
-            int roomHeight = roomImage.getHeight(null);
-            double proportion = (double) screenWidth / roomWidth;
+        Image roomImage = currentRoom.getBackgroundImage();
+        int roomWidth = roomImage.getWidth(null);
+        int roomHeight = roomImage.getHeight(null);
+        double proportion = (double) screenWidth / roomWidth;
+        rescalingFactor = (double) roomWidth / screenWidth;
 
-            backgroundImg = new ImageIcon(roomImage.getScaledInstance(screenWidth, (int)(roomHeight * proportion), Image.SCALE_SMOOTH));
-        }
-        catch (IOException e)
-        {
-            // Errore caricamento background
-            throw new IOError(e);
-        }
+        backgroundImg = new ImageIcon(roomImage.getScaledInstance(screenWidth, (int)(roomHeight * proportion), Image.SCALE_SMOOTH));
+
+
     }
 
     private void fullScreenOn()
@@ -182,9 +178,16 @@ public class MainFrame extends javax.swing.JFrame {
         // Creazione bottoni per menuPanel
         JButton okButton = new JButton("Ok");
         JButton exitButton = new JButton("Esci");
+        exitButton.addActionListener((e) -> System.exit(0));
         Item barile = new Item("Barile", "Un barile scemo come Basile");
 
-        JLabel barileLabel = new JLabel(new ImageIcon(barile.getSprite()));
+        Image sprite = barile.getSprite();
+        rescalingFactor = 2;
+        System.out.println(rescalingFactor);
+        int newWidth = (int) (rescalingFactor * sprite.getWidth(null));
+        int newHeight = (int)(rescalingFactor * sprite.getHeight(null));
+        Image newSprite = sprite.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        JLabel barileLabel = new JLabel(new ImageIcon(newSprite));
 
         // Imposta layout
         menuPanel.setLayout(new FlowLayout());
