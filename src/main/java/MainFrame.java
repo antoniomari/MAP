@@ -4,6 +4,7 @@
  */
 
 import database.DBManager;
+import items.Item;
 import rooms.Room;
 
 import javax.imageio.ImageIO;
@@ -181,6 +182,9 @@ public class MainFrame extends javax.swing.JFrame {
         // Creazione bottoni per menuPanel
         JButton okButton = new JButton("Ok");
         JButton exitButton = new JButton("Esci");
+        Item barile = new Item("Barile", "Un barile scemo come Basile");
+
+        JLabel barileLabel = new JLabel(new ImageIcon(barile.getSprite()));
 
         // Imposta layout
         menuPanel.setLayout(new FlowLayout());
@@ -188,6 +192,7 @@ public class MainFrame extends javax.swing.JFrame {
         // Aggiungi bottoni al menuPanel
         menuPanel.add(okButton);
         menuPanel.add(exitButton);
+        menuPanel.add(barileLabel);
 
         menuPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
 
