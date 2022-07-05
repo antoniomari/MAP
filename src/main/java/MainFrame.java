@@ -124,6 +124,8 @@ public class MainFrame extends javax.swing.JFrame {
     {
         Image roomImage = currentRoom.getBackgroundImage();
         int roomWidth = roomImage.getWidth(null);
+        System.out.println("roomWidth: " + roomWidth);
+        System.out.println("screenWidth: " + screenWidth);
         int roomHeight = roomImage.getHeight(null);
         double proportion = (double) screenWidth / roomWidth;
         rescalingFactor = (double) roomWidth / screenWidth;
