@@ -5,17 +5,13 @@
 
 import database.DBManager;
 import items.Item;
+import rooms.Coordinates;
 import rooms.Room;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.IOError;
-import java.io.IOException;
-import java.nio.Buffer;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -29,7 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // COMPONENTI SWING
     private javax.swing.JLabel backgroundLabel;
-    private javax.swing.JPanel gamePanel;
+    private javax.swing.JLayeredPane gamePanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel menuPanel;
 
@@ -155,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
         //Creazione componenti
         mainPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
-        gamePanel = new javax.swing.JPanel();
+        gamePanel = new javax.swing.JLayeredPane();
 
         // Chiudi l'app alla chiusura della finestra
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,14 +167,26 @@ public class MainFrame extends javax.swing.JFrame {
         //                  SETUP gamePanel
         // -----------------------------------------------------
 
+        Item barile1 = new Item("Barile", "Un barile scemo come Basile");
+        JLabel barile1Label = new JLabel(rescaledImageIcon(barile1.getSprite()));
+
         // Crea nuova label per visualizzare l'immagine di sfondo
         backgroundLabel = new javax.swing.JLabel(backgroundImg);
 
-        // Aggiungi la label al gamePanel come centrale
-        gamePanel.add(backgroundLabel, BorderLayout.CENTER);
 
         // Imposta dimensioni pannello pari a quelle dello schermo
         gamePanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+
+        Insets gamePanelInsets = gamePanel.getInsets();
+
+        backgroundLabel.setBounds(gamePanelInsets.left, gamePanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
+        paintItem(barile1, barile1Label, 9, 5);
+
+        // Aggiungi background al layer 0
+        gamePanel.add(backgroundLabel, Integer.valueOf(1));
+        gamePanel.add(barile1Label, Integer.valueOf(2));
+
+
 
         // -----------------------------------------------------
         //                  SETUP menuPanel
@@ -227,6 +235,33 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
 
     }
+
+    private void paintItem(Item it, JLabel label, int xBlocks, int yBlocks)
+    {
+        Icon resizedSprite = rescaledImageIcon(it.getSprite());
+        Insets gamePanelInsets = gamePanel.getInsets();
+
+        Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
+        int x = coord.getX();
+        int y = coord.getY();
+
+        label.setBounds(gamePanelInsets.left + x, gamePanelInsets.top + y, resizedSprite.getIconWidth(), resizedSprite.getIconHeight());
+
+    }
+
+    private Coordinates calculateCoordinates(int xBlocks, int yBlocks)
+    {
+        if(xBlocks < 0 || yBlocks < 0)
+            throw new IllegalArgumentException();
+
+        final int BLOCK_SIZE = 48;
+        int xOffset = (int)(xBlocks * BLOCK_SIZE * rescalingFactor);
+        int yOffset = (int) (yBlocks * BLOCK_SIZE * rescalingFactor);
+
+        return new Coordinates(xOffset, yOffset);
+    }
+
+
 
     public void showMenu(boolean b)
     {
