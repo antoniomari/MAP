@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.IOError;
 import java.io.IOException;
 import java.nio.Buffer;
@@ -124,13 +125,11 @@ public class MainFrame extends javax.swing.JFrame {
     {
         Image roomImage = currentRoom.getBackgroundImage();
         int roomWidth = roomImage.getWidth(null);
-        System.out.println("roomWidth: " + roomWidth);
-        System.out.println("screenWidth: " + screenWidth);
         int roomHeight = roomImage.getHeight(null);
-        double proportion = (double) screenWidth / roomWidth;
-        rescalingFactor = (double) roomWidth / screenWidth;
+        rescalingFactor = (double) screenWidth / roomWidth;
 
-        backgroundImg = new ImageIcon(roomImage.getScaledInstance(screenWidth, (int)(roomHeight * proportion), Image.SCALE_SMOOTH));
+        // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
+        backgroundImg = new ImageIcon(roomImage.getScaledInstance(screenWidth, (int)(roomHeight * rescalingFactor), Image.SCALE_SMOOTH));
 
 
     }
@@ -140,6 +139,14 @@ public class MainFrame extends javax.swing.JFrame {
         GraphicsDevice device = GraphicsEnvironment
                 .getLocalGraphicsEnvironment().getScreenDevices()[0];
         device.setFullScreenWindow(this);
+    }
+
+    private Icon rescaledImageIcon(Image im)
+    {
+        int newWidth = (int) (rescalingFactor * im.getWidth(null));
+        int newHeight = (int)(rescalingFactor * im.getHeight(null));
+        Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+         return new ImageIcon(newSprite);
     }
 
     // inizializzazione componenti JFrame
@@ -182,14 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
         JButton exitButton = new JButton("Esci");
         exitButton.addActionListener((e) -> System.exit(0));
         Item barile = new Item("Barile", "Un barile scemo come Basile");
-
-        Image sprite = barile.getSprite();
-        rescalingFactor = 2;
-        System.out.println(rescalingFactor);
-        int newWidth = (int) (rescalingFactor * sprite.getWidth(null));
-        int newHeight = (int)(rescalingFactor * sprite.getHeight(null));
-        Image newSprite = sprite.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        JLabel barileLabel = new JLabel(new ImageIcon(newSprite));
+        JLabel barileLabel = new JLabel(rescaledImageIcon(barile.getSprite()));
 
         // Imposta layout
         menuPanel.setLayout(new FlowLayout());
