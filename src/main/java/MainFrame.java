@@ -115,7 +115,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initCursor()
     {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("src/main/resources/img/HUD/cursoreneon.png");
+        Image image = toolkit.getImage("src/main/resources/img/HUD/cursoreneonnero.png");
         Cursor c = toolkit.createCustomCursor(image , new Point(getX(), getY()), "img");
         setCursor(c);
     }
