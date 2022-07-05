@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOError;
@@ -29,6 +30,8 @@ public class Item implements Observable
 
     // SPRITE OGGETTO
     private BufferedImage sprite;
+    private double scalingFactor;
+    private Icon scaledSpriteIcon;
 
     // CARICAMENTO SPRITESHEET IN MEMORIA
     static
@@ -100,6 +103,33 @@ public class Item implements Observable
     public Image getSprite()
     {
         return sprite;
+    }
+
+    /**
+     * Restituisce una copia modificata (rescaled) dello sprite dell'oggetto.
+     *
+     * L'ultima immagine richiesta viene salvata internamente in modo tale che
+     * finché questo metodo viene chiamato nuovamente con lo stesso scalingFactor
+     * non crea un'ulteriore immagine.
+     *
+     * @param scalingFactor fattore di riscalamento dell'immagine
+     * @return l'icona modificata
+     */
+    public Icon getScaledIconSprite(double scalingFactor)
+    {
+        if(scaledSpriteIcon == null || scalingFactor != this.scalingFactor)
+            scaledSpriteIcon = rescaledImageIcon(sprite, scalingFactor);
+
+        return scaledSpriteIcon;
+    }
+
+
+    private static Icon rescaledImageIcon(Image im, double rescalingFactor)
+    {
+        int newWidth = (int) (rescalingFactor * im.getWidth(null));
+        int newHeight = (int)(rescalingFactor * im.getHeight(null));
+        Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        return new ImageIcon(newSprite);
     }
 
 }

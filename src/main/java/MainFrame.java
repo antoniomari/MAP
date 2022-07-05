@@ -9,9 +9,13 @@ import rooms.Coordinates;
 import rooms.Room;
 
 import javax.swing.*;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -31,6 +35,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     // LISTENER FOR KEYS
     private final MyKeyListener ESC_LISTENER;
+
+
+    /**
+     * Dizionario che contiene gli oggetti presenti nella stanza
+     * e le JLabel associate al gamePanel
+     */
+    private Map<Item, JLabel> itemLabelMap;
+
+    // LAYER GAMEPANEL (sono richiesti Integer e non int)
+    private final static Integer BACKGROUND_LAYER = 1;
+    private final static Integer ITEM_LAYER = 2;
 
     public class MyKeyListener implements KeyListener
     {
@@ -97,6 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         screenHeight = (int) screenSize.getHeight();
 
         this.ESC_LISTENER = new MyKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
+        itemLabelMap = new HashMap<>();
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -137,6 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         device.setFullScreenWindow(this);
     }
 
+    /*
     private Icon rescaledImageIcon(Image im)
     {
         int newWidth = (int) (rescalingFactor * im.getWidth(null));
@@ -144,6 +161,8 @@ public class MainFrame extends javax.swing.JFrame {
         Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
          return new ImageIcon(newSprite);
     }
+
+     */
 
     // inizializzazione componenti JFrame
     private void initComponents()
@@ -157,9 +176,6 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Schwartz");
 
-        // Imposta cursore visualizzato
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR)); //TODO: custom cursor
-
         // Imposta dimensioni finestra pari a quelle dello schermo
         setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
 
@@ -168,7 +184,6 @@ public class MainFrame extends javax.swing.JFrame {
         // -----------------------------------------------------
 
         Item barile1 = new Item("Barile", "Un barile scemo come Basile");
-        JLabel barile1Label = new JLabel(rescaledImageIcon(barile1.getSprite()));
 
         // Crea nuova label per visualizzare l'immagine di sfondo
         backgroundLabel = new javax.swing.JLabel(backgroundImg);
@@ -180,12 +195,23 @@ public class MainFrame extends javax.swing.JFrame {
         Insets gamePanelInsets = gamePanel.getInsets();
 
         backgroundLabel.setBounds(gamePanelInsets.left, gamePanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
-        paintItem(barile1, barile1Label, 9, 5);
+
+        addGameItem(barile1, 9, 5);
+
+        updateItemPosition(barile1, 10, 5);
 
         // Aggiungi background al layer 0
-        gamePanel.add(backgroundLabel, Integer.valueOf(1));
-        gamePanel.add(barile1Label, Integer.valueOf(2));
+        gamePanel.add(backgroundLabel, BACKGROUND_LAYER);
 
+        MyKeyListener spaceListener = new MyKeyListener(KeyEvent.VK_SPACE,
+                () -> {
+                    Random random = new Random();
+                    int x = random.nextInt(9);
+                    int y = random.nextInt(9);
+                    updateItemPosition(barile1, x, y);
+                    }, null);
+
+        addKeyListener(spaceListener);
 
 
         // -----------------------------------------------------
@@ -197,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
         JButton exitButton = new JButton("Esci");
         exitButton.addActionListener((e) -> System.exit(0));
         Item barile = new Item("Barile", "Un barile scemo come Basile");
-        JLabel barileLabel = new JLabel(rescaledImageIcon(barile.getSprite()));
+        JLabel barileLabel = new JLabel(barile.getScaledIconSprite(rescalingFactor));
 
         // Imposta layout
         menuPanel.setLayout(new FlowLayout());
@@ -236,17 +262,42 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
 
-    private void paintItem(Item it, JLabel label, int xBlocks, int yBlocks)
+    /**
+     * Aggiunge al gamePanel un Item, il quale verrà posizionato
+     * nel blocco desiderato.
+     *
+     * Crea una JLabel associata all'oggetto e la aggiunge nel gamePanel
+     * per poter stampare lo sprite dell'oggetto sullo schermo.
+     *
+     * @param it oggetto da aggiungere
+     * @param xBlocks numero di blocchi a sinsitra di quello desiderato
+     * @param yBlocks numero di blocchi sopra rispetto a quello desiderato
+     */
+    private void addGameItem(Item it, final int xBlocks, final int yBlocks)
     {
-        Icon resizedSprite = rescaledImageIcon(it.getSprite());
-        Insets gamePanelInsets = gamePanel.getInsets();
+        // recupera lo sprite della giusta dimensione
+        Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
 
+        // crea la label corrispondente all'Item
+        JLabel itemLabel = new JLabel(rescaledSprite);
+
+        // metti la coppia Item JLabel nel dizionario
+        itemLabelMap.put(it, itemLabel);
+
+        // aggiungi la label nell'ITEM_LAYER
+        gamePanel.add(itemLabel, ITEM_LAYER);
+
+
+    }
+
+    private void updateItemPosition(Item it, int xBlocks, int yBlocks)
+    {
+        Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
+        Insets insets = gamePanel.getInsets();
         Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
-        int x = coord.getX();
-        int y = coord.getY();
 
-        label.setBounds(gamePanelInsets.left + x, gamePanelInsets.top + y, resizedSprite.getIconWidth(), resizedSprite.getIconHeight());
-
+        JLabel itemLabel = itemLabelMap.get(it);
+        itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(), rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
     }
 
     private Coordinates calculateCoordinates(int xBlocks, int yBlocks)
