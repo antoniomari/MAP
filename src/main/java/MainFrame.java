@@ -4,14 +4,12 @@
  */
 
 import database.DBManager;
+import items.Door;
 import items.Item;
-import org.h2.util.json.JsonConstructorUtils;
-import org.w3c.dom.ls.LSOutput;
 import rooms.Coordinates;
 import rooms.Room;
 
 import javax.swing.*;
-import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -248,6 +246,7 @@ public class MainFrame extends javax.swing.JFrame {
         // -----------------------------------------------------
 
         Item barile1 = new Item("Barile", "Un barile scemo come Basile");
+        Door door = new Door("Porta", "Una porta spicolosa.");
 
         // Crea nuova label per visualizzare l'immagine di sfondo
         backgroundLabel = new javax.swing.JLabel(backgroundImg);
@@ -261,8 +260,7 @@ public class MainFrame extends javax.swing.JFrame {
         backgroundLabel.setBounds(gamePanelInsets.left, gamePanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
 
         addGameItem(barile1, 9, 5);
-
-        updateItemPosition(barile1, 10, 5);
+        addGameItem(door, 7, 2);
 
         // Aggiungi background al layer 0
         gamePanel.add(backgroundLabel, BACKGROUND_LAYER);
@@ -355,6 +353,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         // aggiungi la label nell'ITEM_LAYER
         gamePanel.add(itemLabel, ITEM_LAYER);
+
+        updateItemPosition(it, xBlocks, yBlocks);
     }
 
     /**

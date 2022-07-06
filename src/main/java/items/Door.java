@@ -1,8 +1,9 @@
 package items;
 
 import events.EventHandler;
-import events.GameEvent;
 import events.ItemInteractionEvent;
+
+import java.awt.image.BufferedImage;
 
 public class Door extends Item implements Openable, Lockable
 {
@@ -12,15 +13,27 @@ public class Door extends Item implements Openable, Lockable
 
     private int state;
 
+    private final static String OBJECT_SPRITESHEET_PATH = "/img/tileset/porte.png";
+    // PATH JSON RELATIVO AL TILESET
+    private final static String JSON_PATH = "/img/tileset/porte.json";
+
+    // SPRITESHEET OGGETTI
+    private final static BufferedImage SPRITESHEET;
+
+    static
+    {
+        SPRITESHEET = loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
+    }
+
     public Door(String name, int state)
     {
-        super(name, "Una porta strana");
+        super(name, "Una porta strana", SPRITESHEET, JSON_PATH);
         this.state = state;
     }
 
     public Door(String name, String description)
     {
-        super(name, description);
+        super(name, description, SPRITESHEET, JSON_PATH);
         this.state = BLOCKED;
     }
     public void open()
@@ -38,7 +51,6 @@ public class Door extends Item implements Openable, Lockable
             result = "La porta è bloccata, non si può aprire";
 
         EventHandler.printEvent(new ItemInteractionEvent(this, result));
-
 
     }
 

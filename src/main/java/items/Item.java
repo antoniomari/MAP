@@ -26,7 +26,7 @@ public class Item implements Observable
     private final static String JSON_PATH = "/img/tileset/oggetti.json";
 
     // SPRITESHEET OGGETTI
-    private static BufferedImage SPRITESHEET;
+    private static final BufferedImage SPRITESHEET;
 
     // SPRITE OGGETTO
     private BufferedImage sprite;
@@ -37,29 +37,39 @@ public class Item implements Observable
     // CARICAMENTO SPRITESHEET IN MEMORIA
     static
     {
+        SPRITESHEET = loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
+    }
+
+    protected static BufferedImage loadSpriteSheet(String spriteSheetPath)
+    {
         try
         {
-            SPRITESHEET = ImageIO.read(Item.class.getResource(OBJECT_SPRITESHEET_PATH));
+            return ImageIO.read(Item.class.getResource(spriteSheetPath));
         }
         catch (IOException e)
         {
             // Errore caricamento background
             throw new IOError(e);
         }
-
     }
-
 
     public Item(String name, String description)
     {
         this.name = name;
         this.description = description;
-        extractSprite();
+        extractSprite(SPRITESHEET, JSON_PATH);
     }
 
     public Item()
     {
         this(DEFAULT_NAME, DEFAULT_DESCRIPTION);
+    }
+
+    protected Item(String name, String description, BufferedImage spriteSheet, String jsonPath)
+    {
+        this.name = name;
+        this.description = description;
+        extractSprite(spriteSheet, jsonPath);
     }
 
     public String observe()
@@ -77,12 +87,12 @@ public class Item implements Observable
         return description;
     }
 
-    private void extractSprite()
+    private void extractSprite(BufferedImage spriteSheet, String jsonPath)
     {
 
         try
         {
-            InputStream is = Item.class.getResourceAsStream(JSON_PATH);
+            InputStream is = Item.class.getResourceAsStream(jsonPath);
             JSONTokener tokener = new JSONTokener(is);
             JSONObject json = new JSONObject(tokener);
 
@@ -93,7 +103,7 @@ public class Item implements Observable
             int width = itemJson.getInt("width");
             int height = itemJson.getInt("height");
 
-            sprite = SPRITESHEET.getSubimage(x, y, width, height);
+            sprite = spriteSheet.getSubimage(x, y, width, height);
         }
         catch(JSONException e)
         {
@@ -123,7 +133,6 @@ public class Item implements Observable
             scaledSpriteIcon = rescaledImageIcon(sprite, scalingFactor);
             this.scalingFactor = scalingFactor;
         }
-
 
         return scaledSpriteIcon;
     }
