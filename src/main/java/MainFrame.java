@@ -5,6 +5,8 @@
 
 import database.DBManager;
 import items.Item;
+import org.h2.util.json.JsonConstructorUtils;
+import org.w3c.dom.ls.LSOutput;
 import rooms.Coordinates;
 import rooms.Room;
 
@@ -13,6 +15,8 @@ import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -47,6 +51,65 @@ public class MainFrame extends javax.swing.JFrame {
     // LAYER GAMEPANEL (sono richiesti Integer e non int)
     private final static Integer BACKGROUND_LAYER = 1;
     private final static Integer ITEM_LAYER = 2;
+
+    public class MyMouseListener implements MouseListener
+    {
+        private int button;
+        private final Runnable clickAction;
+        private final Runnable pressAction;
+
+
+        public MyMouseListener(int button, Runnable clickAction, Runnable pressAction)
+        {
+            this.button = button;
+
+            if(pressAction == null)
+                this.pressAction = () -> {};
+            else
+                this.pressAction = pressAction;
+
+            if(clickAction == null)
+                this.clickAction = () -> {};
+            else
+                this.clickAction = clickAction;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            if (e.getButton() == button )
+            {
+                clickAction.run();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e)
+        {
+            if (e.getButton() == button )
+            {
+                pressAction.run();
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e)
+        {
+            // TODO
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e)
+        {
+            // TODO
+        }
+    }
 
     public class MyKeyListener implements KeyListener
     {
@@ -281,6 +344,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         // crea la label corrispondente all'Item
         JLabel itemLabel = new JLabel(rescaledSprite);
+        itemLabel.addMouseListener(new MyMouseListener(MouseEvent.BUTTON1,
+                                   () -> System.out.println("a"), () -> System.out.println("b")));
+        MyMouseListener popMenuListener = new MyMouseListener(MouseEvent.BUTTON3,
+                           () -> PopMenuManager.showMenu(it, itemLabel, 0, 0), null);
+        itemLabel.addMouseListener(popMenuListener);
 
         // metti la coppia Item JLabel nel dizionario
         itemLabelMap.put(it, itemLabel);
