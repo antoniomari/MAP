@@ -17,7 +17,6 @@ public class EventHandler
         if(ge instanceof ItemInteractionEvent)
             if (((ItemInteractionEvent) ge).hasAnimation())
                 performAnimation((ItemInteractionEvent) ge);
-
     }
 
 
