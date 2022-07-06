@@ -19,6 +19,7 @@ public class Item implements Observable
 
     private final static String DEFAULT_NAME = "Spicoli";
     private final static String DEFAULT_DESCRIPTION = "Un oggetto strano";
+    protected boolean spriteChanged = false;
 
     // PATH TILESET OGGETTI
     private final static String OBJECT_SPRITESHEET_PATH = "/img/tileset/oggetti.png";
@@ -29,7 +30,7 @@ public class Item implements Observable
     private static final BufferedImage SPRITESHEET;
 
     // SPRITE OGGETTO
-    private BufferedImage sprite;
+    protected BufferedImage sprite;
     // Per bufferizzazione sprite riscalamento
     private double scalingFactor;
     private Icon scaledSpriteIcon;
@@ -87,6 +88,22 @@ public class Item implements Observable
         return description;
     }
 
+    protected BufferedImage loadSpriteByName(BufferedImage spriteSheet, String jsonPath, String spriteName)
+    {
+        InputStream is = Item.class.getResourceAsStream(jsonPath);
+        JSONTokener tokener = new JSONTokener(is);
+        JSONObject json = new JSONObject(tokener);
+
+        JSONObject itemJson = json.getJSONObject(spriteName);
+
+        int x = itemJson.getInt("x");
+        int y = itemJson.getInt("y");
+        int width = itemJson.getInt("width");
+        int height = itemJson.getInt("height");
+
+        return spriteSheet.getSubimage(x, y, width, height);
+    }
+
     private void extractSprite(BufferedImage spriteSheet, String jsonPath)
     {
 
@@ -128,10 +145,11 @@ public class Item implements Observable
      */
     public Icon getScaledIconSprite(double scalingFactor)
     {
-        if(scaledSpriteIcon == null || scalingFactor != this.scalingFactor)
+        if(scaledSpriteIcon == null || spriteChanged || scalingFactor != this.scalingFactor)
         {
             scaledSpriteIcon = rescaledImageIcon(sprite, scalingFactor);
             this.scalingFactor = scalingFactor;
+            spriteChanged=false;
         }
 
         return scaledSpriteIcon;

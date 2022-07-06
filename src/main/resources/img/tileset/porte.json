@@ -5,6 +5,37 @@
     "y": 1,
     "width": 96,
     "height": 96
-  }
+  },
 
+  "closed":
+  {
+    "x": 313,
+    "y": 1,
+    "width": 96,
+    "height": 96
+  },
+
+  "open1":
+  {
+    "x": 313,
+    "y": 97,
+    "width": 96,
+    "height": 96
+  },
+
+  "open2":
+  {
+    "x": 313,
+    "y": 193,
+    "width": 96,
+    "height": 96
+  },
+
+  "open3":
+  {
+    "x": 313,
+    "y": 288,
+    "width": 96,
+    "height": 96
+  }
 }
