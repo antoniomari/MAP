@@ -41,4 +41,9 @@ public class GameEvent
 
         return eventTime.toString() + " -> " + " [" + itemInvolved.getName() + "] "+ toPrint;
     }
+
+    public Item getItemInvolved()
+    {
+        return itemInvolved;
+    }
 }

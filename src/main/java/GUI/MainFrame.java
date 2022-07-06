@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+package GUI;
+
 
 import database.DBManager;
 import items.Door;
@@ -12,9 +10,7 @@ import rooms.Room;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,141 +23,45 @@ public class MainFrame extends javax.swing.JFrame {
 
     private final int screenWidth;
     private final int screenHeight;
-    private double rescalingFactor;
-
+    private int gameWidth;
+    private int gameHeight;
+    private static double rescalingFactor;
+    private final static JLabel outputLabel = new JLabel("ciao");
 
     // COMPONENTI SWING
-    private javax.swing.JLabel backgroundLabel;
-    private javax.swing.JLayeredPane gamePanel;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel menuPanel;
+    private JLabel backgroundLabel;
+    private JLayeredPane gameScreenPanel;
+    private JPanel mainPanel;
+    private JPanel menuPanel;
+    private JPanel gamePanel;
+    private JPanel inventoryPanel;
 
     // LISTENER FOR KEYS
-    private final MyKeyListener ESC_LISTENER;
+    private final GameKeyListener ESC_LISTENER;
 
 
     /**
      * Dizionario che contiene gli oggetti presenti nella stanza
-     * e le JLabel associate al gamePanel
+     * e le JLabel associate al gameScreenPanel
      */
-    private Map<Item, JLabel> itemLabelMap;
+    private static Map<Item, JLabel> itemLabelMap;
 
     // LAYER GAMEPANEL (sono richiesti Integer e non int)
     private final static Integer BACKGROUND_LAYER = 1;
     private final static Integer ITEM_LAYER = 2;
 
-    public class MyMouseListener implements MouseListener
+
+
+
+
+    public static JLabel getLabelAssociated(Item item)
     {
-        private int button;
-        private final Runnable clickAction;
-        private final Runnable pressAction;
-
-
-        public MyMouseListener(int button, Runnable clickAction, Runnable pressAction)
-        {
-            this.button = button;
-
-            if(pressAction == null)
-                this.pressAction = () -> {};
-            else
-                this.pressAction = pressAction;
-
-            if(clickAction == null)
-                this.clickAction = () -> {};
-            else
-                this.clickAction = clickAction;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e)
-        {
-            if (e.getButton() == button )
-            {
-                clickAction.run();
-            }
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e)
-        {
-            if (e.getButton() == button )
-            {
-                pressAction.run();
-            }
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e)
-        {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e)
-        {
-            // TODO
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e)
-        {
-            // TODO
-        }
+        return itemLabelMap.get(item);
     }
 
-    public class MyKeyListener implements KeyListener
+    public static double getScalingFactor()
     {
-        private final int keyCode;
-        private boolean pressed;
-        private final Runnable pressAction;
-        private final Runnable releaseAction;
-
-        public MyKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction)
-        {
-            this.keyCode = keyCode;
-
-            if(pressAction == null)
-                this.pressAction = () -> {};
-            else
-                this.pressAction = pressAction;
-
-            if(releaseAction == null)
-                this.releaseAction = () -> {};
-            else
-                this.releaseAction = releaseAction;
-
-            this.pressed = false;
-        }
-
-        @Override
-        public void keyTyped(KeyEvent e)
-        {
-            // vuoto
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e)
-        {
-            if (e.getKeyCode() == keyCode)
-            {
-                if(!pressed)
-                {
-                    pressAction.run();
-                    pressed = true;
-                }
-
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e)
-        {
-            if (e.getKeyCode() == keyCode)
-            {
-                releaseAction.run();
-                pressed = false;
-            }
-        }
+        return rescalingFactor;
     }
 
     public MainFrame(Room initialRoom)
@@ -173,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
         screenWidth = (int) screenSize.getWidth();
         screenHeight = (int) screenSize.getHeight();
 
-        this.ESC_LISTENER = new MyKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
+        this.ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
         itemLabelMap = new HashMap<>();
 
         // inizializzazione immagine di sfondo
@@ -203,7 +103,9 @@ public class MainFrame extends javax.swing.JFrame {
         rescalingFactor = (double) screenWidth / roomWidth;
 
         // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
-        backgroundImg = new ImageIcon(roomImage.getScaledInstance(screenWidth, (int)(roomHeight * rescalingFactor), Image.SCALE_SMOOTH));
+        gameWidth = screenWidth;
+        gameHeight = (int)(roomHeight * rescalingFactor);
+        backgroundImg = new ImageIcon(roomImage.getScaledInstance(gameWidth, gameHeight, Image.SCALE_SMOOTH));
 
 
     }
@@ -230,9 +132,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents()
     {
         //Creazione componenti
-        mainPanel = new javax.swing.JPanel();
-        menuPanel = new javax.swing.JPanel();
-        gamePanel = new javax.swing.JLayeredPane();
+        mainPanel = new JPanel();
+        menuPanel = new JPanel();
+        gamePanel = new JPanel();
+        inventoryPanel = new JPanel();
+        gameScreenPanel = new JLayeredPane();
+
+
 
         // Chiudi l'app alla chiusura della finestra
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -242,7 +148,7 @@ public class MainFrame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
 
         // -----------------------------------------------------
-        //                  SETUP gamePanel
+        //                  SETUP gameScreenPanel
         // -----------------------------------------------------
 
         Item barile1 = new Item("Barile", "Un barile scemo come Basile");
@@ -253,19 +159,19 @@ public class MainFrame extends javax.swing.JFrame {
 
 
         // Imposta dimensioni pannello pari a quelle dello schermo
-        gamePanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+        gameScreenPanel.setPreferredSize(new java.awt.Dimension(gameWidth, gameHeight));
 
-        Insets gamePanelInsets = gamePanel.getInsets();
+        Insets gameScreenPanelInsets = gameScreenPanel.getInsets();
 
-        backgroundLabel.setBounds(gamePanelInsets.left, gamePanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
+        backgroundLabel.setBounds(gameScreenPanelInsets.left, gameScreenPanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
 
         addGameItem(barile1, 9, 5);
         addGameItem(door, 7, 2);
 
         // Aggiungi background al layer 0
-        gamePanel.add(backgroundLabel, BACKGROUND_LAYER);
+        gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
 
-        MyKeyListener spaceListener = new MyKeyListener(KeyEvent.VK_SPACE,
+        GameKeyListener spaceListener = new GameKeyListener(KeyEvent.VK_SPACE,
                 () -> {
                     Random random = new Random();
                     int x = random.nextInt(9);
@@ -284,8 +190,6 @@ public class MainFrame extends javax.swing.JFrame {
         JButton okButton = new JButton("Ok");
         JButton exitButton = new JButton("Esci");
         exitButton.addActionListener((e) -> System.exit(0));
-        Item barile = new Item("Barile", "Un barile scemo come Basile");
-        JLabel barileLabel = new JLabel(barile.getScaledIconSprite(rescalingFactor));
 
         // Imposta layout
         menuPanel.setLayout(new FlowLayout());
@@ -293,9 +197,17 @@ public class MainFrame extends javax.swing.JFrame {
         // Aggiungi bottoni al menuPanel
         menuPanel.add(okButton);
         menuPanel.add(exitButton);
-        menuPanel.add(barileLabel);
 
         menuPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+
+        //setup gamePanel
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+        gamePanel.add(gameScreenPanel, BorderLayout.CENTER);
+
+        inventoryPanel.setLayout(new FlowLayout());
+        inventoryPanel.add(outputLabel);
+        gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -315,6 +227,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
 
+
+
+
         // -----------------------------------------------------
         //                  SETUP MainFrame
         // -----------------------------------------------------
@@ -324,11 +239,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
 
+    public static void output(String s)
+    {
+        outputLabel.setFont(new Font("Calibri", Font.BOLD, 40));
+        outputLabel.setText(s);
+    }
+
     /**
-     * Aggiunge al gamePanel un Item, il quale verrà posizionato
+     * Aggiunge al gameScreenPanel un Item, il quale verrà posizionato
      * nel blocco desiderato.
      *
-     * Crea una JLabel associata all'oggetto e la aggiunge nel gamePanel
+     * Crea una JLabel associata all'oggetto e la aggiunge nel gameScreenPanel
      * per poter stampare lo sprite dell'oggetto sullo schermo.
      *
      * @param it oggetto da aggiungere
@@ -342,9 +263,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         // crea la label corrispondente all'Item
         JLabel itemLabel = new JLabel(rescaledSprite);
-        itemLabel.addMouseListener(new MyMouseListener(MouseEvent.BUTTON1,
+        itemLabel.addMouseListener(new GameMouseListener(MouseEvent.BUTTON1,
                                    () -> System.out.println("a"), () -> System.out.println("b")));
-        MyMouseListener popMenuListener = new MyMouseListener(MouseEvent.BUTTON3,
+        GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
                            () -> PopMenuManager.showMenu(it, itemLabel, 0, 0), null);
         itemLabel.addMouseListener(popMenuListener);
 
@@ -352,7 +273,7 @@ public class MainFrame extends javax.swing.JFrame {
         itemLabelMap.put(it, itemLabel);
 
         // aggiungi la label nell'ITEM_LAYER
-        gamePanel.add(itemLabel, ITEM_LAYER);
+        gameScreenPanel.add(itemLabel, ITEM_LAYER);
 
         updateItemPosition(it, xBlocks, yBlocks);
     }
@@ -376,7 +297,7 @@ public class MainFrame extends javax.swing.JFrame {
             throw new IllegalArgumentException("Item non presente nella stanza");
         }
         Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
-        Insets insets = gamePanel.getInsets();
+        Insets insets = gameScreenPanel.getInsets();
         Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
 
         JLabel itemLabel = itemLabelMap.get(it);
@@ -422,6 +343,8 @@ public class MainFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -439,6 +362,8 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
+
 
         DBManager.setupInventory();
 

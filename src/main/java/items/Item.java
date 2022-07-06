@@ -1,5 +1,6 @@
 package items;
 
+import graphics.SpriteManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -19,7 +20,6 @@ public class Item implements Observable
 
     private final static String DEFAULT_NAME = "Spicoli";
     private final static String DEFAULT_DESCRIPTION = "Un oggetto strano";
-    protected boolean spriteChanged = false;
 
     // PATH TILESET OGGETTI
     private final static String OBJECT_SPRITESHEET_PATH = "/img/tileset/oggetti.png";
@@ -38,21 +38,9 @@ public class Item implements Observable
     // CARICAMENTO SPRITESHEET IN MEMORIA
     static
     {
-        SPRITESHEET = loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
+        SPRITESHEET = SpriteManager.loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
     }
 
-    protected static BufferedImage loadSpriteSheet(String spriteSheetPath)
-    {
-        try
-        {
-            return ImageIO.read(Item.class.getResource(spriteSheetPath));
-        }
-        catch (IOException e)
-        {
-            // Errore caricamento background
-            throw new IOError(e);
-        }
-    }
 
     public Item(String name, String description)
     {
@@ -88,6 +76,7 @@ public class Item implements Observable
         return description;
     }
 
+    /*
     protected BufferedImage loadSpriteByName(BufferedImage spriteSheet, String jsonPath, String spriteName)
     {
         InputStream is = Item.class.getResourceAsStream(jsonPath);
@@ -103,6 +92,8 @@ public class Item implements Observable
 
         return spriteSheet.getSubimage(x, y, width, height);
     }
+
+     */
 
     private void extractSprite(BufferedImage spriteSheet, String jsonPath)
     {
@@ -145,11 +136,10 @@ public class Item implements Observable
      */
     public Icon getScaledIconSprite(double scalingFactor)
     {
-        if(scaledSpriteIcon == null || spriteChanged || scalingFactor != this.scalingFactor)
+        if(scaledSpriteIcon == null || scalingFactor != this.scalingFactor)
         {
             scaledSpriteIcon = rescaledImageIcon(sprite, scalingFactor);
             this.scalingFactor = scalingFactor;
-            spriteChanged=false;
         }
 
         return scaledSpriteIcon;

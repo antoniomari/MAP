@@ -1,3 +1,5 @@
+package GUI;
+
 import items.Door;
 import items.Item;
 import items.Observable;
@@ -21,7 +23,7 @@ public class PopMenuManager
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println(((Observable) selected).observe());
+            MainFrame.output(((Observable) selected).observe());
         }
     };
 
