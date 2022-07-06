@@ -17,6 +17,7 @@ public class SpriteManager
      *
      * @param spriteSheetPath path dello spritesheet
      * @return BufferedImage corrispondente al file
+     * @throws IOError se fallisce la lettura del file dello spritesheet
      */
     public static BufferedImage loadSpriteSheet(String spriteSheetPath)
     {
@@ -39,7 +40,7 @@ public class SpriteManager
      * @param spriteSheet immagine completa dello spritesheet, già caricata
      * @param jsonPath path del file json relativo allo spritesheet
      * @param spriteName nome dell'immagine da caricare, contenuto nel json
-     * @return
+     * @return lo sprite richiesto
      */
     public static BufferedImage loadSpriteByName(BufferedImage spriteSheet, String jsonPath, String spriteName)
     {

@@ -51,9 +51,6 @@ public class MainFrame extends javax.swing.JFrame {
     private final static Integer ITEM_LAYER = 2;
 
 
-
-
-
     public static JLabel getLabelAssociated(Item item)
     {
         return itemLabelMap.get(item);
@@ -171,16 +168,19 @@ public class MainFrame extends javax.swing.JFrame {
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
 
-        GameKeyListener spaceListener = new GameKeyListener(KeyEvent.VK_SPACE,
-                () -> {
-                    Random random = new Random();
-                    int x = random.nextInt(9);
-                    int y = random.nextInt(9);
-                    updateItemPosition(barile1, x, y);
-                    }, null);
+        // -----------------------------------------------------
+        //                  SETUP inventoryPanel
+        // -----------------------------------------------------
+        inventoryPanel.setLayout(new FlowLayout());
+        inventoryPanel.add(outputLabel);
 
-        addKeyListener(spaceListener);
-
+        // -----------------------------------------------------
+        //                  SETUP gamePanel
+        // -----------------------------------------------------
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+        gamePanel.add(gameScreenPanel, BorderLayout.CENTER);
+        gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
 
         // -----------------------------------------------------
         //                  SETUP menuPanel
@@ -200,14 +200,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
 
-        //setup gamePanel
-        gamePanel.setLayout(new BorderLayout());
-        gamePanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
-        gamePanel.add(gameScreenPanel, BorderLayout.CENTER);
-
-        inventoryPanel.setLayout(new FlowLayout());
-        inventoryPanel.add(outputLabel);
-        gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -226,8 +218,6 @@ public class MainFrame extends javax.swing.JFrame {
         cl.show(mainPanel, "GIOCO");
 
         mainPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
-
-
 
 
         // -----------------------------------------------------
@@ -320,7 +310,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
 
-
     public void showMenu(boolean b)
     {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
@@ -362,8 +351,6 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-
 
         DBManager.setupInventory();
 

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 // animazione statica
-public class Animation extends Thread// TODO: implementare iterable?? Runnable??
+public class Animation extends Thread// TODO: implementare iterable??
 {
     private List<Image> frames;
     private List<Icon> framesIcon;
@@ -87,24 +87,5 @@ public class Animation extends Thread// TODO: implementare iterable?? Runnable??
                 e.printStackTrace();
             }
         }
-
-
-
-        /*
-        for(int i = 0; i <= 1; i++)
-        {
-            try
-            {
-                Thread.sleep(delayMilliseconds);
-                label.setIcon(framesIcon.get(i));
-
-
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-         */
     }
 }
