@@ -21,6 +21,7 @@ public class EventHandler
     }
 
 
+    // nota: servirà spostare questo in un'altra classe
     private static void performAnimation(ItemInteractionEvent e)
     {
 
