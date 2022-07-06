@@ -63,4 +63,9 @@ public class Room
         return backgroundImage;
     }
 
+    /*
+    funzione boolean isBloccoCamminabile(int xBlock, int yBlock)
+     */
+
+    //TODO: inserire max xBlock e yBlock
 }

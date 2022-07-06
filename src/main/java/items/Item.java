@@ -30,6 +30,7 @@ public class Item implements Observable
 
     // SPRITE OGGETTO
     private BufferedImage sprite;
+    // Per bufferizzazione sprite riscalamento
     private double scalingFactor;
     private Icon scaledSpriteIcon;
 
@@ -118,7 +119,11 @@ public class Item implements Observable
     public Icon getScaledIconSprite(double scalingFactor)
     {
         if(scaledSpriteIcon == null || scalingFactor != this.scalingFactor)
+        {
             scaledSpriteIcon = rescaledImageIcon(sprite, scalingFactor);
+            this.scalingFactor = scalingFactor;
+        }
+
 
         return scaledSpriteIcon;
     }

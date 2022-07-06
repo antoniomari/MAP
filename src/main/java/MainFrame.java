@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -286,20 +287,37 @@ public class MainFrame extends javax.swing.JFrame {
 
         // aggiungi la label nell'ITEM_LAYER
         gamePanel.add(itemLabel, ITEM_LAYER);
-
-
     }
 
+    /**
+     * Aggiorna la posizione di un oggetto nella stanza.
+     *
+     * @param it oggetto da riposizionare
+     * @param xBlocks blocco x
+     * @param yBlocks blocco y
+     * @throws IllegalArgumentException se it non è presente nella stanza
+     */
     private void updateItemPosition(Item it, int xBlocks, int yBlocks)
     {
+        Objects.requireNonNull(it);
+
+        // controlla che it è presente effettivamente nella stanza
+        if(!itemLabelMap.containsKey(it))
+        {
+            // TODO: ricontrollare eccezione lanciata
+            throw new IllegalArgumentException("Item non presente nella stanza");
+        }
         Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
         Insets insets = gamePanel.getInsets();
         Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
 
         JLabel itemLabel = itemLabelMap.get(it);
-        itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(), rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+        itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
+                            rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
     }
+    // TODO: aggiornare stato stanza, generare evento di gioco
 
+    // TODO: calcolare massimi xBlock e yBlock per la stanza
     private Coordinates calculateCoordinates(int xBlocks, int yBlocks)
     {
         if(xBlocks < 0 || yBlocks < 0)
