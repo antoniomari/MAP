@@ -3,15 +3,20 @@ package GUI;
 
 import database.DBManager;
 import events.executors.AnimationExecutor;
+import graphics.SpriteManager;
 import items.Door;
 import items.Item;
 import rooms.Coordinates;
 import rooms.Room;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,7 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
     private int gameWidth;
     private int gameHeight;
     private double rescalingFactor;
-    private final static JLabel outputLabel = new JLabel("ciao");
+    private final static JLabel outputLabel = new JLabel();
 
     // COMPONENTI SWING
     private JLabel backgroundLabel;
@@ -35,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
     private JPanel mainPanel;
     private JPanel menuPanel;
     private JPanel gamePanel;
-    private JPanel inventoryPanel;
+    private InventoryPanel inventoryPanel;
 
     // LISTENER FOR KEYS
     private final GameKeyListener ESC_LISTENER;
@@ -80,12 +85,29 @@ public class MainFrame extends javax.swing.JFrame {
 
         // inizializzazione immagine di sfondo
         setupBackground();
+        // inizializzazione inventario
+        setupInventory();
         // inizializzazione componenti
         initComponents();
         // inizializzazione cursore
         initCursor();
         // attiva schermo intero
         fullScreenOn();
+
+    }
+
+    private void setupInventory()
+    {
+        try
+        {
+            String inventoryPath = "/img/inventario/Barra oggetti inventario.png";
+            BufferedImage inventoryBar = ImageIO.read(this.getClass().getResource(inventoryPath));
+            outputLabel.setIcon(SpriteManager.rescaledImageIcon(inventoryBar, 1));
+        }
+        catch (IOException e)
+        {
+            // fanculo
+        }
 
     }
 
@@ -137,7 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel = new JPanel();
         menuPanel = new JPanel();
         gamePanel = new JPanel();
-        inventoryPanel = new JPanel();
+        inventoryPanel = new InventoryPanel();
         gameScreenPanel = new JLayeredPane();
 
 
@@ -176,8 +198,8 @@ public class MainFrame extends javax.swing.JFrame {
         // -----------------------------------------------------
         //                  SETUP inventoryPanel
         // -----------------------------------------------------
-        inventoryPanel.setLayout(new FlowLayout());
-        inventoryPanel.add(outputLabel);
+        //inventoryPanel.setLayout(new FlowLayout());
+        //inventoryPanel.add(outputLabel);
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
@@ -261,7 +283,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
         GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
-                           null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
+                           () -> inventoryPanel.addItem(new ImageIcon((new Item("Barile", "OK")).getSprite())), () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
         itemLabel.addMouseListener(popMenuListener);
 
         // metti la coppia Item JLabel nel dizionario
