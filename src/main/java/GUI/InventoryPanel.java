@@ -171,7 +171,7 @@ public class InventoryPanel extends JLayeredPane
     {
         itemIconList.add(icon);
 
-        //temp
+        //temp TODO: aggiustare logica del display bar
         displayBar(1);
     }
 

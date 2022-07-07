@@ -1,9 +1,6 @@
 package GUI;
 
-import items.Door;
-import items.Item;
-import items.Observable;
-import items.Openable;
+import items.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +12,7 @@ public class PopMenuManager
 {
     private static JPopupMenu itemMenu;
     private static JPopupMenu doorMenu;
+    private static JPopupMenu pickupableItemMenu;
     private static Map<Class, JPopupMenu> classMenuMap;
     private static Object selected;
 
@@ -36,11 +34,21 @@ public class PopMenuManager
         }
     };
 
+    private final static Action PICKUP_ACTION = new AbstractAction("Raccogli")
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ((PickupableItem) selected).pickup();
+        }
+    };
+
     static
     {
         classMenuMap = new HashMap<>();
         setupItemMenu();
         setupDoorMenu();
+        setupPickupableItemMenu();
 
     }
 
@@ -58,6 +66,15 @@ public class PopMenuManager
         doorMenu.add(new JMenuItem(OBSERVE_ACTION));
         doorMenu.add(new JMenuItem(OPEN_ACTION));
         classMenuMap.put(Door.class, doorMenu);
+    }
+
+    private static void setupPickupableItemMenu()
+    {
+        pickupableItemMenu = new JPopupMenu();
+
+        pickupableItemMenu.add(new JMenuItem(OBSERVE_ACTION));
+        pickupableItemMenu.add(new JMenuItem(PICKUP_ACTION));
+        classMenuMap.put(PickupableItem.class, pickupableItemMenu);
     }
 
     public static void showMenu(Object o, Component invoker, int x, int y)

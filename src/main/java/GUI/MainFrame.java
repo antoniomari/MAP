@@ -6,6 +6,7 @@ import events.executors.AnimationExecutor;
 import graphics.SpriteManager;
 import items.Door;
 import items.Item;
+import items.PickupableItem;
 import rooms.Coordinates;
 import rooms.Room;
 
@@ -175,7 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
         //                  SETUP gameScreenPanel
         // -----------------------------------------------------
 
-        Item barile1 = new Item("Barile", "Un barile scemo come Basile");
+        Item barile1 = new PickupableItem("Barile", "Un barile scemo come Basile");
         Door door = new Door("Porta", "Una porta spicolosa.");
 
         // Crea nuova label per visualizzare l'immagine di sfondo

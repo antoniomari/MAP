@@ -6,4 +6,9 @@ public class PickupableItem extends Item
     {
         super(name, description);
     }
+
+    public void pickup()
+    {
+
+    }
 }
