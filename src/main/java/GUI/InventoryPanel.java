@@ -169,7 +169,8 @@ public class InventoryPanel extends JLayeredPane
 
     public void addItem(Icon icon)
     {
-        itemIconList.add(icon);
+        if(itemIconList.size() < CAPACITY)
+            itemIconList.add(icon);
 
         //temp TODO: aggiustare logica del display bar
         displayBar(1);
