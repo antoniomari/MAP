@@ -138,20 +138,11 @@ public class Item implements Observable
     {
         if(scaledSpriteIcon == null || scalingFactor != this.scalingFactor)
         {
-            scaledSpriteIcon = rescaledImageIcon(sprite, scalingFactor);
+            scaledSpriteIcon = SpriteManager.rescaledImageIcon(sprite, scalingFactor);
             this.scalingFactor = scalingFactor;
         }
 
         return scaledSpriteIcon;
-    }
-
-
-    private static Icon rescaledImageIcon(Image im, double rescalingFactor)
-    {
-        int newWidth = (int) (rescalingFactor * im.getWidth(null));
-        int newHeight = (int)(rescalingFactor * im.getHeight(null));
-        Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        return new ImageIcon(newSprite);
     }
 
 }

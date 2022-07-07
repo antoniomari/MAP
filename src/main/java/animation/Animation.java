@@ -1,5 +1,6 @@
 package animation;
 
+import graphics.SpriteManager;
 import items.Item;
 
 import javax.swing.*;
@@ -34,13 +35,16 @@ public class Animation extends Thread// TODO: implementare iterable??
 
     public void rescaleFrames(double rescalingFactor)
     {
+        framesIcon = new ArrayList<>();
+
         for(Image frame : frames)
         {
-            framesIcon.add(rescaledImageIcon(frame, rescalingFactor));
+            framesIcon.add(SpriteManager.rescaledImageIcon(frame, rescalingFactor));
         }
     }
 
 
+    /*
     private static Icon rescaledImageIcon(Image im, double rescalingFactor)
     {
         int newWidth = (int) (rescalingFactor * im.getWidth(null));
@@ -48,6 +52,8 @@ public class Animation extends Thread// TODO: implementare iterable??
         Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(newSprite);
     }
+
+     */
 
     public Item getItem()
     {

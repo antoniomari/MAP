@@ -2,6 +2,7 @@ package GUI;
 
 
 import database.DBManager;
+import events.executors.AnimationExecutor;
 import items.Door;
 import items.Item;
 import rooms.Coordinates;
@@ -25,7 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final int screenHeight;
     private int gameWidth;
     private int gameHeight;
-    private static double rescalingFactor;
+    private double rescalingFactor;
     private final static JLabel outputLabel = new JLabel("ciao");
 
     // COMPONENTI SWING
@@ -44,25 +45,29 @@ public class MainFrame extends javax.swing.JFrame {
      * Dizionario che contiene gli oggetti presenti nella stanza
      * e le JLabel associate al gameScreenPanel
      */
-    private static Map<Item, JLabel> itemLabelMap;
+    private Map<Item, JLabel> itemLabelMap;
 
     // LAYER GAMEPANEL (sono richiesti Integer e non int)
     private final static Integer BACKGROUND_LAYER = 1;
     private final static Integer ITEM_LAYER = 2;
 
 
-    public static JLabel getLabelAssociated(Item item)
+    public JLabel getLabelAssociated(Item item)
     {
         return itemLabelMap.get(item);
     }
 
-    public static double getScalingFactor()
+    public double getScalingFactor()
     {
         return rescalingFactor;
     }
 
     public MainFrame(Room initialRoom)
     {
+        // imposta gli esecutori su di te TODO: migliorare codice
+        AnimationExecutor.setMainFrame(this);
+
+
         currentRoom = initialRoom;
 
         // Calcolo delle dimensioni dello schermo

@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOError;
 import java.io.IOException;
@@ -57,4 +59,13 @@ public class SpriteManager
 
         return spriteSheet.getSubimage(x, y, width, height);
     }
+
+    public static Icon rescaledImageIcon(Image im, double rescalingFactor)
+    {
+        int newWidth = (int) (rescalingFactor * im.getWidth(null));
+        int newHeight = (int)(rescalingFactor * im.getHeight(null));
+        Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        return new ImageIcon(newSprite);
+    }
+
 }
