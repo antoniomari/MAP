@@ -258,10 +258,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         // crea la label corrispondente all'Item
         JLabel itemLabel = new JLabel(rescaledSprite);
-        itemLabel.addMouseListener(new GameMouseListener(MouseEvent.BUTTON1,
-                                   () -> System.out.println("a"), () -> System.out.println("b")));
+
+        // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
         GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
-                           () -> PopMenuManager.showMenu(it, itemLabel, 0, 0), null);
+                           null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
         itemLabel.addMouseListener(popMenuListener);
 
         // metti la coppia Item JLabel nel dizionario

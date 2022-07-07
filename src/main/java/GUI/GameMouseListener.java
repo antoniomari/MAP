@@ -6,11 +6,13 @@ import java.awt.event.MouseListener;
 public class GameMouseListener implements MouseListener
 {
     private final int button;
-    private final Runnable clickAction;
     private final Runnable pressAction;
+    private final Runnable releaseAction;
+
+    private boolean okFlag;
 
 
-    public GameMouseListener(int button, Runnable clickAction, Runnable pressAction)
+    public GameMouseListener(int button, Runnable pressAction, Runnable releaseAction)
     {
         this.button = button;
 
@@ -19,45 +21,49 @@ public class GameMouseListener implements MouseListener
         else
             this.pressAction = pressAction;
 
-        if(clickAction == null)
-            this.clickAction = () -> {};
+        if(releaseAction == null)
+            this.releaseAction = () -> {};
         else
-            this.clickAction = clickAction;
+            this.releaseAction = releaseAction;
+
+        okFlag = false;
     }
 
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        if (e.getButton() == button )
-        {
-            clickAction.run();
-        }
+
     }
 
     @Override
     public void mousePressed(MouseEvent e)
     {
-        if (e.getButton() == button )
+        if (e.getButton() == button)
         {
             pressAction.run();
+            okFlag = true;
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e)
     {
-
+        if (e.getButton() == button)
+        {
+            if(okFlag)
+                releaseAction.run();
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e)
     {
-        // TODO
+
     }
 
     @Override
     public void mouseExited(MouseEvent e)
     {
-        // TODO
+        okFlag = false;
     }
 }
