@@ -10,8 +10,6 @@ import rooms.Room;
 
 public class PickupableItem extends Item
 {
-    private Room locationRoom; // stanza in cui è contenuto, se è null allora vuol dire che è nell'inventario
-
     // costruttore che inizializza l'oggetto come presente nell'inventario
     public PickupableItem(String name, String description)
     {
@@ -21,17 +19,6 @@ public class PickupableItem extends Item
     public PickupableItem(String name, String description, Room locationRoom)
     {
         super(name, description);
-        this.locationRoom = locationRoom;
-    }
-
-    public void setLocationRoom(Room room)
-    {
-        this.locationRoom = room;
-    }
-
-    public Room getLocationRoom()
-    {
-        return locationRoom;
     }
 
 

@@ -2,8 +2,6 @@ package events.executors;
 
 import GUI.InventoryPanel;
 import GUI.MainFrame;
-import animation.Animation;
-import items.Item;
 import items.PickupableItem;
 
 import javax.swing.*;

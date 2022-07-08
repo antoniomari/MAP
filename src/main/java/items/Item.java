@@ -4,6 +4,7 @@ import graphics.SpriteManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import rooms.Room;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -35,6 +36,8 @@ public class Item implements Observable
     private double scalingFactor;
     private Icon scaledSpriteIcon;
 
+    private Room locationRoom; // stanza in cui è contenuto, se è null allora vuol dire che è nell'inventario
+
     // CARICAMENTO SPRITESHEET IN MEMORIA
     static
     {
@@ -59,6 +62,16 @@ public class Item implements Observable
         this.name = name;
         this.description = description;
         extractSprite(spriteSheet, jsonPath);
+    }
+
+    public void setLocationRoom(Room room)
+    {
+        this.locationRoom = room;
+    }
+
+    public Room getLocationRoom()
+    {
+        return locationRoom;
     }
 
     public String observe()

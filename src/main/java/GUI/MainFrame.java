@@ -193,7 +193,8 @@ public class MainFrame extends javax.swing.JFrame {
         //                  SETUP gameScreenPanel
         // -----------------------------------------------------
 
-        Item barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
+        PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
+        barile1.setLocationRoom(currentRoom);
         currentRoom.addItem(barile1, calculateCoordinates(9, 5));
         Door door = new Door("Porta", "Una porta spicolosa.");
 
@@ -214,11 +215,6 @@ public class MainFrame extends javax.swing.JFrame {
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
 
-        // -----------------------------------------------------
-        //                  SETUP inventoryPanel
-        // -----------------------------------------------------
-        //inventoryPanel.setLayout(new FlowLayout());
-        //inventoryPanel.add(outputLabel);
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
@@ -272,6 +268,7 @@ public class MainFrame extends javax.swing.JFrame {
         add(mainPanel, BorderLayout.CENTER);
         addKeyListener(ESC_LISTENER);
         pack();
+
 
     }
 
