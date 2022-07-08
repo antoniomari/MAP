@@ -6,22 +6,25 @@ import items.Item;
 
 import javax.swing.*;
 
-public class AnimationExecutor //TODO: valutare se creare classe AbstractExecutor da cui gli esecutori derivano
+public class AnimationExecutor extends Executor
 {
-    private static MainFrame mainFrame;
+    private static double scalingFactor;
 
     public static void setMainFrame(MainFrame frame)
     {
-        mainFrame = frame;
+        Executor.setMainFrame(frame);
+        scalingFactor = mainFrame.getScalingFactor();
     }
 
     public static void executeAnimation(Animation animation)
     {
         Item itemToAnimate = animation.getItem();
-        JLabel label = mainFrame.getLabelAssociated(itemToAnimate);
-        animation.setLabel(label);
-        animation.rescaleFrames(mainFrame.getScalingFactor());
+        JLabel labelToAnimate = mainFrame.getLabelAssociated(itemToAnimate);
+        animation.setLabel(labelToAnimate);
+        animation.rescaleFrames(scalingFactor);
         animation.start();
-
     }
+
+
+
 }

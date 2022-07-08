@@ -1,16 +1,9 @@
 package events.executors;
 
-import GUI.MainFrame;
 import items.Item;
 
-public class RoomUpdateExecutor
+public class RoomUpdateExecutor extends Executor
 {
-    private static MainFrame mainFrame;
-
-    public static void setMainFrame(MainFrame frame)
-    {
-        mainFrame = frame;
-    }
 
     public static void executeRemoveItem(Item it)
     {

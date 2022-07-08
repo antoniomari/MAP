@@ -6,14 +6,13 @@ import items.PickupableItem;
 
 import javax.swing.*;
 
-public class InventoryUpdateExecutor
+public class InventoryUpdateExecutor extends Executor
 {
-    private static MainFrame mainFrame;
     private static InventoryPanel inventoryPanel;
 
     public static void setMainFrame(MainFrame frame)
     {
-        mainFrame = frame;
+        Executor.setMainFrame(frame);
         inventoryPanel = mainFrame.getInventoryPanel();
     }
 
