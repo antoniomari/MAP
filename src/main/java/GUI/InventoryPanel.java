@@ -5,11 +5,9 @@ import rooms.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class InventoryPanel extends JLayeredPane
@@ -127,20 +125,6 @@ public class InventoryPanel extends JLayeredPane
         displayBar(currentBar);
     }
 
-    public void initListeners()
-    {
-        GameKeyListener upArrowListener = new GameKeyListener(KeyEvent.VK_UP, this::visualizePreviousBar, null);
-        GameKeyListener downArrowListener = new GameKeyListener(KeyEvent.VK_DOWN, this::visualizeNextBar, null);
-
-        Container parent = getParent();
-        while(!(parent instanceof MainFrame))
-        {
-            System.out.println(parent.getClass());
-            parent = parent.getParent();
-        }
-        parent.addKeyListener(upArrowListener);
-        parent.addKeyListener(downArrowListener);
-    }
     /**
      * Calcola la posizione della i-esima label nella barra dell'inventario,
      * con i = 0, ..., BAR_SIZE-1.
