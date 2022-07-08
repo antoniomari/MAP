@@ -18,6 +18,6 @@ public class InventoryUpdateExecutor extends Executor
 
     public static void executeAdd(PickupableItem it)
     {
-        inventoryPanel.addItem(new ImageIcon(it.getSprite()));
+        inventoryPanel.addItem(it.getSprite());
     }
 }

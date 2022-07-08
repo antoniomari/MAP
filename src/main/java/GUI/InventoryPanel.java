@@ -5,6 +5,7 @@ import rooms.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -12,78 +13,126 @@ import java.util.List;
 
 public class InventoryPanel extends JLayeredPane
 {
-    /** Capacità dell'inventario */
-    private final static int CAPACITY = 30;
+    // Dimensioni //
+    private final static int CAPACITY = 30;  // capacità inventario
+    private final static int BAR_SIZE = 10;  // numero di oggetti nella barra
+    private final static int MAX_BAR = CAPACITY / BAR_SIZE;  // numero di barre
+    private final static int ORIGINAL_ITEM_SIZE = 48;  // dimensione lato sprite oggetti (quadrato)
 
-    /** Numero di oggetti visualizzati nella barra */
-    private final static int BAR_SIZE = 10;
-
-    /** Numero massimo di barre, */
-    private final static int MAX_BAR = CAPACITY / BAR_SIZE;
-
-    /** Dimensione label degli oggetti nell'inventario */
-    private final static int LABEL_SIZE = 48;
-
-    /** Path dell'immagine di background della barra dell'inventario */
-    private final static String BACKGROUND_PATH = "/img/inventario/Barra oggetti inventario.png";
-
-    /** Immagine di background della barra dell'inventario */
-    private final static BufferedImage BACKGROUND_IMAGE;
-
+    // Path immagini e json //
+    private final static String BAR_PATH = "/img/inventario/Barra oggetti inventario.png";
     private final static String BUTTON_SPRITESHEET_PATH = "/img/inventario/bottoni.png";
     private final static String BUTTON_JSON_PATH = "/img/inventario/bottoni.json";
+
+    // Immagini png (da caricare) //
+    private final static BufferedImage BAR_IMAGE;
     private final static BufferedImage BUTTON_SPRITESHEET;
 
-    /** Lista delle etichette associate a ciascun elemento nella barra dell'inventario */
+    // Livelli del LayeredPane inventario //
+    private final static Integer BAR_LEVEL = 1;
+    private final static Integer ITEM_LEVEL = 2;
+
+
+
+
+    /*
+    private final static int NO_SELECTION = -1;
+        TODO: ciao
+    private int selectedItem = NO_SELECTION;
+
+     */
+
+    /** Lista delle etichette associate a ciascun elemento della barra dell'inventario */
     private List<JLabel> itemLabelList;
     /** Lista delle icone degli oggetti presenti nell'inventario */
     private List<Icon> itemIconList;
 
-    private final static Integer BAR_LEVEL = 1;
-    private final static Integer ITEM_LEVEL = 2;
-
     /** Barra correntemente visualizzata */
     private int currentBar;
+
+    // Label per barra e bottoni
+    private JLabel barLabel;
+    private JLabel upButtonLabel;
+    private JLabel downButtonLabel;
+
+    /** Fattore di riscalamento per la visualizzazione */
+    private double scalingFactor;
 
 
     static
     {
-        // Caricamento immagine background barra dell'inventario
-        BACKGROUND_IMAGE = SpriteManager.loadSpriteSheet(BACKGROUND_PATH);
+        // Caricamento immagini barra e bottoni
+        BAR_IMAGE = SpriteManager.loadSpriteSheet(BAR_PATH);
         BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
     }
 
 
-    public InventoryPanel()
+    public InventoryPanel(int preferredHeight)
     {
         super();
 
+
+        scalingFactor = (double) preferredHeight / ORIGINAL_ITEM_SIZE;
+
+        initBar();
+        initButtons();
+
+        int totalWidth = barLabel.getIcon().getIconWidth()
+                + upButtonLabel.getIcon().getIconWidth()
+                + downButtonLabel.getIcon().getIconWidth();
+
+
+
+        int inventoryWidth = (int) (totalWidth * scalingFactor);
+        int inventoryHeight = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
+
+        // imposta dimensione del pannello
+        setPreferredSize(new Dimension(inventoryWidth, inventoryHeight));
+
+        // setup icone oggetti
+        itemIconList = new ArrayList<>(CAPACITY);
+
+        initLabelList();
+
+        // visualizza barra 1
+        currentBar = 1;
+        displayBar(currentBar);
+    }
+
+
+    private void initBar()
+    {
         Insets inventoryInsets = this.getInsets();
 
         // setup background, immagine della barra dell'inventario
-        JLabel backgroundLabel = new JLabel(new ImageIcon(BACKGROUND_IMAGE));
+        barLabel = new JLabel(SpriteManager.rescaledImageIcon(BAR_IMAGE, scalingFactor));
         // imposta bordi background
-        int backgroundWidth = backgroundLabel.getIcon().getIconWidth();
-        int backgroundHeight = backgroundLabel.getIcon().getIconHeight();
+        int backgroundWidth = barLabel.getIcon().getIconWidth();
+        int backgroundHeight = barLabel.getIcon().getIconHeight();
 
-        backgroundLabel.setBounds(inventoryInsets.left + LABEL_SIZE * 2, inventoryInsets.top,
-                                            backgroundWidth, backgroundHeight);
+        barLabel.setBounds(inventoryInsets.left + (int)(ORIGINAL_ITEM_SIZE * scalingFactor * 2), inventoryInsets.top,
+                backgroundWidth, backgroundHeight);
 
-        add(backgroundLabel, BAR_LEVEL);
+        add(barLabel, BAR_LEVEL);
+    }
+
+    private void initButtons()
+    {
+        Insets inventoryInsets = this.getInsets();
 
         // aggiungi bottoni per cambiare visualizzazione barra
-        JLabel upButtonLabel = new JLabel(
-                        new ImageIcon(SpriteManager.loadSpriteByName(
-                                BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up")));
+        upButtonLabel = new JLabel(
+                SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteByName(
+                        BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"), scalingFactor));
 
         upButtonLabel.setBounds(inventoryInsets.left, inventoryInsets.top,
-                                upButtonLabel.getIcon().getIconWidth(), upButtonLabel.getIcon().getIconHeight());
+                upButtonLabel.getIcon().getIconWidth(), upButtonLabel.getIcon().getIconHeight());
 
-        JLabel downButtonLabel = new JLabel(
-                new ImageIcon(SpriteManager.loadSpriteByName(
-                        BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down")));
+        downButtonLabel = new JLabel(
+                SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteByName(
+                        BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"), scalingFactor));
 
-        downButtonLabel.setBounds(inventoryInsets.left + LABEL_SIZE, inventoryInsets.top,
+        downButtonLabel.setBounds(inventoryInsets.left + (int)(ORIGINAL_ITEM_SIZE * scalingFactor), inventoryInsets.top,
                 downButtonLabel.getIcon().getIconWidth(), downButtonLabel.getIcon().getIconHeight());
 
         add(upButtonLabel, BAR_LEVEL);
@@ -94,14 +143,13 @@ public class InventoryPanel extends JLayeredPane
 
         upButtonLabel.addMouseListener(upListener);
         downButtonLabel.addMouseListener(downListener);
+    }
 
-        // imposta dimensione del pannello
-        setPreferredSize(new Dimension(backgroundWidth + 2 * LABEL_SIZE, backgroundHeight));
+    private void initLabelList()
+    {
+        Insets inventoryInsets = getInsets();
 
-        // setup icone oggetti
-        itemIconList = new ArrayList<>(CAPACITY);
-
-        // crea 10 label e posizionale
+        // crea array di label
         itemLabelList = new ArrayList<>(BAR_SIZE);
 
         for(int i = 0; i < BAR_SIZE; i++)
@@ -112,18 +160,18 @@ public class InventoryPanel extends JLayeredPane
             // posiziona label
             Coordinates coord = calculateOffset(i);
             tempLabel.setBounds(inventoryInsets.left + coord.getX(),
-                                inventoryInsets.top +  coord.getY(),
-                                    LABEL_SIZE, LABEL_SIZE);
+                    inventoryInsets.top +  coord.getY(),
+                    (int)(ORIGINAL_ITEM_SIZE * scalingFactor), (int)(ORIGINAL_ITEM_SIZE * scalingFactor));
             // aggiungi label alla lista
             itemLabelList.add(tempLabel);
             // aggiungi label al pannello
             add(tempLabel, ITEM_LEVEL);
-        }
 
-        // visualizza barra 1
-        currentBar = 1;
-        displayBar(currentBar);
+            // aggiungi MouseListener per la selezione TODO: urgente, capire come fare qua
+            // GameMouseListener mouseListener = new GameMouseListener(MouseEvent.BUTTON1, () -> selectItem(tempLabel), null)
+        }
     }
+
 
     /**
      * Calcola la posizione della i-esima label nella barra dell'inventario,
@@ -134,18 +182,18 @@ public class InventoryPanel extends JLayeredPane
      */
     public Coordinates calculateOffset(int i)
     {
-        return new Coordinates((i + 2) * LABEL_SIZE + 1, 1);
+        return new Coordinates((int)((i + 2) * ORIGINAL_ITEM_SIZE * scalingFactor + 1), 1);
     }
 
     /**
      * Aggiunge l'icona di un oggetto nell'inventario
      *
-     * @param icon icona dell'item aggiunto
+     * @param image icona dell'item aggiunto
      */
-    public void addItem(Icon icon)
+    public void addItem(Image image)
     {
         if(itemIconList.size() < CAPACITY)
-            itemIconList.add(icon);
+            itemIconList.add(SpriteManager.rescaledImageIcon(image, scalingFactor));
 
         //temp TODO: aggiustare logica del display bar
         displayBar(1);

@@ -148,8 +148,6 @@ public class MainFrame extends javax.swing.JFrame {
         gameWidth = screenWidth;
         gameHeight = (int)(roomHeight * rescalingFactor);
         backgroundImg = new ImageIcon(roomImage.getScaledInstance(gameWidth, gameHeight, Image.SCALE_SMOOTH));
-
-
     }
 
     private void fullScreenOn()
@@ -177,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel = new JPanel();
         menuPanel = new JPanel();
         gamePanel = new JPanel();
-        inventoryPanel = new InventoryPanel();
+        // dopo inventoryPanel = new InventoryPanel();
         gameScreenPanel = new JLayeredPane();
 
 
@@ -215,6 +213,10 @@ public class MainFrame extends javax.swing.JFrame {
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
 
+        // -----------------------------------------------------
+        //                  SETUP inventoryPanel
+        // -----------------------------------------------------
+        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
