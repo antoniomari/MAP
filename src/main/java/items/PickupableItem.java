@@ -5,6 +5,7 @@ import characters.PlayingCharacter;
 import events.EventHandler;
 import events.InventoryEvent;
 import events.RoomEvent;
+import rooms.Coordinates;
 import rooms.Room;
 
 
@@ -33,5 +34,17 @@ public class PickupableItem extends Item
         // generato evento aggiungiInventario TODO: togliere spicolo
         PlayingCharacter.SPICOLO.addToInventory(this);
         EventHandler.printEvent(new InventoryEvent(PlayingCharacter.SPICOLO, this, InventoryEvent.Type.ADD_ITEM));
+    }
+
+    public void drop(Room room, Coordinates coord)
+    {
+        //aggiungi alla stanza
+        room.addItem(this, coord);
+        setLocationRoom(room);
+        EventHandler.printEvent(new RoomEvent(room, this, RoomEvent.Type.ADD_ITEM_IN_ROOM));
+
+        // rimuovi dall'inventario
+        PlayingCharacter.SPICOLO.removeFromInventory(this);
+        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.SPICOLO, this, InventoryEvent.Type.USE_ITEM));
     }
 }
