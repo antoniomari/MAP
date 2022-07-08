@@ -6,6 +6,7 @@ import items.PickupableItem;
 
 public class InventoryEvent extends GameEvent
 {
+    Type type;
     public enum Type
     {
         ADD_ITEM {
@@ -24,8 +25,19 @@ public class InventoryEvent extends GameEvent
         }
     }
 
+    public InventoryEvent(PlayingCharacter ch, PickupableItem item, Type type)
+    {
+        this(ch, item, type.toString());
+        this.type = type;
+    }
+
     public InventoryEvent(PlayingCharacter ch, PickupableItem item, String toPrint)
     {
         super(item, toPrint);
+    }
+
+    public Type getType()
+    {
+        return this.type;
     }
 }

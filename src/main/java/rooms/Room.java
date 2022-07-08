@@ -41,6 +41,12 @@ public class Room
         itemList.add(item);
     }
 
+    public void removeItem(Item item)
+    {
+        itemMap.remove(item);
+        itemList.remove(item);
+    }
+
     public Item getItem(int i)
     {
         return itemList.get(i);

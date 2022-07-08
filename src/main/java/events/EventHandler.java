@@ -1,12 +1,8 @@
 package events;
 
 
-import GUI.MainFrame;
-import animation.Animation;
 import events.executors.AnimationExecutor;
-import items.Item;
 
-import javax.swing.*;
 
 public class EventHandler
 {
@@ -18,6 +14,23 @@ public class EventHandler
         if(ge instanceof ItemInteractionEvent)
             if (((ItemInteractionEvent) ge).hasAnimation())
                 AnimationExecutor.executeAnimation(((ItemInteractionEvent) ge).getAnimation());
+
+        if(ge instanceof InventoryEvent)
+            executeInventoryEvent((InventoryEvent) ge);
+
+        if(ge instanceof RoomEvent)
+            executeRoomEvent((RoomEvent) ge);
+    }
+
+    public static void executeInventoryEvent(InventoryEvent e)
+    {
+        if()
+        InventoryEvent.executeAdd(e.getItemInvolved());
+    }
+
+    public static void executeRoomEvent(RoomEvent e)
+    {
+        // demanda all'esecutore corrispondente l'aggiornamento della stanza
     }
 
 }
