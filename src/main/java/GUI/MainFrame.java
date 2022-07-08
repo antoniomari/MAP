@@ -3,6 +3,8 @@ package GUI;
 
 import database.DBManager;
 import events.executors.AnimationExecutor;
+import events.executors.InventoryUpdateExecutor;
+import events.executors.RoomUpdateExecutor;
 import graphics.SpriteManager;
 import items.Door;
 import items.Item;
@@ -48,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     /**
-     * Dizionario che contiene gli oggetti presenti nella stanza
+     * Dizionario che contiene gli oggetti presenti nella stanza (currentRoom)
      * e le JLabel associate al gameScreenPanel
      */
     private Map<Item, JLabel> itemLabelMap;
@@ -63,17 +65,27 @@ public class MainFrame extends javax.swing.JFrame {
         return itemLabelMap.get(item);
     }
 
+    public void removeItemCurrentRoom(Item item)
+    {
+        // rimuovere la JLabel dal gameScreenPanel
+        gameScreenPanel.remove(itemLabelMap.get(item));
+
+        // elimina la voce dal dizionario
+        itemLabelMap.remove(item);
+    }
+
     public double getScalingFactor()
     {
         return rescalingFactor;
     }
 
+    public InventoryPanel getInventoryPanel()
+    {
+        return inventoryPanel;
+    }
+
     public MainFrame(Room initialRoom)
     {
-        // imposta gli esecutori su di te TODO: migliorare codice
-        AnimationExecutor.setMainFrame(this);
-
-
         currentRoom = initialRoom;
 
         // Calcolo delle dimensioni dello schermo
@@ -94,6 +106,11 @@ public class MainFrame extends javax.swing.JFrame {
         initCursor();
         // attiva schermo intero
         fullScreenOn();
+
+        // imposta gli esecutori su di te TODO: migliorare codice
+        AnimationExecutor.setMainFrame(this);
+        InventoryUpdateExecutor.setMainFrame(this);
+        RoomUpdateExecutor.setMainFrame(this);
 
     }
 
@@ -176,7 +193,8 @@ public class MainFrame extends javax.swing.JFrame {
         //                  SETUP gameScreenPanel
         // -----------------------------------------------------
 
-        Item barile1 = new PickupableItem("Barile", "Un barile scemo come Basile");
+        Item barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
+        currentRoom.addItem(barile1, calculateCoordinates(9, 5));
         Door door = new Door("Porta", "Una porta spicolosa.");
 
         // Crea nuova label per visualizzare l'immagine di sfondo
@@ -284,7 +302,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
         GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
-                           () -> inventoryPanel.addItem(new ImageIcon((new Item("Barile", "OK")).getSprite())), () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
+                null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
         itemLabel.addMouseListener(popMenuListener);
 
         // metti la coppia Item JLabel nel dizionario

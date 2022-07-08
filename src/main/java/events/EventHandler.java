@@ -2,6 +2,9 @@ package events;
 
 
 import events.executors.AnimationExecutor;
+import events.executors.InventoryUpdateExecutor;
+import events.executors.RoomUpdateExecutor;
+import items.PickupableItem;
 
 
 public class EventHandler
@@ -24,13 +27,17 @@ public class EventHandler
 
     public static void executeInventoryEvent(InventoryEvent e)
     {
-        if()
-        InventoryEvent.executeAdd(e.getItemInvolved());
+        if(e.getType() == InventoryEvent.Type.ADD_ITEM)
+            InventoryUpdateExecutor.executeAdd((PickupableItem) e.getItemInvolved()); //TODO: vedere se si può migliorare castr
+
     }
 
     public static void executeRoomEvent(RoomEvent e)
     {
-        // demanda all'esecutore corrispondente l'aggiornamento della stanza
+        if(e.getType() == RoomEvent.Type.REMOVE_ITEM_FROM_ROOM)
+        {
+            RoomUpdateExecutor.executeRemoveItem(e.getItemInvolved()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import rooms.Room;
 
 public class RoomEvent extends GameEvent
 {
+    Type type;
     Room roomInvolved;
     public enum Type
     {
@@ -30,6 +31,7 @@ public class RoomEvent extends GameEvent
     public RoomEvent(Room room, PickupableItem item, Type type)
     {
         this(room, item, type.toString());
+        this.type = type;
     }
 
     public RoomEvent(Room room, PickupableItem item, String toPrint)
@@ -41,5 +43,10 @@ public class RoomEvent extends GameEvent
     public Room getRoomInvolved()
     {
         return roomInvolved;
+    }
+
+    public Type getType()
+    {
+        return type;
     }
 }

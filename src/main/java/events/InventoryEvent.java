@@ -6,7 +6,7 @@ import items.PickupableItem;
 
 public class InventoryEvent extends GameEvent
 {
-    Type type;
+    private Type type;
     public enum Type
     {
         ADD_ITEM {
