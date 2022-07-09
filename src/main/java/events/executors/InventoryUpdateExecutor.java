@@ -4,7 +4,6 @@ import GUI.InventoryPanel;
 import GUI.MainFrame;
 import items.PickupableItem;
 
-
 public class InventoryUpdateExecutor extends Executor
 {
     private static InventoryPanel inventoryPanel;

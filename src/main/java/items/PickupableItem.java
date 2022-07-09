@@ -8,7 +8,6 @@ import events.RoomEvent;
 import rooms.Coordinates;
 import rooms.Room;
 
-
 public class PickupableItem extends Item
 {
     // costruttore che inizializza l'oggetto come presente nell'inventario
@@ -33,7 +32,7 @@ public class PickupableItem extends Item
 
         // generato evento aggiungiInventario TODO: togliere spicolo
         PlayingCharacter.getPlayer().addToInventory(this);
-        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.getPlayer(), this, InventoryEvent.Type.ADD_ITEM));
+        EventHandler.printEvent(new InventoryEvent(this, InventoryEvent.Type.ADD_ITEM));
     }
 
     public void drop(Room room, Coordinates coord)
@@ -45,6 +44,6 @@ public class PickupableItem extends Item
 
         // rimuovi dall'inventario
         PlayingCharacter.getPlayer().removeFromInventory(this);
-        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.getPlayer(), this, InventoryEvent.Type.USE_ITEM));
+        EventHandler.printEvent(new InventoryEvent(this, InventoryEvent.Type.USE_ITEM));
     }
 }

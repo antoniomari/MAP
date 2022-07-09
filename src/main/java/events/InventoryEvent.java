@@ -1,7 +1,6 @@
 package events;
 
 import characters.PlayingCharacter;
-import items.Item;
 import items.PickupableItem;
 
 public class InventoryEvent extends GameEvent
@@ -25,13 +24,13 @@ public class InventoryEvent extends GameEvent
         }
     }
 
-    public InventoryEvent(PlayingCharacter ch, PickupableItem item, Type type)
+    public InventoryEvent(PickupableItem item, Type type)
     {
-        this(ch, item, type.toString());
+        this(item, type.toString());
         this.type = type;
     }
 
-    public InventoryEvent(PlayingCharacter ch, PickupableItem item, String toPrint)
+    public InventoryEvent(PickupableItem item, String toPrint)
     {
         super(item, toPrint);
     }

@@ -24,7 +24,4 @@ public class AnimationExecutor extends Executor
         animation.rescaleFrames(scalingFactor);
         animation.start();
     }
-
-
-
 }

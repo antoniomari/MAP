@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.util.*;
 import java.util.List;
 
@@ -93,6 +94,8 @@ public class InventoryPanel extends JLayeredPane
     public InventoryPanel(PlayingCharacter character, int preferredHeight)
     {
         super();
+        scalingFactor = (double) preferredHeight / ORIGINAL_ITEM_SIZE;
+        scaledItemSize = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
 
         // inizializza riferimento all'inventario del personaggio giocante
         List<PickupableItem> characterInventory = character.getInventory();
@@ -106,10 +109,6 @@ public class InventoryPanel extends JLayeredPane
         {
             inventoryItemIconList.add(new Pair<>(item, item.getScaledIconSprite(scalingFactor)));
         }
-
-
-        scalingFactor = (double) preferredHeight / ORIGINAL_ITEM_SIZE;
-        scaledItemSize = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
 
         initBar();
         initButtons();
@@ -216,14 +215,19 @@ public class InventoryPanel extends JLayeredPane
         if (itemIndex >= inventoryItemIconList.size())
             selectedItem = null;
         else
+        {
             selectedItem = inventoryItemIconList.get(itemIndex).getObject1();
+            float brightnessFactor = 1.3f; // How much brighter. 1.3 means 30% brighter
+            RescaleOp op = new RescaleOp(brightnessFactor, 0, null);
+            BufferedImage bufImage = op.filter((BufferedImage) selectedItem.getSprite(), null);
+            itemLabelList.get(i).setIcon(SpriteManager.rescaledImageIcon(bufImage, scalingFactor));
+        }
     }
 
     public PickupableItem getSelectedItem()
     {
         return selectedItem;
     }
-
 
     /**
      * Calcola la posizione della i-esima label nella barra dell'inventario,
@@ -248,11 +252,7 @@ public class InventoryPanel extends JLayeredPane
             inventoryItemIconList.add(new Pair<>(item, item.getScaledIconSprite(scalingFactor)));
 
         int lastIndex = inventoryItemIconList.size() - 1;
-
-        if (lastIndex % 10 == 0)
-            displayBar(lastIndex / 10 + 1);
-        else
-            displayBar(lastIndex / 10);
+        displayBar(lastIndex / 10 + 1);
     }
 
     public void dropFromInventory(PickupableItem item)

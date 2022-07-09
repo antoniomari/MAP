@@ -1,29 +1,30 @@
 package events;
 
-
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
 import items.PickupableItem;
-import rooms.Room;
-
 
 public class EventHandler
 {
-
     public static void printEvent(GameEvent ge)
     {
         System.out.println(ge.getEventString());
 
         if(ge instanceof ItemInteractionEvent)
-            if (((ItemInteractionEvent) ge).hasAnimation())
-                AnimationExecutor.executeAnimation(((ItemInteractionEvent) ge).getAnimation());
+            executeItemInteractionEvent((ItemInteractionEvent) ge);
 
         if(ge instanceof InventoryEvent)
             executeInventoryEvent((InventoryEvent) ge);
 
         if(ge instanceof RoomEvent)
             executeRoomEvent((RoomEvent) ge);
+    }
+
+    public static void executeItemInteractionEvent(ItemInteractionEvent e)
+    {
+        if (e.hasAnimation())
+            AnimationExecutor.executeAnimation(e.getAnimation());
     }
 
     public static void executeInventoryEvent(InventoryEvent e)

@@ -1,9 +1,9 @@
 package graphics;
 
 import items.Item;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -46,11 +46,21 @@ public class SpriteManager
      */
     public static BufferedImage loadSpriteByName(BufferedImage spriteSheet, String jsonPath, String spriteName)
     {
-        InputStream is = Item.class.getResourceAsStream(jsonPath);
+        InputStream is = SpriteManager.class.getResourceAsStream(jsonPath);
         JSONTokener tokener = new JSONTokener(is);
         JSONObject json = new JSONObject(tokener);
 
-        JSONObject itemJson = json.getJSONObject(spriteName);
+        JSONObject itemJson;
+        try
+        {
+            itemJson = json.getJSONObject(spriteName);
+        }
+        catch (JSONException e)
+        {
+            System.out.println(jsonPath + "      " + spriteName);
+            itemJson = json.getJSONObject("missing");
+            System.out.println(itemJson);
+        }
 
         int x = itemJson.getInt("x");
         int y = itemJson.getInt("y");
@@ -67,5 +77,4 @@ public class SpriteManager
         Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(newSprite);
     }
-
 }

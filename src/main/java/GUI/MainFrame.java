@@ -420,9 +420,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        // DBManager.setupInventory();
         PlayingCharacter.initPlayer("Spicola");
-        PlayingCharacter.getPlayer().flushInventory();
+        DBManager.setupInventory();
 
         Room cucina = DBManager.loadRoom("Cucina");
 

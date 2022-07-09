@@ -5,6 +5,13 @@
     "y": 1,
     "width": 48,
     "height": 48
-  }
+  },
 
+  "missing":
+  {
+    "x": 97,
+    "y": 97,
+    "width": 48,
+    "height": 48
+  }
 }

@@ -27,13 +27,13 @@ public class Door extends Item implements Openable, Lockable
 
     public Door(String name, int state)
     {
-        super(name, "Una porta strana", SPRITESHEET, JSON_PATH);
+        super("Porta", "Una porta strana", SPRITESHEET, JSON_PATH);
         this.state = state;
     }
 
     public Door(String name, String description)
     {
-        super(name, description, SPRITESHEET, JSON_PATH);
+        super("Porta", description, SPRITESHEET, JSON_PATH);
         this.state = CLOSED;
     }
     public void open()

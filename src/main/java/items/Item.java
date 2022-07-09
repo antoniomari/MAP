@@ -52,10 +52,12 @@ public class Item implements Observable
         extractSprite(SPRITESHEET, JSON_PATH);
     }
 
+    /*
     public Item()
     {
         this(DEFAULT_NAME, DEFAULT_DESCRIPTION);
     }
+    */
 
     protected Item(String name, String description, BufferedImage spriteSheet, String jsonPath)
     {
@@ -108,9 +110,10 @@ public class Item implements Observable
 
      */
 
+
     private void extractSprite(BufferedImage spriteSheet, String jsonPath)
     {
-
+        /*
         try
         {
             InputStream is = Item.class.getResourceAsStream(jsonPath);
@@ -128,8 +131,11 @@ public class Item implements Observable
         }
         catch(JSONException e)
         {
-            //TODO: :)
+
         }
+
+        */
+       sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, name);
     }
 
     public Image getSprite()
@@ -157,5 +163,4 @@ public class Item implements Observable
 
         return scaledSpriteIcon;
     }
-
 }

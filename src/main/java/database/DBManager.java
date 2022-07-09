@@ -46,7 +46,6 @@ public class DBManager
 
     public static void setupInventory() throws SQLException
     {
-
         startConnection();
         PreparedStatement pstm= conn.prepareStatement("SELECT nomeoggetto, descrizione FROM gamedb.inventario");
         ResultSet rs= pstm.executeQuery();

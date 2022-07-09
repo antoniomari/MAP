@@ -1,6 +1,5 @@
 package events;
 
-import characters.PlayingCharacter;
 import items.PickupableItem;
 import rooms.Coordinates;
 import rooms.Room;
@@ -32,19 +31,13 @@ public class RoomEvent extends GameEvent
 
     public RoomEvent(Room room, PickupableItem item, Type type)
     {
-        this(room, item, type.toString());
-        this.type = type;
-    }
-
-    public RoomEvent(Room room, PickupableItem item, String toPrint)
-    {
-        super(item, toPrint);
-        this.roomInvolved = room;
+        this(room, item, null, type);
     }
 
     public RoomEvent(Room room, PickupableItem item, Coordinates coord, Type type)
     {
         super(item, type.toString());
+        this.roomInvolved = room;
         this.type = type;
         this.coord = coord;
 
