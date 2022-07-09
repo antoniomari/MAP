@@ -24,14 +24,17 @@ public class InventoryPanel extends JLayeredPane
     private final static String BAR_PATH = "/img/inventario/Barra oggetti inventario.png";
     private final static String BUTTON_SPRITESHEET_PATH = "/img/inventario/bottoni.png";
     private final static String BUTTON_JSON_PATH = "/img/inventario/bottoni.json";
+    private final static String SELECTION_ITEM_PATH = "/img/inventario/oggetto selezionato.png";
 
     // Immagini png (da caricare) //
     private final static BufferedImage BAR_IMAGE;
+    private final static BufferedImage SELECTION_IMAGE;
     private final static BufferedImage BUTTON_SPRITESHEET;
 
     // Livelli del LayeredPane inventario //
     private final static Integer BAR_LEVEL = 1;
-    private final static Integer ITEM_LEVEL = 2;
+    private final static Integer SELECTION_LEVEL = 2;
+    private final static Integer ITEM_LEVEL = 3;
 
 
 
@@ -54,6 +57,8 @@ public class InventoryPanel extends JLayeredPane
     private JLabel barLabel;
     private JLabel upButtonLabel;
     private JLabel downButtonLabel;
+    private JLabel selectionLabel;
+    private Icon selectionIcon;
 
     /** Fattore di riscalamento per la visualizzazione */
     private double scalingFactor;
@@ -83,11 +88,14 @@ public class InventoryPanel extends JLayeredPane
             return object2;
         }
     }
+
     static
     {
         // Caricamento immagini barra e bottoni
         BAR_IMAGE = SpriteManager.loadSpriteSheet(BAR_PATH);
         BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
+        SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
+
     }
 
 
@@ -101,6 +109,12 @@ public class InventoryPanel extends JLayeredPane
         List<PickupableItem> characterInventory = character.getInventory();
 
         selectedItem = null;
+
+        selectionLabel = new JLabel();
+        selectionIcon = SpriteManager.rescaledImageIcon(SELECTION_IMAGE, scalingFactor);
+        add(selectionLabel, SELECTION_LEVEL);
+        // add(selectionLabel, SELECTION_LEVEL);
+
 
         // utilizziamo LinkedHashMap per mantenere l'ordine di inserimento
         inventoryItemIconList = new ArrayList<>(PlayingCharacter.INVENTORY_SIZE);
@@ -212,15 +226,28 @@ public class InventoryPanel extends JLayeredPane
     private void selectItem(int i)
     {
         int itemIndex = (currentBar -1) * 10 +  i;
+        selectionLabel.setIcon(null);
         if (itemIndex >= inventoryItemIconList.size())
+        {
             selectedItem = null;
+        }
         else
         {
             selectedItem = inventoryItemIconList.get(itemIndex).getObject1();
-            float brightnessFactor = 1.3f; // How much brighter. 1.3 means 30% brighter
-            RescaleOp op = new RescaleOp(brightnessFactor, 0, null);
-            BufferedImage bufImage = op.filter((BufferedImage) selectedItem.getSprite(), null);
-            itemLabelList.get(i).setIcon(SpriteManager.rescaledImageIcon(bufImage, scalingFactor));
+
+            // aggiorna posizione selection label
+            Coordinates coord = calculateOffset(i);
+
+
+
+            selectionLabel.setBounds(getInsets().left + coord.getX(), getInsets().top + coord.getY(),
+                    selectionIcon.getIconWidth(), selectionIcon.getIconHeight());
+
+            selectionLabel.setIcon(selectionIcon);
+
+
+
+
         }
     }
 
@@ -268,6 +295,7 @@ public class InventoryPanel extends JLayeredPane
             }
         }
 
+        selectItem(30); // TODO: aggiustare
         displayBar(currentBar);
     }
 
