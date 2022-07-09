@@ -52,7 +52,7 @@ public class DBManager
         ResultSet rs= pstm.executeQuery();
         while(rs.next())
         {
-            PlayingCharacter.SPICOLO.addToInventory(new PickupableItem(rs.getString(1), rs.getString(2)));
+            PlayingCharacter.getPlayer().addToInventory(new PickupableItem(rs.getString(1), rs.getString(2)));
         }
         rs.close();
         pstm.close();

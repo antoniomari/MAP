@@ -41,11 +41,11 @@ public class HelloWorld
             else if(input.equals("CHIUDI 3"))
                 door3.close();
             else if(input.equals("APRI 3 oggetto strano"))
-                door3.unlock(PlayingCharacter.SPICOLO.getInventory().get(0));
+                door3.unlock(PlayingCharacter.getPlayer().getInventory().get(0));
             else if (input.equals("APRI 3 chiave spicola"))
-                door3.unlock(PlayingCharacter.SPICOLO.getInventory().get(1));
+                door3.unlock(PlayingCharacter.getPlayer().getInventory().get(1));
             else if (input.equals("INV"))
-                for (PickupableItem p: PlayingCharacter.SPICOLO.getInventory())
+                for (PickupableItem p: PlayingCharacter.getPlayer().getInventory())
                     System.out.println(p.getName() + " || " + p.getDescription());
 
             input = scanner.nextLine();

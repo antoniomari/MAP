@@ -32,8 +32,8 @@ public class PickupableItem extends Item
         EventHandler.printEvent(new RoomEvent(oldRoom, this, RoomEvent.Type.REMOVE_ITEM_FROM_ROOM));
 
         // generato evento aggiungiInventario TODO: togliere spicolo
-        PlayingCharacter.SPICOLO.addToInventory(this);
-        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.SPICOLO, this, InventoryEvent.Type.ADD_ITEM));
+        PlayingCharacter.getPlayer().addToInventory(this);
+        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.getPlayer(), this, InventoryEvent.Type.ADD_ITEM));
     }
 
     public void drop(Room room, Coordinates coord)
@@ -44,7 +44,7 @@ public class PickupableItem extends Item
         EventHandler.printEvent(new RoomEvent(room, this, coord, RoomEvent.Type.ADD_ITEM_IN_ROOM));
 
         // rimuovi dall'inventario
-        PlayingCharacter.SPICOLO.removeFromInventory(this);
-        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.SPICOLO, this, InventoryEvent.Type.USE_ITEM));
+        PlayingCharacter.getPlayer().removeFromInventory(this);
+        EventHandler.printEvent(new InventoryEvent(PlayingCharacter.getPlayer(), this, InventoryEvent.Type.USE_ITEM));
     }
 }

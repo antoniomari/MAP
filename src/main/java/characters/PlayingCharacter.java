@@ -1,9 +1,6 @@
 package characters;
 
-import events.EventHandler;
-import events.GameEvent;
 import items.PickupableItem;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +9,23 @@ public class PlayingCharacter extends GameCharacter
     public static final int INVENTORY_SIZE = 30;
 
     List<PickupableItem> inventory;
-    public final static PlayingCharacter SPICOLO = new PlayingCharacter("Spicolo il terribile");
+    private static PlayingCharacter player;
 
-    public PlayingCharacter(String name)
+    private PlayingCharacter(String name)
     {
         super(name);
         this.inventory = new ArrayList<>();
+    }
+
+    public static void initPlayer(String name)
+    {
+        if (player == null)
+            player = new PlayingCharacter(name);
+    }
+
+    public static PlayingCharacter getPlayer()
+    {
+        return player;
     }
 
     public void addToInventory(PickupableItem i)
