@@ -5,6 +5,7 @@ import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
 import items.PickupableItem;
+import rooms.Room;
 
 
 public class EventHandler
@@ -29,6 +30,8 @@ public class EventHandler
     {
         if(e.getType() == InventoryEvent.Type.ADD_ITEM)
             InventoryUpdateExecutor.executeAdd((PickupableItem) e.getItemInvolved()); //TODO: vedere se si può migliorare castr
+        if(e.getType() == InventoryEvent.Type.USE_ITEM)
+            InventoryUpdateExecutor.executeDrop((PickupableItem) e.getItemInvolved());
 
     }
 
@@ -37,6 +40,10 @@ public class EventHandler
         if(e.getType() == RoomEvent.Type.REMOVE_ITEM_FROM_ROOM)
         {
             RoomUpdateExecutor.executeRemoveItem(e.getItemInvolved()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
+        }
+        else if(e.getType() == RoomEvent.Type.ADD_ITEM_IN_ROOM)
+        {
+            RoomUpdateExecutor.executeAddItem(e.getItemInvolved(), e.getCoordinates());
         }
     }
 

@@ -41,7 +41,7 @@ public class PickupableItem extends Item
         //aggiungi alla stanza
         room.addItem(this, coord);
         setLocationRoom(room);
-        EventHandler.printEvent(new RoomEvent(room, this, RoomEvent.Type.ADD_ITEM_IN_ROOM));
+        EventHandler.printEvent(new RoomEvent(room, this, coord, RoomEvent.Type.ADD_ITEM_IN_ROOM));
 
         // rimuovi dall'inventario
         PlayingCharacter.SPICOLO.removeFromInventory(this);

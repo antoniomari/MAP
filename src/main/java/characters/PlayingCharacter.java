@@ -9,6 +9,8 @@ import java.util.List;
 
 public class PlayingCharacter extends GameCharacter
 {
+    public static final int INVENTORY_SIZE = 30;
+
     List<PickupableItem> inventory;
     public final static PlayingCharacter SPICOLO = new PlayingCharacter("Spicolo il terribile");
 
@@ -31,5 +33,13 @@ public class PlayingCharacter extends GameCharacter
     public List<PickupableItem> getInventory()
     {
         return inventory;
+    }
+
+    public void flushInventory()
+    {
+        for(PickupableItem i : inventory)
+        {
+            inventory.remove(i);
+        }
     }
 }

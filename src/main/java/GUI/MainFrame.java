@@ -1,6 +1,7 @@
 package GUI;
 
 
+import characters.PlayingCharacter;
 import database.DBManager;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
@@ -28,6 +29,7 @@ import java.util.Random;
 public class MainFrame extends javax.swing.JFrame {
 
     private final Room currentRoom;
+    private final PlayingCharacter character;
     private Icon backgroundImg;
 
     private final int screenWidth;
@@ -74,6 +76,13 @@ public class MainFrame extends javax.swing.JFrame {
         itemLabelMap.remove(item);
     }
 
+    public void addItemCurrentRoom(Item item , Coordinates coord)
+    {
+        Coordinates blockCoord = calculateBlocks(coord);
+        addGameItem(item, blockCoord.getX(), blockCoord.getY());
+    }
+
+
     public double getScalingFactor()
     {
         return rescalingFactor;
@@ -84,9 +93,10 @@ public class MainFrame extends javax.swing.JFrame {
         return inventoryPanel;
     }
 
-    public MainFrame(Room initialRoom)
+    public MainFrame(Room initialRoom, PlayingCharacter character)
     {
         currentRoom = initialRoom;
+        this.character = character;
 
         // Calcolo delle dimensioni dello schermo
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -216,7 +226,12 @@ public class MainFrame extends javax.swing.JFrame {
         // -----------------------------------------------------
         //                  SETUP inventoryPanel
         // -----------------------------------------------------
-        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
+        inventoryPanel = new InventoryPanel(character,screenHeight - gameHeight);
+
+        GameMouseListener dropItemListener = new GameMouseListener(MouseEvent.BUTTON1,
+                () -> {if (inventoryPanel.getSelectedItem() != null) {inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y)); }}
+                    , null);
+        gameScreenPanel.addMouseListener(dropItemListener);
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
@@ -313,6 +328,14 @@ public class MainFrame extends javax.swing.JFrame {
         updateItemPosition(it, xBlocks, yBlocks);
     }
 
+    private Coordinates calculateBlocks(Coordinates coord)
+    {
+        final int BLOCK_SIZE = 48;
+        int xBlocks = (int)(coord.getX() / (BLOCK_SIZE * rescalingFactor));
+        int yBlocks = (int)(coord.getY() / (BLOCK_SIZE * rescalingFactor));
+
+        return new Coordinates(xBlocks, yBlocks);
+    }
     /**
      * Aggiorna la posizione di un oggetto nella stanza.
      *
@@ -397,12 +420,14 @@ public class MainFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        DBManager.setupInventory();
+        // DBManager.setupInventory();
+
+        PlayingCharacter.SPICOLO.flushInventory();
 
         Room cucina = DBManager.loadRoom("Cucina");
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina, PlayingCharacter.SPICOLO).setVisible(true));
     }
 
 }

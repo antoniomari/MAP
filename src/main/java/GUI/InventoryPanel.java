@@ -1,22 +1,22 @@
 package GUI;
 
+import characters.PlayingCharacter;
 import graphics.SpriteManager;
+import items.PickupableItem;
 import rooms.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class InventoryPanel extends JLayeredPane
 {
-    // Dimensioni //
-    private final static int CAPACITY = 30;  // capacità inventario
+    // Dimensioni (nota: utilizziamo la costante pubblica della classe PlayingCharacter) //
     private final static int BAR_SIZE = 10;  // numero di oggetti nella barra
-    private final static int MAX_BAR = CAPACITY / BAR_SIZE;  // numero di barre
+    private final static int MAX_BAR = PlayingCharacter.INVENTORY_SIZE / BAR_SIZE;  // numero di barre
     private final static int ORIGINAL_ITEM_SIZE = 48;  // dimensione lato sprite oggetti (quadrato)
 
     // Path immagini e json //
@@ -44,11 +44,10 @@ public class InventoryPanel extends JLayeredPane
 
     /** Lista delle etichette associate a ciascun elemento della barra dell'inventario */
     private List<JLabel> itemLabelList;
-    /** Lista delle icone degli oggetti presenti nell'inventario */
-    private List<Icon> itemIconList;
 
     /** Barra correntemente visualizzata */
     private int currentBar;
+    private PickupableItem selectedItem;
 
     // Label per barra e bottoni
     private JLabel barLabel;
@@ -57,8 +56,32 @@ public class InventoryPanel extends JLayeredPane
 
     /** Fattore di riscalamento per la visualizzazione */
     private double scalingFactor;
+    /** calcolato tramite (int) (ORIGINAL_ITEM_SIZE * scalingFactor) */
+    private int scaledItemSize;
 
+    private List<Pair<PickupableItem, Icon>> inventoryItemIconList;
 
+    public class Pair<t1, t2>
+    {
+        private t1 object1;
+        private t2 object2;
+
+        Pair(t1 object1, t2 object2)
+        {
+            this.object1 = object1;
+            this.object2 = object2;
+        }
+
+        public t1 getObject1()
+        {
+            return object1;
+        }
+
+        public t2 getObject2()
+        {
+            return object2;
+        }
+    }
     static
     {
         // Caricamento immagini barra e bottoni
@@ -67,12 +90,26 @@ public class InventoryPanel extends JLayeredPane
     }
 
 
-    public InventoryPanel(int preferredHeight)
+    public InventoryPanel(PlayingCharacter character, int preferredHeight)
     {
         super();
 
+        // inizializza riferimento all'inventario del personaggio giocante
+        List<PickupableItem> characterInventory = character.getInventory();
+
+        selectedItem = null;
+
+        // utilizziamo LinkedHashMap per mantenere l'ordine di inserimento
+        inventoryItemIconList = new ArrayList<>(PlayingCharacter.INVENTORY_SIZE);
+
+        for(PickupableItem item : characterInventory)
+        {
+            inventoryItemIconList.add(new Pair<>(item, item.getScaledIconSprite(scalingFactor)));
+        }
+
 
         scalingFactor = (double) preferredHeight / ORIGINAL_ITEM_SIZE;
+        scaledItemSize = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
 
         initBar();
         initButtons();
@@ -84,13 +121,11 @@ public class InventoryPanel extends JLayeredPane
 
 
         int inventoryWidth = (int) (totalWidth * scalingFactor);
-        int inventoryHeight = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
+        int inventoryHeight = scaledItemSize;
 
         // imposta dimensione del pannello
         setPreferredSize(new Dimension(inventoryWidth, inventoryHeight));
 
-        // setup icone oggetti
-        itemIconList = new ArrayList<>(CAPACITY);
 
         initLabelList();
 
@@ -110,7 +145,7 @@ public class InventoryPanel extends JLayeredPane
         int backgroundWidth = barLabel.getIcon().getIconWidth();
         int backgroundHeight = barLabel.getIcon().getIconHeight();
 
-        barLabel.setBounds(inventoryInsets.left + (int)(ORIGINAL_ITEM_SIZE * scalingFactor * 2), inventoryInsets.top,
+        barLabel.setBounds(inventoryInsets.left +  scaledItemSize * 2, inventoryInsets.top,
                 backgroundWidth, backgroundHeight);
 
         add(barLabel, BAR_LEVEL);
@@ -132,7 +167,7 @@ public class InventoryPanel extends JLayeredPane
                 SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteByName(
                         BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"), scalingFactor));
 
-        downButtonLabel.setBounds(inventoryInsets.left + (int)(ORIGINAL_ITEM_SIZE * scalingFactor), inventoryInsets.top,
+        downButtonLabel.setBounds(inventoryInsets.left + scaledItemSize, inventoryInsets.top,
                 downButtonLabel.getIcon().getIconWidth(), downButtonLabel.getIcon().getIconHeight());
 
         add(upButtonLabel, BAR_LEVEL);
@@ -161,15 +196,32 @@ public class InventoryPanel extends JLayeredPane
             Coordinates coord = calculateOffset(i);
             tempLabel.setBounds(inventoryInsets.left + coord.getX(),
                     inventoryInsets.top +  coord.getY(),
-                    (int)(ORIGINAL_ITEM_SIZE * scalingFactor), (int)(ORIGINAL_ITEM_SIZE * scalingFactor));
+                    scaledItemSize, scaledItemSize);
             // aggiungi label alla lista
             itemLabelList.add(tempLabel);
             // aggiungi label al pannello
             add(tempLabel, ITEM_LEVEL);
 
             // aggiungi MouseListener per la selezione TODO: urgente, capire come fare qua
-            // GameMouseListener mouseListener = new GameMouseListener(MouseEvent.BUTTON1, () -> selectItem(tempLabel), null)
+            GameMouseListener mouseListener = new GameMouseListener(
+                    MouseEvent.BUTTON1, () -> selectItem(itemLabelList.indexOf(tempLabel)), null);
+
+            tempLabel.addMouseListener(mouseListener);
         }
+    }
+
+    private void selectItem(int i)
+    {
+        int itemIndex = (currentBar -1) * 10 +  i;
+        if (itemIndex >= inventoryItemIconList.size())
+            selectedItem = null;
+        else
+            selectedItem = inventoryItemIconList.get(itemIndex).getObject1();
+    }
+
+    public PickupableItem getSelectedItem()
+    {
+        return selectedItem;
     }
 
 
@@ -182,21 +234,41 @@ public class InventoryPanel extends JLayeredPane
      */
     public Coordinates calculateOffset(int i)
     {
-        return new Coordinates((int)((i + 2) * ORIGINAL_ITEM_SIZE * scalingFactor + 1), 1);
+        return new Coordinates((i + 2) * scaledItemSize + 1, 1);
     }
 
     /**
      * Aggiunge l'icona di un oggetto nell'inventario
      *
-     * @param image icona dell'item aggiunto
+     * @param item item aggiunto
      */
-    public void addItem(Image image)
+    public void addItem(PickupableItem item)
     {
-        if(itemIconList.size() < CAPACITY)
-            itemIconList.add(SpriteManager.rescaledImageIcon(image, scalingFactor));
+        if(inventoryItemIconList.size() < PlayingCharacter.INVENTORY_SIZE)
+            inventoryItemIconList.add(new Pair<>(item, item.getScaledIconSprite(scalingFactor)));
 
-        //temp TODO: aggiustare logica del display bar
-        displayBar(1);
+        int lastIndex = inventoryItemIconList.size() - 1;
+
+        if (lastIndex % 10 == 0)
+            displayBar(lastIndex / 10 + 1);
+        else
+            displayBar(lastIndex / 10);
+    }
+
+    public void dropFromInventory(PickupableItem item)
+    {
+        for(Pair<PickupableItem, Icon> p : inventoryItemIconList)
+        {
+            if(p.getObject1() == item)
+            {
+                inventoryItemIconList.remove(p);
+                if(selectedItem == item)
+                    selectedItem = null;
+                break;
+            }
+        }
+
+        displayBar(currentBar);
     }
 
     /**
@@ -214,19 +286,19 @@ public class InventoryPanel extends JLayeredPane
 
         // selezionare la sottolista
         int start = (i-1) * 10;
-        int end = Math.min(start + 10, itemIconList.size());
+        int end = Math.min(start + 10, inventoryItemIconList.size());
 
         // caso barra completamente vuota
-        List<Icon> sublist;
+        List<Pair<PickupableItem, Icon>> sublist;
 
-        if(start >= itemIconList.size())
+        if(start >= inventoryItemIconList.size())
             sublist = new ArrayList<>(); // lista vuota
         else
-            sublist = itemIconList.subList(start, end);
+            sublist = inventoryItemIconList.subList(start, end);
 
         // binding di ogni elemento della sottolista nella label
         for(int j = 0; j < sublist.size(); j++)
-            itemLabelList.get(j).setIcon(sublist.get(j));
+            itemLabelList.get(j).setIcon(sublist.get(j).getObject2());
 
         // le rimanenti icone devono essere null
         for(int j = sublist.size(); j < BAR_SIZE; j++)
