@@ -17,7 +17,8 @@ public class InventoryPanel extends JLayeredPane
 {
     // Dimensioni (nota: utilizziamo la costante pubblica della classe PlayingCharacter) //
     private final static int BAR_SIZE = 10;  // numero di oggetti nella barra
-    private final static int MAX_BAR = PlayingCharacter.INVENTORY_SIZE / BAR_SIZE;  // numero di barre
+    private final static int INVENTORY_SIZE = PlayingCharacter.INVENTORY_SIZE;
+    private final static int MAX_BAR = INVENTORY_SIZE / BAR_SIZE;  // numero di barre
     private final static int ORIGINAL_ITEM_SIZE = 48;  // dimensione lato sprite oggetti (quadrato)
 
     // Path immagini e json //
@@ -35,6 +36,8 @@ public class InventoryPanel extends JLayeredPane
     private final static Integer BAR_LEVEL = 1;
     private final static Integer SELECTION_LEVEL = 2;
     private final static Integer ITEM_LEVEL = 3;
+
+    private final static int NO_ITEM = -1;
 
 
 
@@ -223,31 +226,37 @@ public class InventoryPanel extends JLayeredPane
         }
     }
 
+    /**
+     * Seleziona l'item corrispondente alla label in posizione i.
+     *
+     * @param i indice della label: da 0 a BAR_SIZE - 1 (da sinistra verso destra),
+     *          oppure NO_ITEM per indicare che non si sta selezionando alcun item.
+     */
     private void selectItem(int i)
     {
+        // calcola indice dell'item in inventoryItemIconList
         int itemIndex = (currentBar -1) * 10 +  i;
+
+        // deseleziona icona
         selectionLabel.setIcon(null);
-        if (itemIndex >= inventoryItemIconList.size())
+
+        // CASO indice invalido (NO_ITEM è un indice invalido)
+        if (itemIndex <= -1 || itemIndex >= inventoryItemIconList.size())
         {
             selectedItem = null;
         }
-        else
+        else // indice valido
         {
+            // recupera l'elemento selezionato
             selectedItem = inventoryItemIconList.get(itemIndex).getObject1();
 
             // aggiorna posizione selection label
             Coordinates coord = calculateOffset(i);
-
-
-
             selectionLabel.setBounds(getInsets().left + coord.getX(), getInsets().top + coord.getY(),
                     selectionIcon.getIconWidth(), selectionIcon.getIconHeight());
 
+            // reimposta icona
             selectionLabel.setIcon(selectionIcon);
-
-
-
-
         }
     }
 
@@ -263,7 +272,7 @@ public class InventoryPanel extends JLayeredPane
      * @param i indice della label
      * @return coordinate di posizionamento della i-esima label
      */
-    public Coordinates calculateOffset(int i)
+    private Coordinates calculateOffset(int i)
     {
         return new Coordinates((i + 2) * scaledItemSize + 1, 1);
     }
@@ -282,20 +291,44 @@ public class InventoryPanel extends JLayeredPane
         displayBar(lastIndex / 10 + 1);
     }
 
+
+    /**
+     * Rimuovi oggetto dall'inventario.
+     *
+     * @param item oggetto da rimuovere. Se non è presente nell'inventario,
+     *             allora non succede nulla
+     *
+     */
     public void dropFromInventory(PickupableItem item)
     {
+        Objects.requireNonNull(item);
+
+        // cerca oggetto nell'inventario e rimuovilo
         for(Pair<PickupableItem, Icon> p : inventoryItemIconList)
-        {
             if(p.getObject1() == item)
             {
                 inventoryItemIconList.remove(p);
-                if(selectedItem == item)
-                    selectedItem = null;
-                break;
-            }
-        }
 
-        selectItem(30); // TODO: aggiustare
+                // se era l'oggetto selezionato, allora deseleziona e ricarica la barra
+                if(selectedItem == item)
+                {
+                    selectItem(NO_ITEM);
+                    refreshBar();
+                }
+
+                return;
+            }
+    }
+
+    /**
+     * Ricarica la barra dell'inventario.
+     *
+     * Quando il contenuto della barra viene modificato,
+     * permette di visualizzare immediatamente la modifica.
+     *
+     */
+    public void refreshBar()
+    {
         displayBar(currentBar);
     }
 
@@ -336,16 +369,20 @@ public class InventoryPanel extends JLayeredPane
     public void visualizeNextBar()
     {
         if(currentBar < MAX_BAR)
+        {
+            selectItem(NO_ITEM);
             displayBar(++currentBar);
-
+        }
         // altrimenti non puoi andare avanti
     }
 
     public void visualizePreviousBar()
     {
         if(currentBar > 1)
+        {
+            selectItem(NO_ITEM);
             displayBar(--currentBar);
-
+        }
         // altrimenti non puoi andare indietro
     }
 
