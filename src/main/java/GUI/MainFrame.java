@@ -420,13 +420,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        PlayingCharacter.initPlayer("Spicola");
+        PlayingCharacter player = PlayingCharacter.getPlayer();
         DBManager.setupInventory();
 
         Room cucina = DBManager.loadRoom("Cucina");
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina, PlayingCharacter.getPlayer()).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina, player).setVisible(true));
     }
 
 }

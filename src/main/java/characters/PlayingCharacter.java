@@ -17,14 +17,11 @@ public class PlayingCharacter extends GameCharacter
         this.inventory = new ArrayList<>();
     }
 
-    public static void initPlayer(String name)
-    {
-        if (player == null)
-            player = new PlayingCharacter(name);
-    }
-
     public static PlayingCharacter getPlayer()
     {
+        if(player == null)
+            player = new PlayingCharacter("Schwartz");
+
         return player;
     }
 
