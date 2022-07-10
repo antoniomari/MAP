@@ -1,13 +1,14 @@
 package events;
 
 import events.executors.AnimationExecutor;
+import events.executors.CharacterUpdateExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
 import items.PickupableItem;
 
 public class EventHandler
 {
-    public static void printEvent(GameEvent ge)
+    public static void sendEvent(GameEvent ge)
     {
         System.out.println(ge.getEventString());
 
@@ -19,6 +20,9 @@ public class EventHandler
 
         if(ge instanceof RoomEvent)
             executeRoomEvent((RoomEvent) ge);
+
+        if(ge instanceof CharacterEvent)
+            executeCharacterEvent((CharacterEvent) ge);
     }
 
     public static void executeItemInteractionEvent(ItemInteractionEvent e)
@@ -48,4 +52,11 @@ public class EventHandler
         }
     }
 
+    public static void executeCharacterEvent(CharacterEvent e)
+    {
+        if(e.getType() == CharacterEvent.Type.MOVE)
+        {
+            CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getPosition()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
+        }
+    }
 }

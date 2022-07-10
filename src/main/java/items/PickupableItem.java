@@ -28,11 +28,11 @@ public class PickupableItem extends Item
         Room oldRoom = getLocationRoom();
         oldRoom.removeItem(this); // rimuovi this dalla stanza in cui è contenuto
         setLocationRoom(null); // setta a null la stanza
-        EventHandler.printEvent(new RoomEvent(oldRoom, this, RoomEvent.Type.REMOVE_ITEM_FROM_ROOM));
+        EventHandler.sendEvent(new RoomEvent(oldRoom, this, RoomEvent.Type.REMOVE_ITEM_FROM_ROOM));
 
         // generato evento aggiungiInventario TODO: togliere spicolo
         PlayingCharacter.getPlayer().addToInventory(this);
-        EventHandler.printEvent(new InventoryEvent(this, InventoryEvent.Type.ADD_ITEM));
+        EventHandler.sendEvent(new InventoryEvent(this, InventoryEvent.Type.ADD_ITEM));
     }
 
     public void drop(Room room, Coordinates coord)
@@ -40,10 +40,10 @@ public class PickupableItem extends Item
         //aggiungi alla stanza
         room.addItem(this, coord);
         setLocationRoom(room);
-        EventHandler.printEvent(new RoomEvent(room, this, coord, RoomEvent.Type.ADD_ITEM_IN_ROOM));
+        EventHandler.sendEvent(new RoomEvent(room, this, coord, RoomEvent.Type.ADD_ITEM_IN_ROOM));
 
         // rimuovi dall'inventario
         PlayingCharacter.getPlayer().removeFromInventory(this);
-        EventHandler.printEvent(new InventoryEvent(this, InventoryEvent.Type.USE_ITEM));
+        EventHandler.sendEvent(new InventoryEvent(this, InventoryEvent.Type.USE_ITEM));
     }
 }

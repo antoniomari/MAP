@@ -1,6 +1,7 @@
 package GUI;
 
 
+import characters.GameCharacter;
 import characters.PlayingCharacter;
 import database.DBManager;
 import events.executors.AnimationExecutor;
@@ -55,6 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
      * e le JLabel associate al gameScreenPanel
      */
     private Map<Item, JLabel> itemLabelMap;
+    private Map<GameCharacter, JLabel> characterLabelMap;
 
     // LAYER GAMEPANEL (sono richiesti Integer e non int)
     private final static Integer BACKGROUND_LAYER = 1;
@@ -81,6 +83,18 @@ public class MainFrame extends javax.swing.JFrame {
         addGameItem(item, blockCoord.getX(), blockCoord.getY());
     }
 
+    public void addCharacterCurrentRoom(GameCharacter ch, Coordinates coord)
+    {
+        Coordinates blockCoord = calculateBlocks(coord);
+        addGameCharacter(ch, blockCoord.getX(), blockCoord.getY());
+    }
+
+    public void moveCharacter(GameCharacter ch, Coordinates coord)
+    {
+        Coordinates blockCoord = calculateBlocks(coord);
+        updateCharacterPosition(ch, blockCoord.getX(), blockCoord.getY());
+    }
+
 
     public double getScalingFactor()
     {
@@ -103,6 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         this.ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
         itemLabelMap = new HashMap<>();
+        characterLabelMap = new HashMap<>();
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -124,6 +139,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void setupInventory()
     {
+        // TODO eliminare questo metodo
+        /*
         try
         {
             String inventoryPath = "/img/inventario/Barra oggetti inventario.png";
@@ -134,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             // fanculo
         }
-
+        */
     }
 
     private void initCursor()
@@ -203,6 +220,7 @@ public class MainFrame extends javax.swing.JFrame {
         barile1.setLocationRoom(currentRoom);
         currentRoom.addItem(barile1, calculateCoordinates(9, 5));
         Door door = new Door("Porta", "Una porta spicolosa.");
+        addGameCharacter(PlayingCharacter.getPlayer(), 6, 5);
 
         // Crea nuova label per visualizzare l'immagine di sfondo
         backgroundLabel = new javax.swing.JLabel(backgroundImg);
@@ -227,7 +245,18 @@ public class MainFrame extends javax.swing.JFrame {
         inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
 
         GameMouseListener dropItemListener = new GameMouseListener(MouseEvent.BUTTON1,
-                () -> {if (inventoryPanel.getSelectedItem() != null) {inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y)); }}
+                () ->
+                {
+                    if (inventoryPanel.getSelectedItem() != null)
+                    {
+                        inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y));
+                    }
+                    else
+                    {
+                        PlayingCharacter.getPlayer().setPosition(new Coordinates(getMousePosition().x, getMousePosition().y));
+                    }
+                }
+
                     , null);
         gameScreenPanel.addMouseListener(dropItemListener);
 
@@ -326,6 +355,23 @@ public class MainFrame extends javax.swing.JFrame {
         updateItemPosition(it, xBlocks, yBlocks);
     }
 
+    private void addGameCharacter(GameCharacter ch, final int xBlocks, final int yBlocks)
+    {
+        // recupera lo sprite della giusta dimensione
+        Icon rescaledSprite = SpriteManager.rescaledImageIcon(ch.getSprite(), rescalingFactor);
+
+        // crea la label corrispondente all'Item
+        JLabel characterLabel = new JLabel(rescaledSprite);
+
+        // metti la coppia Item JLabel nel dizionario
+        characterLabelMap.put(ch, characterLabel);
+
+        // aggiungi la label nell'ITEM_LAYER  TODO pensare al layer
+        gameScreenPanel.add(characterLabel, ITEM_LAYER);
+
+        updateCharacterPosition(ch, xBlocks, yBlocks);
+    }
+
     private Coordinates calculateBlocks(Coordinates coord)
     {
         final int BLOCK_SIZE = 48;
@@ -334,6 +380,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         return new Coordinates(xBlocks, yBlocks);
     }
+
     /**
      * Aggiorna la posizione di un oggetto nella stanza.
      *
@@ -360,7 +407,34 @@ public class MainFrame extends javax.swing.JFrame {
         itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
                             rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
     }
-    // TODO: aggiornare stato stanza, generare evento di gioco
+
+    /**
+     * Aggiorna la posizione di un personaggio nella stanza.
+     *
+     * @param ch personaggio da riposizionare
+     * @param xBlocks blocco x
+     * @param yBlocks blocco y
+     * @throws IllegalArgumentException se ch non è presente nella stanza
+     */
+    private void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks)
+    {
+        Objects.requireNonNull(ch);
+
+        // controlla che it è presente effettivamente nella stanza
+        if(!characterLabelMap.containsKey(ch))
+        {
+            // TODO: ricontrollare eccezione lanciata
+            throw new IllegalArgumentException("Pergonaggio non presente nella stanza");
+        }
+        Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
+        Insets insets = gameScreenPanel.getInsets();
+        Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
+
+        JLabel characterLabel = characterLabelMap.get(ch);
+        characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
+                rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+    }
+
 
     // TODO: calcolare massimi xBlock e yBlock per la stanza
     private Coordinates calculateCoordinates(int xBlocks, int yBlocks)
@@ -374,7 +448,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         return new Coordinates(xOffset, yOffset);
     }
-
 
     public void showMenu(boolean b)
     {

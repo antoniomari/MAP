@@ -51,7 +51,7 @@ public class Door extends Item implements Openable, Lockable
         else // if(this.state == BLOCKED)
             result = "La porta è bloccata, non si può aprire";
 
-        EventHandler.printEvent(new ItemInteractionEvent(this, result, OPEN_ANIMATION));
+        EventHandler.sendEvent(new ItemInteractionEvent(this, result, OPEN_ANIMATION));
 
     }
 
@@ -65,7 +65,7 @@ public class Door extends Item implements Openable, Lockable
             String result = "La porta è chiusa";
             this.state = CLOSED;
 
-            EventHandler.printEvent(new ItemInteractionEvent(this, result));
+            EventHandler.sendEvent(new ItemInteractionEvent(this, result));
         }
 
     }
@@ -91,11 +91,11 @@ public class Door extends Item implements Openable, Lockable
         {
             this.state = OPEN;
 
-            EventHandler.printEvent(new ItemInteractionEvent(this, "la porta è sbloccata e aperta"));
+            EventHandler.sendEvent(new ItemInteractionEvent(this, "la porta è sbloccata e aperta"));
         }
         else
         {
-            EventHandler.printEvent(new ItemInteractionEvent(this, "chiave non corretta"));
+            EventHandler.sendEvent(new ItemInteractionEvent(this, "chiave non corretta"));
         }
     }
 

@@ -46,4 +46,9 @@ public class GameEvent
     {
         return itemInvolved;
     }
+
+    public GameCharacter getCharacterInvolved()
+    {
+        return characterInvolved;
+    }
 }

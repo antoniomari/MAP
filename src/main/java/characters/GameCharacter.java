@@ -22,4 +22,8 @@ public class GameCharacter
         return this.name;
     }
 
+    public BufferedImage getSprite()
+    {
+        return this.sprite;
+    }
 }
