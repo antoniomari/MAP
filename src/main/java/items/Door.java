@@ -106,7 +106,7 @@ public class Door extends Item implements Openable, Lockable
         BufferedImage open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open2");
         BufferedImage open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open3");
 
-        Animation openAnimation = new Animation(this, 500);
+        Animation openAnimation = new Animation(this, 500, true);
         openAnimation.addFrame(closed);
         openAnimation.addFrame(open1);
         openAnimation.addFrame(open2);

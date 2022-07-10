@@ -1,5 +1,6 @@
 package GUI;
 
+import animation.Animation;
 import characters.PlayingCharacter;
 import graphics.SpriteManager;
 import items.PickupableItem;
@@ -38,6 +39,10 @@ public class InventoryPanel extends JLayeredPane
 
     // Costante per la deselezione (dare come parametro a select(i)) //
     private final static int NO_ITEM = -1;
+
+    // Animazioni
+    private final static Animation UP_BUTTON_PRESS;
+    private final static Animation DOWN_BUTTON_PRESS;
 
 
     //**************************************************
@@ -107,6 +112,15 @@ public class InventoryPanel extends JLayeredPane
         BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
         SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
 
+        // Creazione animazioni
+        UP_BUTTON_PRESS = new Animation(null, 200, false);
+        UP_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "upPressed"));
+        UP_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"));
+
+        DOWN_BUTTON_PRESS = new Animation(null, 200, false);
+        DOWN_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "downPressed"));
+        DOWN_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"));
+
     }
 
 
@@ -124,6 +138,7 @@ public class InventoryPanel extends JLayeredPane
         initButtons();  // inizializza bottoni
         setupDimensions();  // calcola larghezza e altezza di this e impostale
         initLabelList();  // inizializza le label per la visualizzazione icone oggetti
+        initAnimation();  // inizializza le animazioni
 
         // visualizza barra 1
         currentBar = 1;
@@ -184,7 +199,7 @@ public class InventoryPanel extends JLayeredPane
         upButtonLabel.setBounds(inventoryInsets.left, inventoryInsets.top,
                 upButtonLabel.getIcon().getIconWidth(), upButtonLabel.getIcon().getIconHeight());
 
-        // bottone "down" per visualizzare barra dell'inventario successiva
+        // bottone "down" per visualizzare  barra dell'inventario successiva
         downButtonLabel = new JLabel(
                 SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteByName(
                         BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"), scalingFactor));
@@ -194,9 +209,9 @@ public class InventoryPanel extends JLayeredPane
 
         // aggiungi MouseListener per il tasto sinistro
         GameMouseListener upListener = new GameMouseListener(
-                            MouseEvent.BUTTON1, this::visualizePreviousBar, null);
+                            MouseEvent.BUTTON1, () -> {UP_BUTTON_PRESS.start();visualizePreviousBar();}, null);
         GameMouseListener downListener = new GameMouseListener(
-                            MouseEvent.BUTTON1, this::visualizeNextBar, null);
+                            MouseEvent.BUTTON1, () -> {DOWN_BUTTON_PRESS.start(); visualizeNextBar(); }, null);
         // registra listener
         upButtonLabel.addMouseListener(upListener);
         downButtonLabel.addMouseListener(downListener);
@@ -205,7 +220,6 @@ public class InventoryPanel extends JLayeredPane
         add(upButtonLabel, BAR_LEVEL);
         add(downButtonLabel, BAR_LEVEL);
     }
-
 
     private void setupDimensions()
     {
@@ -249,6 +263,17 @@ public class InventoryPanel extends JLayeredPane
 
             tempLabel.addMouseListener(selectionListener);
         }
+    }
+
+    private void initAnimation()
+    {
+        // riscalamento frame animazioni
+        UP_BUTTON_PRESS.rescaleFrames(scalingFactor);
+        DOWN_BUTTON_PRESS.rescaleFrames(scalingFactor);
+
+        // impostazione label
+        UP_BUTTON_PRESS.setLabel(upButtonLabel);
+        DOWN_BUTTON_PRESS.setLabel(downButtonLabel);
     }
 
     /**

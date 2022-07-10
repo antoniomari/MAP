@@ -2,7 +2,6 @@ package animation;
 
 import graphics.SpriteManager;
 import items.Item;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,20 +9,47 @@ import java.util.List;
 import java.util.Objects;
 
 // animazione statica
-public class Animation extends Thread// TODO: implementare iterable??
+public class Animation
 {
     private List<Image> frames;
     private List<Icon> framesIcon;
     private JLabel label;
     private int delayMilliseconds;
     private Item item;
+    private final boolean initialDelay;
 
-    public Animation(Item item, int delayMilliseconds)
+    private class AnimationThread extends Thread // TODO trovare un modo per evitare che la stessa animazione venga eseguita contemporaneamente
+    {
+        @Override
+        public void run()
+        {
+            boolean isFirst = true;
+
+            for(Icon frame : framesIcon)
+            {
+                try
+                {
+                    if (!isFirst || initialDelay == false)
+                    {
+                        Thread.sleep(delayMilliseconds);
+                    }
+
+                    label.setIcon(frame);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public Animation(Item item, int delayMilliseconds, boolean initialDelay)
     {
         frames = new ArrayList<>();
         framesIcon = new ArrayList<>();
         this.delayMilliseconds = delayMilliseconds;
         this.item = item;
+        this.initialDelay = initialDelay;
     }
 
     public void addFrame(Image frame)
@@ -76,22 +102,8 @@ public class Animation extends Thread// TODO: implementare iterable??
         this.label = label;
     }
 
-    @Override
-    public void run()
+    public void start()
     {
-
-        for(Icon frame : framesIcon)
-        {
-            try
-            {
-                Thread.sleep(delayMilliseconds);
-                label.setIcon(frame);
-
-
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
+        new AnimationThread().start();
     }
 }
