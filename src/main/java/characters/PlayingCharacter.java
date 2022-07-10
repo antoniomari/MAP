@@ -11,16 +11,16 @@ public class PlayingCharacter extends GameCharacter
     List<PickupableItem> inventory;
     private static PlayingCharacter player;
 
-    private PlayingCharacter(String name)
+    private PlayingCharacter(String name, String spritePath)
     {
-        super(name);
+        super(name, spritePath);
         this.inventory = new ArrayList<>();
     }
 
     public static PlayingCharacter getPlayer()
     {
         if(player == null)
-            player = new PlayingCharacter("Schwartz");
+            player = new PlayingCharacter("Schwartz", "/img/personaggi/schwartz.png");
 
         return player;
     }
