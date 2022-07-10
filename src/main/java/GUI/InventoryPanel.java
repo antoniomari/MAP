@@ -113,11 +113,11 @@ public class InventoryPanel extends JLayeredPane
         SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
 
         // Creazione animazioni
-        UP_BUTTON_PRESS = new Animation(null, 200, false);
+        UP_BUTTON_PRESS = new Animation(null, 100, false);
         UP_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "upPressed"));
         UP_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"));
 
-        DOWN_BUTTON_PRESS = new Animation(null, 200, false);
+        DOWN_BUTTON_PRESS = new Animation(null, 100, false);
         DOWN_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "downPressed"));
         DOWN_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"));
 

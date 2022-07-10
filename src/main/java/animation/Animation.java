@@ -23,16 +23,16 @@ public class Animation
         @Override
         public void run()
         {
-            boolean isFirst = true;
+            boolean delay = initialDelay;
 
             for(Icon frame : framesIcon)
             {
                 try
                 {
-                    if (!isFirst || initialDelay == false)
-                    {
+                    if(delay)
                         Thread.sleep(delayMilliseconds);
-                    }
+                    else
+                        delay = true;
 
                     label.setIcon(frame);
                 } catch (InterruptedException e)
