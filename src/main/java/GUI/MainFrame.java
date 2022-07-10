@@ -29,7 +29,6 @@ import java.util.Random;
 public class MainFrame extends javax.swing.JFrame {
 
     private final Room currentRoom;
-    private final PlayingCharacter character;
     private Icon backgroundImg;
 
     private final int screenWidth;
@@ -93,10 +92,9 @@ public class MainFrame extends javax.swing.JFrame {
         return inventoryPanel;
     }
 
-    public MainFrame(Room initialRoom, PlayingCharacter character)
+    public MainFrame(Room initialRoom)
     {
         currentRoom = initialRoom;
-        this.character = character;
 
         // Calcolo delle dimensioni dello schermo
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -226,7 +224,7 @@ public class MainFrame extends javax.swing.JFrame {
         // -----------------------------------------------------
         //                  SETUP inventoryPanel
         // -----------------------------------------------------
-        inventoryPanel = new InventoryPanel(character,screenHeight - gameHeight);
+        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
 
         GameMouseListener dropItemListener = new GameMouseListener(MouseEvent.BUTTON1,
                 () -> {if (inventoryPanel.getSelectedItem() != null) {inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y)); }}
@@ -426,7 +424,7 @@ public class MainFrame extends javax.swing.JFrame {
         Room cucina = DBManager.loadRoom("Cucina");
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina, player).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));
     }
 
 }

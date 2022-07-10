@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 import java.util.*;
 import java.util.List;
 
@@ -37,18 +36,19 @@ public class InventoryPanel extends JLayeredPane
     private final static Integer SELECTION_LEVEL = 2;
     private final static Integer ITEM_LEVEL = 3;
 
+    // Costante per la deselezione (dare come parametro a select(i)) //
     private final static int NO_ITEM = -1;
 
 
+    //**************************************************
+    //            VARIABILI DI ISTANZA
+    //**************************************************
 
-
-    /*
-    private final static int NO_SELECTION = -1;
-        TODO: ciao
-    private int selectedItem = NO_SELECTION;
-
-     */
-
+    // Componenti swing //
+    private JLabel barLabel; // barra inventario
+    private JLabel upButtonLabel;
+    private JLabel downButtonLabel;
+    private JLabel selectionLabel; // label per stampare l'immagine dell'item selezionato
     /** Lista delle etichette associate a ciascun elemento della barra dell'inventario */
     private List<JLabel> itemLabelList;
 
@@ -56,24 +56,32 @@ public class InventoryPanel extends JLayeredPane
     private int currentBar;
     private PickupableItem selectedItem;
 
-    // Label per barra e bottoni
-    private JLabel barLabel;
-    private JLabel upButtonLabel;
-    private JLabel downButtonLabel;
-    private JLabel selectionLabel;
+    /** Icona corrispondente a SELECTION_IMAGE, resa variabile in quanto è riscalata ed è necessario
+     * salvare un riferimento esterno ad esa per poter correttamente selezionare e deselezionare.
+     */
     private Icon selectionIcon;
 
-    /** Fattore di riscalamento per la visualizzazione */
-    private double scalingFactor;
+    /** Fattore di riscalamento per tutte le icone */
+    private final double scalingFactor;
     /** calcolato tramite (int) (ORIGINAL_ITEM_SIZE * scalingFactor) */
-    private int scaledItemSize;
+    private final int scaledItemSize;
 
+    /** lista che contiene riferimenti a tutti gli oggetti dell'inventario e alle rispettive
+     * icone, riscalate secondo il fattore di riscalamento. */
     private List<Pair<PickupableItem, Icon>> inventoryItemIconList;
 
-    public class Pair<t1, t2>
+    /**
+     * Classe che rappresenta una coppia di oggetti.
+     *
+     * Viene utilizzata per inventoryItemIconList (lista item-icone dell'inventario).
+     *
+     * @param <t1> primo tipo di oggetti della coppia
+     * @param <t2> secondo tipo di oggetti della coppia
+     */
+    public static class Pair<t1, t2>
     {
-        private t1 object1;
-        private t2 object2;
+        private final t1 object1;
+        private final t2 object2;
 
         Pair(t1 object1, t2 object2)
         {
@@ -94,7 +102,7 @@ public class InventoryPanel extends JLayeredPane
 
     static
     {
-        // Caricamento immagini barra e bottoni
+        // Caricamento immagini barra, bottoni e cella di selezione
         BAR_IMAGE = SpriteManager.loadSpriteSheet(BAR_PATH);
         BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
         SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
@@ -102,22 +110,30 @@ public class InventoryPanel extends JLayeredPane
     }
 
 
-    public InventoryPanel(PlayingCharacter character, int preferredHeight)
+    public InventoryPanel(int preferredHeight)
     {
         super();
+
+        // lo scalingFactor è il rapporto tra l'altezza del menu e quella delle icone originali
         scalingFactor = (double) preferredHeight / ORIGINAL_ITEM_SIZE;
         scaledItemSize = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
 
+        initItemIconList();  // inizializza sulla base dell'inventario corrente del giocatore
+        initSelection();  // inizializza label e icona di selezione (all'inizio deselezionato)
+        initBar();  // inizializza barra dell'inventario
+        initButtons();  // inizializza bottoni
+        setupDimensions();  // calcola larghezza e altezza di this e impostale
+        initLabelList();  // inizializza le label per la visualizzazione icone oggetti
+
+        // visualizza barra 1
+        currentBar = 1;
+        refreshBar();
+    }
+
+    private void initItemIconList()
+    {
         // inizializza riferimento all'inventario del personaggio giocante
-        List<PickupableItem> characterInventory = character.getInventory();
-
-        selectedItem = null;
-
-        selectionLabel = new JLabel();
-        selectionIcon = SpriteManager.rescaledImageIcon(SELECTION_IMAGE, scalingFactor);
-        add(selectionLabel, SELECTION_LEVEL);
-        // add(selectionLabel, SELECTION_LEVEL);
-
+        List<PickupableItem> characterInventory = PlayingCharacter.getPlayer().getInventory();
 
         // utilizziamo LinkedHashMap per mantenere l'ordine di inserimento
         inventoryItemIconList = new ArrayList<>(PlayingCharacter.INVENTORY_SIZE);
@@ -126,28 +142,16 @@ public class InventoryPanel extends JLayeredPane
         {
             inventoryItemIconList.add(new Pair<>(item, item.getScaledIconSprite(scalingFactor)));
         }
+    }
 
-        initBar();
-        initButtons();
+    private void initSelection()
+    {
+        // inizialmente nessun oggetto è selezionato
+        selectedItem = null;
 
-        int totalWidth = barLabel.getIcon().getIconWidth()
-                + upButtonLabel.getIcon().getIconWidth()
-                + downButtonLabel.getIcon().getIconWidth();
-
-
-
-        int inventoryWidth = (int) (totalWidth * scalingFactor);
-        int inventoryHeight = scaledItemSize;
-
-        // imposta dimensione del pannello
-        setPreferredSize(new Dimension(inventoryWidth, inventoryHeight));
-
-
-        initLabelList();
-
-        // visualizza barra 1
-        currentBar = 1;
-        displayBar(currentBar);
+        selectionLabel = new JLabel();
+        selectionIcon = SpriteManager.rescaledImageIcon(SELECTION_IMAGE, scalingFactor);
+        add(selectionLabel, SELECTION_LEVEL);
     }
 
 
@@ -167,11 +171,12 @@ public class InventoryPanel extends JLayeredPane
         add(barLabel, BAR_LEVEL);
     }
 
+
     private void initButtons()
     {
         Insets inventoryInsets = this.getInsets();
 
-        // aggiungi bottoni per cambiare visualizzazione barra
+        // bottone "up" per visualizzare barra dell'inventario precedente
         upButtonLabel = new JLabel(
                 SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteByName(
                         BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"), scalingFactor));
@@ -179,6 +184,7 @@ public class InventoryPanel extends JLayeredPane
         upButtonLabel.setBounds(inventoryInsets.left, inventoryInsets.top,
                 upButtonLabel.getIcon().getIconWidth(), upButtonLabel.getIcon().getIconHeight());
 
+        // bottone "down" per visualizzare barra dell'inventario successiva
         downButtonLabel = new JLabel(
                 SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteByName(
                         BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"), scalingFactor));
@@ -186,15 +192,34 @@ public class InventoryPanel extends JLayeredPane
         downButtonLabel.setBounds(inventoryInsets.left + scaledItemSize, inventoryInsets.top,
                 downButtonLabel.getIcon().getIconWidth(), downButtonLabel.getIcon().getIconHeight());
 
-        add(upButtonLabel, BAR_LEVEL);
-        add(downButtonLabel, BAR_LEVEL);
-
-        GameMouseListener upListener = new GameMouseListener(MouseEvent.BUTTON1, this::visualizePreviousBar, null);
-        GameMouseListener downListener = new GameMouseListener(MouseEvent.BUTTON1, this::visualizeNextBar, null);
-
+        // aggiungi MouseListener per il tasto sinistro
+        GameMouseListener upListener = new GameMouseListener(
+                            MouseEvent.BUTTON1, this::visualizePreviousBar, null);
+        GameMouseListener downListener = new GameMouseListener(
+                            MouseEvent.BUTTON1, this::visualizeNextBar, null);
+        // registra listener
         upButtonLabel.addMouseListener(upListener);
         downButtonLabel.addMouseListener(downListener);
+
+        // aggiungi bottoni all'InventoryPanel
+        add(upButtonLabel, BAR_LEVEL);
+        add(downButtonLabel, BAR_LEVEL);
     }
+
+
+    private void setupDimensions()
+    {
+        // calcolo larghezza pannello
+        int originalInventoryWidth = barLabel.getIcon().getIconWidth()
+                + upButtonLabel.getIcon().getIconWidth()
+                + downButtonLabel.getIcon().getIconWidth();
+
+        int inventoryWidth = (int) (originalInventoryWidth * scalingFactor);
+
+        // imposta dimensione del pannello
+        setPreferredSize(new Dimension(inventoryWidth, scaledItemSize));
+    }
+
 
     private void initLabelList()
     {
@@ -211,25 +236,25 @@ public class InventoryPanel extends JLayeredPane
             // posiziona label
             Coordinates coord = calculateOffset(i);
             tempLabel.setBounds(inventoryInsets.left + coord.getX(),
-                    inventoryInsets.top +  coord.getY(),
-                    scaledItemSize, scaledItemSize);
+                                inventoryInsets.top +  coord.getY(),
+                                    scaledItemSize, scaledItemSize);
             // aggiungi label alla lista
             itemLabelList.add(tempLabel);
             // aggiungi label al pannello
             add(tempLabel, ITEM_LEVEL);
 
-            // aggiungi MouseListener per la selezione TODO: urgente, capire come fare qua
-            GameMouseListener mouseListener = new GameMouseListener(
-                    MouseEvent.BUTTON1, () -> selectItem(itemLabelList.indexOf(tempLabel)), null);
+            // aggiungi MouseListener per la selezione (tasto sinistro)
+            GameMouseListener selectionListener = new GameMouseListener(
+                        MouseEvent.BUTTON1, () -> selectItem(itemLabelList.indexOf(tempLabel)), null);
 
-            tempLabel.addMouseListener(mouseListener);
+            tempLabel.addMouseListener(selectionListener);
         }
     }
 
     /**
      * Seleziona l'item corrispondente alla label in posizione i.
      *
-     * @param i indice della label: da 0 a BAR_SIZE - 1 (da sinistra verso destra),
+     * @param i indice della label: da 0 a BAR_SIZE-1 (da sinistra verso destra),
      *          oppure NO_ITEM per indicare che non si sta selezionando alcun item.
      */
     private void selectItem(int i)
@@ -297,7 +322,6 @@ public class InventoryPanel extends JLayeredPane
      *
      * @param item oggetto da rimuovere. Se non è presente nell'inventario,
      *             allora non succede nulla
-     *
      */
     public void dropFromInventory(PickupableItem item)
     {
