@@ -182,16 +182,6 @@ public class MainFrame extends javax.swing.JFrame {
         device.setFullScreenWindow(this);
     }
 
-    /*
-    private Icon rescaledImageIcon(Image im)
-    {
-        int newWidth = (int) (rescalingFactor * im.getWidth(null));
-        int newHeight = (int)(rescalingFactor * im.getHeight(null));
-        Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-         return new ImageIcon(newSprite);
-    }
-
-     */
 
     // inizializzazione componenti JFrame
     private void initComponents()
@@ -444,7 +434,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         final int BLOCK_SIZE = 48;
         int xOffset = (int)(xBlocks * BLOCK_SIZE * rescalingFactor);
-        int yOffset = (int) (yBlocks * BLOCK_SIZE * rescalingFactor);
+        int yOffset = (int) (yBlocks * BLOCK_SIZE * rescalingFactor) + 3; // TODO: controllare
 
         return new Coordinates(xOffset, yOffset);
     }
