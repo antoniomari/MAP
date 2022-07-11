@@ -6,6 +6,26 @@ import items.Item;
 public class ItemInteractionEvent extends GameEvent
 {
     private Animation animation;
+    private Type type;
+
+    public enum Type
+    {
+        OBSERVE
+        {
+            public String toString()
+            {
+                return "aggiunto alla stanza";
+            }
+        }
+    }
+
+
+    public ItemInteractionEvent(Item item, Type type)
+    {
+        this(item, type.toString());
+        this.type = type;
+
+    }
 
     public ItemInteractionEvent(Item item, String toPrint)
     {
@@ -26,5 +46,10 @@ public class ItemInteractionEvent extends GameEvent
     public Animation getAnimation()
     {
         return animation;
+    }
+
+    public Type getType()
+    {
+        return type;
     }
 }

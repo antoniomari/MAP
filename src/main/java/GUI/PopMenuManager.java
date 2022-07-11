@@ -21,7 +21,7 @@ public class PopMenuManager
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            MainFrame.output(((Observable) selected).observe());
+            ((Observable) selected).observe();
         }
     };
 

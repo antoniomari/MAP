@@ -1,9 +1,6 @@
 package events;
 
-import events.executors.AnimationExecutor;
-import events.executors.CharacterUpdateExecutor;
-import events.executors.InventoryUpdateExecutor;
-import events.executors.RoomUpdateExecutor;
+import events.executors.*;
 import items.PickupableItem;
 
 public class EventHandler
@@ -29,6 +26,8 @@ public class EventHandler
     {
         if (e.hasAnimation())
             AnimationExecutor.executeAnimation(e.getAnimation());
+        if (e.getType() == ItemInteractionEvent.Type.OBSERVE)
+            TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
     }
 
     public static void executeInventoryEvent(InventoryEvent e)

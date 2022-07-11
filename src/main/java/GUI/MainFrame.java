@@ -46,6 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
     private JPanel menuPanel;
     private JPanel gamePanel;
     private InventoryPanel inventoryPanel;
+    private TextBarPanel textBarPanel;
 
     // LISTENER FOR KEYS
     private final GameKeyListener ESC_LISTENER;
@@ -104,6 +105,11 @@ public class MainFrame extends javax.swing.JFrame {
     public InventoryPanel getInventoryPanel()
     {
         return inventoryPanel;
+    }
+
+    public TextBarPanel getTextBarPanel()
+    {
+        return textBarPanel;
     }
 
     public MainFrame(Room initialRoom)
@@ -191,7 +197,6 @@ public class MainFrame extends javax.swing.JFrame {
         menuPanel = new JPanel();
         gamePanel = new JPanel();
         // dopo inventoryPanel = new InventoryPanel();
-        gameScreenPanel = new JLayeredPane();
 
 
 
@@ -206,49 +211,31 @@ public class MainFrame extends javax.swing.JFrame {
         //                  SETUP gameScreenPanel
         // -----------------------------------------------------
 
-        PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
-        barile1.setLocationRoom(currentRoom);
-        currentRoom.addItem(barile1, calculateCoordinates(9, 5));
-        Door door = new Door("Porta", "Una porta spicolosa.");
-        addGameCharacter(PlayingCharacter.getPlayer(), 6, 5);
-
-        // Crea nuova label per visualizzare l'immagine di sfondo
-        backgroundLabel = new javax.swing.JLabel(backgroundImg);
+       initGameScreenPanel();
 
 
-        // Imposta dimensioni pannello pari a quelle dello schermo
-        gameScreenPanel.setPreferredSize(new java.awt.Dimension(gameWidth, gameHeight));
+        // -----------------------------------------------------
+        //                  SETUP textBarPanel
+        // -----------------------------------------------------
+        textBarPanel = new TextBarPanel(rescalingFactor);
+        int x_offset = (int)(3 * 48 * rescalingFactor); // TODO : aggiustare questi
+        int y_offset = (int)(7 * rescalingFactor);
 
-        Insets gameScreenPanelInsets = gameScreenPanel.getInsets();
+        textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
+                (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
+        gameScreenPanel.add(textBarPanel, Integer.valueOf(20));
 
-        backgroundLabel.setBounds(gameScreenPanelInsets.left, gameScreenPanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
+        addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
 
-        addGameItem(barile1, 9, 5);
-        addGameItem(door, 7, 2);
 
-        // Aggiungi background al layer 0
-        gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
+
 
         // -----------------------------------------------------
         //                  SETUP inventoryPanel
         // -----------------------------------------------------
-        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
+        initInventoryPanel();
 
-        GameMouseListener dropItemListener = new GameMouseListener(MouseEvent.BUTTON1,
-                () ->
-                {
-                    if (inventoryPanel.getSelectedItem() != null)
-                    {
-                        inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y));
-                    }
-                    else
-                    {
-                        PlayingCharacter.getPlayer().setPosition(new Coordinates(getMousePosition().x, getMousePosition().y));
-                    }
-                }
 
-                    , null);
-        gameScreenPanel.addMouseListener(dropItemListener);
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
@@ -303,7 +290,58 @@ public class MainFrame extends javax.swing.JFrame {
         addKeyListener(ESC_LISTENER);
         pack();
 
+    }
 
+    public void initGameScreenPanel()
+    {
+        gameScreenPanel = new JLayeredPane();
+
+        PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
+        barile1.setLocationRoom(currentRoom);
+        currentRoom.addItem(barile1, calculateCoordinates(9, 5));
+        Door door = new Door("Porta", "Una porta spicolosa.");
+        addGameCharacter(PlayingCharacter.getPlayer(), 6, 5);
+
+        // Crea nuova label per visualizzare l'immagine di sfondo
+        backgroundLabel = new javax.swing.JLabel(backgroundImg);
+
+
+        // Imposta dimensioni pannello pari a quelle dello schermo
+        gameScreenPanel.setPreferredSize(new java.awt.Dimension(gameWidth, gameHeight));
+
+        Insets gameScreenPanelInsets = gameScreenPanel.getInsets();
+
+        backgroundLabel.setBounds(gameScreenPanelInsets.left, gameScreenPanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
+
+        addGameItem(barile1, 9, 5);
+        addGameItem(door, 7, 2);
+
+        // Aggiungi background al layer 0
+        gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
+
+
+        // gameScreenPanel.add(textBarPanel, Integer.valueOf(3));
+    }
+
+    public void initInventoryPanel()
+    {
+        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
+
+        GameMouseListener dropItemListener = new GameMouseListener(MouseEvent.BUTTON1,
+                () ->
+                {
+                    if (inventoryPanel.getSelectedItem() != null)
+                    {
+                        inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y));
+                    }
+                    else
+                    {
+                        PlayingCharacter.getPlayer().setPosition(new Coordinates(getMousePosition().x, getMousePosition().y));
+                    }
+                }
+
+                , null);
+        gameScreenPanel.addMouseListener(dropItemListener);
     }
 
     public static void output(String s)

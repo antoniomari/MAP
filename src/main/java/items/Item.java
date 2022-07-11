@@ -1,5 +1,7 @@
 package items;
 
+import events.EventHandler;
+import events.ItemInteractionEvent;
 import graphics.SpriteManager;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,9 +78,9 @@ public class Item implements Observable
         return locationRoom;
     }
 
-    public String observe()
+    public void observe()
     {
-        return this.description;
+        EventHandler.sendEvent(new ItemInteractionEvent(this, ItemInteractionEvent.Type.OBSERVE));
     }
 
     public String getName()
