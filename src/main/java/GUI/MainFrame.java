@@ -14,18 +14,13 @@ import items.PickupableItem;
 import rooms.Coordinates;
 import rooms.Room;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOError;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -60,6 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Map<GameCharacter, JLabel> characterLabelMap;
 
     // LAYER GAMEPANEL (sono richiesti Integer e non int)
+    private final static Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
     private final static Integer BACKGROUND_LAYER = 1;
     private final static Integer ITEM_LAYER = 2;
 
@@ -71,8 +67,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void removeItemCurrentRoom(Item item)
     {
+        JLabel labelToRemove = itemLabelMap.get(item);
+
+        //Sposta etichetta nel layer per la rimozione
+        gameScreenPanel.setLayer(labelToRemove, GARBAGE_LAYER);
+        labelToRemove.setIcon(null);
+
         // rimuovere la JLabel dal gameScreenPanel
-        gameScreenPanel.remove(itemLabelMap.get(item));
+        gameScreenPanel.remove(labelToRemove);
 
         // elimina la voce dal dizionario
         itemLabelMap.remove(item);
@@ -433,7 +435,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         JLabel itemLabel = itemLabelMap.get(it);
         itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                            rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+                rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
     }
 
     /**
