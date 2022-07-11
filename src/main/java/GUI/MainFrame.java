@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends JFrame {
 
     private final Room currentRoom;
     private Icon backgroundImg;
@@ -32,7 +32,6 @@ public class MainFrame extends javax.swing.JFrame {
     private int gameWidth;
     private int gameHeight;
     private double rescalingFactor;
-    private final static JLabel outputLabel = new JLabel();
 
     // COMPONENTI SWING
     private JLabel backgroundLabel;
@@ -51,19 +50,21 @@ public class MainFrame extends javax.swing.JFrame {
      * Dizionario che contiene gli oggetti presenti nella stanza (currentRoom)
      * e le JLabel associate al gameScreenPanel
      */
-    private Map<Item, JLabel> itemLabelMap;
-    private Map<GameCharacter, JLabel> characterLabelMap;
+    private final Map<Item, JLabel> itemLabelMap;
+    private final Map<GameCharacter, JLabel> characterLabelMap;
 
     // LAYER GAMEPANEL (sono richiesti Integer e non int)
     private final static Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
     private final static Integer BACKGROUND_LAYER = 1;
     private final static Integer ITEM_LAYER = 2;
+    private final static Integer TEXT_BAR_LEVEL = 3;
 
 
     public JLabel getLabelAssociated(Item item)
     {
         return itemLabelMap.get(item);
     }
+
 
     public void removeItemCurrentRoom(Item item)
     {
@@ -82,19 +83,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void addItemCurrentRoom(Item item , Coordinates coord)
     {
-        Coordinates blockCoord = calculateBlocks(coord);
+        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
         addGameItem(item, blockCoord.getX(), blockCoord.getY());
     }
 
     public void addCharacterCurrentRoom(GameCharacter ch, Coordinates coord)
     {
-        Coordinates blockCoord = calculateBlocks(coord);
+        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
         addGameCharacter(ch, blockCoord.getX(), blockCoord.getY());
     }
 
     public void moveCharacter(GameCharacter ch, Coordinates coord)
     {
-        Coordinates blockCoord = calculateBlocks(coord);
+        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
         updateCharacterPosition(ch, blockCoord.getX(), blockCoord.getY());
     }
 
@@ -129,8 +130,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         // inizializzazione immagine di sfondo
         setupBackground();
-        // inizializzazione inventario
-        setupInventory();
         // inizializzazione componenti
         initComponents();
         // inizializzazione cursore
@@ -142,25 +141,8 @@ public class MainFrame extends javax.swing.JFrame {
         AnimationExecutor.setMainFrame(this);
         InventoryUpdateExecutor.setMainFrame(this);
         RoomUpdateExecutor.setMainFrame(this);
-
     }
 
-    private void setupInventory()
-    {
-        // TODO eliminare questo metodo
-        /*
-        try
-        {
-            String inventoryPath = "/img/inventario/Barra oggetti inventario.png";
-            BufferedImage inventoryBar = ImageIO.read(this.getClass().getResource(inventoryPath));
-            outputLabel.setIcon(SpriteManager.rescaledImageIcon(inventoryBar, 1));
-        }
-        catch (IOException e)
-        {
-            // fanculo
-        }
-        */
-    }
 
     private void initCursor()
     {
@@ -225,19 +207,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
                 (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
-        gameScreenPanel.add(textBarPanel, Integer.valueOf(20));
+        gameScreenPanel.add(textBarPanel, TEXT_BAR_LEVEL);
 
         addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
-
-
-
 
         // -----------------------------------------------------
         //                  SETUP inventoryPanel
         // -----------------------------------------------------
         initInventoryPanel();
-
-
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
@@ -264,7 +241,6 @@ public class MainFrame extends javax.swing.JFrame {
         menuPanel.add(exitButton);
 
         menuPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
-
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -294,19 +270,27 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
 
-    public void initGameScreenPanel()
-    {
-        gameScreenPanel = new JLayeredPane();
 
+    public void setupPlayground()
+    {
         PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
         barile1.setLocationRoom(currentRoom);
-        currentRoom.addItem(barile1, calculateCoordinates(9, 5));
+        currentRoom.addItem(barile1, GameScreenManager.calculateCoordinates(9, 5, rescalingFactor));
         Door door = new Door("Porta", "Una porta spicolosa.");
         addGameCharacter(PlayingCharacter.getPlayer(), 6, 5);
 
+        addGameItem(barile1, 9, 5);
+        addGameItem(door, 7, 2);
+
+    }
+
+    public void initGameScreenPanel()
+    {
+        gameScreenPanel = new JLayeredPane();
         // Crea nuova label per visualizzare l'immagine di sfondo
         backgroundLabel = new javax.swing.JLabel(backgroundImg);
 
+        setupPlayground();
 
         // Imposta dimensioni pannello pari a quelle dello schermo
         gameScreenPanel.setPreferredSize(new java.awt.Dimension(gameWidth, gameHeight));
@@ -315,14 +299,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         backgroundLabel.setBounds(gameScreenPanelInsets.left, gameScreenPanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
 
-        addGameItem(barile1, 9, 5);
-        addGameItem(door, 7, 2);
-
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
-
-
-        // gameScreenPanel.add(textBarPanel, Integer.valueOf(3));
     }
 
     public void initInventoryPanel()
@@ -346,11 +324,6 @@ public class MainFrame extends javax.swing.JFrame {
         gameScreenPanel.addMouseListener(dropItemListener);
     }
 
-    public static void output(String s)
-    {
-        outputLabel.setFont(new Font("Calibri", Font.BOLD, 40));
-        outputLabel.setText(s);
-    }
 
     /**
      * Aggiunge al gameScreenPanel un Item, il quale verrà posizionato
@@ -402,15 +375,6 @@ public class MainFrame extends javax.swing.JFrame {
         updateCharacterPosition(ch, xBlocks, yBlocks);
     }
 
-    private Coordinates calculateBlocks(Coordinates coord)
-    {
-        final int BLOCK_SIZE = 48;
-        int xBlocks = (int)(coord.getX() / (BLOCK_SIZE * rescalingFactor));
-        int yBlocks = (int)(coord.getY() / (BLOCK_SIZE * rescalingFactor));
-
-        return new Coordinates(xBlocks, yBlocks);
-    }
-
     /**
      * Aggiorna la posizione di un oggetto nella stanza.
      *
@@ -431,7 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
         Insets insets = gameScreenPanel.getInsets();
-        Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
+        Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks, yBlocks, rescalingFactor);
 
         JLabel itemLabel = itemLabelMap.get(it);
         itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
@@ -458,26 +422,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
         Insets insets = gameScreenPanel.getInsets();
-        Coordinates coord = calculateCoordinates(xBlocks, yBlocks);
+        Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks, yBlocks, rescalingFactor);
 
         JLabel characterLabel = characterLabelMap.get(ch);
         characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
                 rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
     }
 
-
-    // TODO: calcolare massimi xBlock e yBlock per la stanza
-    private Coordinates calculateCoordinates(int xBlocks, int yBlocks)
-    {
-        if(xBlocks < 0 || yBlocks < 0)
-            throw new IllegalArgumentException();
-
-        final int BLOCK_SIZE = 48;
-        int xOffset = (int)(xBlocks * BLOCK_SIZE * rescalingFactor);
-        int yOffset = (int) (yBlocks * BLOCK_SIZE * rescalingFactor) + 3; // TODO: controllare
-
-        return new Coordinates(xOffset, yOffset);
-    }
 
     public void showMenu(boolean b)
     {
@@ -490,38 +441,31 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
 
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws Exception
+    public static void main(String[] args) throws Exception
     {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        PlayingCharacter player = PlayingCharacter.getPlayer();
         DBManager.setupInventory();
 
         Room cucina = DBManager.loadRoom("Cucina");
@@ -529,5 +473,4 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));
     }
-
 }
