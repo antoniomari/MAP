@@ -3,18 +3,10 @@ package items;
 import events.EventHandler;
 import events.ItemInteractionEvent;
 import graphics.SpriteManager;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import rooms.Room;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOError;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Item implements Observable
 {
