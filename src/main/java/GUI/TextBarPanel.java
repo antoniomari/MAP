@@ -4,14 +4,19 @@ import graphics.SpriteManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 
 public class TextBarPanel extends JLayeredPane
 {
-    // Path immagini e json //
+    // Path risorse //
     private final static String TEXT_BAR_PATH = "/img/barra di testo/text bar.png";
+    private final static String FONT_PATH = "src/main/resources/font/text font.ttf";
 
     // Immagini png (da caricare) //
     private final static BufferedImage TEXT_BAR_IMAGE;
+    private static Font DIALOG_FONT;
 
     // Livelli del LayeredPane inventario //
     private final static Integer BAR_LEVEL = 1;
@@ -25,6 +30,7 @@ public class TextBarPanel extends JLayeredPane
     public JLabel barLabel;
     private JTextArea textArea;
     private Icon barIcon;
+    private Font dialogFont;
 
     /** Fattore di riscalamento per tutte le icone */
     private final double scalingFactor;
@@ -33,6 +39,18 @@ public class TextBarPanel extends JLayeredPane
     {
         // Caricamento immagini barra, bottoni e cella di selezione
         TEXT_BAR_IMAGE = SpriteManager.loadSpriteSheet(TEXT_BAR_PATH);
+
+        // Caricamento Font
+        try
+        {
+            DIALOG_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FONT_PATH));
+        }
+        catch (IOException | FontFormatException e)
+        {
+            // errore nel caricamento del font
+            throw new IOError(e);
+        }
+
     }
 
     public TextBarPanel(double scalingFactor)
@@ -63,12 +81,14 @@ public class TextBarPanel extends JLayeredPane
          textArea.setBorder(null);
          textArea.getCaret().deinstall(textArea);
          textArea.setVisible(false);
-         textArea.setFont(new Font("Dialog", Font.BOLD, 32 ));
+
+         textArea.setFont(DIALOG_FONT.deriveFont((float)(13.5 * scalingFactor)));
+
          textArea.setRows(2);
          int horizontalBorder = (int) (20 * scalingFactor);
-         int verticalBorder = (int) (15 * scalingFactor);
+         int verticalBorder = (int) (18 * scalingFactor);
          textArea.setBounds(horizontalBorder, verticalBorder,
-                              barIcon.getIconWidth() - 2 * horizontalBorder,
+                              barIcon.getIconWidth() - (int)(2.5 * horizontalBorder),
                               barIcon.getIconHeight() - 2 * verticalBorder);
 
          add(textArea, TEXT_LEVEL);
@@ -77,8 +97,7 @@ public class TextBarPanel extends JLayeredPane
     public void showTextBar(String text)
     {
         barLabel.setIcon(barIcon);
-        String text1 = "una bella giornata passata in compagnia a fare coding";
-        textArea.setText(text + "\n" + text1);
+        textArea.setText(text);
         textArea.setVisible(true);
     }
 
