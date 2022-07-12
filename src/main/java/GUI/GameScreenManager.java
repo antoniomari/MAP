@@ -15,10 +15,18 @@ public class GameScreenManager
 {
 
     private static final int BLOCK_SIZE = 24;
+    private static GameScreenPanel active_panel;
 
     private GameScreenManager()
     {
         // costruttore privato per non permettere l'istanziazione
+    }
+
+    public static void setActivePanel(GameScreenPanel gsp)
+    {
+        Objects.requireNonNull(gsp);
+
+        active_panel = gsp;
     }
 
     // TODO: calcolare massimi xBlock e yBlock per la stanza
@@ -27,9 +35,10 @@ public class GameScreenManager
         if(xBlocks < 0 || yBlocks < 0)
             throw new IllegalArgumentException();
 
-        int xOffset = (int) Math.round(xBlocks * BLOCK_SIZE * rescalingFactor);
-        System.out.println(xOffset);
-        int yOffset = (int) Math.round(yBlocks * BLOCK_SIZE * rescalingFactor);
+        Insets insets = active_panel.getInsets();
+
+        int xOffset = (int) Math.round(insets.left + xBlocks * BLOCK_SIZE * rescalingFactor);
+        int yOffset = (int) Math.round(insets.top + yBlocks * BLOCK_SIZE * rescalingFactor);
 
         return new Coordinates(xOffset, yOffset);
     }
@@ -59,8 +68,8 @@ public class GameScreenManager
         }
 
         // determinare se lo sprite entra nella stanza
-        int roomWidth = currentRoom.getWidth();
-        int roomHeight = currentRoom.getHeight();
+        int roomWidth = currentRoom.getBWidth();
+        int roomHeight = currentRoom.getBHeight();
 
         int spriteWidth = ch.getSprite().getWidth() / BLOCK_SIZE;
         int spriteHeight = ch.getSprite().getHeight() / BLOCK_SIZE;
@@ -112,8 +121,8 @@ public class GameScreenManager
         }
 
         // determinare se lo sprite entra nella stanza
-        int roomWidth = currentRoom.getWidth();
-        int roomHeight = currentRoom.getHeight();
+        int roomWidth = currentRoom.getBWidth();
+        int roomHeight = currentRoom.getBHeight();
 
         int spriteWidth = it.getSprite().getWidth(null) / BLOCK_SIZE;
         int spriteHeight = it.getSprite().getHeight(null) / BLOCK_SIZE;

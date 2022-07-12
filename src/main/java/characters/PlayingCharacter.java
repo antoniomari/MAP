@@ -10,7 +10,6 @@ import java.util.List;
 public class PlayingCharacter extends GameCharacter
 {
     public static final int INVENTORY_SIZE = 30;
-    private Coordinates position;
 
     List<PickupableItem> inventory;
     private static PlayingCharacter player;
@@ -27,12 +26,6 @@ public class PlayingCharacter extends GameCharacter
             player = new PlayingCharacter("Schwartz", "/img/personaggi/schwartz.png");
 
         return player;
-    }
-
-    public void setPosition(Coordinates newPosition)
-    {
-        this.position = newPosition;
-        EventHandler.sendEvent(new CharacterEvent(this, newPosition, CharacterEvent.Type.MOVE));
     }
 
     public void addToInventory(PickupableItem i)

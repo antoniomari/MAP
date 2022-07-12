@@ -5,9 +5,12 @@ import items.PickupableItem;
 
 public class EventHandler
 {
+    private static final String YELLOW_EVENT_COLOR = "\u001B[33m";
+    private static final String RESET_COLOR = "\u001B[0m";
+
     public static void sendEvent(GameEvent ge)
     {
-        System.out.println(ge.getEventString());
+        System.out.println(YELLOW_EVENT_COLOR + ge.getEventString() + RESET_COLOR);
 
         if(ge instanceof ItemInteractionEvent)
             executeItemInteractionEvent((ItemInteractionEvent) ge);

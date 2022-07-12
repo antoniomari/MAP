@@ -224,10 +224,7 @@ public class InventoryPanel extends JLayeredPane
     private void setupDimensions()
     {
         // calcolo larghezza pannello
-        int originalInventoryWidth = barLabel.getIcon().getIconWidth()
-                + upButtonLabel.getIcon().getIconWidth()
-                + downButtonLabel.getIcon().getIconWidth();
-
+        int originalInventoryWidth = ORIGINAL_ITEM_SIZE * (BAR_SIZE + 2); // + 2 bottoni
         int inventoryWidth = (int) (originalInventoryWidth * scalingFactor);
 
         // imposta dimensione del pannello

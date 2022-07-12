@@ -45,12 +45,12 @@ public class Room
 
     }
 
-    public int getWidth()
+    public int getBWidth()
     {
         return width;
     }
 
-    public int getHeight()
+    public int getBHeight()
     {
         return height;
     }

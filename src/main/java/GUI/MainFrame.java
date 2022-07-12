@@ -5,6 +5,7 @@ import database.DBManager;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
+import graphics.SpriteManager;
 import items.Door;
 import items.PickupableItem;
 import rooms.Coordinates;
@@ -16,6 +17,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame {
+
+    private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
+    private static final int BLOCK_SIZE = 24;
 
     private final Room currentRoom;
     private Icon backgroundImg;
@@ -77,6 +81,9 @@ public class MainFrame extends JFrame {
         // attiva schermo intero
         fullScreenOn();
 
+        GameScreenManager.setActivePanel(gameScreenPanel);
+        setupPlayground();
+
         // imposta gli esecutori su di te TODO: migliorare codice
         AnimationExecutor.setMainFrame(this);
         InventoryUpdateExecutor.setMainFrame(this);
@@ -87,7 +94,7 @@ public class MainFrame extends JFrame {
     private void initCursor()
     {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("src/main/resources/img/HUD/cursoreneonnero.png");
+        Image image = toolkit.getImage(CURSOR_PATH);
         Cursor c = toolkit.createCustomCursor(image , new Point(getX(), getY()), "img");
         setCursor(c);
     }
@@ -95,18 +102,22 @@ public class MainFrame extends JFrame {
     private void setupBackground()
     {
         Image roomImage = currentRoom.getBackgroundImage();
-        int roomWidth = roomImage.getWidth(null);
-        int roomHeight = roomImage.getHeight(null);
-        rescalingFactor = (double) screenWidth / roomWidth;
-        rescalingFactor = Math.floor(rescalingFactor * 24) / 24;
+        int roomWidthBlocks = currentRoom.getBWidth();
+        int roomHeightBlocks = currentRoom.getBHeight();
 
-        int roomWidthBlocks = roomWidth / 24;
-        int roomHeightBlocks = roomHeight / 24;
+        // per calcolare lo scaling factor serve ottenere il rapporto tra
+        // la larghezza dello schermo e quella dell'immagine della stanza;
+        // in seguito si aggiusta in modo tale che la grandezza di ogni blocco
+        // sia pari al più grande intero minore della grandezza dei blocchi
+        // fullscreen
+        rescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
+        rescalingFactor = Math.floor(rescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
 
         // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
-        gameWidth = (int)(roomWidthBlocks * Math.floor(rescalingFactor * 24));
-        gameHeight = (int)(roomHeightBlocks * Math.floor(rescalingFactor * 24));
-        backgroundImg = new ImageIcon(roomImage.getScaledInstance(gameWidth, gameHeight, Image.SCALE_SMOOTH));
+        gameWidth = (int)(roomWidthBlocks * rescalingFactor * BLOCK_SIZE);
+        gameHeight = (int)(roomHeightBlocks * rescalingFactor * BLOCK_SIZE);
+        backgroundImg = SpriteManager.rescaledImageIcon(roomImage, rescalingFactor);
+
     }
 
     private void fullScreenOn()
@@ -140,15 +151,28 @@ public class MainFrame extends JFrame {
         initTextBarPanel();
         initInventoryPanel();
 
-        setupPlayground();
-
         // -----------------------------------------------------
         //                  SETUP gamePanel
         // -----------------------------------------------------
-        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setLayout(null);
         gamePanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        gamePanel.add(gameScreenPanel, BorderLayout.CENTER);
-        gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
+        gamePanel.setBackground(Color.BLACK);
+
+        Insets insets = gamePanel.getInsets();
+        int xBorder = (screenWidth - gameWidth) / 2;
+
+
+        // imposta posizione dello schermo di gioco
+        gameScreenPanel.setBounds(insets.left + xBorder, insets.top, gameWidth, gameHeight);
+
+        gamePanel.add(gameScreenPanel);
+
+        xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
+
+        inventoryPanel.setBounds(insets.left + xBorder, insets.top + gameHeight,
+                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
+
+        gamePanel.add(inventoryPanel, BorderLayout.NORTH);
 
         // -----------------------------------------------------
         //                  SETUP menuPanel
@@ -166,7 +190,7 @@ public class MainFrame extends JFrame {
         menuPanel.add(okButton);
         menuPanel.add(exitButton);
 
-        menuPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+        menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -174,7 +198,7 @@ public class MainFrame extends JFrame {
 
         //Imposta layout (Card layout per poter visualizzare più schermate e scegliere quale
         // visualizzare)
-        CardLayout cl = new java.awt.CardLayout();
+        CardLayout cl = new CardLayout();
         mainPanel.setLayout(cl);
 
         // aggiungi CARDS al mainPanel, con le rispettive etichette
@@ -184,8 +208,7 @@ public class MainFrame extends JFrame {
         // mostra la schermata di gioco
         cl.show(mainPanel, "GIOCO");
 
-        mainPanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
-
+        mainPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
         // -----------------------------------------------------
         //                  SETUP MainFrame
@@ -223,7 +246,10 @@ public class MainFrame extends JFrame {
         gameScreenPanel.setPreferredSize(new Dimension(gameWidth, gameHeight));
         Insets gameScreenPanelInsets = gameScreenPanel.getInsets();
 
-        backgroundLabel.setBounds(gameScreenPanelInsets.left, gameScreenPanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
+        backgroundLabel.setBounds(gameScreenPanelInsets.left,
+                                gameScreenPanelInsets.top,
+                                backgroundImg.getIconWidth(),
+                                backgroundImg.getIconHeight());
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
@@ -262,91 +288,6 @@ public class MainFrame extends JFrame {
                 , null);
         gameScreenPanel.addMouseListener(dropItemListener);
     }
-
-
-
-    /*
-
-    /**
-     * Aggiunge al gameScreenPanel un Item, il quale verrà posizionato
-     * nel blocco desiderato.
-     *
-     * Crea una JLabel associata all'oggetto e la aggiunge nel gameScreenPanel
-     * per poter stampare lo sprite dell'oggetto sullo schermo.
-     *
-     * @param it oggetto da aggiungere
-     * @param xBlocks numero di blocchi a sinsitra di quello desiderato
-     * @param yBlocks numero di blocchi sopra rispetto a quello desiderato
-     *
-    private void addGameItem(Item it, final int xBlocks, final int yBlocks)
-    {
-        // recupera lo sprite della giusta dimensione
-        Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
-
-        // crea la label corrispondente all'Item
-        JLabel itemLabel = new JLabel(rescaledSprite);
-
-        // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
-        GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
-                null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
-        itemLabel.addMouseListener(popMenuListener);
-
-        // metti la coppia Item JLabel nel dizionario
-        itemLabelMap.put(it, itemLabel);
-
-        // aggiungi la label nell'ITEM_LAYER
-        gameScreenPanel.add(itemLabel, GameScreenPanel.ITEM_LAYER);
-
-        updateItemPosition(it, xBlocks, yBlocks);
-    }
-
-    private void addGameCharacter(GameCharacter ch, final int xBlocks, final int yBlocks)
-    {
-        // recupera lo sprite della giusta dimensione
-        Icon rescaledSprite = SpriteManager.rescaledImageIcon(ch.getSprite(), rescalingFactor);
-
-        // crea la label corrispondente all'Item
-        JLabel characterLabel = new JLabel(rescaledSprite);
-
-        // metti la coppia Item JLabel nel dizionario
-        characterLabelMap.put(ch, characterLabel);
-
-        // aggiungi la label nell'ITEM_LAYER  TODO pensare al layer
-        gameScreenPanel.add(characterLabel, GameScreenPanel.ITEM_LAYER);
-
-        updateCharacterPosition(ch, xBlocks, yBlocks);
-    }
-
-    /**
-     * Aggiorna la posizione di un oggetto nella stanza.
-     *
-     * @param it oggetto da riposizionare
-     * @param xBlocks blocco x
-     * @param yBlocks blocco y
-     * @throws IllegalArgumentException se it non è presente nella stanza
-     *
-    private void updateItemPosition(Item it, int xBlocks, int yBlocks)
-    {
-        GameScreenManager.updateSpritePosition(it, xBlocks, yBlocks, currentRoom, itemLabelMap,
-                                                gameScreenPanel, rescalingFactor);
-    }
-
-    /**
-     * Aggiorna la posizione di un personaggio nella stanza.
-     *
-     * @param ch personaggio da riposizionare
-     * @param xBlocks blocco x
-     * @param yBlocks blocco y
-     * @throws IllegalArgumentException se ch non è presente nella stanza
-     *
-    private void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks)
-    {
-        GameScreenManager.updateSpritePosition(ch, xBlocks, yBlocks, currentRoom, characterLabelMap,
-                gameScreenPanel, rescalingFactor);
-
-    }
-
-    */
 
 
     public void showMenu(boolean b)

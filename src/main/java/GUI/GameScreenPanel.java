@@ -1,5 +1,6 @@
 package GUI;
 
+import animation.MovingAnimation;
 import characters.GameCharacter;
 import graphics.SpriteManager;
 import items.Item;
@@ -7,9 +8,11 @@ import rooms.Coordinates;
 import rooms.Room;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class GameScreenPanel extends JLayeredPane
 {
@@ -72,12 +75,28 @@ public class GameScreenPanel extends JLayeredPane
         addGameCharacter(ch, blockCoord.getX(), blockCoord.getY());
     }
 
-    public void moveCharacter(GameCharacter ch, Coordinates coord)
+    public void moveCharacter(GameCharacter ch, Coordinates finalCoord, boolean withAnimation)
     {
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
-        updateCharacterPosition(ch, blockCoord.getX(), blockCoord.getY());
+        // calcola coordinate di blocco
+        Coordinates blockCoord = GameScreenManager.calculateBlocks(finalCoord, rescalingFactor);
+
+        MovingAnimation animation;
+        // crea animazione
+        if(withAnimation)
+            animation = createMoveAnimation(ch);
+        else
+            animation = null;
+
+        updateCharacterPosition(ch, blockCoord.getX(), blockCoord.getY(), animation);
     }
 
+    public MovingAnimation createMoveAnimation(GameCharacter ch)
+    {
+        MovingAnimation moveAnimation = new MovingAnimation(characterLabelMap.get(ch),  true);
+        moveAnimation.setInsets(getInsets());
+
+        return moveAnimation;
+    }
 
     /**
      * Aggiunge al gameScreenPanel un Item, il quale verrà posizionato
@@ -126,7 +145,7 @@ public class GameScreenPanel extends JLayeredPane
         // aggiungi la label nell'ITEM_LAYER  TODO pensare al layer
         add(characterLabel, ITEM_LAYER);
 
-        updateCharacterPosition(ch, xBlocks, yBlocks);
+        updateCharacterPosition(ch, xBlocks, yBlocks, null);
     }
 
     /**
@@ -137,7 +156,7 @@ public class GameScreenPanel extends JLayeredPane
      * @param yBlocks blocco y
      * @throws IllegalArgumentException se it non è presente nella stanza
      */
-    public void updateItemPosition(Item it, int xBlocks, int yBlocks)
+    private void updateItemPosition(Item it, int xBlocks, int yBlocks)
     {
         GameScreenManager.updateSpritePosition(it, xBlocks, yBlocks, currentRoom, itemLabelMap,
                 this, rescalingFactor);
@@ -151,10 +170,53 @@ public class GameScreenPanel extends JLayeredPane
      * @param yBlocks blocco y
      * @throws IllegalArgumentException se ch non è presente nella stanza
      */
-    public void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks)
+    private void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks, MovingAnimation anim)
     {
-        GameScreenManager.updateSpritePosition(ch, xBlocks, yBlocks, currentRoom, characterLabelMap,
-                this, rescalingFactor);
+        Objects.requireNonNull(ch);
+
+        int BLOCK_SIZE = 24;
+
+        // controlla che it è presente effettivamente nella stanza
+        if(!characterLabelMap.containsKey(ch))
+        {
+            // TODO: ricontrollare eccezione lanciata
+            throw new IllegalArgumentException("Personaggio non presente nella stanza");
+        }
+
+        // determinare se lo sprite entra nella stanza
+        int roomWidth = currentRoom.getBWidth();
+        int roomHeight = currentRoom.getBHeight();
+
+        int spriteWidth = ch.getSprite().getWidth() / BLOCK_SIZE;
+        int spriteHeight = ch.getSprite().getHeight() / BLOCK_SIZE;
+
+        int rightBlock = xBlocks + spriteWidth - 1;
+        int topBlock = yBlocks - spriteHeight + 1;
+
+        // controlla se lo sprite entra per intero nella schermata
+        boolean canMove = rightBlock < roomWidth && topBlock >= 0;
+
+        if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks) && canMove)
+        {
+            Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
+            Insets insets = getInsets();
+            Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks,
+                    topBlock, rescalingFactor);
+
+            if(anim == null)
+            {
+                JLabel characterLabel = characterLabelMap.get(ch);
+                characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
+                        rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+            }
+            else
+            {
+                anim.setFinalCoord(coord);
+                anim.start();
+                // TODO: stoppare
+            }
+
+        }
 
     }
 }
