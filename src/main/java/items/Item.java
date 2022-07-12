@@ -47,13 +47,6 @@ public class Item implements Observable
         extractSprite(SPRITESHEET, JSON_PATH);
     }
 
-    /*
-    public Item()
-    {
-        this(DEFAULT_NAME, DEFAULT_DESCRIPTION);
-    }
-    */
-
     protected Item(String name, String description, BufferedImage spriteSheet, String jsonPath)
     {
         this.name = name;

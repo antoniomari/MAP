@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class GameEvent
 {
-    private LocalDateTime eventTime;
+    protected LocalDateTime eventTime;
     private String toPrint;
     private Item itemInvolved;
     private GameCharacter characterInvolved;

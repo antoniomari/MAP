@@ -35,4 +35,10 @@ public class CharacterEvent extends GameEvent
     {
         return this.position;
     }
+
+    public String getEventString()
+    {
+        return eventTime.toString() + " -> " + " [" + getCharacterInvolved().getName() + "] "+ type.toString()
+                + " in posizione " + position.toString();
+    }
 }

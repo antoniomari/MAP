@@ -58,6 +58,7 @@ public class DBManager
         conn.close();
     }
 
+    /*
     public static Room loadRoom(String name) throws SQLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
     {
         startConnection();
@@ -98,4 +99,6 @@ public class DBManager
 
         return room;
     }
+
+     */
 }

@@ -141,6 +141,8 @@ public class MainFrame extends JFrame {
         AnimationExecutor.setMainFrame(this);
         InventoryUpdateExecutor.setMainFrame(this);
         RoomUpdateExecutor.setMainFrame(this);
+
+        setupPlayground();
     }
 
 
@@ -277,10 +279,10 @@ public class MainFrame extends JFrame {
         barile1.setLocationRoom(currentRoom);
         currentRoom.addItem(barile1, GameScreenManager.calculateCoordinates(9, 5, rescalingFactor));
         Door door = new Door("Porta", "Una porta spicolosa.");
-        addGameCharacter(PlayingCharacter.getPlayer(), 6, 5);
+        addGameCharacter(PlayingCharacter.getPlayer(), 12, 10);
 
-        addGameItem(barile1, 9, 5);
-        addGameItem(door, 7, 2);
+        addGameItem(barile1, 18, 12);
+        addGameItem(door, 14, 7);
 
     }
 
@@ -290,7 +292,7 @@ public class MainFrame extends JFrame {
         // Crea nuova label per visualizzare l'immagine di sfondo
         backgroundLabel = new javax.swing.JLabel(backgroundImg);
 
-        setupPlayground();
+        // setupPlayground();
 
         // Imposta dimensioni pannello pari a quelle dello schermo
         gameScreenPanel.setPreferredSize(new java.awt.Dimension(gameWidth, gameHeight));
@@ -385,21 +387,8 @@ public class MainFrame extends JFrame {
      */
     private void updateItemPosition(Item it, int xBlocks, int yBlocks)
     {
-        Objects.requireNonNull(it);
-
-        // controlla che it è presente effettivamente nella stanza
-        if(!itemLabelMap.containsKey(it))
-        {
-            // TODO: ricontrollare eccezione lanciata
-            throw new IllegalArgumentException("Item non presente nella stanza");
-        }
-        Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
-        Insets insets = gameScreenPanel.getInsets();
-        Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks, yBlocks, rescalingFactor);
-
-        JLabel itemLabel = itemLabelMap.get(it);
-        itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+        GameScreenManager.updateSpritePosition(it, xBlocks, yBlocks, currentRoom, itemLabelMap,
+                                                gameScreenPanel, rescalingFactor);
     }
 
     /**
@@ -412,21 +401,33 @@ public class MainFrame extends JFrame {
      */
     private void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks)
     {
+        GameScreenManager.updateSpritePosition(ch, xBlocks, yBlocks, currentRoom, characterLabelMap,
+                gameScreenPanel, rescalingFactor);
+
+        /*
         Objects.requireNonNull(ch);
 
         // controlla che it è presente effettivamente nella stanza
         if(!characterLabelMap.containsKey(ch))
         {
             // TODO: ricontrollare eccezione lanciata
-            throw new IllegalArgumentException("Pergonaggio non presente nella stanza");
+            throw new IllegalArgumentException("Personaggio non presente nella stanza");
         }
-        Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
-        Insets insets = gameScreenPanel.getInsets();
-        Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks, yBlocks, rescalingFactor);
 
-        JLabel characterLabel = characterLabelMap.get(ch);
-        characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+        System.out.println(xBlocks);
+        System.out.println(yBlocks);
+        System.out.println(currentRoom.getFloor().isWalkable(xBlocks, yBlocks));
+        if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks))
+        {
+            Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
+            Insets insets = gameScreenPanel.getInsets();
+            Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks, yBlocks, rescalingFactor);
+
+            JLabel characterLabel = characterLabelMap.get(ch);
+            characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
+                    rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+        }
+        */
     }
 
 
@@ -468,7 +469,9 @@ public class MainFrame extends JFrame {
 
         DBManager.setupInventory();
 
-        Room cucina = DBManager.loadRoom("Cucina");
+
+        // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
+        Room cucina = new Room("Cucina", "/img/lab1 griglia.png", "/img/lab1.json");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));

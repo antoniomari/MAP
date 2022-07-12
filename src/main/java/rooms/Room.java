@@ -1,11 +1,10 @@
 package rooms;
 
+import graphics.SpriteManager;
 import items.Item;
+import org.json.JSONObject;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.IOError;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,15 +23,41 @@ public class Room
     private BufferedImage backgroundImage;
 
     private Map<Item, Coordinates> itemMap;
+    private RoomFloor floor;
+
+    private int width;  // larghezza in blocchi
+    private int height;  // altezza in blocchi
 
 
-    public Room(String name, String path)
+    public Room(String name, String path, String jsonPath)
     {
         this.roomName = name;
         itemMap = new HashMap<>();
         itemList = new ArrayList<>();
         backgroundPath = path;
         loadBackgroundImage();
+        floor = SpriteManager.loadFloorFromJson(jsonPath);
+        JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
+
+        width = json.getInt("width");
+        height = json.getInt("height");
+
+
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public RoomFloor getFloor()
+    {
+        return floor;
     }
 
     public void addItem(Item item, Coordinates c)
@@ -54,24 +79,13 @@ public class Room
 
     private void loadBackgroundImage()
     {
-        try
-        {
-            backgroundImage = ImageIO.read(getClass().getResource(backgroundPath));
-        }
-        catch(IOException e)
-        {
-            // Errore caricamento background
-            throw new IOError(e);
-        }
+        backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
     }
+
     public BufferedImage getBackgroundImage()
     {
         return backgroundImage;
     }
 
-    /*
-    funzione boolean isBloccoCamminabile(int xBlock, int yBlock)
-     */
 
-    //TODO: inserire max xBlock e yBlock
 }
