@@ -1,15 +1,11 @@
 package GUI;
 
-
-import characters.GameCharacter;
 import characters.PlayingCharacter;
 import database.DBManager;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
-import graphics.SpriteManager;
 import items.Door;
-import items.Item;
 import items.PickupableItem;
 import rooms.Coordinates;
 import rooms.Room;
@@ -18,9 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 public class MainFrame extends JFrame {
 
@@ -33,9 +26,7 @@ public class MainFrame extends JFrame {
     private int gameHeight;
     private double rescalingFactor;
 
-    // COMPONENTI SWING
-    private JLabel backgroundLabel;
-    private JLayeredPane gameScreenPanel;
+    private GameScreenPanel gameScreenPanel;
     private JPanel mainPanel;
     private JPanel menuPanel;
     private JPanel gamePanel;
@@ -44,60 +35,6 @@ public class MainFrame extends JFrame {
 
     // LISTENER FOR KEYS
     private final GameKeyListener ESC_LISTENER;
-
-
-    /**
-     * Dizionario che contiene gli oggetti presenti nella stanza (currentRoom)
-     * e le JLabel associate al gameScreenPanel
-     */
-    private final Map<Item, JLabel> itemLabelMap;
-    private final Map<GameCharacter, JLabel> characterLabelMap;
-
-    // LAYER GAMEPANEL (sono richiesti Integer e non int)
-    private final static Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
-    private final static Integer BACKGROUND_LAYER = 1;
-    private final static Integer ITEM_LAYER = 2;
-    private final static Integer TEXT_BAR_LEVEL = 3;
-
-
-    public JLabel getLabelAssociated(Item item)
-    {
-        return itemLabelMap.get(item);
-    }
-
-
-    public void removeItemCurrentRoom(Item item)
-    {
-        JLabel labelToRemove = itemLabelMap.get(item);
-
-        //Sposta etichetta nel layer per la rimozione
-        gameScreenPanel.setLayer(labelToRemove, GARBAGE_LAYER);
-        labelToRemove.setIcon(null);
-
-        // rimuovere la JLabel dal gameScreenPanel
-        gameScreenPanel.remove(labelToRemove);
-
-        // elimina la voce dal dizionario
-        itemLabelMap.remove(item);
-    }
-
-    public void addItemCurrentRoom(Item item , Coordinates coord)
-    {
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
-        addGameItem(item, blockCoord.getX(), blockCoord.getY());
-    }
-
-    public void addCharacterCurrentRoom(GameCharacter ch, Coordinates coord)
-    {
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
-        addGameCharacter(ch, blockCoord.getX(), blockCoord.getY());
-    }
-
-    public void moveCharacter(GameCharacter ch, Coordinates coord)
-    {
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
-        updateCharacterPosition(ch, blockCoord.getX(), blockCoord.getY());
-    }
 
 
     public double getScalingFactor()
@@ -115,6 +52,11 @@ public class MainFrame extends JFrame {
         return textBarPanel;
     }
 
+    public GameScreenPanel getGameScreenPanel()
+    {
+        return gameScreenPanel;
+    }
+
     public MainFrame(Room initialRoom)
     {
         currentRoom = initialRoom;
@@ -125,8 +67,6 @@ public class MainFrame extends JFrame {
         screenHeight = (int) screenSize.getHeight();
 
         this.ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
-        itemLabelMap = new HashMap<>();
-        characterLabelMap = new HashMap<>();
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -141,8 +81,6 @@ public class MainFrame extends JFrame {
         AnimationExecutor.setMainFrame(this);
         InventoryUpdateExecutor.setMainFrame(this);
         RoomUpdateExecutor.setMainFrame(this);
-
-        setupPlayground();
     }
 
 
@@ -160,10 +98,14 @@ public class MainFrame extends JFrame {
         int roomWidth = roomImage.getWidth(null);
         int roomHeight = roomImage.getHeight(null);
         rescalingFactor = (double) screenWidth / roomWidth;
+        rescalingFactor = Math.floor(rescalingFactor * 24) / 24;
+
+        int roomWidthBlocks = roomWidth / 24;
+        int roomHeightBlocks = roomHeight / 24;
 
         // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
-        gameWidth = screenWidth;
-        gameHeight = (int)(roomHeight * rescalingFactor);
+        gameWidth = (int)(roomWidthBlocks * Math.floor(rescalingFactor * 24));
+        gameHeight = (int)(roomHeightBlocks * Math.floor(rescalingFactor * 24));
         backgroundImg = new ImageIcon(roomImage.getScaledInstance(gameWidth, gameHeight, Image.SCALE_SMOOTH));
     }
 
@@ -187,42 +129,24 @@ public class MainFrame extends JFrame {
 
 
         // Chiudi l'app alla chiusura della finestra
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Schwartz");
 
         // Imposta dimensioni finestra pari a quelle dello schermo
-        setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
-
-        // -----------------------------------------------------
-        //                  SETUP gameScreenPanel
-        // -----------------------------------------------------
-
-       initGameScreenPanel();
+        setPreferredSize(new Dimension(screenWidth, screenHeight));
 
 
-        // -----------------------------------------------------
-        //                  SETUP textBarPanel
-        // -----------------------------------------------------
-        textBarPanel = new TextBarPanel(rescalingFactor);
-        int x_offset = (int)(3 * 48 * rescalingFactor); // TODO : aggiustare questi
-        int y_offset = (int)(7 * rescalingFactor);
-
-        textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
-                (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
-        gameScreenPanel.add(textBarPanel, TEXT_BAR_LEVEL);
-
-        addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
-
-        // -----------------------------------------------------
-        //                  SETUP inventoryPanel
-        // -----------------------------------------------------
+        initGameScreenPanel();
+        initTextBarPanel();
         initInventoryPanel();
+
+        setupPlayground();
 
         // -----------------------------------------------------
         //                  SETUP gamePanel
         // -----------------------------------------------------
         gamePanel.setLayout(new BorderLayout());
-        gamePanel.setPreferredSize(new java.awt.Dimension(screenWidth, screenHeight));
+        gamePanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
         gamePanel.add(gameScreenPanel, BorderLayout.CENTER);
         gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
 
@@ -279,30 +203,43 @@ public class MainFrame extends JFrame {
         barile1.setLocationRoom(currentRoom);
         currentRoom.addItem(barile1, GameScreenManager.calculateCoordinates(9, 5, rescalingFactor));
         Door door = new Door("Porta", "Una porta spicolosa.");
-        addGameCharacter(PlayingCharacter.getPlayer(), 12, 10);
+        gameScreenPanel.addGameCharacter(PlayingCharacter.getPlayer(), 12, 10);
 
-        addGameItem(barile1, 18, 12);
-        addGameItem(door, 14, 7);
+        gameScreenPanel.addGameItem(barile1, 18, 12);
+        gameScreenPanel.addGameItem(door, 14, 7);
 
     }
 
     public void initGameScreenPanel()
     {
-        gameScreenPanel = new JLayeredPane();
-        // Crea nuova label per visualizzare l'immagine di sfondo
-        backgroundLabel = new javax.swing.JLabel(backgroundImg);
+        gameScreenPanel = new GameScreenPanel(currentRoom);
+        gameScreenPanel.setScalingFactor(rescalingFactor);
 
-        // setupPlayground();
+        // Crea nuova label per visualizzare l'immagine di sfondo
+        // COMPONENTI SWING
+        JLabel backgroundLabel = new JLabel(backgroundImg);
 
         // Imposta dimensioni pannello pari a quelle dello schermo
-        gameScreenPanel.setPreferredSize(new java.awt.Dimension(gameWidth, gameHeight));
-
+        gameScreenPanel.setPreferredSize(new Dimension(gameWidth, gameHeight));
         Insets gameScreenPanelInsets = gameScreenPanel.getInsets();
 
         backgroundLabel.setBounds(gameScreenPanelInsets.left, gameScreenPanelInsets.top, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
 
         // Aggiungi background al layer 0
-        gameScreenPanel.add(backgroundLabel, BACKGROUND_LAYER);
+        gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
+    }
+
+    public void initTextBarPanel()
+    {
+        textBarPanel = new TextBarPanel(rescalingFactor);
+        int x_offset = (int)(3 * 48 * rescalingFactor); // TODO : aggiustare questi
+        int y_offset = (int)(7 * rescalingFactor);
+
+        textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
+                (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
+        gameScreenPanel.add(textBarPanel, GameScreenPanel.TEXT_BAR_LEVEL);
+
+        addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
     public void initInventoryPanel()
@@ -327,6 +264,9 @@ public class MainFrame extends JFrame {
     }
 
 
+
+    /*
+
     /**
      * Aggiunge al gameScreenPanel un Item, il quale verrà posizionato
      * nel blocco desiderato.
@@ -337,7 +277,7 @@ public class MainFrame extends JFrame {
      * @param it oggetto da aggiungere
      * @param xBlocks numero di blocchi a sinsitra di quello desiderato
      * @param yBlocks numero di blocchi sopra rispetto a quello desiderato
-     */
+     *
     private void addGameItem(Item it, final int xBlocks, final int yBlocks)
     {
         // recupera lo sprite della giusta dimensione
@@ -355,7 +295,7 @@ public class MainFrame extends JFrame {
         itemLabelMap.put(it, itemLabel);
 
         // aggiungi la label nell'ITEM_LAYER
-        gameScreenPanel.add(itemLabel, ITEM_LAYER);
+        gameScreenPanel.add(itemLabel, GameScreenPanel.ITEM_LAYER);
 
         updateItemPosition(it, xBlocks, yBlocks);
     }
@@ -372,7 +312,7 @@ public class MainFrame extends JFrame {
         characterLabelMap.put(ch, characterLabel);
 
         // aggiungi la label nell'ITEM_LAYER  TODO pensare al layer
-        gameScreenPanel.add(characterLabel, ITEM_LAYER);
+        gameScreenPanel.add(characterLabel, GameScreenPanel.ITEM_LAYER);
 
         updateCharacterPosition(ch, xBlocks, yBlocks);
     }
@@ -384,7 +324,7 @@ public class MainFrame extends JFrame {
      * @param xBlocks blocco x
      * @param yBlocks blocco y
      * @throws IllegalArgumentException se it non è presente nella stanza
-     */
+     *
     private void updateItemPosition(Item it, int xBlocks, int yBlocks)
     {
         GameScreenManager.updateSpritePosition(it, xBlocks, yBlocks, currentRoom, itemLabelMap,
@@ -398,37 +338,15 @@ public class MainFrame extends JFrame {
      * @param xBlocks blocco x
      * @param yBlocks blocco y
      * @throws IllegalArgumentException se ch non è presente nella stanza
-     */
+     *
     private void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks)
     {
         GameScreenManager.updateSpritePosition(ch, xBlocks, yBlocks, currentRoom, characterLabelMap,
                 gameScreenPanel, rescalingFactor);
 
-        /*
-        Objects.requireNonNull(ch);
-
-        // controlla che it è presente effettivamente nella stanza
-        if(!characterLabelMap.containsKey(ch))
-        {
-            // TODO: ricontrollare eccezione lanciata
-            throw new IllegalArgumentException("Personaggio non presente nella stanza");
-        }
-
-        System.out.println(xBlocks);
-        System.out.println(yBlocks);
-        System.out.println(currentRoom.getFloor().isWalkable(xBlocks, yBlocks));
-        if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks))
-        {
-            Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
-            Insets insets = gameScreenPanel.getInsets();
-            Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks, yBlocks, rescalingFactor);
-
-            JLabel characterLabel = characterLabelMap.get(ch);
-            characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                    rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
-        }
-        */
     }
+
+    */
 
 
     public void showMenu(boolean b)

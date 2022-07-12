@@ -23,10 +23,10 @@ public class Room
     private BufferedImage backgroundImage;
 
     private Map<Item, Coordinates> itemMap;
-    private RoomFloor floor;
+    private final RoomFloor floor;
 
-    private int width;  // larghezza in blocchi
-    private int height;  // altezza in blocchi
+    private final int width;  // larghezza in blocchi
+    private final int height;  // altezza in blocchi
 
 
     public Room(String name, String path, String jsonPath)

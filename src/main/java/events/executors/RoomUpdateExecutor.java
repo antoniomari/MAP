@@ -8,12 +8,12 @@ public class RoomUpdateExecutor extends Executor
 
     public static void executeRemoveItem(Item it)
     {
-        mainFrame.removeItemCurrentRoom(it);
+        gameScreenPanel.removeItemCurrentRoom(it);
     }
 
     public static void executeAddItem(Item it, Coordinates coord)
     {
-        mainFrame.addItemCurrentRoom(it, coord);
+        gameScreenPanel.addItemCurrentRoom(it, coord);
     }
 
 }

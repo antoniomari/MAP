@@ -109,8 +109,10 @@ public class SpriteManager
 
     public static Icon rescaledImageIcon(Image im, double rescalingFactor)
     {
-        int newWidth = (int) (rescalingFactor * im.getWidth(null));
-        int newHeight = (int)(rescalingFactor * im.getHeight(null));
+        int newWidth = (int) Math.round(rescalingFactor * im.getWidth(null));
+        System.out.println("Nuova largherzza: " + newWidth);
+        int newHeight = (int) Math.round(rescalingFactor * im.getHeight(null));
+        System.out.println("Nuova altezza: " + newHeight);
         Image newSprite = im.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(newSprite);
     }

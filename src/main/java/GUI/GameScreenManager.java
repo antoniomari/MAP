@@ -27,8 +27,9 @@ public class GameScreenManager
         if(xBlocks < 0 || yBlocks < 0)
             throw new IllegalArgumentException();
 
-        int xOffset = (int)(xBlocks * BLOCK_SIZE * rescalingFactor);
-        int yOffset = (int) (yBlocks * BLOCK_SIZE * rescalingFactor + 2.2); // TODO: controllare
+        int xOffset = (int) Math.round(xBlocks * BLOCK_SIZE * rescalingFactor);
+        System.out.println(xOffset);
+        int yOffset = (int) Math.round(yBlocks * BLOCK_SIZE * rescalingFactor);
 
         return new Coordinates(xOffset, yOffset);
     }
@@ -45,7 +46,7 @@ public class GameScreenManager
     // todo: completare e raffinare logica
     // xBlocks e yBlocks sono il blocco in basso a sinistra
     public static void updateSpritePosition(GameCharacter ch, int xBlocks, int yBlocks, Room currentRoom,
-                                      Map<GameCharacter, JLabel> characterLabelMap, JLayeredPane gameScreenPanel,
+                                      Map<GameCharacter, JLabel> characterLabelMap, GameScreenPanel gameScreenPanel,
                                       double rescalingFactor)
     {
         Objects.requireNonNull(ch);
@@ -64,10 +65,11 @@ public class GameScreenManager
         int spriteWidth = ch.getSprite().getWidth() / BLOCK_SIZE;
         int spriteHeight = ch.getSprite().getHeight() / BLOCK_SIZE;
 
-        int rightBlock = xBlocks + spriteWidth; // divisione intera
-        int topBlock = yBlocks - spriteHeight; // divisione intera
+        int rightBlock = xBlocks + spriteWidth - 1;
+        int topBlock = yBlocks - spriteHeight + 1;
 
-        boolean canMove = rightBlock <= roomWidth + 1 && topBlock <= roomHeight + 1;
+        // controlla se lo sprite entra per intero nella schermata
+        boolean canMove = rightBlock < roomWidth && topBlock >= 0;
 
         if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks) && canMove)
         {
@@ -82,7 +84,7 @@ public class GameScreenManager
             Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
             Insets insets = gameScreenPanel.getInsets();
             Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks,
-                                        topBlock + 1, rescalingFactor);
+                                        topBlock, rescalingFactor);
 
             JLabel characterLabel = characterLabelMap.get(ch);
             characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
@@ -96,7 +98,7 @@ public class GameScreenManager
     // todo: completare e raffinare logica
     // xBlocks e yBlocks sono il blocco in basso a sinistra
     public static void updateSpritePosition(Item it, int xBlocks, int yBlocks, Room currentRoom,
-                                            Map<Item, JLabel> itemLabelMap, JLayeredPane gameScreenPanel,
+                                            Map<Item, JLabel> itemLabelMap, GameScreenPanel gameScreenPanel,
                                             double rescalingFactor)
     {
         Objects.requireNonNull(it);
@@ -116,10 +118,10 @@ public class GameScreenManager
         int spriteWidth = it.getSprite().getWidth(null) / BLOCK_SIZE;
         int spriteHeight = it.getSprite().getHeight(null) / BLOCK_SIZE;
 
-        int rightBlock = xBlocks + spriteWidth; // divisione intera
-        int topBlock = yBlocks - spriteHeight; // divisione intera
+        int rightBlock = xBlocks + spriteWidth - 1;
+        int topBlock = yBlocks - spriteHeight + 1;
 
-        boolean canMove = rightBlock <= roomWidth + 1 && topBlock <= roomHeight + 1;
+        boolean canMove = rightBlock < roomWidth && topBlock >= 0;;
 
         if (canMove)
         {
@@ -134,7 +136,7 @@ public class GameScreenManager
             Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
             Insets insets = gameScreenPanel.getInsets();
             Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks,
-                    topBlock + 1, rescalingFactor);
+                    topBlock, rescalingFactor);
 
             JLabel itemLabel = itemLabelMap.get(it);
             itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),

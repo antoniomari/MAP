@@ -7,6 +7,6 @@ public class CharacterUpdateExecutor extends Executor
 {
     public static void executeMove(GameCharacter ch, Coordinates pos)
     {
-        mainFrame.moveCharacter(ch, pos);
+        gameScreenPanel.moveCharacter(ch, pos);
     }
 }

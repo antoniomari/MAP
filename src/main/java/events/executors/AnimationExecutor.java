@@ -18,7 +18,7 @@ public class AnimationExecutor extends Executor
     public static void executeAnimation(Animation animation)
     {
         Item itemToAnimate = animation.getItem();
-        JLabel labelToAnimate = mainFrame.getLabelAssociated(itemToAnimate);
+        JLabel labelToAnimate = gameScreenPanel.getLabelAssociated(itemToAnimate);
         animation.setLabel(labelToAnimate);
         animation.rescaleFrames(scalingFactor);
         animation.start();
