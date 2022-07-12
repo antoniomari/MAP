@@ -80,9 +80,9 @@ public class MovingAnimation
         int finalY = finalCoord.getY();
 
 
-        //double distance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
-        //delayMilliseconds = (int) Math.round(1000.0 / HZ);
-        //numFrames = HZ * (int) distance / 1000;
+        double distance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
+        delayMilliseconds = (int) Math.round(1000.0 / HZ);
+        numFrames = HZ * (int) distance / 1000;
 
         double deltaX = (double)(finalX- initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;
