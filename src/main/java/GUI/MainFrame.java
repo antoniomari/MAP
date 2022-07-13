@@ -12,9 +12,13 @@ import rooms.BlockPosition;
 import rooms.Room;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -32,7 +36,7 @@ public class MainFrame extends JFrame {
 
     private GameScreenPanel gameScreenPanel;
     private JPanel mainPanel;
-    private JPanel menuPanel;
+    private JLayeredPane menuPanel;
     private JPanel gamePanel;
     private InventoryPanel inventoryPanel;
     private TextBarPanel textBarPanel;
@@ -133,7 +137,6 @@ public class MainFrame extends JFrame {
     {
         //Creazione componenti
         mainPanel = new JPanel();
-        menuPanel = new JPanel();
         gamePanel = new JPanel();
         // dopo inventoryPanel = new InventoryPanel();
 
@@ -280,17 +283,46 @@ public class MainFrame extends JFrame {
 
     public void initMenuPanel()
     {
+        menuPanel = new JLayeredPane();
+
         // Creazione bottoni per menuPanel
         JButton okButton = new JButton("Ok");
         JButton exitButton = new JButton("Esci");
         exitButton.addActionListener((e) -> System.exit(0));
 
-        // Imposta layout
-        menuPanel.setLayout(new FlowLayout());
+        menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        menuPanel.setOpaque(true);
+        menuPanel.setBackground(Color.BLACK);
+
+
+        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet("/img/lab1 blur.png"), rescalingFactor));
+
+        int xBorder = (screenWidth - backLabel.getIcon().getIconWidth()) / 2;
+
+        backLabel.setBounds(menuPanel.getInsets().left + xBorder, menuPanel.getInsets().top, backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
+
+        okButton.setBounds(menuPanel.getInsets().left + 100, menuPanel.getInsets().top + 100, 50, 50);
+        exitButton.setBounds(menuPanel.getInsets().left + 200, menuPanel.getInsets().top + 200, 50, 50);
+
+
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        JLabel impostLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet("/img/impostazioni.png"), rescalingFactor / 3));
+
+
+        buttonPanel.add(impostLabel, BorderLayout.CENTER);
+
+        buttonPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));  // TODO : capire dimensionamenti
+        buttonPanel.setBounds(menuPanel.getInsets().left, menuPanel.getInsets().top, screenWidth / 2, screenHeight / 2);
+        buttonPanel.setOpaque(true);
+        buttonPanel.setBackground(new Color(0, 0, 0, 0));
+
+        menuPanel.add(buttonPanel, Integer.valueOf(2));
+
+        menuPanel.add(backLabel, Integer.valueOf(0));
 
         // Aggiungi bottoni al menuPanel
-        menuPanel.add(okButton);
-        menuPanel.add(exitButton);
+        menuPanel.add(okButton, Integer.valueOf(3));
+        menuPanel.add(exitButton, Integer.valueOf(3));
 
         menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
     }

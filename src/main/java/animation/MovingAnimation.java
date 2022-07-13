@@ -17,7 +17,7 @@ public class MovingAnimation
     private int numFrames;
     private List<AbsPosition> positionsList;
 
-    private static final int HZ = 144;
+    private static final int FPS = 144;
 
     private int xOffset;
     private int yOffset;
@@ -81,8 +81,8 @@ public class MovingAnimation
 
 
         double distance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
-        delayMilliseconds = (int) Math.round(1000.0 / HZ);
-        numFrames = HZ * (int) distance / 1000;
+        delayMilliseconds = (int) Math.round(1000.0 / FPS);
+        numFrames = FPS * (int) distance / 1000;
 
         double deltaX = (double)(finalX- initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;

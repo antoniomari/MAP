@@ -87,6 +87,7 @@ public class GameScreenPanel extends JLayeredPane
         updateCharacterPosition(ch, finalPos, animation);
     }
 
+    // todo: gestire opportunamente final coords
     public MovingAnimation createMoveAnimation(GameCharacter ch)
     {
         MovingAnimation moveAnimation = new MovingAnimation(characterLabelMap.get(ch),  true);

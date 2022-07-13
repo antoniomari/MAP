@@ -48,7 +48,7 @@ public class GameScreenManager
 
 
     /**
-     * Restituisce la posizione del blocco il cui angolo in basso a destra è il più vicino
+     * Restituisce la posizione del blocco il cui angolo in basso a sinistra è il più vicino
      * alla posizione assoluta passata.
      *
      * @param absPos posizione assoluta della quale calcolare il blocco più vicino
@@ -62,114 +62,18 @@ public class GameScreenManager
         int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * rescalingFactor));
         int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * rescalingFactor)) - 1;
 
-        System.out.println("CALCOLATO X : " + x);
-        System.out.println("CALCOLATO Y: " + y);
+        //System.out.println("CALCOLATO X : " + x);
+        //System.out.println("CALCOLATO Y: " + y);
 
         //check
-        System.out.println( (x % (int)(BLOCK_SIZE * rescalingFactor) == 0)
-                            + " "
-                            + (y % (int)(BLOCK_SIZE * rescalingFactor) == 0) );
+        //System.out.println( (x % (int)(BLOCK_SIZE * rescalingFactor) == 0)
+        //                    + " "
+        //                    + (y % (int)(BLOCK_SIZE * rescalingFactor) == 0) );
 
-
-
-
-
-        //int xBlocks = (int)(coord.getX() / (BLOCK_SIZE * rescalingFactor));
-        //int yBlocks = (int)(coord.getY() / (BLOCK_SIZE * rescalingFactor));
-
-        //return new BlockPosition(xBlocks, yBlocks);
-
+        // todo: controllare
         return new BlockPosition(Math.max(x, 0), y);
     }
 
-    /*
-    // todo: completare e raffinare logica
-    // xBlocks e yBlocks sono il blocco in basso a sinistra
-    public static void updateSpritePosition(GameCharacter ch, int xBlocks, int yBlocks, Room currentRoom,
-                                      Map<GameCharacter, JLabel> characterLabelMap, GameScreenPanel gameScreenPanel,
-                                      double rescalingFactor)
-    {
-        Objects.requireNonNull(ch);
-
-        // controlla che it è presente effettivamente nella stanza
-        if(!characterLabelMap.containsKey(ch))
-        {
-            // TODO: ricontrollare eccezione lanciata
-            throw new IllegalArgumentException("Personaggio non presente nella stanza");
-        }
-
-        // determinare se lo sprite entra nella stanza
-        int roomWidth = currentRoom.getBWidth();
-        int roomHeight = currentRoom.getBHeight();
-
-        int spriteWidth = ch.getSprite().getWidth() / BLOCK_SIZE;
-        int spriteHeight = ch.getSprite().getHeight() / BLOCK_SIZE;
-
-        int rightBlock = xBlocks + spriteWidth - 1;
-        int topBlock = yBlocks - spriteHeight + 1;
-
-        // controlla se lo sprite entra per intero nella schermata
-        boolean canMove = rightBlock < roomWidth && topBlock >= 0;
-
-        if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks) && canMove)
-        {
-            // System.out.println("ok");
-            // System.out.println("Moving to " + xBlocks + ", " + yBlocks);
-            // System.out.println("Top-left: " + topBlock + ", " + xBlocks);
-            // System.out.println("Top-right: " + topBlock + ", " + rightBlock);
-            // System.out.println("bottom-left: " + yBlocks + ", " + xBlocks);
-            // System.out.println("bottom-right: " + yBlocks + ", " + rightBlock);
-            // System.out.println("Sprite width: " + spriteWidth);
-            // System.out.println("Sprite height: " + spriteHeight);
-            Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
-            Insets insets = gameScreenPanel.getInsets();
-            Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks,
-                                        topBlock, rescalingFactor);
-
-            JLabel characterLabel = characterLabelMap.get(ch);
-            characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                    rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
-        }
-
-    }
-
-     */
-
-
-
-    // todo: completare e raffinare logica
-    // xBlocks e yBlocks sono il blocco in basso a sinistra
-    public static void updateSpritePosition(Item it, BlockPosition finalPos, Room currentRoom,
-                                            Map<Item, JLabel> itemLabelMap, GameScreenPanel gameScreenPanel,
-                                            double rescalingFactor)
-    {
-        Objects.requireNonNull(it);
-
-        int xBlocks = finalPos.getX();
-        int yBlocks = finalPos.getY();
-
-
-        // controlla che it è presente effettivamente nella stanza
-        if(!itemLabelMap.containsKey(it))
-        {
-            // TODO: ricontrollare eccezione lanciata
-            throw new IllegalArgumentException("Item non presente nella stanza");
-        }
-
-        // determinare se lo sprite entra nella stanza
-        int roomWidth = currentRoom.getBWidth();
-        int roomHeight = currentRoom.getBHeight();
-
-        int spriteWidth = it.getSprite().getWidth(null) / BLOCK_SIZE;
-        int spriteHeight = it.getSprite().getHeight(null) / BLOCK_SIZE;
-
-        int rightBlock = xBlocks + spriteWidth - 1;
-        int topBlock = yBlocks - spriteHeight + 1;
-
-        boolean canMove = rightBlock < roomWidth && topBlock >= 0;;
-
-
-    }
 
     public static void updateLabelPosition(JLabel label, BlockPosition pos, double scalingFactor)
     {
