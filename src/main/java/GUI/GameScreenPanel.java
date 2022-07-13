@@ -2,6 +2,7 @@ package GUI;
 
 import animation.MovingAnimation;
 import characters.GameCharacter;
+import characters.PlayingCharacter;
 import graphics.SpriteManager;
 import items.Item;
 import rooms.BlockPosition;
@@ -152,8 +153,14 @@ public class GameScreenPanel extends JLayeredPane
      */
     private void updateItemPosition(Item it, BlockPosition finalPos)
     {
-        GameScreenManager.updateSpritePosition(it, finalPos, currentRoom, itemLabelMap,
-                this, rescalingFactor);
+        Objects.requireNonNull(it);
+        Objects.requireNonNull(finalPos);
+
+        // controlla che it sia presente effettivamente nella stanza
+        if(!itemLabelMap.containsKey(it))
+            throw new IllegalArgumentException("Item non presente nella stanza");
+
+        updateSpritePosition(itemLabelMap.get(it), finalPos, null, true);
     }
 
     /**
@@ -161,29 +168,45 @@ public class GameScreenPanel extends JLayeredPane
      *
      * @param ch personaggio da riposizionare
      * @param finalPos posizione d'arrivo del personaggio
+     * @param anim animazione da eseguire, può essere null
      * @throws IllegalArgumentException se ch non è presente nella stanza
      */
     private void updateCharacterPosition(GameCharacter ch, BlockPosition finalPos, MovingAnimation anim)
     {
         Objects.requireNonNull(ch);
+        Objects.requireNonNull(finalPos);
+
+        // controlla che ch sia presente effettivamente nella stanza
+        if(!characterLabelMap.containsKey(ch))
+            throw new IllegalArgumentException("Item non presente nella stanza");
+
+        updateSpritePosition(characterLabelMap.get(ch), finalPos, anim, false);
+
+    }
+
+
+    /**
+     * Aggiorna la posizione di una label a finalPos, se possibile
+     *
+     * @param label
+     * @param finalPos
+     * @param anim
+     * @param canGoOnWall
+     */
+    private void updateSpritePosition(JLabel label, BlockPosition finalPos, MovingAnimation anim, boolean canGoOnWall)
+    {
 
         int BLOCK_SIZE = 24;
 
         int xBlocks = finalPos.getX();
         int yBlocks = finalPos.getY();
 
-        // controlla che it è presente effettivamente nella stanza
-        if(!characterLabelMap.containsKey(ch))
-        {
-            // TODO: ricontrollare eccezione lanciata
-            throw new IllegalArgumentException("Personaggio non presente nella stanza");
-        }
 
         // determinare se lo sprite entra nella stanza
         int roomWidth = currentRoom.getBWidth();
 
-        int spriteWidth = ch.getSprite().getWidth() / BLOCK_SIZE;
-        int spriteHeight = ch.getSprite().getHeight() / BLOCK_SIZE;
+        int spriteWidth = label.getIcon().getIconWidth() / (int)(BLOCK_SIZE * rescalingFactor);
+        int spriteHeight = label.getIcon().getIconHeight() / (int)(BLOCK_SIZE * rescalingFactor);
 
         int rightBlock = xBlocks + spriteWidth - 1;
         int topBlock = yBlocks - spriteHeight + 1;
@@ -191,23 +214,25 @@ public class GameScreenPanel extends JLayeredPane
         // controlla se lo sprite entra per intero nella schermata
         boolean canMove = rightBlock < roomWidth && topBlock >= 0;
 
-        if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks) && canMove)
+        if(!canGoOnWall)
+            canMove = canMove && currentRoom.getFloor().isWalkable(xBlocks, yBlocks);
+
+        if (canMove)
         {
-            BlockPosition topLeftBlock = new BlockPosition(xBlocks, topBlock);
+            // update finalPosition
+            finalPos = new BlockPosition(xBlocks, topBlock);
 
             if(anim == null)
             {
-                JLabel characterLabel = characterLabelMap.get(ch);
-                GameScreenManager.updateLabelPosition(characterLabel, topLeftBlock, rescalingFactor);
+                GameScreenManager.updateLabelPosition(label, finalPos, rescalingFactor);
             }
             else
             {
-                anim.setFinalCoord(GameScreenManager.calculateCoordinates(topLeftBlock, rescalingFactor));
+                anim.setFinalCoord(GameScreenManager.calculateCoordinates(finalPos, rescalingFactor));
                 anim.start();
                 // TODO: stoppare
             }
-
         }
-
     }
+
 }

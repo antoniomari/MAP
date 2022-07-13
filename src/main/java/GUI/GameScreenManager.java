@@ -47,12 +47,39 @@ public class GameScreenManager
     }
 
 
-    public static BlockPosition calculateBlocks(AbsPosition coord, double rescalingFactor)
+    /**
+     * Restituisce la posizione del blocco il cui angolo in basso a destra è il più vicino
+     * alla posizione assoluta passata.
+     *
+     * @param absPos posizione assoluta della quale calcolare il blocco più vicino
+     * @param rescalingFactor fattore di riscalamento
+     * @return posizione del blocco corrispondente
+     */
+    public static BlockPosition calculateBlocks(AbsPosition absPos, double rescalingFactor)
     {
-        int xBlocks = (int)(coord.getX() / (BLOCK_SIZE * rescalingFactor));
-        int yBlocks = (int)(coord.getY() / (BLOCK_SIZE * rescalingFactor));
 
-        return new BlockPosition(xBlocks, yBlocks);
+        // scegli il blocco più vicino
+        int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * rescalingFactor));
+        int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * rescalingFactor)) - 1;
+
+        System.out.println("CALCOLATO X : " + x);
+        System.out.println("CALCOLATO Y: " + y);
+
+        //check
+        System.out.println( (x % (int)(BLOCK_SIZE * rescalingFactor) == 0)
+                            + " "
+                            + (y % (int)(BLOCK_SIZE * rescalingFactor) == 0) );
+
+
+
+
+
+        //int xBlocks = (int)(coord.getX() / (BLOCK_SIZE * rescalingFactor));
+        //int yBlocks = (int)(coord.getY() / (BLOCK_SIZE * rescalingFactor));
+
+        //return new BlockPosition(xBlocks, yBlocks);
+
+        return new BlockPosition(Math.max(x, 0), y);
     }
 
     /*
@@ -141,24 +168,6 @@ public class GameScreenManager
 
         boolean canMove = rightBlock < roomWidth && topBlock >= 0;;
 
-        if (canMove)
-        {
-            // System.out.println("ok");
-            // System.out.println("Moving to " + xBlocks + ", " + yBlocks);
-            // System.out.println("Top-left: " + topBlock + ", " + xBlocks);
-            // System.out.println("Top-right: " + topBlock + ", " + rightBlock);
-            // System.out.println("bottom-left: " + yBlocks + ", " + xBlocks);
-            // System.out.println("bottom-right: " + yBlocks + ", " + rightBlock);
-            // System.out.println("Sprite width: " + spriteWidth);
-            // System.out.println("Sprite height: " + spriteHeight);
-            Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
-            Insets insets = gameScreenPanel.getInsets();
-            //Abs coord = GameScreenManager.calculateCoordinates(xBlocks,
-            //        topBlock, rescalingFactor);
-
-            JLabel itemLabel = itemLabelMap.get(it);
-            updateLabelPosition(itemLabel, new BlockPosition(xBlocks, topBlock), rescalingFactor);
-        }
 
     }
 

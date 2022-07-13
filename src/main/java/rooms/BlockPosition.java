@@ -11,6 +11,11 @@ public class BlockPosition
         this.y = y;
     }
 
+    public BlockPosition relativePosition(int offsetX, int offsetY)
+    {
+        return new BlockPosition(this.getX() + offsetX, this.getY() + offsetY);
+    }
+
     @Override
     public String toString()
     {

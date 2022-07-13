@@ -240,11 +240,14 @@ public class MainFrame extends JFrame {
                 {
                     if (inventoryPanel.getSelectedItem() != null)
                     {
-                        inventoryPanel.getSelectedItem().drop(currentRoom, GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y ), rescalingFactor));
+                        BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor);
+                                inventoryPanel.getSelectedItem().drop(currentRoom, bp.relativePosition(-1, 1));
                     }
                     else
                     {
-                        PlayingCharacter.getPlayer().setPosition(GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y ), rescalingFactor));
+                        BlockPosition bp = GameScreenManager.calculateBlocks(
+                                new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor).relativePosition(-2, 0);
+                        PlayingCharacter.getPlayer().setPosition(bp);
                     }
                 }
 
