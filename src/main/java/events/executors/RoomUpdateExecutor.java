@@ -1,7 +1,7 @@
 package events.executors;
 
 import items.Item;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 
 public class RoomUpdateExecutor extends Executor
 {
@@ -11,9 +11,9 @@ public class RoomUpdateExecutor extends Executor
         gameScreenPanel.removeItemCurrentRoom(it);
     }
 
-    public static void executeAddItem(Item it, Coordinates coord)
+    public static void executeAddItem(Item it, BlockPosition pos)
     {
-        gameScreenPanel.addItemCurrentRoom(it, coord);
+        gameScreenPanel.addItemCurrentRoom(it, pos);
     }
 
 }

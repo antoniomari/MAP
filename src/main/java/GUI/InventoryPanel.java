@@ -4,7 +4,6 @@ import animation.Animation;
 import characters.PlayingCharacter;
 import graphics.SpriteManager;
 import items.PickupableItem;
-import rooms.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
@@ -245,7 +244,7 @@ public class InventoryPanel extends JLayeredPane
             JLabel tempLabel = new JLabel();
 
             // posiziona label
-            Coordinates coord = calculateOffset(i);
+            AbsPosition coord = calculateOffset(i);
             tempLabel.setBounds(inventoryInsets.left + coord.getX(),
                                 inventoryInsets.top +  coord.getY(),
                                     scaledItemSize, scaledItemSize);
@@ -298,7 +297,7 @@ public class InventoryPanel extends JLayeredPane
             selectedItem = inventoryItemIconList.get(itemIndex).getObject1();
 
             // aggiorna posizione selection label
-            Coordinates coord = calculateOffset(i);
+            AbsPosition coord = calculateOffset(i);
             selectionLabel.setBounds(getInsets().left + coord.getX(), getInsets().top + coord.getY(),
                     selectionIcon.getIconWidth(), selectionIcon.getIconHeight());
 
@@ -319,9 +318,9 @@ public class InventoryPanel extends JLayeredPane
      * @param i indice della label
      * @return coordinate di posizionamento della i-esima label
      */
-    private Coordinates calculateOffset(int i)
+    private AbsPosition calculateOffset(int i)
     {
-        return new Coordinates((i + 2) * scaledItemSize + 1, 1);
+        return new AbsPosition((i + 2) * scaledItemSize + 1, 1);
     }
 
     /**

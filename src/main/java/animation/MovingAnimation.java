@@ -1,6 +1,6 @@
 package animation;
 
-import rooms.Coordinates;
+import GUI.AbsPosition;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +12,10 @@ public class MovingAnimation
     private JLabel label;
     private int delayMilliseconds;
     private final boolean initialDelay;
-    private Coordinates initialCoord;
-    private Coordinates finalCoord;
+    private AbsPosition initialCoord;
+    private AbsPosition finalCoord;
     private int numFrames;
-    private List<Coordinates> positionsList;
+    private List<AbsPosition> positionsList;
 
     private static final int HZ = 144;
 
@@ -29,7 +29,7 @@ public class MovingAnimation
         {
             boolean delay = initialDelay;
 
-            for(Coordinates c : positionsList)
+            for(AbsPosition c : positionsList)
             {
                 try
                 {
@@ -56,11 +56,11 @@ public class MovingAnimation
         this.label = label;
         this.initialDelay = initialDelay;
 
-        this.initialCoord = new Coordinates(label.getX(), label.getY());
+        this.initialCoord = new AbsPosition(label.getX(), label.getY());
     }
 
 
-    public void setFinalCoord(Coordinates finalC)
+    public void setFinalCoord(AbsPosition finalC)
     {
         finalCoord = finalC;
         initCoordList();
@@ -106,7 +106,7 @@ public class MovingAnimation
             xIncrement = initialX + (int) Math.round(i * deltaX);
             yIncrement = initialY + (int) Math.round(i * deltaY);
 
-            positionsList.add(new Coordinates(xIncrement, yIncrement));
+            positionsList.add(new AbsPosition(xIncrement, yIncrement));
         }
         positionsList.add(finalCoord);
 

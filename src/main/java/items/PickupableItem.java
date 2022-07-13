@@ -5,7 +5,7 @@ import characters.PlayingCharacter;
 import events.EventHandler;
 import events.InventoryEvent;
 import events.RoomEvent;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 import rooms.Room;
 
 public class PickupableItem extends Item
@@ -35,7 +35,7 @@ public class PickupableItem extends Item
         EventHandler.sendEvent(new InventoryEvent(this, InventoryEvent.Type.ADD_ITEM));
     }
 
-    public void drop(Room room, Coordinates coord)
+    public void drop(Room room, BlockPosition coord)
     {
         //aggiungi alla stanza
         room.addItem(this, coord);

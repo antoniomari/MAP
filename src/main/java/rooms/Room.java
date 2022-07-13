@@ -22,7 +22,7 @@ public class Room
     private String backgroundPath;
     private BufferedImage backgroundImage;
 
-    private Map<Item, Coordinates> itemMap;
+    private Map<Item, BlockPosition> itemMap;
     private final RoomFloor floor;
 
     private final int width;  // larghezza in blocchi
@@ -45,11 +45,13 @@ public class Room
 
     }
 
+    // restituisce la larghezza misurata in numero di blocchi
     public int getBWidth()
     {
         return width;
     }
 
+    // restituisce l'altezza misurata in numero di blocchi
     public int getBHeight()
     {
         return height;
@@ -60,7 +62,7 @@ public class Room
         return floor;
     }
 
-    public void addItem(Item item, Coordinates c)
+    public void addItem(Item item, BlockPosition c)
     {
         itemMap.put(item, c);
         itemList.add(item);

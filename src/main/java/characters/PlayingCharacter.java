@@ -3,7 +3,6 @@ package characters;
 import events.CharacterEvent;
 import events.EventHandler;
 import items.PickupableItem;
-import rooms.Coordinates;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package rooms;
+package GUI;
 
-public class Coordinates
+public class AbsPosition
 {
     private int x;
     private int y;
 
-    public Coordinates(int x, int y)
+    public AbsPosition(int x, int y)
     {
         this.x = x;
         this.y = y;
@@ -14,7 +14,7 @@ public class Coordinates
     @Override
     public String toString()
     {
-        return "[" + "x=" + x + ", y=" + y + "]";
+        return "[" + "(Absolute Position) x=" + x + ", y=" + y + "]";
     }
 
     public int getX()

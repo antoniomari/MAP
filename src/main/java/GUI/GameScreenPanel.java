@@ -4,7 +4,7 @@ import animation.MovingAnimation;
 import characters.GameCharacter;
 import graphics.SpriteManager;
 import items.Item;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 import rooms.Room;
 
 import javax.swing.*;
@@ -63,22 +63,18 @@ public class GameScreenPanel extends JLayeredPane
         itemLabelMap.remove(item);
     }
 
-    public void addItemCurrentRoom(Item item , Coordinates coord)
+    public void addItemCurrentRoom(Item item , BlockPosition pos)
     {
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
-        addGameItem(item, blockCoord.getX(), blockCoord.getY());
+        addGameItem(item,pos);
     }
 
-    public void addCharacterCurrentRoom(GameCharacter ch, Coordinates coord)
+    public void addCharacterCurrentRoom(GameCharacter ch, BlockPosition pos)
     {
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(coord, rescalingFactor);
-        addGameCharacter(ch, blockCoord.getX(), blockCoord.getY());
+        addGameCharacter(ch, pos);
     }
 
-    public void moveCharacter(GameCharacter ch, Coordinates finalCoord, boolean withAnimation)
+    public void moveCharacter(GameCharacter ch, BlockPosition finalPos, boolean withAnimation)
     {
-        // calcola coordinate di blocco
-        Coordinates blockCoord = GameScreenManager.calculateBlocks(finalCoord, rescalingFactor);
 
         MovingAnimation animation;
         // crea animazione
@@ -87,7 +83,7 @@ public class GameScreenPanel extends JLayeredPane
         else
             animation = null;
 
-        updateCharacterPosition(ch, blockCoord.getX(), blockCoord.getY(), animation);
+        updateCharacterPosition(ch, finalPos, animation);
     }
 
     public MovingAnimation createMoveAnimation(GameCharacter ch)
@@ -106,10 +102,9 @@ public class GameScreenPanel extends JLayeredPane
      * per poter stampare lo sprite dell'oggetto sullo schermo.
      *
      * @param it oggetto da aggiungere
-     * @param xBlocks numero di blocchi a sinsitra di quello desiderato
-     * @param yBlocks numero di blocchi sopra rispetto a quello desiderato
+     * @param pos blocco in cui piazzare l'oggetto
      */
-    public void addGameItem(Item it, final int xBlocks, final int yBlocks)
+    public void addGameItem(Item it, BlockPosition pos)
     {
         // recupera lo sprite della giusta dimensione
         Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
@@ -128,10 +123,10 @@ public class GameScreenPanel extends JLayeredPane
         // aggiungi la label nell'ITEM_LAYER
         add(itemLabel, ITEM_LAYER);
 
-        updateItemPosition(it, xBlocks, yBlocks);
+        updateItemPosition(it, pos);
     }
 
-    public void addGameCharacter(GameCharacter ch, final int xBlocks, final int yBlocks)
+    public void addGameCharacter(GameCharacter ch, BlockPosition pos)
     {
         // recupera lo sprite della giusta dimensione
         Icon rescaledSprite = SpriteManager.rescaledImageIcon(ch.getSprite(), rescalingFactor);
@@ -145,20 +140,19 @@ public class GameScreenPanel extends JLayeredPane
         // aggiungi la label nell'ITEM_LAYER  TODO pensare al layer
         add(characterLabel, ITEM_LAYER);
 
-        updateCharacterPosition(ch, xBlocks, yBlocks, null);
+        updateCharacterPosition(ch, pos, null);
     }
 
     /**
      * Aggiorna la posizione di un oggetto nella stanza.
      *
      * @param it oggetto da riposizionare
-     * @param xBlocks blocco x
-     * @param yBlocks blocco y
+     * @param finalPos posizione d'arrivo dell'oggetto
      * @throws IllegalArgumentException se it non è presente nella stanza
      */
-    private void updateItemPosition(Item it, int xBlocks, int yBlocks)
+    private void updateItemPosition(Item it, BlockPosition finalPos)
     {
-        GameScreenManager.updateSpritePosition(it, xBlocks, yBlocks, currentRoom, itemLabelMap,
+        GameScreenManager.updateSpritePosition(it, finalPos, currentRoom, itemLabelMap,
                 this, rescalingFactor);
     }
 
@@ -166,15 +160,17 @@ public class GameScreenPanel extends JLayeredPane
      * Aggiorna la posizione di un personaggio nella stanza.
      *
      * @param ch personaggio da riposizionare
-     * @param xBlocks blocco x
-     * @param yBlocks blocco y
+     * @param finalPos posizione d'arrivo del personaggio
      * @throws IllegalArgumentException se ch non è presente nella stanza
      */
-    private void updateCharacterPosition(GameCharacter ch, int xBlocks, int yBlocks, MovingAnimation anim)
+    private void updateCharacterPosition(GameCharacter ch, BlockPosition finalPos, MovingAnimation anim)
     {
         Objects.requireNonNull(ch);
 
         int BLOCK_SIZE = 24;
+
+        int xBlocks = finalPos.getX();
+        int yBlocks = finalPos.getY();
 
         // controlla che it è presente effettivamente nella stanza
         if(!characterLabelMap.containsKey(ch))
@@ -185,7 +181,6 @@ public class GameScreenPanel extends JLayeredPane
 
         // determinare se lo sprite entra nella stanza
         int roomWidth = currentRoom.getBWidth();
-        int roomHeight = currentRoom.getBHeight();
 
         int spriteWidth = ch.getSprite().getWidth() / BLOCK_SIZE;
         int spriteHeight = ch.getSprite().getHeight() / BLOCK_SIZE;
@@ -198,20 +193,16 @@ public class GameScreenPanel extends JLayeredPane
 
         if (currentRoom.getFloor().isWalkable(xBlocks, yBlocks) && canMove)
         {
-            Icon rescaledSprite = characterLabelMap.get(ch).getIcon();
-            Insets insets = getInsets();
-            Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks,
-                    topBlock, rescalingFactor);
+            BlockPosition topLeftBlock = new BlockPosition(xBlocks, topBlock);
 
             if(anim == null)
             {
                 JLabel characterLabel = characterLabelMap.get(ch);
-                characterLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                        rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+                GameScreenManager.updateLabelPosition(characterLabel, topLeftBlock, rescalingFactor);
             }
             else
             {
-                anim.setFinalCoord(coord);
+                anim.setFinalCoord(GameScreenManager.calculateCoordinates(topLeftBlock, rescalingFactor));
                 anim.start();
                 // TODO: stoppare
             }

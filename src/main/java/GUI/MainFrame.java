@@ -8,7 +8,7 @@ import events.executors.RoomUpdateExecutor;
 import graphics.SpriteManager;
 import items.Door;
 import items.PickupableItem;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 import rooms.Room;
 
 import javax.swing.*;
@@ -150,47 +150,10 @@ public class MainFrame extends JFrame {
         initGameScreenPanel();
         initTextBarPanel();
         initInventoryPanel();
-
-        // -----------------------------------------------------
-        //                  SETUP gamePanel
-        // -----------------------------------------------------
-        gamePanel.setLayout(null);
-        gamePanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        gamePanel.setBackground(Color.BLACK);
-
-        Insets insets = gamePanel.getInsets();
-        int xBorder = (screenWidth - gameWidth) / 2;
+        initGamePanel();
+        initMenuPanel();
 
 
-        // imposta posizione dello schermo di gioco
-        gameScreenPanel.setBounds(insets.left + xBorder, insets.top, gameWidth, gameHeight);
-
-        gamePanel.add(gameScreenPanel);
-
-        xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
-
-        inventoryPanel.setBounds(insets.left + xBorder, insets.top + gameHeight,
-                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
-
-        gamePanel.add(inventoryPanel, BorderLayout.NORTH);
-
-        // -----------------------------------------------------
-        //                  SETUP menuPanel
-        // -----------------------------------------------------
-
-        // Creazione bottoni per menuPanel
-        JButton okButton = new JButton("Ok");
-        JButton exitButton = new JButton("Esci");
-        exitButton.addActionListener((e) -> System.exit(0));
-
-        // Imposta layout
-        menuPanel.setLayout(new FlowLayout());
-
-        // Aggiungi bottoni al menuPanel
-        menuPanel.add(okButton);
-        menuPanel.add(exitButton);
-
-        menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -224,16 +187,16 @@ public class MainFrame extends JFrame {
     {
         PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
         barile1.setLocationRoom(currentRoom);
-        currentRoom.addItem(barile1, GameScreenManager.calculateCoordinates(9, 5, rescalingFactor));
+        currentRoom.addItem(barile1,new BlockPosition(9, 5));
         Door door = new Door("Porta", "Una porta spicolosa.");
-        gameScreenPanel.addGameCharacter(PlayingCharacter.getPlayer(), 12, 10);
+        gameScreenPanel.addGameCharacter(PlayingCharacter.getPlayer(), new BlockPosition(12, 10));
 
-        gameScreenPanel.addGameItem(barile1, 18, 12);
-        gameScreenPanel.addGameItem(door, 14, 7);
+        gameScreenPanel.addGameItem(barile1, new BlockPosition(18, 12));
+        gameScreenPanel.addGameItem(door, new BlockPosition(14, 7));
 
     }
 
-    public void initGameScreenPanel()
+    private void initGameScreenPanel()
     {
         gameScreenPanel = new GameScreenPanel(currentRoom);
         gameScreenPanel.setScalingFactor(rescalingFactor);
@@ -255,7 +218,7 @@ public class MainFrame extends JFrame {
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
     }
 
-    public void initTextBarPanel()
+    private void initTextBarPanel()
     {
         textBarPanel = new TextBarPanel(rescalingFactor);
         int x_offset = (int)(3 * 48 * rescalingFactor); // TODO : aggiustare questi
@@ -268,7 +231,7 @@ public class MainFrame extends JFrame {
         addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
-    public void initInventoryPanel()
+    private void initInventoryPanel()
     {
         inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
 
@@ -277,16 +240,56 @@ public class MainFrame extends JFrame {
                 {
                     if (inventoryPanel.getSelectedItem() != null)
                     {
-                        inventoryPanel.getSelectedItem().drop(currentRoom, new Coordinates(getMousePosition().x, getMousePosition().y));
+                        inventoryPanel.getSelectedItem().drop(currentRoom, GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y ), rescalingFactor));
                     }
                     else
                     {
-                        PlayingCharacter.getPlayer().setPosition(new Coordinates(getMousePosition().x, getMousePosition().y));
+                        PlayingCharacter.getPlayer().setPosition(GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y ), rescalingFactor));
                     }
                 }
 
                 , null);
         gameScreenPanel.addMouseListener(dropItemListener);
+    }
+
+    private void initGamePanel()
+    {
+        gamePanel.setLayout(null);
+        gamePanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        gamePanel.setBackground(Color.BLACK);
+
+        Insets insets = gamePanel.getInsets();
+        int xBorder = (screenWidth - gameWidth) / 2;
+
+
+        // imposta posizione dello schermo di gioco
+        gameScreenPanel.setBounds(insets.left + xBorder, insets.top, gameWidth, gameHeight);
+
+        gamePanel.add(gameScreenPanel);
+
+        xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
+
+        inventoryPanel.setBounds(insets.left + xBorder, insets.top + gameHeight,
+                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
+
+        gamePanel.add(inventoryPanel, BorderLayout.NORTH);
+    }
+
+    public void initMenuPanel()
+    {
+        // Creazione bottoni per menuPanel
+        JButton okButton = new JButton("Ok");
+        JButton exitButton = new JButton("Esci");
+        exitButton.addActionListener((e) -> System.exit(0));
+
+        // Imposta layout
+        menuPanel.setLayout(new FlowLayout());
+
+        // Aggiungi bottoni al menuPanel
+        menuPanel.add(okButton);
+        menuPanel.add(exitButton);
+
+        menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
     }
 
 

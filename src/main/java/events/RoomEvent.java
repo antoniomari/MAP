@@ -1,14 +1,16 @@
 package events;
 
 import items.PickupableItem;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 import rooms.Room;
+
+import java.awt.*;
 
 public class RoomEvent extends GameEvent
 {
     Type type;
     Room roomInvolved;
-    Coordinates coord;
+    BlockPosition coord;
     public enum Type
     {
         ADD_ITEM_IN_ROOM
@@ -34,7 +36,7 @@ public class RoomEvent extends GameEvent
         this(room, item, null, type);
     }
 
-    public RoomEvent(Room room, PickupableItem item, Coordinates coord, Type type)
+    public RoomEvent(Room room, PickupableItem item, BlockPosition coord, Type type)
     {
         super(item, type.toString());
         this.roomInvolved = room;
@@ -52,7 +54,7 @@ public class RoomEvent extends GameEvent
         return type;
     }
 
-    public Coordinates getCoordinates()
+    public BlockPosition getCoordinates()
     {
         return coord;
     }

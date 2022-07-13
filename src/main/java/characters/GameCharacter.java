@@ -3,7 +3,7 @@ package characters;
 import events.CharacterEvent;
 import events.EventHandler;
 import graphics.SpriteManager;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 
 import java.awt.image.BufferedImage;
 
@@ -12,7 +12,7 @@ public class GameCharacter
     private String name;
     protected String spritePath;
     protected BufferedImage sprite;
-    protected Coordinates position;
+    protected BlockPosition position;
 
     public GameCharacter(String name, String spritePath)
     {
@@ -32,13 +32,13 @@ public class GameCharacter
     }
 
 
-    public void setPosition(Coordinates newPosition)
+    public void setPosition(BlockPosition newPosition)
     {
         this.position = newPosition;
         EventHandler.sendEvent(new CharacterEvent(this, newPosition, CharacterEvent.Type.MOVE));
     }
 
-    public Coordinates getPosition()
+    public BlockPosition getPosition()
     {
         return position;
     }

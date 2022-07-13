@@ -3,7 +3,6 @@ package database;
 import characters.PlayingCharacter;
 import items.Item;
 import items.PickupableItem;
-import rooms.Coordinates;
 import rooms.Room;
 
 import java.lang.reflect.Constructor;

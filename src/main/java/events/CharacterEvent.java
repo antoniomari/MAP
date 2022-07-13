@@ -2,12 +2,12 @@ package events;
 
 import characters.GameCharacter;
 import items.PickupableItem;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 
 public class CharacterEvent extends GameEvent
 {
     private Type type;
-    private Coordinates position;
+    private BlockPosition position;
 
     public enum Type
     {
@@ -19,7 +19,7 @@ public class CharacterEvent extends GameEvent
         },
     }
 
-    public CharacterEvent(GameCharacter ch, Coordinates pos, Type type)
+    public CharacterEvent(GameCharacter ch, BlockPosition pos, Type type)
     {
         super(ch, type.toString());
         this.type = type;
@@ -31,7 +31,7 @@ public class CharacterEvent extends GameEvent
         return this.type;
     }
 
-    public Coordinates getPosition()
+    public BlockPosition getPosition()
     {
         return this.position;
     }

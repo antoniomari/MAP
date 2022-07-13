@@ -2,7 +2,7 @@ package GUI;
 
 import characters.GameCharacter;
 import items.Item;
-import rooms.Coordinates;
+import rooms.BlockPosition;
 import rooms.Room;
 
 import javax.swing.*;
@@ -30,8 +30,11 @@ public class GameScreenManager
     }
 
     // TODO: calcolare massimi xBlock e yBlock per la stanza
-    public static Coordinates calculateCoordinates(int xBlocks, int yBlocks, double rescalingFactor)
+    public static AbsPosition calculateCoordinates(BlockPosition pos, double rescalingFactor)
     {
+        int xBlocks = pos.getX();
+        int yBlocks = pos.getY();
+
         if(xBlocks < 0 || yBlocks < 0)
             throw new IllegalArgumentException();
 
@@ -40,18 +43,19 @@ public class GameScreenManager
         int xOffset = (int) Math.round(insets.left + xBlocks * BLOCK_SIZE * rescalingFactor);
         int yOffset = (int) Math.round(insets.top + yBlocks * BLOCK_SIZE * rescalingFactor);
 
-        return new Coordinates(xOffset, yOffset);
+        return new AbsPosition(xOffset, yOffset);
     }
 
 
-    public static Coordinates calculateBlocks(Coordinates coord, double rescalingFactor)
+    public static BlockPosition calculateBlocks(AbsPosition coord, double rescalingFactor)
     {
         int xBlocks = (int)(coord.getX() / (BLOCK_SIZE * rescalingFactor));
         int yBlocks = (int)(coord.getY() / (BLOCK_SIZE * rescalingFactor));
 
-        return new Coordinates(xBlocks, yBlocks);
+        return new BlockPosition(xBlocks, yBlocks);
     }
 
+    /*
     // todo: completare e raffinare logica
     // xBlocks e yBlocks sono il blocco in basso a sinistra
     public static void updateSpritePosition(GameCharacter ch, int xBlocks, int yBlocks, Room currentRoom,
@@ -102,15 +106,20 @@ public class GameScreenManager
 
     }
 
+     */
+
 
 
     // todo: completare e raffinare logica
     // xBlocks e yBlocks sono il blocco in basso a sinistra
-    public static void updateSpritePosition(Item it, int xBlocks, int yBlocks, Room currentRoom,
+    public static void updateSpritePosition(Item it, BlockPosition finalPos, Room currentRoom,
                                             Map<Item, JLabel> itemLabelMap, GameScreenPanel gameScreenPanel,
                                             double rescalingFactor)
     {
         Objects.requireNonNull(it);
+
+        int xBlocks = finalPos.getX();
+        int yBlocks = finalPos.getY();
 
 
         // controlla che it è presente effettivamente nella stanza
@@ -144,13 +153,22 @@ public class GameScreenManager
             // System.out.println("Sprite height: " + spriteHeight);
             Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
             Insets insets = gameScreenPanel.getInsets();
-            Coordinates coord = GameScreenManager.calculateCoordinates(xBlocks,
-                    topBlock, rescalingFactor);
+            //Abs coord = GameScreenManager.calculateCoordinates(xBlocks,
+            //        topBlock, rescalingFactor);
 
             JLabel itemLabel = itemLabelMap.get(it);
-            itemLabel.setBounds(insets.left + coord.getX(), insets.top + coord.getY(),
-                    rescaledSprite.getIconWidth(), rescaledSprite.getIconHeight());
+            updateLabelPosition(itemLabel, new BlockPosition(xBlocks, topBlock), rescalingFactor);
         }
 
+    }
+
+    public static void updateLabelPosition(JLabel label, BlockPosition pos, double scalingFactor)
+    {
+        Insets insets = active_panel.getInsets();
+
+        AbsPosition c = calculateCoordinates(pos, scalingFactor);
+
+        label.setBounds(insets.left + c.getX(), insets.top + c.getY(),
+                label.getIcon().getIconWidth(), label.getIcon().getIconHeight());
     }
 }
