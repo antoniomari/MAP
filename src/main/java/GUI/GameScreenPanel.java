@@ -5,8 +5,10 @@ import characters.GameCharacter;
 import characters.PlayingCharacter;
 import graphics.SpriteManager;
 import items.Item;
+import items.PickupableItem;
 import rooms.BlockPosition;
 import rooms.Room;
+import rooms.RoomFloor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -168,7 +170,7 @@ public class GameScreenPanel extends JLayeredPane
      * Aggiorna la posizione di un personaggio nella stanza.
      *
      * @param ch personaggio da riposizionare
-     * @param finalPos posizione d'arrivo del personaggio
+     * @param finalPos blocco in basso a sinistra della posizione di arrivo del personaggio
      * @param anim animazione da eseguire, può essere null
      * @throws IllegalArgumentException se ch non è presente nella stanza
      */
@@ -176,6 +178,7 @@ public class GameScreenPanel extends JLayeredPane
     {
         Objects.requireNonNull(ch);
         Objects.requireNonNull(finalPos);
+
 
         // controlla che ch sia presente effettivamente nella stanza
         if(!characterLabelMap.containsKey(ch))
@@ -211,6 +214,10 @@ public class GameScreenPanel extends JLayeredPane
 
         int rightBlock = xBlocks + spriteWidth - 1;
         int topBlock = yBlocks - spriteHeight + 1;
+
+        //TODO: bordo superiore, può salire di 1 il cursore
+        //TODO: bordi laterali, si controlla la posizione e si dà quella più vicina disponibile
+
 
         // controlla se lo sprite entra per intero nella schermata
         boolean canMove = rightBlock < roomWidth && topBlock >= 0;

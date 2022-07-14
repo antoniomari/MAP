@@ -27,6 +27,8 @@ public class MovingAnimation
         @Override
         public void run()
         {
+            // imposta a moving gamestate
+
             boolean delay = initialDelay;
 
             for(AbsPosition c : positionsList)
@@ -38,7 +40,7 @@ public class MovingAnimation
                     else
                         delay = true;
 
-                    //System.out.println("X e Y: " + c);
+                    // System.out.println("X e Y: " + c);
 
                     label.setBounds(xOffset + c.getX(), yOffset + c.getY(), label.getIcon().getIconWidth(),
                             label.getIcon().getIconHeight());
@@ -48,6 +50,8 @@ public class MovingAnimation
                     e.printStackTrace();
                 }
             }
+
+            // infine reimposta a playing state
         }
     }
 

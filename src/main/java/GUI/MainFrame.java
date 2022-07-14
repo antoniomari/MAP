@@ -10,6 +10,7 @@ import items.Door;
 import items.PickupableItem;
 import rooms.BlockPosition;
 import rooms.Room;
+import rooms.RoomFloor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -243,13 +244,16 @@ public class MainFrame extends JFrame {
                 {
                     if (inventoryPanel.getSelectedItem() != null)
                     {
-                        BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor);
-                                inventoryPanel.getSelectedItem().drop(currentRoom, bp.relativePosition(-1, 1));
+                        BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor).relativePosition(-1, 1);
+                        bp = currentRoom.getFloor().getNearestPlacement(bp, inventoryPanel.getSelectedItem().getBWidth(), inventoryPanel.getSelectedItem().getBHeight());
+                        inventoryPanel.getSelectedItem().drop(currentRoom, bp);
                     }
                     else
                     {
                         BlockPosition bp = GameScreenManager.calculateBlocks(
                                 new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor).relativePosition(-2, 0);
+
+                        bp = currentRoom.getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
                         PlayingCharacter.getPlayer().setPosition(bp);
                     }
                 }

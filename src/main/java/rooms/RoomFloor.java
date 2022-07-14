@@ -1,5 +1,7 @@
 package rooms;
 
+import GUI.debug.MotionDebugger;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,4 +34,58 @@ public class RoomFloor
 
         return false;
     }
+
+    public boolean isWalkable(BlockPosition pos)
+    {
+        return isWalkable(pos.getX(), pos.getY());
+    }
+
+
+    // TODO: aggiustare codice metodo
+    public BlockPosition getNearestPlacement(BlockPosition tryPos, int spriteWidth, int spriteHeight)
+    {
+        MotionDebugger.print("Vuoi spostarti in " + tryPos);
+
+        if(isWalkable(tryPos) && isWalkable(tryPos.relativePosition(spriteWidth - 1, - spriteHeight + 1)))
+        {
+            return tryPos;
+        }
+
+        else
+        {
+            int heightDistance;
+            int widthDistance;
+
+            for(Rectangle walkableArea : walkableRectangles)
+            {
+                int leftBorder = (int) walkableArea.getX();
+                int rightBorder = leftBorder + (int) walkableArea.getWidth() - 1;
+                int topBorder = (int) walkableArea.getY();
+
+                int finalX = tryPos.getX();
+                int finalY = tryPos.getY();
+
+
+                // controllo bordo sopra
+                if(tryPos.getY() == topBorder - 1 && tryPos.getY() - spriteHeight >= 0)
+                    finalY = tryPos.getY() + 1;
+
+                // controllo bordo laterale
+                 if(tryPos.getX() < leftBorder)
+                     finalX = leftBorder;
+                 else if (tryPos.getX() + spriteWidth - 1 > rightBorder)
+                     finalX = rightBorder - spriteWidth + 1;
+
+                 // TODO: aggiustare
+                 MotionDebugger.print("La posizione più vicina è " + new BlockPosition(finalX, finalY));
+
+                 return new BlockPosition(finalX, finalY);
+
+
+            }
+
+            return tryPos;
+        }
+    }
+
 }

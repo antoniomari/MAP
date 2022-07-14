@@ -27,6 +27,10 @@ public class Item implements Observable
 
     // SPRITE OGGETTO
     protected BufferedImage sprite;
+
+    protected int bWidth;
+    protected int bHeight;
+
     // Per bufferizzazione sprite riscalamento
     private double scalingFactor;
     private Icon scaledSpriteIcon;
@@ -42,16 +46,19 @@ public class Item implements Observable
 
     public Item(String name, String description)
     {
-        this.name = name;
-        this.description = description;
-        extractSprite(SPRITESHEET, JSON_PATH);
+        this(name, description, SPRITESHEET, JSON_PATH);
     }
 
     protected Item(String name, String description, BufferedImage spriteSheet, String jsonPath)
     {
+        int BLOCK_SIZE = 24;
+
         this.name = name;
         this.description = description;
         extractSprite(spriteSheet, jsonPath);
+        bWidth = sprite.getWidth() / BLOCK_SIZE;
+        bHeight = sprite.getHeight() / BLOCK_SIZE;
+
     }
 
     public void setLocationRoom(Room room)
@@ -150,5 +157,15 @@ public class Item implements Observable
         }
 
         return scaledSpriteIcon;
+    }
+
+    public int getBWidth()
+    {
+        return bWidth;
+    }
+
+    public int getBHeight()
+    {
+        return bHeight;
     }
 }

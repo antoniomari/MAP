@@ -14,11 +14,18 @@ public class GameCharacter
     protected BufferedImage sprite;
     protected BlockPosition position;
 
+    protected int bWidth;
+    protected int bHeight;
+
     public GameCharacter(String name, String spritePath)
     {
+        int BLOCK_SIZE = 24;
+
         this.name = name;
         this.spritePath = spritePath;
         this.sprite = SpriteManager.loadSpriteSheet(spritePath);
+        this.bWidth = sprite.getWidth() / BLOCK_SIZE;
+        this.bHeight = sprite.getHeight() / BLOCK_SIZE;
     }
 
     public String getName()
@@ -42,4 +49,15 @@ public class GameCharacter
     {
         return position;
     }
+
+    public int getBWidth()
+    {
+        return bWidth;
+    }
+
+    public int getBHeight()
+    {
+        return bHeight;
+    }
+
 }
