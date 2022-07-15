@@ -27,7 +27,7 @@ public class PickupableItem extends Item
     {
         // generato evento togliStanza
         Room oldRoom = getLocationRoom();
-        oldRoom.removeItem(this); // rimuovi this dalla stanza in cui è contenuto
+        oldRoom.removePiece(this); // rimuovi this dalla stanza in cui è contenuto
         setLocationRoom(null); // setta a null la stanza
         EventHandler.sendEvent(new RoomEvent(oldRoom, this, RoomEvent.Type.REMOVE_ITEM_FROM_ROOM));
 
@@ -39,7 +39,7 @@ public class PickupableItem extends Item
     public void drop(Room room, BlockPosition coord)
     {
         //aggiungi alla stanza
-        room.addItem(this, coord);
+        room.addPiece(this, coord);
         setLocationRoom(room);
         EventHandler.sendEvent(new RoomEvent(room, this, coord, RoomEvent.Type.ADD_ITEM_IN_ROOM));
 

@@ -1,34 +1,35 @@
 package characters;
 
-import events.CharacterEvent;
-import events.EventHandler;
 import graphics.SpriteManager;
 import items.Item;
 import rooms.BlockPosition;
 import rooms.Room;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.Icon;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
+/**
+ * Classe che rappresenta un qualsiasi elemento fisico del gioco, ossia che ha uno sprite
+ * e può occupare una posizione (e ha un'estensione) in una stanza.
+ *
+ * Viene utilizzata come classe base sia per i personaggi {@link GameCharacter} che per gli
+ * oggetti {@link Item}
+ */
 public class GamePiece
 {
     public static final int BLOCK_SIZE = 24;
 
-    protected Image sprite;
     private final String name;
+    protected Image sprite;
 
-    // larghezza in blocchi dell'elemento
-    protected int bWidth;
-    // altezza in blocchi dell'elemento
-    protected int bHeight;
+    protected int bWidth;  // larghezza in blocchi dell'elemento
+    protected int bHeight;  // altezza in blocchi dell'elemento
 
-    // stanza in cui è contenuto
-    private Room locationRoom;
+    private Room locationRoom;  // stanza in cui è contenuto
 
-
-    // Per bufferizzazione sprite riscalamento
+    // Per bufferizzazione sprite
     private double scalingFactor;
     private Icon scaledSpriteIcon;
 
@@ -37,8 +38,8 @@ public class GamePiece
      * Costruttore da utilizzare quando l'immagine appartiene
      * a un unico file.
      *
-     * @param name
-     * @param spritePath
+     * @param name nome da assegnare a this
+     * @param spritePath path dell'immagine (sprite)
      */
     public GamePiece(String name, String spritePath)
     {
@@ -55,9 +56,10 @@ public class GamePiece
      * spritesheet ed esiste un Json con le informazioni sullo sprite
      * da caricare.
      *
-     * @param name
-     * @param spriteSheet
-     * @param jsonPath
+     * @param name nome da assegnare a this
+     * @param spriteSheet lo spriteSheet intero
+     * @param jsonPath path del json che contiene informazioni
+     *                 (ricavate tramite {@code name})
      */
     public GamePiece(String name, BufferedImage spriteSheet, String jsonPath)
     {
@@ -89,12 +91,33 @@ public class GamePiece
     }
 
 
+    /**
+     * Imposta la stanza in cui è presente this.
+     *
+     * @param room la stanza in cui aggiungere l'oggetto (le coordinate saranno null),
+     *             oppure {@code null} se si vuole semplicemente rimuovere l'oggetto
+     *             dalla stanza
+     */
     public void setLocationRoom(Room room)
     {
+        // rimuovi l'oggetto dalla vecchia stanza (se presente)
+        if(locationRoom != null)
+            locationRoom.removePiece(this);
+
+        // imposta attributo
         this.locationRoom = room;
-        locationRoom.addPiece(this, null);
+
+        // se è stata effettivamente impostata una nuova stanza, aggiungilo in posizione null
+        if(room != null)
+            locationRoom.addPiece(this, null);
+
     }
 
+    /**
+     * Restituisce la stanza in cui è presente l'oggetto, {@code null} se non è presente in alcuna.
+     *
+     * @return stanza in cui è presente l'oggetto, oppure {@code null}
+     */
     public Room getLocationRoom()
     {
         return locationRoom;
@@ -124,23 +147,33 @@ public class GamePiece
     }
 
 
-
-
-    // TODO : la posizione dev'essere conosciuta dalla stanza, non dal personaggio
+    /**
+     * Imposta la posizione (in blocchi) di this all'interno
+     * della stanza in cui è contenuto
+     *
+     * @param newPosition posizione in blocchi alla quale posizionare
+     */
     public void setPosition(BlockPosition newPosition)
     {
         Objects.requireNonNull(newPosition);
         locationRoom.setPiecePosition(this, newPosition);
 
+        // TODO: controllo sui bordi
         // TODO: aggiustare
         //if(this instanceof GameCharacter)
         //    EventHandler.sendEvent(new CharacterEvent((GameCharacter) this, newPosition, CharacterEvent.Type.MOVE));
-
-
     }
 
+    /**
+     * Restituisce la posizione di this all'interno della stanza
+     *
+     * @return la posizione nella stanza, {@code null} se this è
+     *          presente in una stanza ma la posizione non è stata impostata
+     * @throws NullPointerException se l'oggetto non è presente in alcuna stanza
+     */
     public BlockPosition getPosition()
     {
+        // todo: modificare nullPointerException?
         return locationRoom.getPiecePosition(this);
     }
 

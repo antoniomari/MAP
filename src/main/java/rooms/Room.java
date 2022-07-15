@@ -1,9 +1,7 @@
 package rooms;
 
-import characters.GameCharacter;
 import characters.GamePiece;
 import graphics.SpriteManager;
-import items.Item;
 import org.json.JSONObject;
 
 import java.awt.image.BufferedImage;
@@ -24,8 +22,8 @@ public class Room
     private final Map<GamePiece, BlockPosition> pieceLocationMap;
     private final RoomFloor floor;
 
-    private final int width;  // larghezza in blocchi
-    private final int height;  // altezza in blocchi
+    private final int bWidth;  // larghezza in blocchi
+    private final int bHeight;  // altezza in blocchi
 
 
     public Room(String name, String path, String jsonPath)
@@ -37,22 +35,20 @@ public class Room
         floor = SpriteManager.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 
-        width = json.getInt("width");
-        height = json.getInt("height");
-
-
+        bWidth = json.getInt("width");
+        bHeight = json.getInt("height");
     }
 
     // restituisce la larghezza misurata in numero di blocchi
     public int getBWidth()
     {
-        return width;
+        return bWidth;
     }
 
     // restituisce l'altezza misurata in numero di blocchi
     public int getBHeight()
     {
-        return height;
+        return bHeight;
     }
 
     public RoomFloor getFloor()
@@ -60,28 +56,6 @@ public class Room
         return floor;
     }
 
-    public void addItem(Item item, BlockPosition c)
-    {
-        pieceLocationMap.put(item, c);
-
-        // genera evento
-
-    }
-
-    public void removeItem(Item item)
-    {
-        pieceLocationMap.remove(item);
-    }
-
-    public void addCharacter(GameCharacter ch, BlockPosition pos)
-    {
-        pieceLocationMap.put(ch, pos);
-    }
-
-    public void removeCharacter(Character ch)
-    {
-        pieceLocationMap.remove(ch);
-    }
 
     public void addPiece(GamePiece p, BlockPosition c)
     {
@@ -127,9 +101,7 @@ public class Room
     public void printPieces()
     {
         for (Map.Entry<GamePiece, BlockPosition> entry : pieceLocationMap.entrySet())
-        {
             System.out.println(entry.getKey().getName() + " in posizione " + entry.getValue());
-        }
     }
 
 }
