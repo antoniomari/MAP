@@ -10,16 +10,11 @@ import items.Door;
 import items.PickupableItem;
 import rooms.BlockPosition;
 import rooms.Room;
-import rooms.RoomFloor;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -189,14 +184,15 @@ public class MainFrame extends JFrame {
 
     public void setupPlayground()
     {
-        PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
-        barile1.setLocationRoom(currentRoom);
-        currentRoom.addItem(barile1,new BlockPosition(9, 5));
-        Door door = new Door("Porta", "Una porta spicolosa.");
-        gameScreenPanel.addGameCharacter(PlayingCharacter.getPlayer(), new BlockPosition(12, 10));
+        //PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
+        //barile1.setPosition(new BlockPosition(9, 5));
+        //Door door = new Door("Porta", "Una porta spicolosa.");
+        //gameScreenPanel.addGameCharacter();
 
-        gameScreenPanel.addGameItem(barile1, new BlockPosition(18, 12));
-        gameScreenPanel.addGameItem(door, new BlockPosition(14, 7));
+        //gameScreenPanel.addGameItem(barile1, new BlockPosition(18, 12));
+        //gameScreenPanel.addGameItem(door, new BlockPosition(14, 7));
+
+        //currentRoom.addCharacter(PlayingCharacter.getPlayer(), new BlockPosition(12, 10));
 
     }
 

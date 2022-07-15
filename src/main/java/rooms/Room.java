@@ -1,28 +1,27 @@
 package rooms;
 
+import characters.GameCharacter;
+import characters.GamePiece;
 import graphics.SpriteManager;
 import items.Item;
 import org.json.JSONObject;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Room
 {
-    private String roomName;
+    private final String roomName;
     private Room north;
     private Room south;
     private Room west;
     private Room east;
-    private List<Item> itemList;
 
-    private String backgroundPath;
+    private final String backgroundPath;
     private BufferedImage backgroundImage;
 
-    private Map<Item, BlockPosition> itemMap;
+    private final Map<GamePiece, BlockPosition> pieceLocationMap;
     private final RoomFloor floor;
 
     private final int width;  // larghezza in blocchi
@@ -32,8 +31,7 @@ public class Room
     public Room(String name, String path, String jsonPath)
     {
         this.roomName = name;
-        itemMap = new HashMap<>();
-        itemList = new ArrayList<>();
+        pieceLocationMap = new HashMap<>();
         backgroundPath = path;
         loadBackgroundImage();
         floor = SpriteManager.loadFloorFromJson(jsonPath);
@@ -64,19 +62,55 @@ public class Room
 
     public void addItem(Item item, BlockPosition c)
     {
-        itemMap.put(item, c);
-        itemList.add(item);
+        pieceLocationMap.put(item, c);
+
+        // genera evento
+
     }
 
     public void removeItem(Item item)
     {
-        itemMap.remove(item);
-        itemList.remove(item);
+        pieceLocationMap.remove(item);
     }
 
-    public Item getItem(int i)
+    public void addCharacter(GameCharacter ch, BlockPosition pos)
     {
-        return itemList.get(i);
+        pieceLocationMap.put(ch, pos);
+    }
+
+    public void removeCharacter(Character ch)
+    {
+        pieceLocationMap.remove(ch);
+    }
+
+    public void addPiece(GamePiece p, BlockPosition c)
+    {
+        pieceLocationMap.put(p, c);
+
+        // genera evento
+
+    }
+
+    public void removePiece(GamePiece p)
+    {
+        pieceLocationMap.remove(p);
+    }
+
+
+    public BlockPosition getPiecePosition(GamePiece p)
+    {
+        if(!pieceLocationMap.containsKey(p))
+            throw new IllegalArgumentException("Elemento non presente nella stanza");
+
+        return pieceLocationMap.get(p);
+    }
+
+    public void setPiecePosition(GamePiece p, BlockPosition pos)
+    {
+        if (!pieceLocationMap.containsKey(p))
+            throw new IllegalArgumentException("Elemento non presente nella stanza");
+
+        pieceLocationMap.put(p, pos);
     }
 
     private void loadBackgroundImage()
@@ -89,5 +123,13 @@ public class Room
         return backgroundImage;
     }
 
+    //TODO: rimuovere, solo stampa di prova
+    public void printPieces()
+    {
+        for (Map.Entry<GamePiece, BlockPosition> entry : pieceLocationMap.entrySet())
+        {
+            System.out.println(entry.getKey().getName() + " in posizione " + entry.getValue());
+        }
+    }
 
 }

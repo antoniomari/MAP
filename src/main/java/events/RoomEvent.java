@@ -21,6 +21,15 @@ public class RoomEvent extends GameEvent
             }
         },
 
+        ADD_CHARACTER_IN_ROOM
+        {
+            public String toString()
+            {
+                return "aggiunto alla stanza";
+            }
+
+        },
+
         REMOVE_ITEM_FROM_ROOM
         {
             @Override

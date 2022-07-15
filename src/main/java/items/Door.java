@@ -4,6 +4,7 @@ import animation.Animation;
 import events.EventHandler;
 import events.ItemInteractionEvent;
 import graphics.SpriteManager;
+import rooms.Room;
 
 import java.awt.image.BufferedImage;
 

@@ -1,7 +1,6 @@
 package events;
 
 import characters.GameCharacter;
-import items.PickupableItem;
 import rooms.BlockPosition;
 
 public class CharacterEvent extends GameEvent

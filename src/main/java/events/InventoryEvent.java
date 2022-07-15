@@ -1,6 +1,5 @@
 package events;
 
-import characters.PlayingCharacter;
 import items.PickupableItem;
 
 public class InventoryEvent extends GameEvent

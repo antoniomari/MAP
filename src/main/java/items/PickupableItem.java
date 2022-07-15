@@ -19,6 +19,7 @@ public class PickupableItem extends Item
     public PickupableItem(String name, String description, Room locationRoom)
     {
         super(name, description);
+        setLocationRoom(locationRoom);
     }
 
 

@@ -2,8 +2,8 @@ package GUI;
 
 public class AbsPosition
 {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public AbsPosition(int x, int y)
     {
