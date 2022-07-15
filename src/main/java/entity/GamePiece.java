@@ -1,6 +1,9 @@
 package entity;
 
 import entity.characters.GameCharacter;
+import events.CharacterEvent;
+import events.EventHandler;
+import events.ItemInteractionEvent;
 import general.GameException;
 import graphics.SpriteManager;
 import entity.items.Item;
@@ -101,24 +104,31 @@ public class GamePiece
     /**
      * Imposta la stanza in cui è presente this.
      *
-     * @param room la stanza in cui aggiungere l'oggetto (le coordinate saranno null),
-     *             oppure {@code null} se si vuole semplicemente rimuovere l'oggetto
-     *             dalla stanza
+     * @param room la stanza in cui aggiungere l'oggetto
+     * @param pos la posizione in cui aggiungere l'oggetto
      */
-    public void setLocationRoom(Room room)
+    public void addInRoom(Room room, BlockPosition pos)
     {
-        // rimuovi l'oggetto dalla vecchia stanza (se presente)
-        if(locationRoom != null)
-            locationRoom.removePiece(this);
+        Objects.requireNonNull(room);
+        Objects.requireNonNull(pos);
 
+        // aggiungilo nella stanza
+        room.addPiece(this, pos);
         // imposta attributo
         this.locationRoom = room;
 
-        // se è stata effettivamente impostata una nuova stanza, aggiungilo in posizione null
-        if(room != null)
-            locationRoom.addPiece(this, null);
-
+        // evento dalla prospettiva del GamePiece: il GamePiece è stato inserito in una stanza
+        if(this instanceof GameCharacter)
+            EventHandler.sendEvent(new CharacterEvent((GameCharacter) this, pos, CharacterEvent.Type.ADDED_IN_ROOM));
+            // TODO: aggiustare event
     }
+
+    public void removeFromRoom()
+    {
+        locationRoom.removePiece(this);
+        this.locationRoom = null;
+    }
+
 
     /**
      * Restituisce la stanza in cui è presente l'oggetto, {@code null} se non è presente in alcuna.
@@ -160,15 +170,21 @@ public class GamePiece
      *
      * @param newPosition posizione in blocchi alla quale posizionare
      */
-    public void setPosition(BlockPosition newPosition)
+    public void updatePosition(BlockPosition newPosition)
     {
         Objects.requireNonNull(newPosition);
+
+        if (locationRoom == null)
+            throw new GameException(this + "non presente in alcuna stanza");
+
         locationRoom.setPiecePosition(this, newPosition);
 
         // TODO: controllo sui bordi
         // TODO: aggiustare
-        //if(this instanceof GameCharacter)
-        //    EventHandler.sendEvent(new CharacterEvent((GameCharacter) this, newPosition, CharacterEvent.Type.MOVE));
+        if(this instanceof GameCharacter)
+            EventHandler.sendEvent(new CharacterEvent((GameCharacter) this, newPosition, CharacterEvent.Type.MOVE));
+        //else
+        //    EventHandler.sendEvent(new ItemInteractionEvent((Item) this), Type.);
     }
 
     /**

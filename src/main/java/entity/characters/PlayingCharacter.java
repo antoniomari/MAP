@@ -1,6 +1,9 @@
 package entity.characters;
 
 import entity.items.PickupableItem;
+import events.EventHandler;
+import events.InventoryEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +31,13 @@ public class PlayingCharacter extends GameCharacter
     public void addToInventory(PickupableItem i)
     {
         inventory.add(i);
+        EventHandler.sendEvent(new InventoryEvent(i, InventoryEvent.Type.ADD_ITEM));
     }
 
     public void removeFromInventory(PickupableItem i)
     {
         inventory.remove(i);
+        EventHandler.sendEvent(new InventoryEvent(i, InventoryEvent.Type.USE_ITEM));
     }
 
     public List<PickupableItem> getInventory()

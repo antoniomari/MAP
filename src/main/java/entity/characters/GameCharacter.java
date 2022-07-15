@@ -10,7 +10,4 @@ public class GameCharacter extends GamePiece
         super(name, spritePath);
     }
 
-
-
-
 }

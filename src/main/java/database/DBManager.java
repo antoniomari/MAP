@@ -3,6 +3,7 @@ package database;
 import entity.characters.PlayingCharacter;
 import entity.items.PickupableItem;
 
+import java.io.IOError;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,18 +40,27 @@ public class DBManager
     }
     */
 
-    public static void setupInventory() throws SQLException
+    public static void setupInventory()
     {
-        startConnection();
-        PreparedStatement pstm= conn.prepareStatement("SELECT nomeoggetto, descrizione FROM gamedb.inventario");
-        ResultSet rs= pstm.executeQuery();
-        while(rs.next())
+        try
         {
-            PlayingCharacter.getPlayer().addToInventory(new PickupableItem(rs.getString(1), rs.getString(2)));
+            startConnection();
+            PreparedStatement pstm= conn.prepareStatement("SELECT nomeoggetto, descrizione FROM gamedb.inventario");
+            ResultSet rs= pstm.executeQuery();
+            while(rs.next())
+            {
+                PlayingCharacter.getPlayer().addToInventory(new PickupableItem(rs.getString(1), rs.getString(2)));
+            }
+            rs.close();
+            pstm.close();
+            conn.close();
         }
-        rs.close();
-        pstm.close();
-        conn.close();
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            throw new IOError(e); // TODO: migliorare
+        }
+
     }
 
     /*

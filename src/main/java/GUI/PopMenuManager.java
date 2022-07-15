@@ -1,5 +1,6 @@
 package GUI;
 
+import entity.characters.NPC;
 import entity.items.*;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class PopMenuManager
     private static JPopupMenu itemMenu;
     private static JPopupMenu doorMenu;
     private static JPopupMenu pickupableItemMenu;
+    private static JPopupMenu npcMenu;
     private static Map<Class, JPopupMenu> classMenuMap;
     private static Object selected;
 
@@ -42,12 +44,24 @@ public class PopMenuManager
         }
     };
 
+    private final static Action SPEAK_ACTION = new AbstractAction("Parla")
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ((NPC) selected).speak();
+        }
+    };
+
+
+
     static
     {
         classMenuMap = new HashMap<>();
         setupItemMenu();
         setupDoorMenu();
         setupPickupableItemMenu();
+        setupNPCMenu();
 
     }
 
@@ -75,6 +89,15 @@ public class PopMenuManager
         pickupableItemMenu.add(new JMenuItem(PICKUP_ACTION));
         classMenuMap.put(PickupableItem.class, pickupableItemMenu);
     }
+
+    private static void setupNPCMenu()
+    {
+        npcMenu = new JPopupMenu();
+
+        npcMenu.add(new JMenuItem(SPEAK_ACTION));
+        classMenuMap.put(NPC.class, npcMenu);
+    }
+
 
     public static void showMenu(Object o, Component invoker, int x, int y)
     {

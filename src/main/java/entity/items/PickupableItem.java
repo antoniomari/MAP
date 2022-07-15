@@ -13,38 +13,25 @@ public class PickupableItem extends Item
     // costruttore che inizializza l'oggetto come presente nell'inventario
     public PickupableItem(String name, String description)
     {
-        this(name, description, null);
-    }
-
-    public PickupableItem(String name, String description, Room locationRoom)
-    {
         super(name, description);
-        setLocationRoom(locationRoom);
     }
 
 
     public void pickup()
     {
         // generato evento togliStanza
-        Room oldRoom = getLocationRoom();
-        oldRoom.removePiece(this); // rimuovi this dalla stanza in cui è contenuto
-        setLocationRoom(null); // setta a null la stanza
-        EventHandler.sendEvent(new RoomEvent(oldRoom, this, RoomEvent.Type.REMOVE_ITEM_FROM_ROOM));
+        removeFromRoom(); // setta a null la stanza
 
-        // generato evento aggiungiInventario TODO: togliere spicolo
         PlayingCharacter.getPlayer().addToInventory(this);
-        EventHandler.sendEvent(new InventoryEvent(this, InventoryEvent.Type.ADD_ITEM));
+
     }
 
-    public void drop(Room room, BlockPosition coord)
+    public void drop(Room room, BlockPosition pos)
     {
         //aggiungi alla stanza
-        room.addPiece(this, coord);
-        setLocationRoom(room);
-        EventHandler.sendEvent(new RoomEvent(room, this, coord, RoomEvent.Type.ADD_ITEM_IN_ROOM));
+        addInRoom(room, pos);
 
         // rimuovi dall'inventario
         PlayingCharacter.getPlayer().removeFromInventory(this);
-        EventHandler.sendEvent(new InventoryEvent(this, InventoryEvent.Type.USE_ITEM));
     }
 }

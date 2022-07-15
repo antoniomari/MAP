@@ -1,54 +1,52 @@
 package events;
 
-import entity.items.PickupableItem;
+import entity.GamePiece;
+import entity.characters.GameCharacter;
+import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 
 public class RoomEvent extends GameEvent
 {
     Type type;
-    Room roomInvolved;
-    BlockPosition coord;
+
     public enum Type
     {
-        ADD_ITEM_IN_ROOM
+        ADD_PIECE_IN_ROOM
         {
             public String toString()
             {
-                return "aggiunto alla stanza";
+                return " aggiunto alla stanza";
             }
         },
 
-        ADD_CHARACTER_IN_ROOM
-        {
-            public String toString()
-            {
-                return "aggiunto alla stanza";
-            }
-
-        },
-
-        REMOVE_ITEM_FROM_ROOM
+        REMOVE_PIECE_FROM_ROOM
         {
             @Override
             public String toString()
             {
-                return "rimosso dalla stanza";
+                return " rimosso dalla stanza";
             }
         }
     }
 
-    public RoomEvent(Room room, PickupableItem item, Type type)
+    public RoomEvent(Room room, GamePiece p, Type type)
     {
-        this(room, item, null, type);
+        this(room, p, null, type);
     }
 
-    public RoomEvent(Room room, PickupableItem item, BlockPosition coord, Type type)
+    public RoomEvent(Room room, GamePiece p, BlockPosition pos, Type type)
     {
-        super(item, type.toString());
+        super(type.toString());
+
+        if(p instanceof GameCharacter)
+            this.characterInvolved = (GameCharacter) p;
+        else if(p instanceof Item)
+            this.itemInvolved = (Item) p;
+
         this.roomInvolved = room;
         this.type = type;
-        this.coord = coord;
+        this.pos = pos;
 
     }
     public Room getRoomInvolved()
@@ -63,6 +61,21 @@ public class RoomEvent extends GameEvent
 
     public BlockPosition getCoordinates()
     {
-        return coord;
+        return pos;
+    }
+
+    @Override
+    public String getEventString()
+    {
+        String s  = eventTime.toString() + " -> ";
+        if(itemInvolved != null)
+            s += " [" + roomInvolved + "] " + itemInvolved + type;
+        else
+            s += " [" + roomInvolved + "] " + characterInvolved + type;
+
+        if(pos != null)
+            s = s + " in posizione " + pos;
+
+        return s;
     }
 }

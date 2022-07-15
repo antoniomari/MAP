@@ -2,6 +2,8 @@ package events;
 
 import entity.characters.GameCharacter;
 import entity.items.Item;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -9,37 +11,25 @@ import java.util.Objects;
 public class GameEvent
 {
     protected LocalDateTime eventTime;
-    private String toPrint;
-    private Item itemInvolved;
-    private GameCharacter characterInvolved;
+    protected String toPrint;
+    protected Item itemInvolved;
+    protected GameCharacter characterInvolved;
+    protected Room roomInvolved;
+    protected BlockPosition pos;
 
-    public GameEvent(Item item, String toPrint)
+
+    public GameEvent(String toPrint)
     {
         Objects.requireNonNull(toPrint);
 
         eventTime = LocalDateTime.now();
         this.toPrint = toPrint;
-        this.itemInvolved = item;
     }
 
-    public GameEvent(GameCharacter ch, String toPrint)
-    {
-        Objects.requireNonNull(toPrint);
-
-        eventTime = LocalDateTime.now();
-        this.toPrint = toPrint;
-        this.itemInvolved = null;
-        this.characterInvolved = ch;
-    }
 
     public String getEventString()
     {
-        if (itemInvolved == null)
-        {
-            return eventTime.toString() + " -> " + " [" + characterInvolved.getName() + "] "+ toPrint;
-        }
-
-        return eventTime.toString() + " -> " + " [" + itemInvolved.getName() + "] "+ toPrint;
+        return eventTime.toString();
     }
 
     public Item getItemInvolved()
@@ -49,6 +39,7 @@ public class GameEvent
 
     public GameCharacter getCharacterInvolved()
     {
+
         return characterInvolved;
     }
 }

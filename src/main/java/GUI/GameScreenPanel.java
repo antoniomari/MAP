@@ -1,8 +1,9 @@
 package GUI;
 
 import animation.MovingAnimation;
+import entity.GamePiece;
 import entity.characters.GameCharacter;
-import graphics.SpriteManager;
+import entity.characters.NPC;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
@@ -21,19 +22,22 @@ public class GameScreenPanel extends JLayeredPane
      */
     private final Map<Item, JLabel> itemLabelMap;
     private final Map<GameCharacter, JLabel> characterLabelMap;
+    private final Map<GamePiece, MovingAnimation> activeMovingAnimation;
     private Room currentRoom;
     private double rescalingFactor;
 
-    public final static Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
-    public final static Integer BACKGROUND_LAYER = 1;
-    public final static Integer ITEM_LAYER = 2;
-    public final static Integer TEXT_BAR_LEVEL = 3;
+    public static final Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
+    public static final Integer BACKGROUND_LAYER = 1;
+    public static final Integer ITEM_LAYER = 2;
+    public static final Integer CHARACTER_LAYER = 3;
+    public static final Integer TEXT_BAR_LEVEL = 4;
 
     public GameScreenPanel(Room initialRoom)
     {
         super();
         itemLabelMap = new HashMap<>();
         characterLabelMap = new HashMap<>();
+        activeMovingAnimation = new HashMap<>();
         currentRoom = initialRoom;
     }
 
@@ -70,6 +74,16 @@ public class GameScreenPanel extends JLayeredPane
     public void addCharacterCurrentRoom(GameCharacter ch, BlockPosition pos)
     {
         addGameCharacter(ch, pos);
+
+        if(ch instanceof NPC)
+            if (((NPC) ch).hasAnimation())
+            {
+                MovingAnimation compiled = ((NPC) ch).getMovementAnimation().compile(characterLabelMap.get(ch), rescalingFactor);
+                compiled.setInsets(getInsets());
+                activeMovingAnimation.put(ch, compiled);
+                compiled.start();
+            }
+
     }
 
     public void moveCharacter(GameCharacter ch, BlockPosition finalPos, boolean withAnimation)
@@ -129,16 +143,24 @@ public class GameScreenPanel extends JLayeredPane
     public void addGameCharacter(GameCharacter ch, BlockPosition pos)
     {
         // recupera lo sprite della giusta dimensione
-        Icon rescaledSprite = SpriteManager.rescaledImageIcon(ch.getSprite(), rescalingFactor);
+        Icon rescaledSprite = ch.getScaledIconSprite(rescalingFactor);
 
         // crea la label corrispondente all'Item
         JLabel characterLabel = new JLabel(rescaledSprite);
 
+        if(ch instanceof NPC)
+        {
+            // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
+            GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
+                    null, () -> PopMenuManager.showMenu(ch, characterLabel, 0, 0));
+            characterLabel.addMouseListener(popMenuListener);
+        }
+
         // metti la coppia Item JLabel nel dizionario
         characterLabelMap.put(ch, characterLabel);
 
-        // aggiungi la label nell'ITEM_LAYER  TODO pensare al layer
-        add(characterLabel, ITEM_LAYER);
+        // aggiungi la label
+        add(characterLabel, CHARACTER_LAYER);
 
         updateCharacterPosition(ch, pos, null);
     }

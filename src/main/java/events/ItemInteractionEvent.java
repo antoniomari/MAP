@@ -29,12 +29,14 @@ public class ItemInteractionEvent extends GameEvent
 
     public ItemInteractionEvent(Item item, String toPrint)
     {
-        super(item, toPrint);
+        super(toPrint);
+        itemInvolved = item;
     }
 
     public ItemInteractionEvent(Item item, String toPrint, Animation animation)
     {
-        super(item, toPrint);
+        super(toPrint);
+        itemInvolved = item;
         this.animation = animation;
     }
 
@@ -51,5 +53,11 @@ public class ItemInteractionEvent extends GameEvent
     public Type getType()
     {
         return type;
+    }
+
+    @Override
+    public String getEventString()
+    {
+        return eventTime + " -> " + "[" + itemInvolved + "] " + type;
     }
 }

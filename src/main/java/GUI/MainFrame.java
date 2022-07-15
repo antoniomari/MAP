@@ -1,7 +1,11 @@
 package GUI;
 
+import animation.MovingAnimation;
+import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import database.DBManager;
+import entity.items.Door;
+import entity.items.PickupableItem;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
@@ -19,7 +23,7 @@ public class MainFrame extends JFrame {
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
     private static final int BLOCK_SIZE = 24;
 
-    private final Room currentRoom;
+    protected final Room currentRoom;
     private Icon backgroundImg;
 
     private final int screenWidth;
@@ -80,12 +84,14 @@ public class MainFrame extends JFrame {
         fullScreenOn();
 
         GameScreenManager.setActivePanel(gameScreenPanel);
-        setupPlayground();
+
 
         // imposta gli esecutori su di te TODO: migliorare codice
         AnimationExecutor.setMainFrame(this);
         InventoryUpdateExecutor.setMainFrame(this);
         RoomUpdateExecutor.setMainFrame(this);
+
+        setupPlayground();
     }
 
 
@@ -182,16 +188,23 @@ public class MainFrame extends JFrame {
 
     public void setupPlayground()
     {
-        //PickupableItem barile1 = new PickupableItem("Barile", "Un barile scemo come Basile", currentRoom);
-        //barile1.setPosition(new BlockPosition(9, 5));
-        //Door door = new Door("Porta", "Una porta spicolosa.");
-        //gameScreenPanel.addGameCharacter();
+        DBManager.setupInventory();
 
-        //gameScreenPanel.addGameItem(barile1, new BlockPosition(18, 12));
-        //gameScreenPanel.addGameItem(door, new BlockPosition(14, 7));
+        PickupableItem barile1 = new PickupableItem(
+                "Barile", "Un barile scemo come Basile");
+        barile1.addInRoom(currentRoom, new BlockPosition(18, 12));
 
-        //currentRoom.addCharacter(PlayingCharacter.getPlayer(), new BlockPosition(12, 10));
 
+        Door door = new Door("Porta", "Una porta spicolosa.");
+        door.addInRoom(currentRoom, new BlockPosition(14, 7));
+
+        PlayingCharacter.getPlayer().addInRoom(currentRoom, new BlockPosition(12, 10));
+
+        // aggiungi nicolas
+        NPC nicolas = new NPC("Nicolas", "/img/personaggi/nicolas.png");
+        MovingAnimation m = new MovingAnimation(nicolas, new BlockPosition(7, 13), true);
+        nicolas.setMovementAnimation(m);
+        nicolas.addInRoom(currentRoom, new BlockPosition(17, 10));
     }
 
     private void initGameScreenPanel()
@@ -248,7 +261,7 @@ public class MainFrame extends JFrame {
                                 new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor).relativePosition(-2, 0);
 
                         bp = currentRoom.getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
-                        PlayingCharacter.getPlayer().setPosition(bp);
+                        PlayingCharacter.getPlayer().updatePosition(bp);
                     }
                 }
 
@@ -361,8 +374,6 @@ public class MainFrame extends JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        DBManager.setupInventory();
 
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare

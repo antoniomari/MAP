@@ -4,6 +4,7 @@ import entity.items.PickupableItem;
 
 public class InventoryEvent extends GameEvent
 {
+
     private Type type;
     public enum Type
     {
@@ -29,13 +30,24 @@ public class InventoryEvent extends GameEvent
         this.type = type;
     }
 
+
     public InventoryEvent(PickupableItem item, String toPrint)
     {
-        super(item, toPrint);
+        super(toPrint);
+        itemInvolved = item;
     }
+
+
 
     public Type getType()
     {
         return this.type;
     }
+
+    @Override
+    public String getEventString()
+    {
+        return eventTime + " -> " + "[" + itemInvolved + "] " + type;
+    }
+
 }

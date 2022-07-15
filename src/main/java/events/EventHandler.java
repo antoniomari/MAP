@@ -1,5 +1,6 @@
 package events;
 
+import entity.rooms.Room;
 import events.executors.*;
 import entity.items.PickupableItem;
 
@@ -44,13 +45,16 @@ public class EventHandler
 
     public static void executeRoomEvent(RoomEvent e)
     {
-        if(e.getType() == RoomEvent.Type.REMOVE_ITEM_FROM_ROOM)
+        if(e.getType() == RoomEvent.Type.REMOVE_PIECE_FROM_ROOM)
         {
             RoomUpdateExecutor.executeRemoveItem(e.getItemInvolved()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
-        else if(e.getType() == RoomEvent.Type.ADD_ITEM_IN_ROOM)
+        else if(e.getType() == RoomEvent.Type.ADD_PIECE_IN_ROOM)
         {
-            RoomUpdateExecutor.executeAddItem(e.getItemInvolved(), e.getCoordinates());
+            if(e.getItemInvolved() != null)
+                RoomUpdateExecutor.executeAddItem(e.getItemInvolved(), e.getCoordinates());
+            else
+                RoomUpdateExecutor.executeAddCharacter(e.characterInvolved, e.getCoordinates());
         }
     }
 
@@ -59,6 +63,10 @@ public class EventHandler
         if(e.getType() == CharacterEvent.Type.MOVE)
         {
             CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getPosition()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
+        }
+        else if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
+        {
+            TextBarUpdateExecutor.executeDisplay(e.getSentence());
         }
     }
 }

@@ -1,6 +1,11 @@
 package animation;
 
 import GUI.AbsPosition;
+import GUI.GameScreenManager;
+import GUI.GameScreenPanel;
+import entity.GamePiece;
+import entity.rooms.BlockPosition;
+import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +21,8 @@ public class MovingAnimation
     private AbsPosition finalCoord;
     private int numFrames;
     private List<AbsPosition> positionsList;
+
+    private BlockPosition relativeF;
 
     private static final int FPS = 144;
 
@@ -55,12 +62,25 @@ public class MovingAnimation
         }
     }
 
+
+    public MovingAnimation(GamePiece p, BlockPosition relativeFinal, boolean initialDelay)
+    {
+        this.relativeF = relativeFinal;
+        this.initialDelay = initialDelay;
+    }
+
+
     public MovingAnimation(JLabel label, boolean initialDelay)
     {
         this.label = label;
         this.initialDelay = initialDelay;
 
         this.initialCoord = new AbsPosition(label.getX(), label.getY());
+    }
+
+    public void setInitialCoord(AbsPosition initialC)
+    {
+        initialCoord = initialC;
     }
 
 
@@ -115,6 +135,18 @@ public class MovingAnimation
         positionsList.add(finalCoord);
 
     }
+
+    public MovingAnimation compile(JLabel label, double rescalingFactor)
+    {
+        this.label = label;
+        this.initialCoord = new AbsPosition(label.getX(), label.getY());
+        this.finalCoord = GameScreenManager.calculateCoordinates(relativeF, rescalingFactor);
+
+        initCoordList();
+
+        return this;
+    }
+
 
 
     public int getTimeToWait()

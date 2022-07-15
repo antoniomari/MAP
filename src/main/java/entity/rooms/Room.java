@@ -1,6 +1,8 @@
 package entity.rooms;
 
 import entity.GamePiece;
+import events.EventHandler;
+import events.RoomEvent;
 import general.GameException;
 import graphics.SpriteManager;
 import org.json.JSONObject;
@@ -74,7 +76,10 @@ public class Room
 
         safePieceInsert(p, pos);
 
-        // TODO: genera evento
+        // Evento dalla prospettiva della stanza: Un GamePiece è stato aggiunto alla stanza
+        EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
+
+
     }
 
     private void safePieceInsert(GamePiece p, BlockPosition pos)
@@ -82,7 +87,7 @@ public class Room
         if(pos == null || canFit(p, pos))
             pieceLocationMap.put(p, pos);
         else
-            throw new GameException(p + "non può entrare in " + this + " alla posizione " + pos);
+            throw new GameException(p + " non può entrare in " + this + " alla posizione " + pos);
     }
 
     /**
@@ -100,7 +105,8 @@ public class Room
         Objects.requireNonNull(pos);
 
         Rectangle roomRect = new Rectangle(0, 0, bWidth, bHeight);
-        Rectangle pieceRect = new Rectangle(pos.getX(), pos.getY(), p.getBWidth(), p.getBHeight());
+
+        Rectangle pieceRect = new Rectangle(pos.getX(), pos.getY() - p.getBHeight(), p.getBWidth(), p.getBHeight());
 
         return roomRect.contains(pieceRect);
 
@@ -112,6 +118,7 @@ public class Room
         Objects.requireNonNull(p);
 
         pieceLocationMap.remove(p);
+        EventHandler.sendEvent(new RoomEvent(this, p, RoomEvent.Type.REMOVE_PIECE_FROM_ROOM));
     }
 
 
