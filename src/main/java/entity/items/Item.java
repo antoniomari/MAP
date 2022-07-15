@@ -1,6 +1,6 @@
-package items;
+package entity.items;
 
-import characters.GamePiece;
+import entity.GamePiece;
 import events.EventHandler;
 import events.ItemInteractionEvent;
 import graphics.SpriteManager;

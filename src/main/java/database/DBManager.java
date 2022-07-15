@@ -1,12 +1,8 @@
 package database;
 
-import characters.PlayingCharacter;
-import items.Item;
-import items.PickupableItem;
-import rooms.Room;
+import entity.characters.PlayingCharacter;
+import entity.items.PickupableItem;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

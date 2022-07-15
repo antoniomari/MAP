@@ -1,17 +1,13 @@
 package GUI;
 
 import animation.MovingAnimation;
-import characters.GameCharacter;
-import characters.PlayingCharacter;
+import entity.characters.GameCharacter;
 import graphics.SpriteManager;
-import items.Item;
-import items.PickupableItem;
-import rooms.BlockPosition;
-import rooms.Room;
-import rooms.RoomFloor;
+import entity.items.Item;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;

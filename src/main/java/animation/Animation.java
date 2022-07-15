@@ -1,7 +1,7 @@
 package animation;
 
 import graphics.SpriteManager;
-import items.Item;
+import entity.items.Item;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

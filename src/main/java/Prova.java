@@ -1,8 +1,8 @@
-import characters.PlayingCharacter;
-import items.Door;
-import items.PickupableItem;
-import rooms.BlockPosition;
-import rooms.Room;
+import entity.characters.PlayingCharacter;
+import entity.items.Door;
+import entity.items.PickupableItem;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 public class Prova
 {
@@ -25,6 +25,18 @@ public class Prova
 
 
         currentRoom.printPieces();
+
+
+        door.setLocationRoom(null);
+
+
+        currentRoom.printPieces();
+
+        //door.setLocationRoom(currentRoom);
+        //door.setPosition(new BlockPosition(50, 50));
+
+        door.getPosition();
+
 
     }
 }

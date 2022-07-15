@@ -1,11 +1,10 @@
 package graphics;
 
-import items.Item;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import rooms.RoomFloor;
+import entity.rooms.RoomFloor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 
 public class SpriteManager
 {

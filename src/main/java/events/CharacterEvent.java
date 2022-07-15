@@ -1,7 +1,7 @@
 package events;
 
-import characters.GameCharacter;
-import rooms.BlockPosition;
+import entity.characters.GameCharacter;
+import entity.rooms.BlockPosition;
 
 public class CharacterEvent extends GameEvent
 {

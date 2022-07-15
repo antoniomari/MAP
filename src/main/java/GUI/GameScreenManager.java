@@ -1,13 +1,9 @@
 package GUI;
 
-import characters.GameCharacter;
-import items.Item;
-import rooms.BlockPosition;
-import rooms.Room;
+import entity.rooms.BlockPosition;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 import java.util.Objects;
 
 

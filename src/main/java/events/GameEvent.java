@@ -1,7 +1,7 @@
 package events;
 
-import characters.GameCharacter;
-import items.Item;
+import entity.characters.GameCharacter;
+import entity.items.Item;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package items;
+package entity.items;
 
 public interface Lockable
 {

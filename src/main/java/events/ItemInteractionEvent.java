@@ -1,7 +1,7 @@
 package events;
 
 import animation.Animation;
-import items.Item;
+import entity.items.Item;
 
 public class ItemInteractionEvent extends GameEvent
 {

@@ -1,12 +1,15 @@
-package rooms;
+package entity.rooms;
 
-import characters.GamePiece;
+import entity.GamePiece;
+import general.GameException;
 import graphics.SpriteManager;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Room
 {
@@ -39,6 +42,11 @@ public class Room
         bHeight = json.getInt("height");
     }
 
+    public String toString()
+    {
+        return roomName;
+    }
+
     // restituisce la larghezza misurata in numero di blocchi
     public int getBWidth()
     {
@@ -56,17 +64,53 @@ public class Room
         return floor;
     }
 
-
-    public void addPiece(GamePiece p, BlockPosition c)
+    // TODO: aggiungere controllo sul pavimento
+    public void addPiece(GamePiece p, BlockPosition pos)
     {
-        pieceLocationMap.put(p, c);
+        Objects.requireNonNull(p);
 
-        // genera evento
+        if(pieceLocationMap.containsKey(p))
+            throw new GameException(p + " già presente in " + this);
+
+        safePieceInsert(p, pos);
+
+        // TODO: genera evento
+    }
+
+    private void safePieceInsert(GamePiece p, BlockPosition pos)
+    {
+        if(pos == null || canFit(p, pos))
+            pieceLocationMap.put(p, pos);
+        else
+            throw new GameException(p + "non può entrare in " + this + " alla posizione " + pos);
+    }
+
+    /**
+     * Controlla se il pezzo {@code p} può essere stampato interamente in this Room
+     * alla posizione pos
+     *
+     * @param p GamePiece del quale si esegue il controllo
+     * @param pos coordinate del blocco più in basso a sinistra di {@code p}
+     * @return {@code true} se il pezzo può essere stampato interamente,
+     * {@code false} altrimenti
+     */
+    private boolean canFit(GamePiece p, BlockPosition pos)
+    {
+        Objects.requireNonNull(p);
+        Objects.requireNonNull(pos);
+
+        Rectangle roomRect = new Rectangle(0, 0, bWidth, bHeight);
+        Rectangle pieceRect = new Rectangle(pos.getX(), pos.getY(), p.getBWidth(), p.getBHeight());
+
+        return roomRect.contains(pieceRect);
 
     }
 
+
     public void removePiece(GamePiece p)
     {
+        Objects.requireNonNull(p);
+
         pieceLocationMap.remove(p);
     }
 
@@ -74,7 +118,7 @@ public class Room
     public BlockPosition getPiecePosition(GamePiece p)
     {
         if(!pieceLocationMap.containsKey(p))
-            throw new IllegalArgumentException("Elemento non presente nella stanza");
+            throw new GameException(p + " non presente in " + this);
 
         return pieceLocationMap.get(p);
     }
@@ -82,9 +126,10 @@ public class Room
     public void setPiecePosition(GamePiece p, BlockPosition pos)
     {
         if (!pieceLocationMap.containsKey(p))
-            throw new IllegalArgumentException("Elemento non presente nella stanza");
+            throw new GameException(p + " non presente in " + this);
 
-        pieceLocationMap.put(p, pos);
+        safePieceInsert(p, pos);
+
     }
 
     private void loadBackgroundImage()

@@ -1,7 +1,7 @@
 package events.executors;
 
-import items.Item;
-import rooms.BlockPosition;
+import entity.items.Item;
+import entity.rooms.BlockPosition;
 
 public class RoomUpdateExecutor extends Executor
 {

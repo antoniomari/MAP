@@ -1,6 +1,6 @@
 package events;
 
-import items.PickupableItem;
+import entity.items.PickupableItem;
 
 public class InventoryEvent extends GameEvent
 {

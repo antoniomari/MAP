@@ -1,7 +1,7 @@
 package events;
 
 import events.executors.*;
-import items.PickupableItem;
+import entity.items.PickupableItem;
 
 public class EventHandler
 {

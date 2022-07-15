@@ -1,9 +1,11 @@
-package characters;
+package entity;
 
+import entity.characters.GameCharacter;
+import general.GameException;
 import graphics.SpriteManager;
-import items.Item;
-import rooms.BlockPosition;
-import rooms.Room;
+import entity.items.Item;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 import javax.swing.Icon;
 import java.awt.Image;
@@ -68,6 +70,11 @@ public class GamePiece
 
         this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+    }
+
+    public String toString()
+    {
+        return name;
     }
 
     public Image getSprite()
@@ -169,11 +176,13 @@ public class GamePiece
      *
      * @return la posizione nella stanza, {@code null} se this è
      *          presente in una stanza ma la posizione non è stata impostata
-     * @throws NullPointerException se l'oggetto non è presente in alcuna stanza
+     * @throws GameException se l'oggetto non è presente in alcuna stanza
      */
     public BlockPosition getPosition()
     {
-        // todo: modificare nullPointerException?
+        if(locationRoom == null)
+            throw new GameException(this + " non presente in alcuna stanza");
+
         return locationRoom.getPiecePosition(this);
     }
 

@@ -1,15 +1,13 @@
 package GUI;
 
-import characters.PlayingCharacter;
+import entity.characters.PlayingCharacter;
 import database.DBManager;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
 import graphics.SpriteManager;
-import items.Door;
-import items.PickupableItem;
-import rooms.BlockPosition;
-import rooms.Room;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 import javax.swing.*;
 import java.awt.*;

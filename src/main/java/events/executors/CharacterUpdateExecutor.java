@@ -1,7 +1,7 @@
 package events.executors;
 
-import characters.GameCharacter;
-import rooms.BlockPosition;
+import entity.characters.GameCharacter;
+import entity.rooms.BlockPosition;
 
 public class CharacterUpdateExecutor extends Executor
 {

@@ -1,4 +1,4 @@
-package characters;
+package entity.characters;
 
 public class NPC extends GameCharacter
 {

@@ -1,6 +1,6 @@
 package GUI;
 
-import items.*;
+import entity.items.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

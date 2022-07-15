@@ -1,12 +1,12 @@
-package items;
+package entity.items;
 
 
-import characters.PlayingCharacter;
+import entity.characters.PlayingCharacter;
 import events.EventHandler;
 import events.InventoryEvent;
 import events.RoomEvent;
-import rooms.BlockPosition;
-import rooms.Room;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 public class PickupableItem extends Item
 {

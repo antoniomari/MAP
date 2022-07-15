@@ -1,6 +1,6 @@
-package characters;
+package entity.characters;
 
-import rooms.BlockPosition;
+import entity.GamePiece;
 
 public class GameCharacter extends GamePiece
 {

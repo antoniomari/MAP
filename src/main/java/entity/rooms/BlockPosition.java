@@ -1,4 +1,4 @@
-package rooms;
+package entity.rooms;
 
 public class BlockPosition
 {

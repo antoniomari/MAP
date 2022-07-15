@@ -1,10 +1,8 @@
 package events;
 
-import items.PickupableItem;
-import rooms.BlockPosition;
-import rooms.Room;
-
-import java.awt.*;
+import entity.items.PickupableItem;
+import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 
 public class RoomEvent extends GameEvent
 {

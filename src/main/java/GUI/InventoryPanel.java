@@ -1,9 +1,9 @@
 package GUI;
 
 import animation.Animation;
-import characters.PlayingCharacter;
+import entity.characters.PlayingCharacter;
 import graphics.SpriteManager;
-import items.PickupableItem;
+import entity.items.PickupableItem;
 
 import javax.swing.*;
 import java.awt.*;

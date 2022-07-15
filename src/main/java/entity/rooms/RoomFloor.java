@@ -1,4 +1,4 @@
-package rooms;
+package entity.rooms;
 
 import GUI.debug.MotionDebugger;
 

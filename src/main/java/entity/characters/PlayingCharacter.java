@@ -1,8 +1,6 @@
-package characters;
+package entity.characters;
 
-import events.CharacterEvent;
-import events.EventHandler;
-import items.PickupableItem;
+import entity.items.PickupableItem;
 import java.util.ArrayList;
 import java.util.List;
 

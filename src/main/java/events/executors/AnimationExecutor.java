@@ -2,7 +2,7 @@ package events.executors;
 
 import GUI.MainFrame;
 import animation.Animation;
-import items.Item;
+import entity.items.Item;
 import javax.swing.*;
 
 public class AnimationExecutor extends Executor
