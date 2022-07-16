@@ -1,6 +1,8 @@
 package entity.rooms;
 
 import entity.GamePiece;
+import entity.characters.GameCharacter;
+import entity.items.Item;
 import events.EventHandler;
 import events.RoomEvent;
 import general.GameException;
@@ -74,7 +76,10 @@ public class Room
         if(pieceLocationMap.containsKey(p))
             throw new GameException(p + " già presente in " + this);
 
-        safePieceInsert(p, pos);
+        if(pos == null)
+            pieceLocationMap.put(p, pos);
+        else
+            safePieceInsert(p, pos);
 
         // Evento dalla prospettiva della stanza: Un GamePiece è stato aggiunto alla stanza
         EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
@@ -84,10 +89,32 @@ public class Room
 
     private void safePieceInsert(GamePiece p, BlockPosition pos)
     {
-        if(pos == null || canFit(p, pos))
+        if(canGo(p, pos))
             pieceLocationMap.put(p, pos);
         else
             throw new GameException(p + " non può entrare in " + this + " alla posizione " + pos);
+    }
+
+
+    private boolean canGo(GamePiece p, BlockPosition pos)
+    {
+        boolean fit = canFit(p, pos);
+
+        System.out.println("CanFit: " + fit);
+
+        if(p instanceof Item)
+            return fit;
+        else // if(p instanceof GameCharacter)
+        {
+            BlockPosition nearest = floor.getNearestPlacement(pos, p.getBWidth(), p.getBHeight());
+
+            System.out.println("Nearest: " + nearest);
+
+            if(nearest == null)
+                return false;
+            else
+                return fit;
+        }
     }
 
     /**

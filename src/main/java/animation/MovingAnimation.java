@@ -3,6 +3,7 @@ package animation;
 import GUI.AbsPosition;
 import GUI.GameScreenManager;
 import GUI.GameScreenPanel;
+import GUI.gamestate.GameState;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
 import graphics.SpriteManager;
@@ -22,19 +23,16 @@ public class MovingAnimation
     private int numFrames;
     private List<AbsPosition> positionsList;
 
-    private BlockPosition relativeF;
-
     private static final int FPS = 144;
+    private final double speed;
 
-    private int xOffset;
-    private int yOffset;
 
     private class AnimationThread extends Thread // TODO trovare un modo per evitare che la stessa animazione venga eseguita contemporaneamente
     {
         @Override
         public void run()
         {
-            // imposta a moving gamestate
+            GameState.changeState(GameState.State.MOVING);
 
             boolean delay = initialDelay;
 
@@ -49,8 +47,7 @@ public class MovingAnimation
 
                     // System.out.println("X e Y: " + c);
 
-                    label.setBounds(xOffset + c.getX(), yOffset + c.getY(), label.getIcon().getIconWidth(),
-                            label.getIcon().getIconHeight());
+                    GameScreenManager.updateLabelPosition(label, c);
                 }
                 catch (InterruptedException e)
                 {
@@ -58,45 +55,33 @@ public class MovingAnimation
                 }
             }
 
-            // infine reimposta a playing state
+            GameState.changeState(GameState.State.PLAYING);
         }
     }
 
 
-    public MovingAnimation(GamePiece p, BlockPosition relativeFinal, boolean initialDelay)
+    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos,  boolean initialDelay)
     {
-        this.relativeF = relativeFinal;
-        this.initialDelay = initialDelay;
+        this(label, initialPos, finalPos, initialDelay, 1.0);
     }
 
-
-    public MovingAnimation(JLabel label, boolean initialDelay)
+    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos,  boolean initialDelay, double speed)
     {
         this.label = label;
         this.initialDelay = initialDelay;
 
-        this.initialCoord = new AbsPosition(label.getX(), label.getY());
-    }
+        // initialCoord: coordinate iniziali dell'angolo in basso a sinistra
+        this.initialCoord = GameScreenManager.calculateCoordinates(initialPos);
 
-    public void setInitialCoord(AbsPosition initialC)
-    {
-        initialCoord = initialC;
-    }
+        // coordinate finali dell'angolo in basso a sinistra
+        this.finalCoord = GameScreenManager.calculateCoordinates(finalPos);
 
+        this.speed = speed;
 
-    public void setFinalCoord(AbsPosition finalC)
-    {
-        finalCoord = finalC;
         initCoordList();
     }
 
-    public void setInsets(Insets i)
-    {
-        xOffset = i.left;
-        yOffset = i.top;
-    }
-
-    public void initCoordList()
+    private void initCoordList()
     {
         int initialX = initialCoord.getX();
         int finalX = finalCoord.getX();
@@ -106,7 +91,7 @@ public class MovingAnimation
 
         double distance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
         delayMilliseconds = (int) Math.round(1000.0 / FPS);
-        numFrames = FPS * (int) distance / 1000;
+        numFrames = (int)(FPS * distance / (1000 * speed));
 
         double deltaX = (double)(finalX- initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;
@@ -116,8 +101,6 @@ public class MovingAnimation
         //System.out.println("Final: " + finalCoord);
         //System.out.println("dX = " + deltaX);
         //System.out.println("dY = " + deltaY);
-
-
 
 
         positionsList = new ArrayList<>();
@@ -134,29 +117,6 @@ public class MovingAnimation
         }
         positionsList.add(finalCoord);
 
-    }
-
-    public MovingAnimation compile(JLabel label, double rescalingFactor)
-    {
-        this.label = label;
-        this.initialCoord = new AbsPosition(label.getX(), label.getY());
-        this.finalCoord = GameScreenManager.calculateCoordinates(relativeF, rescalingFactor);
-
-        initCoordList();
-
-        return this;
-    }
-
-
-
-    public int getTimeToWait()
-    {
-        return delayMilliseconds;
-    }
-
-    public void setLabel(JLabel label)
-    {
-        this.label = label;
     }
 
     public void start()

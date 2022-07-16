@@ -62,7 +62,8 @@ public class EventHandler
     {
         if(e.getType() == CharacterEvent.Type.MOVE)
         {
-            CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getPosition()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
+            CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getOldPosition(), e.getPosition());
+            // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
         else if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {

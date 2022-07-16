@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.gamestate.GameState;
 import animation.MovingAnimation;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
@@ -40,7 +41,7 @@ public class MainFrame extends JFrame {
     private TextBarPanel textBarPanel;
 
     // LISTENER FOR KEYS
-    private final GameKeyListener ESC_LISTENER;
+   //private final GameKeyListener ESC_LISTENER;
 
 
     public double getScalingFactor()
@@ -63,6 +64,12 @@ public class MainFrame extends JFrame {
         return gameScreenPanel;
     }
 
+    public Room getCurrentRoom()
+    {
+        return currentRoom;
+    }
+
+
     public MainFrame(Room initialRoom)
     {
         currentRoom = initialRoom;
@@ -72,7 +79,7 @@ public class MainFrame extends JFrame {
         screenWidth = (int) screenSize.getWidth();
         screenHeight = (int) screenSize.getHeight();
 
-        this.ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
+        //this.ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -90,6 +97,8 @@ public class MainFrame extends JFrame {
         AnimationExecutor.setMainFrame(this);
         InventoryUpdateExecutor.setMainFrame(this);
         RoomUpdateExecutor.setMainFrame(this);
+
+        GameState.setMainFrame(this);
 
         setupPlayground();
     }
@@ -180,7 +189,7 @@ public class MainFrame extends JFrame {
         //                  SETUP MainFrame
         // -----------------------------------------------------
         add(mainPanel, BorderLayout.CENTER);
-        addKeyListener(ESC_LISTENER);
+        //addKeyListener(ESC_LISTENER);
         pack();
 
     }
@@ -202,9 +211,10 @@ public class MainFrame extends JFrame {
 
         // aggiungi nicolas
         NPC nicolas = new NPC("Nicolas", "/img/personaggi/nicolas.png");
-        MovingAnimation m = new MovingAnimation(nicolas, new BlockPosition(7, 13), true);
-        nicolas.setMovementAnimation(m);
         nicolas.addInRoom(currentRoom, new BlockPosition(17, 10));
+        nicolas.move(new BlockPosition(7, 13), "absolute");
+        //nicolas.move(new BlockPosition(4, 13), "absolute");
+
     }
 
     private void initGameScreenPanel()
@@ -239,34 +249,12 @@ public class MainFrame extends JFrame {
                 (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
         gameScreenPanel.add(textBarPanel, GameScreenPanel.TEXT_BAR_LEVEL);
 
-        addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
+        // addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
     private void initInventoryPanel()
     {
         inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
-
-        GameMouseListener dropItemListener = new GameMouseListener(MouseEvent.BUTTON1,
-                () ->
-                {
-                    if (inventoryPanel.getSelectedItem() != null)
-                    {
-                        BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor).relativePosition(-1, 1);
-                        bp = currentRoom.getFloor().getNearestPlacement(bp, inventoryPanel.getSelectedItem().getBWidth(), inventoryPanel.getSelectedItem().getBHeight());
-                        inventoryPanel.getSelectedItem().drop(currentRoom, bp);
-                    }
-                    else
-                    {
-                        BlockPosition bp = GameScreenManager.calculateBlocks(
-                                new AbsPosition(getMousePosition().x ,getMousePosition().y), rescalingFactor).relativePosition(-2, 0);
-
-                        bp = currentRoom.getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
-                        PlayingCharacter.getPlayer().updatePosition(bp);
-                    }
-                }
-
-                , null);
-        gameScreenPanel.addMouseListener(dropItemListener);
     }
 
     private void initGamePanel()
@@ -353,7 +341,7 @@ public class MainFrame extends JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -377,7 +365,7 @@ public class MainFrame extends JFrame {
 
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
-        Room cucina = new Room("Cucina", "/img/lab1 griglia.png", "/img/lab1.json");
+        Room cucina = new Room("Cucina", "/img/LabPav.png", "/img/lab1.json");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));

@@ -6,6 +6,7 @@ import entity.rooms.BlockPosition;
 public class CharacterEvent extends GameEvent
 {
     private Type type;
+    private BlockPosition oldPosition;
     private BlockPosition position;
     private String sentence;
 
@@ -44,6 +45,15 @@ public class CharacterEvent extends GameEvent
         this.characterInvolved = ch;
     }
 
+    public CharacterEvent(GameCharacter ch, BlockPosition oldPos, BlockPosition newPos, Type type)
+    {
+        super(type.toString());
+        this.type = type;
+        this.oldPosition = oldPos;
+        this.position = newPos;
+        this.characterInvolved = ch;
+    }
+
     public CharacterEvent(GameCharacter ch, String sentence, Type type)
     {
         super(type.toString());
@@ -55,6 +65,11 @@ public class CharacterEvent extends GameEvent
     public Type getType()
     {
         return this.type;
+    }
+
+    public BlockPosition getOldPosition()
+    {
+        return oldPosition;
     }
 
     public BlockPosition getPosition()

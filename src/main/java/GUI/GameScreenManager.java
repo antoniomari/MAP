@@ -4,6 +4,7 @@ import entity.rooms.BlockPosition;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.attribute.AttributeView;
 import java.util.Objects;
 
 
@@ -12,6 +13,7 @@ public class GameScreenManager
 
     private static final int BLOCK_SIZE = 24;
     private static GameScreenPanel active_panel;
+    private static double rescalingFactor;
 
     private GameScreenManager()
     {
@@ -23,10 +25,18 @@ public class GameScreenManager
         Objects.requireNonNull(gsp);
 
         active_panel = gsp;
+        rescalingFactor = active_panel.getScalingFactor();
+
     }
 
     // TODO: calcolare massimi xBlock e yBlock per la stanza
-    public static AbsPosition calculateCoordinates(BlockPosition pos, double rescalingFactor)
+
+    /**
+     * Restituisce la coordinata del pixel in alto a sinistra del blocco
+     * @param pos
+     * @return
+     */
+    public static AbsPosition calculateCoordinates(BlockPosition pos)
     {
         int xBlocks = pos.getX();
         int yBlocks = pos.getY();
@@ -48,10 +58,9 @@ public class GameScreenManager
      * alla posizione assoluta passata.
      *
      * @param absPos posizione assoluta della quale calcolare il blocco più vicino
-     * @param rescalingFactor fattore di riscalamento
      * @return posizione del blocco corrispondente
      */
-    public static BlockPosition calculateBlocks(AbsPosition absPos, double rescalingFactor)
+    public static BlockPosition calculateBlocks(AbsPosition absPos)
     {
 
         // scegli il blocco più vicino
@@ -71,13 +80,42 @@ public class GameScreenManager
     }
 
 
-    public static void updateLabelPosition(JLabel label, BlockPosition pos, double scalingFactor)
+    /**
+     *
+     * @param label
+     * @param pos angolo in basso a sinistra
+     */
+    public static void updateLabelPosition(JLabel label, BlockPosition pos)
     {
+
+        updateLabelPosition(label, calculateCoordinates(pos));
+
+        // calcola angolo in alto a sinistra
+        //BlockPosition leftUpCornerPos = pos.relativePosition(0, - bHeight + 1);
+
+        //AbsPosition c = calculateCoordinates(leftUpCornerPos);
+        //c = new AbsPosition(c.getX(), c.getY());
+
+        //label.setBounds(insets.left + c.getX(), insets.top + c.getY(),
+        //        label.getIcon().getIconWidth(), label.getIcon().getIconHeight());
+    }
+
+    /**
+     *
+     * @param label label su cui lavorare
+     * @param pos posizione assoluta dell'angolo in basso a sinistra
+     */
+    public static void updateLabelPosition(JLabel label, AbsPosition pos)
+    {
+        // offset y
+        int offsetHeight= label.getIcon().getIconHeight() - (int)(BLOCK_SIZE * rescalingFactor);
+
+
+        // pos è angolo in basso a sinistra, dobbiamo calcolarci l'angolo in alto a sinistra
         Insets insets = active_panel.getInsets();
 
-        AbsPosition c = calculateCoordinates(pos, scalingFactor);
-
-        label.setBounds(insets.left + c.getX(), insets.top + c.getY(),
-                label.getIcon().getIconWidth(), label.getIcon().getIconHeight());
+        AbsPosition leftUpCornerPos = new AbsPosition(pos.getX(), pos.getY() - offsetHeight);
+        label.setBounds(insets.left + leftUpCornerPos.getX(), insets.top + leftUpCornerPos.getY(),
+                        label.getIcon().getIconWidth(), label.getIcon().getIconHeight());
     }
 }

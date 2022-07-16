@@ -1,5 +1,7 @@
 package GUI;
 
+import GUI.gamestate.GameState;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,8 +11,9 @@ public class GameKeyListener implements KeyListener
     private boolean pressed;
     private final Runnable pressAction;
     private final Runnable releaseAction;
+    private final GameState.State targetState;
 
-    public GameKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction)
+    public GameKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction, GameState.State targetState)
     {
         this.keyCode = keyCode;
 
@@ -24,8 +27,17 @@ public class GameKeyListener implements KeyListener
         else
             this.releaseAction = releaseAction;
 
+        this.targetState = targetState;
         this.pressed = false;
+
     }
+
+    public GameKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction)
+    {
+        this(keyCode, pressAction, releaseAction, GameState.State.PLAYING);
+    }
+
+
 
     @Override
     public void keyTyped(KeyEvent e)
@@ -36,7 +48,7 @@ public class GameKeyListener implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        if (e.getKeyCode() == keyCode)
+        if (GameState.getState() == targetState &&  e.getKeyCode() == keyCode)
         {
             if(!pressed)
             {
@@ -50,7 +62,7 @@ public class GameKeyListener implements KeyListener
     @Override
     public void keyReleased(KeyEvent e)
     {
-        if (e.getKeyCode() == keyCode)
+        if (GameState.getState() == targetState && e.getKeyCode() == keyCode)
         {
             releaseAction.run();
             pressed = false;

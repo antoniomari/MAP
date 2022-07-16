@@ -39,6 +39,9 @@ public class GamePiece
     private Icon scaledSpriteIcon;
 
 
+    // tutti i costruttori sono protetti per far sì che non sia
+    // direttamente istanziabile dall'esterno
+
     /**
      * Costruttore da utilizzare quando l'immagine appartiene
      * a un unico file.
@@ -46,7 +49,7 @@ public class GamePiece
      * @param name nome da assegnare a this
      * @param spritePath path dell'immagine (sprite)
      */
-    public GamePiece(String name, String spritePath)
+    protected GamePiece(String name, String spritePath)
     {
         this.name = name;
         this.sprite = SpriteManager.loadSpriteSheet(spritePath);
@@ -66,7 +69,7 @@ public class GamePiece
      * @param jsonPath path del json che contiene informazioni
      *                 (ricavate tramite {@code name})
      */
-    public GamePiece(String name, BufferedImage spriteSheet, String jsonPath)
+    protected GamePiece(String name, BufferedImage spriteSheet, String jsonPath)
     {
         this.name = name;
         sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, name);
@@ -168,7 +171,7 @@ public class GamePiece
      * Imposta la posizione (in blocchi) di this all'interno
      * della stanza in cui è contenuto
      *
-     * @param newPosition posizione in blocchi alla quale posizionare
+     * @param newPosition posizione del blocco in basso a sinistra del GamePiece
      */
     public void updatePosition(BlockPosition newPosition)
     {
@@ -177,14 +180,22 @@ public class GamePiece
         if (locationRoom == null)
             throw new GameException(this + "non presente in alcuna stanza");
 
-        locationRoom.setPiecePosition(this, newPosition);
 
-        // TODO: controllo sui bordi
-        // TODO: aggiustare
-        if(this instanceof GameCharacter)
-            EventHandler.sendEvent(new CharacterEvent((GameCharacter) this, newPosition, CharacterEvent.Type.MOVE));
-        //else
-        //    EventHandler.sendEvent(new ItemInteractionEvent((Item) this), Type.);
+        BlockPosition oldPosition = getPosition();
+
+
+        // aggiorna posizione nella stanza
+        try
+        {
+            locationRoom.setPiecePosition(this, newPosition);
+            if(this instanceof GameCharacter)
+                EventHandler.sendEvent(new CharacterEvent((GameCharacter) this,
+                                        oldPosition, newPosition, CharacterEvent.Type.MOVE));
+        }
+        catch(GameException ignored)
+        {
+            // non fare nulla, non muoverti quindi non generare alcun evento
+        }
     }
 
     /**

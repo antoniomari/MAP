@@ -46,6 +46,11 @@ public class GameScreenPanel extends JLayeredPane
         this.rescalingFactor = scalingFactor;
     }
 
+    public double getScalingFactor()
+    {
+        return rescalingFactor;
+    }
+
     public JLabel getLabelAssociated(Item item)
     {
         return itemLabelMap.get(item);
@@ -74,38 +79,26 @@ public class GameScreenPanel extends JLayeredPane
     public void addCharacterCurrentRoom(GameCharacter ch, BlockPosition pos)
     {
         addGameCharacter(ch, pos);
-
-        if(ch instanceof NPC)
-            if (((NPC) ch).hasAnimation())
-            {
-                MovingAnimation compiled = ((NPC) ch).getMovementAnimation().compile(characterLabelMap.get(ch), rescalingFactor);
-                compiled.setInsets(getInsets());
-                activeMovingAnimation.put(ch, compiled);
-                compiled.start();
-            }
-
     }
 
-    public void moveCharacter(GameCharacter ch, BlockPosition finalPos, boolean withAnimation)
+    public void moveCharacter(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, boolean withAnimation)
     {
 
         MovingAnimation animation;
         // crea animazione
         if(withAnimation)
-            animation = createMoveAnimation(ch);
+            animation = createMoveAnimation(ch, initialPos, finalPos);
         else
             animation = null;
 
         updateCharacterPosition(ch, finalPos, animation);
     }
 
-    // todo: gestire opportunamente final coords
-    public MovingAnimation createMoveAnimation(GameCharacter ch)
-    {
-        MovingAnimation moveAnimation = new MovingAnimation(characterLabelMap.get(ch),  true);
-        moveAnimation.setInsets(getInsets());
 
-        return moveAnimation;
+    public MovingAnimation createMoveAnimation(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos)
+    {
+        return new MovingAnimation(characterLabelMap.get(ch),
+                                    initialPos, finalPos, true);
     }
 
     /**
@@ -211,7 +204,7 @@ public class GameScreenPanel extends JLayeredPane
      * Aggiorna la posizione di una label a finalPos, se possibile
      *
      * @param label
-     * @param finalPos
+     * @param finalPos posizione del blocco in basso a sinistra del GamePiece corrispondente alla label
      * @param anim
      * @param canGoOnWall
      */
@@ -245,18 +238,13 @@ public class GameScreenPanel extends JLayeredPane
 
         if (canMove)
         {
-            // update finalPosition
-            finalPos = new BlockPosition(xBlocks, topBlock);
-
             if(anim == null)
             {
-                GameScreenManager.updateLabelPosition(label, finalPos, rescalingFactor);
+                GameScreenManager.updateLabelPosition(label, finalPos);
             }
             else
             {
-                anim.setFinalCoord(GameScreenManager.calculateCoordinates(finalPos, rescalingFactor));
                 anim.start();
-                // TODO: stoppare
             }
         }
     }

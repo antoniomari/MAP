@@ -44,48 +44,42 @@ public class RoomFloor
     // TODO: aggiustare codice metodo
     public BlockPosition getNearestPlacement(BlockPosition tryPos, int spriteWidth, int spriteHeight)
     {
-        MotionDebugger.print("Vuoi spostarti in " + tryPos);
 
-        if(isWalkable(tryPos) && isWalkable(tryPos.relativePosition(spriteWidth - 1, - spriteHeight + 1)))
+        if(isWalkable(tryPos) && isWalkable(tryPos.relativePosition(spriteWidth - 1, 0)))
         {
             return tryPos;
         }
 
-        else
+        for(Rectangle walkableArea : walkableRectangles)
         {
-            int heightDistance;
-            int widthDistance;
+            int leftBorder = (int) walkableArea.getX();
+            int rightBorder = leftBorder + (int) walkableArea.getWidth() - 1;
+            int topBorder = (int) walkableArea.getY();
 
-            for(Rectangle walkableArea : walkableRectangles)
-            {
-                int leftBorder = (int) walkableArea.getX();
-                int rightBorder = leftBorder + (int) walkableArea.getWidth() - 1;
-                int topBorder = (int) walkableArea.getY();
-
-                int finalX = tryPos.getX();
-                int finalY = tryPos.getY();
+            int finalX = tryPos.getX();
+            int finalY = -1;
 
 
-                // controllo bordo sopra
-                if(tryPos.getY() == topBorder - 1 && tryPos.getY() - spriteHeight >= 0)
-                    finalY = tryPos.getY() + 1;
+            // controllo bordo sopra
+            if(tryPos.getY() == topBorder - 1 && tryPos.getY() - spriteHeight >= 0)
+                finalY = tryPos.getY() + 1;
+            else if (tryPos.getY() >= topBorder)
+                finalY = tryPos.getY();
 
-                // controllo bordo laterale
-                 if(tryPos.getX() < leftBorder)
-                     finalX = leftBorder;
-                 else if (tryPos.getX() + spriteWidth - 1 > rightBorder)
-                     finalX = rightBorder - spriteWidth + 1;
+            // controllo bordo laterale
+             if(tryPos.getX() < leftBorder)
+                 finalX = leftBorder;
+             else if (tryPos.getX() + spriteWidth - 1 > rightBorder)
+                 finalX = rightBorder - spriteWidth + 1;
 
-                 // TODO: aggiustare
-                 MotionDebugger.print("La posizione più vicina è " + new BlockPosition(finalX, finalY));
+             // TODO: aggiustare
+             if(finalY == -1)
+                 return null;
 
-                 return new BlockPosition(finalX, finalY);
-
-
-            }
-
-            return tryPos;
+             return new BlockPosition(finalX, finalY);
         }
+
+        // TODO: attenzione qua
+        return null;
     }
-
 }
