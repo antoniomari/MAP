@@ -6,6 +6,7 @@ import events.CharacterEvent;
 import events.EventHandler;
 import general.GameException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -13,21 +14,11 @@ import java.util.Random;
 public class NPC extends GameCharacter
 {
 
-    MovingAnimation movementAnimation;
     public NPC(String name, String spritePath)
     {
         super(name, spritePath);
     }
 
-    public void setMovementAnimation(MovingAnimation m)
-    {
-        this.movementAnimation = m;
-    }
-
-    public MovingAnimation getMovementAnimation()
-    {
-        return movementAnimation;
-    }
 
     public void move(BlockPosition finalPos, String type)
     {
@@ -42,6 +33,26 @@ public class NPC extends GameCharacter
             throw new IllegalArgumentException("Valore type non valido");
     }
 
+    /*
+    public void move(int xBlock, int yBlock, String type)
+    {
+        move(new BlockPosition(xBlock, yBlock), type);
+    }
+
+     */
+
+    public void stayStill(int delayMilliseconds)
+    {
+        try
+        {
+            Thread.sleep(delayMilliseconds);
+        }
+        catch(InterruptedException ex)
+        {
+            // notghin
+        }
+
+    }
 
     public void speak()
     {
@@ -58,10 +69,5 @@ public class NPC extends GameCharacter
 
         return sentencesList.get(rand.nextInt(sentencesList.size()));
 
-    }
-
-    public boolean hasAnimation()
-    {
-        return movementAnimation != null;
     }
 }

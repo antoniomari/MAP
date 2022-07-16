@@ -1,7 +1,7 @@
 package GUI;
 
 import GUI.gamestate.GameState;
-import animation.MovingAnimation;
+import action.ActionSequence;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import database.DBManager;
@@ -16,8 +16,6 @@ import entity.rooms.Room;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame {
 
@@ -212,8 +210,18 @@ public class MainFrame extends JFrame {
         // aggiungi nicolas
         NPC nicolas = new NPC("Nicolas", "/img/personaggi/nicolas.png");
         nicolas.addInRoom(currentRoom, new BlockPosition(17, 10));
-        nicolas.move(new BlockPosition(7, 13), "absolute");
-        //nicolas.move(new BlockPosition(4, 13), "absolute");
+
+        ActionSequence a = new ActionSequence();
+        a.append(() -> nicolas.move(new BlockPosition(7, 13), "absolute"));
+        //a.append(() -> nicolas.stayStill(1000));
+        a.append(() -> nicolas.move(new BlockPosition(14, 13), "absolute"));
+        //a.append(() -> nicolas.stayStill(1000));
+        a.append(() -> nicolas.move(new BlockPosition(7, 13), "absolute"));
+        //a.append(() -> nicolas.stayStill(1000));
+        a.append(() -> nicolas.move(new BlockPosition(7, 9), "absolute"));
+        //a.append(() -> nicolas.stayStill(1000));
+
+        a.performActions();
 
     }
 
@@ -265,7 +273,6 @@ public class MainFrame extends JFrame {
 
         Insets insets = gamePanel.getInsets();
         int xBorder = (screenWidth - gameWidth) / 2;
-
 
         // imposta posizione dello schermo di gioco
         gameScreenPanel.setBounds(insets.left + xBorder, insets.top, gameWidth, gameHeight);

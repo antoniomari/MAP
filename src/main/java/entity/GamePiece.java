@@ -180,9 +180,7 @@ public class GamePiece
         if (locationRoom == null)
             throw new GameException(this + "non presente in alcuna stanza");
 
-
         BlockPosition oldPosition = getPosition();
-
 
         // aggiorna posizione nella stanza
         try
@@ -194,7 +192,7 @@ public class GamePiece
         }
         catch(GameException ignored)
         {
-            // non fare nulla, non muoverti quindi non generare alcun evento
+            System.out.println(ignored.getMessage()); // TODO: aggiustare
         }
     }
 

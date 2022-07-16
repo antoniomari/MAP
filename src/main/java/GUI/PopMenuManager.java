@@ -26,12 +26,18 @@ public class PopMenuManager
         }
     };
 
-    private final static Action OPEN_ACTION = new AbstractAction("Apri")
+    // TODO : migliorare nome
+    private final static Action OPEN_CLOSE_ACTION = new AbstractAction("Apri/Chiudi")
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            ((Openable) selected).open();
+            Openable opItem = ((Openable) selected);
+
+            if(opItem.isOpen())
+                opItem.close();
+            else
+                opItem.open();
         }
     };
 
@@ -54,7 +60,6 @@ public class PopMenuManager
     };
 
 
-
     static
     {
         classMenuMap = new HashMap<>();
@@ -62,7 +67,6 @@ public class PopMenuManager
         setupDoorMenu();
         setupPickupableItemMenu();
         setupNPCMenu();
-
     }
 
     private static void setupItemMenu()
@@ -72,12 +76,13 @@ public class PopMenuManager
         classMenuMap.put(Item.class, itemMenu);
     }
 
+    // TODO: aggiungere chiusura
     private static void setupDoorMenu()
     {
         doorMenu = new JPopupMenu();
 
         doorMenu.add(new JMenuItem(OBSERVE_ACTION));
-        doorMenu.add(new JMenuItem(OPEN_ACTION));
+        doorMenu.add(new JMenuItem(OPEN_CLOSE_ACTION));
         classMenuMap.put(Door.class, doorMenu);
     }
 

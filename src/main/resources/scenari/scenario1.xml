@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<scenario>
+	<azione num="1">
+		<subject>nicolas</subject>
+		<method>move</method>
+		<param num="1">7</param>
+		<param num="2">13</param>
+		<param num="3">"absolute"</param>
+	</azione>
+	<azione num="2">
+		<subject>nicolas</subject>
+		<method>move</method>
+		<param num="1">14</param>
+		<param num="2">13</param>
+		<param num="3">"absolute"</param>
+    	</azione>
+</scenario>

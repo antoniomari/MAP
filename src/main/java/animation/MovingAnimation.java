@@ -17,13 +17,13 @@ import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class MovingAnimation
+public class MovingAnimation extends Animation
 {
     private JLabel label;
     private int delayMilliseconds;
     private final boolean initialDelay;
-    private AbsPosition initialCoord;
-    private AbsPosition finalCoord;
+    private final AbsPosition initialCoord;
+    private final AbsPosition finalCoord;
     private int numFrames;
     private List<AbsPosition> positionsList;
 
@@ -39,8 +39,8 @@ public class MovingAnimation
         @Override
         public void run()
         {
-
-            GameState.changeState(GameState.State.MOVING);
+            if(GameState.getState() != GameState.State.MOVING)
+                GameState.changeState(GameState.State.MOVING);
 
             boolean delay = initialDelay;
 
@@ -66,10 +66,24 @@ public class MovingAnimation
             // rimuovi animazione corrente dalla coda
             animationQueue.remove();
 
+
             if(animationQueue.isEmpty())
                 GameState.changeState(GameState.State.PLAYING);
             else
-                animationQueue.poll().start();
+            {
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+
+                MovingAnimation next = animationQueue.peek();
+                next.executeAnimation();
+            }
+
         }
     }
 
@@ -110,13 +124,6 @@ public class MovingAnimation
         double deltaX = (double)(finalX- initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;
 
-        //System.out.println("Initial: " + initialCoord);
-
-        //System.out.println("Final: " + finalCoord);
-        //System.out.println("dX = " + deltaX);
-        //System.out.println("dY = " + deltaY);
-
-
         positionsList = new ArrayList<>();
 
         int xIncrement;
@@ -133,16 +140,38 @@ public class MovingAnimation
 
     }
 
+    @Override
+    public String toString()
+    {
+        return "Animazione{" +
+                "initialCoord=" + initialCoord +
+                ", finalCoord=" + finalCoord +
+                '}';
+    }
+
     public void start()
     {
         if(animationQueue.isEmpty())
         {
+            System.out.println("Inizio " +  this);
+            executeAnimation();
             animationQueue.add(this);
-            new AnimationThread().start();
         }
         else
+        {
             animationQueue.add(this);
+        }
+    }
 
+    private void executeAnimation()
+    {
+        new AnimationThread().start();
+    }
+
+    @Override
+    public void addFrame(Image im)
+    {
+        // TODO: implementare
     }
 }
 

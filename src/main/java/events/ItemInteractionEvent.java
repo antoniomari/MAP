@@ -1,11 +1,12 @@
 package events;
 
 import animation.Animation;
+import animation.StillAnimation;
 import entity.items.Item;
 
 public class ItemInteractionEvent extends GameEvent
 {
-    private Animation animation;
+    private StillAnimation animation;
     private Type type;
 
     public enum Type
@@ -33,7 +34,7 @@ public class ItemInteractionEvent extends GameEvent
         itemInvolved = item;
     }
 
-    public ItemInteractionEvent(Item item, String toPrint, Animation animation)
+    public ItemInteractionEvent(Item item, String toPrint, StillAnimation animation)
     {
         super(toPrint);
         itemInvolved = item;
@@ -45,7 +46,7 @@ public class ItemInteractionEvent extends GameEvent
         return animation != null;
     }
 
-    public Animation getAnimation()
+    public StillAnimation getAnimation()
     {
         return animation;
     }

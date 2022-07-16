@@ -2,6 +2,7 @@ package events.executors;
 
 import GUI.MainFrame;
 import animation.Animation;
+import animation.StillAnimation;
 import entity.items.Item;
 import javax.swing.*;
 
@@ -15,12 +16,9 @@ public class AnimationExecutor extends Executor
         scalingFactor = mainFrame.getScalingFactor();
     }
 
-    public static void executeAnimation(Animation animation)
+    public static void executeAnimation(Item it, StillAnimation animation)
     {
-        Item itemToAnimate = animation.getItem();
-        JLabel labelToAnimate = gameScreenPanel.getLabelAssociated(itemToAnimate);
-        animation.setLabel(labelToAnimate);
-        animation.rescaleFrames(scalingFactor);
+        animation.compile(gameScreenPanel.getLabelAssociated(it), scalingFactor);
         animation.start();
     }
 }

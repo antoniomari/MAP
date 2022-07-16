@@ -29,7 +29,7 @@ public class EventHandler
     public static void executeItemInteractionEvent(ItemInteractionEvent e)
     {
         if (e.hasAnimation())
-            AnimationExecutor.executeAnimation(e.getAnimation());
+            AnimationExecutor.executeAnimation(e.getItemInvolved(), e.getAnimation());
         if (e.getType() == ItemInteractionEvent.Type.OBSERVE)
             TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
     }
@@ -63,6 +63,8 @@ public class EventHandler
         if(e.getType() == CharacterEvent.Type.MOVE)
         {
             CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getOldPosition(), e.getPosition());
+            System.out.println("Vecchia pos: " + e.getOldPosition());
+            System.out.println("Nuova pos: " + e.getPosition());
             // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
         else if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
