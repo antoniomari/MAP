@@ -11,7 +11,11 @@ import graphics.SpriteManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MovingAnimation
 {
@@ -26,12 +30,16 @@ public class MovingAnimation
     private static final int FPS = 144;
     private final double speed;
 
+    private static final Queue<MovingAnimation> animationQueue = new ConcurrentLinkedQueue<>();
+
 
     private class AnimationThread extends Thread // TODO trovare un modo per evitare che la stessa animazione venga eseguita contemporaneamente
     {
+
         @Override
         public void run()
         {
+
             GameState.changeState(GameState.State.MOVING);
 
             boolean delay = initialDelay;
@@ -55,7 +63,13 @@ public class MovingAnimation
                 }
             }
 
-            GameState.changeState(GameState.State.PLAYING);
+            // rimuovi animazione corrente dalla coda
+            animationQueue.remove();
+
+            if(animationQueue.isEmpty())
+                GameState.changeState(GameState.State.PLAYING);
+            else
+                animationQueue.poll().start();
         }
     }
 
@@ -121,7 +135,14 @@ public class MovingAnimation
 
     public void start()
     {
-        new AnimationThread().start();
+        if(animationQueue.isEmpty())
+        {
+            animationQueue.add(this);
+            new AnimationThread().start();
+        }
+        else
+            animationQueue.add(this);
+
     }
 }
 
