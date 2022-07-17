@@ -81,13 +81,13 @@ public class GameScreenPanel extends JLayeredPane
         addGameCharacter(ch, pos);
     }
 
-    public void moveCharacter(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, boolean withAnimation)
+    public void moveCharacter(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean withAnimation)
     {
 
         MovingAnimation animation;
         // crea animazione
         if(withAnimation)
-            animation = createMoveAnimation(ch, initialPos, finalPos);
+            animation = createMoveAnimation(ch, initialPos, finalPos, millisecondWaitEnd);
         else
             animation = null;
 
@@ -95,10 +95,10 @@ public class GameScreenPanel extends JLayeredPane
     }
 
 
-    public MovingAnimation createMoveAnimation(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos)
+    public MovingAnimation createMoveAnimation(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd)
     {
         return new MovingAnimation(characterLabelMap.get(ch),
-                                    initialPos, finalPos, true);
+                                    initialPos, finalPos, millisecondWaitEnd, true, ((NPC) ch).getMovingFrames());
     }
 
     /**
@@ -193,7 +193,7 @@ public class GameScreenPanel extends JLayeredPane
 
         // controlla che ch sia presente effettivamente nella stanza
         if(!characterLabelMap.containsKey(ch))
-            throw new IllegalArgumentException("Item non presente nella stanza");
+            throw new IllegalArgumentException("Personaggio non presente nella stanza");
 
         updateSpritePosition(characterLabelMap.get(ch), finalPos, anim, false);
 

@@ -9,6 +9,7 @@ public class CharacterEvent extends GameEvent
     private BlockPosition oldPosition;
     private BlockPosition position;
     private String sentence;
+    private int millisecondWaitEnd;
 
     public enum Type
     {
@@ -45,13 +46,14 @@ public class CharacterEvent extends GameEvent
         this.characterInvolved = ch;
     }
 
-    public CharacterEvent(GameCharacter ch, BlockPosition oldPos, BlockPosition newPos, Type type)
+    public CharacterEvent(GameCharacter ch, BlockPosition oldPos, BlockPosition newPos, int millisecondWaitEnd, Type type)
     {
         super(type.toString());
         this.type = type;
         this.oldPosition = oldPos;
         this.position = newPos;
         this.characterInvolved = ch;
+        this.millisecondWaitEnd = millisecondWaitEnd;
     }
 
     public CharacterEvent(GameCharacter ch, String sentence, Type type)
@@ -76,6 +78,12 @@ public class CharacterEvent extends GameEvent
     {
         return this.position;
     }
+
+    public int getMillisecondWaitEnd()
+    {
+        return  millisecondWaitEnd;
+    }
+
 
     public String getEventString()
     {

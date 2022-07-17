@@ -1,17 +1,43 @@
 <?xml version="1.0"?>
 <scenario>
 	<azione num="1">
-		<subject>nicolas</subject>
+		<subject>Nicolas</subject>
 		<method>move</method>
-		<param num="1">7</param>
-		<param num="2">13</param>
-		<param num="3">"absolute"</param>
+		<x>7</x>
+		<y>13</y>
+		<how>absolute</how>
+		<finalWait>1000</finalWait>
 	</azione>
 	<azione num="2">
-		<subject>nicolas</subject>
+		<subject>Nicolas</subject>
 		<method>move</method>
-		<param num="1">14</param>
-		<param num="2">13</param>
-		<param num="3">"absolute"</param>
+		<x>7</x>
+		<y>9</y>
+		<how>absolute</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione num="3">
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>9</x>
+		<y>9</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="4">
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>7</x>
+		<y>13</y>
+		<how>absolute</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione num="5">
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>14</x>
+		<y>13</y>
+		<how>absolute</how>
+		<finalWait>0</finalWait>
     	</azione>
 </scenario>

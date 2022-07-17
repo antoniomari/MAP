@@ -4,7 +4,9 @@ import entity.characters.GameCharacter;
 import events.CharacterEvent;
 import events.EventHandler;
 import events.ItemInteractionEvent;
+import general.GameError;
 import general.GameException;
+import general.GameManager;
 import graphics.SpriteManager;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
@@ -56,6 +58,9 @@ public class GamePiece
 
         this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+
+        // aggiungi nel gameManager
+        GameManager.addPiece(this);
     }
 
 
@@ -76,6 +81,9 @@ public class GamePiece
 
         this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+
+        // aggiungi nel gameManager
+        GameManager.addPiece(this);
     }
 
     public String toString()
@@ -166,14 +174,17 @@ public class GamePiece
         return scaledSpriteIcon;
     }
 
-
+    public void updatePosition(BlockPosition newPosition)
+    {
+        updatePosition(newPosition, 0);
+    }
     /**
      * Imposta la posizione (in blocchi) di this all'interno
      * della stanza in cui è contenuto
      *
      * @param newPosition posizione del blocco in basso a sinistra del GamePiece
      */
-    public void updatePosition(BlockPosition newPosition)
+    public void updatePosition(BlockPosition newPosition, int millisecondWaitEnd)
     {
         Objects.requireNonNull(newPosition);
 
@@ -185,14 +196,17 @@ public class GamePiece
         // aggiorna posizione nella stanza
         try
         {
+            System.out.println("milli: " + millisecondWaitEnd);
+            // TODO: invalidare l'animazione sbagliata
             locationRoom.setPiecePosition(this, newPosition);
             if(this instanceof GameCharacter)
                 EventHandler.sendEvent(new CharacterEvent((GameCharacter) this,
-                                        oldPosition, newPosition, CharacterEvent.Type.MOVE));
+                                        oldPosition, newPosition, millisecondWaitEnd, CharacterEvent.Type.MOVE));
         }
-        catch(GameException ignored)
+        catch(GameException e)
         {
-            System.out.println(ignored.getMessage()); // TODO: aggiustare
+            // TODO : controllare
+            throw new GameError(e);
         }
     }
 

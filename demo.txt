@@ -1,0 +1,12 @@
+[ANIMATO]: pg1 dice che vuole salire
+[GIOCATO]: prova e non riesce, bloccata (osserva ascensore: dice numero da chiamare)
+lettura del numero --> innesca [ANIMATO]: prova a chiamare, non ho telefono. dice "magari esplosione"
+[GIOCATO]: barile non utilizzabile da solo, osserva -> "attenzione, esplosivo, infiammabile, dangeer...."
+	mobile: apri -> show inventory (chest minecraft, puoi prendere le cose, game state open chest)
+usa pulsante dall'inventario -> scenario animato che fa sì che pg2 entri in scena e parli
+
+[GIOCATO]: usa ciambella con tecnico -> [ANIMATO] ...
+[GIOCATO]:  tappeto viene spostato -> compaiono oggetti -> prendi le cose e conseguenza: si addormenta pg2
+usa accendino con barile -> esplosione (animazione + effetto animato)
+[animato] pg2 si sveglia 
+[giocato] dai cacciavite a pg2 -> animato -> giocato entra nell'ascensore -> animato fine

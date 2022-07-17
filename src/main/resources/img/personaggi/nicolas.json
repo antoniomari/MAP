@@ -1,0 +1,41 @@
+{
+  "Nicolas":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "moving1":
+  {
+    "x": 96,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "moving2":
+  {
+    "x": 192,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "moving3":
+  {
+    "x": 288,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "moving4":
+  {
+    "x": 0,
+    "y": 384,
+    "width": 96,
+    "height": 96
+  }
+}

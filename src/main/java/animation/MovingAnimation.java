@@ -8,12 +8,11 @@ import entity.GamePiece;
 import entity.rooms.BlockPosition;
 import graphics.SpriteManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -29,8 +28,14 @@ public class MovingAnimation extends Animation
 
     private static final int FPS = 144;
     private final double speed;
+    private final int millisecondWaitEnd;
 
-    private static final Queue<MovingAnimation> animationQueue = new ConcurrentLinkedQueue<>();
+    private List<Image> frames;
+    private List<Icon> frameIcons;
+    private int currentIndex;
+
+    private static final Map<JLabel, Queue<MovingAnimation>> animationQueueMap = new HashMap<>();
+    //private static final Queue<MovingAnimation> animationQueue = new ConcurrentLinkedQueue<>();
 
 
     private class AnimationThread extends Thread // TODO trovare un modo per evitare che la stessa animazione venga eseguita contemporaneamente
@@ -53,8 +58,6 @@ public class MovingAnimation extends Animation
                     else
                         delay = true;
 
-                    // System.out.println("X e Y: " + c);
-
                     GameScreenManager.updateLabelPosition(label, c);
                 }
                 catch (InterruptedException e)
@@ -64,22 +67,24 @@ public class MovingAnimation extends Animation
             }
 
             // rimuovi animazione corrente dalla coda
+            Queue<MovingAnimation> animationQueue = animationQueueMap.get(label);
             animationQueue.remove();
 
 
+            // TODO: improtante, syncronized sul game state
             if(animationQueue.isEmpty())
                 GameState.changeState(GameState.State.PLAYING);
             else
             {
                 try
                 {
-                    Thread.sleep(1000);
+                    // aspetta quanto richiesto prima di iniziare la successiva
+                    Thread.sleep(millisecondWaitEnd);
                 }
                 catch (InterruptedException e)
                 {
                     e.printStackTrace();
                 }
-
                 MovingAnimation next = animationQueue.peek();
                 next.executeAnimation();
             }
@@ -88,12 +93,12 @@ public class MovingAnimation extends Animation
     }
 
 
-    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos,  boolean initialDelay)
+    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean initialDelay, List<Image> frames)
     {
-        this(label, initialPos, finalPos, initialDelay, 1.0);
+        this(label, initialPos, finalPos, millisecondWaitEnd, initialDelay,1.0, frames);
     }
 
-    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos,  boolean initialDelay, double speed)
+    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos,  int millisecondWaitEnd, boolean initialDelay, double speed, List<Image> frames)
     {
         this.label = label;
         this.initialDelay = initialDelay;
@@ -104,9 +109,34 @@ public class MovingAnimation extends Animation
         // coordinate finali dell'angolo in basso a sinistra
         this.finalCoord = GameScreenManager.calculateCoordinates(finalPos);
 
+
         this.speed = speed;
+        this.millisecondWaitEnd = millisecondWaitEnd;
+
+        this.frames = frames;
+        this.currentIndex = 0;
+
+        // calcola rescaling factor
+        frameIcons = new ArrayList<>(frames.size());
+        double rescalingFactor = (double) label.getIcon().getIconWidth() / frames.get(0).getWidth(null);
+
+        for(Image i : frames)
+            frameIcons.add(SpriteManager.rescaledImageIcon(i, rescalingFactor));
+
 
         initCoordList();
+    }
+
+    private Icon getNextIcon()
+    {
+        if (currentIndex < frameIcons.size() - 1)
+            return frameIcons.get(currentIndex++);
+        else
+        {
+            currentIndex = 0;
+            return frameIcons.get(frameIcons.size() - 1);
+
+        }
     }
 
     private void initCoordList()
@@ -151,15 +181,26 @@ public class MovingAnimation extends Animation
 
     public void start()
     {
-        if(animationQueue.isEmpty())
+        Queue<MovingAnimation> workingQueue;
+
+        if(!animationQueueMap.containsKey(label))
         {
-            System.out.println("Inizio " +  this);
-            executeAnimation();
-            animationQueue.add(this);
+            workingQueue = new ConcurrentLinkedQueue<>();
+            animationQueueMap.put(label, workingQueue);
         }
         else
         {
-            animationQueue.add(this);
+            workingQueue = animationQueueMap.get(label);
+        }
+
+        if(workingQueue.isEmpty())
+        {
+            workingQueue.add(this);
+            executeAnimation();
+        }
+        else
+        {
+            workingQueue.add(this);
         }
     }
 

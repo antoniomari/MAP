@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<stanza>
+    <oggetto nome="barile"></oggetto>
+    <oggetto nome="tappeto">
+        <oggetto nome="cacciavite">c</oggetto>
+        <oggetto nome="accendino">gf</oggetto>
+    </oggetto>
+    <oggetto name="mobile">
+        <oggetto>tasto rosso</oggetto>
+        <oggetto>ciambella viola</oggetto>
+    </oggetto>
+</stanza>
