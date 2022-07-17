@@ -46,19 +46,20 @@ public abstract class Animation
                 GameState.changeState(GameState.State.PLAYING);
             else
             {
-                try
-                {
-                    Thread.sleep(millisecondWaitEnd);
 
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
 
                 // TODO: ricontrollare IMPORTANTE !!!
                 //Animation next = animationQueue.peek();
                 //next.executeAnimation();
+            }
+
+            try
+            {
+                Thread.sleep(millisecondWaitEnd);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
             }
 
             // template

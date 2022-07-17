@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<oggetti>
+    <oggetto nome="Barile">
+        <classe>PickupableItem</classe>
+        <descrizione>Un barile scemo come basile</descrizione>
+    </oggetto>
+    <oggetto nome="Ascensore">
+        <classe>Door</classe>
+        <descrizione>Un ascensore per salire</descrizione>
+    </oggetto>
+</oggetti>
+
+

@@ -1,6 +1,5 @@
 package events;
 
-import animation.StillAnimation;
 import entity.items.Item;
 
 import java.awt.*;
@@ -17,7 +16,7 @@ public class ItemInteractionEvent extends GameEvent
         {
             public String toString()
             {
-                return "aggiunto alla stanza";
+                return "osservata";
             }
         }
     }

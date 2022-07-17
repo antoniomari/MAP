@@ -1,12 +1,21 @@
 <?xml version="1.0"?>
-<stanza>
-    <oggetto nome="barile"></oggetto>
-    <oggetto nome="tappeto">
-        <oggetto nome="cacciavite">c</oggetto>
-        <oggetto nome="accendino">gf</oggetto>
-    </oggetto>
-    <oggetto name="mobile">
-        <oggetto>tasto rosso</oggetto>
-        <oggetto>ciambella viola</oggetto>
-    </oggetto>
+<stanza nome="Demo">
+    <png>/img/LabPav.png</png>
+    <json>/img/lab1.json"</json>
+    <oggetti>
+        <oggetto nome="Barile">
+            <x>18</x>
+            <y>12</y>
+        </oggetto>
+        <oggetto nome="Ascensore">
+            <x>14</x>
+            <y>7</y>
+        </oggetto>
+    </oggetti>
+    <personaggi>
+        <personaggio nome="Schwartz">
+            <x>12</x>
+            <y>10</y>
+        </personaggio>
+    </personaggi>
 </stanza>

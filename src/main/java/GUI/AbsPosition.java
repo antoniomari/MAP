@@ -26,4 +26,15 @@ public class AbsPosition
     {
         return y;
     }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o instanceof AbsPosition)
+        {
+            return x == ((AbsPosition) o).getX() && y == ((AbsPosition) o).getY();
+        }
+
+        return false;
+    }
 }

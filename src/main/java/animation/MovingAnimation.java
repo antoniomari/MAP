@@ -32,7 +32,7 @@ public class MovingAnimation extends Animation
     public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean initialDelay, List<Image> frames)
     {
         // TODO: aggiustare speed
-        this(label, initialPos, finalPos, millisecondWaitEnd, initialDelay,1.0, frames);
+        this(label, initialPos, finalPos, millisecondWaitEnd, initialDelay,0.5, frames);
     }
 
     public MovingAnimation(JLabel label, BlockPosition initialPos,
@@ -106,7 +106,6 @@ public class MovingAnimation extends Animation
             {
                 if(positionsList.indexOf(c) % 10 == 0)
                 {
-                    System.out.println("Cambiato icona");
                     label.setIcon(getNextIcon());
                 }
 
