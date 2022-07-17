@@ -6,6 +6,7 @@ import GUI.GameScreenPanel;
 import GUI.gamestate.GameState;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
+import general.GameManager;
 import graphics.SpriteManager;
 
 import javax.imageio.ImageIO;
@@ -123,6 +124,12 @@ public class MovingAnimation extends Animation
 
             label.setIcon(frameIcons.get(frameIcons.size() -1));
         }
+    }
+
+    @Override
+    protected void terminate()
+    {
+        GameManager.continueScenario();
     }
 
 }

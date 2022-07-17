@@ -43,4 +43,10 @@ public class StillAnimation extends Animation
             }
         }
     }
+
+    @Override
+    protected void terminate()
+    {
+        // do nothing
+    }
 }

@@ -11,6 +11,7 @@ import entity.items.PickupableItem;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
+import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
@@ -215,7 +216,7 @@ public class MainFrame extends JFrame {
 
         ActionSequence a = ActionSequence.loadScenario("src/main/resources/scenari/scenario1.xml");
 
-        a.performActions();
+        GameManager.startAnimatedScenario(a);
 
     }
 

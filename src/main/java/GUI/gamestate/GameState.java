@@ -3,6 +3,7 @@ package GUI.gamestate;
 import GUI.*;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
+import general.GameManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -35,7 +36,7 @@ public class GameState
         ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> mainFrame.showMenu(true), null);
         mainFrame.addKeyListener(ESC_LISTENER);
 
-        SPACE_LISTENER = new GameKeyListener(KeyEvent.VK_SPACE, mainFrame.getTextBarPanel()::hideTextBar, null);
+        // SPACE_LISTENER = new GameKeyListener(KeyEvent.VK_SPACE, () -> {mainFrame.getTextBarPanel().hideTextBar(); GameManager.continueScenario();}, null);
 
         DROP_LISTENER = new GameMouseListener(MouseEvent.BUTTON1,
                 () ->
@@ -59,7 +60,8 @@ public class GameState
                 , null);
         mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
 
-        mainFrame.addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, mainFrame.getTextBarPanel()::hideTextBar, () -> changeState(State.PLAYING), State.TEXT_BAR));
+        // TODO: migliora
+        mainFrame.addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, () -> {mainFrame.getTextBarPanel().hideTextBar(); changeState(State.PLAYING); GameManager.continueScenario();}, null, State.TEXT_BAR));
 
     }
 

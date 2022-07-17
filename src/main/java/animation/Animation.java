@@ -41,23 +41,28 @@ public abstract class Animation
             animationQueue.remove();
 
 
-            // TODO: improtante, syncronized sul game state
+            // TODO: importante, syncronized sul game state
             if(animationQueue.isEmpty())
                 GameState.changeState(GameState.State.PLAYING);
             else
             {
                 try
                 {
-                    // aspetta quanto richiesto prima di iniziare la successiva
                     Thread.sleep(millisecondWaitEnd);
+
                 }
                 catch (InterruptedException e)
                 {
                     e.printStackTrace();
                 }
-                Animation next = animationQueue.peek();
-                next.executeAnimation();
+
+                // TODO: ricontrollare IMPORTANTE !!!
+                //Animation next = animationQueue.peek();
+                //next.executeAnimation();
             }
+
+            // template
+            terminate();
 
         }
     }
@@ -127,6 +132,8 @@ public abstract class Animation
     }
 
     protected abstract void execute();
+
+    protected abstract void terminate();
 
 
 

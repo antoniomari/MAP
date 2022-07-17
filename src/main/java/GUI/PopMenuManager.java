@@ -1,5 +1,6 @@
 package GUI;
 
+import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.items.*;
 import javax.swing.*;
@@ -55,7 +56,7 @@ public class PopMenuManager
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            ((NPC) selected).speak();
+            ((GameCharacter) selected).speak();
         }
     };
 

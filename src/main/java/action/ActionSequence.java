@@ -1,5 +1,6 @@
 package action;
 
+import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.rooms.BlockPosition;
 import general.GameManager;
@@ -17,11 +18,13 @@ import java.util.List;
 public class ActionSequence
 {
     private final List<Runnable> actionList;
+    private int index;
 
 
     public ActionSequence()
     {
         actionList = new ArrayList<>();
+        index = 0;
     }
 
     public void append(Runnable action)
@@ -29,12 +32,19 @@ public class ActionSequence
         actionList.add(action);
     }
 
-    public void performActions()
+    public void runAction()
     {
-        for(Runnable action : actionList)
+        if(!isConcluded())
         {
-            action.run();
+            System.out.println("Runnando azione");
+            actionList.get(index++).run();
         }
+
+    }
+
+    public boolean isConcluded()
+    {
+        return index == actionList.size();
     }
 
     public static ActionSequence loadScenario(String scenarioPath)
@@ -74,6 +84,8 @@ public class ActionSequence
 
                 if (methodName.equals("move"))
                     scenarioSequence.append(parseMove(eAction));
+                if (methodName.equals("speak"))
+                    scenarioSequence.append(parseSpeak(eAction));
 
             }
 
@@ -91,7 +103,7 @@ public class ActionSequence
     {
 
         String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
-        NPC subject = (NPC) GameManager.getPiece(subjectName);
+        GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
 
         // costruisci block position
         int x = Integer.parseInt(eActionNode.getElementsByTagName("x").item(0).getTextContent());
@@ -107,6 +119,18 @@ public class ActionSequence
 
         // esegui comando
         return () -> subject.move(new BlockPosition(x, y), type, millisecondEndWait);
+    }
+
+    private static Runnable parseSpeak(Element eActionNode)
+    {
+        String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
+        GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
+
+        // ricava modalità
+        String sentence = eActionNode.getElementsByTagName("sentence").item(0).getTextContent();
+
+        // esegui comando
+        return () -> subject.speak(sentence);
     }
 
 }

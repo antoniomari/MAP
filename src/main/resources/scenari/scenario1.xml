@@ -10,11 +10,8 @@
 	</azione>
 	<azione num="2">
 		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>7</x>
-		<y>9</y>
-		<how>absolute</how>
-		<finalWait>500</finalWait>
+		<method>speak</method>
+		<sentence>Ciao, questa è una prova</sentence>
 	</azione>
 	<azione num="3">
 		<subject>Nicolas</subject>
@@ -22,22 +19,6 @@
 		<x>9</x>
 		<y>9</y>
 		<how>absolute</how>
-		<finalWait>2000</finalWait>
-	</azione>
-	<azione num="4">
-		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>7</x>
-		<y>13</y>
-		<how>absolute</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione num="5">
-		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>14</x>
-		<y>13</y>
-		<how>absolute</how>
 		<finalWait>0</finalWait>
-    	</azione>
+	</azione>
 </scenario>
