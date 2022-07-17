@@ -1,6 +1,6 @@
 package GUI;
 
-import animation.Animation;
+
 import animation.StillAnimation;
 import entity.characters.PlayingCharacter;
 import graphics.SpriteManager;
@@ -41,8 +41,8 @@ public class InventoryPanel extends JLayeredPane
     private final static int NO_ITEM = -1;
 
     // Animazioni
-    private final static StillAnimation UP_BUTTON_PRESS;
-    private final static StillAnimation DOWN_BUTTON_PRESS;
+    private StillAnimation UP_BUTTON_PRESS;
+    private StillAnimation DOWN_BUTTON_PRESS;
 
 
     //**************************************************
@@ -111,15 +111,6 @@ public class InventoryPanel extends JLayeredPane
         BAR_IMAGE = SpriteManager.loadSpriteSheet(BAR_PATH);
         BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
         SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
-
-        // Creazione animazioni
-        UP_BUTTON_PRESS = new StillAnimation(100, false);
-        UP_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "upPressed"));
-        UP_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"));
-
-        DOWN_BUTTON_PRESS = new StillAnimation(100, false);
-        DOWN_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "downPressed"));
-        DOWN_BUTTON_PRESS.addFrame(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"));
 
     }
 
@@ -264,9 +255,19 @@ public class InventoryPanel extends JLayeredPane
 
     private void initAnimation()
     {
-        // riscalamento frame animazioni
-        UP_BUTTON_PRESS.compile(upButtonLabel, scalingFactor);
-        DOWN_BUTTON_PRESS.compile(downButtonLabel, scalingFactor);
+
+        // Creazione animazioni
+        List<Image> upFrames = new ArrayList<>();
+        upFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "upPressed"));
+        upFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"));
+
+        UP_BUTTON_PRESS = new StillAnimation(upButtonLabel, upFrames, 100, false);
+
+        List<Image> downFrames = new ArrayList<>();
+        downFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "downPressed"));
+        downFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"));
+
+        DOWN_BUTTON_PRESS = new StillAnimation(downButtonLabel, downFrames, 100, false);
     }
 
     /**

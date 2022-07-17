@@ -31,4 +31,13 @@ public class BlockPosition
     {
         return y;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o instanceof BlockPosition)
+            return x == ((BlockPosition) o).x && y == ((BlockPosition) o).y;
+        else
+            return false;
+    }
 }

@@ -1,12 +1,14 @@
 package events;
 
-import animation.Animation;
 import animation.StillAnimation;
 import entity.items.Item;
 
+import java.awt.*;
+import java.util.List;
+
 public class ItemInteractionEvent extends GameEvent
 {
-    private StillAnimation animation;
+    private List<Image> frames;
     private Type type;
 
     public enum Type
@@ -34,21 +36,21 @@ public class ItemInteractionEvent extends GameEvent
         itemInvolved = item;
     }
 
-    public ItemInteractionEvent(Item item, String toPrint, StillAnimation animation)
+    public ItemInteractionEvent(Item item, String toPrint, List<Image> frames)
     {
         super(toPrint);
         itemInvolved = item;
-        this.animation = animation;
+        this.frames = frames;
     }
 
     public boolean hasAnimation()
     {
-        return animation != null;
+        return frames != null;
     }
 
-    public StillAnimation getAnimation()
+    public List<Image> getFrames()
     {
-        return animation;
+        return frames;
     }
 
     public Type getType()

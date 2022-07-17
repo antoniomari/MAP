@@ -16,40 +16,14 @@ import java.util.Random;
 
 public class NPC extends GameCharacter
 {
-    private String jsonPath;
-    private BufferedImage spritesheet;
-    private List<Image> movingFrames;
-
-    public NPC(String name, String spritePath)
-    {
-        super(name, spritePath);
-    }
 
     public NPC(String name, String spritesheetPath, String jsonPath)
     {
-        super(name, SpriteManager.loadSpriteSheet(spritesheetPath), jsonPath);
-        spritesheet = SpriteManager.loadSpriteSheet(spritesheetPath);
-        movingFrames = new ArrayList<>();
-        this.jsonPath = jsonPath;
+        super(name, spritesheetPath, jsonPath);
 
-        initMovingFrames();
         // TODO: ottimizzare
     }
 
-    public List<Image> getMovingFrames()
-    {
-        return movingFrames;
-    }
-
-
-    private void initMovingFrames()
-    {
-        // TODO: generalizzare
-        for(int i = 1; i <= 4; i++)
-        {
-            movingFrames.add(SpriteManager.loadSpriteByName(spritesheet, jsonPath, "moving" + i));
-        }
-    }
 
 
     public void move(BlockPosition finalPos, String type, int millisecondWaitEnd)

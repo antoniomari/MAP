@@ -98,7 +98,7 @@ public class GameScreenPanel extends JLayeredPane
     public MovingAnimation createMoveAnimation(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd)
     {
         return new MovingAnimation(characterLabelMap.get(ch),
-                                    initialPos, finalPos, millisecondWaitEnd, true, ((NPC) ch).getMovingFrames());
+                                    initialPos, finalPos, millisecondWaitEnd, true, ch.getMovingFrames());
     }
 
     /**

@@ -1,6 +1,5 @@
 package entity.items;
 
-import animation.Animation;
 import animation.StillAnimation;
 import events.EventHandler;
 import events.ItemInteractionEvent;
@@ -8,6 +7,8 @@ import graphics.SpriteManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Door extends Item implements Openable, Lockable
 {
@@ -25,9 +26,30 @@ public class Door extends Item implements Openable, Lockable
     private final static BufferedImage SPRITESHEET = SpriteManager.loadSpriteSheet(SPRITESHEET_PATH);
 
     // ANIMAZIONI
-    private static final StillAnimation OPEN_ANIMATION = createOpenAnimation(); // rendere static
-    private static final StillAnimation CLOSE_ANIMATION = createCloseAnimation();
+    private static final List<Image> OPEN_FRAMES;
+    private static final List<Image> CLOSE_FRAMES;
 
+    static
+    {
+        // inizializzazione frames
+        Image closed = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "closed");
+        Image open1 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open1");
+        Image open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open2");
+        Image open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open3");
+
+        OPEN_FRAMES = new ArrayList<>();
+        OPEN_FRAMES.add(closed);
+        OPEN_FRAMES.add(open1);
+        OPEN_FRAMES.add(open2);
+        OPEN_FRAMES.add(open3);
+
+        CLOSE_FRAMES = new ArrayList<>();
+        CLOSE_FRAMES.add(open3);
+        CLOSE_FRAMES.add(open2);
+        CLOSE_FRAMES.add(open1);
+        CLOSE_FRAMES.add(closed);
+
+    }
     public Door(String name, String description)
     {
         super("Porta", description, SPRITESHEET, JSON_PATH);
@@ -44,58 +66,25 @@ public class Door extends Item implements Openable, Lockable
         if(this.state == CLOSED)
         {
             this.state = OPEN;
-            EventHandler.sendEvent(new ItemInteractionEvent(this, "La porta è aperta", OPEN_ANIMATION));
+            EventHandler.sendEvent(new ItemInteractionEvent(this, "La porta è aperta", OPEN_FRAMES));
         }
 
         // TODO: cambio sprite
         // else // if(this.state == BLOCKED)
-
-
     }
 
     @Override
-    public StillAnimation getOpenAnimation()
+    public List<Image> getOpenFrames()
     {
-        return OPEN_ANIMATION;
+        return OPEN_FRAMES;
     }
 
     @Override
-    public StillAnimation getCloseAnimation()
+    public List<Image> getCloseFrames()
     {
-        return CLOSE_ANIMATION;
+        return CLOSE_FRAMES;
     }
 
-    private static StillAnimation createOpenAnimation()
-    {
-        BufferedImage closed = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "closed");
-        BufferedImage open1 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open1");
-        BufferedImage open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open2");
-        BufferedImage open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open3");
-
-        StillAnimation openAnimation = new StillAnimation( 500, true);
-        openAnimation.addFrame(closed);
-        openAnimation.addFrame(open1);
-        openAnimation.addFrame(open2);
-        openAnimation.addFrame(open3);
-
-        return openAnimation;
-    }
-
-    private static StillAnimation createCloseAnimation()
-    {
-        BufferedImage closed = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "closed");
-        BufferedImage open1 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open1");
-        BufferedImage open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open2");
-        BufferedImage open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open3");
-
-        StillAnimation openAnimation = new StillAnimation( 500, true);
-        openAnimation.addFrame(open3);
-        openAnimation.addFrame(open2);
-        openAnimation.addFrame(open1);
-        openAnimation.addFrame(closed);
-
-        return openAnimation;
-    }
 
     @Override
     public boolean isOpen()
@@ -113,7 +102,7 @@ public class Door extends Item implements Openable, Lockable
             String result = "La porta è chiusa";
             this.state = CLOSED;
 
-            EventHandler.sendEvent(new ItemInteractionEvent(this, result, CLOSE_ANIMATION));
+            EventHandler.sendEvent(new ItemInteractionEvent(this, result, CLOSE_FRAMES));
         }
 
     }

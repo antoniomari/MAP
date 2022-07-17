@@ -11,71 +11,36 @@ import java.util.Objects;
 // animazione statica
 public class StillAnimation extends Animation
 {
-    private List<Image> frames;
-    private List<Icon> framesIcon;
-    private JLabel label;
-    private int delayMilliseconds;
-    private Item item;
+    private final int delayMilliseconds;
     private final boolean initialDelay;
 
-    private class AnimationThread extends Thread // TODO trovare un modo per evitare che la stessa animazione venga eseguita contemporaneamente
+
+    public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
     {
-        @Override
-        public void run()
-        {
-            boolean delay = initialDelay;
-
-            for(Icon frame : framesIcon)
-            {
-                try
-                {
-                    if(delay)
-                        Thread.sleep(delayMilliseconds);
-                    else
-                        delay = true;
-
-                    label.setIcon(frame);
-                } catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public StillAnimation(int delayMilliseconds, boolean initialDelay)
-    {
-        frames = new ArrayList<>();
-        framesIcon = new ArrayList<>();
+        super(label, frames);
         this.delayMilliseconds = delayMilliseconds;
         this.initialDelay = initialDelay;
     }
 
-    public void compile(JLabel label, double rescalingFactor)
+    @Override
+    protected void execute()
     {
-        this.label = label;
-        rescaleFrames(rescalingFactor);
-    }
+        boolean delay = initialDelay;
 
-
-    public void addFrame(Image frame)
-    {
-        Objects.requireNonNull(frame);
-        frames.add(frame);
-    }
-
-    private void rescaleFrames(double rescalingFactor)
-    {
-        framesIcon = new ArrayList<>();
-
-        for(Image frame : frames)
+        for(Icon frame : frameIcons)
         {
-            framesIcon.add(SpriteManager.rescaledImageIcon(frame, rescalingFactor));
-        }
-    }
+            try
+            {
+                if(delay)
+                    Thread.sleep(delayMilliseconds);
+                else
+                    delay = true;
 
-    public void start()
-    {
-        new AnimationThread().start();
+                label.setIcon(frame);
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }

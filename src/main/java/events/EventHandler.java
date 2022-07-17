@@ -29,7 +29,7 @@ public class EventHandler
     public static void executeItemInteractionEvent(ItemInteractionEvent e)
     {
         if (e.hasAnimation())
-            AnimationExecutor.executeAnimation(e.getItemInvolved(), e.getAnimation());
+            AnimationExecutor.executeAnimation(e.getItemInvolved(), e.getFrames());
         if (e.getType() == ItemInteractionEvent.Type.OBSERVE)
             TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
     }

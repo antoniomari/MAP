@@ -1,10 +1,11 @@
 package events.executors;
 
 import GUI.MainFrame;
-import animation.Animation;
 import animation.StillAnimation;
 import entity.items.Item;
-import javax.swing.*;
+import java.util.List;
+
+import java.awt.*;
 
 public class AnimationExecutor extends Executor
 {
@@ -16,9 +17,10 @@ public class AnimationExecutor extends Executor
         scalingFactor = mainFrame.getScalingFactor();
     }
 
-    public static void executeAnimation(Item it, StillAnimation animation)
+
+    public static void executeAnimation(Item it, List<Image> frames)
     {
-        animation.compile(gameScreenPanel.getLabelAssociated(it), scalingFactor);
-        animation.start();
+        new StillAnimation(gameScreenPanel.getLabelAssociated(it), frames, 200, true).start();
     }
+
 }
