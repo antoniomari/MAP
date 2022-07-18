@@ -12,9 +12,8 @@
         <descrizione>Un tappeto dalla forma strana</descrizione>
         <canUse>true</canUse>
         <onUse>
-            <effetto>
-                <executeScenario>src/main/resources/scenari/tappetoUse.xml</executeScenario>
-            </effetto>
+            <actionName>Solleva</actionName>
+            <effetto>src/main/resources/scenari/tappetoUse.xml</effetto>
         </onUse>
     </oggetto>
     <oggetto nome="Accendino">

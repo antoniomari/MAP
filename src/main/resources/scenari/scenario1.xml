@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
-	<tipo>sequenziale</tipo>
+	<mode>sequence</mode>
 	<azione num="1">
 		<subject>Nicolas</subject>
 		<method>move</method>

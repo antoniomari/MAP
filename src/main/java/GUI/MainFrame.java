@@ -205,7 +205,7 @@ public class MainFrame extends JFrame {
         barile1.addInRoom(currentRoom, new BlockPosition(18, 12));
 
 
-        Door door = new Door("Porta", "Una porta spicolosa.", () -> {GameManager.startAnimatedScenario(ActionSequence.loadScenario("src/main/resources/scenari/fine.xml"));});
+        Door door = new Door("Porta", "Una porta spicolosa.", () -> {GameManager.startScenario(ActionSequence.loadScenario("src/main/resources/scenari/fine.xml"));});
 
         door.addInRoom(currentRoom, new BlockPosition(14, 7));
 
@@ -225,7 +225,7 @@ public class MainFrame extends JFrame {
 
         ActionSequence a = ActionSequence.loadScenario("src/main/resources/scenari/scenario1.xml");
 
-        GameManager.startAnimatedScenario(a);
+        GameManager.startScenario(a);
 
     }
 

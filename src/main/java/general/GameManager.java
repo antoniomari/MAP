@@ -18,20 +18,19 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 public class GameManager
 {
     private static final Map<String, Room> rooms = new HashMap<>();
     private static final Map<String, GamePiece> pieces = new HashMap<>();
 
-    private static ActionSequence currentAnimatedScenario;
+    private static Stack<ActionSequence> scenarioStack = new Stack<>();
 
 
     public static void addPiece(GamePiece p)
     {
         pieces.put(p.getName(), p);
-
-        System.out.println(pieces);
     }
 
     public static void addRoom(Room room)
@@ -44,16 +43,30 @@ public class GameManager
         return rooms.get(roomName);
     }
 
-    public static void startAnimatedScenario(ActionSequence scenario)
+    public static void startScenario(ActionSequence scenario)
     {
-        currentAnimatedScenario = scenario;
-        currentAnimatedScenario.runAction();
+        scenarioStack.push(scenario);
+
+        if(scenario.getMode() == ActionSequence.Mode.SEQUENCE)
+            scenario.runAction();
+        else
+        {
+            scenario.runAll();
+            scenarioStack.pop();
+        }
+
     }
 
     public static synchronized void continueScenario()
     {
-       if(!currentAnimatedScenario.isConcluded())
-           currentAnimatedScenario.runAction();
+        if(scenarioStack.isEmpty())
+            return;
+
+        ActionSequence top = scenarioStack.peek();
+        if(top.isConcluded())
+            scenarioStack.pop();
+        else
+            top.runAction();
     }
 
     public static GamePiece getPiece(String name)

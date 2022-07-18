@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
-    <tipo>istantaneo</tipo>
+    <mode>instant</mode>
     <azione num="1">
         <subject>Cucina</subject>
         <subjectClass>Room</subjectClass>

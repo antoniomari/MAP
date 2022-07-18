@@ -67,8 +67,12 @@ public class Item extends GamePiece implements Observable
 
     public void use()
     {
-        if(canUse())
+        if(usable)
+        {
             useAction.runAll();
+            usable = false;
+        }
+
     }
 
     public String getUseActionName()
