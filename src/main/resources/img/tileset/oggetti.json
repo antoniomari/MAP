@@ -7,6 +7,22 @@
     "height": 48
   },
 
+  "Cacciavite":
+  {
+    "x": 0,
+    "y": 144,
+    "width": 48,
+    "height": 48
+  },
+
+  "Accendino":
+  {
+    "x": 288,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
   "missing":
   {
     "x": 96,
