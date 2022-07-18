@@ -207,13 +207,13 @@ public class ActionSequence
     {
         try
         {
-            File characterFile = new File(path);
+            File xmlFile = new File(path);
             // parser per xml
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             // per ottenere documento
             DocumentBuilder db = dbf.newDocumentBuilder();
             // documento
-            Document xml = db.parse(characterFile);
+            Document xml = db.parse(xmlFile);
             // elabora documento
             xml.getDocumentElement().normalize();
 
@@ -317,7 +317,8 @@ public class ActionSequence
         //ActionSequence initScenario = parseScenario((Element) scenarioNode);
 
         // creazione stanza TODO: fix
-        String name = roomXml.getAttributes().getNamedItem("nome").getNodeValue();
+        Element roomElement = roomXml.getDocumentElement();
+        String name = roomElement.getAttributes().getNamedItem("nome").getNodeValue();
         String pngPath = roomXml.getElementsByTagName("png").item(0).getTextContent();
         String jsonPath = roomXml.getElementsByTagName("json").item(0).getTextContent();
 
