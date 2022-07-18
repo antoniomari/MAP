@@ -3,7 +3,10 @@ package action;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
+import entity.items.Door;
 import entity.items.Item;
+import entity.items.Openable;
+import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import general.GameException;
@@ -85,11 +88,15 @@ public class ActionSequence
 
     public static ActionSequence loadScenario(String scenarioPath)
     {
-
         Document document = openXml(scenarioPath);
+        return parseScenario((Element) document);
+    }
 
+    private static ActionSequence parseScenario(Element scenarioElement)
+    {
         // ricava tipo scnenario
-        String modeString = document.getElementsByTagName("mode").item(0).getTextContent();
+        String modeString = scenarioElement.getElementsByTagName("mode").item(0).getTextContent();
+
         Mode mode = null;
 
         for(Mode m : Mode.values())
@@ -101,9 +108,8 @@ public class ActionSequence
 
         ActionSequence scenarioSequence = new ActionSequence(mode);
 
-
         // ottieni lista di azioni
-        NodeList actionList = document.getElementsByTagName("azione");
+        NodeList actionList = scenarioElement.getElementsByTagName("azione");
 
         // cicla sulle azioni
         for (int i = 0; i < actionList.getLength(); i++)
@@ -124,6 +130,15 @@ public class ActionSequence
                 scenarioSequence.append(parseSpeak(eAction));
             if (methodName.equals("add"))
                 scenarioSequence.append(parseAdd(eAction));
+        }
+
+        // prendi scenario eventuale alla fine
+        NodeList exeScenarioList = scenarioElement.getElementsByTagName("executeScenario");
+
+        if(exeScenarioList.getLength() != 0)
+        {
+            String nextScenarioPath = exeScenarioList.item(0).getTextContent();
+            scenarioSequence.append(() -> GameManager.startScenario(ActionSequence.loadScenario(nextScenarioPath)));
         }
 
         return scenarioSequence;
@@ -249,16 +264,26 @@ public class ActionSequence
             if (elementName.equals(name))
             {
                 Element pieceElement = (Element) itemNode;
+                String className = pieceElement.getElementsByTagName("classe").item(0).getTextContent();
                 String description = pieceElement.getElementsByTagName("descrizione").item(0).getTextContent();
                 boolean canUse = Boolean.getBoolean(pieceElement
                         .getElementsByTagName("canUse")
                         .item(0).getTextContent());
 
                 // TODO: caricare l'opportuna classe IMPORTANTEEEEE!"!!!!!!1
-                Item item = new Item(name, description, canUse);
+                Item item;
+                if(className.equals("Item"))
+                    item = new Item(name, description, canUse);
+                else if (className.equals("PickupableItem"))
+                    item = new PickupableItem(name, description);
+                else if (className.equals("Door"))
+                    item = new Door(name, description);
+                else
+                    throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
+                // TODO : rimpiazzare if-else
+
 
                 Node onUseNode = pieceElement.getElementsByTagName("onUse").item(0);
-
 
                 if (onUseNode != null)
                 {
@@ -268,12 +293,48 @@ public class ActionSequence
                     item.setUseActionName(((Element) onUseNode).getElementsByTagName("actionName").item(0).getTextContent());
                 }
 
+                Node onOpenNode = pieceElement.getElementsByTagName("onOpen").item(0);
+
+                if (onOpenNode != null)
+                {
+                    String scenarioPath = ((Element) onOpenNode).getElementsByTagName("effetto").item(0).getTextContent();
+                    ((Openable) item).setOpenEffect(loadScenario(scenarioPath));
+                }
+
                 return item;
             }
         }
 
         return null;
 
+    }
+
+    public static Room loadRoom(String roomPath)
+    {
+        Document roomXml = openXml(roomPath);
+
+        //Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
+        //ActionSequence initScenario = parseScenario((Element) scenarioNode);
+
+        // creazione stanza TODO: fix
+        String name = roomXml.getAttributes().getNamedItem("nome").getNodeValue();
+        String pngPath = roomXml.getElementsByTagName("png").item(0).getTextContent();
+        String jsonPath = roomXml.getElementsByTagName("json").item(0).getTextContent();
+
+        Room room = new Room(name, pngPath, jsonPath);
+        // esegui scenario appropriato
+        //GameManager.startScenario(initScenario);
+
+        return room;
+    }
+
+    public static ActionSequence loadRoomInit(String roomPath)
+    {
+        Document roomXml = openXml(roomPath);
+
+        Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
+
+        return parseScenario((Element) scenarioNode);
     }
 
 

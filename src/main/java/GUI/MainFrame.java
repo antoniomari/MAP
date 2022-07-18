@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
     private static final int BLOCK_SIZE = 24;
 
-    protected final Room currentRoom;
+    protected Room currentRoom;
     private Icon backgroundImg;
 
     private final int screenWidth;
@@ -200,12 +200,20 @@ public class MainFrame extends JFrame {
     {
         DBManager.setupInventory();
 
+        // TODO: attenzione alla current room
+        ActionSequence a = ActionSequence.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
+        GameManager.startScenario(a);
+
+        /*
         PickupableItem barile1 = new PickupableItem(
                 "Barile", "Un barile scemo come Basile");
         barile1.addInRoom(currentRoom, new BlockPosition(18, 12));
 
 
-        Door door = new Door("Porta", "Una porta spicolosa.", () -> {GameManager.startScenario(ActionSequence.loadScenario("src/main/resources/scenari/fine.xml"));});
+        Door door = new Door("Porta", "Una porta spicolosa.");
+        ActionSequence doorOpen = new ActionSequence();
+        doorOpen.append(() -> {GameManager.startScenario(ActionSequence.loadScenario("src/main/resources/scenari/fine.xml"));});
+        door.setOpenEffect(doorOpen);
 
         door.addInRoom(currentRoom, new BlockPosition(14, 7));
 
@@ -226,6 +234,8 @@ public class MainFrame extends JFrame {
         ActionSequence a = ActionSequence.loadScenario("src/main/resources/scenari/scenario1.xml");
 
         GameManager.startScenario(a);
+
+         */
 
     }
 
@@ -377,9 +387,9 @@ public class MainFrame extends JFrame {
 
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
-        Room cucina = new Room("Cucina", "/img/LabPav.png", "/img/lab1.json");
+        Room demoRoom = ActionSequence.loadRoom("src/main/resources/scenari/demoRoom.xml");
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(cucina).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));
     }
 }

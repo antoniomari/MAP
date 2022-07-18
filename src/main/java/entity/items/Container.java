@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Container extends Item implements Openable
+public class Container extends Item //implements Openable
 {
     List<PickupableItem> containedPickups;
 
@@ -19,19 +19,19 @@ public class Container extends Item implements Openable
         containedPickups.add(it);
     }
 
-    @Override
+    //@Override
     public void open()
     {
         // fai vedere quello che c'è dentro
     }
 
-    @Override
+    //@Override
     public void close()
     {
         // non serve a niente
     }
 
-    @Override
+    //@Override
     public boolean isOpen()
     {
         return false;

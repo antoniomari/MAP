@@ -1,5 +1,6 @@
 package entity.items;
 
+import action.ActionSequence;
 import animation.StillAnimation;
 
 import java.awt.*;
@@ -14,4 +15,6 @@ public interface Openable
     //List<Image> getCloseFrames();
 
     boolean isOpen();
+
+    void setOpenEffect(ActionSequence effect);
 }

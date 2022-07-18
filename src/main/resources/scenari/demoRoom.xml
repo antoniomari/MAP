@@ -2,20 +2,36 @@
 <stanza nome="Demo">
     <png>/img/LabPav.png</png>
     <json>/img/lab1.json"</json>
-    <oggetti>
-        <oggetto nome="Barile">
+    <scenario>
+        <mode>instant</mode>
+        <azione num="1">
+            <subject>Cucina</subject>
+            <method>add</method>
+            <what>Barile</what>
             <x>18</x>
             <y>12</y>
-        </oggetto>
-        <oggetto nome="Ascensore">
+        </azione>
+        <azione num="2">
+            <subject>Cucina</subject>
+            <method>add</method>
+            <what>Ascensore</what>
             <x>14</x>
             <y>7</y>
-        </oggetto>
-    </oggetti>
-    <personaggi>
-        <personaggio nome="Schwartz">
+        </azione>
+        <azione num="3">
+            <subject>Cucina</subject>
+            <method>add</method>
+            <what>Schwartz</what>
             <x>12</x>
             <y>10</y>
-        </personaggio>
-    </personaggi>
+        </azione>
+        <azione num="4">
+            <subject>Cucina</subject>
+            <method>add</method>
+            <what>Nicolas</what>
+            <x>17</x>
+            <y>10</y>
+        </azione>
+        <executeScenario>src/main/resources/scenari/scenario1.xml</executeScenario>
+    </scenario>
 </stanza>

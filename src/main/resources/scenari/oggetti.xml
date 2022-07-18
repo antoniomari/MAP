@@ -3,12 +3,18 @@
     <oggetto nome="Barile">
         <classe>PickupableItem</classe>
         <descrizione>Un barile scemo come basile</descrizione>
+        <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Ascensore">
         <classe>Door</classe>
         <descrizione>Un ascensore per salire</descrizione>
+        <canUse>false</canUse>
+        <onOpen>
+            <effetto>src/main/resources/scenari/fine.xml</effetto>
+        </onOpen>
     </oggetto>
     <oggetto nome="Tappeto">
+        <classe>Item</classe>
         <descrizione>Un tappeto dalla forma strana</descrizione>
         <canUse>true</canUse>
         <onUse>
@@ -19,12 +25,12 @@
     <oggetto nome="Accendino">
         <classe>PickupableItem</classe>
         <descrizione>Un accendino per dare fuoco a Spicoli</descrizione>
-        <canUse>true</canUse>
+        <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Cacciavite">
         <classe>PickupableItem</classe>
         <descrizione>Un cacciavite per i più belli</descrizione>
-        <canUse>true</canUse>
+        <canUse>false</canUse>
     </oggetto>
 </oggetti>
 
