@@ -65,7 +65,7 @@ public class MovingAnimation extends Animation
 
         double distance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
         delayMilliseconds = (int) Math.round(1000.0 / FPS);
-        int numFrames = (int) (FPS * distance / (1000 * speed));
+        numFrames = (int) (FPS * distance / (1000 * speed));
 
         double deltaX = (double)(finalX- initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;

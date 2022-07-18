@@ -21,12 +21,11 @@ import java.util.Set;
 
 public class GameManager
 {
-    private static Map<String, Room> rooms = new HashMap<>();
-    private static Map<String, GamePiece> pieces = new HashMap<>();
+    private static final Map<String, Room> rooms = new HashMap<>();
+    private static final Map<String, GamePiece> pieces = new HashMap<>();
 
     private static ActionSequence currentAnimatedScenario;
 
-    private static boolean canContinue = false;
 
     public static void addPiece(GamePiece p)
     {
@@ -50,6 +49,9 @@ public class GameManager
     {
         return pieces.get(name);
     }
+
+
+    /*
 
     // TODO: completare
     public static Room loadPlayableScenario(String path)
@@ -131,7 +133,7 @@ public class GameManager
         // esegui comando
         return () -> subject.move(new BlockPosition(x, y), type, millisecondEndWait);
 
-         */
+
     }
 
     // TODO : completare
@@ -147,7 +149,8 @@ public class GameManager
         // esegui comando
         return () -> subject.speak(sentence);
 
-         */
+
     }
-    }
+
+    */
 }

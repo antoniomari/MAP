@@ -62,7 +62,7 @@ public class GameKeyListener implements KeyListener
     @Override
     public void keyReleased(KeyEvent e)
     {
-        if (GameState.getState() == targetState && e.getKeyCode() == keyCode)
+        if (e.getKeyCode() == keyCode)
         {
             releaseAction.run();
             pressed = false;

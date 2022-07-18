@@ -36,7 +36,6 @@ public class ActionSequence
     {
         if(!isConcluded())
         {
-            System.out.println("Runnando azione");
             actionList.get(index++).run();
         }
 
@@ -126,11 +125,14 @@ public class ActionSequence
         String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
         GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
 
-        // ricava modalità
+        // ricava stringa da stampare
         String sentence = eActionNode.getElementsByTagName("sentence").item(0).getTextContent();
 
+        // formatta stringa
+        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
+
         // esegui comando
-        return () -> subject.speak(sentence);
+        return () -> subject.speak(sentenceNewLined);
     }
 
 }

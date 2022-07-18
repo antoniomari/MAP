@@ -15,10 +15,20 @@
 	</azione>
 	<azione num="3">
 		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>Devi trovare il modo per aprire (*) l'ascensore</sentence>
+	</azione>
+	<azione num="4">
+		<subject>Nicolas</subject>
 		<method>move</method>
 		<x>9</x>
 		<y>9</y>
 		<how>absolute</how>
 		<finalWait>0</finalWait>
 	</azione>
+	<effetto>
+		<subject>Tappeto</subject>
+		<method>canUse</method>
+		<value>true</value>
+	</effetto>
 </scenario>

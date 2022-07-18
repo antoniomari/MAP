@@ -20,6 +20,9 @@ public class Item extends GamePiece implements Observable
     // SPRITESHEET OGGETTI
     private static final BufferedImage SPRITESHEET;
 
+    // flag utlizzabile
+    private boolean usable;
+
 
 
     // CARICAMENTO SPRITESHEET IN MEMORIA
@@ -31,16 +34,34 @@ public class Item extends GamePiece implements Observable
 
     public Item(String name, String description)
     {
-        this(name, description, SPRITESHEET, JSON_PATH);
+        this(name, description, false);
+    }
+
+    public Item(String name, String description, boolean canUse)
+    {
+        this(name, description, SPRITESHEET, JSON_PATH, canUse);
     }
 
     protected Item(String name, String description, BufferedImage spriteSheet, String jsonPath)
     {
+        this(name, description, spriteSheet, jsonPath, false);
+    }
+
+    protected Item(String name, String description, BufferedImage spriteSheet, String jsonPath, boolean canUse)
+    {
         super(name, spriteSheet, jsonPath);
         this.description = description;
-        // extractSprite(spriteSheet, jsonPath);
+        this.usable = canUse;
+    }
 
+    public void use()
+    {
 
+    }
+
+    public boolean canUse()
+    {
+        return usable;
     }
 
 

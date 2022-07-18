@@ -16,7 +16,7 @@ public abstract class Animation
 {
     protected JLabel label;
 
-    private int numFrames;
+    protected int numFrames;
     private final List<Image> frames;
     protected List<Icon> frameIcons;
 

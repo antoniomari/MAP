@@ -36,8 +36,6 @@ public class GameState
         ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> mainFrame.showMenu(true), null);
         mainFrame.addKeyListener(ESC_LISTENER);
 
-        // SPACE_LISTENER = new GameKeyListener(KeyEvent.VK_SPACE, () -> {mainFrame.getTextBarPanel().hideTextBar(); GameManager.continueScenario();}, null);
-
         DROP_LISTENER = new GameMouseListener(MouseEvent.BUTTON1,
                 () ->
                 {
@@ -61,7 +59,7 @@ public class GameState
         mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
 
         // TODO: migliora
-        mainFrame.addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, () -> {mainFrame.getTextBarPanel().hideTextBar(); changeState(State.PLAYING); GameManager.continueScenario();}, null, State.TEXT_BAR));
+        mainFrame.addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, mainFrame.getTextBarPanel()::hideTextBar, null, State.TEXT_BAR));
 
     }
 
