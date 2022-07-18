@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<scenario>
+    <tipo>istantaneo</tipo>
+    <azione num="1">
+        <subject>Cucina</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>Accendino</what>
+        <x>6</x>
+        <y>9</y>
+    </azione>
+    <azione num="2">
+        <subject>Cucina</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>Cacciavite</what>
+        <x>6</x>
+        <y>12</y>
+    </azione>
+</scenario>

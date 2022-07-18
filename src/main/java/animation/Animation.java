@@ -46,8 +46,6 @@ public abstract class Animation
                 GameState.changeState(GameState.State.PLAYING);
             else
             {
-
-
                 // TODO: ricontrollare IMPORTANTE !!!
                 //Animation next = animationQueue.peek();
                 //next.executeAnimation();

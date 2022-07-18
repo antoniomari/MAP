@@ -2,6 +2,8 @@ package action;
 
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
+import entity.items.Item;
+import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import general.GameManager;
 import org.w3c.dom.Document;
@@ -39,6 +41,14 @@ public class ActionSequence
             actionList.get(index++).run();
         }
 
+    }
+
+    public void runAll()
+    {
+        for(Runnable r : actionList)
+        {
+            r.run();
+        }
     }
 
     public boolean isConcluded()
@@ -85,6 +95,8 @@ public class ActionSequence
                     scenarioSequence.append(parseMove(eAction));
                 if (methodName.equals("speak"))
                     scenarioSequence.append(parseSpeak(eAction));
+                if (methodName.equals("add"))
+                    scenarioSequence.append(parseAdd(eAction));
 
             }
 
@@ -133,6 +145,22 @@ public class ActionSequence
 
         // esegui comando
         return () -> subject.speak(sentenceNewLined);
+    }
+
+    private static Runnable parseAdd(Element eActionNode)
+    {
+        String subjectClassString = eActionNode.getElementsByTagName("subjectClass").item(0).getTextContent();
+        String subject = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
+
+        String objectName = eActionNode.getElementsByTagName("what").item(0).getTextContent();
+        int x = Integer.parseInt(eActionNode.getElementsByTagName("x").item(0).getTextContent());
+        int y = Integer.parseInt(eActionNode.getElementsByTagName("y").item(0).getTextContent());
+
+        // crea oggetto:
+        PickupableItem item = new PickupableItem(objectName, "CIAO CIAO");
+
+        return () -> item.addInRoom(GameManager.getRoom(subject), new BlockPosition(x, y));
+
     }
 
 }

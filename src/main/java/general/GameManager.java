@@ -34,11 +34,22 @@ public class GameManager
         System.out.println(pieces);
     }
 
+    public static void addRoom(Room room)
+    {
+        rooms.put(room.getName(), room);
+    }
+
+    public static Room getRoom(String roomName)
+    {
+        return rooms.get(roomName);
+    }
+
     public static void startAnimatedScenario(ActionSequence scenario)
     {
         currentAnimatedScenario = scenario;
         currentAnimatedScenario.runAction();
     }
+
     public static synchronized void continueScenario()
     {
        if(!currentAnimatedScenario.isConcluded())

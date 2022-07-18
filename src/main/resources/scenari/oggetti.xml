@@ -8,6 +8,25 @@
         <classe>Door</classe>
         <descrizione>Un ascensore per salire</descrizione>
     </oggetto>
+    <oggetto nome="Tappeto">
+        <descrizione>Un tappeto dalla forma strana</descrizione>
+        <canUse>true</canUse>
+        <onUse>
+            <effetto>
+                <executeScenario>src/main/resources/scenari/tappetoUse.xml</executeScenario>
+            </effetto>
+        </onUse>
+    </oggetto>
+    <oggetto nome="Accendino">
+        <classe>PickupableItem</classe>
+        <descrizione>Un accendino per dare fuoco a Spicoli</descrizione>
+        <canUse>true</canUse>
+    </oggetto>
+    <oggetto nome="Cacciavite">
+        <classe>PickupableItem</classe>
+        <descrizione>Un cacciavite per i più belli</descrizione>
+        <canUse>true</canUse>
+    </oggetto>
 </oggetti>
 
 

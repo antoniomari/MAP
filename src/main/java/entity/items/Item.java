@@ -1,11 +1,15 @@
 package entity.items;
 
+import action.ActionSequence;
 import entity.GamePiece;
 import events.EventHandler;
 import events.ItemInteractionEvent;
+import general.GameManager;
 import graphics.SpriteManager;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.AccessibleObject;
 
 public class Item extends GamePiece implements Observable
 {
@@ -23,6 +27,8 @@ public class Item extends GamePiece implements Observable
     // flag utlizzabile
     private boolean usable;
 
+    private String useActionName = "Usa1";
+    private ActionSequence useAction;
 
 
     // CARICAMENTO SPRITESHEET IN MEMORIA
@@ -54,10 +60,27 @@ public class Item extends GamePiece implements Observable
         this.usable = canUse;
     }
 
+    public void setUseAction(ActionSequence useEffect)
+    {
+        this.useAction = useEffect;
+    }
+
     public void use()
     {
-
+        if(canUse())
+            useAction.runAll();
     }
+
+    public String getUseActionName()
+    {
+        return useActionName;
+    }
+
+    public void setUseActionName(String n)
+    {
+        this.useActionName = n;
+    }
+
 
     public boolean canUse()
     {

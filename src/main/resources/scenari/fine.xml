@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<scenario>
+    <azione num="1">
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>7</x>
+        <y>13</y>
+        <how>absolute</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione num="2">
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ce l'hai fatta!</sentence>
+    </azione>
+</scenario>

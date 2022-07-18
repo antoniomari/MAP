@@ -162,7 +162,10 @@ public class PopMenuManager
         if(o instanceof Openable)
             menu.add(OPEN_CLOSE_ACTION);
         if(o instanceof Item && ((Item) o).canUse())
+        {
+            USE_ACTION.putValue(Action.NAME, ((Item) o).getUseActionName());
             menu.add(USE_ACTION);
+        }
         if(o instanceof PickupableItem)
             menu.add(PICKUP_ACTION);
         if(o instanceof GameCharacter)

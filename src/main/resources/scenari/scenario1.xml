@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
+	<tipo>sequenziale</tipo>
 	<azione num="1">
 		<subject>Nicolas</subject>
 		<method>move</method>
@@ -26,9 +27,5 @@
 		<how>absolute</how>
 		<finalWait>0</finalWait>
 	</azione>
-	<effetto>
-		<subject>Tappeto</subject>
-		<method>canUse</method>
-		<value>true</value>
-	</effetto>
+
 </scenario>

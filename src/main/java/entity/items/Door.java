@@ -1,8 +1,10 @@
 package entity.items;
 
+import action.ActionSequence;
 import animation.StillAnimation;
 import events.EventHandler;
 import events.ItemInteractionEvent;
+import general.GameManager;
 import graphics.SpriteManager;
 
 import java.awt.*;
@@ -15,6 +17,8 @@ public class Door extends Item implements Openable, Lockable
     public final static int OPEN = 1;
     public final static int CLOSED = 0;
     public final static int BLOCKED = -1;
+
+    private final Runnable onOpen;
 
     private int state;
 
@@ -54,6 +58,14 @@ public class Door extends Item implements Openable, Lockable
     {
         super("Porta", description, SPRITESHEET, JSON_PATH);
         this.state = CLOSED;
+        this.onOpen = () ->{};
+    }
+
+    public Door(String name, String description, Runnable onOpen)
+    {
+        super("Porta", description, SPRITESHEET, JSON_PATH);
+        this.state = CLOSED;
+        this.onOpen = onOpen;
     }
 
     public void open()
@@ -67,23 +79,27 @@ public class Door extends Item implements Openable, Lockable
         {
             this.state = OPEN;
             EventHandler.sendEvent(new ItemInteractionEvent(this, "La porta è aperta", OPEN_FRAMES));
+
+            // carica scenario animato
+            onOpen.run();
+
         }
 
         // TODO: cambio sprite
         // else // if(this.state == BLOCKED)
     }
 
-    @Override
-    public List<Image> getOpenFrames()
-    {
-        return OPEN_FRAMES;
-    }
+    //@Override
+    //public List<Image> getOpenFrames()
+    //{
+    //    return OPEN_FRAMES;
+    //}
 
-    @Override
-    public List<Image> getCloseFrames()
-    {
-        return CLOSE_FRAMES;
-    }
+    //@Override
+    //public List<Image> getCloseFrames()
+    //{
+    //    return CLOSE_FRAMES;
+    //}
 
 
     @Override

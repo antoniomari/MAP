@@ -34,4 +34,6 @@ public class PickupableItem extends Item
         // rimuovi dall'inventario
         PlayingCharacter.getPlayer().removeFromInventory(this);
     }
+
+    // TODO: useWith(Item)
 }

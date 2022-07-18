@@ -1,3 +1,4 @@
+@Deprecated
 public class Scenario
 {
     // lista di azioni da compiere

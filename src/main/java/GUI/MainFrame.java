@@ -7,6 +7,7 @@ import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import database.DBManager;
 import entity.items.Door;
+import entity.items.Item;
 import entity.items.PickupableItem;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
@@ -204,8 +205,16 @@ public class MainFrame extends JFrame {
         barile1.addInRoom(currentRoom, new BlockPosition(18, 12));
 
 
-        Door door = new Door("Porta", "Una porta spicolosa.");
+        Door door = new Door("Porta", "Una porta spicolosa.", () -> {GameManager.startAnimatedScenario(ActionSequence.loadScenario("src/main/resources/scenari/fine.xml"));});
+
         door.addInRoom(currentRoom, new BlockPosition(14, 7));
+
+        // aggiungi tappeto
+        Item tappeto = new Item("Tappeto", "tappeto orribile", true);
+        tappeto.setUseActionName("Solleva");
+        tappeto.setUseAction(ActionSequence.loadScenario("src/main/resources/scenari/tappetoUse.xml"));
+
+        tappeto.addInRoom(currentRoom, new BlockPosition(11, 11));
 
         PlayingCharacter.getPlayer().addInRoom(currentRoom, new BlockPosition(12, 10));
 

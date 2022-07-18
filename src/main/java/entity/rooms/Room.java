@@ -6,6 +6,7 @@ import entity.items.Item;
 import events.EventHandler;
 import events.RoomEvent;
 import general.GameException;
+import general.GameManager;
 import graphics.SpriteManager;
 import org.json.JSONObject;
 
@@ -44,9 +45,16 @@ public class Room
 
         bWidth = json.getInt("width");
         bHeight = json.getInt("height");
+
+        GameManager.addRoom(this);
     }
 
     public String toString()
+    {
+        return roomName;
+    }
+
+    public String getName()
     {
         return roomName;
     }

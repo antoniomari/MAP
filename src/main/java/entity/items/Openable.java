@@ -8,10 +8,10 @@ import java.util.List;
 public interface Openable
 {
     void open();
-    List<Image> getOpenFrames();
+    //List<Image> getOpenFrames();
 
     void close();
-    List<Image> getCloseFrames();
+    //List<Image> getCloseFrames();
 
     boolean isOpen();
 }
