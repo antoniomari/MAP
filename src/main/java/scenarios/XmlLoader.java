@@ -132,41 +132,70 @@ public class XmlLoader
     }
 
 
-    private static Runnable parseMove(Element eActionNode)
+    /**
+     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
+     * che contiene il valore {@code move} per il tag {@literal  <method>}
+     *
+     * I tag richiesti per il parsing di questo comando sono:
+     * <ul>
+     *    <li>{@literal <subject>} il nome del soggetto dell'azione (GamePiece)</li>
+     *
+     *    <li>{@literal <x>} ascissa di blocco in cui subject deve muoversi</li>
+     *
+     *    <li>{@literal <y>} ordinata di blocco in cui subject deve muoversi</li>
+     *
+     *    <li>{@literal <how>} "absolute" se (x, y) sono coordinate assolute;
+     *    "relative" se sono relative alla posizione attuale di suject</li>
+     *
+     *    <li>{@literal <finalWait>} numero di millisecondi da aspettare
+     *    dopo l'esecuzione dell'animazione di movimento</li>
+     * </ul>
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata al comando move
+     */
+    private static Runnable parseMove(Element eAction)
     {
+        String subjectName = getTagValue(eAction, "subject");
 
-        String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
-        GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
-
-        System.out.println("Prendo " + subjectName);
-
-        // costruisci block position
-        int x = Integer.parseInt(eActionNode.getElementsByTagName("x").item(0).getTextContent());
-        int y = Integer.parseInt(eActionNode.getElementsByTagName("y").item(0).getTextContent());
+        // ricava coordinate finali
+        int x = Integer.parseInt(getTagValue(eAction, "x"));
+        int y = Integer.parseInt(getTagValue(eAction, "y"));
 
         // ricava modalità
-        String type = eActionNode.getElementsByTagName("how").item(0).getTextContent();
+        String type = getTagValue(eAction, "how");
 
         // ricava millis
-        int millisecondEndWait = Integer.parseInt(eActionNode
+        int millisecondEndWait = Integer.parseInt(eAction
                 .getElementsByTagName("finalWait")
                 .item(0).getTextContent());
 
-        // esegui comando
-        return () -> subject.move(new BlockPosition(x, y), type, millisecondEndWait);
+        // ritorna runnable
+        return () -> ((GameCharacter) GameManager.getPiece(subjectName)).move(new BlockPosition(x, y), type, millisecondEndWait);
     }
 
-    private static Runnable parseSpeak(Element eActionNode)
-    {
-        String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
-        GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
-        // ricava stringa da stampare
-        String sentence = eActionNode.getElementsByTagName("sentence").item(0).getTextContent();
-        // formatta stringa
-        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
 
+    /**
+     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
+     * che contiene il valore {@code speak} per il tag {@literal  <method>}
+     *
+     * I tag richiesti per il parsing di questo comando sono:
+     * <ul>
+     *    <li>{@literal <subject>} il nome del soggetto dell'azione (GameCharacter)</li>
+     *
+     *    <li>{@literal <sentence>} frase pronunciata (a capo con "(*)"</li>
+     * </ul>
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata al comando move
+     */
+    private static Runnable parseSpeak(Element eAction)
+    {
+        String subjectName = getTagValue(eAction, "subject");
+        // ricava stringa da stampare
+        String sentence = getTagValue(eAction, "sentence");
+        // formatta stringa (spazi)
+        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
         // restituisci runnable corrispondente
-        return () -> subject.speak(sentenceNewLined);
+        return () -> ((GameCharacter) GameManager.getPiece(subjectName)).speak(sentenceNewLined);
     }
 
     private static Runnable parseAdd(Element eActionNode)
