@@ -193,7 +193,7 @@ public class XmlLoader
                 .item(0).getTextContent());
 
         // ritorna runnable
-        return () -> ((GameCharacter) GameManager.getPiece(subjectName)).move(new BlockPosition(x, y), type, millisecondEndWait);
+        return () -> (GameManager.getPiece(subjectName)).move(new BlockPosition(x, y), type, millisecondEndWait);
     }
 
 

@@ -16,6 +16,7 @@ public class GameEvent
     protected GameCharacter characterInvolved;
     protected Room roomInvolved;
     protected BlockPosition pos;
+    protected BlockPosition finalPos;
 
 
     public GameEvent(String toPrint)
@@ -37,9 +38,9 @@ public class GameEvent
         return itemInvolved;
     }
 
-    public GameCharacter getCharacterInvolved()
-    {
+    //public GameCharacter getCharacterInvolved()
+    //{
 
-        return characterInvolved;
-    }
+    //    return characterInvolved;
+    //}
 }

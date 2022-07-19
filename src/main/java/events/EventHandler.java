@@ -1,5 +1,6 @@
 package events;
 
+import entity.GamePiece;
 import entity.rooms.Room;
 import events.executors.*;
 import entity.items.PickupableItem;
@@ -24,6 +25,9 @@ public class EventHandler
 
         if(ge instanceof CharacterEvent)
             executeCharacterEvent((CharacterEvent) ge);
+
+        if(ge instanceof GamePieceEvent)
+            executeGamePieceEvent((GamePieceEvent) ge);
     }
 
     public static void executeItemInteractionEvent(ItemInteractionEvent e)
@@ -75,4 +79,15 @@ public class EventHandler
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
         }
     }
+
+    public static void executeGamePieceEvent(GamePieceEvent e)
+    {
+        if(e.getType() == GamePieceEvent.Type.MOVE)
+        {
+            CharacterUpdateExecutor.executeMove(e.getPieceInvolved(), e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
+            // lavora sulla currentRoom TODO: migliorare quest'aspetto
+        }
+
+    }
+
 }

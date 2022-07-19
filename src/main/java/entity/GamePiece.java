@@ -3,6 +3,7 @@ package entity;
 import entity.characters.GameCharacter;
 import events.CharacterEvent;
 import events.EventHandler;
+import events.GamePieceEvent;
 import events.ItemInteractionEvent;
 import general.GameError;
 import general.GameException;
@@ -11,10 +12,13 @@ import graphics.SpriteManager;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import jdk.jfr.Event;
 
 import javax.swing.Icon;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -43,6 +47,8 @@ public class GamePiece
     private BufferedImage spriteSheet;
     private String jsonPath;
 
+    protected List<Image> movingFrames;
+
 
     // tutti i costruttori sono protetti per far sì che non sia
     // direttamente istanziabile dall'esterno
@@ -62,10 +68,14 @@ public class GamePiece
         this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
 
+        fakeInitMovingFrames();
+
         // aggiungi nel gameManager
         GameManager.addPiece(this);
     }
 
+
+    // TODO : unificare costruttori
 
     /**
      * Costruttore da utilizzare quando l'immagine appartiene a uno
@@ -90,6 +100,8 @@ public class GamePiece
 
         this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+
+        fakeInitMovingFrames();
 
         // aggiungi nel gameManager
         GameManager.addPiece(this);
@@ -138,6 +150,18 @@ public class GamePiece
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, animationName, ItemInteractionEvent.Type.EFFECT_ANIMATION));
     }
 
+    public List<Image> getMovingFrames()
+    {
+        return movingFrames;
+    }
+
+
+    private void fakeInitMovingFrames()
+    {
+        movingFrames = new ArrayList<>();
+        movingFrames.add(sprite);
+    }
+
 
     /**
      * Imposta la stanza in cui è presente this.
@@ -154,11 +178,6 @@ public class GamePiece
         room.addPiece(this, pos);
         // imposta attributo
         this.locationRoom = room;
-
-        // evento dalla prospettiva del GamePiece: il GamePiece è stato inserito in una stanza
-        if(this instanceof GameCharacter)
-            EventHandler.sendEvent(new CharacterEvent((GameCharacter) this, pos, CharacterEvent.Type.ADDED_IN_ROOM));
-            // TODO: aggiustare event
     }
 
     public void removeFromRoom()
@@ -201,6 +220,19 @@ public class GamePiece
         return scaledSpriteIcon;
     }
 
+    public void move(BlockPosition finalPos, String type, int millisecondWaitEnd)
+    {
+        if(this.getPosition() == null)
+            throw new GameException("Personaggio non posizionato");
+
+        if(type.equals("absolute"))
+            updatePosition(finalPos, millisecondWaitEnd);
+        else if(type.equals("relative"))
+            updatePosition(getPosition().relativePosition(finalPos.getX(), finalPos.getY()), millisecondWaitEnd);
+        else
+            throw new IllegalArgumentException("Valore type non valido");
+    }
+
     public void updatePosition(BlockPosition newPosition)
     {
         updatePosition(newPosition, 0);
@@ -225,9 +257,13 @@ public class GamePiece
         {
             // TODO: invalidare l'animazione sbagliata
             locationRoom.setPiecePosition(this, newPosition);
-            if(this instanceof GameCharacter)
-                EventHandler.sendEvent(new CharacterEvent((GameCharacter) this,
-                                        oldPosition, newPosition, millisecondWaitEnd, CharacterEvent.Type.MOVE));
+
+            GamePieceEvent moveEvent = new GamePieceEvent(this, GamePieceEvent.Type.MOVE);
+            moveEvent.setOldPosition(oldPosition);
+            moveEvent.setNewPosition(newPosition);
+            moveEvent.setMillisecondWaitEnd(millisecondWaitEnd);
+
+            EventHandler.sendEvent(moveEvent);
         }
         catch(GameException e)
         {

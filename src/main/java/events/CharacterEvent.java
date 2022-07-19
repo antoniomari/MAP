@@ -13,19 +13,13 @@ public class CharacterEvent extends GameEvent
 
     public enum Type
     {
-        MOVE {
-            public String toString()
-            {
-                return "si è spostato";
-            }
-        },
-        ADDED_IN_ROOM
+        MOVE
                 {
                     @Override
                     public String toString()
-                    {
-                        return "aggiunto in stanza";
-                    }
+            {
+                return "si è spostato";
+            }
                 },
         NPC_SPEAKS
                 {
@@ -36,14 +30,6 @@ public class CharacterEvent extends GameEvent
                     }
                 }
 
-    }
-
-    public CharacterEvent(GameCharacter ch, BlockPosition pos, Type type)
-    {
-        super(type.toString());
-        this.type = type;
-        this.position = pos;
-        this.characterInvolved = ch;
     }
 
     public CharacterEvent(GameCharacter ch, BlockPosition oldPos, BlockPosition newPos, int millisecondWaitEnd, Type type)
@@ -84,12 +70,17 @@ public class CharacterEvent extends GameEvent
         return  millisecondWaitEnd;
     }
 
+    public GameCharacter getCharacterInvolved()
+    {
+        return characterInvolved;
+    }
+
 
     public String getEventString()
     {
-        if(type == Type.MOVE || type == Type.ADDED_IN_ROOM)
-        return eventTime.toString() + " -> " + " [" + getCharacterInvolved().getName() + "] "+ type.toString()
-                + " in posizione " + position.toString();
+        if(type == Type.MOVE)
+        return eventTime.toString() + " -> " + " [" + characterInvolved + "] "+ type
+                + " in posizione " + position;
         else
             return eventTime.toString() + " -> " + "[" + characterInvolved + "] " + type;
     }

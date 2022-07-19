@@ -78,6 +78,7 @@ public class GameScreenPanel extends JLayeredPane
     {
         if(whatAnimation.equals("Esplosione"))
         {
+            // TODO: generalizzazione
             JLabel barileLabel = itemLabelMap.get((Item)GameManager.getPiece("Barile"));
             JLabel effectLabel = new JLabel(barileLabel.getIcon());
             add(effectLabel, EFFECT_LAYER);
@@ -99,17 +100,17 @@ public class GameScreenPanel extends JLayeredPane
         addGameCharacter(ch, pos);
     }
 
-    public void moveCharacter(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean withAnimation)
+    public void movePiece(GamePiece piece, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean withAnimation)
     {
 
         MovingAnimation animation;
         // crea animazione
         if(withAnimation)
-            animation = createMoveAnimation(ch, initialPos, finalPos, millisecondWaitEnd);
+            animation = createMoveAnimation(piece, initialPos, finalPos, millisecondWaitEnd);
         else
             animation = null;
 
-        updateCharacterPosition(ch, finalPos, animation);
+        updatePiecePosition(piece, finalPos, animation);
     }
 
     public void updateSprite(GamePiece piece)
@@ -122,10 +123,17 @@ public class GameScreenPanel extends JLayeredPane
     }
 
 
-    public MovingAnimation createMoveAnimation(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd)
+    public MovingAnimation createMoveAnimation(GamePiece piece, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd)
     {
-        return new MovingAnimation(characterLabelMap.get(ch),
-                                    initialPos, finalPos, millisecondWaitEnd, true, ch.getMovingFrames());
+        JLabel labelToAnimate;
+
+        if(piece instanceof Item)
+            labelToAnimate = itemLabelMap.get(piece);
+        else
+            labelToAnimate = characterLabelMap.get(piece);
+
+        return new MovingAnimation(labelToAnimate,
+                                    initialPos, finalPos, millisecondWaitEnd, true, piece.getMovingFrames());
     }
 
     /**
@@ -157,7 +165,7 @@ public class GameScreenPanel extends JLayeredPane
         // aggiungi la label nell'ITEM_LAYER
         add(itemLabel, ITEM_LAYER);
 
-        updateItemPosition(it, pos);
+        updatePiecePosition(it, pos, null);
     }
 
     public void addGameCharacter(GameCharacter ch, BlockPosition pos)
@@ -182,49 +190,41 @@ public class GameScreenPanel extends JLayeredPane
         // aggiungi la label
         add(characterLabel, CHARACTER_LAYER);
 
-        updateCharacterPosition(ch, pos, null);
+        updatePiecePosition(ch, pos, null);
     }
 
     /**
      * Aggiorna la posizione di un oggetto nella stanza.
      *
-     * @param it oggetto da riposizionare
+     * @param piece GamePiece da posizionare
      * @param finalPos posizione d'arrivo dell'oggetto
      * @throws IllegalArgumentException se it non è presente nella stanza
      */
-    private void updateItemPosition(Item it, BlockPosition finalPos)
+    private void updatePiecePosition(GamePiece piece, BlockPosition finalPos, MovingAnimation anim)
     {
-        Objects.requireNonNull(it);
+        Objects.requireNonNull(piece);
         Objects.requireNonNull(finalPos);
 
-        // controlla che it sia presente effettivamente nella stanza
-        if(!itemLabelMap.containsKey(it))
-            throw new IllegalArgumentException("Item non presente nella stanza");
-
-        updateSpritePosition(itemLabelMap.get(it), finalPos, null, true);
-    }
-
-    /**
-     * Aggiorna la posizione di un personaggio nella stanza.
-     *
-     * @param ch personaggio da riposizionare
-     * @param finalPos blocco in basso a sinistra della posizione di arrivo del personaggio
-     * @param anim animazione da eseguire, può essere null
-     * @throws IllegalArgumentException se ch non è presente nella stanza
-     */
-    private void updateCharacterPosition(GameCharacter ch, BlockPosition finalPos, MovingAnimation anim)
-    {
-        Objects.requireNonNull(ch);
-        Objects.requireNonNull(finalPos);
-
+        JLabel pieceLabel = null;
+        boolean canGoOnWall = true;
 
         // controlla che ch sia presente effettivamente nella stanza
-        if(!characterLabelMap.containsKey(ch))
-            throw new IllegalArgumentException("Personaggio non presente nella stanza");
+        if(characterLabelMap.containsKey(piece))
+        {
+            pieceLabel = characterLabelMap.get(piece);
+            canGoOnWall = false;
+        }
+        if(itemLabelMap.containsKey(piece))
+        {
+            pieceLabel = itemLabelMap.get(piece);
+        }
 
-        updateSpritePosition(characterLabelMap.get(ch), finalPos, anim, false);
+        if(pieceLabel == null)
+            throw new IllegalArgumentException("GamePiece non presente nella stanza");
 
+        updateSpritePosition(pieceLabel, finalPos, anim, canGoOnWall);
     }
+
 
 
     /**

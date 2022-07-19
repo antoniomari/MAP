@@ -16,21 +16,14 @@ import java.util.Random;
 
 public class GameCharacter extends GamePiece
 {
-    private List<Image> movingFrames;
     private String jsonPath;
     private BufferedImage spritesheet;
 
     public GameCharacter(String name, String spritePath)
     {
         super(name, spritePath);
-        fakeInitMovingFrames();
     }
 
-    private void fakeInitMovingFrames()
-    {
-        movingFrames = new ArrayList<>();
-        movingFrames.add(sprite);
-    }
 
     public GameCharacter(String name, String spritesheetPath, String jsonPath)
     {
@@ -53,25 +46,6 @@ public class GameCharacter extends GamePiece
     }
 
 
-    public List<Image> getMovingFrames()
-    {
-        return movingFrames;
-    }
-
-    public void move(BlockPosition finalPos, String type, int millisecondWaitEnd)
-    {
-        if(this.getPosition() == null)
-            throw new GameException("Personaggio non posizionato");
-
-        if(type.equals("absolute"))
-            updatePosition(finalPos, millisecondWaitEnd);
-        else if(type.equals("relative"))
-            updatePosition(getPosition().relativePosition(finalPos.getX(), finalPos.getY()), millisecondWaitEnd);
-        else
-            throw new IllegalArgumentException("Valore type non valido");
-    }
-
-
     public String randomSentence()
     {
         String[] sentences = {"Ciao, solo l'amico di spicoli", "Oggi ho preso 29 e lode", "Fa freddo"};
@@ -85,8 +59,7 @@ public class GameCharacter extends GamePiece
 
     public void speak()
     {
-        String toPrint =  getName() + ": " + randomSentence();
-        EventHandler.sendEvent(new CharacterEvent(this, toPrint, CharacterEvent.Type.NPC_SPEAKS));
+        speak(randomSentence());
 
     }
 
