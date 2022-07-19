@@ -8,7 +8,7 @@
     </azione>
     <azione num="2">
         <subject>Barile</subject>
-        <method>updateSprite</method>
-        <spriteName>BarileEsploso</spriteName>
+        <method>effectAnimation</method>
+        <animationName>Esplosione</animationName>
     </azione>
 </scenario>

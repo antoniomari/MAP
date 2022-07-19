@@ -1,21 +1,15 @@
 package GUI;
 
 import GUI.gamestate.GameState;
-import action.ActionExecutor;
-import action.ActionSequence;
-import entity.characters.NPC;
-import entity.characters.PlayingCharacter;
+import scenarios.ActionSequence;
 import database.DBManager;
-import entity.items.Door;
-import entity.items.Item;
-import entity.items.PickupableItem;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
 import events.executors.RoomUpdateExecutor;
 import general.GameManager;
 import graphics.SpriteManager;
-import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import scenarios.XmlLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -201,7 +195,7 @@ public class MainFrame extends JFrame {
         DBManager.setupInventory();
 
         // TODO: attenzione alla current room
-        ActionSequence a = ActionSequence.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
+        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
         GameManager.startScenario(a);
 
         /*
@@ -387,7 +381,7 @@ public class MainFrame extends JFrame {
 
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
-        Room demoRoom = ActionSequence.loadRoom("src/main/resources/scenari/demoRoom.xml");
+        Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/demoRoom.xml");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));

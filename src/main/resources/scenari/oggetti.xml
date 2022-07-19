@@ -29,6 +29,10 @@
     <oggetto nome="Accendino">
         <classe>PickupableItem</classe>
         <descrizione>Un accendino per dare fuoco a Spicoli</descrizione>
+        <onUseWith>
+            <target>Barile</target>
+            <method>use</method>
+        </onUseWith>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Cacciavite">

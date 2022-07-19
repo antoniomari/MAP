@@ -1,10 +1,6 @@
 package entity.items;
 
-import action.ActionSequence;
-import animation.StillAnimation;
-
-import java.awt.*;
-import java.util.List;
+import scenarios.ActionSequence;
 
 public interface Openable
 {

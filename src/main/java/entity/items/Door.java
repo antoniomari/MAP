@@ -1,7 +1,6 @@
 package entity.items;
 
-import action.ActionSequence;
-import animation.StillAnimation;
+import scenarios.ActionSequence;
 import events.EventHandler;
 import events.ItemInteractionEvent;
 import general.GameManager;

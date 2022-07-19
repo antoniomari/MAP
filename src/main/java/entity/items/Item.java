@@ -1,6 +1,6 @@
 package entity.items;
 
-import action.ActionSequence;
+import scenarios.ActionSequence;
 import entity.GamePiece;
 import events.EventHandler;
 import events.ItemInteractionEvent;

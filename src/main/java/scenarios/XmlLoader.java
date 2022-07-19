@@ -1,4 +1,4 @@
-package action;
+package scenarios;
 
 import entity.GamePiece;
 import entity.characters.GameCharacter;
@@ -22,96 +22,54 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Optional;
 
-public class ActionSequence
+public class XmlLoader
 {
-    private final List<Runnable> actionList;
-    private int index;
-    private final Mode mode;
-
-    public enum Mode
-    {
-        INSTANT, SEQUENCE
-    }
-
-
-    public ActionSequence(Mode mode)
-    {
-        Objects.requireNonNull(mode);
-
-        actionList = new ArrayList<>();
-        index = 0;
-        this.mode = mode;
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuilder s = new StringBuilder("[");
-        for(Runnable r : actionList)
-            s.append(r.toString() + "\t");
-        s.append("]");
-
-        return s.toString();
-    }
-
-    public Mode getMode()
-    {
-        return mode;
-    }
-
-    public void append(Runnable action)
-    {
-        actionList.add(action);
-    }
-
-    public void runAction()
-    {
-        if(!isConcluded())
-        {
-            System.out.println("Runno " + actionList.get(index));
-            actionList.get(index++).run();
-        }
-
-    }
-
-    public void runAll()
-    {
-        for(Runnable r : actionList)
-        {
-            System.out.println("Ranno " + r);
-            r.run();
-        }
-    }
-
-    public boolean isConcluded()
-    {
-        System.out.println("Indice " + index);
-        System.out.println("Dim " + actionList.size());
-        return index == actionList.size();
-    }
-
     public static ActionSequence loadScenario(String scenarioPath)
     {
         Document document = openXml(scenarioPath);
         return parseScenario(document.getDocumentElement());
     }
 
+    private static String getTagValue(Element xmlElement, String tagName)
+    {
+        Optional<String> value = getOptionalTagValue(xmlElement, tagName);
+
+        if(value.isEmpty())
+            throw new GameException("tag [" + tagName + "] non presente in xml");
+        else
+            return value.get();
+    }
+
+    private static Optional<String> getOptionalTagValue(Element xmlElement, String tagName)
+    {
+        NodeList elements = xmlElement.getElementsByTagName(tagName);
+
+        if(elements.getLength() > 1)
+            throw new GameException("tag [" + tagName + "] replicato in xml");
+
+        if(elements.item(0) == null)
+            return Optional.empty();
+        else
+            return Optional.of(elements.item(0).getTextContent());
+    }
+
     private static ActionSequence parseScenario(Element scenarioElement)
     {
-        System.out.println("Parsando scenario");
-        // ricava tipo scnenario
-        String modeString = scenarioElement.getElementsByTagName("mode").item(0).getTextContent();
+        // ricava tipo scenario
+        String modeString = getTagValue(scenarioElement, "mode");
+        ActionSequence.Mode mode = null;
 
-        Mode mode = null;
-
-        for(Mode m : Mode.values())
+        // controlla se il valore del tag "mode" corrisponde a un tipo scenario
+        for(ActionSequence.Mode m : ActionSequence.Mode.values())
             if(m.toString().equals(modeString.toUpperCase()))
                 mode = m;
 
+        // se mode non corrisponde allora lancia eccezione
         if(mode == null)
             throw new GameException("Tag xml \"mode\" xml non valido");
 
@@ -123,36 +81,54 @@ public class ActionSequence
         // cicla sulle azioni
         for (int i = 0; i < actionList.getLength(); i++)
         {
-            Node actionToExecute = actionList.item(i);
-            Element eAction = (Element) actionToExecute;
-            // prendi nome metodo
-            String methodName = eAction
-                    .getElementsByTagName("method")
-                    .item(0)
-                    .getTextContent();
-
-            System.out.println("preso metodo " + methodName );
-
-            if (methodName.equals("move"))
-                scenarioSequence.append(parseMove(eAction));
-            if (methodName.equals("speak"))
-                scenarioSequence.append(parseSpeak(eAction));
-            if (methodName.equals("add"))
-                scenarioSequence.append(parseAdd(eAction));
-            if(methodName.equals("updateSprite"))
-                scenarioSequence.append(parseUpdateSprite(eAction));
+            Element eAction =  (Element) actionList.item(i);
+            scenarioSequence.append(parseAction(eAction));
         }
 
         // prendi scenario eventuale alla fine
-        NodeList exeScenarioList = scenarioElement.getElementsByTagName("executeScenario");
+        Optional<String> scenarioName = getOptionalTagValue(scenarioElement, "executeScenario");
 
-        if(exeScenarioList.getLength() != 0)
+        if(scenarioName.isPresent())
         {
-            String nextScenarioPath = exeScenarioList.item(0).getTextContent();
-            scenarioSequence.append(() -> GameManager.startScenario(ActionSequence.loadScenario(nextScenarioPath)));
+            String nextScenarioPath = scenarioName.get();
+            scenarioSequence.append(() -> GameManager.startScenario(loadScenario(nextScenarioPath)));
         }
 
         return scenarioSequence;
+    }
+
+    private static Runnable parseAction(Element actionElement)
+    {
+        // prendi nome metodo
+        String methodName = getTagValue(actionElement, "method");
+
+        System.out.println("preso metodo " + methodName );
+
+        Runnable actionParsed;
+
+        // TODO : modificare con le reflection
+        switch (methodName)
+        {
+            case "move":
+                actionParsed = parseMove(actionElement);
+                break;
+            case "speak":
+                actionParsed = parseSpeak(actionElement);
+                break;
+            case "add":
+                actionParsed = parseAdd(actionElement);
+                break;
+            case "updateSprite":
+                actionParsed = parseUpdateSprite(actionElement);
+                break;
+            case "effectAnimation":
+                actionParsed = parseEffectAnimation(actionElement);
+                break;
+            default:
+                throw new GameException("XML contiene metodo " + methodName + " non valido");
+        }
+
+        return actionParsed;
     }
 
 
@@ -231,6 +207,23 @@ public class ActionSequence
 
         return () -> piece.updateSprite(spriteName);
     }
+
+    private static Runnable parseEffectAnimation(Element eActionNode)
+    {
+        // non serve la classe, sappiamo che è una Room
+        // String subjectClassString = eActionNode.getElementsByTagName("subjectClass").item(0).getTextContent();
+        String subject = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
+        GamePiece piece = GameManager.getPiece(subject);
+
+        // Carica il GamePiece da aggiungere
+        String animationNAme = eActionNode.getElementsByTagName("animationName").item(0).getTextContent();
+
+        if(piece == null)
+            throw new GameException("Piece non trovato");
+
+        return () -> piece.executeEffectAnimation(animationNAme);
+    }
+
 
     private static Document openXml(String path)
     {
@@ -327,6 +320,42 @@ public class ActionSequence
                 {
                     String scenarioPath = ((Element) onOpenNode).getElementsByTagName("effetto").item(0).getTextContent();
                     ((Openable) item).setOpenEffect(loadScenario(scenarioPath));
+                }
+
+                Node onUseWithNode = pieceElement.getElementsByTagName("onUseWith").item(0);
+
+                if (onUseWithNode != null)
+                {
+                    String targetName = ((Element) onUseWithNode).getElementsByTagName("target").item(0).getTextContent();
+                    Item target = (Item) GameManager.getPiece(targetName);
+                    String methodName = ((Element) onUseWithNode).getElementsByTagName("method").item(0).getTextContent();
+                    Method method;
+                    try
+                    {
+                        method = target.getClass().getMethod(methodName);
+                    }
+                    catch(NoSuchMethodException e)
+                    {
+                        throw new GameException("metodo non trovato");
+                    }
+
+                    // TODO: generalizzare
+                    ActionSequence useWithScenario = new ActionSequence(ActionSequence.Mode.INSTANT);
+                    useWithScenario.append(() ->
+                    {
+                        try
+                        {
+                            System.out.println("Metodo" + method.getName());
+                            System.out.println("Target" + targetName);
+                            method.invoke(target);
+                        } catch (IllegalAccessException | InvocationTargetException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    ((PickupableItem) item).setTargetItem(target);
+                    ((PickupableItem) item).setUsewithAction(useWithScenario);
                 }
 
                 return item;

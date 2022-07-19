@@ -1,23 +1,11 @@
 package general;
 
-import action.ActionSequence;
+import scenarios.ActionSequence;
 import entity.GamePiece;
-import entity.characters.GameCharacter;
-import entity.items.Item;
-import entity.rooms.BlockPosition;
 import entity.rooms.Room;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 
 public class GameManager

@@ -1,12 +1,14 @@
 package GUI;
 
 import animation.MovingAnimation;
+import animation.StillAnimation;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.GameManager;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -30,7 +32,8 @@ public class GameScreenPanel extends JLayeredPane
     public static final Integer BACKGROUND_LAYER = 1;
     public static final Integer ITEM_LAYER = 2;
     public static final Integer CHARACTER_LAYER = 3;
-    public static final Integer TEXT_BAR_LEVEL = 4;
+    public static final Integer EFFECT_LAYER = 4;
+    public static final Integer TEXT_BAR_LEVEL = 5;
 
     public GameScreenPanel(Room initialRoom)
     {
@@ -69,6 +72,21 @@ public class GameScreenPanel extends JLayeredPane
 
         // elimina la voce dal dizionario
         itemLabelMap.remove(item);
+    }
+
+    public void effectAnimation(String whatAnimation, BlockPosition pos)
+    {
+        if(whatAnimation.equals("Esplosione"))
+        {
+            JLabel barileLabel = itemLabelMap.get((Item)GameManager.getPiece("Barile"));
+            JLabel effectLabel = new JLabel(barileLabel.getIcon());
+            add(effectLabel, EFFECT_LAYER);
+            GameScreenManager.updateLabelPosition(effectLabel, pos);
+            StillAnimation effectAnimation = StillAnimation.createExplosionAnimation(effectLabel, pos);
+            effectAnimation.setActionOnEnd(() -> this.remove(effectLabel));
+            effectAnimation.start();
+        }
+
     }
 
     public void addItemCurrentRoom(Item item , BlockPosition pos)

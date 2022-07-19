@@ -1,15 +1,17 @@
 package entity.items;
 
 
+import scenarios.ActionSequence;
 import entity.characters.PlayingCharacter;
-import events.EventHandler;
-import events.InventoryEvent;
-import events.RoomEvent;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.GameManager;
 
 public class PickupableItem extends Item
 {
+    private ActionSequence usewithAction;
+    private Item targetItem;
+
     // costruttore che inizializza l'oggetto come presente nell'inventario
     public PickupableItem(String name, String description)
     {
@@ -33,6 +35,23 @@ public class PickupableItem extends Item
 
         // rimuovi dall'inventario
         PlayingCharacter.getPlayer().removeFromInventory(this);
+    }
+
+    public void setUsewithAction(ActionSequence usewithAction)
+    {
+        this.usewithAction = usewithAction;
+    }
+
+    public void setTargetItem(Item item)
+    {
+        this.targetItem = item;
+    }
+
+    public void useWith(Item item)
+    {
+        System.out.println("entrato in useWith");
+        if(item.equals(targetItem))
+            GameManager.startScenario(usewithAction);
     }
 
     // TODO: useWith(Item)

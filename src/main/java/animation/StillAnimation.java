@@ -1,9 +1,11 @@
 package animation;
 
+import entity.rooms.BlockPosition;
 import graphics.SpriteManager;
 import entity.items.Item;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +15,7 @@ public class StillAnimation extends Animation
 {
     private final int delayMilliseconds;
     private final boolean initialDelay;
+    private Runnable onEndExecute;
 
 
     public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
@@ -44,9 +47,26 @@ public class StillAnimation extends Animation
         }
     }
 
+    public void setActionOnEnd(Runnable action)
+    {
+        onEndExecute = action;
+    }
+
     @Override
     protected void terminate()
     {
-        // do nothing
+        if(onEndExecute != null)
+            onEndExecute.run();
     }
+
+
+    public static StillAnimation createExplosionAnimation(JLabel animationLabel, BlockPosition pos)
+    {
+        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet("/img/animazioni/esplosione.png");
+        List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, "/img/animazioni/esplosione.json");
+
+        return new StillAnimation(animationLabel, frames, 100, true);
+
+    }
+
 }

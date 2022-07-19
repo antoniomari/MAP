@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpriteManager
 {
@@ -34,6 +36,15 @@ public class SpriteManager
             // Errore caricamento background
             throw new IOError(e);
         }
+    }
+
+    public static List<Image> getOrderedFrames(BufferedImage spritesheet, String jsonPath)
+    {
+        JSONObject json = getJsonFromFile(jsonPath);
+        return json.keySet()
+                .stream().mapToInt(Integer::parseInt).sorted()
+                .mapToObj(key -> loadSpriteByName(spritesheet, jsonPath, String.valueOf(key)))
+                .collect(Collectors.toList());
     }
 
 

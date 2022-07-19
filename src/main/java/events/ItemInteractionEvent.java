@@ -1,5 +1,6 @@
 package events;
 
+import animation.StillAnimation;
 import entity.items.Item;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ public class ItemInteractionEvent extends GameEvent
 {
     private List<Image> frames;
     private Type type;
+    private String whatAnimation;
 
     public enum Type
     {
@@ -25,6 +27,13 @@ public class ItemInteractionEvent extends GameEvent
                     {
                         return " aggiornato sprite";
                     }
+                },
+        EFFECT_ANIMATION
+                {
+                    public String toString()
+                    {
+                        return " eseguito effetto animato";
+                    }
                 }
     }
 
@@ -36,10 +45,23 @@ public class ItemInteractionEvent extends GameEvent
 
     }
 
+    public String getAnimationName()
+    {
+        return whatAnimation;
+    }
+
+    public ItemInteractionEvent(Item item, String whatAnimation, Type type)
+    {
+        this(item, type);
+        this.whatAnimation = whatAnimation;
+    }
+
     public ItemInteractionEvent(Item item, String toPrint)
     {
         super(toPrint);
         itemInvolved = item;
+
+
     }
 
     public ItemInteractionEvent(Item item, String toPrint, List<Image> frames)

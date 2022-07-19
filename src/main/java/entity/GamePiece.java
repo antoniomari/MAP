@@ -133,6 +133,11 @@ public class GamePiece
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, ItemInteractionEvent.Type.UPDATE_SPRITE));
     }
 
+    public void executeEffectAnimation(String animationName)
+    {
+        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, animationName, ItemInteractionEvent.Type.EFFECT_ANIMATION));
+    }
+
 
     /**
      * Imposta la stanza in cui è presente this.

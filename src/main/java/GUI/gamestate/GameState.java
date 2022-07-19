@@ -2,6 +2,7 @@ package GUI.gamestate;
 
 import GUI.*;
 import entity.characters.PlayingCharacter;
+import entity.items.Item;
 import entity.rooms.BlockPosition;
 import general.GameManager;
 
@@ -41,8 +42,10 @@ public class GameState
                 {
                     if (mainFrame.getInventoryPanel().getSelectedItem() != null)
                     {
-                        BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-1, 1);
-                        mainFrame.getInventoryPanel().getSelectedItem().drop(mainFrame.getCurrentRoom(), bp);
+                        //BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-1, 1);
+                        //mainFrame.getInventoryPanel().getSelectedItem().drop(mainFrame.getCurrentRoom(), bp);
+                        System.out.println("usato");
+                        mainFrame.getInventoryPanel().getSelectedItem().useWith((Item)GameManager.getPiece("Barile"));
                     }
                     else
                     {
