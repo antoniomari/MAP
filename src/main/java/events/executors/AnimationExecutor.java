@@ -25,9 +25,9 @@ public class AnimationExecutor extends Executor
         new StillAnimation(gameScreenPanel.getLabelAssociated(it), frames, 200, true).start();
     }
 
-    public static void executeEffectAnimation(String whatAnimation, BlockPosition pos)
+    public static void executeEffectAnimation(String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos)
     {
-        gameScreenPanel.effectAnimation(whatAnimation, pos);
+        gameScreenPanel.effectAnimation(spritesheetPath, jsonPath, whatAnimation, pos);
     }
 
 

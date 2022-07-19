@@ -39,7 +39,7 @@ public class EventHandler
         if(e.getType() == ItemInteractionEvent.Type.UPDATE_SPRITE)
             PieceUpdateExecutor.executeUpdateSprite(e.getItemInvolved());
         if(e.getType() == ItemInteractionEvent.Type.EFFECT_ANIMATION)
-            AnimationExecutor.executeEffectAnimation(e.getAnimationName(), e.getItemInvolved().getPosition());
+            AnimationExecutor.executeEffectAnimation(e.getSpritesheetPath(), e.getJsonPath(), e.getAnimationName(), e.getItemInvolved().getPosition());
 
     }
 

@@ -74,7 +74,7 @@ public class GameScreenPanel extends JLayeredPane
         itemLabelMap.remove(item);
     }
 
-    public void effectAnimation(String whatAnimation, BlockPosition pos)
+    public void effectAnimation(String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos)
     {
         if(whatAnimation.equals("Esplosione"))
         {
@@ -83,7 +83,7 @@ public class GameScreenPanel extends JLayeredPane
             JLabel effectLabel = new JLabel(barileLabel.getIcon());
             add(effectLabel, EFFECT_LAYER);
             GameScreenManager.updateLabelPosition(effectLabel, pos);
-            StillAnimation effectAnimation = StillAnimation.createExplosionAnimation(effectLabel, pos);
+            StillAnimation effectAnimation = StillAnimation.createExplosionAnimation(spritesheetPath, jsonPath, effectLabel);
             effectAnimation.setActionOnEnd(() -> this.remove(effectLabel));
             effectAnimation.start();
         }

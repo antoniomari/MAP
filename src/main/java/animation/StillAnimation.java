@@ -60,10 +60,11 @@ public class StillAnimation extends Animation
     }
 
 
-    public static StillAnimation createExplosionAnimation(JLabel animationLabel, BlockPosition pos)
+    public static StillAnimation createExplosionAnimation(String spritesheetPath, String jsonPath,
+                                                          JLabel animationLabel)
     {
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet("/img/animazioni/esplosione.png");
-        List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, "/img/animazioni/esplosione.json");
+        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
+        List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
 
         return new StillAnimation(animationLabel, frames, 100, true);
 

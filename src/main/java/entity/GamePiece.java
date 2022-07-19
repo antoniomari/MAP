@@ -147,7 +147,16 @@ public class GamePiece
 
     public void executeEffectAnimation(String animationName)
     {
-        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, animationName, ItemInteractionEvent.Type.EFFECT_ANIMATION));
+        // TODO: generalizzare, probabilmente utilizzare map delle animazioni in qualche classe
+        String spritesheetPath = null;
+        String jsonPath = null;
+        if(animationName.equals( "Esplosione"))
+        {
+            spritesheetPath = "/img/animazioni/esplosione.png";
+            jsonPath = "/img/animazioni/esplosione.json";
+        }
+
+        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, spritesheetPath, jsonPath, animationName, ItemInteractionEvent.Type.EFFECT_ANIMATION));
     }
 
     public List<Image> getMovingFrames()

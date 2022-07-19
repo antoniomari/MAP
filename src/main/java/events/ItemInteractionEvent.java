@@ -11,6 +11,8 @@ public class ItemInteractionEvent extends GameEvent
     private List<Image> frames;
     private Type type;
     private String whatAnimation;
+    private String spritesheetPath;
+    private String jsonPath;
 
     public enum Type
     {
@@ -50,10 +52,22 @@ public class ItemInteractionEvent extends GameEvent
         return whatAnimation;
     }
 
-    public ItemInteractionEvent(Item item, String whatAnimation, Type type)
+    public ItemInteractionEvent(Item item, String spritesheetPath, String jsonPath, String whatAnimation, Type type)
     {
         this(item, type);
+        this.spritesheetPath = spritesheetPath;
+        this.jsonPath = jsonPath;
         this.whatAnimation = whatAnimation;
+    }
+
+    public String getSpritesheetPath()
+    {
+        return spritesheetPath;
+    }
+
+    public String getJsonPath()
+    {
+        return jsonPath;
     }
 
     public ItemInteractionEvent(Item item, String toPrint)
