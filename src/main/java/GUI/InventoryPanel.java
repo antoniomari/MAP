@@ -1,8 +1,8 @@
 package GUI;
 
-
 import animation.StillAnimation;
 import entity.characters.PlayingCharacter;
+import entity.items.Container;
 import graphics.SpriteManager;
 import entity.items.PickupableItem;
 
@@ -10,19 +10,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
 public class InventoryPanel extends JLayeredPane
 {
     // Dimensioni (nota: utilizziamo la costante pubblica della classe PlayingCharacter) //
-    private final static int BAR_SIZE = 10;  // numero di oggetti nella barra
+    private final static int BAR_SIZE = 8;  // numero di oggetti nella barra
     private final static int INVENTORY_SIZE = PlayingCharacter.INVENTORY_SIZE;
     private final static int MAX_BAR = INVENTORY_SIZE / BAR_SIZE;  // numero di barre
     private final static int ORIGINAL_ITEM_SIZE = 48;  // dimensione lato sprite oggetti (quadrato)
 
     // Path immagini e json //
     private final static String BAR_PATH = "/img/inventario/Barra oggetti inventario.png";
+    private final static String TEXT_BOARD_PATH = "/img/inventario/barra nome oggetto.png";
     private final static String BUTTON_SPRITESHEET_PATH = "/img/inventario/bottoni.png";
     private final static String BUTTON_JSON_PATH = "/img/inventario/bottoni.json";
     private final static String SELECTION_ITEM_PATH = "/img/inventario/oggetto selezionato.png";
@@ -31,6 +35,7 @@ public class InventoryPanel extends JLayeredPane
     private final static BufferedImage BAR_IMAGE;
     private final static BufferedImage SELECTION_IMAGE;
     private final static BufferedImage BUTTON_SPRITESHEET;
+    private final static BufferedImage TEXT_BOARD_IMAGE;
 
     // Livelli del LayeredPane inventario //
     private final static Integer BAR_LEVEL = 1;
@@ -54,6 +59,8 @@ public class InventoryPanel extends JLayeredPane
     private JLabel upButtonLabel;
     private JLabel downButtonLabel;
     private JLabel selectionLabel; // label per stampare l'immagine dell'item selezionato
+    private JLabel textBoardLabel; // label per la casella di testo sulla destra
+    private JLabel textLabel; // area di testo per la casella sulla destra
     /** Lista delle etichette associate a ciascun elemento della barra dell'inventario */
     private List<JLabel> itemLabelList;
 
@@ -111,7 +118,7 @@ public class InventoryPanel extends JLayeredPane
         BAR_IMAGE = SpriteManager.loadSpriteSheet(BAR_PATH);
         BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
         SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
-
+        TEXT_BOARD_IMAGE = SpriteManager.loadSpriteSheet(TEXT_BOARD_PATH);
     }
 
 
@@ -127,6 +134,7 @@ public class InventoryPanel extends JLayeredPane
         initSelection();  // inizializza label e icona di selezione (all'inizio deselezionato)
         initBar();  // inizializza barra dell'inventario
         initButtons();  // inizializza bottoni
+        initTextBoard();
         setupDimensions();  // calcola larghezza e altezza di this e impostale
         initLabelList();  // inizializza le label per la visualizzazione icone oggetti
         initAnimation();  // inizializza le animazioni
@@ -212,10 +220,47 @@ public class InventoryPanel extends JLayeredPane
         add(downButtonLabel, BAR_LEVEL);
     }
 
+    private void initTextBoard()
+    {
+        Font dialogFont;
+        try
+        {
+            dialogFont = Font.createFont(Font.TRUETYPE_FONT, new File(TextBarPanel.FONT_PATH));
+        }
+        catch (IOException | FontFormatException e)
+        {
+            // errore nel caricamento del font
+            throw new IOError(e);
+        }
+
+        Icon textBoardIcon = SpriteManager.rescaledImageIcon(TEXT_BOARD_IMAGE, scalingFactor);
+
+        textBoardLabel = new JLabel(textBoardIcon);
+        Insets inventoryInsets = getInsets();
+        textBoardLabel.setBounds(inventoryInsets.left + scaledItemSize * (2 + BAR_SIZE),
+                                inventoryInsets.top, textBoardIcon.getIconWidth(),
+                                textBoardIcon.getIconHeight());
+        add(textBoardLabel, BAR_LEVEL);
+
+
+        textLabel= new JLabel();
+        textLabel.setFont(dialogFont.deriveFont((float)(15 * scalingFactor)));
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        int horizontalBorder = (int) (20 * scalingFactor);
+        int verticalBorder = (int) (10 * scalingFactor);
+        textLabel.setBounds(inventoryInsets.left + scaledItemSize * (2 + BAR_SIZE) + horizontalBorder,
+                inventoryInsets.top + verticalBorder, textBoardIcon.getIconWidth() - 2 * horizontalBorder,
+                textBoardIcon.getIconHeight() - 2 * verticalBorder);
+
+        add(textLabel, SELECTION_LEVEL);
+    }
+
     private void setupDimensions()
     {
         // calcolo larghezza pannello
-        int originalInventoryWidth = ORIGINAL_ITEM_SIZE * (BAR_SIZE + 2); // + 2 bottoni
+        int originalInventoryWidth = ORIGINAL_ITEM_SIZE * (BAR_SIZE + 2 + 4); // + 2 bottoni
+                                                                    // e +4 (dimensione textBoard)
         int inventoryWidth = (int) (originalInventoryWidth * scalingFactor);
 
         // imposta dimensione del pannello
@@ -247,9 +292,30 @@ public class InventoryPanel extends JLayeredPane
 
             // aggiungi MouseListener per la selezione (tasto sinistro)
             GameMouseListener selectionListener = new GameMouseListener(
-                        MouseEvent.BUTTON1, () -> selectItem(itemLabelList.indexOf(tempLabel)), null);
+                        MouseEvent.BUTTON1,
+                    () ->
+                    {
+                        selectItem(itemLabelList.indexOf(tempLabel));
+                        if(selectedItem != null)
+                            showTextOnBoard(getSelectedItem().getName());
+                    }, null);
+
+            GameMouseListener observeListener = new GameMouseListener(
+                    MouseEvent.BUTTON3,
+                    () ->
+                    {
+                        if(selectedItem != null)  // TODO : aggiustare in modo tale che esca descrizione click solo item
+                        {
+                            java.awt.Container parent = getParent();
+                            while(!(parent instanceof MainFrame))
+                                parent = parent.getParent();
+                            ((MainFrame)parent).getTextBarPanel().showTextBar(selectedItem.getDescription());
+                        }
+                    },
+                    null);
 
             tempLabel.addMouseListener(selectionListener);
+            tempLabel.addMouseListener(observeListener);
         }
     }
 
@@ -288,6 +354,7 @@ public class InventoryPanel extends JLayeredPane
         if (itemIndex <= -1 || itemIndex >= inventoryItemIconList.size())
         {
             selectedItem = null;
+            hideTextOnBoard();
         }
         else // indice valido
         {
@@ -332,7 +399,7 @@ public class InventoryPanel extends JLayeredPane
             inventoryItemIconList.add(new Pair<>(item, item.getScaledIconSprite(scalingFactor)));
 
         int lastIndex = inventoryItemIconList.size() - 1;
-        displayBar(lastIndex / 10 + 1);
+        displayBar(lastIndex / BAR_SIZE + 1);
     }
 
 
@@ -429,4 +496,13 @@ public class InventoryPanel extends JLayeredPane
         // altrimenti non puoi andare indietro
     }
 
+    public void showTextOnBoard(String text)
+    {
+        textLabel.setText(text);
+    }
+
+    public void hideTextOnBoard()
+    {
+        textLabel.setText(null);
+    }
 }

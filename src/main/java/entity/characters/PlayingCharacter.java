@@ -13,6 +13,7 @@ public class PlayingCharacter extends GameCharacter
 
     List<PickupableItem> inventory;
     private static PlayingCharacter player;
+    private static final String PLAYER_NAME = "Schwartz";
 
     private PlayingCharacter(String name, String spritePath)
     {
@@ -51,5 +52,10 @@ public class PlayingCharacter extends GameCharacter
         {
             inventory.remove(i);
         }
+    }
+
+    public static String getPlayerName()
+    {
+        return PLAYER_NAME;
     }
 }

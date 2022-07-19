@@ -198,39 +198,6 @@ public class MainFrame extends JFrame {
         ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
         GameManager.startScenario(a);
 
-        /*
-        PickupableItem barile1 = new PickupableItem(
-                "Barile", "Un barile scemo come Basile");
-        barile1.addInRoom(currentRoom, new BlockPosition(18, 12));
-
-
-        Door door = new Door("Porta", "Una porta spicolosa.");
-        ActionSequence doorOpen = new ActionSequence();
-        doorOpen.append(() -> {GameManager.startScenario(ActionSequence.loadScenario("src/main/resources/scenari/fine.xml"));});
-        door.setOpenEffect(doorOpen);
-
-        door.addInRoom(currentRoom, new BlockPosition(14, 7));
-
-        // aggiungi tappeto
-        Item tappeto = new Item("Tappeto", "tappeto orribile", true);
-        tappeto.setUseActionName("Solleva");
-        tappeto.setUseAction(ActionSequence.loadScenario("src/main/resources/scenari/tappetoUse.xml"));
-
-        tappeto.addInRoom(currentRoom, new BlockPosition(11, 11));
-
-        PlayingCharacter.getPlayer().addInRoom(currentRoom, new BlockPosition(12, 10));
-
-        // aggiungi nicolas
-        NPC nicolas = new NPC("Nicolas", "/img/personaggi/Nicolas spritesheet.png",
-                                                    "/img/personaggi/nicolas.json");
-        nicolas.addInRoom(currentRoom, new BlockPosition(17, 10));
-
-        ActionSequence a = ActionSequence.loadScenario("src/main/resources/scenari/scenario1.xml");
-
-        GameManager.startScenario(a);
-
-         */
-
     }
 
     private void initGameScreenPanel()

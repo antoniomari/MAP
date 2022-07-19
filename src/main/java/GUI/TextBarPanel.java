@@ -14,7 +14,7 @@ public class TextBarPanel extends JLayeredPane
 {
     // Path risorse //
     private final static String TEXT_BAR_PATH = "/img/barra di testo/text bar.png";
-    private final static String FONT_PATH = "src/main/resources/font/text font.ttf";
+    public final static String FONT_PATH = "src/main/resources/font/text font.ttf";
 
     // Immagini png (da caricare) //
     private final static BufferedImage TEXT_BAR_IMAGE;

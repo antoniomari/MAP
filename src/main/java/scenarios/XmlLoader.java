@@ -2,6 +2,8 @@ package scenarios;
 
 import entity.GamePiece;
 import entity.characters.GameCharacter;
+import entity.characters.NPC;
+import entity.characters.PlayingCharacter;
 import entity.items.Door;
 import entity.items.Item;
 import entity.items.Openable;
@@ -318,7 +320,10 @@ public class XmlLoader
                 String spritesheetPath = getTagValue(characterElement, "spritesheet");
                 String jsonPath = getTagValue(characterElement, "json");
 
-                return new GameCharacter(name, spritesheetPath, jsonPath);
+                if(name.equals(PlayingCharacter.getPlayerName()))
+                    return new GameCharacter(name, spritesheetPath, jsonPath);
+                else
+                    return new NPC(name, spritesheetPath, jsonPath);
             }
         }
         // personaggio non presente
