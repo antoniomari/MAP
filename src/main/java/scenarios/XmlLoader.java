@@ -12,6 +12,7 @@ import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import general.GameException;
 import general.GameManager;
+import general.LogOutputManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,6 +24,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Optional;
@@ -31,8 +33,11 @@ public class XmlLoader
 {
     public static ActionSequence loadScenario(String scenarioPath)
     {
+        // STAMPA DI LOG
+        LogOutputManager.logOutput("Parsing scenario " + scenarioPath, LogOutputManager.XML_COLOR);
+
         Document document = openXml(scenarioPath);
-        return parseScenario(document.getDocumentElement());
+        return parseScenario(scenarioPath, document.getDocumentElement());
     }
 
     private static String getTagValue(Element xmlElement, String tagName)
@@ -76,7 +81,7 @@ public class XmlLoader
             return valueNode.getNodeValue();
     }
 
-    private static ActionSequence parseScenario(Element scenarioElement)
+    private static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
     {
         // ricava tipo scenario
         String modeString = getTagValue(scenarioElement, "mode");
@@ -91,7 +96,7 @@ public class XmlLoader
         if(mode == null)
             throw new GameException("Tag xml \"mode\" xml non valido");
 
-        ActionSequence scenarioSequence = new ActionSequence(mode);
+        ActionSequence scenarioSequence = new ActionSequence(scenarioName, mode);
 
         // ottieni lista di azioni
         NodeList actionList = scenarioElement.getElementsByTagName("azione");
@@ -104,11 +109,11 @@ public class XmlLoader
         }
 
         // prendi scenario eventuale alla fine
-        Optional<String> scenarioName = getOptionalTagValue(scenarioElement, "executeScenario");
+        Optional<String> nextScenario = getOptionalTagValue(scenarioElement, "executeScenario");
 
-        if(scenarioName.isPresent())
+        if(nextScenario.isPresent())
         {
-            String nextScenarioPath = scenarioName.get();
+            String nextScenarioPath = nextScenario.get();
             scenarioSequence.append(() -> GameManager.startScenario(loadScenario(nextScenarioPath)));
         }
 
@@ -120,7 +125,7 @@ public class XmlLoader
         // prendi nome metodo
         String methodName = getTagValue(actionElement, "method");
 
-        System.out.println("preso metodo " + methodName );
+        LogOutputManager.logOutput("Azione " + methodName, LogOutputManager.XML_COLOR);
 
         Runnable actionParsed;
 
@@ -403,7 +408,7 @@ public class XmlLoader
                     }
 
                     // TODO: generalizzare
-                    ActionSequence useWithScenario = new ActionSequence(ActionSequence.Mode.INSTANT);
+                    ActionSequence useWithScenario = new ActionSequence("useWithScenario", ActionSequence.Mode.INSTANT);
                     useWithScenario.append(() ->
                     {
                         try
@@ -502,7 +507,7 @@ public class XmlLoader
         }
         catch (ParserConfigurationException | IOException | SAXException e)
         {
-            System.out.println(e.getStackTrace());
+            LogOutputManager.logOutput(e.getStackTrace().toString(), LogOutputManager.EXCEPTION_COLOR);
             throw new GameException("Errore nel caricamento dell'xml");
         }
     }
@@ -539,7 +544,7 @@ public class XmlLoader
         Document roomXml = openXml(roomPath);
         Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
 
-        return parseScenario((Element) scenarioNode);
+        return parseScenario("init Room " + roomPath, (Element) scenarioNode);
     }
 
 }

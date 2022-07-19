@@ -5,6 +5,7 @@ import entity.characters.PlayingCharacter;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
 import general.GameManager;
+import general.LogOutputManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -44,7 +45,7 @@ public class GameState
                     {
                         //BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-1, 1);
                         //mainFrame.getInventoryPanel().getSelectedItem().drop(mainFrame.getCurrentRoom(), bp);
-                        System.out.println("usato");
+                        // System.out.println("usato");
                         mainFrame.getInventoryPanel().getSelectedItem().useWith((Item)GameManager.getPiece("Barile"));
                     }
                     else
@@ -71,7 +72,7 @@ public class GameState
         Objects.requireNonNull(newState);
 
         CURRENT_STATE = newState;
-        System.out.println("Nuovo stato: " + CURRENT_STATE);
+        LogOutputManager.logOutput("Nuovo stato: " + CURRENT_STATE, LogOutputManager.GAMESTATE_COLOR);
     }
 
     public static State getState()

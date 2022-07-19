@@ -20,7 +20,7 @@ public abstract class Animation
     private final List<Image> frames;
     protected List<Icon> frameIcons;
 
-    protected static final Map<JLabel, Queue<Animation>> animationQueueMap = new HashMap<>();
+    // protected static final Map<JLabel, Queue<Animation>> animationQueueMap = new HashMap<>();
 
     protected int millisecondWaitEnd;
 
@@ -37,19 +37,19 @@ public abstract class Animation
             execute();
 
             // rimuovi animazione corrente dalla coda
-            Queue<Animation> animationQueue = animationQueueMap.get(label);
-            animationQueue.remove();
+            //Queue<Animation> animationQueue = animationQueueMap.get(label);
+            //animationQueue.remove();
 
 
             // TODO: importante, syncronized sul game state
-            if(animationQueue.isEmpty())
-                GameState.changeState(GameState.State.PLAYING);
-            else
-            {
-                // TODO: ricontrollare IMPORTANTE !!!
+            //if(animationQueue.isEmpty())
+            //    GameState.changeState(GameState.State.PLAYING);
+            //else
+            //{
+            //    // TODO: ricontrollare IMPORTANTE !!!
                 //Animation next = animationQueue.peek();
                 //next.executeAnimation();
-            }
+            //}
 
             try
             {
@@ -60,6 +60,7 @@ public abstract class Animation
                 e.printStackTrace();
             }
 
+            GameState.changeState(GameState.State.PLAYING);
             // template
             terminate();
 
@@ -102,27 +103,27 @@ public abstract class Animation
 
     public void start()
     {
-        Queue<Animation> workingQueue;
+        //Queue<Animation> workingQueue;
 
-        if(!animationQueueMap.containsKey(label))
-        {
-            workingQueue = new ConcurrentLinkedQueue<>();
-            animationQueueMap.put(label, workingQueue);
-        }
-        else
-        {
-            workingQueue = animationQueueMap.get(label);
-        }
+        //if(!animationQueueMap.containsKey(label))
+        //{
+        //    workingQueue = new ConcurrentLinkedQueue<>();
+        //    animationQueueMap.put(label, workingQueue);
+        //}
+        //else
+        //{
+        //    workingQueue = animationQueueMap.get(label);
+        //}
 
-        if(workingQueue.isEmpty())
-        {
-            workingQueue.add(this);
+        //if(workingQueue.isEmpty())
+        //{
+        //    workingQueue.add(this);
             executeAnimation();
-        }
-        else
-        {
-            workingQueue.add(this);
-        }
+        //}
+        //else
+        //{
+        //    workingQueue.add(this);
+        //}
     }
 
     protected void executeAnimation()

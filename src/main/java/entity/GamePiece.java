@@ -223,7 +223,6 @@ public class GamePiece
         // aggiorna posizione nella stanza
         try
         {
-            System.out.println("milli: " + millisecondWaitEnd);
             // TODO: invalidare l'animazione sbagliata
             locationRoom.setPiecePosition(this, newPosition);
             if(this instanceof GameCharacter)

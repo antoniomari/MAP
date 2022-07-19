@@ -49,7 +49,7 @@ public class PickupableItem extends Item
 
     public void useWith(Item item)
     {
-        System.out.println("entrato in useWith");
+        // System.out.println("entrato in useWith");
         if(item.equals(targetItem))
             GameManager.startScenario(usewithAction);
     }

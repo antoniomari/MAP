@@ -108,15 +108,11 @@ public class Room
     {
         boolean fit = canFit(p, pos);
 
-        System.out.println("CanFit: " + fit);
-
         if(p instanceof Item)
             return fit;
         else // if(p instanceof GameCharacter)
         {
             BlockPosition nearest = floor.getNearestPlacement(pos, p.getBWidth(), p.getBHeight());
-
-            System.out.println("Nearest: " + nearest);
 
             if(nearest == null)
                 return false;
@@ -182,13 +178,6 @@ public class Room
     public BufferedImage getBackgroundImage()
     {
         return backgroundImage;
-    }
-
-    //TODO: rimuovere, solo stampa di prova
-    public void printPieces()
-    {
-        for (Map.Entry<GamePiece, BlockPosition> entry : pieceLocationMap.entrySet())
-            System.out.println(entry.getKey().getName() + " in posizione " + entry.getValue());
     }
 
 }

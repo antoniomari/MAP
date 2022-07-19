@@ -68,9 +68,7 @@ public class SpriteManager
         }
         catch (JSONException e)
         {
-            System.out.println(jsonPath + "      " + spriteName);
             itemJson = json.getJSONObject("missing");
-            System.out.println(itemJson);
         }
 
         int x = itemJson.getInt("x");

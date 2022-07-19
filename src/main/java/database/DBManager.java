@@ -2,6 +2,7 @@ package database;
 
 import entity.characters.PlayingCharacter;
 import entity.items.PickupableItem;
+import general.LogOutputManager;
 
 import java.io.IOError;
 import java.sql.Connection;
@@ -57,7 +58,7 @@ public class DBManager
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            LogOutputManager.logOutput(e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
             throw new IOError(e); // TODO: migliorare
         }
 

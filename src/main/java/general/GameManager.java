@@ -35,18 +35,18 @@ public class GameManager
     {
         scenarioStack.push(scenario);
 
-        System.out.println("Stack" + scenarioStack);
+        LogOutputManager.logOutput("Stack scenari: " + scenarioStack, LogOutputManager.SCENARIO_STACK_COLOR);
 
         if(scenario.getMode() == ActionSequence.Mode.SEQUENCE)
         {
-            System.out.println("Runno singola");
             scenario.runAction();
         }
         else
         {
-            System.out.println("Runno tutte");
             scenario.runAll();
             scenarioStack.remove(scenario);
+
+            LogOutputManager.logOutput("Stack scenari: " + scenarioStack, LogOutputManager.SCENARIO_STACK_COLOR);
         }
 
     }
@@ -56,13 +56,14 @@ public class GameManager
         if(scenarioStack.isEmpty())
             return;
         ActionSequence top = scenarioStack.peek();
-        System.out.println("top=" + top);
-        System.out.println("Number element" + scenarioStack.size());
         if(top.getMode() == ActionSequence.Mode.SEQUENCE)
         {
-            System.out.println("Continuazione" + top);
             if(top.isConcluded())
+            {
                 scenarioStack.pop();
+                LogOutputManager.logOutput("Stack scenari: " + scenarioStack,
+                                            LogOutputManager.SCENARIO_STACK_COLOR);
+            }
             else
                 top.runAction();
         }

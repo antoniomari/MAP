@@ -67,14 +67,6 @@ public class GameScreenManager
         int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * rescalingFactor));
         int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * rescalingFactor)) - 1;
 
-        //System.out.println("CALCOLATO X : " + x);
-        //System.out.println("CALCOLATO Y: " + y);
-
-        //check
-        //System.out.println( (x % (int)(BLOCK_SIZE * rescalingFactor) == 0)
-        //                    + " "
-        //                    + (y % (int)(BLOCK_SIZE * rescalingFactor) == 0) );
-
         // todo: controllare
         return new BlockPosition(Math.max(x, 0), y);
     }
