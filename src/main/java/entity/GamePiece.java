@@ -40,6 +40,9 @@ public class GamePiece
     private double scalingFactor;
     private Icon scaledSpriteIcon;
 
+    private BufferedImage spriteSheet;
+    private String jsonPath;
+
 
     // tutti i costruttori sono protetti per far sì che non sia
     // direttamente istanziabile dall'esterno
@@ -76,7 +79,13 @@ public class GamePiece
      */
     protected GamePiece(String name, BufferedImage spriteSheet, String jsonPath)
     {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(spriteSheet);
+        Objects.requireNonNull(jsonPath);
+
         this.name = name;
+        this.spriteSheet = spriteSheet;
+        this.jsonPath = jsonPath;
         sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, name);
 
         this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
@@ -109,6 +118,19 @@ public class GamePiece
     public int getBHeight()
     {
         return bHeight;
+    }
+
+    public void updateSprite(String spriteName)
+    {
+        sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, spriteName);
+
+        // setta a null così viene ricaricata
+        scaledSpriteIcon = null;
+
+        this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
+        this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+
+        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, ItemInteractionEvent.Type.UPDATE_SPRITE));
     }
 
 

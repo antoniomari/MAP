@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <oggetti>
     <oggetto nome="Barile">
-        <classe>PickupableItem</classe>
+        <classe>Item</classe>
         <descrizione>Un barile scemo come basile</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Accendi</actionName>
+            <effetto>src/main/resources/scenari/esplosioneBarile.xml</effetto>
+        </onUse>
     </oggetto>
     <oggetto nome="Ascensore">
         <classe>Door</classe>
@@ -33,5 +37,3 @@
         <canUse>false</canUse>
     </oggetto>
 </oggetti>
-
-

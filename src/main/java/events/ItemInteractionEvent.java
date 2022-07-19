@@ -18,7 +18,14 @@ public class ItemInteractionEvent extends GameEvent
             {
                 return "osservata";
             }
-        }
+        },
+        UPDATE_SPRITE
+                {
+                    public String toString()
+                    {
+                        return " aggiornato sprite";
+                    }
+                }
     }
 
 

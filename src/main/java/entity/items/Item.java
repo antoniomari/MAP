@@ -4,12 +4,9 @@ import action.ActionSequence;
 import entity.GamePiece;
 import events.EventHandler;
 import events.ItemInteractionEvent;
-import general.GameManager;
 import graphics.SpriteManager;
 
-import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.AccessibleObject;
 
 public class Item extends GamePiece implements Observable
 {
@@ -24,11 +21,19 @@ public class Item extends GamePiece implements Observable
     // SPRITESHEET OGGETTI
     private static final BufferedImage SPRITESHEET;
 
-    // flag utlizzabile
+    // flag utilizzabile
     private boolean usable;
 
-    private String useActionName = "Usa1";
+    // modalità: è utilizzabile una volta//infinite volte
+    private int usability;
+
+    // default per il nome dell'azione (viene modificato con il setter)
+    private String useActionName = "Usa";
     private ActionSequence useAction;
+
+
+    public static final int USE_ONCE = 1;
+    public static final int USE_INFTY = 2;
 
 
     // CARICAMENTO SPRITESHEET IN MEMORIA
@@ -36,7 +41,6 @@ public class Item extends GamePiece implements Observable
     {
         SPRITESHEET = SpriteManager.loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
     }
-
 
     public Item(String name, String description)
     {
@@ -58,6 +62,17 @@ public class Item extends GamePiece implements Observable
         super(name, spriteSheet, jsonPath);
         this.description = description;
         this.usable = canUse;
+        this.usability = USE_ONCE;
+    }
+
+    public void setUsability(int usability)
+    {
+        if(usability == USE_ONCE)
+            this.usability = USE_ONCE;
+        else if (usability == USE_INFTY)
+            this.usability = USE_INFTY;
+        else
+            throw new IllegalArgumentException("usability non valida");
     }
 
     public void setUseAction(ActionSequence useEffect)
@@ -70,7 +85,9 @@ public class Item extends GamePiece implements Observable
         if(usable)
         {
             useAction.runAll();
-            usable = false;
+
+            if(usability == USE_ONCE)
+                usable = false;
         }
 
     }
@@ -80,29 +97,24 @@ public class Item extends GamePiece implements Observable
         return useActionName;
     }
 
-    public void setUseActionName(String n)
+    public void setUseActionName(String s)
     {
-        this.useActionName = n;
+        this.useActionName = s;
     }
-
 
     public boolean canUse()
     {
         return usable;
     }
 
-
     public void observe()
     {
         EventHandler.sendEvent(new ItemInteractionEvent(this, ItemInteractionEvent.Type.OBSERVE));
     }
 
-
     public String getDescription()
     {
         return description;
     }
-
-
 
 }

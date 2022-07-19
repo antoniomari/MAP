@@ -32,6 +32,9 @@ public class EventHandler
             AnimationExecutor.executeAnimation(e.getItemInvolved(), e.getFrames());
         if (e.getType() == ItemInteractionEvent.Type.OBSERVE)
             TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
+        if(e.getType() == ItemInteractionEvent.Type.UPDATE_SPRITE)
+            PieceUpdateExecutor.executeUpdateSprite(e.getItemInvolved());
+
     }
 
     public static void executeInventoryEvent(InventoryEvent e)

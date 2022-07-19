@@ -94,6 +94,15 @@ public class GameScreenPanel extends JLayeredPane
         updateCharacterPosition(ch, finalPos, animation);
     }
 
+    public void updateSprite(GamePiece piece)
+    {
+        Icon newIcon = piece.getScaledIconSprite(rescalingFactor);
+        if(piece instanceof Item)
+            itemLabelMap.get(piece).setIcon(newIcon);
+        else if (piece instanceof GameCharacter)
+            characterLabelMap.get(piece).setIcon(newIcon);
+    }
+
 
     public MovingAnimation createMoveAnimation(GameCharacter ch, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd)
     {

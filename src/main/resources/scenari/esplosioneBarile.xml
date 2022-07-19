@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione num="1">
+        <subject>Barile</subject>
+        <method>updateSprite</method>
+        <spriteName>BarileEsploso</spriteName>
+    </azione>
+    <azione num="2">
+        <subject>Barile</subject>
+        <method>updateSprite</method>
+        <spriteName>BarileEsploso</spriteName>
+    </azione>
+</scenario>

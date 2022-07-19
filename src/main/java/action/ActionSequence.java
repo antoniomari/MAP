@@ -21,11 +21,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class ActionSequence
@@ -40,11 +38,6 @@ public class ActionSequence
     }
 
 
-    public ActionSequence()
-    {
-        this(Mode.SEQUENCE);
-    }
-
     public ActionSequence(Mode mode)
     {
         Objects.requireNonNull(mode);
@@ -52,6 +45,17 @@ public class ActionSequence
         actionList = new ArrayList<>();
         index = 0;
         this.mode = mode;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder s = new StringBuilder("[");
+        for(Runnable r : actionList)
+            s.append(r.toString() + "\t");
+        s.append("]");
+
+        return s.toString();
     }
 
     public Mode getMode()
@@ -68,6 +72,7 @@ public class ActionSequence
     {
         if(!isConcluded())
         {
+            System.out.println("Runno " + actionList.get(index));
             actionList.get(index++).run();
         }
 
@@ -77,23 +82,27 @@ public class ActionSequence
     {
         for(Runnable r : actionList)
         {
+            System.out.println("Ranno " + r);
             r.run();
         }
     }
 
     public boolean isConcluded()
     {
+        System.out.println("Indice " + index);
+        System.out.println("Dim " + actionList.size());
         return index == actionList.size();
     }
 
     public static ActionSequence loadScenario(String scenarioPath)
     {
         Document document = openXml(scenarioPath);
-        return parseScenario((Element) document);
+        return parseScenario(document.getDocumentElement());
     }
 
     private static ActionSequence parseScenario(Element scenarioElement)
     {
+        System.out.println("Parsando scenario");
         // ricava tipo scnenario
         String modeString = scenarioElement.getElementsByTagName("mode").item(0).getTextContent();
 
@@ -122,7 +131,7 @@ public class ActionSequence
                     .item(0)
                     .getTextContent();
 
-            System.out.println("preso metodo");
+            System.out.println("preso metodo " + methodName );
 
             if (methodName.equals("move"))
                 scenarioSequence.append(parseMove(eAction));
@@ -130,6 +139,8 @@ public class ActionSequence
                 scenarioSequence.append(parseSpeak(eAction));
             if (methodName.equals("add"))
                 scenarioSequence.append(parseAdd(eAction));
+            if(methodName.equals("updateSprite"))
+                scenarioSequence.append(parseUpdateSprite(eAction));
         }
 
         // prendi scenario eventuale alla fine
@@ -151,6 +162,8 @@ public class ActionSequence
         String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
         GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
 
+        System.out.println("Prendo " + subjectName);
+
         // costruisci block position
         int x = Integer.parseInt(eActionNode.getElementsByTagName("x").item(0).getTextContent());
         int y = Integer.parseInt(eActionNode.getElementsByTagName("y").item(0).getTextContent());
@@ -171,14 +184,12 @@ public class ActionSequence
     {
         String subjectName = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
         GameCharacter subject = (GameCharacter) GameManager.getPiece(subjectName);
-
         // ricava stringa da stampare
         String sentence = eActionNode.getElementsByTagName("sentence").item(0).getTextContent();
-
         // formatta stringa
         String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
 
-        // esegui comando
+        // restituisci runnable corrispondente
         return () -> subject.speak(sentenceNewLined);
     }
 
@@ -191,6 +202,7 @@ public class ActionSequence
 
         // Carica il GamePiece da aggiungere
         String pieceName = eActionNode.getElementsByTagName("what").item(0).getTextContent();
+
         GamePiece piece = loadPiece(pieceName);
 
         if(piece == null)
@@ -199,8 +211,25 @@ public class ActionSequence
         int x = Integer.parseInt(eActionNode.getElementsByTagName("x").item(0).getTextContent());
         int y = Integer.parseInt(eActionNode.getElementsByTagName("y").item(0).getTextContent());
 
+
         return () -> piece.addInRoom(subjectRoom, new BlockPosition(x, y));
 
+    }
+
+    private static Runnable parseUpdateSprite(Element eActionNode)
+    {
+        // non serve la classe, sappiamo che è una Room
+        // String subjectClassString = eActionNode.getElementsByTagName("subjectClass").item(0).getTextContent();
+        String subject = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
+        GamePiece piece = GameManager.getPiece(subject);
+
+        // Carica il GamePiece da aggiungere
+        String spriteName = eActionNode.getElementsByTagName("spriteName").item(0).getTextContent();
+
+        if(piece == null)
+            throw new GameException("Piece non trovato");
+
+        return () -> piece.updateSprite(spriteName);
     }
 
     private static Document openXml(String path)
@@ -259,14 +288,13 @@ public class ActionSequence
             Node itemNode = itemNodeList.item(i);
             String elementName = itemNode.getAttributes().getNamedItem("nome").getNodeValue();
 
-            System.out.println("Nome elem" + elementName);
 
             if (elementName.equals(name))
             {
                 Element pieceElement = (Element) itemNode;
                 String className = pieceElement.getElementsByTagName("classe").item(0).getTextContent();
                 String description = pieceElement.getElementsByTagName("descrizione").item(0).getTextContent();
-                boolean canUse = Boolean.getBoolean(pieceElement
+                boolean canUse = Boolean.parseBoolean(pieceElement
                         .getElementsByTagName("canUse")
                         .item(0).getTextContent());
 
@@ -313,26 +341,18 @@ public class ActionSequence
     {
         Document roomXml = openXml(roomPath);
 
-        //Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
-        //ActionSequence initScenario = parseScenario((Element) scenarioNode);
-
-        // creazione stanza TODO: fix
+        // creazione stanza
         Element roomElement = roomXml.getDocumentElement();
         String name = roomElement.getAttributes().getNamedItem("nome").getNodeValue();
         String pngPath = roomXml.getElementsByTagName("png").item(0).getTextContent();
         String jsonPath = roomXml.getElementsByTagName("json").item(0).getTextContent();
 
-        Room room = new Room(name, pngPath, jsonPath);
-        // esegui scenario appropriato
-        //GameManager.startScenario(initScenario);
-
-        return room;
+        return new Room(name, pngPath, jsonPath);
     }
 
     public static ActionSequence loadRoomInit(String roomPath)
     {
         Document roomXml = openXml(roomPath);
-
         Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
 
         return parseScenario((Element) scenarioNode);
