@@ -2,7 +2,6 @@ package scenarios;
 
 import entity.GamePiece;
 import entity.characters.GameCharacter;
-import entity.characters.NPC;
 import entity.items.Door;
 import entity.items.Item;
 import entity.items.Openable;
@@ -22,7 +21,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Optional;
@@ -56,6 +54,24 @@ public class XmlLoader
             return Optional.empty();
         else
             return Optional.of(elements.item(0).getTextContent());
+    }
+
+    /**
+     * Restituisce l'attributo {@code attributeName} dell'elemento xml {@code xmlElement}.
+     *
+     * @param xmlElement elemento xml
+     * @param attributeName nome dell'attributo di cui è cercato il valore
+     * @return il valore dell'attributo corrispondente
+     * @throws GameException se {@code xmlElement} non presenta l'attributo {@code attributeName}
+     */
+    private static String getXmlAttribute(Element xmlElement, String attributeName)
+    {
+        Node valueNode = xmlElement.getAttributes().getNamedItem(attributeName);
+
+        if(valueNode == null)
+            throw new GameException("Attributo [" + attributeName + "] non presente nell'xml");
+        else
+            return valueNode.getNodeValue();
     }
 
     private static ActionSequence parseScenario(Element scenarioElement)
@@ -182,7 +198,7 @@ public class XmlLoader
      * <ul>
      *    <li>{@literal <subject>} il nome del soggetto dell'azione (GameCharacter)</li>
      *
-     *    <li>{@literal <sentence>} frase pronunciata (a capo con "(*)"</li>
+     *    <li>{@literal <sentence>} frase pronunciata (a capo con "(*)")</li>
      * </ul>
      * @param eAction elemento corrispondente all'azione xml
      * @return Runnable associata al comando move
@@ -198,169 +214,182 @@ public class XmlLoader
         return () -> ((GameCharacter) GameManager.getPiece(subjectName)).speak(sentenceNewLined);
     }
 
-    private static Runnable parseAdd(Element eActionNode)
+    /**
+     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
+     * che contiene il valore {@code add} per il tag {@literal  <method>}
+     *
+     * I tag richiesti per il parsing di questo comando sono:
+     * <ul>
+     *     <li>{@literal <subject>} il nome della stanza in cui caricare il GamePiece</li>
+     *
+     *    <li>{@literal <what>} il nome del del GamePiece da caricare nella stanza,
+     *    che viene caricato tramite il rispettivo file xml</li>
+     *
+     *    <li>{@literal x} ascissa dove dev'essere collocato l'angolo in basso a sinistra
+     *    dello sprite di {@literal <what>}</li>
+     *
+     *    <li>{@literal y} ordinata dove dev'essere collocato l'angolo in basso a sinistra
+     *    dello sprite di {@literal <what>}</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata al comando move
+     * @throws GameException se {@literal <what>} non è stato trovato nel
+     * corrispettivo xml
+     */
+    private static Runnable parseAdd(Element eAction)
     {
         // non serve la classe, sappiamo che è una Room
-        // String subjectClassString = eActionNode.getElementsByTagName("subjectClass").item(0).getTextContent();
-        String subject = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
+        String subject = getTagValue(eAction, "subject");
         Room subjectRoom = GameManager.getRoom(subject);
 
         // Carica il GamePiece da aggiungere
-        String pieceName = eActionNode.getElementsByTagName("what").item(0).getTextContent();
-
+        String pieceName = getTagValue(eAction, "what");
         GamePiece piece = loadPiece(pieceName);
 
         if(piece == null)
             throw new GameException("Oggetto dell'add non trovato");
 
-        int x = Integer.parseInt(eActionNode.getElementsByTagName("x").item(0).getTextContent());
-        int y = Integer.parseInt(eActionNode.getElementsByTagName("y").item(0).getTextContent());
-
+        int x = Integer.parseInt(getTagValue(eAction, "x"));
+        int y = Integer.parseInt(getTagValue(eAction, "y"));
 
         return () -> piece.addInRoom(subjectRoom, new BlockPosition(x, y));
 
     }
 
-    private static Runnable parseUpdateSprite(Element eActionNode)
-    {
-        // non serve la classe, sappiamo che è una Room
-        // String subjectClassString = eActionNode.getElementsByTagName("subjectClass").item(0).getTextContent();
-        String subject = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
-        GamePiece piece = GameManager.getPiece(subject);
-
-        // Carica il GamePiece da aggiungere
-        String spriteName = eActionNode.getElementsByTagName("spriteName").item(0).getTextContent();
-
-        if(piece == null)
-            throw new GameException("Piece non trovato");
-
-        return () -> piece.updateSprite(spriteName);
-    }
-
-    private static Runnable parseEffectAnimation(Element eActionNode)
-    {
-        // non serve la classe, sappiamo che è una Room
-        // String subjectClassString = eActionNode.getElementsByTagName("subjectClass").item(0).getTextContent();
-        String subject = eActionNode.getElementsByTagName("subject").item(0).getTextContent();
-        GamePiece piece = GameManager.getPiece(subject);
-
-        // Carica il GamePiece da aggiungere
-        String animationNAme = eActionNode.getElementsByTagName("animationName").item(0).getTextContent();
-
-        if(piece == null)
-            throw new GameException("Piece non trovato");
-
-        return () -> piece.executeEffectAnimation(animationNAme);
-    }
-
-
-    private static Document openXml(String path)
-    {
-        try
-        {
-            File xmlFile = new File(path);
-            // parser per xml
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            // per ottenere documento
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            // documento
-            Document xml = db.parse(xmlFile);
-            // elabora documento
-            xml.getDocumentElement().normalize();
-
-            return xml;
-        }
-        catch (ParserConfigurationException | IOException | SAXException e)
-        {
-            System.out.println(e.getStackTrace());
-            throw new GameException("Errore nel caricamento dell'xml");
-        }
-
-    }
-
+    /**
+     * Restituisce il GamePiece sulla base del nome: se non è già stato caricato
+     * in memoria allora lo cerca in "personaggi.xml" e in "oggetti.xml"
+     *
+     * @param name nome del GamePiece cercato
+     * @return GamePiece cercato
+     * @throws GameException se non esiste un GamePiece di nome {@code name}
+     */
     private static GamePiece loadPiece(String name)
     {
-        if(GameManager.getPiece(name) != null)
-            return GameManager.getPiece(name);
+        // 1: cerca in gameManager (caso in cui è già stato caricato in memoria)
+        GamePiece piece = GameManager.getPiece(name);
+        if(piece != null)
+            return piece;
 
+        // cerca tra i personaggi (file xml)
+        piece = loadCharacter(name);
+        if(piece != null)
+            return piece;
+
+        // cerca tra gli oggetti (file xml)
+        piece = loadItem(name);
+        if(piece != null)
+            return piece;
+
+        // piece non presente, lancia eccezione
+        throw new GameException("GamePiece inesistente");
+    }
+
+    /**
+     * Carica un GameCharacter dal rispettivo file (personaggi.xml).
+     *
+     * Cerca il GameCharacter (elemento xml con tag {@literal <personaggio>} il cui nome
+     * è {@code name}. Nella costruzione dell'oggetto utilizza il contenuto dei seguenti tag:
+     * <ul>
+     *     <li>{@literal <spritesheet>} path dello spritesheet del personaggio</li>
+     *
+     *    <li>{@literal <json>} path del json associato allo spritesheet del personaggio</li>
+     * </ul>
+     *
+     * @param name nome del GameCharacter da caricare
+     * @return il GameCharacter caricato, {@code null} se non esiste un GameCharacter
+     * il cui nome sia {@code name}
+     */
+    private static GameCharacter loadCharacter(String name)
+    {
         Document characterXml = openXml("src/main/resources/scenari/personaggi.xml");
-        Document itemXml = openXml("src/main/resources/scenari/oggetti.xml");
-
 
         NodeList characterNodeList = characterXml.getElementsByTagName("personaggio");
+
+        // per ogni personaggio controlla l'atttibuto "nome"
         for(int i = 0; i < characterNodeList.getLength(); i++)
         {
-            Node characterNode = characterNodeList.item(i);
-            String elementName = characterNode.getAttributes().getNamedItem("nome").getNodeValue();
+            Element characterElement = (Element) characterNodeList.item(i);
+            String elementName = getXmlAttribute(characterElement, "nome");
+
             if (elementName.equals(name))
             {
-                Element characterElement = (Element) characterNode;
-                String spritesheetPath = characterElement.getElementsByTagName("spritesheet").item(0).getTextContent();
-                String jsonPath = characterElement.getElementsByTagName("json").item(0).getTextContent();
+                String spritesheetPath = getTagValue(characterElement, "spritesheet");
+                String jsonPath = getTagValue(characterElement, "json");
 
-                return new NPC(name, spritesheetPath, jsonPath);
+                return new GameCharacter(name, spritesheetPath, jsonPath);
             }
-
         }
+        // personaggio non presente
+        return null;
+    }
 
+    // TODO : documentazion e modularizzazione
+    private static Item loadItem(String name)
+    {
+        Document itemXml = openXml("src/main/resources/scenari/oggetti.xml");
 
         NodeList itemNodeList = itemXml.getElementsByTagName("oggetto");
+
+        // per ogni oggetto cerca
         for(int i = 0; i < itemNodeList.getLength(); i++)
         {
-            Node itemNode = itemNodeList.item(i);
-            String elementName = itemNode.getAttributes().getNamedItem("nome").getNodeValue();
-
+            Element itemElement = (Element) itemNodeList.item(i);
+            String elementName = getXmlAttribute(itemElement, "nome");
 
             if (elementName.equals(name))
             {
-                Element pieceElement = (Element) itemNode;
-                String className = pieceElement.getElementsByTagName("classe").item(0).getTextContent();
-                String description = pieceElement.getElementsByTagName("descrizione").item(0).getTextContent();
-                boolean canUse = Boolean.parseBoolean(pieceElement
-                        .getElementsByTagName("canUse")
-                        .item(0).getTextContent());
+                String className = getTagValue(itemElement, "classe");
+                String description = getTagValue(itemElement, "descrizione");
+                boolean canUse = Boolean.parseBoolean(getTagValue(itemElement, "canUse"));
 
                 // TODO: caricare l'opportuna classe IMPORTANTEEEEE!"!!!!!!1
-                Item item;
+                Item itemToLoad;
                 if(className.equals("Item"))
-                    item = new Item(name, description, canUse);
+                    itemToLoad = new Item(name, description, canUse);
                 else if (className.equals("PickupableItem"))
-                    item = new PickupableItem(name, description);
+                    itemToLoad = new PickupableItem(name, description);
                 else if (className.equals("Door"))
-                    item = new Door(name, description);
+                    itemToLoad = new Door(name, description);
                 else
                     throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
                 // TODO : rimpiazzare if-else
 
 
-                Node onUseNode = pieceElement.getElementsByTagName("onUse").item(0);
+                // setup onUse action
+                Element onUseElement = (Element) itemElement.getElementsByTagName("onUse").item(0);
 
-                if (onUseNode != null)
+                if (onUseElement != null)
                 {
-                    String scenarioPath = ((Element) onUseNode).getElementsByTagName("effetto").item(0).getTextContent();
-                    item.setUseAction(loadScenario(scenarioPath));
-
-                    item.setUseActionName(((Element) onUseNode).getElementsByTagName("actionName").item(0).getTextContent());
+                    String scenarioPath = getTagValue(onUseElement, "effetto");
+                    // imposta useAction
+                    itemToLoad.setUseAction(loadScenario(scenarioPath));
+                    // imposta nome azione
+                    itemToLoad.setUseActionName(getTagValue(onUseElement, "actionName"));
                 }
 
-                Node onOpenNode = pieceElement.getElementsByTagName("onOpen").item(0);
+                Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
 
-                if (onOpenNode != null)
+                if (onOpenElement != null)
                 {
-                    String scenarioPath = ((Element) onOpenNode).getElementsByTagName("effetto").item(0).getTextContent();
-                    ((Openable) item).setOpenEffect(loadScenario(scenarioPath));
+                    String scenarioPath = getTagValue(onOpenElement, "effetto");
+                    // imposta openEffect TODO: rinominare in setOpenAction
+                    ((Openable) itemToLoad).setOpenEffect(loadScenario(scenarioPath));
                 }
 
-                Node onUseWithNode = pieceElement.getElementsByTagName("onUseWith").item(0);
+                Element onUseWithElement = (Element) itemElement.getElementsByTagName("onUseWith").item(0);
 
-                if (onUseWithNode != null)
+                // TODO : completare
+                if (onUseWithElement != null)
                 {
-                    String targetName = ((Element) onUseWithNode).getElementsByTagName("target").item(0).getTextContent();
-                    Item target = (Item) GameManager.getPiece(targetName);
-                    String methodName = ((Element) onUseWithNode).getElementsByTagName("method").item(0).getTextContent();
+                    String targetName = getTagValue(onUseWithElement, "target");
+                    String methodName = getTagValue(onUseWithElement, "method");
                     Method method;
+                    Item target;
                     try
                     {
+                        target = (Item) GameManager.getPiece(targetName);
                         method = target.getClass().getMethod(methodName);
                     }
                     catch(NoSuchMethodException e)
@@ -374,8 +403,6 @@ public class XmlLoader
                     {
                         try
                         {
-                            System.out.println("Metodo" + method.getName());
-                            System.out.println("Target" + targetName);
                             method.invoke(target);
                         } catch (IllegalAccessException | InvocationTargetException e)
                         {
@@ -383,31 +410,125 @@ public class XmlLoader
                         }
                     });
 
-                    ((PickupableItem) item).setTargetItem(target);
-                    ((PickupableItem) item).setUsewithAction(useWithScenario);
+                    ((PickupableItem) itemToLoad).setTargetItem(target);
+                    ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
                 }
 
-                return item;
+                return itemToLoad;
             }
         }
 
+        // non trovato
         return null;
-
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
+     * che contiene il valore {@code updateSprite} per il tag {@literal  <method>}.
+     *
+     * I tag richiesti per il parsing di questo comando sono:
+     * <ul>
+     *     <li>{@literal <subject>} il nome del soggetto dell'azione (GamePiece)</li>
+     *
+     *    <li>{@literal <spriteName>} il nome ddello sprite da caricare (presente nel json)</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata al comando updateSprite
+     * @throws GameException se {@literal <subject>} non è stato trovato nel GameManager
+     */
+    private static Runnable parseUpdateSprite(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        GamePiece piece = GameManager.getPiece(subject);
+
+        if(piece == null)
+            throw new GameException("Piece non trovato");
+
+        String spriteName = getTagValue(eAction, "spriteName");
+
+        return () -> piece.updateSprite(spriteName);
+    }
+
+    /**
+     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
+     * che contiene il valore {@code effectAnimation} per il tag {@literal  <method>}.
+     *
+     * I tag richiesti per il parsing di questo comando sono:
+     * <ul>
+     *     <li>{@literal <subject>} il nome del soggetto dell'azione (GamePiece)</li>
+     *
+     *    <li>{@literal <animationName>} il nome dell'animazione da eseguire</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata al comando updateSprite
+     */
+    private static Runnable parseEffectAnimation(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        // recupera il nome dell'animazione
+        String animationNAme = getTagValue(eAction, "animationName");
+
+        return () -> GameManager.getPiece(subject).executeEffectAnimation(animationNAme);
+    }
+
+    /**
+     * Restituisce un Document relativo a un file xml.
+     *
+     * @param path path del file xml da aprire
+     * @return Document del file
+     * @throws GameException se si verifica un problema nell'aprire e caricare il file
+     */
+    private static Document openXml(String path)
+    {
+        try
+        {
+            File xmlFile = new File(path);
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            // parse xml -> ottieni documento
+            Document xml = db.parse(xmlFile);
+            // normalizza documento
+            xml.getDocumentElement().normalize();
+
+            return xml;
+        }
+        catch (ParserConfigurationException | IOException | SAXException e)
+        {
+            System.out.println(e.getStackTrace());
+            throw new GameException("Errore nel caricamento dell'xml");
+        }
+    }
+
+    /**
+     * Crea una Room descritta nel file xml corrispondente.
+     *
+     * @param roomPath path del file xml contenente i dati della Room
+     *                 (root tag: {@literal <stanza>})
+     * @return stanza corrispondente
+     */
     public static Room loadRoom(String roomPath)
     {
         Document roomXml = openXml(roomPath);
 
         // creazione stanza
         Element roomElement = roomXml.getDocumentElement();
-        String name = roomElement.getAttributes().getNamedItem("nome").getNodeValue();
-        String pngPath = roomXml.getElementsByTagName("png").item(0).getTextContent();
-        String jsonPath = roomXml.getElementsByTagName("json").item(0).getTextContent();
+        String name = getXmlAttribute(roomElement, "nome");
+        String pngPath = getTagValue(roomElement, "png");
+        String jsonPath = getTagValue(roomElement, "json");
 
         return new Room(name, pngPath, jsonPath);
     }
 
+    /**
+     * Carica lo scenario d'inizializzazione della stanza, contenuto
+     * nel file xml della stessa.
+     *
+     * @param roomPath path del file xml contenente i dati della Room
+     * @return ActionSequence che comprende le azioni d'inizializzazione stanza
+     */
     public static ActionSequence loadRoomInit(String roomPath)
     {
         Document roomXml = openXml(roomPath);
@@ -415,7 +536,5 @@ public class XmlLoader
 
         return parseScenario((Element) scenarioNode);
     }
-
-
 
 }
