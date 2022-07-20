@@ -10,7 +10,7 @@
         <subject>Barile</subject>
         <method>effectAnimation</method>
         <animationName>Esplosione</animationName>
-        <finalWait>10000</finalWait>
+        <finalWait>1000</finalWait>
     </azione>
     <azione num="3">
         <subject>Cucina</subject>

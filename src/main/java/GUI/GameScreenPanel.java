@@ -2,15 +2,18 @@ package GUI;
 
 import animation.MovingAnimation;
 import animation.StillAnimation;
+import com.sun.tools.javac.Main;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.items.Item;
+import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import general.GameManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +62,18 @@ public class GameScreenPanel extends JLayeredPane
         return itemLabelMap.get(item);
     }
 
+    private MainFrame retrieveParentFrame()
+    {
+        Container parent = getParent();
+
+        while(!(parent instanceof MainFrame))
+        {
+            parent = parent.getParent();
+        }
+
+        return (MainFrame) parent;
+    }
+
     public void removeItemCurrentRoom(Item item)
     {
         JLabel labelToRemove = itemLabelMap.get(item);
@@ -84,7 +99,13 @@ public class GameScreenPanel extends JLayeredPane
             add(effectLabel, EFFECT_LAYER);
             GameScreenManager.updateLabelPosition(effectLabel, pos);
             StillAnimation effectAnimation = StillAnimation.createExplosionAnimation(spritesheetPath, jsonPath, effectLabel, finalWait);
-            effectAnimation.setActionOnEnd(() -> this.remove(effectLabel));
+            effectAnimation.setActionOnEnd(() ->
+                    {
+                        setLayer(effectLabel, GameScreenPanel.GARBAGE_LAYER);
+                        effectLabel.setIcon(null);
+                        this.remove(effectLabel);
+                    });
+
             effectAnimation.start();
         }
 
@@ -158,6 +179,18 @@ public class GameScreenPanel extends JLayeredPane
         GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
                 null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
         itemLabel.addMouseListener(popMenuListener);
+
+        // crea listener per il tasto sinistro
+        GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+                null,
+                () ->
+                {
+                    InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
+                    PickupableItem selectedItem = inventoryPanel.getSelectedItem();
+                    if(selectedItem != null)
+                        selectedItem.useWith(it);
+                });
+        itemLabel.addMouseListener(interactionListener);
 
         // metti la coppia Item JLabel nel dizionario
         itemLabelMap.put(it, itemLabel);

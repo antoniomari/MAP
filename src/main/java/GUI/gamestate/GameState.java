@@ -7,6 +7,7 @@ import entity.rooms.BlockPosition;
 import general.GameManager;
 import general.LogOutputManager;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
@@ -18,6 +19,20 @@ public class GameState
     private static GameKeyListener ESC_LISTENER;
     private static GameKeyListener SPACE_LISTENER;
     private static GameMouseListener DROP_LISTENER;
+
+    private static Runnable leftMouseClick = () ->
+            {
+                // se hai un elemento selezionato e click sinistro su oggetto prova "useWith"
+                if (mainFrame.getInventoryPanel().getSelectedItem() == null)
+                {
+                    BlockPosition bp = GameScreenManager.calculateBlocks(
+                            new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-2, 0);
+
+                    bp = mainFrame.getCurrentRoom().getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
+                    if(bp != null)
+                        PlayingCharacter.getPlayer().updatePosition(bp);
+                }
+            };
 
     public enum State
     {
@@ -38,33 +53,16 @@ public class GameState
         ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> mainFrame.showMenu(true), null);
         mainFrame.addKeyListener(ESC_LISTENER);
 
-        DROP_LISTENER = new GameMouseListener(MouseEvent.BUTTON1,
-                () ->
-                {
-                    if (mainFrame.getInventoryPanel().getSelectedItem() != null)
-                    {
-                        //BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-1, 1);
-                        //mainFrame.getInventoryPanel().getSelectedItem().drop(mainFrame.getCurrentRoom(), bp);
-                        // System.out.println("usato"); TODO: togliere qua!!!!
-                        mainFrame.getInventoryPanel().getSelectedItem().useWith((Item)GameManager.getPiece("Barile"));
-                    }
-                    else
-                    {
-                        BlockPosition bp = GameScreenManager.calculateBlocks(
-                                new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-2, 0);
-
-                        bp = mainFrame.getCurrentRoom().getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
-                        if(bp != null)
-                            PlayingCharacter.getPlayer().updatePosition(bp);
-                    }
-                }
-
-                , null, State.PLAYING);
-        mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
+        initListeners();
 
         // TODO: migliora
         mainFrame.addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, mainFrame.getTextBarPanel()::hideTextBar, null, State.TEXT_BAR));
+    }
 
+    public static void initListeners()
+    {
+        DROP_LISTENER = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
+        mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
     }
 
     public static void changeState(State newState)

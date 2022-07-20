@@ -79,7 +79,7 @@
 	<azione num="12">
 		<subject>Schwartz</subject>
 		<method>move</method>
-		<x>-4</x>
+		<x>-6</x>
 		<y>0</y>
 		<how>relative</how>
 		<finalWait>1000</finalWait>
