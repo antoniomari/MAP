@@ -2,6 +2,7 @@ package events.executors;
 
 import GUI.MainFrame;
 import animation.StillAnimation;
+import entity.GamePiece;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
 
@@ -25,9 +26,9 @@ public class AnimationExecutor extends Executor
         new StillAnimation(gameScreenPanel.getLabelAssociated(it), frames, 200, true).start();
     }
 
-    public static void executeEffectAnimation(String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos)
+    public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)
     {
-        gameScreenPanel.effectAnimation(spritesheetPath, jsonPath, whatAnimation, pos);
+        gameScreenPanel.effectAnimation(piece, spritesheetPath, jsonPath, whatAnimation, pos, finalWait);
     }
 
 

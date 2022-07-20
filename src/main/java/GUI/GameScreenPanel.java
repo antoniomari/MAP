@@ -74,16 +74,16 @@ public class GameScreenPanel extends JLayeredPane
         itemLabelMap.remove(item);
     }
 
-    public void effectAnimation(String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos)
+    public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)
     {
         if(whatAnimation.equals("Esplosione"))
         {
-            // TODO: generalizzazione
-            JLabel barileLabel = itemLabelMap.get((Item)GameManager.getPiece("Barile"));
-            JLabel effectLabel = new JLabel(barileLabel.getIcon());
+            // TODO: generalizzazione anche su gameCharacter
+            JLabel pieceLabel = itemLabelMap.get(piece);
+            JLabel effectLabel = new JLabel(pieceLabel.getIcon());
             add(effectLabel, EFFECT_LAYER);
             GameScreenManager.updateLabelPosition(effectLabel, pos);
-            StillAnimation effectAnimation = StillAnimation.createExplosionAnimation(spritesheetPath, jsonPath, effectLabel);
+            StillAnimation effectAnimation = StillAnimation.createExplosionAnimation(spritesheetPath, jsonPath, effectLabel, finalWait);
             effectAnimation.setActionOnEnd(() -> this.remove(effectLabel));
             effectAnimation.start();
         }

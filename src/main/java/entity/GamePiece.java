@@ -1,7 +1,6 @@
 package entity;
 
 import entity.characters.GameCharacter;
-import events.CharacterEvent;
 import events.EventHandler;
 import events.GamePieceEvent;
 import events.ItemInteractionEvent;
@@ -12,7 +11,6 @@ import graphics.SpriteManager;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
-import jdk.jfr.Event;
 
 import javax.swing.Icon;
 import java.awt.Image;
@@ -145,7 +143,7 @@ public class GamePiece
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, ItemInteractionEvent.Type.UPDATE_SPRITE));
     }
 
-    public void executeEffectAnimation(String animationName)
+    public void executeEffectAnimation(String animationName, int finalWait)
     {
         // TODO: generalizzare, probabilmente utilizzare map delle animazioni in qualche classe
         String spritesheetPath = null;
@@ -156,7 +154,7 @@ public class GamePiece
             jsonPath = "/img/animazioni/esplosione.json";
         }
 
-        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, spritesheetPath, jsonPath, animationName, ItemInteractionEvent.Type.EFFECT_ANIMATION));
+        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, spritesheetPath, jsonPath, animationName, finalWait, ItemInteractionEvent.Type.EFFECT_ANIMATION));
     }
 
     public List<Image> getMovingFrames()
@@ -187,6 +185,8 @@ public class GamePiece
         room.addPiece(this, pos);
         // imposta attributo
         this.locationRoom = room;
+
+        GameManager.continueScenario();
     }
 
     public void removeFromRoom()

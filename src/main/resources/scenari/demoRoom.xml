@@ -8,14 +8,7 @@
             <subject>Cucina</subject>
             <method>add</method>
             <what>Schwartz</what>
-            <x>12</x>
-            <y>10</y>
-        </azione>
-        <azione num="2">
-            <subject>Cucina</subject>
-            <method>add</method>
-            <what>Nicolas</what>
-            <x>17</x>
+            <x>0</x>
             <y>10</y>
         </azione>
         <azione num="3">

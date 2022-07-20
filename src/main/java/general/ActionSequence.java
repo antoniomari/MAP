@@ -1,4 +1,4 @@
-package scenarios;
+package general;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +45,13 @@ public class ActionSequence
         actionList.add(action);
     }
 
-    public void runAction()
+    void runAction()
     {
         if(!isConcluded())
             actionList.get(index++).run();
     }
 
-    public void runAll()
+   void runAll()
     {
         for(Runnable r : actionList)
             r.run();

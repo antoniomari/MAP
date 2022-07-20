@@ -45,7 +45,7 @@ public class GameState
                     {
                         //BlockPosition bp = GameScreenManager.calculateBlocks(new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-1, 1);
                         //mainFrame.getInventoryPanel().getSelectedItem().drop(mainFrame.getCurrentRoom(), bp);
-                        // System.out.println("usato");
+                        // System.out.println("usato"); TODO: togliere qua!!!!
                         mainFrame.getInventoryPanel().getSelectedItem().useWith((Item)GameManager.getPiece("Barile"));
                     }
                     else
@@ -59,7 +59,7 @@ public class GameState
                     }
                 }
 
-                , null);
+                , null, State.PLAYING);
         mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
 
         // TODO: migliora

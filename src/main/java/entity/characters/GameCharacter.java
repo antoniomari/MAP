@@ -1,13 +1,10 @@
 package entity.characters;
 
 import entity.GamePiece;
-import entity.rooms.BlockPosition;
 import events.CharacterEvent;
 import events.EventHandler;
-import general.GameException;
 import graphics.SpriteManager;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,12 +34,7 @@ public class GameCharacter extends GamePiece
 
     private void initMovingFrames()
     {
-        // TODO: generalizzare
-        for(int i = 1; i <= 4; i++)
-        {
-            movingFrames.add(SpriteManager.loadSpriteByName(spritesheet, jsonPath, "moving" + i));
-        }
-        movingFrames.add(sprite);
+        movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "moving");
     }
 
 

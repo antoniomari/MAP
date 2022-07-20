@@ -2,29 +2,96 @@
 <scenario>
 	<mode>sequence</mode>
 	<azione num="1">
-		<subject>Nicolas</subject>
+		<subject>Schwartz</subject>
 		<method>move</method>
-		<x>7</x>
-		<y>13</y>
+		<x>12</x>
+		<y>8</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="2">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>Sono di fretta</sentence>
+	</azione>
+	<azione num="3">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>E come ogni volta che sono di fretta, (*) l'ascensore non funziona</sentence>
+	</azione>
+	<azione num="4">
+		<subject>Schwartz</subject>
+		<method>move</method>
+		<x>-2</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="5">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>Qua c'è il numero del tecnico (*) dell'ascensore. Potrei chiamarlo...</sentence>
+	</azione>
+	<azione num="6">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>... non ho mai deciso di (*) compare un telefono...</sentence>
+	</azione>
+	<azione num="7">
+		<subject>Schwartz</subject>
+		<method>move</method>
+		<x>14</x>
+		<y>14</y>
 		<how>absolute</how>
 		<finalWait>1000</finalWait>
 	</azione>
-	<azione num="2">
-		<subject>Nicolas</subject>
+	<azione num="8">
+		<subject>Schwartz</subject>
 		<method>speak</method>
-		<sentence>Ciao, questa è una prova</sentence>
+		<sentence>forse se facessi esplodere (*) questo barile davanti all'ascensore</sentence>
 	</azione>
-	<azione num="3">
-		<subject>Nicolas</subject>
+	<azione num="8">
+		<subject>Schwartz</subject>
 		<method>speak</method>
-		<sentence>Devi trovare il modo per aprire (*) l'ascensore</sentence>
+		<sentence>potrei riuscire ad aprire (*) le porte!</sentence>
 	</azione>
-	<azione num="4">
-		<subject>Nicolas</subject>
+	<azione num="9">
+		<subject>Schwartz</subject>
 		<method>move</method>
-		<x>9</x>
-		<y>9</y>
-		<how>absolute</how>
-		<finalWait>0</finalWait>
+		<x>2</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="10">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>è troppo pesante...</sentence>
+	</azione>
+	<azione num="11">
+		<subject>Schwartz</subject>
+		<method>move</method>
+		<x>4</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>1000</finalWait>
+	</azione>
+	<azione num="12">
+		<subject>Schwartz</subject>
+		<method>move</method>
+		<x>-4</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>1000</finalWait>
+	</azione>
+	<azione num="13">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>forse se facessi esplodere (*) comunque questo barile puzzolente</sentence>
+	</azione>
+	<azione num="14">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>qualcuno potrebbe sentirlo (*) e venire ad aiutarmi!</sentence>
 	</azione>
 </scenario>

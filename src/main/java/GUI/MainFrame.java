@@ -1,7 +1,7 @@
 package GUI;
 
 import GUI.gamestate.GameState;
-import scenarios.ActionSequence;
+import general.ActionSequence;
 import database.DBManager;
 import events.executors.AnimationExecutor;
 import events.executors.InventoryUpdateExecutor;
@@ -9,7 +9,7 @@ import events.executors.RoomUpdateExecutor;
 import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.Room;
-import scenarios.XmlLoader;
+import general.XmlLoader;
 
 import javax.swing.*;
 import java.awt.*;

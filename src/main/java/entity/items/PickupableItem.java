@@ -1,7 +1,7 @@
 package entity.items;
 
 
-import scenarios.ActionSequence;
+import general.ActionSequence;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;

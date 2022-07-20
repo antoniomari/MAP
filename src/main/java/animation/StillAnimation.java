@@ -1,6 +1,7 @@
 package animation;
 
 import entity.rooms.BlockPosition;
+import general.GameManager;
 import graphics.SpriteManager;
 import entity.items.Item;
 import javax.swing.*;
@@ -20,9 +21,15 @@ public class StillAnimation extends Animation
 
     public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
     {
+        this(label, frames, delayMilliseconds, initialDelay, 0);
+    }
+
+    public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, int finalWait)
+    {
         super(label, frames);
         this.delayMilliseconds = delayMilliseconds;
         this.initialDelay = initialDelay;
+        this.millisecondWaitEnd = finalWait;
     }
 
     @Override
@@ -57,17 +64,17 @@ public class StillAnimation extends Animation
     {
         if(onEndExecute != null)
             onEndExecute.run();
+
+        GameManager.continueScenario();
     }
 
 
     public static StillAnimation createExplosionAnimation(String spritesheetPath, String jsonPath,
-                                                          JLabel animationLabel)
+                                                          JLabel animationLabel, int finalWait)
     {
         BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
 
-        return new StillAnimation(animationLabel, frames, 100, true);
-
+        return new StillAnimation(animationLabel, frames, 100, true, finalWait);
     }
-
 }

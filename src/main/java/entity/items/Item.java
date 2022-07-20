@@ -1,9 +1,10 @@
 package entity.items;
 
-import scenarios.ActionSequence;
+import general.ActionSequence;
 import entity.GamePiece;
 import events.EventHandler;
 import events.ItemInteractionEvent;
+import general.GameManager;
 import graphics.SpriteManager;
 
 import java.awt.image.BufferedImage;
@@ -84,7 +85,7 @@ public class Item extends GamePiece implements Observable
     {
         if(usable)
         {
-            useAction.runAll();
+            GameManager.startScenario(useAction);
 
             if(usability == USE_ONCE)
                 usable = false;

@@ -1,6 +1,5 @@
 package general;
 
-import scenarios.ActionSequence;
 import entity.GamePiece;
 import entity.rooms.Room;
 
@@ -13,8 +12,7 @@ public class GameManager
     private static final Map<String, Room> rooms = new HashMap<>();
     private static final Map<String, GamePiece> pieces = new HashMap<>();
 
-    private static Stack<ActionSequence> scenarioStack = new Stack<>();
-
+    private static final Stack<ActionSequence> scenarioStack = new Stack<>();
 
     public static void addPiece(GamePiece p)
     {
@@ -31,7 +29,7 @@ public class GameManager
         return rooms.get(roomName);
     }
 
-    public static void startScenario(ActionSequence scenario)
+    public static synchronized void startScenario(ActionSequence scenario)
     {
         scenarioStack.push(scenario);
 
@@ -48,26 +46,25 @@ public class GameManager
 
             LogOutputManager.logOutput("Stack scenari: " + scenarioStack, LogOutputManager.SCENARIO_STACK_COLOR);
         }
-
     }
 
     public static synchronized void continueScenario()
     {
         if(scenarioStack.isEmpty())
             return;
+
         ActionSequence top = scenarioStack.peek();
         if(top.getMode() == ActionSequence.Mode.SEQUENCE)
         {
             if(top.isConcluded())
             {
-                scenarioStack.pop();
+                scenarioStack.remove(top);
                 LogOutputManager.logOutput("Stack scenari: " + scenarioStack,
                                             LogOutputManager.SCENARIO_STACK_COLOR);
             }
             else
                 top.runAction();
         }
-
     }
 
     public static GamePiece getPiece(String name)

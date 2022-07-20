@@ -1,15 +1,16 @@
-package scenarios;
+package general;
 
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
-import entity.items.Door;
+import entity.items.DoorLike;
 import entity.items.Item;
 import entity.items.Openable;
 import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
@@ -24,7 +25,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Optional;
@@ -360,8 +360,8 @@ public class XmlLoader
                     itemToLoad = new Item(name, description, canUse);
                 else if (className.equals("PickupableItem"))
                     itemToLoad = new PickupableItem(name, description);
-                else if (className.equals("Door"))
-                    itemToLoad = new Door(name, description);
+                else if (className.equals("DoorLike"))
+                    itemToLoad = new DoorLike(name, description, false, false);
                 else
                     throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
                 // TODO : rimpiazzare if-else
@@ -479,9 +479,10 @@ public class XmlLoader
         String subject = getTagValue(eAction, "subject");
 
         // recupera il nome dell'animazione
-        String animationNAme = getTagValue(eAction, "animationName");
+        String animationName = getTagValue(eAction, "animationName");
+        int finalWait = Integer.parseInt(getTagValue(eAction, "finalWait"));
 
-        return () -> GameManager.getPiece(subject).executeEffectAnimation(animationNAme);
+        return () -> GameManager.getPiece(subject).executeEffectAnimation(animationName, finalWait);
     }
 
     /**

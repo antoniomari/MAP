@@ -76,7 +76,7 @@ public abstract class Animation
         this.frames = frames;
         resizeFrames();
         this.currentIndex = 0;
-        this.millisecondWaitEnd = 0;
+        this.millisecondWaitEnd = 0; // TODO :aggiustare
     }
 
     protected void resizeFrames()

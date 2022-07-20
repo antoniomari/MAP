@@ -10,10 +10,14 @@
         </onUse>
     </oggetto>
     <oggetto nome="Ascensore">
-        <classe>Door</classe>
+        <classe>DoorLike</classe>
         <descrizione>Un ascensore per salire</descrizione>
         <canUse>false</canUse>
+        <toOpen>
+            <check>isUnlocked</check>
+        </toOpen>
         <onOpen>
+            <mode>once</mode>
             <effetto>src/main/resources/scenari/fine.xml</effetto>
         </onOpen>
     </oggetto>

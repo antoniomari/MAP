@@ -13,6 +13,7 @@ public class ItemInteractionEvent extends GameEvent
     private String whatAnimation;
     private String spritesheetPath;
     private String jsonPath;
+    private int finalWait;
 
     public enum Type
     {
@@ -52,12 +53,13 @@ public class ItemInteractionEvent extends GameEvent
         return whatAnimation;
     }
 
-    public ItemInteractionEvent(Item item, String spritesheetPath, String jsonPath, String whatAnimation, Type type)
+    public ItemInteractionEvent(Item item, String spritesheetPath, String jsonPath, String whatAnimation, int finalWait, Type type)
     {
         this(item, type);
         this.spritesheetPath = spritesheetPath;
         this.jsonPath = jsonPath;
         this.whatAnimation = whatAnimation;
+        this.finalWait = finalWait;
     }
 
     public String getSpritesheetPath()
@@ -98,6 +100,11 @@ public class ItemInteractionEvent extends GameEvent
     public Type getType()
     {
         return type;
+    }
+
+    public int getFinalWait()
+    {
+        return finalWait;
     }
 
     @Override

@@ -47,6 +47,18 @@ public class SpriteManager
                 .collect(Collectors.toList());
     }
 
+    public static List<Image> getKeywordOrderedFrames(BufferedImage spritesheet, String jsonPath, String keyword)
+    {
+        JSONObject json = getJsonFromFile(jsonPath);
+        return json.keySet().stream()
+                .filter(str -> str.startsWith(keyword))
+                .mapToInt(str -> Integer.parseInt(str.split(keyword)[1]))
+                .sorted()
+                .mapToObj(x -> keyword + x)
+                .map(key -> loadSpriteByName(spritesheet, jsonPath, String.valueOf(key)))
+                .collect(Collectors.toList());
+    }
+
 
     /**
      * Carica immagine sprite in base al nome contenuto nel json

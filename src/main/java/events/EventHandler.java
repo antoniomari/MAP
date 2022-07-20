@@ -38,8 +38,8 @@ public class EventHandler
             TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
         if(e.getType() == ItemInteractionEvent.Type.UPDATE_SPRITE)
             PieceUpdateExecutor.executeUpdateSprite(e.getItemInvolved());
-        if(e.getType() == ItemInteractionEvent.Type.EFFECT_ANIMATION)
-            AnimationExecutor.executeEffectAnimation(e.getSpritesheetPath(), e.getJsonPath(), e.getAnimationName(), e.getItemInvolved().getPosition());
+        if(e.getType() == ItemInteractionEvent.Type.EFFECT_ANIMATION)  // TODO: modificare in gamePiece da item
+            AnimationExecutor.executeEffectAnimation(e.getItemInvolved(), e.getSpritesheetPath(), e.getJsonPath(), e.getAnimationName(), e.getItemInvolved().getPosition(), e.getFinalWait());
 
     }
 
