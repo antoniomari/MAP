@@ -7,10 +7,7 @@ public interface Triggerable
 {
     void trigger();
 
-    List<Image> getTriggerFrames(); //animazione
-    Image getTriggeredSprite();
-    void setTriggeredSprite();
+    void setTriggerScenario();
 
-
-    void isTriggered();
+    boolean hasBeenTriggered();
 }

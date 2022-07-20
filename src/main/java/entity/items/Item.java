@@ -23,7 +23,7 @@ public class Item extends GamePiece implements Observable
     private static final BufferedImage SPRITESHEET;
 
     // flag utilizzabile
-    private boolean usable;
+    private boolean canUse;
 
     // modalità: è utilizzabile una volta//infinite volte
     private int usability;
@@ -62,7 +62,7 @@ public class Item extends GamePiece implements Observable
     {
         super(name, spriteSheet, jsonPath);
         this.description = description;
-        this.usable = canUse;
+        this.canUse = canUse;
         this.usability = USE_ONCE;
     }
 
@@ -83,12 +83,12 @@ public class Item extends GamePiece implements Observable
 
     public void use()
     {
-        if(usable)
+        if(canUse)
         {
             GameManager.startScenario(useAction);
 
             if(usability == USE_ONCE)
-                usable = false;
+                canUse = false;
         }
 
     }
@@ -103,9 +103,14 @@ public class Item extends GamePiece implements Observable
         this.useActionName = s;
     }
 
+    public void setCanUse(boolean canUse)
+    {
+        this.canUse = canUse;
+    }
+
     public boolean canUse()
     {
-        return usable;
+        return canUse;
     }
 
     public void observe()
