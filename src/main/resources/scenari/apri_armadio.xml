@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione num="1">
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ci sono degli oggetti strani qui dentro.</sentence>
+    </azione>
+    <azione num="2">
+        <subject>Cucina</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>Ciambella</what>
+        <x>22</x>
+        <y>10</y>
+    </azione>
+    <azione num="3">
+        <subject>Cucina</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>Pulsante rosso</what>
+        <x>24</x>
+        <y>10</y>
+    </azione>
+</scenario>

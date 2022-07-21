@@ -217,6 +217,22 @@ public class GameScreenPanel extends JLayeredPane
             characterLabel.addMouseListener(popMenuListener);
         }
 
+        if(ch.getName().equals("Schwartz"))
+        {
+            // listener per il tasto sinistro, per usare gli oggetti
+            // crea listener per il tasto sinistro
+            GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+                    null,
+                    () ->
+                    {
+                        InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
+                        PickupableItem selectedItem = inventoryPanel.getSelectedItem();
+                        if(selectedItem != null)
+                            selectedItem.use();
+                    });
+            characterLabel.addMouseListener(interactionListener);
+        }
+
         // metti la coppia Item JLabel nel dizionario
         characterLabelMap.put(ch, characterLabel);
 

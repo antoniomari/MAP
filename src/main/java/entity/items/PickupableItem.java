@@ -13,9 +13,9 @@ public class PickupableItem extends Item
     private Item targetItem;
 
     // costruttore che inizializza l'oggetto come presente nell'inventario
-    public PickupableItem(String name, String description)
+    public PickupableItem(String name, String description, boolean canUse)
     {
-        super(name, description);
+        super(name, description, canUse);
     }
 
 

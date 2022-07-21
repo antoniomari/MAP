@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione num="3">
+        <subject>Cucina</subject>
+        <method>add</method>
+        <what>Nicolas</what>
+        <x>0</x>
+        <y>10</y>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>SONO IL TECNICO DELL'ASCENSORE! (*) QUALCUNO HA CHIAMATO?</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>8</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Sono stato io. (*) L'ascensore non si apre.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>E IO STAVO PROVANDO AD AGGIUSTARLA! (*) ERO CON LA SIGNORA DELLE PULIZIE</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>MA A UN CERTO PUNTO HO PERSO IL MIO (*) CACCIAVITE SUPERSONICO.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>SONO ANDATO QUINDI A FARE COLAZIONE (*) SE SOLO TU NON AVESSI CHIAMATO, ORA AVREI FINITO.</sentence>
+    </azione>
+</scenario>

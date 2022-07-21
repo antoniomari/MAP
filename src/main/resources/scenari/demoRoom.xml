@@ -39,6 +39,16 @@
             <x>22</x>
             <y>8</y>
         </azione>
+        <azione num="7">
+            <subject>Armadio</subject>
+            <method>addPickup</method>
+            <what>Ciambella</what>
+        </azione>
+        <azione num="8">
+            <subject>Armadio</subject>
+            <method>addPickup</method>
+            <what>Pulsante rosso</what>
+        </azione>
         <executeScenario>src/main/resources/scenari/scenario1.xml</executeScenario>
     </scenario>
 </stanza>

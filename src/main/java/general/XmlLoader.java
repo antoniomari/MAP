@@ -144,6 +144,9 @@ public class XmlLoader
             case "effectAnimation":
                 actionParsed = parseEffectAnimation(actionElement);
                 break;
+            case "addPickup":
+                actionParsed = parseAddPickup(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -261,6 +264,17 @@ public class XmlLoader
 
     }
 
+    private static Runnable parseAddPickup(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String pickupName = getTagValue(eAction, "what");
+        PickupableItem pickup = (PickupableItem) GameManager.getPiece(pickupName);
+
+        return () -> ((Container) GameManager.getPiece(subject)).addPickup(pickup);
+    }
+
+
     /**
      * Restituisce il GamePiece sulla base del nome: se non è già stato caricato
      * in memoria allora lo cerca in "personaggi.xml" e in "oggetti.xml"
@@ -356,7 +370,7 @@ public class XmlLoader
                 if(className.equals("Item"))
                     itemToLoad = new Item(name, description, canUse);
                 else if (className.equals("PickupableItem"))
-                    itemToLoad = new PickupableItem(name, description);
+                    itemToLoad = new PickupableItem(name, description, canUse);
                 else if (className.equals("DoorLike"))
                     itemToLoad = new DoorLike(name, description);
                 else if (className.equals("Container"))
@@ -376,6 +390,7 @@ public class XmlLoader
                     String scenarioPath = getTagValue(onUseElement, "effetto");
                     // imposta useAction
                     itemToLoad.setUseAction(loadScenario(scenarioPath));
+
                     // imposta nome azione
                     itemToLoad.setUseActionName(getTagValue(onUseElement, "actionName"));
                 }
@@ -386,7 +401,7 @@ public class XmlLoader
                 if(onTriggerElement != null)
                 {
                     String scenarioPath = getTagValue(onTriggerElement, "effetto");
-                    // imposta useAction
+                    // imposta trigger actiom
                     ((Triggerable) itemToLoad).setTriggerScenario(loadScenario(scenarioPath));
                     // imposta nome azione
                 }
@@ -400,9 +415,13 @@ public class XmlLoader
                     // imposta openEffect TODO: rinominare in setOpenAction
                     ((Openable) itemToLoad).setOpenEffect(loadScenario(scenarioPath));
 
-                    boolean isOpen = Boolean.parseBoolean(getTagValue(itemElement, "isOpen"));
-                    boolean isLocked = Boolean.parseBoolean(getTagValue(itemElement, "isLocked"));
-                    ((DoorLike) itemToLoad).setInitialState(isOpen, isLocked);
+                    if(itemToLoad.getClass() == DoorLike.class)
+                    {
+                        boolean isOpen = Boolean.parseBoolean(getTagValue(itemElement, "isOpen"));
+                        boolean isLocked = Boolean.parseBoolean(getTagValue(itemElement, "isLocked"));
+                        ((DoorLike) itemToLoad).setInitialState(isOpen, isLocked);
+                    }
+
                 }
 
                 Element onUseWithElement = (Element) itemElement.getElementsByTagName("onUseWith").item(0);

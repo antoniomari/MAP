@@ -50,7 +50,7 @@ public class DBManager
             ResultSet rs= pstm.executeQuery();
             while(rs.next())
             {
-                PlayingCharacter.getPlayer().addToInventory(new PickupableItem(rs.getString(1), rs.getString(2)));
+                PlayingCharacter.getPlayer().addToInventory(new PickupableItem(rs.getString(1), rs.getString(2), false));
             }
             rs.close();
             pstm.close();

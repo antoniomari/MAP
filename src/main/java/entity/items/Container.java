@@ -2,6 +2,7 @@ package entity.items;
 
 import entity.characters.PlayingCharacter;
 import general.ActionSequence;
+import general.GameManager;
 import graphics.SpriteManager;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Container extends Item implements Openable
 {
     List<PickupableItem> containedPickups;
+    ActionSequence openEffect;
 
     private static final String JSON_PATH = "/img/tileset/container.json";
     private static final String SPRITESHEET_PATH = "/img/tileset/container.png";
@@ -36,11 +38,8 @@ public class Container extends Item implements Openable
     //@Override
     public void open()
     {
-        for(PickupableItem p : containedPickups)
-        {
-            PlayingCharacter.getPlayer().addToInventory(p);
-        }
-
+        GameManager.startScenario(openEffect);
+        
         for (PickupableItem p : containedPickups)
         {
             containedPickups.remove(p);
@@ -74,7 +73,7 @@ public class Container extends Item implements Openable
     @Override
     public void setOpenEffect(ActionSequence effect)
     {
-
+        this.openEffect = effect;
     }
 
     @Override
