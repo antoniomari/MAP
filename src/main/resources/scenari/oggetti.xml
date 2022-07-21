@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <oggetti>
     <oggetto nome="Barile">
-        <classe>Item</classe>
+        <classe>TriggerableItem</classe>
         <descrizione>Un barile scemo come basile</descrizione>
-        <canUse>true</canUse>
-        <onUse>
-            <actionName>Accendi</actionName>
+        <canUse>false</canUse>
+        <directlyTriggered>false</directlyTriggered>
+        <onTrigger>
             <effetto>src/main/resources/scenari/esplosioneBarile.xml</effetto>
-        </onUse>
+        </onTrigger>
     </oggetto>
     <oggetto nome="Ascensore">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore per salire</descrizione>
         <canUse>false</canUse>
-        <toOpen>
-            <check>isUnlocked</check>
-        </toOpen>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
         <onOpen>
             <mode>once</mode>
             <effetto>src/main/resources/scenari/fine.xml</effetto>
@@ -35,13 +34,22 @@
         <descrizione>Un accendino per dare fuoco a Spicoli</descrizione>
         <onUseWith>
             <target>Barile</target>
-            <method>use</method>
+            <method>trigger</method>
         </onUseWith>
         <canUse>false</canUse>
     </oggetto>
-    <oggetto nome="Cacciavite">
+    <oggetto nome="Chiave">
         <classe>PickupableItem</classe>
         <descrizione>Un cacciavite per i più belli</descrizione>
+        <onUseWith>
+            <target>Ascensore</target>
+            <method>unlock</method>
+        </onUseWith>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Armadio">
+        <classe>Container</classe>
+        <descrizione>Un armadio strambo come Armando</descrizione>
         <canUse>false</canUse>
     </oggetto>
 </oggetti>

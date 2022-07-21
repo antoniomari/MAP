@@ -4,10 +4,7 @@ import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
-import entity.items.DoorLike;
-import entity.items.Item;
-import entity.items.Openable;
-import entity.items.PickupableItem;
+import entity.items.*;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import general.ActionSequence;
@@ -361,7 +358,11 @@ public class XmlLoader
                 else if (className.equals("PickupableItem"))
                     itemToLoad = new PickupableItem(name, description);
                 else if (className.equals("DoorLike"))
-                    itemToLoad = new DoorLike(name, description, false, false);
+                    itemToLoad = new DoorLike(name, description);
+                else if (className.equals("Container"))
+                    itemToLoad = new Container(name, description);
+                else if (className.equals("TriggerableItem"))
+                    itemToLoad = new TriggerableItem(name, description, false);
                 else
                     throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
                 // TODO : rimpiazzare if-else
@@ -379,6 +380,18 @@ public class XmlLoader
                     itemToLoad.setUseActionName(getTagValue(onUseElement, "actionName"));
                 }
 
+                // setup onTrigger action
+                Element onTriggerElement = (Element) itemElement.getElementsByTagName("onTrigger").item(0);
+                // TODO: aggiungere directlyTriggered
+                if(onTriggerElement != null)
+                {
+                    String scenarioPath = getTagValue(onTriggerElement, "effetto");
+                    // imposta useAction
+                    ((Triggerable) itemToLoad).setTriggerScenario(loadScenario(scenarioPath));
+                    // imposta nome azione
+                }
+
+                // inferenza: se trovo questo tag allora è un doorlike TODO: aggiustare
                 Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
 
                 if (onOpenElement != null)
@@ -386,6 +399,10 @@ public class XmlLoader
                     String scenarioPath = getTagValue(onOpenElement, "effetto");
                     // imposta openEffect TODO: rinominare in setOpenAction
                     ((Openable) itemToLoad).setOpenEffect(loadScenario(scenarioPath));
+
+                    boolean isOpen = Boolean.parseBoolean(getTagValue(itemElement, "isOpen"));
+                    boolean isLocked = Boolean.parseBoolean(getTagValue(itemElement, "isLocked"));
+                    ((DoorLike) itemToLoad).setInitialState(isOpen, isLocked);
                 }
 
                 Element onUseWithElement = (Element) itemElement.getElementsByTagName("onUseWith").item(0);

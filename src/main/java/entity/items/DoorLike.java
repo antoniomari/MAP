@@ -51,9 +51,13 @@ public class DoorLike extends Item implements Openable, Lockable
 
     }
 
-    public DoorLike(String name, String description, boolean isOpen, boolean isLocked)
+    public DoorLike(String name, String description)
     {
         super(name, description, SPRITESHEET, JSON_PATH);
+    }
+
+    public void setInitialState(boolean isOpen, boolean isLocked)
+    {
         this.isOpen = isOpen;
         this.isLocked = isLocked;
     }

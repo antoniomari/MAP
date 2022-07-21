@@ -32,6 +32,13 @@
             <x>11</x>
             <y>11</y>
         </azione>
+        <azione num="6">
+            <subject>Cucina</subject>
+            <method>add</method>
+            <what>Armadio</what>
+            <x>22</x>
+            <y>8</y>
+        </azione>
         <executeScenario>src/main/resources/scenari/scenario1.xml</executeScenario>
     </scenario>
 </stanza>

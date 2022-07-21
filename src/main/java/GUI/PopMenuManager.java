@@ -11,11 +11,6 @@ import java.util.Map;
 
 public class PopMenuManager
 {
-    //private static JPopupMenu itemMenu;
-    //private static JPopupMenu doorMenu;
-    //private static JPopupMenu pickupableItemMenu;
-    //private static JPopupMenu npcMenu;
-    //private static Map<Class, JPopupMenu> classMenuMap;
     private static final JPopupMenu menu;
     private static Object selected;
 
@@ -73,14 +68,6 @@ public class PopMenuManager
 
     static
     {
-        /*
-        classMenuMap = new HashMap<>();
-        setupItemMenu();
-        setupDoorMenu();
-        setupPickupableItemMenu();
-        setupNPCMenu();
-
-         */
 
         Map<Action, JMenuItem> actionItemMap = new HashMap<>();
         menu = new JPopupMenu();
@@ -94,44 +81,6 @@ public class PopMenuManager
     }
 
 
-    /*
-    private static void setupItemMenu()
-    {
-        itemMenu = new JPopupMenu();
-        itemMenu.add(new JMenuItem(OBSERVE_ACTION));
-        classMenuMap.put(Item.class, itemMenu);
-    }
-
-    // TODO: aggiungere chiusura
-    private static void setupDoorMenu()
-    {
-        doorMenu = new JPopupMenu();
-
-        doorMenu.add(new JMenuItem(OBSERVE_ACTION));
-        doorMenu.add(new JMenuItem(OPEN_CLOSE_ACTION));
-        classMenuMap.put(Door.class, doorMenu);
-    }
-
-    private static void setupPickupableItemMenu()
-    {
-        pickupableItemMenu = new JPopupMenu();
-
-        pickupableItemMenu.add(new JMenuItem(OBSERVE_ACTION));
-        pickupableItemMenu.add(new JMenuItem(PICKUP_ACTION));
-        classMenuMap.put(PickupableItem.class, pickupableItemMenu);
-    }
-
-    private static void setupNPCMenu()
-    {
-        npcMenu = new JPopupMenu();
-
-        npcMenu.add(new JMenuItem(SPEAK_ACTION));
-        classMenuMap.put(NPC.class, npcMenu);
-    }
-
-     */
-
-
     public static void showMenu(Object o, Component invoker, int x, int y)
     {
         selected = o;
@@ -139,18 +88,6 @@ public class PopMenuManager
         menu.show(invoker, x, y);
     }
 
-    /*
-    private static void removeItem(JPopupMenu menu, String name)
-    {
-        if(menu.get)
-    }
-
-    public static JPopupMenu getPopupMenu(Class c)
-    {
-        return classMenuMap.get(c);
-    }
-
-     */
 
     public static JPopupMenu getPopupMenu(Object o)
     {
