@@ -1,0 +1,257 @@
+{
+  "esclamativo1":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo2":
+  {
+    "x": 48,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo3":
+  {
+    "x": 96,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo4":
+  {
+    "x": 144,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo5":
+  {
+    "x": 192,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo6":
+  {
+    "x": 240,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo7":
+  {
+    "x": 288,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "esclamativo8":
+  {
+    "x": 326,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo1":
+  {
+    "x": 0,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo2":
+  {
+    "x": 48,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo3":
+  {
+    "x": 96,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo4":
+  {
+    "x": 144,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo5":
+  {
+    "x": 192,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo6":
+  {
+    "x": 240,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo7":
+  {
+    "x": 288,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "interrogativo8":
+  {
+    "x": 326,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale1":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale2":
+  {
+    "x": 48,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale3":
+  {
+    "x": 96,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale4":
+  {
+    "x": 144,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale5":
+  {
+    "x": 192,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale6":
+  {
+    "x": 240,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale7":
+  {
+    "x": 288,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "notaMusicale8":
+  {
+    "x": 326,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore1":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore2":
+  {
+    "x": 48,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore3":
+  {
+    "x": 96,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore4":
+  {
+    "x": 144,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore5":
+  {
+    "x": 192,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore6":
+  {
+    "x": 240,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore7":
+  {
+    "x": 288,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "cuore8":
+  {
+    "x": 326,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  }
+}

@@ -69,7 +69,7 @@ public class StillAnimation extends Animation
     }
 
 
-    public static StillAnimation createExplosionAnimation(String spritesheetPath, String jsonPath,
+    public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath,
                                                           JLabel animationLabel, int finalWait)
     {
         BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);

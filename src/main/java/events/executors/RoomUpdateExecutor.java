@@ -1,25 +1,18 @@
 package events.executors;
 
-import entity.characters.GameCharacter;
-import entity.items.Item;
+import entity.GamePiece;
 import entity.rooms.BlockPosition;
 
 public class RoomUpdateExecutor extends Executor
 {
 
-    public static void executeRemoveItem(Item it)
+    public static void executeRemovePiece(GamePiece it)
     {
-        gameScreenPanel.removeItemCurrentRoom(it);
+        gameScreenPanel.removePieceCurrentRoom(it);
     }
 
-    public static void executeAddItem(Item it, BlockPosition pos)
+    public static void executeAddPiece(GamePiece piece, BlockPosition pos)
     {
-        gameScreenPanel.addItemCurrentRoom(it, pos);
+        gameScreenPanel.addPieceCurrentRoom(piece, pos);
     }
-
-    public static void executeAddCharacter(GameCharacter ch, BlockPosition pos)
-    {
-        gameScreenPanel.addCharacterCurrentRoom(ch, pos);
-    }
-
 }

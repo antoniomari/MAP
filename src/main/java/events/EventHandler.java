@@ -56,14 +56,14 @@ public class EventHandler
     {
         if(e.getType() == RoomEvent.Type.REMOVE_PIECE_FROM_ROOM)
         {
-            RoomUpdateExecutor.executeRemoveItem(e.getItemInvolved()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
+            RoomUpdateExecutor.executeRemovePiece(e.getItemInvolved()); // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
         else if(e.getType() == RoomEvent.Type.ADD_PIECE_IN_ROOM)
         {
             if(e.getItemInvolved() != null)
-                RoomUpdateExecutor.executeAddItem(e.getItemInvolved(), e.getCoordinates());
+                RoomUpdateExecutor.executeAddPiece(e.getItemInvolved(), e.getCoordinates());
             else
-                RoomUpdateExecutor.executeAddCharacter(e.characterInvolved, e.getCoordinates());
+                RoomUpdateExecutor.executeAddPiece(e.characterInvolved, e.getCoordinates());
         }
     }
 
