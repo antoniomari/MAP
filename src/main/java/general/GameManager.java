@@ -1,6 +1,7 @@
 package general;
 
 import entity.GamePiece;
+import entity.characters.PlayingCharacter;
 import entity.rooms.Room;
 
 import java.util.HashMap;
@@ -13,6 +14,12 @@ public class GameManager
     private static final Map<String, GamePiece> pieces = new HashMap<>();
 
     private static final Stack<ActionSequence> scenarioStack = new Stack<>();
+
+    static
+    {
+        // load Schwartz
+        pieces.put(PlayingCharacter.getPlayerName(), PlayingCharacter.getPlayer());
+    }
 
     public static void addPiece(GamePiece p)
     {

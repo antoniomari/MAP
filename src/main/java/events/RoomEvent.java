@@ -8,7 +8,8 @@ import entity.rooms.Room;
 
 public class RoomEvent extends GameEvent
 {
-    Type type;
+    private Type type;
+    private GamePiece pieceInvolved;
 
     public enum Type
     {
@@ -39,10 +40,7 @@ public class RoomEvent extends GameEvent
     {
         super(type.toString());
 
-        if(p instanceof GameCharacter)
-            this.characterInvolved = (GameCharacter) p;
-        else if(p instanceof Item)
-            this.itemInvolved = (Item) p;
+        this.pieceInvolved = p;
 
         this.roomInvolved = room;
         this.type = type;
@@ -77,5 +75,10 @@ public class RoomEvent extends GameEvent
             s = s + " in posizione " + pos;
 
         return s;
+    }
+
+    public GamePiece getPieceInvolved()
+    {
+        return pieceInvolved;
     }
 }

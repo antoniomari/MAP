@@ -46,13 +46,6 @@ public class PlayingCharacter extends GameCharacter
         return inventory;
     }
 
-    public void flushInventory()
-    {
-        for(PickupableItem i : inventory)
-        {
-            inventory.remove(i);
-        }
-    }
 
     public static String getPlayerName()
     {

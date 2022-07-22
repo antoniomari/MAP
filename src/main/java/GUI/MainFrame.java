@@ -67,7 +67,7 @@ public class MainFrame extends JFrame {
     public void setCurrentRoom(Room newRoom)
     {
         this.currentRoom = newRoom;
-        this.backgroundImg = SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor);
+        // this.backgroundImg = SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor);
         gameScreenPanel.changeRoom(newRoom);
     }
 

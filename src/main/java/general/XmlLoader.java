@@ -260,9 +260,6 @@ public class XmlLoader
         String pieceName = getTagValue(eAction, "what");
         GamePiece piece = loadPiece(pieceName);
 
-        if(piece == null)
-            throw new GameException("Oggetto dell'add non trovato");
-
         int x = Integer.parseInt(getTagValue(eAction, "x"));
         int y = Integer.parseInt(getTagValue(eAction, "y"));
 

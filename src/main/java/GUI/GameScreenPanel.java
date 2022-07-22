@@ -20,18 +20,20 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+
 public class GameScreenPanel extends JLayeredPane
 {
     /**
-     * Dizionario che contiene gli oggetti presenti nella stanza (currentRoom)
-     * e le JLabel associate al gameScreenPanel
+     * Dizionario che contiene i GamePiece presenti nella stanza (currentRoom)
+     * e le JLabel a essi associate.
      */
-    private final Map<GamePiece, JLabel> pieceLabelMap;
+    private Map<GamePiece, JLabel> pieceLabelMap;
     private Room currentRoom;
     private double rescalingFactor;
 
     public static final Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
     public static final Integer BACKGROUND_LAYER = 1;
+    // TODO: aggiungere algoritmo per posizionare correttamente secondo la prospettiva sia gli oggetti che i personaggi
     public static final Integer ITEM_LAYER = 2;
     public static final Integer CHARACTER_LAYER = 3;
     public static final Integer EFFECT_LAYER = 4;
@@ -46,35 +48,30 @@ public class GameScreenPanel extends JLayeredPane
 
     public void changeRoom(Room newRoom)
     {
-        Room oldRoom = currentRoom;
-        this.currentRoom = newRoom;
-
-        for (Component comp : getComponentsInLayer(BACKGROUND_LAYER))
-            remove(comp);
+        // rimuovi giocatore dalla room
+        PlayingCharacter.getPlayer().removeFromRoom();
 
         // rimuovi oggetti e personaggi
-        Set<GamePiece> piecesToDelete = pieceLabelMap.keySet();
-        for(GamePiece piece : piecesToDelete)
-            removePieceCurrentRoom(piece);
+        removeAllPiecesFromScreen();
 
         // setta nuovo background
-        JLabel backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
+        JLabel backgroundLabel = (JLabel) getComponentsInLayer(BACKGROUND_LAYER)[0];
+        backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
 
         backgroundLabel.setBounds(getInsets().left,
                 getInsets().top,
                 backgroundLabel.getIcon().getIconWidth(),
                 backgroundLabel.getIcon().getIconHeight());
 
-        // Aggiungi background al layer 0
-        add(backgroundLabel, BACKGROUND_LAYER);
+        // aggiungi componenti della nuova stanza sullo schermo
+        for(GamePiece piece: newRoom.getPiecesPresent())
+            addPieceOnScreen(piece, newRoom.getPiecePosition(piece));
 
-        // aggiungi componenti nella nuova stanza
-        List<GamePiece> piecesToAdd = newRoom.getPiecesPresent();
+        // aggiungi il personaggio giocante nella stanza
+        PlayingCharacter.getPlayer().addInRoom(newRoom, new BlockPosition(20, 10));
 
-        for(GamePiece piece: piecesToAdd)
-            addPieceCurrentRoom(piece, newRoom.getPiecePosition(piece));
-
-        currentRoom.addPiece(PlayingCharacter.getPlayer(), new BlockPosition(20, 10));
+        // aggiorna currentRoom
+        this.currentRoom = newRoom;
     }
 
     /**
@@ -124,12 +121,16 @@ public class GameScreenPanel extends JLayeredPane
         return (MainFrame) parent;
     }
 
-    public void removePieceCurrentRoom(GamePiece piece)
+    /**
+     * NOTA: non usare per cicli
+     * @param piece
+     */
+    public void removePieceFromScreen(GamePiece piece)
     {
         JLabel labelToRemove = pieceLabelMap.get(piece);
 
         //Sposta etichetta nel layer per la rimozione
-        setLayer(labelToRemove, GameScreenPanel.GARBAGE_LAYER);
+        setLayer(labelToRemove, GARBAGE_LAYER);
         labelToRemove.setIcon(null);
 
         // rimuovere la JLabel dal gameScreenPanel
@@ -138,6 +139,24 @@ public class GameScreenPanel extends JLayeredPane
         // elimina la voce dal dizionario
         pieceLabelMap.remove(piece);
     }
+
+    private void removeAllPiecesFromScreen()
+    {
+        List<JLabel> labelsToDelete = new ArrayList<>(pieceLabelMap.values());
+
+        for(JLabel label : labelsToDelete)
+        {
+            setLayer(label, GARBAGE_LAYER);
+            label.setIcon(null);
+            remove(label);
+        }
+
+        pieceLabelMap = new HashMap<>();
+
+        // TODO : continaure subito
+    }
+
+
 
     public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)
     {
@@ -161,7 +180,7 @@ public class GameScreenPanel extends JLayeredPane
         }
     }
 
-    public void addPieceCurrentRoom(GamePiece piece , BlockPosition pos)
+    public void addPieceOnScreen(GamePiece piece , BlockPosition pos)
     {
         if (piece instanceof Item)
             addGameItem((Item) piece, pos);
@@ -169,7 +188,16 @@ public class GameScreenPanel extends JLayeredPane
             addGameCharacter((GameCharacter) piece, pos);
     }
 
-    public void movePiece(GamePiece piece, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean withAnimation)
+    /**
+     *
+     * @param piece
+     * @param initialPos
+     * @param finalPos
+     * @param millisecondWaitEnd
+     * @param withAnimation
+     */
+    public void movePiece(GamePiece piece, BlockPosition initialPos,
+                          BlockPosition finalPos, int millisecondWaitEnd, boolean withAnimation)
     {
         Objects.requireNonNull(piece);
         Objects.requireNonNull(initialPos);
@@ -185,6 +213,15 @@ public class GameScreenPanel extends JLayeredPane
         updatePiecePosition(piece, finalPos, animation);
     }
 
+    /**
+     * Aggiorna la visualizzazione dello sprite del GamePiece specificato.
+     *
+     * Da utilizzare ad esempio nel caso in cui viene modificato lo sprite
+     * del GamePiece, in questo modo si potrà effettivamente visualizzarlo sullo
+     * schermo.
+     *
+     * @param piece GamePiece di cui aggiornare lo sprite
+     */
     public void updateSprite(GamePiece piece)
     {
         Objects.requireNonNull(piece);
@@ -193,8 +230,19 @@ public class GameScreenPanel extends JLayeredPane
         pieceLabelMap.get(piece).setIcon(newIcon);
     }
 
-
-    private MovingAnimation createMoveAnimation(GamePiece piece, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd)
+    /**
+     * Crea l'animazione di movimento di un GamePiece, la quale parte da {@code initialPos},
+     * termina in {@code finalPos} e alla fine attende {@code millisecondWaitEnd} millisecondi prima
+     * che il gioco torni nello stato {@link GUI.gamestate.GameState.State#PLAYING}.
+     *
+     * @param piece GamePiece da animare
+     * @param initialPos posizione di partenza dell'animazione
+     * @param finalPos posizione di arrivo dell'animazione
+     * @param millisecondWaitEnd millisecondi da aspettare alla fine dell'animazione
+     * @return l'animazione che soddisfa le condizioni richieste
+     */
+    private MovingAnimation createMoveAnimation(GamePiece piece, BlockPosition initialPos,
+                                                BlockPosition finalPos, int millisecondWaitEnd)
     {
         JLabel labelToAnimate = pieceLabelMap.get(piece);
 
@@ -267,8 +315,7 @@ public class GameScreenPanel extends JLayeredPane
             characterLabel.addMouseListener(popMenuListener);
         }
 
-        //
-        if(ch == PlayingCharacter.getPlayer())
+        if(ch instanceof PlayingCharacter)
         {
             // listener per il tasto sinistro, per usare gli oggetti
             // crea listener per il tasto sinistro
@@ -286,7 +333,6 @@ public class GameScreenPanel extends JLayeredPane
 
         // metti la coppia Item JLabel nel dizionario
         pieceLabelMap.put(ch, characterLabel);
-
         // aggiungi la label
         add(characterLabel, CHARACTER_LAYER);
 
@@ -352,5 +398,4 @@ public class GameScreenPanel extends JLayeredPane
                 anim.start();
         }
     }
-
 }
