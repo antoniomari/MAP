@@ -3,6 +3,9 @@ package GUI;
 import animation.MovingAnimation;
 import animation.StillAnimation;
 import com.sun.tools.javac.Main;
+
+import java.util.*;
+
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
@@ -11,13 +14,12 @@ import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import general.GameManager;
+import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 
 public class GameScreenPanel extends JLayeredPane
 {
@@ -25,9 +27,8 @@ public class GameScreenPanel extends JLayeredPane
      * Dizionario che contiene gli oggetti presenti nella stanza (currentRoom)
      * e le JLabel associate al gameScreenPanel
      */
-    private final Map<Item, JLabel> itemLabelMap;
-    private final Map<GameCharacter, JLabel> characterLabelMap;
-    private final Map<GamePiece, MovingAnimation> activeMovingAnimation;
+    private Map<Item, JLabel> itemLabelMap;
+    private Map<GameCharacter, JLabel> characterLabelMap;
     private Room currentRoom;
     private double rescalingFactor;
 
@@ -43,8 +44,64 @@ public class GameScreenPanel extends JLayeredPane
         super();
         itemLabelMap = new HashMap<>();
         characterLabelMap = new HashMap<>();
-        activeMovingAnimation = new HashMap<>();
         currentRoom = initialRoom;
+    }
+
+    public void changeRoom(Room newRoom)
+    {
+        this.currentRoom = newRoom;
+
+        List<Component> componentsToRemove = new ArrayList<>();
+
+        Component[] comps = getComponentsInLayer(BACKGROUND_LAYER);
+
+        for (Component comp : comps)
+        {
+            remove(comp);
+        }
+
+        comps = getComponentsInLayer(ITEM_LAYER);
+
+        for (Component comp : comps)
+        {
+            remove(comp);
+        }
+
+        comps = getComponentsInLayer(CHARACTER_LAYER);
+
+        for (Component comp : comps)
+        {
+            remove(comp);
+        }
+
+        // setta nuovo background
+        JLabel backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
+
+        backgroundLabel.setBounds(getInsets().left,
+                getInsets().top,
+                backgroundLabel.getIcon().getIconWidth(),
+                backgroundLabel.getIcon().getIconHeight());
+
+        // Aggiungi background al layer 0
+        add(backgroundLabel, BACKGROUND_LAYER);
+
+        // setta oggetti nella stanza
+        itemLabelMap = new HashMap<>();
+        characterLabelMap = new HashMap<>();
+
+        List<GamePiece> pieces = newRoom.getPiecesPresent();
+
+        for(GamePiece piece: pieces)
+        {
+            if(piece instanceof Item)
+            {
+                addGameItem((Item) piece, newRoom.getPiecePosition(piece));
+            }
+            else
+            {
+                addGameCharacter((GameCharacter) piece, newRoom.getPiecePosition(piece));
+            }
+        }
     }
 
     public void setScalingFactor(double scalingFactor)

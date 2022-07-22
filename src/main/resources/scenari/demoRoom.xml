@@ -49,6 +49,11 @@
             <method>addPickup</method>
             <what>Pulsante rosso</what>
         </azione>
+        <azione>
+            <subject>Cucina</subject>
+            <method>setEast</method>
+            <what>src/main/resources/scenari/prison.xml</what>
+        </azione>
         <executeScenario>src/main/resources/scenari/scenario1.xml</executeScenario>
     </scenario>
 </stanza>

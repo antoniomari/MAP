@@ -4,11 +4,13 @@ import GUI.*;
 import entity.characters.PlayingCharacter;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
+import entity.rooms.Room;
 import general.GameManager;
 import general.LogOutputManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
@@ -63,6 +65,32 @@ public class GameState
     {
         DROP_LISTENER = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
         mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
+
+
+        KeyListener leftArrowListener = new GameKeyListener(KeyEvent.VK_LEFT,
+            () ->
+            {
+                Room west = mainFrame.getCurrentRoom().getWest();
+
+                if (west != null)
+                {
+                    mainFrame.setCurrentRoom(west);
+                }
+            }, null);
+
+        KeyListener rightArrowListener = new GameKeyListener(KeyEvent.VK_RIGHT,
+                () ->
+                {
+                    Room east = mainFrame.getCurrentRoom().getEast();
+
+                    if (east != null)
+                    {
+                        mainFrame.setCurrentRoom(east);
+                    }
+                }, null);
+
+        mainFrame.addKeyListener(leftArrowListener);
+        mainFrame.addKeyListener(rightArrowListener);
     }
 
     public static void changeState(State newState)

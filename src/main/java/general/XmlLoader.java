@@ -147,6 +147,12 @@ public class XmlLoader
             case "addPickup":
                 actionParsed = parseAddPickup(actionElement);
                 break;
+            case "setEast":
+                actionParsed = parseSetEast(actionElement);
+                break;
+            case "setWest":
+                actionParsed = parseSetWest(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -272,6 +278,26 @@ public class XmlLoader
         PickupableItem pickup = (PickupableItem) GameManager.getPiece(pickupName);
 
         return () -> ((Container) GameManager.getPiece(subject)).addPickup(pickup);
+    }
+
+    private static Runnable parseSetEast(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        Room room = loadRoom(roomName);
+
+        return () -> GameManager.getRoom(subject).setEast(room);
+    }
+
+    private static Runnable parseSetWest(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        Room room = loadRoom(roomName);
+
+        return () -> GameManager.getRoom(subject).setWest(room);
     }
 
 

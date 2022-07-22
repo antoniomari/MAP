@@ -1,7 +1,9 @@
 package entity.rooms;
 
 import entity.GamePiece;
-import entity.characters.GameCharacter;
+
+import java.util.*;
+
 import entity.items.Item;
 import events.EventHandler;
 import events.RoomEvent;
@@ -12,9 +14,7 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 
 public class Room
 {
@@ -39,7 +39,7 @@ public class Room
         this.roomName = name;
         pieceLocationMap = new HashMap<>();
         backgroundPath = path;
-        loadBackgroundImage();
+        backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
         floor = SpriteManager.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 
@@ -47,6 +47,36 @@ public class Room
         bHeight = json.getInt("height");
 
         GameManager.addRoom(this);
+    }
+
+    public Room getEast()
+    {
+        return east;
+    }
+
+    public Room getWest()
+    {
+        return west;
+    }
+
+    public void setEast(Room eastRoom)
+    {
+        Objects.requireNonNull(eastRoom);
+
+        this.east = eastRoom;
+
+        if(eastRoom.getWest() == null)
+            eastRoom.setWest(this);
+    }
+
+    public void setWest(Room westRoom)
+    {
+        Objects.requireNonNull(westRoom);
+
+        this.west = westRoom;
+
+        if(westRoom.getEast() != null)
+            westRoom.setEast(this);
     }
 
     public String toString()
@@ -161,6 +191,19 @@ public class Room
         return pieceLocationMap.get(p);
     }
 
+    /**
+     * Restituisce la lista di tutti i GamePiece presenti nella stanza.
+     *
+     * Se si combina con getPiecePosition è possibile recuperare tutte le
+     * informazioni con GamePiece.
+     *
+     * @return lista dei GamePiece presenti nella stanza
+     */
+    public List<GamePiece> getPiecesPresent()
+    {
+        return new ArrayList<>(pieceLocationMap.keySet());
+    }
+
     public void setPiecePosition(GamePiece p, BlockPosition pos)
     {
         if (!pieceLocationMap.containsKey(p))
@@ -170,10 +213,6 @@ public class Room
 
     }
 
-    private void loadBackgroundImage()
-    {
-        backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
-    }
 
     public BufferedImage getBackgroundImage()
     {
