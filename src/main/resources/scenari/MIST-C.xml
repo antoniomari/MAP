@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<stanza nome="Mist-C">
+    <png>/img/MIST/MIST-C.png</png>
+    <json>/img/MIST/MIST-C.json</json>
+
+    <scenario>
+        <mode>instant</mode>
+        <azione num="1">
+            <subject>MistC</subject>
+            <method>add</method>
+            <what>Schwartz</what>
+            <x>0</x>
+            <y>10</y>
+        </azione>
+        <azione num="2">
+            <subject>MistC</subject>
+            <method>setWest</method>
+            <what>src/main/resources/scenari/MIST-Bagno.xml</what>
+        </azione>
+    </scenario>
+</stanza>

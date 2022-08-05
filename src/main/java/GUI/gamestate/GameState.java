@@ -1,14 +1,15 @@
 package GUI.gamestate;
 
-import GUI.*;
+import GUI.AbsPosition;
+import GUI.GameKeyListener;
+import GUI.GameMouseListener;
+import GUI.GameScreenManager;
+import GUI.MainFrame;
 import entity.characters.PlayingCharacter;
-import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
-import general.GameManager;
 import general.LogOutputManager;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -79,18 +80,42 @@ public class GameState
             }, null);
 
         KeyListener rightArrowListener = new GameKeyListener(KeyEvent.VK_RIGHT,
-                () ->
-                {
-                    Room east = mainFrame.getCurrentRoom().getEast();
+            () ->
+            {
+                Room east = mainFrame.getCurrentRoom().getEast();
 
-                    if (east != null)
-                    {
-                        mainFrame.setCurrentRoom(east);
-                    }
-                }, null);
+                if (east != null)
+                {
+                    mainFrame.setCurrentRoom(east);
+                }
+            }, null);
+
+        KeyListener upArrowListener = new GameKeyListener(KeyEvent.VK_UP,
+            () ->
+            {
+                Room north = mainFrame.getCurrentRoom().getNorth();
+
+                if (north != null)
+                {
+                    mainFrame.setCurrentRoom(north);
+                }
+            }, null);
+
+        KeyListener downArrowListener = new GameKeyListener(KeyEvent.VK_DOWN,
+            () ->
+            {
+                Room south = mainFrame.getCurrentRoom().getSouth();
+
+                if (south != null)
+                {
+                    mainFrame.setCurrentRoom(south);
+                }
+            }, null);
 
         mainFrame.addKeyListener(leftArrowListener);
         mainFrame.addKeyListener(rightArrowListener);
+        mainFrame.addKeyListener(upArrowListener);
+        mainFrame.addKeyListener(downArrowListener);
     }
 
     public static void changeState(State newState)

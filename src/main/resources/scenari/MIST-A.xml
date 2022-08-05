@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<stanza nome="MistA">
+    <png>/img/MIST/MIST-A.png</png>
+    <json>/img/MIST/MIST-A.json</json>
+    <scenario>
+        <mode>instant</mode>
+        <azione num="1">
+            <subject>MistA</subject>
+            <method>add</method>
+            <what>Schwartz</what>
+            <x>0</x>
+            <y>10</y>
+        </azione>
+        <azione num="2">
+            <subject>MistA</subject>
+            <method>add</method>
+            <what>AscensoreMIST</what>
+            <x>14</x>
+            <y>7</y>
+        </azione>
+        <azione num="3">
+            <subject>MistA</subject>
+            <method>setEast</method>
+            <what>src/main/resources/scenari/MIST-D.xml</what>
+        </azione>
+        <azione num="4">
+            <subject>MistA</subject>
+            <method>setWest</method>
+            <what>src/main/resources/scenari/MIST-B.xml</what>
+        </azione>
+    </scenario>
+</stanza>

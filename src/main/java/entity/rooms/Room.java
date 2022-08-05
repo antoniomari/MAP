@@ -1,9 +1,6 @@
 package entity.rooms;
 
 import entity.GamePiece;
-
-import java.util.*;
-
 import entity.items.Item;
 import events.EventHandler;
 import events.RoomEvent;
@@ -14,7 +11,11 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Room
 {
@@ -59,6 +60,16 @@ public class Room
         return west;
     }
 
+    public Room getNorth()
+    {
+        return north;
+    }
+
+    public Room getSouth()
+    {
+        return south;
+    }
+
     public void setEast(Room eastRoom)
     {
         Objects.requireNonNull(eastRoom);
@@ -75,8 +86,28 @@ public class Room
 
         this.west = westRoom;
 
-        if(westRoom.getEast() != null)
+        if(westRoom.getEast() == null)
             westRoom.setEast(this);
+    }
+
+    public void setNorth(Room southRoom)
+    {
+        Objects.requireNonNull(southRoom);
+
+        this.south = southRoom;
+
+        if(southRoom.getSouth() == null)
+            southRoom.setSouth(this);
+    }
+
+    public void setSouth(Room northRoom)
+    {
+        Objects.requireNonNull(northRoom);
+
+        this.north = northRoom;
+
+        if(northRoom.getNorth() == null)
+            northRoom.setNorth(this);
     }
 
     public String toString()

@@ -23,7 +23,7 @@
     <oggetto nome="Tappeto">
         <classe>Item</classe>
         <descrizione>Un tappeto dalla forma strana</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
         <onUse>
             <actionName>Solleva</actionName>
             <effetto>src/main/resources/scenari/tappetoUse.xml</effetto>
@@ -69,5 +69,12 @@
             <actionName>Premi</actionName>
             <effetto>src/main/resources/scenari/arrivoNicolas.xml</effetto>
         </onUse>
+    </oggetto>
+    <oggetto nome="AscensoreMIST">
+        <classe>DoorLike</classe>
+        <descrizione>Un ascensore arancione</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
     </oggetto>
 </oggetti>
