@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<stanza nome="ALUB">
+    <png>/img/ALU/ALU-B.png</png>
+    <json>/img/ALU/ALU_B.json</json>
+
+    <scenario>
+        <mode>instant</mode>
+        <azione num="1">
+            <subject>ALUB</subject>
+            <method>add</method>
+            <what>Schwartz</what>
+            <x>0</x>
+            <y>10</y>
+        </azione>
+    </scenario>
+</stanza>

@@ -202,7 +202,7 @@ public class MainFrame extends JFrame {
         DBManager.setupInventory();
 
         // TODO: attenzione alla current room
-        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/MIST-A.xml");
+        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/ALU-A.xml");
         GameManager.startScenario(a);
 
     }
@@ -355,7 +355,7 @@ public class MainFrame extends JFrame {
 
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
-        Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/MIST-A.xml");
+        Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/ALU-A.xml");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));

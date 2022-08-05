@@ -77,4 +77,11 @@
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
     </oggetto>
+    <oggetto nome="AscensoreALU">
+        <classe>DoorLike</classe>
+        <descrizione>Un ascensore blue</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
+    </oggetto>
 </oggetti>
