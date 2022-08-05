@@ -2,7 +2,6 @@
 <stanza nome="Mist-C">
     <png>/img/MIST/MIST-C.png</png>
     <json>/img/MIST/MIST-C.json</json>
-
     <scenario>
         <mode>instant</mode>
         <azione num="1">
@@ -16,6 +15,13 @@
             <subject>MistC</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/MIST-Bagno.xml</what>
+        </azione>
+        <azione num="3">
+            <subject>Mist-C</subject>
+            <method>add</method>
+            <what>ArmadioMIST</what>
+            <x>22</x>
+            <y>8</y>
         </azione>
     </scenario>
 </stanza>

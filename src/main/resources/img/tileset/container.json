@@ -5,5 +5,13 @@
     "y": 288,
     "width": 48,
     "height": 96
+  },
+
+  "ArmadioMIST":
+  {
+    "x": 432,
+    "y": 288,
+    "width": 48,
+    "height": 96
   }
 }

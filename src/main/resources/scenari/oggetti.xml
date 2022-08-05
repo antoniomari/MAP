@@ -77,6 +77,30 @@
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
     </oggetto>
+    <oggetto nome="ArmadioMIST">
+        <classe>Container</classe>
+        <descrizione>Un armadio bloccato, bisogna usare la forza</descrizione>
+        <canUse>false</canUse>
+        <onOpen>
+            <mode>once</mode>
+            <effetto>src/main/resources/scenari/apri_armadioMIST.xml</effetto>
+        </onOpen>
+    </oggetto>
+    <oggetto nome="Filamento">
+        <classe>PickupableItem</classe>
+        <descrizione>Filamento per stampanti 3D.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Registratore">
+        <classe>PickupableItem</classe>
+        <descrizione>Un registratore vuoto.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Guanto">
+        <classe>PickupableItem</classe>
+        <descrizione>Un guanto robotico.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
     <oggetto nome="AscensoreALU">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore blue</descrizione>
