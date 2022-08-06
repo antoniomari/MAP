@@ -101,11 +101,26 @@
         <descrizione>Un guanto robotico.</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="Cassetta">
+        <classe>PickupableItem</classe>
+        <descrizione>Una cassetta che contiene l'audio per stordire chiunque.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
     <oggetto nome="AscensoreALU">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore blue</descrizione>
         <canUse>false</canUse>
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
+    </oggetto>
+    <oggetto nome="Bottiglietta">
+        <classe>PickupableItem</classe>
+        <descrizione>Una bottiglietta vuota.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Tazzina">
+        <classe>PickupableItem</classe>
+        <descrizione>Una tazza di caffè.</descrizione>
+        <canUse>false</canUse>
     </oggetto>
 </oggetti>
