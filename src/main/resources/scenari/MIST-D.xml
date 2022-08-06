@@ -2,16 +2,16 @@
 <stanza nome="Mist-D">
     <png>/img/MIST/MIST-D.png</png>
     <json>/img/MIST/MIST-D.json</json>
-    <!--
     <scenario>
+        <!--
         <mode>instant</mode>
         <azione num="1">
             <subject>Mist-D</subject>
             <method>add</method>
             <what>Guanto</what>
-            <x>4</x>
-            <y>4</y>
+            <x>10</x>
+            <y>8</y>
         </azione>
+        -->
     </scenario>
-    -->
 </stanza>

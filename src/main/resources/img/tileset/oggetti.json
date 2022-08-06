@@ -103,6 +103,14 @@
     "height": 48
   },
 
+  "Telefono":
+  {
+    "x": 240,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
   "missing":
   {
     "x": 96,
