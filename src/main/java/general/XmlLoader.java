@@ -4,13 +4,15 @@ import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
-import entity.items.*;
+import entity.items.Container;
+import entity.items.DoorLike;
+import entity.items.Item;
+import entity.items.Openable;
+import entity.items.PickupableItem;
+import entity.items.Triggerable;
+import entity.items.TriggerableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
-import general.ActionSequence;
-import general.GameException;
-import general.GameManager;
-import general.LogOutputManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -152,6 +154,12 @@ public class XmlLoader
                 break;
             case "setWest":
                 actionParsed = parseSetWest(actionElement);
+                break;
+            case "setNorth":
+                actionParsed = parseSetNorth(actionElement);
+                break;
+            case "setSouth":
+                actionParsed = parseSetSouth(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -295,6 +303,26 @@ public class XmlLoader
         Room room = loadRoom(roomName);
 
         return () -> GameManager.getRoom(subject).setWest(room);
+    }
+
+    private static Runnable parseSetNorth(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        Room room = loadRoom(roomName);
+
+        return () -> GameManager.getRoom(subject).setNorth(room);
+    }
+
+    private static Runnable parseSetSouth(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        Room room = loadRoom(roomName);
+
+        return () -> GameManager.getRoom(subject).setSouth(room);
     }
 
 
