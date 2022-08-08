@@ -90,24 +90,24 @@ public class Room
             westRoom.setEast(this);
     }
 
-    public void setNorth(Room southRoom)
+    public void setSouth(Room southRoom)
     {
         Objects.requireNonNull(southRoom);
 
         this.south = southRoom;
 
-        if(southRoom.getSouth() == null)
-            southRoom.setSouth(this);
+        if(southRoom.getNorth() == null)
+            southRoom.setNorth(this);
     }
 
-    public void setSouth(Room northRoom)
+    public void setNorth(Room northRoom)
     {
         Objects.requireNonNull(northRoom);
 
         this.north = northRoom;
 
-        if(northRoom.getNorth() == null)
-            northRoom.setNorth(this);
+        if(northRoom.getSouth() == null)
+            northRoom.setSouth(this);
     }
 
     public String toString()
