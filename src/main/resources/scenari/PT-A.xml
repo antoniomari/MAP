@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<stanza nome="PT-A">
+    <png>/img/PT/PT-A.png</png>
+    <json>/img/PT/PT-A.json</json>
+    <scenario>
+        <mode>instant</mode>
+        <azione num="1">
+            <subject>PT-A</subject>
+            <method>add</method>
+            <what>Schwartz</what>
+            <x>0</x>
+            <y>10</y>
+        </azione>
+        <azione num="2">
+            <subject>PT-A</subject>
+            <method>add</method>
+            <what>AscensorePT</what>
+            <x>14</x>
+            <y>7</y>
+        </azione>
+        <azione num="3">
+            <subject>PT-A</subject>
+            <method>setSouth</method>
+            <what>src/main/resources/scenari/PT-B.xml</what>
+        </azione>
+    </scenario>
+</stanza>
