@@ -111,6 +111,38 @@
     "height": 48
   },
 
+  "Cocktail":
+  {
+    "x": 528,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "Rape":
+  {
+    "x": 528,
+    "y": 216,
+    "width": 48,
+    "height": 48
+  },
+
+  "Acx8":
+  {
+    "x": 480,
+    "y": 216,
+    "width": 48,
+    "height": 48
+  },
+
+  "Batterie":
+  {
+    "x": 432,
+    "y": 216,
+    "width": 48,
+    "height": 48
+  },
+
   "missing":
   {
     "x": 96,
