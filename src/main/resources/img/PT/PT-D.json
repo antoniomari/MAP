@@ -1,0 +1,14 @@
+{
+  "width": 41,
+  "height": 41,
+
+  "pavimento":
+  [
+    {
+      "left": 0,
+      "top": 10,
+      "width": 41,
+      "height": 30
+    }
+  ]
+}
