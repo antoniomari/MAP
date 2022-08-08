@@ -6,16 +6,21 @@
     <scenario>
         <mode>instant</mode>
         <azione num="1">
-            <subject>MistB</subject>
+            <subject>Mist-B</subject>
             <method>add</method>
             <what>Schwartz</what>
             <x>0</x>
             <y>10</y>
         </azione>
         <azione num="2">
-            <subject>MistB</subject>
+            <subject>Mist-B</subject>
             <method>setSouth</method>
             <what>src/main/resources/scenari/MIST-C.xml</what>
+        </azione>
+        <azione num="2">
+            <subject>Mist-B</subject>
+            <method>setEast</method>
+            <what>src/main/resources/scenari/MIST-A.xml</what>
         </azione>
     </scenario>
 </stanza>
