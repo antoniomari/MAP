@@ -137,6 +137,12 @@ public class Room
         return floor;
     }
 
+
+    public BlockPosition getInitialPlayerPosition()
+    {
+        return new BlockPosition(10, 8);
+    }
+
     // TODO: aggiungere controllo sul pavimento
     public void addPiece(GamePiece p, BlockPosition pos)
     {
@@ -152,8 +158,6 @@ public class Room
 
         // Evento dalla prospettiva della stanza: Un GamePiece è stato aggiunto alla stanza
         EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
-
-
     }
 
     private void safePieceInsert(GamePiece p, BlockPosition pos)

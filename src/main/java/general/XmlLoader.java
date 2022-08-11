@@ -291,8 +291,9 @@ public class XmlLoader
 
         String roomName = getTagValue(eAction, "what");
         Room room = loadRoom(roomName);
+        ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> GameManager.getRoom(subject).setEast(room);
+        return () -> {GameManager.getRoom(subject).setEast(room); GameManager.startScenario(roomScenario);};
     }
 
     private static Runnable parseSetWest(Element eAction)
@@ -301,8 +302,9 @@ public class XmlLoader
 
         String roomName = getTagValue(eAction, "what");
         Room room = loadRoom(roomName);
+        ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> GameManager.getRoom(subject).setWest(room);
+        return () -> {GameManager.getRoom(subject).setWest(room); GameManager.startScenario(roomScenario);};
     }
 
     private static Runnable parseSetNorth(Element eAction)
@@ -311,8 +313,9 @@ public class XmlLoader
 
         String roomName = getTagValue(eAction, "what");
         Room room = loadRoom(roomName);
+        ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> GameManager.getRoom(subject).setNorth(room);
+        return () -> {GameManager.getRoom(subject).setNorth(room); GameManager.startScenario(roomScenario);};
     }
 
     private static Runnable parseSetSouth(Element eAction)
@@ -321,8 +324,9 @@ public class XmlLoader
 
         String roomName = getTagValue(eAction, "what");
         Room room = loadRoom(roomName);
+        ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> GameManager.getRoom(subject).setSouth(room);
+        return () -> {GameManager.getRoom(subject).setSouth(room); GameManager.startScenario(roomScenario);};
     }
 
 
@@ -616,6 +620,8 @@ public class XmlLoader
         String name = getXmlAttribute(roomElement, "nome");
         String pngPath = getTagValue(roomElement, "png");
         String jsonPath = getTagValue(roomElement, "json");
+
+        LogOutputManager.logOutput("Caricando stanza " + name, LogOutputManager.XML_COLOR);
 
         return new Room(name, pngPath, jsonPath);
     }

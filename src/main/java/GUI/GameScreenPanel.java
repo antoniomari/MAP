@@ -68,7 +68,7 @@ public class GameScreenPanel extends JLayeredPane
             addPieceOnScreen(piece, newRoom.getPiecePosition(piece));
 
         // aggiungi il personaggio giocante nella stanza
-        PlayingCharacter.getPlayer().addInRoom(newRoom, new BlockPosition(20, 10));
+        PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getInitialPlayerPosition());
 
         // aggiorna currentRoom
         this.currentRoom = newRoom;

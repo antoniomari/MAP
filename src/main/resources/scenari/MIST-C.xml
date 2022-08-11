@@ -4,22 +4,10 @@
     <json>/img/MIST/MIST-C.json</json>
     <scenario>
         <mode>instant</mode>
-        <azione num="1">
-            <subject>Mist-C</subject>
-            <method>add</method>
-            <what>Schwartz</what>
-            <x>0</x>
-            <y>10</y>
-        </azione>
         <azione num="2">
             <subject>Mist-C</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/MIST-Bagno.xml</what>
-        </azione>
-        <azione num="3">
-            <subject>Mist-C</subject>
-            <method>setNorth</method>
-            <what>src/main/resources/scenari/MIST-B.xml</what>
         </azione>
         <azione num="4">
             <subject>Mist-C</subject>
