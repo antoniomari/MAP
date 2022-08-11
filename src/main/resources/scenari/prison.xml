@@ -2,4 +2,7 @@
 <stanza nome="Prigione">
     <png>/img/prigione back.png</png>
     <json>/img/prigione back.json</json>
+    <scenario>
+        <mode>instant</mode>
+    </scenario>
 </stanza>
