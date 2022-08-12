@@ -289,9 +289,9 @@ public class XmlLoader
     {
         String subject = getTagValue(eAction, "subject");
 
-        String roomName = getTagValue(eAction, "what");
-        Room room = loadRoom(roomName);
-        ActionSequence roomScenario = loadRoomInit(roomName);
+        String roomPath = getTagValue(eAction, "what");
+        Room room = loadRoom(roomPath);
+        ActionSequence roomScenario = loadRoomInit(roomPath);
 
         return () -> {GameManager.getRoom(subject).setEast(room); GameManager.startScenario(roomScenario);};
     }

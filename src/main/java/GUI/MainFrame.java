@@ -67,6 +67,15 @@ public class MainFrame extends JFrame {
     public void setCurrentRoom(Room newRoom)
     {
         this.currentRoom = newRoom;
+
+        Image roomImage = currentRoom.getBackgroundImage();
+        int roomWidthBlocks = currentRoom.getBWidth();
+        rescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
+        rescalingFactor = Math.floor(rescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+
+        // solo per stanze più grandi TODO: abilitare
+        gameScreenPanel.setScalingFactor(rescalingFactor);
+
         // this.backgroundImg = SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor);
         gameScreenPanel.changeRoom(newRoom);
     }
@@ -202,8 +211,8 @@ public class MainFrame extends JFrame {
         DBManager.setupInventory();
 
         // TODO: attenzione alla current room
-        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
-        // ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/MIST-A.xml");
+        // ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
+        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
         GameManager.startScenario(a);
 
     }
@@ -356,8 +365,8 @@ public class MainFrame extends JFrame {
 
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
-        // Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/MIST-A.xml");
-        Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/demoRoom.xml");
+        Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/piano terra/PT-B.xml");
+        // Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/demoRoom.xml");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));

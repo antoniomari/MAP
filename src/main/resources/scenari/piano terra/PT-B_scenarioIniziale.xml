@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<scenario>
+	<mode>sequence</mode>
+	<azione num="2">
+        <subject>PT-B</subject>
+        <method>add</method>
+        <what>Antonio</what>
+		<x>30</x>
+		<y>12</y>
+    </azione>
+	<azione num="3">
+        <subject>PT-B</subject>
+        <method>add</method>
+        <what>Diego</what>
+		<x>5</x>
+		<y>13</y>
+    </azione>
+	<azione num="4">
+        <subject>PT-B</subject>
+        <method>add</method>
+        <what>Nicolas</what>
+		<x>31</x>
+		<y>24</y>
+    </azione>
+	<azione num="5">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>Che bel posto</sentence>
+	</azione>
+	<azione num="6">
+		<subject>Schwartz</subject>
+		<method>speak</method>
+		<sentence>Quasi quasi mi faccio un drink</sentence>
+	</azione>
+	
+	<azione num="7">
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>14</x>
+		<y>27</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="8">
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>15</x>
+		<y>29</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="9">
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>16</x>
+		<y>29</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	
+	<azione num="10">
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>PRESENTAZIONE</sentence>
+	</azione>
+	<azione num="11">
+		<subject>Diego</subject>
+		<method>speak</method>
+		<sentence>PRESENTAZIONE</sentence>
+	</azione>
+	<azione num="12">
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>PRESENTAZIONE</sentence>
+	</azione>
+	<azione num="13">
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>Siamo davvero orgogliosi</sentence>
+	</azione>
+	<azione num="14">
+		<subject>Diego</subject>
+		<method>speak</method>
+		<sentence>di avere uno scienziato rinomato</sentence>
+	</azione>
+	<azione num="15">
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>al nostro congresso sull'AI</sentence>
+	</azione>
+	<azione num="16">
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>Lì c'è l'open bar</sentence>
+	</azione>
+	<azione num="17">
+		<subject>Diego</subject>
+		<method>speak</method>
+		<sentence>perchè non vai a farti un drink?</sentence>
+	</azione>
+	<azione num="18">
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>È tutto gratis!</sentence>
+	</azione>
+	
+	<azione num="19">
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>40</x>
+		<y>19</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="20">
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>40</x>
+		<y>19</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="21">
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>40</x>
+		<y>19</y>
+		<how>absolute</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	
+</scenario>

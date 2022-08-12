@@ -10,5 +10,11 @@
       "width": 41,
       "height": 21
     }
-  ]
+  ],
+
+  "default position":
+  {
+    "x": 5,
+    "y": 15
+  }
 }

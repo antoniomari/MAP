@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<stanza nome="PT-D">
+    <png>/img/PT/PT-D.png</png>
+    <json>/img/PT/PT-D.json</json>
+    <scenario>
+        <mode>instant</mode>
+    </scenario>
+</stanza>

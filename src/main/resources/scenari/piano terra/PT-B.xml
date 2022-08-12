@@ -8,24 +8,25 @@
             <subject>PT-B</subject>
             <method>add</method>
             <what>Schwartz</what>
-            <x>0</x>
-            <y>10</y>
+            <x>5</x>
+            <y>15</y>
         </azione>
         <azione num="2">
             <subject>PT-B</subject>
             <method>setEast</method>
-            <what>src/main/resources/scenari/PT-D.xml</what>
+            <what>src/main/resources/scenari/piano terra/PT-D.xml</what>
         </azione>
         <azione num="3">
-            <subject>ALUA</subject>
+            <subject>PT-B</subject>
             <method>setWest</method>
-            <what>src/main/resources/scenari/PT-C.xml</what>
+            <what>src/main/resources/scenari/piano terra/PT-C.xml</what>
         </azione>
         <azione num="4">
             <subject>PT-B</subject>
             <method>setNorth</method>
-            <what>src/main/resources/scenari/PT-A.xml</what>
+            <what>src/main/resources/scenari/piano terra/PT-A.xml</what>
         </azione>
+        <!--
         <azione num="5">
             <subject>PT-B</subject>
             <method>add</method>
@@ -33,5 +34,9 @@
             <x>20</x>
             <y>11</y>
         </azione>
+        -->
     </scenario>
+    <!--
+    <executeScenario>src/main/resources/scenari/piano terra/PT-B_scenarioIniziale.xml</executeScenario>
+    -->
 </stanza>

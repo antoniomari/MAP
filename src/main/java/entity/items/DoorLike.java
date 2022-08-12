@@ -23,8 +23,8 @@ public class DoorLike extends Item implements Openable, Lockable
     private ActionSequence onLock;
 
     // PATH SPRITESHEET (png + json)
-    private final static String SPRITESHEET_PATH = "/img/tileset/porte.png";
-    private final static String JSON_PATH = "/img/tileset/porte.json";
+    private final static String SPRITESHEET_PATH = "/img/tileset/portePT.png";
+    private final static String JSON_PATH = "/img/tileset/portePT.json";
 
     // SPRITESHEET OGGETTI
     private final static BufferedImage SPRITESHEET = SpriteManager.loadSpriteSheet(SPRITESHEET_PATH);

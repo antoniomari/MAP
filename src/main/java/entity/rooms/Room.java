@@ -34,6 +34,9 @@ public class Room
     private final int bWidth;  // larghezza in blocchi
     private final int bHeight;  // altezza in blocchi
 
+    // posizione di default all'entrata del protagonista
+    private BlockPosition defaultPosition;
+
 
     public Room(String name, String path, String jsonPath)
     {
@@ -46,6 +49,20 @@ public class Room
 
         bWidth = json.getInt("width");
         bHeight = json.getInt("height");
+
+        // leggi default position
+        if(json.has("default position"))
+        {
+            JSONObject defaultJson = json.getJSONObject("default position");
+            int xDefault = defaultJson.getInt("x");
+            int yDefault = defaultJson.getInt("y");
+
+            defaultPosition = new BlockPosition(xDefault, yDefault);
+        }
+        else //TODO: modificare
+        {
+            defaultPosition = new BlockPosition(10, 8);
+        }
 
         GameManager.addRoom(this);
     }
@@ -140,7 +157,7 @@ public class Room
 
     public BlockPosition getInitialPlayerPosition()
     {
-        return new BlockPosition(10, 8);
+        return defaultPosition;
     }
 
     // TODO: aggiungere controllo sul pavimento

@@ -123,4 +123,11 @@
         <descrizione>Una tazza di caffè.</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="AscensorePT">
+        <classe>DoorLike</classe>
+        <descrizione>Un ascensore viola</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
+    </oggetto>
 </oggetti>
