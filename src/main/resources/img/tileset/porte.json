@@ -37,5 +37,125 @@
     "y": 288,
     "width": 96,
     "height": 96
+  },
+
+  "AscensoreALU":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreALUClosed":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreALUOpen1":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreALUOpen2":
+  {
+    "x": 0,
+    "y": 192,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreALUOpen3":
+  {
+    "x": 0,
+    "y": 288,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreMIST":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreMISTClosed":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreMISTOpen1":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreMISTOpen2":
+  {
+    "x": 0,
+    "y": 192,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreMISTOpen3":
+  {
+    "x": 0,
+    "y": 288,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensorePT":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensorePTClosed":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensorePTOpen1":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensorePTOpen2":
+  {
+    "x": 0,
+    "y": 192,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensorePTOpen3":
+  {
+    "x": 0,
+    "y": 288,
+    "width": 96,
+    "height": 96
   }
 }

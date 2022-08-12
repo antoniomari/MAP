@@ -14,6 +14,7 @@ import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import graphics.SpriteManager;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,7 @@ public class GameScreenPanel extends JLayeredPane
     private Map<GamePiece, JLabel> pieceLabelMap;
     private Room currentRoom;
     private double rescalingFactor;
+    private AbsPosition backgroundOffsets;
 
     public static final Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
     public static final Integer BACKGROUND_LAYER = 1;
@@ -46,6 +48,20 @@ public class GameScreenPanel extends JLayeredPane
         currentRoom = initialRoom;
     }
 
+
+    public void setBackgroundOffsets(AbsPosition offsets)
+    {
+        backgroundOffsets = offsets;
+    }
+
+    public AbsPosition getRoomBorders()
+    {
+        int x = getInsets().left + backgroundOffsets.getX();
+        int y = getInsets().top + backgroundOffsets.getY();
+
+        return new AbsPosition(x, y);
+    }
+
     public void changeRoom(Room newRoom)
     {
         // rimuovi giocatore dalla room
@@ -58,8 +74,10 @@ public class GameScreenPanel extends JLayeredPane
         JLabel backgroundLabel = (JLabel) getComponentsInLayer(BACKGROUND_LAYER)[0];
         backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
 
-        backgroundLabel.setBounds(getInsets().left,
-                getInsets().top,
+        setBackgroundOffsets(new AbsPosition(getInsets().left, getInsets().top));
+
+        backgroundLabel.setBounds(getRoomBorders().getX(),
+                getRoomBorders().getY(),
                 backgroundLabel.getIcon().getIconWidth(),
                 backgroundLabel.getIcon().getIconHeight());
 

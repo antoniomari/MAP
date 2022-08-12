@@ -16,6 +16,9 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
+    private static final int DEFAULT_WIDTH_BLOCKS = 32;
+    private static final int DEFAULT_HEIGHT_BLOCKS = 16;
+
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
     private static final int BLOCK_SIZE = 24;
 
@@ -37,6 +40,7 @@ public class MainFrame extends JFrame {
 
     // LISTENER FOR KEYS
    //private final GameKeyListener ESC_LISTENER;
+
 
 
     public double getScalingFactor()
@@ -67,17 +71,31 @@ public class MainFrame extends JFrame {
     public void setCurrentRoom(Room newRoom)
     {
         this.currentRoom = newRoom;
-
-        Image roomImage = currentRoom.getBackgroundImage();
-        int roomWidthBlocks = currentRoom.getBWidth();
-        rescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
-        rescalingFactor = Math.floor(rescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+        rescalingFactor = calculateScalingFactor(currentRoom);
 
         // solo per stanze più grandi TODO: abilitare
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         // this.backgroundImg = SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor);
         gameScreenPanel.changeRoom(newRoom);
+    }
+
+
+    private double calculateScalingFactor(Room room)
+    {
+        int roomWidthBlocks = room.getBWidth();
+        int roomHeightBlocks = room.getBHeight();
+
+        double widthRescalingFactor;
+        double heightRescalingFactor;
+
+        widthRescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
+        widthRescalingFactor = Math.floor(widthRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+
+        heightRescalingFactor = (double) screenHeight / (roomHeightBlocks * BLOCK_SIZE);
+        heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+
+        return Math.min(widthRescalingFactor, heightRescalingFactor);
     }
 
 
@@ -89,8 +107,6 @@ public class MainFrame extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = (int) screenSize.getWidth();
         screenHeight = (int) screenSize.getHeight();
-
-        //this.ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> showMenu(true), null);
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -134,12 +150,14 @@ public class MainFrame extends JFrame {
         // in seguito si aggiusta in modo tale che la grandezza di ogni blocco
         // sia pari al più grande intero minore della grandezza dei blocchi
         // fullscreen
-        rescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
-        rescalingFactor = Math.floor(rescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
-
+        rescalingFactor = calculateScalingFactor(currentRoom);
         // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
         gameWidth = (int)(roomWidthBlocks * rescalingFactor * BLOCK_SIZE);
         gameHeight = (int)(roomHeightBlocks * rescalingFactor * BLOCK_SIZE);
+
+        System.out.println("GameWidth, GameHeight" + gameWidth + " " + gameHeight);
+        System.out.println("ScreenWidth, ScreenHeight" + screenWidth + " " + screenHeight);
+
         backgroundImg = SpriteManager.rescaledImageIcon(roomImage, rescalingFactor);
 
     }
@@ -227,16 +245,15 @@ public class MainFrame extends JFrame {
         JLabel backgroundLabel = new JLabel(backgroundImg);
 
         // Imposta dimensioni pannello pari a quelle dello schermo
-        gameScreenPanel.setPreferredSize(new Dimension(gameWidth, gameHeight));
-        Insets gameScreenPanelInsets = gameScreenPanel.getInsets();
-
-        backgroundLabel.setBounds(gameScreenPanelInsets.left,
-                                gameScreenPanelInsets.top,
-                                backgroundImg.getIconWidth(),
-                                backgroundImg.getIconHeight());
+        gameScreenPanel.setPreferredSize(new Dimension(screenWidth, gameHeight));
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
+
+        backgroundLabel.setBounds(gameScreenPanel.getRoomBorders().getX(),
+                gameScreenPanel.getRoomBorders().getY(),
+                backgroundImg.getIconWidth(),
+                backgroundImg.getIconHeight());
     }
 
     private void initTextBarPanel()

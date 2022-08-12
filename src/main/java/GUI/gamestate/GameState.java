@@ -32,6 +32,7 @@ public class GameState
                             new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-2, 0);
 
                     bp = mainFrame.getCurrentRoom().getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
+                    System.out.println("Schwartz va a " + bp);
                     if(bp != null)
                         PlayingCharacter.getPlayer().updatePosition(bp);
                 }

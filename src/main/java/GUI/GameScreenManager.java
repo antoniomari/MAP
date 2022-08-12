@@ -3,8 +3,6 @@ package GUI;
 import entity.rooms.BlockPosition;
 
 import javax.swing.*;
-import java.awt.*;
-import java.nio.file.attribute.AttributeView;
 import java.util.Objects;
 
 
@@ -13,7 +11,6 @@ public class GameScreenManager
 
     private static final int BLOCK_SIZE = 24;
     private static GameScreenPanel active_panel;
-    private static double rescalingFactor;
 
     private GameScreenManager()
     {
@@ -25,8 +22,6 @@ public class GameScreenManager
         Objects.requireNonNull(gsp);
 
         active_panel = gsp;
-        rescalingFactor = active_panel.getScalingFactor();
-
     }
 
     // TODO: calcolare massimi xBlock e yBlock per la stanza
@@ -44,10 +39,12 @@ public class GameScreenManager
         if(xBlocks < 0 || yBlocks < 0)
             throw new IllegalArgumentException();
 
-        Insets insets = active_panel.getInsets();
+        AbsPosition roomBorders = active_panel.getRoomBorders();
 
-        int xOffset = (int) Math.round(insets.left + xBlocks * BLOCK_SIZE * rescalingFactor);
-        int yOffset = (int) Math.round(insets.top + yBlocks * BLOCK_SIZE * rescalingFactor);
+
+        int xOffset = (int) Math.round(roomBorders.getX() + xBlocks * BLOCK_SIZE * active_panel.getScalingFactor());
+        int yOffset = (int) Math.round(roomBorders.getY() + yBlocks * BLOCK_SIZE * active_panel.getScalingFactor());
+
 
         return new AbsPosition(xOffset, yOffset);
     }
@@ -62,12 +59,19 @@ public class GameScreenManager
      */
     public static BlockPosition calculateBlocks(AbsPosition absPos)
     {
+        AbsPosition roomBorders = active_panel.getRoomBorders();
+        // ricalcola absPos in base a offset
+        System.out.println("x: " + roomBorders);
+        System.out.println("AbsPos" + absPos);
+        absPos = new AbsPosition(absPos.getX() - roomBorders.getX(), absPos.getY() - roomBorders.getY());
 
+        System.out.println("AbsPos: " + absPos);
         // scegli il blocco più vicino
-        int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * rescalingFactor));
-        int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * rescalingFactor)) - 1;
+        int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * active_panel.getScalingFactor()));
+        int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * active_panel.getScalingFactor())) - 1;
 
         // todo: controllare
+        System.out.println("NBLOVCCO "+ new BlockPosition(Math.max(0, x), y));
         return new BlockPosition(Math.max(x, 0), y);
     }
 
@@ -79,17 +83,7 @@ public class GameScreenManager
      */
     public static void updateLabelPosition(JLabel label, BlockPosition pos)
     {
-
         updateLabelPosition(label, calculateCoordinates(pos));
-
-        // calcola angolo in alto a sinistra
-        //BlockPosition leftUpCornerPos = pos.relativePosition(0, - bHeight + 1);
-
-        //AbsPosition c = calculateCoordinates(leftUpCornerPos);
-        //c = new AbsPosition(c.getX(), c.getY());
-
-        //label.setBounds(insets.left + c.getX(), insets.top + c.getY(),
-        //        label.getIcon().getIconWidth(), label.getIcon().getIconHeight());
     }
 
     /**
@@ -99,15 +93,15 @@ public class GameScreenManager
      */
     public static void updateLabelPosition(JLabel label, AbsPosition pos)
     {
-        // offset y
-        int offsetHeight= label.getIcon().getIconHeight() - (int)(BLOCK_SIZE * rescalingFactor);
-
+        int offsetHeight = label.getIcon().getIconHeight() - (int)(BLOCK_SIZE * active_panel.getScalingFactor());
 
         // pos è angolo in basso a sinistra, dobbiamo calcolarci l'angolo in alto a sinistra
-        Insets insets = active_panel.getInsets();
-
         AbsPosition leftUpCornerPos = new AbsPosition(pos.getX(), pos.getY() - offsetHeight);
-        label.setBounds(insets.left + leftUpCornerPos.getX(), insets.top + leftUpCornerPos.getY(),
-                        label.getIcon().getIconWidth(), label.getIcon().getIconHeight());
+
+        System.out.println("lewft" + leftUpCornerPos);
+        label.setBounds(leftUpCornerPos.getX(),
+                        leftUpCornerPos.getY(),
+                        label.getIcon().getIconWidth(),
+                        label.getIcon().getIconHeight());
     }
 }
