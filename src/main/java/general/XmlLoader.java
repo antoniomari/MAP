@@ -161,6 +161,9 @@ public class XmlLoader
             case "setSouth":
                 actionParsed = parseSetSouth(actionElement);
                 break;
+            case "setSpeakScenario":
+                actionParsed = parseSetSpeakScenario(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -327,6 +330,17 @@ public class XmlLoader
         ActionSequence roomScenario = loadRoomInit(roomName);
 
         return () -> {GameManager.getRoom(subject).setSouth(room); GameManager.startScenario(roomScenario);};
+    }
+
+    private static Runnable parseSetSpeakScenario(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String scenarioPath = getTagValue(eAction, "what");
+
+        Document document = openXml(scenarioPath);
+        return () -> ((NPC) GameManager.getPiece(subject))
+                .setSpeakScenario(parseScenario(scenarioPath, document.getDocumentElement()));
     }
 
 

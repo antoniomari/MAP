@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
+	<mode>sequence</mode>
 	<azione num="1">
 		<subject>Cameriere</subject>
 		<method>speak</method>
@@ -23,6 +24,6 @@
 	<azione num="5">
 		<subject>Cameriere</subject>
 		<method>speak</method>
-		<sentence>In questo posto abbiamo una cucina ben fornita</sentence>
+		<sentence>In questo posto abbiamo una cucina (*) ben fornita</sentence>
 	</azione>
 </scenario>

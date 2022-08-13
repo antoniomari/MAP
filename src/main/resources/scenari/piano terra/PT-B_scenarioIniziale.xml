@@ -1,27 +1,14 @@
 <?xml version="1.0"?>
 <scenario>
 	<mode>sequence</mode>
-	<azione num="2">
-        <subject>PT-B</subject>
-        <method>add</method>
-        <what>Antonio</what>
-		<x>30</x>
-		<y>12</y>
-    </azione>
-	<azione num="3">
-        <subject>PT-B</subject>
-        <method>add</method>
-        <what>Diego</what>
-		<x>5</x>
-		<y>13</y>
-    </azione>
-	<azione num="4">
-        <subject>PT-B</subject>
-        <method>add</method>
-        <what>Nicolas</what>
-		<x>31</x>
-		<y>24</y>
-    </azione>
+	<azione num="1">
+		<subject>Schwartz</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>2000</finalWait>
+	</azione>
 	<azione num="5">
 		<subject>Schwartz</subject>
 		<method>speak</method>
@@ -36,25 +23,33 @@
 	<azione num="7">
 		<subject>Antonio</subject>
 		<method>move</method>
-		<x>14</x>
-		<y>27</y>
-		<how>absolute</how>
+		<x>0</x>
+		<y>5</y>
+		<how>relative</how>
+		<finalWait>2000</finalWait>
+	</azione>
+	<azione num="7">
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>-5</x>
+		<y>0</y>
+		<how>relative</how>
 		<finalWait>2000</finalWait>
 	</azione>
 	<azione num="8">
 		<subject>Diego</subject>
 		<method>move</method>
-		<x>15</x>
-		<y>29</y>
-		<how>absolute</how>
+		<x>10</x>
+		<y>10</y>
+		<how>relative</how>
 		<finalWait>2000</finalWait>
 	</azione>
 	<azione num="9">
 		<subject>Nicolas</subject>
 		<method>move</method>
-		<x>16</x>
-		<y>29</y>
-		<how>absolute</how>
+		<x>-10</x>
+		<y>-5</y>
+		<how>relative</how>
 		<finalWait>2000</finalWait>
 	</azione>
 	
@@ -107,25 +102,30 @@
 	<azione num="19">
 		<subject>Antonio</subject>
 		<method>move</method>
-		<x>40</x>
-		<y>19</y>
-		<how>absolute</how>
+		<x>-3</x>
+		<y>2</y>
+		<how>relative</how>
 		<finalWait>2000</finalWait>
 	</azione>
 	<azione num="20">
 		<subject>Diego</subject>
 		<method>move</method>
-		<x>40</x>
-		<y>19</y>
-		<how>absolute</how>
+		<x>5</x>
+		<y>3</y>
+		<how>relative</how>
 		<finalWait>2000</finalWait>
 	</azione>
 	<azione num="21">
 		<subject>Nicolas</subject>
 		<method>move</method>
-		<x>40</x>
-		<y>19</y>
-		<how>absolute</how>
+		<x>1</x>
+		<y>1</y>
+		<how>relative</how>
 		<finalWait>2000</finalWait>
+	</azione>
+	<azione>
+		<subject>Cameriere</subject>
+		<method>setSpeakScenario</method>
+		<what>src/main/resources/scenari/piano terra/ConoscenzaCameriere.xml</what>
 	</azione>
 </scenario>

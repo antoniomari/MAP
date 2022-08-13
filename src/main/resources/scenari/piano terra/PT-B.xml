@@ -33,6 +33,27 @@
             <x>20</x>
             <y>11</y>
         </azione>
+        <azione num="2">
+            <subject>PT-B</subject>
+            <method>add</method>
+            <what>Antonio</what>
+            <x>30</x>
+            <y>12</y>
+        </azione>
+        <azione num="3">
+            <subject>PT-B</subject>
+            <method>add</method>
+            <what>Diego</what>
+            <x>5</x>
+            <y>13</y>
+        </azione>
+        <azione num="4">
+            <subject>PT-B</subject>
+            <method>add</method>
+            <what>Nicolas</what>
+            <x>31</x>
+            <y>24</y>
+        </azione>
         <executeScenario>src/main/resources/scenari/piano terra/PT-B_scenarioIniziale.xml</executeScenario>
     </scenario>
 </stanza>
