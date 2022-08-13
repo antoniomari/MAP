@@ -61,17 +61,13 @@ public class GameScreenManager
     {
         AbsPosition roomBorders = active_panel.getRoomBorders();
         // ricalcola absPos in base a offset
-        System.out.println("x: " + roomBorders);
-        System.out.println("AbsPos" + absPos);
         absPos = new AbsPosition(absPos.getX() - roomBorders.getX(), absPos.getY() - roomBorders.getY());
 
-        System.out.println("AbsPos: " + absPos);
         // scegli il blocco più vicino
         int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * active_panel.getScalingFactor()));
         int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * active_panel.getScalingFactor())) - 1;
 
         // todo: controllare
-        System.out.println("NBLOVCCO "+ new BlockPosition(Math.max(0, x), y));
         return new BlockPosition(Math.max(x, 0), y);
     }
 
@@ -98,7 +94,6 @@ public class GameScreenManager
         // pos è angolo in basso a sinistra, dobbiamo calcolarci l'angolo in alto a sinistra
         AbsPosition leftUpCornerPos = new AbsPosition(pos.getX(), pos.getY() - offsetHeight);
 
-        System.out.println("lewft" + leftUpCornerPos);
         label.setBounds(leftUpCornerPos.getX(),
                         leftUpCornerPos.getY(),
                         label.getIcon().getIconWidth(),

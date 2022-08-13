@@ -60,7 +60,7 @@ public class EventHandler
         }
         else if(e.getType() == RoomEvent.Type.ADD_PIECE_IN_ROOM)
         {
-            RoomUpdateExecutor.executeAddPiece(e.getPieceInvolved(), e.getCoordinates());
+            RoomUpdateExecutor.executeAddPiece(e.getRoomInvolved(), e.getPieceInvolved(), e.getCoordinates());
         }
     }
 

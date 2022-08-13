@@ -74,9 +74,9 @@ public class InventoryPanel extends JLayeredPane
     private Icon selectionIcon;
 
     /** Fattore di riscalamento per tutte le icone */
-    private final double scalingFactor;
+    private double scalingFactor;
     /** calcolato tramite (int) (ORIGINAL_ITEM_SIZE * scalingFactor) */
-    private final int scaledItemSize;
+    private int scaledItemSize;
 
     /** lista che contiene riferimenti a tutti gli oggetti dell'inventario e alle rispettive
      * icone, riscalate secondo il fattore di riscalamento. */

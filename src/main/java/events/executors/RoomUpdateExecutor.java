@@ -2,6 +2,9 @@ package events.executors;
 
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
+import entity.rooms.Room;
+
+import javax.swing.plaf.IconUIResource;
 
 public class RoomUpdateExecutor extends Executor
 {
@@ -11,8 +14,10 @@ public class RoomUpdateExecutor extends Executor
         gameScreenPanel.removePieceFromScreen(piece);
     }
 
-    public static void executeAddPiece(GamePiece piece, BlockPosition pos)
+    public static void executeAddPiece(Room roomInvolved, GamePiece piece, BlockPosition pos)
     {
-        gameScreenPanel.addPieceOnScreen(piece, pos);
+        if(roomInvolved.equals(mainFrame.getCurrentRoom()))
+            gameScreenPanel.addPieceOnScreen(piece, pos);
+
     }
 }

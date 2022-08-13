@@ -79,6 +79,22 @@ public class MainFrame extends JFrame {
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         gameScreenPanel.changeRoom(newRoom, screenWidth);
+
+        gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * BLOCK_SIZE);
+        gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * BLOCK_SIZE);
+
+        gamePanel.remove(inventoryPanel);
+
+        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
+
+        int xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
+
+        gamePanel.add(inventoryPanel);
+
+        inventoryPanel.setBounds(gamePanel.getInsets().left + xBorder, gamePanel.getInsets().top + gameHeight,
+                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
+
+
     }
 
 
@@ -179,7 +195,6 @@ public class MainFrame extends JFrame {
         //Creazione componenti
         mainPanel = new JPanel();
         gamePanel = new JPanel();
-        // dopo inventoryPanel = new InventoryPanel();
 
 
 
@@ -312,7 +327,7 @@ public class MainFrame extends JFrame {
         inventoryPanel.setBounds(insets.left + xBorder, insets.top + gameHeight,
                 (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
 
-        gamePanel.add(inventoryPanel, BorderLayout.NORTH);
+        gamePanel.add(inventoryPanel);
     }
 
     public void initMenuPanel()

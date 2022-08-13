@@ -6,22 +6,17 @@
     </personaggio>
     <personaggio nome="Antonio">
         <spritesheet>/img/personaggi/Antonio.png</spritesheet>
-        <json>/img/personaggi/antonio.json</json>
     </personaggio>
     <personaggio nome="Diego">
         <spritesheet>/img/personaggi/Diego.png</spritesheet>
-        <json>/img/personaggi/diego.json</json>
     </personaggio>
     <personaggio nome="Cuoco">
         <spritesheet>/img/personaggi/Cuoco.png</spritesheet>
-        <json>/img/personaggi/cuoco.json</json>
     </personaggio>
     <personaggio nome="Cameriere">
-        <spritesheet>/img/personaggi/Cameriere.png</spritesheet>
-        <json>/img/personaggi/cameriere.json</json>
+        <spritesheet>/img/personaggi/cameriere.png</spritesheet>
     </personaggio>
     <personaggio nome="Tecnico">
         <spritesheet>/img/personaggi/Tecnico.png</spritesheet>
-        <json>/img/personaggi/tecnico.json</json>
     </personaggio>
 </personaggi>

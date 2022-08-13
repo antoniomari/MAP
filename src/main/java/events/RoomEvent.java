@@ -66,10 +66,8 @@ public class RoomEvent extends GameEvent
     public String getEventString()
     {
         String s  = eventTime.toString() + " -> ";
-        if(itemInvolved != null)
-            s += " [" + roomInvolved + "] " + itemInvolved + type;
-        else
-            s += " [" + roomInvolved + "] " + characterInvolved + type;
+
+        s += " [" + roomInvolved + "] " + pieceInvolved + type;
 
         if(pos != null)
             s = s + " in posizione " + pos;

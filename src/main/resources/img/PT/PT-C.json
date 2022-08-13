@@ -6,9 +6,15 @@
   [
     {
       "left": 0,
-      "top": 9,
+      "top": 10,
       "width": 32,
       "height": 6
     }
-  ]
+  ],
+
+  "default position":
+  {
+    "x": 8,
+    "y": 11
+  }
 }

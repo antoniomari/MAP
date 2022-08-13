@@ -9,4 +9,10 @@ public class NPC extends GameCharacter
         super(name, spritesheetPath, jsonPath);
         // TODO: ottimizzare
     }
+
+    public NPC(String name, String spritePath)
+    {
+        super(name, spritePath);
+    }
+
 }

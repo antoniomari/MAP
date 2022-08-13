@@ -389,12 +389,20 @@ public class XmlLoader
             if (elementName.equals(name))
             {
                 String spritesheetPath = getTagValue(characterElement, "spritesheet");
-                String jsonPath = getTagValue(characterElement, "json");
+                Optional<String> jsonPath = getOptionalTagValue(characterElement, "json");
 
-                if(name.equals(PlayingCharacter.getPlayerName()))
-                    return new GameCharacter(name, spritesheetPath, jsonPath);
+                if(jsonPath.isPresent())
+                {
+                    if(name.equals(PlayingCharacter.getPlayerName()))
+                        return new GameCharacter(name, spritesheetPath, jsonPath.get());
+                    else
+                        return new NPC(name, spritesheetPath, jsonPath.get());
+                }
                 else
-                    return new NPC(name, spritesheetPath, jsonPath);
+                {
+                    return new NPC(name, spritesheetPath);
+                }
+
             }
         }
         // personaggio non presente

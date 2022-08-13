@@ -13,6 +13,7 @@ import entity.items.Item;
 import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.GameException;
 import graphics.SpriteManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
@@ -209,6 +210,9 @@ public class GameScreenPanel extends JLayeredPane
             addGameItem((Item) piece, pos);
         else if (piece instanceof GameCharacter)
             addGameCharacter((GameCharacter) piece, pos);
+        else
+            throw new GameException("GamePiece " + piece + " non valido");
+
     }
 
     /**
@@ -337,8 +341,7 @@ public class GameScreenPanel extends JLayeredPane
                     null, () -> PopMenuManager.showMenu(ch, characterLabel, 0, 0));
             characterLabel.addMouseListener(popMenuListener);
         }
-
-        if(ch instanceof PlayingCharacter)
+        else if(ch instanceof PlayingCharacter)
         {
             // listener per il tasto sinistro, per usare gli oggetti
             // crea listener per il tasto sinistro
@@ -352,6 +355,10 @@ public class GameScreenPanel extends JLayeredPane
                             selectedItem.use();
                     });
             characterLabel.addMouseListener(interactionListener);
+        }
+        else
+        {
+            throw new GameException(ch + "non NPC o PlayingCharacter");
         }
 
         // metti la coppia Item JLabel nel dizionario
@@ -404,6 +411,7 @@ public class GameScreenPanel extends JLayeredPane
         int spriteWidth = label.getIcon().getIconWidth() / (int)(BLOCK_SIZE * rescalingFactor);
         int spriteHeight = label.getIcon().getIconHeight() / (int)(BLOCK_SIZE * rescalingFactor);
 
+
         int rightBlock = xBlocks + spriteWidth - 1;
         int topBlock = yBlocks - spriteHeight + 1;
 
@@ -419,6 +427,10 @@ public class GameScreenPanel extends JLayeredPane
                 GameScreenManager.updateLabelPosition(label, finalPos);
             else
                 anim.start();
+        }
+        else
+        {
+            throw new GameException("Label non posizionabile in " + finalPos);
         }
     }
 }

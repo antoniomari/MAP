@@ -26,7 +26,6 @@
             <method>setNorth</method>
             <what>src/main/resources/scenari/piano terra/PT-A.xml</what>
         </azione>
-        <!--
         <azione num="5">
             <subject>PT-B</subject>
             <method>add</method>
@@ -34,9 +33,6 @@
             <x>20</x>
             <y>11</y>
         </azione>
-        -->
+        <executeScenario>src/main/resources/scenari/piano terra/PT-B_scenarioIniziale.xml</executeScenario>
     </scenario>
-    <!--
-    <executeScenario>src/main/resources/scenari/piano terra/PT-B_scenarioIniziale.xml</executeScenario>
-    -->
 </stanza>

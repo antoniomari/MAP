@@ -20,7 +20,6 @@ public class GameState
     private static State CURRENT_STATE;
     private static MainFrame mainFrame;
     private static GameKeyListener ESC_LISTENER;
-    private static GameKeyListener SPACE_LISTENER;
     private static GameMouseListener DROP_LISTENER;
 
     private static Runnable leftMouseClick = () ->
@@ -58,9 +57,6 @@ public class GameState
         mainFrame.addKeyListener(ESC_LISTENER);
 
         initListeners();
-
-        // TODO: migliora
-        mainFrame.addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, mainFrame.getTextBarPanel()::hideTextBar, null, State.TEXT_BAR));
     }
 
     public static void initListeners()
@@ -78,7 +74,7 @@ public class GameState
                 {
                     mainFrame.setCurrentRoom(west);
                 }
-            }, null);
+            }, null, State.PLAYING);
 
         KeyListener rightArrowListener = new GameKeyListener(KeyEvent.VK_RIGHT,
             () ->
@@ -89,7 +85,7 @@ public class GameState
                 {
                     mainFrame.setCurrentRoom(east);
                 }
-            }, null);
+            }, null, State.PLAYING);
 
         KeyListener upArrowListener = new GameKeyListener(KeyEvent.VK_UP,
             () ->
@@ -100,7 +96,7 @@ public class GameState
                 {
                     mainFrame.setCurrentRoom(north);
                 }
-            }, null);
+            }, null, State.PLAYING);
 
         KeyListener downArrowListener = new GameKeyListener(KeyEvent.VK_DOWN,
             () ->
@@ -111,12 +107,17 @@ public class GameState
                 {
                     mainFrame.setCurrentRoom(south);
                 }
-            }, null);
+            }, null, State.PLAYING);
 
         mainFrame.addKeyListener(leftArrowListener);
         mainFrame.addKeyListener(rightArrowListener);
         mainFrame.addKeyListener(upArrowListener);
         mainFrame.addKeyListener(downArrowListener);
+
+        GameKeyListener closeBarListener = new GameKeyListener(KeyEvent.VK_SPACE,
+                                                                mainFrame.getTextBarPanel()::hideTextBar,
+                                                                null, State.TEXT_BAR);
+        mainFrame.addKeyListener(closeBarListener);
     }
 
     public static void changeState(State newState)
