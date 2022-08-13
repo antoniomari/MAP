@@ -25,6 +25,7 @@ public class MainFrame extends JFrame {
     protected Room currentRoom;
     private Icon backgroundImg;
 
+
     private final int screenWidth;
     private final int screenHeight;
     private int gameWidth;
@@ -63,6 +64,7 @@ public class MainFrame extends JFrame {
         return gameScreenPanel;
     }
 
+
     public Room getCurrentRoom()
     {
         return currentRoom;
@@ -92,10 +94,12 @@ public class MainFrame extends JFrame {
         widthRescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
         widthRescalingFactor = Math.floor(widthRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
 
-        heightRescalingFactor = (double) screenHeight / (roomHeightBlocks * BLOCK_SIZE);
-        heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+        //heightRescalingFactor = (double) screenHeight / (roomHeightBlocks * BLOCK_SIZE);
+        //heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
 
-        return Math.min(widthRescalingFactor, heightRescalingFactor);
+        //return Math.min(widthRescalingFactor, heightRescalingFactor);
+
+        return widthRescalingFactor;
     }
 
 
@@ -158,7 +162,10 @@ public class MainFrame extends JFrame {
         System.out.println("GameWidth, GameHeight" + gameWidth + " " + gameHeight);
         System.out.println("ScreenWidth, ScreenHeight" + screenWidth + " " + screenHeight);
 
+        System.out.println("Room image " + roomImage.getWidth(null));
         backgroundImg = SpriteManager.rescaledImageIcon(roomImage, rescalingFactor);
+
+        System.out.println(" IMG" + backgroundImg.getIconWidth());
 
     }
 
@@ -238,22 +245,28 @@ public class MainFrame extends JFrame {
     private void initGameScreenPanel()
     {
         gameScreenPanel = new GameScreenPanel(currentRoom);
+
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         // Crea nuova label per visualizzare l'immagine di sfondo
         // COMPONENTI SWING
+
         JLabel backgroundLabel = new JLabel(backgroundImg);
 
         // Imposta dimensioni pannello pari a quelle dello schermo
-        gameScreenPanel.setPreferredSize(new Dimension(screenWidth, gameHeight));
+        gameScreenPanel.setPreferredSize(new Dimension(screenWidth, screenWidth / 2));
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
+        gameScreenPanel.setBackgroundLabel(backgroundLabel);
 
+        /*
         backgroundLabel.setBounds(gameScreenPanel.getRoomBorders().getX(),
                 gameScreenPanel.getRoomBorders().getY(),
                 backgroundImg.getIconWidth(),
                 backgroundImg.getIconHeight());
+
+         */
     }
 
     private void initTextBarPanel()
@@ -285,7 +298,15 @@ public class MainFrame extends JFrame {
 
 
         // imposta posizione dello schermo di gioco
-        gameScreenPanel.setBounds(insets.left + xBorder, insets.top, gameWidth, gameHeight);
+        gameScreenPanel.setBounds(insets.left, insets.top, gameWidth, gameHeight);
+
+        gameScreenPanel.getBackgroundLabel().setBounds(gameScreenPanel.getRoomBorders().getX() + xBorder,
+                gameScreenPanel.getRoomBorders().getY(),
+                backgroundImg.getIconWidth(),
+                backgroundImg.getIconHeight());
+
+        System.out.println("Sfondo img" + gameScreenPanel.getBackgroundLabel().getIcon().getIconWidth());
+
 
         gamePanel.add(gameScreenPanel);
 

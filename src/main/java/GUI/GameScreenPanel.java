@@ -31,7 +31,7 @@ public class GameScreenPanel extends JLayeredPane
     private Map<GamePiece, JLabel> pieceLabelMap;
     private Room currentRoom;
     private double rescalingFactor;
-    private AbsPosition backgroundOffsets;
+    private JLabel backgroundLabel;
 
     public static final Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
     public static final Integer BACKGROUND_LAYER = 1;
@@ -49,15 +49,19 @@ public class GameScreenPanel extends JLayeredPane
     }
 
 
-    public void setBackgroundOffsets(AbsPosition offsets)
+    public void setBackgroundLabel(JLabel backgroundLabel)
     {
-        backgroundOffsets = offsets;
+        this.backgroundLabel = backgroundLabel;
+    }
+    public JLabel getBackgroundLabel()
+    {
+        return backgroundLabel;
     }
 
     public AbsPosition getRoomBorders()
     {
-        int x = getInsets().left + backgroundOffsets.getX();
-        int y = getInsets().top + backgroundOffsets.getY();
+        int x = getInsets().left;
+        int y = getInsets().top;
 
         return new AbsPosition(x, y);
     }
@@ -74,7 +78,6 @@ public class GameScreenPanel extends JLayeredPane
         JLabel backgroundLabel = (JLabel) getComponentsInLayer(BACKGROUND_LAYER)[0];
         backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
 
-        setBackgroundOffsets(new AbsPosition(getInsets().left, getInsets().top));
 
         backgroundLabel.setBounds(getRoomBorders().getX(),
                 getRoomBorders().getY(),
