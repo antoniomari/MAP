@@ -75,10 +75,12 @@ public class GameScreenPanel extends JLayeredPane
         // rimuovi oggetti e personaggi
         removeAllPiecesFromScreen();
 
+        // aggiorna currentRoom
+        this.currentRoom = newRoom;
+
         // setta nuovo background
         JLabel backgroundLabel = (JLabel) getComponentsInLayer(BACKGROUND_LAYER)[0];
         backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
-
 
         int xOffset = (screenWidth - backgroundLabel.getIcon().getIconWidth()) / 2;
 
@@ -93,9 +95,6 @@ public class GameScreenPanel extends JLayeredPane
 
         // aggiungi il personaggio giocante nella stanza
         PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getInitialPlayerPosition());
-
-        // aggiorna currentRoom
-        this.currentRoom = newRoom;
     }
 
     /**

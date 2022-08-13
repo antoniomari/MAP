@@ -7,7 +7,7 @@
 		<sentence>Salve, posso prepararle un drink? (*) È gratis!</sentence>
 	</azione>
 	<azione num="2">
-		<subject>Schwarz</subject>
+		<subject>Schwartz</subject>
 		<method>speak</method>
 		<sentence>Sì, ne vorrei uno che mi ricordi la mia terra natìa</sentence>
 	</azione>
