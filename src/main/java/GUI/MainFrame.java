@@ -78,8 +78,7 @@ public class MainFrame extends JFrame {
         // solo per stanze più grandi TODO: abilitare
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
-        // this.backgroundImg = SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor);
-        gameScreenPanel.changeRoom(newRoom);
+        gameScreenPanel.changeRoom(newRoom, screenWidth);
     }
 
 
@@ -162,10 +161,7 @@ public class MainFrame extends JFrame {
         System.out.println("GameWidth, GameHeight" + gameWidth + " " + gameHeight);
         System.out.println("ScreenWidth, ScreenHeight" + screenWidth + " " + screenHeight);
 
-        System.out.println("Room image " + roomImage.getWidth(null));
         backgroundImg = SpriteManager.rescaledImageIcon(roomImage, rescalingFactor);
-
-        System.out.println(" IMG" + backgroundImg.getIconWidth());
 
     }
 
@@ -254,7 +250,7 @@ public class MainFrame extends JFrame {
         JLabel backgroundLabel = new JLabel(backgroundImg);
 
         // Imposta dimensioni pannello pari a quelle dello schermo
-        gameScreenPanel.setPreferredSize(new Dimension(screenWidth, screenWidth / 2));
+        gameScreenPanel.setPreferredSize(new Dimension(screenWidth, gameHeight)); // screenWidth / 2));
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
@@ -298,7 +294,8 @@ public class MainFrame extends JFrame {
 
 
         // imposta posizione dello schermo di gioco
-        gameScreenPanel.setBounds(insets.left, insets.top, gameWidth, gameHeight);
+        gameScreenPanel.setBounds(insets.left, insets.top, gameScreenPanel.getPreferredSize().width,
+                gameScreenPanel.getPreferredSize().height);
 
         gameScreenPanel.getBackgroundLabel().setBounds(gameScreenPanel.getRoomBorders().getX() + xBorder,
                 gameScreenPanel.getRoomBorders().getY(),

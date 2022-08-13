@@ -60,13 +60,13 @@ public class GameScreenPanel extends JLayeredPane
 
     public AbsPosition getRoomBorders()
     {
-        int x = getInsets().left;
-        int y = getInsets().top;
+        int x = backgroundLabel.getX();
+        int y = backgroundLabel.getY();
 
         return new AbsPosition(x, y);
     }
 
-    public void changeRoom(Room newRoom)
+    public void changeRoom(Room newRoom, int screenWidth)
     {
         // rimuovi giocatore dalla room
         PlayingCharacter.getPlayer().removeFromRoom();
@@ -79,8 +79,10 @@ public class GameScreenPanel extends JLayeredPane
         backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
 
 
-        backgroundLabel.setBounds(getRoomBorders().getX(),
-                getRoomBorders().getY(),
+        int xOffset = (screenWidth - backgroundLabel.getIcon().getIconWidth()) / 2;
+
+        backgroundLabel.setBounds(getInsets().left + xOffset,
+                getInsets().top,
                 backgroundLabel.getIcon().getIconWidth(),
                 backgroundLabel.getIcon().getIconHeight());
 
