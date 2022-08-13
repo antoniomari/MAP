@@ -94,12 +94,12 @@ public class MainFrame extends JFrame {
         widthRescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
         widthRescalingFactor = Math.floor(widthRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
 
-        //heightRescalingFactor = (double) screenHeight / (roomHeightBlocks * BLOCK_SIZE);
-        //heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+        heightRescalingFactor = (double) screenHeight / (roomHeightBlocks * BLOCK_SIZE);
+        heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
 
-        //return Math.min(widthRescalingFactor, heightRescalingFactor);
+        return Math.min(widthRescalingFactor, heightRescalingFactor);
 
-        return widthRescalingFactor;
+        //return widthRescalingFactor;
     }
 
 
