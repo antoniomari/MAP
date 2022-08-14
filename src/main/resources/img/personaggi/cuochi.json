@@ -1,0 +1,90 @@
+{
+  "Cuoco1Inutilizzato":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco1moving1":
+  {
+    "x": 48,
+    "y": 0,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco1moving2":
+  {
+    "x": 96,
+    "y": 0,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco1":
+  {
+    "x": 144,
+    "y": 0,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco2moving2":
+  {
+    "x": 0,
+    "y": 120,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco2":
+  {
+    "x": 48,
+    "y": 120,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco2moving1":
+  {
+    "x": 96,
+    "y": 120,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoconero":
+  {
+    "x": 0,
+    "y": 240,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoconeromoving1":
+  {
+    "x": 48,
+    "y": 240,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoconeromoving2":
+  {
+    "x": 96,
+    "y": 240,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoconeromoving3":
+  {
+    "x": 144,
+    "y": 240,
+    "width": 48,
+    "height": 120
+  }
+
+}
