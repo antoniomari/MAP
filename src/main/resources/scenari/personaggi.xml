@@ -19,4 +19,16 @@
     <personaggio nome="Tecnico">
         <spritesheet>/img/personaggi/Tecnico.png</spritesheet>
     </personaggio>
+    <personaggio nome="Cuoco1">
+        <spritesheet>/img/personaggi/cuochi.png</spritesheet>
+        <json>/img/personaggi/cuochi.json</json>
+    </personaggio>
+    <personaggio nome="Cuoco2">
+        <spritesheet>/img/personaggi/cuochi.png</spritesheet>
+        <json>/img/personaggi/cuochi.json</json>
+    </personaggio>
+    <personaggio nome="CuocoNero">
+        <spritesheet>/img/personaggi/cuochi.png</spritesheet>
+        <json>/img/personaggi/cuochi.json</json>
+    </personaggio>
 </personaggi>

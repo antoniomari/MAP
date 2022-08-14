@@ -35,6 +35,9 @@ public class GameCharacter extends GamePiece
     private void initMovingFrames()
     {
         movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "moving");
+
+        if(movingFrames.isEmpty())
+            movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath,  getName() + "moving");
     }
 
 

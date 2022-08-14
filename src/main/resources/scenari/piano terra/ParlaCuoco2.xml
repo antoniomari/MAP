@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<scenario>
+	<mode>sequence</mode>
+	<azione>
+		<subject>Cuoco2</subject>
+		<method>speak</method>
+		<sentence>Non so leggere!</sentence>
+	</azione>
+	<azione>
+    		<subject>Cuoco2</subject>
+    		<method>speak</method>
+    		<sentence>AAAAAAAHHHH!</sentence>
+    	</azione>
+</scenario>

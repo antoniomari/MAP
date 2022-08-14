@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione num="1">
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>AAAAAAAAAAAAAHHH!!!</sentence>
+    </azione>
+</scenario>

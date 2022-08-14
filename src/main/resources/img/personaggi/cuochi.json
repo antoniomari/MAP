@@ -55,7 +55,7 @@
     "height": 120
   },
 
-  "Cuoconero":
+  "CuocoNero":
   {
     "x": 0,
     "y": 240,
@@ -63,7 +63,7 @@
     "height": 120
   },
 
-  "Cuoconeromoving1":
+  "CuocoNeromoving1":
   {
     "x": 48,
     "y": 240,
@@ -71,7 +71,7 @@
     "height": 120
   },
 
-  "Cuoconeromoving2":
+  "CuocoNeromoving2":
   {
     "x": 96,
     "y": 240,
@@ -79,7 +79,7 @@
     "height": 120
   },
 
-  "Cuoconeromoving3":
+  "CuocoNeromoving3":
   {
     "x": 144,
     "y": 240,

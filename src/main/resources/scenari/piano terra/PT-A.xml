@@ -4,7 +4,7 @@
     <json>/img/PT/PT-A.json</json>
     <scenario>
         <mode>instant</mode>
-        <azione num="2">
+        <azione>
             <subject>PT-A</subject>
             <method>add</method>
             <what>AscensorePT</what>
