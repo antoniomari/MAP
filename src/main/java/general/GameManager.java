@@ -42,6 +42,10 @@ public class GameManager
 
         LogOutputManager.logOutput("Stack scenari: " + scenarioStack, LogOutputManager.SCENARIO_STACK_COLOR);
 
+        // se non è la prima volta che si esegue lo scenario
+        if(scenario.isConcluded())
+            scenario.rewind();
+
         if(scenario.getMode() == ActionSequence.Mode.SEQUENCE)
         {
             scenario.runAction();

@@ -51,7 +51,12 @@ public class ActionSequence
             actionList.get(index++).run();
     }
 
-   void runAll()
+    void rewind()
+    {
+        index = 0;
+    }
+
+    void runAll()
     {
         for(Runnable r : actionList)
             r.run();
