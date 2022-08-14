@@ -529,10 +529,10 @@ public class XmlLoader
                     String targetName = getTagValue(onUseWithElement, "target");
                     String methodName = getTagValue(onUseWithElement, "method");
                     Method method;
-                    Item target;
+                    GamePiece target;
                     try
                     {
-                        target = (Item) GameManager.getPiece(targetName);
+                        target = GameManager.getPiece(targetName);
                         method = target.getClass().getMethod(methodName);
                     }
                     catch(NoSuchMethodException e)
@@ -553,7 +553,7 @@ public class XmlLoader
                         }
                     });
 
-                    ((PickupableItem) itemToLoad).setTargetItem(target);
+                    ((PickupableItem) itemToLoad).setTargetPiece(target);
                     ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
                 }
 

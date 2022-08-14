@@ -1,6 +1,7 @@
 package entity.items;
 
 
+import entity.GamePiece;
 import general.ActionSequence;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
@@ -10,7 +11,7 @@ import general.GameManager;
 public class PickupableItem extends Item
 {
     private ActionSequence usewithAction;
-    private Item targetItem;
+    private GamePiece targetPiece;
 
     // costruttore che inizializza l'oggetto come presente nell'inventario
     public PickupableItem(String name, String description, boolean canUse)
@@ -42,15 +43,15 @@ public class PickupableItem extends Item
         this.usewithAction = usewithAction;
     }
 
-    public void setTargetItem(Item item)
+    public void setTargetPiece(GamePiece target)
     {
-        this.targetItem = item;
+        this.targetPiece = target;
     }
 
-    public void useWith(Item item)
+    public void useWith(GamePiece gamePiece)
     {
         // System.out.println("entrato in useWith");
-        if(item.equals(targetItem))
+        if(gamePiece.equals(targetPiece))
             GameManager.startScenario(usewithAction);
     }
 

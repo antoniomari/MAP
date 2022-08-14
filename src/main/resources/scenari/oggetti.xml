@@ -144,6 +144,10 @@
         <classe>PickupableItem</classe>
         <descrizione>Cime di rapa pugliesi.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <target>Cameriere</target>
+            <scenario>wfgwgwregwergewgr</scenario>
+        </onUseWith>
     </oggetto>
     <oggetto nome="Acx8">
         <classe>PickupableItem</classe>

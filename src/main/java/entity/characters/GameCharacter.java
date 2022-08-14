@@ -1,11 +1,9 @@
 package entity.characters;
 
-import animation.StillAnimation;
 import entity.GamePiece;
 import events.AnimationEvent;
 import events.CharacterEvent;
 import events.EventHandler;
-import events.GamePieceEvent;
 import graphics.SpriteManager;
 
 import java.awt.image.BufferedImage;

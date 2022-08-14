@@ -1,7 +1,6 @@
 package events;
 
 import entity.GamePiece;
-import entity.characters.GameCharacter;
 import entity.rooms.BlockPosition;
 
 /**
@@ -14,7 +13,6 @@ public class GamePieceEvent extends GameEvent
     private BlockPosition oldPosition;
     private BlockPosition newPosition;
     private GamePiece pieceInvolved;
-    private String sentence;
     private int millisecondWaitEnd;
 
     public enum Type
