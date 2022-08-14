@@ -21,9 +21,14 @@ public class AnimationExecutor extends Executor
     }
 
 
-    public static void executeAnimation(Item it, List<Image> frames)
+    public static void executeAnimation(GamePiece piece, List<Image> frames)
     {
-        new StillAnimation(gameScreenPanel.getLabelAssociated(it), frames, 200, true).start();
+        executeAnimation(piece, frames, 200);
+    }
+
+    public static void executeAnimation(GamePiece piece, List<Image> frames, int delayMilliseconds)
+    {
+        new StillAnimation(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, true).start();
     }
 
     public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)

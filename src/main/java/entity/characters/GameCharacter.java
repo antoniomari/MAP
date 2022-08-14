@@ -1,15 +1,15 @@
 package entity.characters;
 
+import animation.StillAnimation;
 import entity.GamePiece;
+import events.AnimationEvent;
 import events.CharacterEvent;
 import events.EventHandler;
+import events.GamePieceEvent;
 import graphics.SpriteManager;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameCharacter extends GamePiece
 {
@@ -37,7 +37,22 @@ public class GameCharacter extends GamePiece
         movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "moving");
 
         if(movingFrames.isEmpty())
+        {
             movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath,  getName() + "moving");
+            movingFrames.add(0, getSprite());
+        }
+    }
+
+    public void animate()
+    {
+        EventHandler.sendEvent(new AnimationEvent(this, movingFrames));
+    }
+
+    public void animateReverse()
+    {
+        Collections.reverse(movingFrames);
+        EventHandler.sendEvent(new AnimationEvent(this, movingFrames));
+        Collections.reverse(movingFrames);
     }
 
 

@@ -2,6 +2,10 @@
 <scenario>
 	<mode>sequence</mode>
 	<azione>
+            <subject>Cuoco2</subject>
+            <method>animate</method>
+    </azione>
+	<azione>
 		<subject>Cuoco2</subject>
 		<method>speak</method>
 		<sentence>Non so leggere!</sentence>
@@ -10,5 +14,9 @@
     		<subject>Cuoco2</subject>
     		<method>speak</method>
     		<sentence>AAAAAAAHHHH!</sentence>
-    	</azione>
+    </azione>
+    <azione>
+            <subject>Cuoco2</subject>
+            <method>animateReverse</method>
+    </azione>
 </scenario>

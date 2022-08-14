@@ -28,6 +28,14 @@ public class CharacterEvent extends GameEvent
                     {
                         return "ha parlato";
                     }
+                },
+        ANIMATE
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "animato";
+                    }
                 }
 
     }

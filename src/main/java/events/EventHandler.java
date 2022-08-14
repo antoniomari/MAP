@@ -1,5 +1,6 @@
 package events;
 
+import animation.Animation;
 import entity.GamePiece;
 import entity.rooms.Room;
 import events.executors.*;
@@ -28,6 +29,9 @@ public class EventHandler
 
         if(ge instanceof GamePieceEvent)
             executeGamePieceEvent((GamePieceEvent) ge);
+
+        if(ge instanceof AnimationEvent)
+            executeAnimationEvent((AnimationEvent) ge);
     }
 
     public static void executeItemInteractionEvent(ItemInteractionEvent e)
@@ -84,7 +88,11 @@ public class EventHandler
             CharacterUpdateExecutor.executeMove(e.getPieceInvolved(), e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
             // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
+    }
 
+    public static void executeAnimationEvent(AnimationEvent e)
+    {
+        AnimationExecutor.executeAnimation(e.getPieceInvolved(), e.getFrames());
     }
 
 }

@@ -164,6 +164,12 @@ public class XmlLoader
             case "setSpeakScenario":
                 actionParsed = parseSetSpeakScenario(actionElement);
                 break;
+            case "animate":
+                actionParsed = parseAnimate(actionElement);
+                break;
+            case "animateReverse":
+                actionParsed = parseAnimateReverse(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -276,6 +282,20 @@ public class XmlLoader
 
         return () -> piece.addInRoom(subjectRoom, new BlockPosition(x, y));
 
+    }
+
+    private static Runnable parseAnimate(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        return () -> ((GameCharacter) GameManager.getPiece(subject)).animate();
+    }
+
+    private static Runnable parseAnimateReverse(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        return () -> ((GameCharacter) GameManager.getPiece(subject)).animateReverse();
     }
 
     private static Runnable parseAddPickup(Element eAction)
