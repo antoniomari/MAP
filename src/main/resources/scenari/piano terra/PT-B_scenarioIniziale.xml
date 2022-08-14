@@ -7,7 +7,7 @@
 		<x>0</x>
 		<y>1</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione num="5">
 		<subject>Schwartz</subject>
@@ -34,7 +34,7 @@
 		<x>-5</x>
 		<y>0</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione num="8">
 		<subject>Diego</subject>
@@ -42,7 +42,7 @@
 		<x>10</x>
 		<y>10</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione num="9">
 		<subject>Nicolas</subject>
@@ -50,13 +50,13 @@
 		<x>-10</x>
 		<y>-5</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	
 	<azione num="10">
 		<subject>Antonio</subject>
 		<method>speak</method>
-		<sentence>PRESENTAZIONE</sentence>
+		<sentence>PRESENTAZzzzzzzzzzzzIONE</sentence>
 	</azione>
 	<azione num="11">
 		<subject>Diego</subject>
@@ -105,7 +105,7 @@
 		<x>-3</x>
 		<y>2</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione num="20">
 		<subject>Diego</subject>
@@ -113,7 +113,7 @@
 		<x>5</x>
 		<y>3</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione num="21">
 		<subject>Nicolas</subject>
@@ -121,7 +121,7 @@
 		<x>1</x>
 		<y>1</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Cameriere</subject>
