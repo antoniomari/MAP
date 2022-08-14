@@ -156,17 +156,17 @@
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Birra">
-        <classe>PickupableItem</classe>
+        <classe>Item</classe>
         <descrizione>Una bellissima Peroni sudata.</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Fettina">
-        <classe>PickupableItem</classe>
-        <descrizione>Che puzza, questa fettina deve essere qui da giorni.</descrizione>
+        <classe>Item</classe>
+        <descrizione>Che puzza, deve essere qui da giorni.</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Pollo">
-        <classe>PickupableItem</classe>
+        <classe>Item</classe>
         <descrizione>Ma questo pollo è ancora vivo...!</descrizione>
         <canUse>false</canUse>
     </oggetto>
