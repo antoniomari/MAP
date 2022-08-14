@@ -146,7 +146,7 @@
         <canUse>false</canUse>
         <onUseWith>
             <target>Cameriere</target>
-            <scenario>wfgwgwregwergewgr</scenario>
+            <scenario>src/main/resources/scenari/piano terra/Drink.xml</scenario>
         </onUseWith>
     </oggetto>
     <oggetto nome="Acx8">

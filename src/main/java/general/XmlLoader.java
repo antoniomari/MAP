@@ -527,34 +527,45 @@ public class XmlLoader
                 if (onUseWithElement != null)
                 {
                     String targetName = getTagValue(onUseWithElement, "target");
-                    String methodName = getTagValue(onUseWithElement, "method");
-                    Method method;
-                    GamePiece target;
-                    try
+                    Optional<String> methodName = getOptionalTagValue(onUseWithElement, "method");
+                    if(methodName.isPresent())
                     {
-                        target = GameManager.getPiece(targetName);
-                        method = target.getClass().getMethod(methodName);
-                    }
-                    catch(NoSuchMethodException e)
-                    {
-                        throw new GameException("metodo non trovato");
-                    }
-
-                    // TODO: generalizzare
-                    ActionSequence useWithScenario = new ActionSequence("useWithScenario", ActionSequence.Mode.INSTANT);
-                    useWithScenario.append(() ->
-                    {
+                        Method method;
+                        GamePiece target;
                         try
                         {
-                            method.invoke(target);
-                        } catch (IllegalAccessException | InvocationTargetException e)
-                        {
-                            e.printStackTrace();
+                            target = GameManager.getPiece(targetName);
+                            method = target.getClass().getMethod(methodName.get());
                         }
-                    });
+                        catch(NoSuchMethodException e)
+                        {
+                            throw new GameException("metodo non trovato");
+                        }
 
-                    ((PickupableItem) itemToLoad).setTargetPiece(target);
-                    ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
+                        // TODO: generalizzare
+                        ActionSequence useWithScenario = new ActionSequence("useWithScenario", ActionSequence.Mode.INSTANT);
+                        useWithScenario.append(() ->
+                        {
+                            try
+                            {
+                                method.invoke(target);
+                            } catch (IllegalAccessException | InvocationTargetException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        });
+
+                        ((PickupableItem) itemToLoad).setTargetPiece(target);
+                        ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
+                    }
+                    else
+                    {
+                        String scenarioPath = getTagValue(onUseWithElement, "scenario");
+                        ActionSequence useWithScenario = loadScenario(scenarioPath);
+
+                        ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
+                    }
+
                 }
 
                 return itemToLoad;

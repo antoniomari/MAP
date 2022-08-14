@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>Grazie delle cime!</sentence>
+    </azione>
+</scenario>
