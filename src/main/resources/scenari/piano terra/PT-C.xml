@@ -28,5 +28,33 @@
             <method>setSpeakScenario</method>
             <what>src/main/resources/scenari/piano terra/ParlaCuoco2.xml</what>
         </azione>
+        <azione>
+            <subject>PT-C</subject>
+            <method>add</method>
+            <what>Rape</what>
+            <x>1</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>PT-C</subject>
+            <method>add</method>
+            <what>Pollo</what>
+            <x>6</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>PT-C</subject>
+            <method>add</method>
+            <what>Fettina</what>
+            <x>4</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>PT-C</subject>
+            <method>add</method>
+            <what>Birra</what>
+            <x>28</x>
+            <y>9</y>
+        </azione>
     </scenario>
 </stanza>

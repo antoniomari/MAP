@@ -125,9 +125,49 @@
     </oggetto>
     <oggetto nome="AscensorePT">
         <classe>DoorLike</classe>
-        <descrizione>Un ascensore viola</descrizione>
+        <descrizione>Un ascensore viola.</descrizione>
         <canUse>false</canUse>
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
+    </oggetto>
+    <oggetto nome="Telefono">
+        <classe>PickupableItem</classe>
+        <descrizione>Un telefono per telefonare.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Cocktail">
+        <classe>PickupableItem</classe>
+        <descrizione>Un cocktail che ricorda la Puglia.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Rape">
+        <classe>PickupableItem</classe>
+        <descrizione>Cime di rapa pugliesi.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Acx8">
+        <classe>PickupableItem</classe>
+        <descrizione>Dispositivo hackerino.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Batterie">
+        <classe>PickupableItem</classe>
+        <descrizione>Danno energia ai dispositivi elettrici.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Birra">
+        <classe>PickupableItem</classe>
+        <descrizione>Una bellissima Peroni sudata.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Fettina">
+        <classe>PickupableItem</classe>
+        <descrizione>Che puzza, questa fettina deve essere qui da giorni.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Pollo">
+        <classe>PickupableItem</classe>
+        <descrizione>Ma questo pollo è ancora vivo...!</descrizione>
+        <canUse>false</canUse>
     </oggetto>
 </oggetti>
