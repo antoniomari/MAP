@@ -11,7 +11,7 @@ import general.GameManager;
 public class PickupableItem extends Item
 {
     private ActionSequence usewithAction;
-    private GamePiece targetPiece;
+    private String targetPieceName;
 
     // costruttore che inizializza l'oggetto come presente nell'inventario
     public PickupableItem(String name, String description, boolean canUse)
@@ -38,20 +38,21 @@ public class PickupableItem extends Item
         PlayingCharacter.getPlayer().removeFromInventory(this);
     }
 
-    public void setUsewithAction(ActionSequence usewithAction)
+    public void setUseWithAction(ActionSequence usewithAction)
     {
         this.usewithAction = usewithAction;
     }
 
-    public void setTargetPiece(GamePiece target)
+    public void setTargetPiece(String pieceName)
     {
-        this.targetPiece = target;
+        targetPieceName = pieceName;
     }
+
 
     public void useWith(GamePiece gamePiece)
     {
         // System.out.println("entrato in useWith");
-        if(gamePiece.equals(targetPiece))
+        if(gamePiece.equals(GameManager.getPiece(targetPieceName)))
             GameManager.startScenario(usewithAction);
     }
 

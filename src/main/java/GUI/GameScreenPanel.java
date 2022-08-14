@@ -361,31 +361,24 @@ public class GameScreenPanel extends JLayeredPane
         // crea la label corrispondente all'Item
         JLabel characterLabel = new JLabel(rescaledSprite);
 
+        // TODO: aggiustare per evitare copia
+        GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+                null,
+                () ->
+                {
+                    InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
+                    PickupableItem selectedItem = inventoryPanel.getSelectedItem();
+                    if(selectedItem != null)
+                        selectedItem.useWith(ch);
+                });
+        characterLabel.addMouseListener(interactionListener);
+
         if(ch instanceof NPC)
         {
             // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
             GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
                     null, () -> PopMenuManager.showMenu(ch, characterLabel, 0, 0));
             characterLabel.addMouseListener(popMenuListener);
-        }
-        else if(ch instanceof PlayingCharacter)
-        {
-            // listener per il tasto sinistro, per usare gli oggetti
-            // crea listener per il tasto sinistro
-            GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
-                    null,
-                    () ->
-                    {
-                        InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
-                        PickupableItem selectedItem = inventoryPanel.getSelectedItem();
-                        if(selectedItem != null)
-                            selectedItem.use();
-                    });
-            characterLabel.addMouseListener(interactionListener);
-        }
-        else
-        {
-            throw new GameException(ch + "non NPC o PlayingCharacter");
         }
 
         // metti la coppia Item JLabel nel dizionario

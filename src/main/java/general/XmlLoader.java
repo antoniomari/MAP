@@ -527,6 +527,8 @@ public class XmlLoader
                 if (onUseWithElement != null)
                 {
                     String targetName = getTagValue(onUseWithElement, "target");
+                    ((PickupableItem) itemToLoad).setTargetPiece(targetName);
+
                     Optional<String> methodName = getOptionalTagValue(onUseWithElement, "method");
                     if(methodName.isPresent())
                     {
@@ -555,15 +557,14 @@ public class XmlLoader
                             }
                         });
 
-                        ((PickupableItem) itemToLoad).setTargetPiece(target);
-                        ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
+                        ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
                     }
                     else
                     {
                         String scenarioPath = getTagValue(onUseWithElement, "scenario");
                         ActionSequence useWithScenario = loadScenario(scenarioPath);
 
-                        ((PickupableItem) itemToLoad).setUsewithAction(useWithScenario);
+                        ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
                     }
 
                 }
