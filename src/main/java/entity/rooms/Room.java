@@ -19,11 +19,14 @@ import java.util.Objects;
 
 public class Room
 {
+    private final static String[] CARDINALS = {"north", "west", "east", "south"};
     private final String roomName;
     private Room north;
     private Room south;
     private Room west;
     private Room east;
+
+    private Map<String, BlockPosition> arrowPositionMap;
 
     private final String backgroundPath;
     private BufferedImage backgroundImage;
@@ -42,6 +45,7 @@ public class Room
     {
         this.roomName = name;
         pieceLocationMap = new HashMap<>();
+        arrowPositionMap = new HashMap<>();
         backgroundPath = path;
         backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
         floor = SpriteManager.loadFloorFromJson(jsonPath);
@@ -62,6 +66,17 @@ public class Room
         else //TODO: modificare
         {
             defaultPosition = new BlockPosition(10, 8);
+        }
+
+        // recupera posizione delle frecce
+        for(String cardinal : CARDINALS)
+        {
+            if(json.has(cardinal + "Arrow"))
+            {
+                JSONObject cardinalJson = json.getJSONObject(cardinal + "Arrow");
+                arrowPositionMap.put(cardinal,
+                        new BlockPosition(cardinalJson.getInt("x"), cardinalJson.getInt("y")));
+            }
         }
 
         GameManager.addRoom(this);
@@ -263,6 +278,18 @@ public class Room
 
         safePieceInsert(p, pos);
 
+    }
+
+    public BlockPosition getArrowPosition(String cardinal)
+    {
+        if(!arrowPositionMap.containsKey(cardinal))
+        {
+            throw new GameException("Punto cardinale non valido");
+        }
+        else
+        {
+            return arrowPositionMap.get(cardinal);
+        }
     }
 
 

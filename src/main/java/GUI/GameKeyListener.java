@@ -37,8 +37,6 @@ public class GameKeyListener implements KeyListener
         this(keyCode, pressAction, releaseAction, GameState.State.PLAYING);
     }
 
-
-
     @Override
     public void keyTyped(KeyEvent e)
     {

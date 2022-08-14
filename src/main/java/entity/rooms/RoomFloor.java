@@ -1,5 +1,7 @@
 package entity.rooms;
 
+import entity.GamePiece;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,11 @@ public class RoomFloor
         return isWalkable(pos.getX(), pos.getY());
     }
 
+
+    public BlockPosition getNearestPlacement(BlockPosition tryPos, GamePiece piece)
+    {
+        return getNearestPlacement(tryPos, piece.getBWidth(), piece.getBHeight());
+    }
 
     // TODO: aggiustare codice metodo
     public BlockPosition getNearestPlacement(BlockPosition tryPos, int spriteWidth, int spriteHeight)

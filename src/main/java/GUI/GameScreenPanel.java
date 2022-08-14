@@ -69,6 +69,28 @@ public class GameScreenPanel extends JLayeredPane
 
     public void changeRoom(Room newRoom, int screenWidth)
     {
+        String cardinal;
+        if(newRoom.equals(currentRoom.getNorth()))
+        {
+            cardinal = "south";
+        }
+        else if (newRoom.equals(currentRoom.getSouth()))
+        {
+            cardinal = "north";
+        }
+        else if (newRoom.equals(currentRoom.getWest()))
+        {
+            cardinal = "east";
+        }
+        else if (newRoom.equals(currentRoom.getEast()))
+        {
+            cardinal = "west";
+        }
+        else
+        {
+            cardinal = null;
+        }
+
         // rimuovi giocatore dalla room
         PlayingCharacter.getPlayer().removeFromRoom();
 
@@ -94,7 +116,13 @@ public class GameScreenPanel extends JLayeredPane
             addPieceOnScreen(piece, newRoom.getPiecePosition(piece));
 
         // aggiungi il personaggio giocante nella stanza
-        PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getInitialPlayerPosition());
+        if(cardinal == null)
+            PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getInitialPlayerPosition());
+        else
+            PlayingCharacter.getPlayer()
+                    .addInRoom(newRoom, newRoom.getFloor().getNearestPlacement(
+                            newRoom.getArrowPosition(cardinal).relativePosition(-2,0),
+                            PlayingCharacter.getPlayer()));
     }
 
     /**
