@@ -27,28 +27,56 @@ public class MainFrame extends JFrame {
     /** Path cursore personalizzato. */
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
 
-
-    protected Room currentRoom;
+    /** Stanza in cui il giocatore si trova attualmente. */
+    private Room currentRoom;
+    /** Immagine di background (riscalata) corrispondente alla currentRoom*/
     private Icon backgroundImg;
 
+    /** Dimensione in pixel della larghezza dello schermo. */
+    private static final int SCREEN_WIDTH;
+    /** Dimensione in pixel dell'altezza dello schermo. */
+    private static final int SCREEN_HEIGHT;
 
-    private final int screenWidth;
-    private final int screenHeight;
+    /** Dimensione in pixel della larghezza della schermata di gioco. */
     private int gameWidth;
+    /** Dimensione in pixel dell'altezza della schermata di gioco. */
     private int gameHeight;
+
+    /** Fattore di riscalamento per ogni icona nella schermata di gioco
+     * e per la barra di testo.
+     */
     private double rescalingFactor;
 
+    /*
+        COMPONENTI SWING DEL FRAME
+     */
+    /** Pannello contenente la schermata di gioco. */
     private GameScreenPanel gameScreenPanel;
-    private JPanel mainPanel;
-    private JLayeredPane menuPanel;
-    private JPanel gamePanel;
+    /** Pannello contenente la barra dell'inventario. */
     private InventoryPanel inventoryPanel;
+    /** Panello contenente la barra di visualizzazione di testo. */
     private TextBarPanel textBarPanel;
 
-    // LISTENER FOR KEYS
-   //private final GameKeyListener ESC_LISTENER;
+    /** Pannello contenente schermata di gioco {@link MainFrame#gameScreenPanel},
+     * barra dell'inventario {@link MainFrame#inventoryPanel}
+     * e barra di visualizzazione di testo {@link MainFrame#textBarPanel}. */
+    private JPanel gamePanel;
+    /** Pannello contenente il menu di pausa. */
+    private JLayeredPane menuPanel;
 
+    /** Pannello padre di tutti gli altri.
+     * Usa CardLayout per alternare la visualizzazione di
+     * {@link MainFrame#gamePanel} e {@link MainFrame#menuPanel}
+     * */
+    private JPanel mainPanel;
 
+    static
+    {
+        // Calcolo delle dimensioni dello schermo
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        SCREEN_WIDTH = (int) screenSize.getWidth();
+        SCREEN_HEIGHT = (int) screenSize.getHeight();
+    }
 
     public double getScalingFactor()
     {
@@ -84,7 +112,7 @@ public class MainFrame extends JFrame {
         // solo per stanze più grandi TODO: abilitare
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
-        gameScreenPanel.changeRoom(newRoom, screenWidth);
+        gameScreenPanel.changeRoom(newRoom, SCREEN_WIDTH);
 
         gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * GameManager.BLOCK_SIZE);
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * GameManager.BLOCK_SIZE);
@@ -96,10 +124,10 @@ public class MainFrame extends JFrame {
         double widthRescalingFactor;
         double heightRescalingFactor;
 
-        widthRescalingFactor = (double) screenWidth / (roomBWidth * GameManager.BLOCK_SIZE);
+        widthRescalingFactor = (double) SCREEN_WIDTH / (roomBWidth * GameManager.BLOCK_SIZE);
         widthRescalingFactor = Math.floor(widthRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
-        heightRescalingFactor = (double) screenHeight / (roomBHeight * GameManager.BLOCK_SIZE);
+        heightRescalingFactor = (double) SCREEN_HEIGHT / (roomBHeight * GameManager.BLOCK_SIZE);
         heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
         return Math.min(widthRescalingFactor, heightRescalingFactor);
@@ -119,11 +147,6 @@ public class MainFrame extends JFrame {
     public MainFrame(Room initialRoom)
     {
         currentRoom = initialRoom;
-
-        // Calcolo delle dimensioni dello schermo
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenWidth = (int) screenSize.getWidth();
-        screenHeight = (int) screenSize.getHeight();
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -173,7 +196,7 @@ public class MainFrame extends JFrame {
         gameHeight = (int)(roomHeightBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
 
         System.out.println("GameWidth, GameHeight" + gameWidth + " " + gameHeight);
-        System.out.println("ScreenWidth, ScreenHeight" + screenWidth + " " + screenHeight);
+        System.out.println("ScreenWidth, ScreenHeight" + SCREEN_WIDTH + " " + SCREEN_HEIGHT);
 
         backgroundImg = SpriteManager.rescaledImageIcon(roomImage, rescalingFactor);
 
@@ -201,7 +224,7 @@ public class MainFrame extends JFrame {
         setTitle("Schwartz");
 
         // Imposta dimensioni finestra pari a quelle dello schermo
-        setPreferredSize(new Dimension(screenWidth, screenHeight));
+        setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
 
         initGameScreenPanel();
@@ -228,7 +251,7 @@ public class MainFrame extends JFrame {
         // mostra la schermata di gioco
         cl.show(mainPanel, "GIOCO");
 
-        mainPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        mainPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
         // -----------------------------------------------------
         //                  SETUP MainFrame
@@ -263,7 +286,7 @@ public class MainFrame extends JFrame {
         JLabel backgroundLabel = new JLabel(backgroundImg);
 
         // Imposta dimensioni pannello pari a quelle dello schermo
-        gameScreenPanel.setPreferredSize(new Dimension(screenWidth, gameHeight)); // screenWidth / 2));
+        gameScreenPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, gameHeight)); // SCREEN_WIDTH / 2));
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
@@ -304,25 +327,25 @@ public class MainFrame extends JFrame {
     private void initInventoryPanel()
     {
 
-        inventoryPanel = new InventoryPanel(screenHeight - defaultGameHeight());
+        inventoryPanel = new InventoryPanel(SCREEN_HEIGHT - defaultGameHeight());
     }
 
     private void initGamePanel()
     {
         gamePanel.setLayout(null);
-        gamePanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        gamePanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         gamePanel.setBackground(Color.BLACK);
 
         Insets insets = gamePanel.getInsets();
 
-        int xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
+        int xBorder = (SCREEN_WIDTH - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
 
         inventoryPanel.setBounds(insets.left + xBorder, insets.top + defaultGameHeight(),
                 (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
 
         gamePanel.add(inventoryPanel);
 
-        xBorder = (screenWidth - gameWidth) / 2;
+        xBorder = (SCREEN_WIDTH - gameWidth) / 2;
 
 
         // imposta posizione dello schermo di gioco
@@ -351,14 +374,14 @@ public class MainFrame extends JFrame {
         JButton exitButton = new JButton("Esci");
         exitButton.addActionListener((e) -> System.exit(0));
 
-        menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        menuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         menuPanel.setOpaque(true);
         menuPanel.setBackground(Color.BLACK);
 
 
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet("/img/lab1 blur.png"), rescalingFactor));
 
-        int xBorder = (screenWidth - backLabel.getIcon().getIconWidth()) / 2;
+        int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
 
         backLabel.setBounds(menuPanel.getInsets().left + xBorder, menuPanel.getInsets().top, backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
@@ -372,8 +395,8 @@ public class MainFrame extends JFrame {
 
         buttonPanel.add(impostLabel, BorderLayout.CENTER);
 
-        buttonPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));  // TODO : capire dimensionamenti
-        buttonPanel.setBounds(menuPanel.getInsets().left, menuPanel.getInsets().top, screenWidth / 2, screenHeight / 2);
+        buttonPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));  // TODO : capire dimensionamenti
+        buttonPanel.setBounds(menuPanel.getInsets().left, menuPanel.getInsets().top, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(new Color(0, 0, 0, 0));
 
@@ -385,7 +408,7 @@ public class MainFrame extends JFrame {
         menuPanel.add(okButton, Integer.valueOf(3));
         menuPanel.add(exitButton, Integer.valueOf(3));
 
-        menuPanel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        menuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
 
