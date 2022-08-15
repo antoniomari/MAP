@@ -26,23 +26,44 @@ import java.util.List;
 
 public class GameScreenPanel extends JLayeredPane
 {
+    /*
+        Layers per contenere tutti gli elementi di gioco nel pannello
+     */
+    /** Utilizzato per inserire oggetti da rimuovere in seguito, causa di bug */
+    public static final Integer GARBAGE_LAYER = 0;
+    /** Utilizzato per contenere l'immagine di sfondo della stanza. */
+    public static final Integer BACKGROUND_LAYER = 1;
+    /** Utilizzato per inserire Item nella stanza. */
+    public static final Integer ITEM_LAYER = 2;
+    /** Utilizzato per inserire GameCharacter nella stanza. */
+    public static final Integer CHARACTER_LAYER = 3;
+    /** Utilizzato per gli effetti animati. */
+    public static final Integer EFFECT_LAYER = 4;
+    /** Utilizzato per visualizzare la barra di testo. */
+    public static final Integer TEXT_BAR_LEVEL = 5;
+    // TODO: aggiungere algoritmo per posizionare correttamente secondo la prospettiva sia gli oggetti che i personaggi
+    // tale algoritmo deve far sì che tutto ciò che sta sopra a te sia dietro e cosa sta sotto di te
+    // sia davanti
+
+    /** Stanza in cui si trova il Player. */
+    private Room currentRoom;
     /**
      * Dizionario che contiene i GamePiece presenti nella stanza (currentRoom)
      * e le JLabel a essi associate.
      */
     private Map<GamePiece, JLabel> pieceLabelMap;
-    private Room currentRoom;
+
+    /** Fattore di riscalamento per le icone (lo stesso del MainFrame). */
     private double rescalingFactor;
+    /** JLabel per l'immagine di background della stanza. */
     private JLabel backgroundLabel;
 
-    public static final Integer GARBAGE_LAYER = 0; // Utilizzato per la rimozione degli oggetti, causa di bug
-    public static final Integer BACKGROUND_LAYER = 1;
-    // TODO: aggiungere algoritmo per posizionare correttamente secondo la prospettiva sia gli oggetti che i personaggi
-    public static final Integer ITEM_LAYER = 2;
-    public static final Integer CHARACTER_LAYER = 3;
-    public static final Integer EFFECT_LAYER = 4;
-    public static final Integer TEXT_BAR_LEVEL = 5;
-
+    /**
+     * Inizializza il pannello, impostando {@code initialRoom}
+     * come stanza iniziale.
+     *
+     * @param initialRoom stanza iniziale
+     */
     public GameScreenPanel(Room initialRoom)
     {
         super();
@@ -50,16 +71,22 @@ public class GameScreenPanel extends JLayeredPane
         currentRoom = initialRoom;
     }
 
-
     public void setBackgroundLabel(JLabel backgroundLabel)
     {
         this.backgroundLabel = backgroundLabel;
     }
+
     public JLabel getBackgroundLabel()
     {
         return backgroundLabel;
     }
 
+    /**
+     * Restituisce le coordinate, misurate in pixel,
+     * dell'angolo in alto a sinistra del background, ovvero della stanza.
+     *
+     * @return coordinate, mìsurate in pixel, dell'angolo in alto a sinistra della stanza.
+     */
     public AbsPosition getRoomBorders()
     {
         int x = backgroundLabel.getX();
@@ -68,9 +95,19 @@ public class GameScreenPanel extends JLayeredPane
         return new AbsPosition(x, y);
     }
 
+    /**
+     * Esegue il cambio stanza, posizionando il Player all'entrata
+     * opportuna se si è entrati da una porta, alla posizione di default
+     * della stanza altrimenti.
+     *
+     * @param newRoom stanza in cui entrare
+     * @param screenWidth larghezza dello schermo, utilizzata per posizionare la stanza
+     */
     public void changeRoom(Room newRoom, int screenWidth)
     {
+        // punto cardinale dell'entrata di newRoom
         String cardinal;
+        // controlla se newRoom è collegata con la vecchia stanza
         if(newRoom.equals(currentRoom.getNorth()))
         {
             cardinal = "south";
@@ -89,6 +126,7 @@ public class GameScreenPanel extends JLayeredPane
         }
         else
         {
+            // se le due stanze non sono direttamente collegate
             cardinal = null;
         }
 
@@ -102,11 +140,10 @@ public class GameScreenPanel extends JLayeredPane
         this.currentRoom = newRoom;
 
         // setta nuovo background
-        JLabel backgroundLabel = (JLabel) getComponentsInLayer(BACKGROUND_LAYER)[0];
         backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
 
+        // posiziona opportunamente il background TODO: aggiustare
         int xOffset = (screenWidth - backgroundLabel.getIcon().getIconWidth()) / 2;
-
         backgroundLabel.setBounds(getInsets().left + xOffset,
                 getInsets().top,
                 backgroundLabel.getIcon().getIconWidth(),
@@ -120,7 +157,7 @@ public class GameScreenPanel extends JLayeredPane
         if(cardinal == null)
             PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getInitialPlayerPosition());
         else
-            PlayingCharacter.getPlayer()
+            PlayingCharacter.getPlayer() // TODO: aggiustare qua il piazzamento
                     .addInRoom(newRoom, newRoom.getFloor().getNearestPlacement(
                             newRoom.getArrowPosition(cardinal).relativePosition(-2,0),
                             PlayingCharacter.getPlayer()));
@@ -192,6 +229,9 @@ public class GameScreenPanel extends JLayeredPane
         pieceLabelMap.remove(piece);
     }
 
+    /**
+     * Rimuovi ogni GamePiece dallo schermo.
+     */
     private void removeAllPiecesFromScreen()
     {
         List<JLabel> labelsToDelete = new ArrayList<>(pieceLabelMap.values());
@@ -202,16 +242,15 @@ public class GameScreenPanel extends JLayeredPane
             label.setIcon(null);
             remove(label);
         }
-
         pieceLabelMap = new HashMap<>();
 
-        // TODO : continaure subito
+        // TODO: controllare se si può aggiustare con il metodo precedente
     }
 
-
-
+    // TODO: aggiustare work in porgress
     public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)
     {
+        // TODO: aggiustare l'hard coding di "esplosione"
         if(whatAnimation.equals("Esplosione"))
         {
             JLabel effectLabel = new JLabel(pieceLabelMap.get(piece).getIcon());
@@ -232,6 +271,12 @@ public class GameScreenPanel extends JLayeredPane
         }
     }
 
+    /**
+     * Aggiunge l'immagine di un GamePiece nella stanza correntemente visualizzata.
+     *
+     * @param piece pezzo da visualizzare
+     * @param pos posizione in cui visualizzare {@code piece}
+     */
     public void addPieceOnScreen(GamePiece piece , BlockPosition pos)
     {
         if (piece instanceof Item)
@@ -244,12 +289,13 @@ public class GameScreenPanel extends JLayeredPane
     }
 
     /**
+     * Sposta un GamePiece dalla posizione {@code initialPos} alla posizione {@code finalPos}.
      *
-     * @param piece
-     * @param initialPos
-     * @param finalPos
-     * @param millisecondWaitEnd
-     * @param withAnimation
+     * @param piece GamePiece da spostare sullo schermo
+     * @param initialPos posizione iniziale del GamePiece, misurata in blocchi
+     * @param finalPos posizione finale del GamePiece, misurata in blocchi
+     * @param millisecondWaitEnd millisecondi da attendere dopo lo spostamento (gioco bloccato nello stato MOVING)
+     * @param withAnimation {@code true} per eseguire l'animazione di movimento, {@code false} altrimenti
      */
     public void movePiece(GamePiece piece, BlockPosition initialPos,
                           BlockPosition finalPos, int millisecondWaitEnd, boolean withAnimation)
@@ -265,6 +311,7 @@ public class GameScreenPanel extends JLayeredPane
         else
             animation = null;
 
+        // aggiorna posizione del pezzo
         updatePiecePosition(piece, finalPos, animation);
     }
 
@@ -315,6 +362,7 @@ public class GameScreenPanel extends JLayeredPane
      */
     private void addGameItem(Item it, BlockPosition pos)
     {
+        // TODO: controllare se c'è codice duplicato
         // recupera lo sprite della giusta dimensione
         Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
 
@@ -395,6 +443,7 @@ public class GameScreenPanel extends JLayeredPane
      *
      * @param piece GamePiece da riposizionare
      * @param finalPos posizione d'arrivo dell'oggetto
+     * @param anim animazione di movimento, {@code null} se il GamePiece non dev'essere animato
      * @throws IllegalArgumentException se it non è presente nella stanza
      */
     private void updatePiecePosition(GamePiece piece, BlockPosition finalPos, MovingAnimation anim)
@@ -419,17 +468,14 @@ public class GameScreenPanel extends JLayeredPane
      */
     private void updateSpritePosition(JLabel label, BlockPosition finalPos, MovingAnimation anim, boolean canGoOnWall)
     {
-
         int xBlocks = finalPos.getX();
         int yBlocks = finalPos.getY();
-
 
         // determinare se lo sprite entra nella stanza
         int roomWidth = currentRoom.getBWidth();
 
         int spriteWidth = label.getIcon().getIconWidth() / (int)(GameManager.BLOCK_SIZE * rescalingFactor);
         int spriteHeight = label.getIcon().getIconHeight() / (int)(GameManager.BLOCK_SIZE * rescalingFactor);
-
 
         int rightBlock = xBlocks + spriteWidth - 1;
         int topBlock = yBlocks - spriteHeight + 1;

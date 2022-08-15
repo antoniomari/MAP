@@ -187,6 +187,10 @@ public class GamePiece
         GameManager.continueScenario();
     }
 
+    /**
+     * Rimuove this dalla stanza in cui è contenuto,
+     * settando la {@link GamePiece#locationRoom} a {@code null}.
+     */
     public void removeFromRoom()
     {
         locationRoom.removePiece(this);
