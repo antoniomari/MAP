@@ -82,20 +82,6 @@ public class MainFrame extends JFrame {
 
         gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * BLOCK_SIZE);
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * BLOCK_SIZE);
-
-        // TODO: rimuovere
-        // gamePanel.remove(inventoryPanel);
-
-        // inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
-
-        // int xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
-
-        //gamePanel.add(inventoryPanel);
-
-        // inventoryPanel.setBounds(gamePanel.getInsets().left + xBorder, gamePanel.getInsets().top + gameHeight,
-        //        (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
-
-
     }
 
 
@@ -288,9 +274,9 @@ public class MainFrame extends JFrame {
 
     private void initTextBarPanel()
     {
-        textBarPanel = new TextBarPanel(rescalingFactor);
-        int x_offset = (int)(3 * 48 * rescalingFactor); // TODO : aggiustare questi
-        int y_offset = (int)(7 * rescalingFactor);
+        textBarPanel = new TextBarPanel(defaultScalingFactor());
+        int x_offset = (int)(3 * 48 * defaultScalingFactor()); // TODO : aggiustare questi
+        int y_offset = (int)(7 * defaultScalingFactor());
 
         textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
                 (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
@@ -299,10 +285,14 @@ public class MainFrame extends JFrame {
         // addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
+    private double defaultScalingFactor()
+    {
+        return calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
+
+    }
     private int defaultGameHeight()
     {
-        double defaultScalingFactor = calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
-        return (int) (DEFAULT_HEIGHT_BLOCKS * BLOCK_SIZE * defaultScalingFactor);
+        return (int) (DEFAULT_HEIGHT_BLOCKS * BLOCK_SIZE * defaultScalingFactor());
     }
 
     private void initInventoryPanel()
