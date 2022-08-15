@@ -145,6 +145,7 @@
         <descrizione>Cime di rapa pugliesi.</descrizione>
         <canUse>false</canUse>
         <onUseWith>
+            <keep>false</keep>
             <target>Cameriere</target>
             <scenario>src/main/resources/scenari/piano terra/Drink.xml</scenario>
         </onUseWith>

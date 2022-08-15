@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.swing.text.html.Option;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -527,6 +528,14 @@ public class XmlLoader
                 if (onUseWithElement != null)
                 {
                     String targetName = getTagValue(onUseWithElement, "target");
+
+                    Optional<String> keepOptional = getOptionalTagValue(onUseWithElement, "keep");
+                    if (keepOptional.isPresent())
+                    {
+                        boolean keep = Boolean.parseBoolean(keepOptional.get());
+                        ((PickupableItem) itemToLoad).setKeepOnUseWith(keep);
+                    }
+
                     ((PickupableItem) itemToLoad).setTargetPiece(targetName);
 
                     Optional<String> methodName = getOptionalTagValue(onUseWithElement, "method");

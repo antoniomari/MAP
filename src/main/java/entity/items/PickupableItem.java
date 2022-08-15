@@ -10,6 +10,7 @@ import general.GameManager;
 
 public class PickupableItem extends Item
 {
+    private boolean keepOnUseWith;
     private ActionSequence usewithAction;
     private String targetPieceName;
 
@@ -26,7 +27,11 @@ public class PickupableItem extends Item
         removeFromRoom(); // setta a null la stanza
 
         PlayingCharacter.getPlayer().addToInventory(this);
+    }
 
+    public void setKeepOnUseWith(boolean b)
+    {
+        this.keepOnUseWith = b;
     }
 
     public void drop(Room room, BlockPosition pos)
@@ -53,7 +58,13 @@ public class PickupableItem extends Item
     {
         // System.out.println("entrato in useWith");
         if(gamePiece.equals(GameManager.getPiece(targetPieceName)))
+        {
             GameManager.startScenario(usewithAction);
+
+            if(!keepOnUseWith)
+                PlayingCharacter.getPlayer().removeFromInventory(this);
+        }
+
     }
 
     // TODO: useWith(Item)
