@@ -2,7 +2,6 @@ package GUI;
 
 import animation.StillAnimation;
 import entity.characters.PlayingCharacter;
-import entity.items.Container;
 import graphics.SpriteManager;
 import entity.items.PickupableItem;
 

@@ -83,36 +83,42 @@ public class MainFrame extends JFrame {
         gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * BLOCK_SIZE);
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * BLOCK_SIZE);
 
-        gamePanel.remove(inventoryPanel);
+        // TODO: rimuovere
+        // gamePanel.remove(inventoryPanel);
 
-        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
+        // inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
 
-        int xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
+        // int xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
 
-        gamePanel.add(inventoryPanel);
+        //gamePanel.add(inventoryPanel);
 
-        inventoryPanel.setBounds(gamePanel.getInsets().left + xBorder, gamePanel.getInsets().top + gameHeight,
-                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
+        // inventoryPanel.setBounds(gamePanel.getInsets().left + xBorder, gamePanel.getInsets().top + gameHeight,
+        //        (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
 
 
     }
 
+
+    private double calculateScalingFactor(int roomBWidth, int roomBHeight)
+    {
+        double widthRescalingFactor;
+        double heightRescalingFactor;
+
+        widthRescalingFactor = (double) screenWidth / (roomBWidth * BLOCK_SIZE);
+        widthRescalingFactor = Math.floor(widthRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+
+        heightRescalingFactor = (double) screenHeight / (roomBHeight * BLOCK_SIZE);
+        heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+
+        return Math.min(widthRescalingFactor, heightRescalingFactor);
+    }
 
     private double calculateScalingFactor(Room room)
     {
         int roomWidthBlocks = room.getBWidth();
         int roomHeightBlocks = room.getBHeight();
 
-        double widthRescalingFactor;
-        double heightRescalingFactor;
-
-        widthRescalingFactor = (double) screenWidth / (roomWidthBlocks * BLOCK_SIZE);
-        widthRescalingFactor = Math.floor(widthRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
-
-        heightRescalingFactor = (double) screenHeight / (roomHeightBlocks * BLOCK_SIZE);
-        heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
-
-        return Math.min(widthRescalingFactor, heightRescalingFactor);
+        return calculateScalingFactor(roomWidthBlocks, roomHeightBlocks);
 
         //return widthRescalingFactor;
     }
@@ -293,9 +299,16 @@ public class MainFrame extends JFrame {
         // addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
+    private int defaultGameHeight()
+    {
+        double defaultScalingFactor = calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
+        return (int) (DEFAULT_HEIGHT_BLOCKS * BLOCK_SIZE * defaultScalingFactor);
+    }
+
     private void initInventoryPanel()
     {
-        inventoryPanel = new InventoryPanel(screenHeight - gameHeight);
+
+        inventoryPanel = new InventoryPanel(screenHeight - defaultGameHeight());
     }
 
     private void initGamePanel()
@@ -305,7 +318,15 @@ public class MainFrame extends JFrame {
         gamePanel.setBackground(Color.BLACK);
 
         Insets insets = gamePanel.getInsets();
-        int xBorder = (screenWidth - gameWidth) / 2;
+
+        int xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
+
+        inventoryPanel.setBounds(insets.left + xBorder, insets.top + defaultGameHeight(),
+                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
+
+        gamePanel.add(inventoryPanel);
+
+        xBorder = (screenWidth - gameWidth) / 2;
 
 
         // imposta posizione dello schermo di gioco
@@ -322,12 +343,7 @@ public class MainFrame extends JFrame {
 
         gamePanel.add(gameScreenPanel);
 
-        xBorder = (screenWidth - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
 
-        inventoryPanel.setBounds(insets.left + xBorder, insets.top + gameHeight,
-                (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
-
-        gamePanel.add(inventoryPanel);
     }
 
     public void initMenuPanel()
