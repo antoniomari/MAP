@@ -28,8 +28,6 @@ import java.util.Objects;
  */
 public class GamePiece
 {
-    public static final int BLOCK_SIZE = 24;
-
     private final String name;
     protected Image sprite;
 
@@ -63,8 +61,8 @@ public class GamePiece
         this.name = name;
         this.sprite = SpriteManager.loadSpriteSheet(spritePath);
 
-        this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
-        this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+        this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
+        this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
 
         fakeInitMovingFrames();
 
@@ -96,8 +94,8 @@ public class GamePiece
         this.jsonPath = jsonPath;
         sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, name);
 
-        this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
-        this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+        this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
+        this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
 
         fakeInitMovingFrames();
 
@@ -137,8 +135,8 @@ public class GamePiece
         // setta a null così viene ricaricata
         scaledSpriteIcon = null;
 
-        this.bWidth = sprite.getWidth(null) / BLOCK_SIZE;
-        this.bHeight = sprite.getHeight(null) / BLOCK_SIZE;
+        this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
+        this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
 
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, ItemInteractionEvent.Type.UPDATE_SPRITE));
     }

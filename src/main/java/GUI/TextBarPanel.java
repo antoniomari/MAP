@@ -59,8 +59,6 @@ public class TextBarPanel extends JLayeredPane
     {
         super();
 
-        final int BLOCK_SIZE = 48;
-
         // lo scalingFactor è il rapporto tra l'altezza del menu e quella delle icone originali
         this.scalingFactor = scalingFactor;
 

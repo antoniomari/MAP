@@ -10,6 +10,8 @@ import java.util.Stack;
 
 public class GameManager
 {
+    public static final int BLOCK_SIZE = 24;
+
     private static final Map<String, Room> rooms = new HashMap<>();
     private static final Map<String, GamePiece> pieces = new HashMap<>();
 

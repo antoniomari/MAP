@@ -14,6 +14,7 @@ import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import general.GameException;
+import general.GameManager;
 import graphics.SpriteManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
@@ -419,8 +420,6 @@ public class GameScreenPanel extends JLayeredPane
     private void updateSpritePosition(JLabel label, BlockPosition finalPos, MovingAnimation anim, boolean canGoOnWall)
     {
 
-        int BLOCK_SIZE = 24;
-
         int xBlocks = finalPos.getX();
         int yBlocks = finalPos.getY();
 
@@ -428,8 +427,8 @@ public class GameScreenPanel extends JLayeredPane
         // determinare se lo sprite entra nella stanza
         int roomWidth = currentRoom.getBWidth();
 
-        int spriteWidth = label.getIcon().getIconWidth() / (int)(BLOCK_SIZE * rescalingFactor);
-        int spriteHeight = label.getIcon().getIconHeight() / (int)(BLOCK_SIZE * rescalingFactor);
+        int spriteWidth = label.getIcon().getIconWidth() / (int)(GameManager.BLOCK_SIZE * rescalingFactor);
+        int spriteHeight = label.getIcon().getIconHeight() / (int)(GameManager.BLOCK_SIZE * rescalingFactor);
 
 
         int rightBlock = xBlocks + spriteWidth - 1;

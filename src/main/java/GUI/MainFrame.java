@@ -16,11 +16,17 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
+    /* Dimensioni in blocchi di stanza di default, utilizzate
+        per effettuare calcoli per ricavare le dimensioni dell'inventoryPanel
+        e del textBarPanel, in modo tale che siano ottimizzati per stanze di tali
+        dimensioni, essendo la maggioranza
+    */
     private static final int DEFAULT_WIDTH_BLOCKS = 32;
     private static final int DEFAULT_HEIGHT_BLOCKS = 16;
 
+    /** Path cursore personalizzato. */
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
-    private static final int BLOCK_SIZE = 24;
+
 
     protected Room currentRoom;
     private Icon backgroundImg;
@@ -80,8 +86,8 @@ public class MainFrame extends JFrame {
 
         gameScreenPanel.changeRoom(newRoom, screenWidth);
 
-        gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * BLOCK_SIZE);
-        gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * BLOCK_SIZE);
+        gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * GameManager.BLOCK_SIZE);
+        gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * GameManager.BLOCK_SIZE);
     }
 
 
@@ -90,11 +96,11 @@ public class MainFrame extends JFrame {
         double widthRescalingFactor;
         double heightRescalingFactor;
 
-        widthRescalingFactor = (double) screenWidth / (roomBWidth * BLOCK_SIZE);
-        widthRescalingFactor = Math.floor(widthRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+        widthRescalingFactor = (double) screenWidth / (roomBWidth * GameManager.BLOCK_SIZE);
+        widthRescalingFactor = Math.floor(widthRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
-        heightRescalingFactor = (double) screenHeight / (roomBHeight * BLOCK_SIZE);
-        heightRescalingFactor = Math.floor(heightRescalingFactor * BLOCK_SIZE) / BLOCK_SIZE;
+        heightRescalingFactor = (double) screenHeight / (roomBHeight * GameManager.BLOCK_SIZE);
+        heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
         return Math.min(widthRescalingFactor, heightRescalingFactor);
     }
@@ -163,8 +169,8 @@ public class MainFrame extends JFrame {
         // fullscreen
         rescalingFactor = calculateScalingFactor(currentRoom);
         // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
-        gameWidth = (int)(roomWidthBlocks * rescalingFactor * BLOCK_SIZE);
-        gameHeight = (int)(roomHeightBlocks * rescalingFactor * BLOCK_SIZE);
+        gameWidth = (int)(roomWidthBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
+        gameHeight = (int)(roomHeightBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
 
         System.out.println("GameWidth, GameHeight" + gameWidth + " " + gameHeight);
         System.out.println("ScreenWidth, ScreenHeight" + screenWidth + " " + screenHeight);
@@ -292,7 +298,7 @@ public class MainFrame extends JFrame {
     }
     private int defaultGameHeight()
     {
-        return (int) (DEFAULT_HEIGHT_BLOCKS * BLOCK_SIZE * defaultScalingFactor());
+        return (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * defaultScalingFactor());
     }
 
     private void initInventoryPanel()

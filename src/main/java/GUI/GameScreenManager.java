@@ -1,6 +1,7 @@
 package GUI;
 
 import entity.rooms.BlockPosition;
+import general.GameManager;
 
 import javax.swing.*;
 import java.util.Objects;
@@ -9,7 +10,6 @@ import java.util.Objects;
 public class GameScreenManager
 {
 
-    private static final int BLOCK_SIZE = 24;
     private static GameScreenPanel active_panel;
 
     private GameScreenManager()
@@ -42,8 +42,8 @@ public class GameScreenManager
         AbsPosition roomBorders = active_panel.getRoomBorders();
 
 
-        int xOffset = (int) Math.round(roomBorders.getX() + xBlocks * BLOCK_SIZE * active_panel.getScalingFactor());
-        int yOffset = (int) Math.round(roomBorders.getY() + yBlocks * BLOCK_SIZE * active_panel.getScalingFactor());
+        int xOffset = (int) Math.round(roomBorders.getX() + xBlocks * GameManager.BLOCK_SIZE * active_panel.getScalingFactor());
+        int yOffset = (int) Math.round(roomBorders.getY() + yBlocks * GameManager.BLOCK_SIZE * active_panel.getScalingFactor());
 
 
         return new AbsPosition(xOffset, yOffset);
@@ -64,8 +64,8 @@ public class GameScreenManager
         absPos = new AbsPosition(absPos.getX() - roomBorders.getX(), absPos.getY() - roomBorders.getY());
 
         // scegli il blocco più vicino
-        int x = (int) Math.round((double) absPos.getX() / (BLOCK_SIZE * active_panel.getScalingFactor()));
-        int y = (int) Math.round((double) absPos.getY() / (BLOCK_SIZE * active_panel.getScalingFactor())) - 1;
+        int x = (int) Math.round((double) absPos.getX() / (GameManager.BLOCK_SIZE * active_panel.getScalingFactor()));
+        int y = (int) Math.round((double) absPos.getY() / (GameManager.BLOCK_SIZE * active_panel.getScalingFactor())) - 1;
 
         // todo: controllare
         return new BlockPosition(Math.max(x, 0), y);
@@ -89,7 +89,7 @@ public class GameScreenManager
      */
     public static void updateLabelPosition(JLabel label, AbsPosition pos)
     {
-        int offsetHeight = label.getIcon().getIconHeight() - (int)(BLOCK_SIZE * active_panel.getScalingFactor());
+        int offsetHeight = label.getIcon().getIconHeight() - (int)(GameManager.BLOCK_SIZE * active_panel.getScalingFactor());
 
         // pos è angolo in basso a sinistra, dobbiamo calcolarci l'angolo in alto a sinistra
         AbsPosition leftUpCornerPos = new AbsPosition(pos.getX(), pos.getY() - offsetHeight);
