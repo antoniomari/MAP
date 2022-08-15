@@ -111,7 +111,6 @@ public class MainFrame extends JFrame {
         return gameScreenPanel;
     }
 
-
     public Room getCurrentRoom()
     {
         return currentRoom;
@@ -120,7 +119,7 @@ public class MainFrame extends JFrame {
     public void setCurrentRoom(Room newRoom)
     {
         this.currentRoom = newRoom;
-        rescalingFactor = calculateScalingFactor(currentRoom);
+        rescalingFactor = calculateScalingFactor(currentRoom.getBWidth(), currentRoom.getBHeight());
 
         // solo per stanze più grandi TODO: abilitare
         gameScreenPanel.setScalingFactor(rescalingFactor);
@@ -130,7 +129,6 @@ public class MainFrame extends JFrame {
         gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * GameManager.BLOCK_SIZE);
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * GameManager.BLOCK_SIZE);
     }
-
 
     private static double calculateScalingFactor(int roomBWidth, int roomBHeight)
     {
@@ -145,17 +143,6 @@ public class MainFrame extends JFrame {
 
         return Math.min(widthRescalingFactor, heightRescalingFactor);
     }
-
-    private double calculateScalingFactor(Room room)
-    {
-        int roomWidthBlocks = room.getBWidth();
-        int roomHeightBlocks = room.getBHeight();
-
-        return calculateScalingFactor(roomWidthBlocks, roomHeightBlocks);
-
-        //return widthRescalingFactor;
-    }
-
 
     public MainFrame(Room initialRoom)
     {
@@ -203,7 +190,7 @@ public class MainFrame extends JFrame {
         // in seguito si aggiusta in modo tale che la grandezza di ogni blocco
         // sia pari al più grande intero minore della grandezza dei blocchi
         // fullscreen
-        rescalingFactor = calculateScalingFactor(currentRoom);
+        rescalingFactor = calculateScalingFactor(currentRoom.getBWidth(), currentRoom.getBHeight());
         // CREA L'IMMAGINE DI SFONDO CON LE CORRETTE DIMENSIONI PER ADATTARSI ALLO SCHERMO
         gameWidth = (int)(roomWidthBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
         gameHeight = (int)(roomHeightBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
