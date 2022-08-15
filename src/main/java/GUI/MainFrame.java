@@ -16,13 +16,22 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    /* Dimensioni in blocchi di stanza di default, utilizzate
+    /*
+        Dimensioni in blocchi di stanza di default, utilizzate
         per effettuare calcoli per ricavare le dimensioni dell'inventoryPanel
         e del textBarPanel, in modo tale che siano ottimizzati per stanze di tali
-        dimensioni, essendo la maggioranza
+        dimensioni, essendo la maggioranza.
     */
     private static final int DEFAULT_WIDTH_BLOCKS = 32;
     private static final int DEFAULT_HEIGHT_BLOCKS = 16;
+    /*
+        Scaling factor e altezza in pixel corrispondenti
+        alla stanza di default, variano da schermo a schermo
+        e vengono calcolati dopo aver recuperato SCREEN_WIDTH
+        e SCREEN_HEIGHT
+     */
+    private static final double DEFAULT_SCALING_FACTOR;
+    private static final int DEFAULT_GAME_HEIGHT;
 
     /** Path cursore personalizzato. */
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
@@ -76,6 +85,10 @@ public class MainFrame extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         SCREEN_WIDTH = (int) screenSize.getWidth();
         SCREEN_HEIGHT = (int) screenSize.getHeight();
+
+        // calcolo del fattore di riscalamento di default e dell'altezza
+        DEFAULT_SCALING_FACTOR = calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
+        DEFAULT_GAME_HEIGHT =  (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR);
     }
 
     public double getScalingFactor()
@@ -119,7 +132,7 @@ public class MainFrame extends JFrame {
     }
 
 
-    private double calculateScalingFactor(int roomBWidth, int roomBHeight)
+    private static double calculateScalingFactor(int roomBWidth, int roomBHeight)
     {
         double widthRescalingFactor;
         double heightRescalingFactor;
@@ -303,9 +316,9 @@ public class MainFrame extends JFrame {
 
     private void initTextBarPanel()
     {
-        textBarPanel = new TextBarPanel(defaultScalingFactor());
-        int x_offset = (int)(3 * 48 * defaultScalingFactor()); // TODO : aggiustare questi
-        int y_offset = (int)(7 * defaultScalingFactor());
+        textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
+        int x_offset = (int)(3 * 48 * DEFAULT_SCALING_FACTOR); // TODO : aggiustare questi
+        int y_offset = (int)(7 * DEFAULT_SCALING_FACTOR);
 
         textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
                 (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
@@ -314,20 +327,10 @@ public class MainFrame extends JFrame {
         // addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
-    private double defaultScalingFactor()
-    {
-        return calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
-
-    }
-    private int defaultGameHeight()
-    {
-        return (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * defaultScalingFactor());
-    }
-
     private void initInventoryPanel()
     {
 
-        inventoryPanel = new InventoryPanel(SCREEN_HEIGHT - defaultGameHeight());
+        inventoryPanel = new InventoryPanel(SCREEN_HEIGHT - DEFAULT_GAME_HEIGHT);
     }
 
     private void initGamePanel()
@@ -340,7 +343,7 @@ public class MainFrame extends JFrame {
 
         int xBorder = (SCREEN_WIDTH - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
 
-        inventoryPanel.setBounds(insets.left + xBorder, insets.top + defaultGameHeight(),
+        inventoryPanel.setBounds(insets.left + xBorder, insets.top + DEFAULT_GAME_HEIGHT,
                 (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
 
         gamePanel.add(inventoryPanel);
