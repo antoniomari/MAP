@@ -6,4 +6,19 @@
         <method>speak</method>
         <sentence>Grazie delle cime!</sentence>
     </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione num="5">
+        <subject>PT-B</subject>
+        <method>add</method>
+        <what>Cocktail</what>
+        <x>20</x>
+        <y>13</y>
+    </azione>
 </scenario>

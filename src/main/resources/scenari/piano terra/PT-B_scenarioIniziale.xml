@@ -118,7 +118,7 @@
 	<azione num="21">
 		<subject>Nicolas</subject>
 		<method>move</method>
-		<x>1</x>
+		<x>-1</x>
 		<y>1</y>
 		<how>relative</how>
 		<finalWait>500</finalWait>
