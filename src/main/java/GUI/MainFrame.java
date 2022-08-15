@@ -1,11 +1,9 @@
 package GUI;
 
 import GUI.gamestate.GameState;
+import events.executors.Executor;
 import general.ActionSequence;
 import database.DBManager;
-import events.executors.AnimationExecutor;
-import events.executors.InventoryUpdateExecutor;
-import events.executors.RoomUpdateExecutor;
 import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.Room;
@@ -61,10 +59,11 @@ public class MainFrame extends JFrame {
      */
     /** Pannello contenente la schermata di gioco. */
     private GameScreenPanel gameScreenPanel;
+    /** Panello contenente la barra di visualizzazione di testo (contenuta nel gameScreen). */
+    private TextBarPanel textBarPanel;
     /** Pannello contenente la barra dell'inventario. */
     private InventoryPanel inventoryPanel;
-    /** Panello contenente la barra di visualizzazione di testo. */
-    private TextBarPanel textBarPanel;
+
 
     /** Pannello contenente schermata di gioco {@link MainFrame#gameScreenPanel},
      * barra dell'inventario {@link MainFrame#inventoryPanel}
@@ -91,10 +90,13 @@ public class MainFrame extends JFrame {
         DEFAULT_GAME_HEIGHT =  (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR);
     }
 
+    /* TODO: capire se eliminarlo
     public double getScalingFactor()
     {
         return rescalingFactor;
     }
+
+     */
 
     public InventoryPanel getInventoryPanel()
     {
@@ -116,6 +118,42 @@ public class MainFrame extends JFrame {
         return currentRoom;
     }
 
+    /**
+     * Calcola il fattore di riscalamento per una stanza di dimensioni
+     * {@code roomBWidth} blocchi di larghezza e {@code roomBHeight} blocchi di altezza.
+     *
+     * Utilizza le costanti {@link MainFrame#SCREEN_WIDTH} e {@link MainFrame#SCREEN_HEIGHT}
+     * per poter riscalare le stanze in modo tale che il lato di un blocco sia il più grande
+     * multiplo intero di pixel che permetta all'immagine della stanza di entrare nello schermo
+     * mantenendo le proporzioni.
+     *
+     * @param roomBWidth larghezza della stanza, misurata in numero di blocchi
+     * @param roomBHeight altezza della stanza, misurata in numero di blocchi
+     * @return scalingFactor per una stanza di tali dimensioni
+     */
+    private static double calculateScalingFactor(int roomBWidth, int roomBHeight)
+    {
+        double widthRescalingFactor = (double) SCREEN_WIDTH / (roomBWidth * GameManager.BLOCK_SIZE);
+        widthRescalingFactor = Math.floor(widthRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
+
+        double heightRescalingFactor = (double) SCREEN_HEIGHT / (roomBHeight * GameManager.BLOCK_SIZE);
+        heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
+
+        return Math.min(widthRescalingFactor, heightRescalingFactor);
+    }
+
+    /**
+     * Imposta la currentRoom del gioco in esecuzione.
+     *
+     * Vengono aggiornati {@link MainFrame#rescalingFactor},
+     * {@link MainFrame#gameWidth} e {@link MainFrame#gameHeight}
+     * sulla base delle dimensioni della stanza {@code newRoom}.
+     *
+     * Nota: viene richiamato il metodo {@link GameScreenPanel#changeRoom(Room, int)}
+     * affinché vengano correttamente impostati tutti i GamePiece nella stanza.
+     *
+     * @param newRoom stanza da impostare come {@link MainFrame#currentRoom}
+     */
     public void setCurrentRoom(Room newRoom)
     {
         this.currentRoom = newRoom;
@@ -130,22 +168,26 @@ public class MainFrame extends JFrame {
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * GameManager.BLOCK_SIZE);
     }
 
-    private static double calculateScalingFactor(int roomBWidth, int roomBHeight)
-    {
-        double widthRescalingFactor;
-        double heightRescalingFactor;
-
-        widthRescalingFactor = (double) SCREEN_WIDTH / (roomBWidth * GameManager.BLOCK_SIZE);
-        widthRescalingFactor = Math.floor(widthRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
-
-        heightRescalingFactor = (double) SCREEN_HEIGHT / (roomBHeight * GameManager.BLOCK_SIZE);
-        heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
-
-        return Math.min(widthRescalingFactor, heightRescalingFactor);
-    }
-
+    /**
+     * Inizializza il frame, ponendolo a schermo intero, e lo registra
+     * presso {@link Executor} e {@link GameState}.
+     *
+     * Inizializza inoltre la scena iniziale del gioco tramite
+     * {@link MainFrame#setupPlayground()}.
+     * Registra inoltre il {@link MainFrame#gameScreenPanel} presso
+     * {@link GameScreenManager}.
+     *
+     * @param initialRoom stanza iniziale da impostare come {@link MainFrame#currentRoom}
+     */
     public MainFrame(Room initialRoom)
     {
+        // Chiudi l'app alla chiusura della finestra
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Schwartz");
+        // Imposta dimensioni finestra pari a quelle dello schermo
+        setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+
+        // imposta stanza iniziale
         currentRoom = initialRoom;
 
         // inizializzazione immagine di sfondo
@@ -157,20 +199,16 @@ public class MainFrame extends JFrame {
         // attiva schermo intero
         fullScreenOn();
 
-        GameScreenManager.setActivePanel(gameScreenPanel);
-
-
-        // imposta gli esecutori su di te TODO: migliorare codice
-        AnimationExecutor.setMainFrame(this);
-        InventoryUpdateExecutor.setMainFrame(this);
-        RoomUpdateExecutor.setMainFrame(this);
-
+        // registrati presso gli Executor (eventi) e presso GameState
+        Executor.setMainFrame(this);
         GameState.setMainFrame(this);
+        // registra il gameScreenPanel presso GameScreenManager
+        GameScreenManager.setActivePanel(gameScreenPanel);
 
         setupPlayground();
     }
 
-
+    // Inizializzazione cursore personalizzato
     private void initCursor()
     {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -179,12 +217,14 @@ public class MainFrame extends JFrame {
         setCursor(c);
     }
 
+    // Inizializzazione immagine di sfondo e gameWidth, gameHeight
     private void setupBackground()
     {
         Image roomImage = currentRoom.getBackgroundImage();
         int roomWidthBlocks = currentRoom.getBWidth();
         int roomHeightBlocks = currentRoom.getBHeight();
 
+        // TODO: rivedere commenti interni
         // per calcolare lo scaling factor serve ottenere il rapporto tra
         // la larghezza dello schermo e quella dell'immagine della stanza;
         // in seguito si aggiusta in modo tale che la grandezza di ogni blocco
@@ -195,20 +235,17 @@ public class MainFrame extends JFrame {
         gameWidth = (int)(roomWidthBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
         gameHeight = (int)(roomHeightBlocks * rescalingFactor * GameManager.BLOCK_SIZE);
 
-        System.out.println("GameWidth, GameHeight" + gameWidth + " " + gameHeight);
-        System.out.println("ScreenWidth, ScreenHeight" + SCREEN_WIDTH + " " + SCREEN_HEIGHT);
-
         backgroundImg = SpriteManager.rescaledImageIcon(roomImage, rescalingFactor);
 
     }
 
+    // imposta schermo intero
     private void fullScreenOn()
     {
         GraphicsDevice device = GraphicsEnvironment
                 .getLocalGraphicsEnvironment().getScreenDevices()[0];
         device.setFullScreenWindow(this);
     }
-
 
     // inizializzazione componenti JFrame
     private void initComponents()
@@ -217,23 +254,11 @@ public class MainFrame extends JFrame {
         mainPanel = new JPanel();
         gamePanel = new JPanel();
 
-
-
-        // Chiudi l'app alla chiusura della finestra
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Schwartz");
-
-        // Imposta dimensioni finestra pari a quelle dello schermo
-        setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-
-
         initGameScreenPanel();
         initTextBarPanel();
         initInventoryPanel();
         initGamePanel();
         initMenuPanel();
-
-
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -262,8 +287,8 @@ public class MainFrame extends JFrame {
 
     }
 
-
-    public void setupPlayground()
+    // setup scena iniziale di gioco TODO: deprecare
+    private void setupPlayground()
     {
         DBManager.setupInventory();
 
@@ -271,55 +296,48 @@ public class MainFrame extends JFrame {
         // ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
         ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
         GameManager.startScenario(a);
-
     }
 
+    // inizializza gameScreenPanel
     private void initGameScreenPanel()
     {
         gameScreenPanel = new GameScreenPanel(currentRoom);
-
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         // Crea nuova label per visualizzare l'immagine di sfondo
-        // COMPONENTI SWING
-
         JLabel backgroundLabel = new JLabel(backgroundImg);
 
-        // Imposta dimensioni pannello pari a quelle dello schermo
+        // Imposta dimensioni pannello sfruttando la larghezza dello schermo
         gameScreenPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, gameHeight)); // SCREEN_WIDTH / 2));
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);
         gameScreenPanel.setBackgroundLabel(backgroundLabel);
-
-        /*
-        backgroundLabel.setBounds(gameScreenPanel.getRoomBorders().getX(),
-                gameScreenPanel.getRoomBorders().getY(),
-                backgroundImg.getIconWidth(),
-                backgroundImg.getIconHeight());
-
-         */
     }
 
+    // inizializza textBarPanel
     private void initTextBarPanel()
     {
         textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
-        int x_offset = (int)(3 * 48 * DEFAULT_SCALING_FACTOR); // TODO : aggiustare questi
+
+        // nota: questi numeri sono per centrare sullo schermo la textBar
+        int x_offset = (int)(6 * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR); // TODO : aggiustare questi
         int y_offset = (int)(7 * DEFAULT_SCALING_FACTOR);
 
+        // impostazione posizione del textBarPanel
         textBarPanel.setBounds(gameScreenPanel.getInsets().left + x_offset, gameScreenPanel.getInsets().top + y_offset,
                 (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
+        // aggiungi a gameScreenPanel
         gameScreenPanel.add(textBarPanel, GameScreenPanel.TEXT_BAR_LEVEL);
-
-        // addKeyListener(new GameKeyListener(KeyEvent.VK_SPACE, textBarPanel::hideTextBar, null));
     }
 
+    // inizializza inventoryPanel
     private void initInventoryPanel()
     {
-
         inventoryPanel = new InventoryPanel(SCREEN_HEIGHT - DEFAULT_GAME_HEIGHT);
     }
 
+    // inizializza gamePanel
     private void initGamePanel()
     {
         gamePanel.setLayout(null);
@@ -328,38 +346,29 @@ public class MainFrame extends JFrame {
 
         Insets insets = gamePanel.getInsets();
 
+        // imposta posizione dell'inventoryPanel nel gamePanel e aggiungilo
         int xBorder = (SCREEN_WIDTH - (int) inventoryPanel.getPreferredSize().getWidth()) / 2;
-
         inventoryPanel.setBounds(insets.left + xBorder, insets.top + DEFAULT_GAME_HEIGHT,
                 (int) inventoryPanel.getPreferredSize().getWidth(), (int) inventoryPanel.getPreferredSize().getHeight());
-
         gamePanel.add(inventoryPanel);
 
+        // imposta posizione del gameScreenPanel nel gamePanel e aggiungilo
         xBorder = (SCREEN_WIDTH - gameWidth) / 2;
-
-
-        // imposta posizione dello schermo di gioco
         gameScreenPanel.setBounds(insets.left, insets.top, gameScreenPanel.getPreferredSize().width,
                 gameScreenPanel.getPreferredSize().height);
-
         gameScreenPanel.getBackgroundLabel().setBounds(gameScreenPanel.getRoomBorders().getX() + xBorder,
                 gameScreenPanel.getRoomBorders().getY(),
                 backgroundImg.getIconWidth(),
                 backgroundImg.getIconHeight());
-
-        System.out.println("Sfondo img" + gameScreenPanel.getBackgroundLabel().getIcon().getIconWidth());
-
-
         gamePanel.add(gameScreenPanel);
-
-
     }
 
+    // inizializza menuPanel
     public void initMenuPanel()
     {
         menuPanel = new JLayeredPane();
 
-        // Creazione bottoni per menuPanel
+        // Creazione bottoni per menuPanel TODO: modificare sta cacata
         JButton okButton = new JButton("Ok");
         JButton exitButton = new JButton("Esci");
         exitButton.addActionListener((e) -> System.exit(0));
@@ -401,7 +410,12 @@ public class MainFrame extends JFrame {
         menuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
-
+    /**
+     * Visualizza menu di gioco oppure chiude il menu di gioco.
+     *
+     * @param b {@code true} per visualizzare il menu di gioco,
+     *                      {@code false} per chiudere il menu di gioco
+     */
     public void showMenu(boolean b)
     {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
@@ -410,11 +424,12 @@ public class MainFrame extends JFrame {
             cl.show(mainPanel, "MENU");
         else
             cl.show(mainPanel, "GIOCO");
-
     }
 
     /**
-     * @param args the command line arguments
+     * Punto d'inizio dell'applicazione.
+     *
+     * @param args argomenti da linea di comando
      */
     public static void main(String[] args)
     {
@@ -437,7 +452,6 @@ public class MainFrame extends JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
 
         // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
         Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/piano terra/PT-B.xml");

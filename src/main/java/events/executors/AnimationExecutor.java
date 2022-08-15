@@ -12,14 +12,6 @@ import java.awt.*;
 
 public class AnimationExecutor extends Executor
 {
-    private static double scalingFactor;
-
-    public static void setMainFrame(MainFrame frame)
-    {
-        Executor.setMainFrame(frame);
-        scalingFactor = mainFrame.getScalingFactor();
-    }
-
 
     public static void executeAnimation(GamePiece piece, List<Image> frames)
     {
