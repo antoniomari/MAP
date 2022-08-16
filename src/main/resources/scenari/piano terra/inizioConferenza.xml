@@ -15,6 +15,14 @@
         <finalWait>500</finalWait>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>7</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>Buongiorno a tutti e grazie per la vostra (*) presenza al Global-AI-2020. </sentence>

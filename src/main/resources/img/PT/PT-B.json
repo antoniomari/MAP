@@ -7,7 +7,21 @@
     {
       "left": 0,
       "top": 10,
-      "width": 40,
+      "width": 10,
+      "height": 18
+    },
+
+    {
+      "left": 10,
+      "top": 15,
+      "width": 19,
+      "height": 13
+    },
+
+    {
+      "left": 29,
+      "top": 10,
+      "width": 11,
       "height": 18
     }
   ],

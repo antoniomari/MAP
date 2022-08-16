@@ -14,7 +14,7 @@
 		<method>speak</method>
 		<sentence>Che bel posto</sentence>
 	</azione>
-	<azione num="6">
+	<azione>
 		<subject>Schwartz</subject>
 		<method>speak</method>
 		<sentence>Quasi quasi mi faccio un drink</sentence>
@@ -25,7 +25,7 @@
 		<x>0</x>
 		<y>5</y>
 		<how>relative</how>
-		<finalWait>2000</finalWait>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione num="7">
 		<subject>Antonio</subject>
@@ -35,24 +35,40 @@
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
-	<azione num="8">
+	<azione>
 		<subject>Diego</subject>
 		<method>move</method>
-		<x>10</x>
-		<y>10</y>
+		<x>0</x>
+		<y>4</y>
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
-	<azione num="9">
+	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>8</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
 		<subject>Nicolas</subject>
 		<method>move</method>
 		<x>-10</x>
-		<y>-5</y>
+		<y>0</y>
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
-	
-	<azione num="10">
+	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>-2</x>
+		<y>-8</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+
+	<azione>
 		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>PRESENTAZzzzzzzzzzzzIONE</sentence>

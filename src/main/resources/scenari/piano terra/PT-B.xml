@@ -8,8 +8,8 @@
             <subject>PT-B</subject>
             <method>add</method>
             <what>Schwartz</what>
-            <x>5</x>
-            <y>15</y>
+            <x>18</x>
+            <y>22</y>
         </azione>
         <azione>
             <method>addToInventory</method>
@@ -55,8 +55,8 @@
             <subject>PT-B</subject>
             <method>add</method>
             <what>Nicolas</what>
-            <x>31</x>
-            <y>24</y>
+            <x>32</x>
+            <y>25</y>
         </azione>
         <executeScenario>src/main/resources/scenari/piano terra/PT-B_scenarioIniziale.xml</executeScenario>
     </scenario>
