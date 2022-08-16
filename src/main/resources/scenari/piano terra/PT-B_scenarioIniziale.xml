@@ -19,7 +19,6 @@
 		<method>speak</method>
 		<sentence>Quasi quasi mi faccio un drink</sentence>
 	</azione>
-	
 	<azione num="7">
 		<subject>Antonio</subject>
 		<method>move</method>

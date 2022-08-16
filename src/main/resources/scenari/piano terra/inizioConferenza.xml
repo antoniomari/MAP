@@ -1,4 +1,160 @@
 <?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Eccola finalmente possiamo iniziare la conferenza,(*)prenda posto tra le prime file.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>19</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Buongiorno a tutti e grazie per la vostra presenza al Global-AI-2020. </sentence>
+    </azione>
+    <azione>
+    <subject>Antonio</subject>
+    <method>speak</method>
+    <sentence>Al contrario dell'edizione precedente, la Global-AI-2015,(*) quest'anno in finale abbiamo una nuova intelligenza
+        artificiale che non si autodistruggerà alla prima barzelletta sui carabinieri.</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Prego JDBC-20 di entrare. </sentence>
+    </azione>
+    <azione>
+        <subject>PT-D</subject>
+        <method>add</method>
+        <what>Robot</what>
+        <x>2</x>
+        <y>16</y>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>move</method>
+        <x>19</x>
+        <y>18</y>
+        <how>absolute</how>
+        <finalWait>2000</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Mettiamolo subito alla prova! </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Due vicini di casa stanno parlando:(*) "Sai, ieri mi hanno rubato la macchina" </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>"No che disdetta, sei andato dai carabinieri?" </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>"Si, ma hanno detto che non sono stati loro" </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Ahahahah ahahahah!!! </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Ahahhah ahahahh!! </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Torniamo seri, come da regolamento l'AI arrivata in finale per essere valutata (*)formalmente intelligente
+        deve superare un test la cui valutazione (*)è effettuata dal più grande esperto mondiale di AI.  </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Quest'anno abbiamo l'onore di avere con noi il professore Schwartz. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwatrz</subject>
+        <method>speak</method>
+        <sentence>Vi ringrazio per l'invito ricevuto e spero che la vostra AI sia all'altezza. </sentence>
+    </azione>
+    <azione>
+    <subject>Diego</subject>
+    <method>speak</method>
+    <sentence>Terminate le presentazioni possiamo iniziare il rifresco preparato dal nostro caro cuoco Luigi. </sentence>
+    </azione>
+    <azione>
+        <subject>PT-D</subject>
+        <method>add</method>
+        <what>CuocoNero</what>
+        <x>2</x>
+        <y>16</y>
+    </azione>
+    <azione>
+        <subject>CuocoNero</subject>
+        <method>speak</method>
+        <sentence>Salve a tutti sono Luigi il cuoco.(*) Per deliziare le vostre papille gustative ho preparato gli spaghetti con le polpette.</sentence>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>L’umano vestito di nero ha parlato di programmazione a spaghetti. </sentence>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>La programmazione a spaghetti è stata severamente proibita da decenni(*)poichè genera codice non strutturato.</sentence>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>Lo chef è obsoleto! Deve essere riprogrammato...</sentence>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>kill chef, chef must die! </sentence>
+    </azione>
+    <azione>
+        <subject>CuocoNero</subject>
+        <method>speak</method>
+        <sentence>AHHHHHHHH!!!.</sentence>
+    </azione>
+    <azione>
+        <subject>CuocoNero</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>16</y>
+        <how>absolute</how>
+        <finalWait>2000</finalWait>
+    </azione>
+    <azione>
+        <subject>CuocoNero</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>16</y>
+        <how>absolute</how>
+        <finalWait>2000</finalWait>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>removeFromRoom</method>
+    </azione>
 </scenario>
