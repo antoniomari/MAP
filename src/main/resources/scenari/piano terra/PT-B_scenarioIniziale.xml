@@ -161,4 +161,9 @@
 		<method>setSpeakScenario</method>
 		<what>src/main/resources/scenari/piano terra/ConoscenzaCameriere.xml</what>
 	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>setSpeakScenario</method>
+		<what></what>
+	</azione>
 </scenario>
