@@ -6,13 +6,6 @@ import entity.items.PickupableItem;
 
 public class InventoryUpdateExecutor extends Executor
 {
-    private static InventoryPanel inventoryPanel;
-
-    public static void setMainFrame(MainFrame frame)
-    {
-        Executor.setMainFrame(frame);
-        inventoryPanel = mainFrame.getInventoryPanel();
-    }
 
     public static void executeAdd(PickupableItem it)
     {
