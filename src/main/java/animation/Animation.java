@@ -1,16 +1,12 @@
 package animation;
 
-import GUI.AbsPosition;
-import GUI.GameScreenManager;
 import GUI.gamestate.GameState;
 import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Animation
 {
@@ -35,21 +31,6 @@ public abstract class Animation
 
             // specifico per ogni classe
             execute();
-
-            // rimuovi animazione corrente dalla coda
-            //Queue<Animation> animationQueue = animationQueueMap.get(label);
-            //animationQueue.remove();
-
-
-            // TODO: importante, syncronized sul game state
-            //if(animationQueue.isEmpty())
-            //    GameState.changeState(GameState.State.PLAYING);
-            //else
-            //{
-            //    // TODO: ricontrollare IMPORTANTE !!!
-                //Animation next = animationQueue.peek();
-                //next.executeAnimation();
-            //}
 
             try
             {

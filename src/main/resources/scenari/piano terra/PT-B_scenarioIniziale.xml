@@ -164,6 +164,6 @@
 	<azione>
 		<subject>Antonio</subject>
 		<method>setSpeakScenario</method>
-		<what></what>
+		<what>src/main/resources/scenari/piano terra/inizioConferenza.xml</what>
 	</azione>
 </scenario>
