@@ -2,21 +2,20 @@ package animation;
 
 import GUI.AbsPosition;
 import GUI.GameScreenManager;
-import GUI.GameScreenPanel;
-import GUI.gamestate.GameState;
-import entity.GamePiece;
 import entity.rooms.BlockPosition;
 import general.GameManager;
-import graphics.SpriteManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * Classe che rappresenta un'animazione di movimento,
+ * che sposta gradualmente una JLabel dalla posizione
+ * iniziale a quella finale. Viene alternata la
+ * visualizzazione dei fotogrammi.
+ */
 public class MovingAnimation extends Animation
 {
     private int delayMilliseconds;
@@ -49,7 +48,7 @@ public class MovingAnimation extends Animation
         this.finalCoord = GameScreenManager.calculateCoordinates(finalPos);
 
         this.speed = speed; // ok
-        this.millisecondWaitEnd = millisecondWaitEnd; // ok
+        setFinalDelay(millisecondWaitEnd);
 
         initCoordList();
     }

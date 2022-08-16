@@ -8,19 +8,42 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Classe astratta che rappresenta un'animazione.
+ *
+ * Ogni animazione agisce su una JLabel e coinvolge un certo
+ * numero di fotogrammi (eventualmente 1).
+ */
 public abstract class Animation
 {
+    /** JLabel su cui eseguire l'animazione. */
     protected JLabel label;
 
     protected int numFrames;
+
+    /** Lista di fotogrammi dell'animazione. */
     private final List<Image> frames;
+    /** Icone relative ai fotogrammi (devono essere correttamente riscalate). */
     protected List<Icon> frameIcons;
 
-    // protected static final Map<JLabel, Queue<Animation>> animationQueueMap = new HashMap<>();
+    /** Indice (nella lista) del fotogramma visualizzato correntemente. */
+    private int currentIndex = 0;
 
-    protected int millisecondWaitEnd;
+    /** Millisecondi da attendere alla fine dell'animazione
+     * (prima di tornare nel GameState Playing)
+     */
+    private int millisecondWaitEnd;
 
-    private class AnimationThread extends Thread // TODO trovare un modo per evitare che la stessa animazione venga eseguita contemporaneamente
+    /**
+     * Thread di esecuzione dell'animazione.
+     *
+     * Il metodo run è un template-method che include le chiamate ai metodi
+     * astratti {@link Animation#execute()} e {@link Animation#terminate()}.
+     *
+     * All'inizio imposta lo stato di gioco Moving, viene eseguita l'animazione,
+     * vengono attesi {@link Animation#millisecondWaitEnd} e infine viene terminata.
+     */
+    private class AnimationThread extends Thread
     {
 
         @Override
@@ -29,7 +52,7 @@ public abstract class Animation
             if(GameState.getState() != GameState.State.MOVING)
                 GameState.changeState(GameState.State.MOVING);
 
-            // specifico per ogni classe
+            // template
             execute();
 
             try
@@ -44,12 +67,15 @@ public abstract class Animation
             GameState.changeState(GameState.State.PLAYING);
             // template
             terminate();
-
         }
     }
 
-    private int currentIndex = 0;
-
+    /**
+     * Crea un'animazione.
+     *
+     * @param labelToAnimate JLabel da animare
+     * @param frames lista dei fotogrammi da utilizzare nell'animazione
+     */
     protected Animation(JLabel labelToAnimate, List<Image> frames)
     {
 
@@ -60,6 +86,24 @@ public abstract class Animation
         this.millisecondWaitEnd = 0; // TODO :aggiustare
     }
 
+    /**
+     * Imposta tempo di attesa alla fine dell'esecuzione dell'animazione
+     *
+     * @param milliseconds millisecondi da attendere
+     */
+    public void setFinalDelay(int milliseconds)
+    {
+        if(milliseconds < 0)
+            throw new IllegalArgumentException("tempo negativo");
+
+        this.millisecondWaitEnd = milliseconds;
+    }
+
+
+    /**
+     * Imposta frameIcons creando icone riscalate per adattarsi
+     * alle dimensioni della label
+     */
     protected void resizeFrames()
     {
         // calcola rescaling factor
@@ -70,6 +114,15 @@ public abstract class Animation
             frameIcons.add(SpriteManager.rescaledImageIcon(i, rescalingFactor));
     }
 
+    /**
+     * Restituisce l'icona successiva a quella attualmente
+     * in uso nell'animazione.
+     *
+     * La successiva all'ultima è la prima della lista {@link Animation#frameIcons}.
+     * Utilizza e modifica {@link Animation#currentIndex}
+     *
+     * @return icona successiva a quella attualmente in uso nell'animazione
+     */
     protected Icon getNextIcon()
     {
         if (currentIndex < frameIcons.size() - 1)
@@ -78,42 +131,28 @@ public abstract class Animation
         {
             currentIndex = 0;
             return frameIcons.get(frameIcons.size() - 1);
-
         }
     }
 
+    /**
+     * Esegue l'animazione, creando un thread dedicato.
+     */
     public void start()
-    {
-        //Queue<Animation> workingQueue;
-
-        //if(!animationQueueMap.containsKey(label))
-        //{
-        //    workingQueue = new ConcurrentLinkedQueue<>();
-        //    animationQueueMap.put(label, workingQueue);
-        //}
-        //else
-        //{
-        //    workingQueue = animationQueueMap.get(label);
-        //}
-
-        //if(workingQueue.isEmpty())
-        //{
-        //    workingQueue.add(this);
-            executeAnimation();
-        //}
-        //else
-        //{
-        //    workingQueue.add(this);
-        //}
-    }
-
-    protected void executeAnimation()
     {
         new Animation.AnimationThread().start();
     }
 
+
+    /**
+     * Esecuzione dell'animazione, chiamato unicamente nel metodo
+     * run dell'AnimationThread.
+     */
     protected abstract void execute();
 
+    /**
+     * Codice da eseguire al termine dell'animazione, chiamato
+     * unicamente nel metodo run dell'AnimationThread.
+     */
     protected abstract void terminate();
 
 
