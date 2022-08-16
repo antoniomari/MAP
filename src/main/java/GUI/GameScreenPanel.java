@@ -258,7 +258,8 @@ public class GameScreenPanel extends JLayeredPane
 
             GameScreenManager.updateLabelPosition(effectLabel, pos);
 
-            StillAnimation effectAnimation = StillAnimation.createCustomAnimation(spritesheetPath, jsonPath, effectLabel, finalWait);
+            StillAnimation effectAnimation = StillAnimation.createCustomAnimation(spritesheetPath, jsonPath, effectLabel);
+            effectAnimation.setFinalDelay(finalWait);
 
             effectAnimation.setActionOnEnd(() ->
                     {

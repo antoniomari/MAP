@@ -16,6 +16,7 @@ import java.util.List;
  */
 public abstract class Animation
 {
+    protected static int DEFAULT_END_MILLISECONDS = 0;
     /** JLabel su cui eseguire l'animazione. */
     protected JLabel label;
 
@@ -32,7 +33,7 @@ public abstract class Animation
     /** Millisecondi da attendere alla fine dell'animazione
      * (prima di tornare nel GameState Playing)
      */
-    private int millisecondWaitEnd;
+    private int millisecondWaitEnd = DEFAULT_END_MILLISECONDS;
 
     /**
      * Thread di esecuzione dell'animazione.
@@ -78,12 +79,10 @@ public abstract class Animation
      */
     protected Animation(JLabel labelToAnimate, List<Image> frames)
     {
-
         this.label = labelToAnimate;
         this.frames = frames;
         resizeFrames();
         this.currentIndex = 0;
-        this.millisecondWaitEnd = 0; // TODO :aggiustare
     }
 
     /**

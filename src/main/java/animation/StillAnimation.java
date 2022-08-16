@@ -11,23 +11,38 @@ import java.util.List;
 // animazione statica
 public class StillAnimation extends Animation
 {
-    private int delayMilliseconds;
-    private boolean initialDelay;
+    private static final int DEFAULT_DELAY_MILLISECONDS = 200;
+    private static final boolean DEFAULT_INITIAL_DELAY = true;
+
+    /** Delay tra cambi di fotogrammi. */
+    private int delayMilliseconds = DEFAULT_DELAY_MILLISECONDS;
+
+    /** Flag per segnalare se c'è delay iniziale. */
+    private boolean initialDelay = DEFAULT_INITIAL_DELAY;
+
+    /** Codice da eseguire alla fine dell'animazione. */
     private Runnable onEndExecute;
 
-
-    public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
+    public StillAnimation(JLabel label, List<Image> frames)
     {
-        this(label, frames, delayMilliseconds, initialDelay, 0);
+        super(label, frames);
     }
 
+    @Deprecated
+    public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
+    {
+        this(label, frames, delayMilliseconds, initialDelay, DEFAULT_END_MILLISECONDS);
+    }
+
+    @Deprecated
     public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, int finalWait)
     {
         super(label, frames);
-        this.delayMilliseconds = delayMilliseconds;
-        this.initialDelay = initialDelay;
+        setDelay(delayMilliseconds);
+        setInitialDelay(initialDelay);
         setFinalDelay(finalWait);
     }
+
 
     public void setDelay(int milliseconds)
     {
@@ -92,17 +107,16 @@ public class StillAnimation extends Animation
      *                        dell'animazione
      * @param jsonPath path del json che contiene i dati dei fotogrammi dell'animazione
      * @param animationLabel JLabel da animare
-     * @param finalWait millisecondi da attendere alla fine dell'esecuzione dell'animazione
      *
      * @return StillAnimation creata
      */
     public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath,
-                                                          JLabel animationLabel, int finalWait)
+                                                                            JLabel animationLabel)
     {
         BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
 
         // TODO: personalizzare delay milliseconds
-        return new StillAnimation(animationLabel, frames, 100, true, finalWait);
+        return new StillAnimation(animationLabel, frames, 100, true);
     }
 }
