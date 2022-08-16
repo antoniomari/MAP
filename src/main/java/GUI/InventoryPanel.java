@@ -120,6 +120,11 @@ public class InventoryPanel extends JLayeredPane
         TEXT_BOARD_IMAGE = SpriteManager.loadSpriteSheet(TEXT_BOARD_PATH);
     }
 
+    @Override
+    public String getToolTipText(MouseEvent event)
+    {
+        return super.getToolTipText(event);
+    }
 
     public InventoryPanel(int preferredHeight)
     {
