@@ -136,6 +136,14 @@
     </azione>
     <azione>
         <subject>CuocoNero</subject>
+        <method>move</method>
+        <x>16</x>
+        <y>18</y>
+        <how>absolute</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>CuocoNero</subject>
         <method>speak</method>
         <sentence>Salve a tutti sono Luigi il cuoco. (*) Per deliziare le vostre papille gustative </sentence>
     </azione>
@@ -157,7 +165,7 @@
     <azione>
         <subject>Robot</subject>
         <method>speak</method>
-        <sentence>poichè genera codice non strutturato.</sentence>
+        <sentence>poiché genera codice non strutturato.</sentence>
     </azione>
     <azione>
         <subject>Robot</subject>

@@ -24,9 +24,11 @@ public class GameCharacter extends GamePiece
     {
         super(name, SpriteManager.loadSpriteSheet(spritesheetPath), jsonPath);
         movingFrames = new ArrayList<>();
+        animateFrames = new ArrayList<>(); // TODO: aggiustare
         spritesheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         this.jsonPath = jsonPath;
         initMovingFrames();
+        initAnimateFrames();
     }
 
 
@@ -37,20 +39,31 @@ public class GameCharacter extends GamePiece
         if(movingFrames.isEmpty())
         {
             movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath,  getName() + "moving");
-            movingFrames.add(0, getSprite());
         }
+        movingFrames.add(0, getSprite());
+    }
+
+    private void initAnimateFrames()
+    {
+        animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "animate");
+
+        if(animateFrames.isEmpty())
+        {
+            animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, getName() + "animate");
+        }
+        animateFrames.add(0, getSprite());
     }
 
     public void animate()
     {
-        EventHandler.sendEvent(new AnimationEvent(this, movingFrames));
+        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
     }
 
     public void animateReverse()
     {
-        Collections.reverse(movingFrames);
-        EventHandler.sendEvent(new AnimationEvent(this, movingFrames));
-        Collections.reverse(movingFrames);
+        Collections.reverse(animateFrames);
+        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
+        Collections.reverse(animateFrames);
     }
 
 

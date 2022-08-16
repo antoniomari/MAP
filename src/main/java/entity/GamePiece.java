@@ -44,6 +44,7 @@ public class GamePiece
     private String jsonPath;
 
     protected List<Image> movingFrames;
+    protected List<Image> animateFrames;
 
 
     // tutti i costruttori sono protetti per far sì che non sia
