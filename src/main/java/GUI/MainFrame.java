@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.gamestate.GameState;
+import entity.characters.PlayingCharacter;
 import events.executors.Executor;
 import general.ActionSequence;
 import database.DBManager;
@@ -290,7 +291,7 @@ public class MainFrame extends JFrame {
     // setup scena iniziale di gioco TODO: deprecare
     private void setupPlayground()
     {
-        DBManager.setupInventory();
+        //DBManager.setupInventory();
 
         // TODO: attenzione alla current room
         // ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");

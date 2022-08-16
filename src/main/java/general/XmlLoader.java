@@ -174,6 +174,9 @@ public class XmlLoader
             case "removeFromRoom":
                 actionParsed = parseRemoveFromRoom(actionElement);
                 break;
+            case "addToInventory":
+                actionParsed = parseAddToInventory(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -372,6 +375,14 @@ public class XmlLoader
         String subject = getTagValue(eAction,"subject");
 
         return () -> GameManager.getPiece(subject).removeFromRoom();
+    }
+
+    private static Runnable parseAddToInventory(Element eAction)
+    {
+        String itemName = getTagValue(eAction, "what");
+        PickupableItem it = (PickupableItem) loadPiece(itemName);
+        // TODO: controllare correttezza
+        return () -> PlayingCharacter.getPlayer().addToInventory(it);
     }
 
 

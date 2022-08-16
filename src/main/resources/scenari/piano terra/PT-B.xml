@@ -11,6 +11,10 @@
             <x>5</x>
             <y>15</y>
         </azione>
+        <azione>
+            <method>addToInventory</method>
+            <what>Telefono</what>
+        </azione>
         <azione num="2">
             <subject>PT-B</subject>
             <method>setEast</method>
