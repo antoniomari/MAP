@@ -134,8 +134,8 @@
 		<subject>PT-D</subject>
 		<method>add</method>
 		<what>Diego</what>
-		<x>15</x>
-		<y>12</y>
+		<x>14</x>
+		<y>14</y>
 	</azione>
 	<azione num="21">
 		<subject>Nicolas</subject>
@@ -153,8 +153,8 @@
 		<subject>PT-D</subject>
 		<method>add</method>
 		<what>Nicolas</what>
-		<x>23</x>
-		<y>12</y>
+		<x>22</x>
+		<y>14</y>
 	</azione>
 	<azione>
 		<subject>Cameriere</subject>
