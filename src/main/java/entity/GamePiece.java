@@ -195,6 +195,8 @@ public class GamePiece
     {
         locationRoom.removePiece(this);
         this.locationRoom = null;
+
+        GameManager.continueScenario();
     }
 
 

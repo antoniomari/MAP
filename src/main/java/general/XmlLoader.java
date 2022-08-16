@@ -171,6 +171,9 @@ public class XmlLoader
             case "animateReverse":
                 actionParsed = parseAnimateReverse(actionElement);
                 break;
+            case "removeFromRoom":
+                actionParsed = parseRemoveFromRoom(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -362,6 +365,13 @@ public class XmlLoader
         Document document = openXml(scenarioPath);
         return () -> ((NPC) GameManager.getPiece(subject))
                 .setSpeakScenario(parseScenario(scenarioPath, document.getDocumentElement()));
+    }
+
+    private static Runnable parseRemoveFromRoom(Element eAction)
+    {
+        String subject = getTagValue(eAction,"subject");
+
+        return () -> GameManager.getPiece(subject).removeFromRoom();
     }
 
 

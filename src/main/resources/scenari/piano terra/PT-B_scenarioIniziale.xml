@@ -102,26 +102,38 @@
 	<azione num="19">
 		<subject>Antonio</subject>
 		<method>move</method>
-		<x>-3</x>
-		<y>2</y>
-		<how>relative</how>
+		<x>36</x>
+		<y>19</y>
+		<how>absolute</how>
 		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>removeFromRoom</method>
 	</azione>
 	<azione num="20">
 		<subject>Diego</subject>
 		<method>move</method>
-		<x>5</x>
-		<y>3</y>
-		<how>relative</how>
+		<x>36</x>
+		<y>19</y>
+		<how>absolute</how>
 		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>removeFromRoom</method>
 	</azione>
 	<azione num="21">
 		<subject>Nicolas</subject>
 		<method>move</method>
-		<x>-1</x>
-		<y>1</y>
-		<how>relative</how>
+		<x>36</x>
+		<y>19</y>
+		<how>absolute</how>
 		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>removeFromRoom</method>
 	</azione>
 	<azione>
 		<subject>Cameriere</subject>
