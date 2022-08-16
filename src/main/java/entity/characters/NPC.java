@@ -24,6 +24,12 @@ public class NPC extends GameCharacter
         this.speakScenario = speakScenario;
     }
 
+    public void setSpeakSentence(String sentence)
+    {
+        this.speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
+        speakScenario.append(() -> this.speak(sentence));
+    }
+
     @Override
     public void speak()
     {

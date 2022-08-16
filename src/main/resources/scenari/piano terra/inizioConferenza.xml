@@ -190,4 +190,9 @@
         <subject>Robot</subject>
         <method>removeFromRoom</method>
     </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>setSpeakSentence</method>
+        <sentence>Ciao!</sentence>
+    </azione>
 </scenario>

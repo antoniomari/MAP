@@ -177,6 +177,9 @@ public class XmlLoader
             case "addToInventory":
                 actionParsed = parseAddToInventory(actionElement);
                 break;
+            case "setSpeakSentence":
+                actionParsed = parseSetSpeakSentence(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -383,6 +386,14 @@ public class XmlLoader
         PickupableItem it = (PickupableItem) loadPiece(itemName);
         // TODO: controllare correttezza
         return () -> PlayingCharacter.getPlayer().addToInventory(it);
+    }
+
+    private static Runnable parseSetSpeakSentence(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        String sentence = getTagValue(eAction, "sentence");
+
+        return () -> ((NPC) GameManager.getPiece(subject)).setSpeakSentence(sentence);
     }
 
 
