@@ -10,9 +10,6 @@
     <personaggio nome="Diego">
         <spritesheet>/img/personaggi/Diego.png</spritesheet>
     </personaggio>
-    <personaggio nome="Cuoco">
-        <spritesheet>/img/personaggi/Cuoco.png</spritesheet>
-    </personaggio>
     <personaggio nome="Cameriere">
         <spritesheet>/img/personaggi/cameriere.png</spritesheet>
     </personaggio>
@@ -30,5 +27,8 @@
     <personaggio nome="CuocoNero">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
         <json>/img/personaggi/cuochi.json</json>
+    </personaggio>
+    <personaggio nome="Robot">
+        <spritesheet>/img/personaggi/Robot.png</spritesheet>
     </personaggio>
 </personaggi>

@@ -4,7 +4,7 @@
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Eccola finalmente possiamo iniziare la conferenza,(*)prenda posto tra le prime file.</sentence>
+        <sentence>Eccola finalmente possiamo iniziare la conferenza, (*) prenda posto tra le prime file.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -22,7 +22,7 @@
     <azione>
     <subject>Antonio</subject>
     <method>speak</method>
-    <sentence>Al contrario dell'edizione precedente, la Global-AI-2015,(*) quest'anno in finale abbiamo una nuova intelligenza
+    <sentence>Al contrario dell'edizione precedente, la Global-AI-2015, (*) quest'anno in finale abbiamo una nuova intelligenza
         artificiale che non si autodistruggerà alla prima barzelletta sui carabinieri.</sentence>
     </azione>
     <azione>
@@ -79,7 +79,7 @@
         <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>Torniamo seri, come da regolamento l'AI arrivata in finale per essere valutata (*)formalmente intelligente
-        deve superare un test la cui valutazione (*)è effettuata dal più grande esperto mondiale di AI.  </sentence>
+        deve superare un test la cui valutazione (*) è effettuata dal più grande esperto mondiale di AI.  </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -87,7 +87,7 @@
         <sentence>Quest'anno abbiamo l'onore di avere con noi il professore Schwartz. </sentence>
     </azione>
     <azione>
-        <subject>Schwatrz</subject>
+        <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Vi ringrazio per l'invito ricevuto e spero che la vostra AI sia all'altezza. </sentence>
     </azione>
@@ -106,7 +106,7 @@
     <azione>
         <subject>CuocoNero</subject>
         <method>speak</method>
-        <sentence>Salve a tutti sono Luigi il cuoco.(*) Per deliziare le vostre papille gustative ho preparato gli spaghetti con le polpette.</sentence>
+        <sentence>Salve a tutti sono Luigi il cuoco. (*) Per deliziare le vostre papille gustative ho preparato gli spaghetti con le polpette.</sentence>
     </azione>
     <azione>
         <subject>Robot</subject>
@@ -131,7 +131,7 @@
     <azione>
         <subject>CuocoNero</subject>
         <method>speak</method>
-        <sentence>AHHHHHHHH!!!.</sentence>
+        <sentence>AHHHHHHHH!!!</sentence>
     </azione>
     <azione>
         <subject>CuocoNero</subject>
