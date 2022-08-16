@@ -111,6 +111,13 @@
 		<subject>Antonio</subject>
 		<method>removeFromRoom</method>
 	</azione>
+	<azione>
+		<subject>PT-D</subject>
+		<method>add</method>
+		<what>Antonio</what>
+		<x>2</x>
+		<y>18</y>
+	</azione>
 	<azione num="20">
 		<subject>Diego</subject>
 		<method>move</method>
@@ -123,6 +130,13 @@
 		<subject>Diego</subject>
 		<method>removeFromRoom</method>
 	</azione>
+	<azione>
+		<subject>PT-D</subject>
+		<method>add</method>
+		<what>Diego</what>
+		<x>15</x>
+		<y>12</y>
+	</azione>
 	<azione num="21">
 		<subject>Nicolas</subject>
 		<method>move</method>
@@ -134,6 +148,13 @@
 	<azione>
 		<subject>Nicolas</subject>
 		<method>removeFromRoom</method>
+	</azione>
+	<azione>
+		<subject>PT-D</subject>
+		<method>add</method>
+		<what>Nicolas</what>
+		<x>23</x>
+		<y>12</y>
 	</azione>
 	<azione>
 		<subject>Cameriere</subject>
