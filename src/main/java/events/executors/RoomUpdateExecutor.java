@@ -11,7 +11,8 @@ public class RoomUpdateExecutor extends Executor
 
     public static void executeRemovePiece(GamePiece piece)
     {
-        gameScreenPanel.removePieceFromScreen(piece);
+        if(gameScreenPanel.getLabelAssociated(piece) != null)
+            gameScreenPanel.removePieceFromScreen(piece);
     }
 
     public static void executeAddPiece(Room roomInvolved, GamePiece piece, BlockPosition pos)
