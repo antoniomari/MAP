@@ -392,8 +392,10 @@ public class XmlLoader
     {
         String subject = getTagValue(eAction, "subject");
         String sentence = getTagValue(eAction, "sentence");
+        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
 
-        return () -> ((NPC) GameManager.getPiece(subject)).setSpeakSentence(sentence);
+
+        return () -> ((NPC) GameManager.getPiece(subject)).setSpeakSentence(sentenceNewLined);
     }
 
     private static Runnable parsePlayMusic(Element eAction)
