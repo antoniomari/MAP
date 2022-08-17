@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>Oggi giorno tutti danno di matto (*) Ho visto un robot che rapiva uno chef. </sentence>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>Lo teneva stretto tra le braccia (*) si sono diretti verso l'ascensore </sentence>
+    </azione>
+</scenario>
