@@ -211,4 +211,9 @@
         <method>setSpeakSentence</method>
         <sentence>Ciao!</sentence>
     </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>setSpeakScenario</method>
+        <what>src/main/resources/scenari/piano terra/InfoCameriere.xml</what>
+    </azione>
 </scenario>
