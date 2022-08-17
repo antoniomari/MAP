@@ -33,6 +33,8 @@ public class NPC extends GameCharacter
     @Override
     public void speak()
     {
-        GameManager.startScenario(speakScenario);
+        if (speakScenario != null) {
+            GameManager.startScenario(speakScenario);
+        }
     }
 }
