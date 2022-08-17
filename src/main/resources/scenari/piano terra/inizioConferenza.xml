@@ -52,7 +52,7 @@
         <method>add</method>
         <what>Robot</what>
         <x>2</x>
-        <y>16</y>
+        <y>18</y>
     </azione>
     <azione>
         <subject>Robot</subject>
@@ -132,7 +132,7 @@
         <method>add</method>
         <what>CuocoNero</what>
         <x>2</x>
-        <y>16</y>
+        <y>18</y>
     </azione>
     <azione>
         <subject>CuocoNero</subject>
@@ -192,7 +192,7 @@
         <subject>CuocoNero</subject>
         <method>move</method>
         <x>2</x>
-        <y>16</y>
+        <y>18</y>
         <how>absolute</how>
         <finalWait>2000</finalWait>
     </azione>
@@ -204,7 +204,7 @@
         <subject>Robot</subject>
         <method>move</method>
         <x>2</x>
-        <y>16</y>
+        <y>18</y>
         <how>absolute</how>
         <finalWait>2000</finalWait>
     </azione>
