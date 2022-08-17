@@ -67,16 +67,6 @@ public class GameCharacter extends GamePiece
     }
 
 
-    public String randomSentence()
-    {
-        String[] sentences = {"Ciao, solo l'amico di spicoli", "Oggi ho preso 29 e lode", "Fa freddo"};
-        List<String> sentencesList = Arrays.asList(sentences);
-
-        Random rand = new Random();
-
-        return sentencesList.get(rand.nextInt(sentencesList.size()));
-
-    }
 
     //public void speak()
     //{

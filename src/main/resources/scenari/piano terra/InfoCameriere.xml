@@ -21,7 +21,7 @@
     </azione>
     <azione>
         <subject>Cameriere</subject>
-        <method>setSpeakScenario</method>
-        <what>src/main/resources/scenari/piano terra/InfoCameriere.xml</what>
+        <method>setSpeakSentence</method>
+        <sentence>Il robot e lo chef si sono diretti (*) verso l'ascensore</sentence>
     </azione>
 </scenario>
