@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class SoundHandler
 {
+    public static final String PICKUP_SOUND_PATH = "src/main/resources/audio/effetti/pickupItem.wav";
     private static MusicThread musicThread;
 
     public static class MusicThread extends Thread

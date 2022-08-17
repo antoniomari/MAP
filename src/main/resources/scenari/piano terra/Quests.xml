@@ -69,7 +69,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Signor Schwartz il software di JDBC-20 (*) si è gravemente corrotto! </sentence>
+        <sentence>Signor Schwartz, il software di JDBC-20 (*) si è gravemente corrotto! </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -94,7 +94,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Quindi sarà lei a risolvere la situazione (*) riparando il software di JDBC-20. </sentence>
+        <sentence>Quindi sarà lei a risolvere la situazione, (*) riparando il software di JDBC-20. </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -124,12 +124,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Per questo motivo ti serviranno dei tappi (*) per orecchie che non possiedo. </sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>Potresti crearteli tu. </sentence>
+        <sentence>Per questo motivo ti serviranno dei tappi (*) per orecchie, che non possiedo. </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -139,7 +134,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence> le registrazioni. </sentence>
+        <sentence> le registrazioni.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -154,7 +149,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>difficile da sabotare, ma non si (*) preoccupi sto lavorando su un gioiellino </sentence>
+        <sentence>difficile da sabotare, ma non si (*) preoccupi: sto lavorando su un gioiellino </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -174,7 +169,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>So che lei è un rinomatissimo scienziato (*) dovrebbe quindi risultarle facile programmare </sentence>
+        <sentence>So che lei è un rinomatissimo scienziato, (*) dovrebbe quindi risultarle facile programmare </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -184,7 +179,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Al piano ALU troverà dei pc accesi nel (*) mio studio e da li potrà sistemare i ciruiti. </sentence>
+        <sentence>Al piano ALU troverà dei pc accesi nel (*) mio studio e da li potrà sistemare i circuiti. </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -204,17 +199,17 @@
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>i permessi da superuser arriverà (*) la parte più complicata, quella di riprogrammare </sentence>
+        <sentence>i permessi di admin arriverà (*) la parte più complicata, quella di riprogrammare </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>i moduli del kernel e per farlo (*) necessiterà del prezioso cheatsheet per </sentence>
+        <sentence>i moduli del kernel. Per farlo (*) necessiterà del prezioso cheat-sheet per </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>dominare l'interfaccia commadline. </sentence>
+        <sentence>dominare l'interfaccia command-line. </sentence>
     </azione>
     <!--
     <azione>
@@ -241,7 +236,6 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Da dove possiamo avere tutto sotto (*) controllo anche i cocktails. </sentence>
+        <sentence>Qui possiamo avere tutto sotto (*) controllo, anche i cocktails! </sentence>
     </azione>
-
 </scenario>

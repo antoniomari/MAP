@@ -6,6 +6,7 @@ import entity.rooms.Room;
 import events.executors.*;
 import entity.items.PickupableItem;
 import general.LogOutputManager;
+import sound.SoundHandler;
 
 public class EventHandler
 {
@@ -50,7 +51,12 @@ public class EventHandler
     public static void executeInventoryEvent(InventoryEvent e)
     {
         if(e.getType() == InventoryEvent.Type.ADD_ITEM)
+        {
             InventoryUpdateExecutor.executeAdd((PickupableItem) e.getItemInvolved()); //TODO: vedere se si può migliorare castr
+
+            // TODO: aggiustare codice
+            SoundHandler.playWav(SoundHandler.PICKUP_SOUND_PATH, "sound");
+        }
         if(e.getType() == InventoryEvent.Type.USE_ITEM)
             InventoryUpdateExecutor.executeDrop((PickupableItem) e.getItemInvolved());
 
