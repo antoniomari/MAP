@@ -34,21 +34,24 @@ public class SoundHandler
             try
             {
                 clip.open(audioStream);
-                if(mode.equals("music"))
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-                else if (mode.equals("sound"))
+                switch (mode)
                 {
-                    clip.start();
-                    // TODO: controllare continueScenario
-                    // GameManager.continueScenario();
+                    case "music":
+                        clip.loop(Clip.LOOP_CONTINUOUSLY);
+                        break;
+                    case "sound":
+                        clip.start();
+                        break;
+                    case "scenarioSound":
+                        // TODO: implementare;
+                        break;
+                    default:
+                        throw new GameException("Modalità audio non esistente");
                 }
-                else
-                    throw new GameException("Modalità audio non esistente");
-
             }
             catch(IOException | LineUnavailableException e)
             {
-                // do nothing TODO: aggiustare
+                e.printStackTrace();
             }
         }
     }
@@ -69,7 +72,8 @@ public class SoundHandler
         }
         catch(UnsupportedAudioFileException | IOException | LineUnavailableException e)
         {
-            // TODO: fai qualcosa
+            e.printStackTrace();
         }
     }
+
 }
