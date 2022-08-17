@@ -2,6 +2,7 @@
 <stanza nome="PT-C">
     <png>/img/PT/PT-C.png</png>
     <json>/img/PT/PT-C.json</json>
+    <musica>src/main/resources/audio/effetti/RumoreCucina.wav</musica>
     <scenario>
         <mode>instant</mode>
         <azione>

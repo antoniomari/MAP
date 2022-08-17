@@ -2,6 +2,7 @@
 <stanza nome="PT-D">
     <png>/img/PT/PT-D.png</png>
     <json>/img/PT/PT-D.json</json>
+    <musica>src/main/resources/audio/musica/PT.wav</musica>
     <scenario>
         <mode>instant</mode>
     </scenario>

@@ -9,6 +9,7 @@ import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.Room;
 import general.XmlLoader;
+import sound.SoundHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -153,6 +154,8 @@ public class MainFrame extends JFrame {
      * Nota: viene richiamato il metodo {@link GameScreenPanel#changeRoom(Room, int)}
      * affinché vengano correttamente impostati tutti i GamePiece nella stanza.
      *
+     * Viene inoltre riprodotta la musica della stanza newRoom.
+     *
      * @param newRoom stanza da impostare come {@link MainFrame#currentRoom}
      */
     public void setCurrentRoom(Room newRoom)
@@ -167,6 +170,9 @@ public class MainFrame extends JFrame {
 
         gameWidth = (int)(newRoom.getBWidth() * rescalingFactor * GameManager.BLOCK_SIZE);
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * GameManager.BLOCK_SIZE);
+
+        // imposta musica
+        SoundHandler.playWav(currentRoom.getMusicPath(), "music");
     }
 
     /**
@@ -190,6 +196,7 @@ public class MainFrame extends JFrame {
 
         // imposta stanza iniziale
         currentRoom = initialRoom;
+        SoundHandler.playWav(currentRoom.getMusicPath(), "music");
 
         // inizializzazione immagine di sfondo
         setupBackground();

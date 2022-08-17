@@ -743,10 +743,11 @@ public class XmlLoader
         String name = getXmlAttribute(roomElement, "nome");
         String pngPath = getTagValue(roomElement, "png");
         String jsonPath = getTagValue(roomElement, "json");
+        String musicPath = getTagValue(roomElement, "musica");
 
         LogOutputManager.logOutput("Caricando stanza " + name, LogOutputManager.XML_COLOR);
 
-        return new Room(name, pngPath, jsonPath);
+        return new Room(name, pngPath, jsonPath, musicPath);
     }
 
     /**

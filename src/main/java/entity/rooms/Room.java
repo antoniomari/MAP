@@ -32,6 +32,7 @@ public class Room
 
     private Map<String, BlockPosition> arrowPositionMap;
 
+    private final String musicPath;
     private final String backgroundPath;
     private BufferedImage backgroundImage;
 
@@ -45,11 +46,13 @@ public class Room
     private final BlockPosition defaultPosition;
 
 
-    public Room(String name, String path, String jsonPath)
+    public Room(String name, String path, String jsonPath, String musicPath)
     {
         this.roomName = name;
         pieceLocationMap = new HashMap<>();
         arrowPositionMap = new HashMap<>();
+
+        this.musicPath = musicPath;
         backgroundPath = path;
         backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
         floor = SpriteManager.loadFloorFromJson(jsonPath);
@@ -84,6 +87,11 @@ public class Room
         }
 
         GameManager.addRoom(this);
+    }
+
+    public String getMusicPath()
+    {
+        return musicPath;
     }
 
     public void setScenarioOnEnter(ActionSequence scenario)

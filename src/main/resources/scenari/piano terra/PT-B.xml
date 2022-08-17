@@ -2,12 +2,9 @@
 <stanza nome="PT-B">
     <png>/img/PT/PT-B.png</png>
     <json>/img/PT/PT-B.json</json>
+    <musica>src/main/resources/audio/musica/PT.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <azione>
-            <method>playMusic</method>
-            <what>src/main/resources/audio/musica/PT.wav</what>
-        </azione>
         <azione num="1">
             <subject>PT-B</subject>
             <method>add</method>
