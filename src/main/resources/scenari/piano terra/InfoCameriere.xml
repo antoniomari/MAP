@@ -27,6 +27,6 @@
     <azione>
         <subject>PT-A</subject>
         <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano terra/ConsegnaGuests.xml</what>
+        <what>src/main/resources/scenari/piano terra/Quests.xml</what>
     </azione>
 </scenario>
