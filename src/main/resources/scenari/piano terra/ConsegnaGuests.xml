@@ -99,17 +99,17 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Una volta raggiunto il robot al quarto piano (*) l'obiettivo primario sarà neutralizzarlo. </sentence>
+        <sentence>Una volta raggiunto il robot al quarto (*) piano l'obiettivo primario sarà neutralizzarlo. </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Per riuscirci occorre utilizzare il GO-TO-SHOCK (*) che si trova in un armadio del mio laboratorio </sentence>
+        <sentence>Per riuscirci occorre utilizzare (*) il GO-TO-SHOCK che si trova in un armadio </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>al piano MIST. (*) Si tratta di un registratore con il quale è </sentence>
+        <sentence>del mio laboratorio al piano MIST. (*) Si tratta di un registratore con il quale è </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -119,7 +119,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>ATTENZIONE! Le onde emesse stordirebbero (*) chiunque, anche te stesso ... </sentence>
+        <sentence>ATTENZIONE! Le onde emesse (*) stordirebbero chiunque, anche te stesso ... </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -134,7 +134,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Quando avrai recuperato l'occorrente torna (*) da me per ottenere la cassetta contenente </sentence>
+        <sentence>Quando avrai recuperato l'occorrente (*) torna da me per ottenere la cassetta contenente </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -149,17 +149,22 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Ho dato un occhiata al robot prima della conferenza, (*) il suo sistema operativo sarà difficile da sabotare </sentence>
+        <sentence>Ho dato un occhiata al robot prima (*) della conferenza, il suo sistema operativo sarà </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>ma non si preoccupi sto lavorando su un (*) gioiellino dell'elettronica, AXC8. </sentence>
+        <sentence>difficile da sabotare, ma non si (*) preoccupi sto lavorando su un gioiellino </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Questo dispositivo è in grado di hackerare qualsiasi sistema informatico. </sentence>
+        <sentence>dell'elettronica, AXC8. Questo dispositivo (*) è in grado di hackerare qualsiasi sistema </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>informatico. </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -194,25 +199,24 @@
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Una volta messo K.O. e dopo aver hackerato il (*) sistema operativo guadagnando i permessi da superuser </sentence>
+        <sentence>Una volta messo K.O. e dopo aver (*) hackerato il sistema operativo guadagnando </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>arriverà la parte più complicata, quella (*) di riprogrammare i moduli del kernel e </sentence>
+        <sentence>i permessi da superuser arriverà (*) la parte più complicata, quella di riprogrammare </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>per farlo necessitera del prezioso cheatsheet (*) per dominare l'interfaccia commadline. </sentence>
+        <sentence>i moduli del kernel e per farlo (*) necessiterà del prezioso cheatsheet per </sentence>
     </azione>
-
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>dominare l'interfaccia commadline. </sentence>
+    </azione>
     <!--
-    <azione>
-        <subject>Antonio</subject>
-        <method>speak</method>
-        <sentence> </sentence>
-    </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
@@ -237,7 +241,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Da dove possiamo avere tutto sotto (*) controllo anche gli cocktails. </sentence>
+        <sentence>Da dove possiamo avere tutto sotto (*) controllo anche i cocktails. </sentence>
     </azione>
 
 </scenario>
