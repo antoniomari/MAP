@@ -61,7 +61,7 @@ public class PopMenuManager
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            ((GameCharacter) selected).speak();
+            ((NPC) selected).speak();
         }
     };
 

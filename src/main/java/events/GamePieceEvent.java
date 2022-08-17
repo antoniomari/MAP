@@ -83,4 +83,13 @@ public class GamePieceEvent extends GameEvent
     {
         return pieceInvolved;
     }
+
+    public String getEventString()
+    {
+        if(type == GamePieceEvent.Type.MOVE)
+            return eventTime.toString() + " -> " + " [" + pieceInvolved + "] "+ type
+                    + " in posizione " + newPosition;
+        else
+            return "NON PRESENTE";
+    }
 }

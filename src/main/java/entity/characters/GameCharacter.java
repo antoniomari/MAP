@@ -78,11 +78,10 @@ public class GameCharacter extends GamePiece
 
     }
 
-    public void speak()
-    {
-        speak(randomSentence());
-
-    }
+    //public void speak()
+    //{
+    //    speak(randomSentence());
+    //}
 
     public void speak(String sentence)
     {

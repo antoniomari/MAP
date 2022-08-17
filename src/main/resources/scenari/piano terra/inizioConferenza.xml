@@ -214,17 +214,12 @@
     <azione>
         <subject>Nicolas</subject>
         <method>setSpeakSentence</method>
-        <sentence>Da grandi poteri derivano... (*) Cosa derivano?</sentence>
+        <sentence>Da grandi poteri derivano...</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>setSpeakSentence</method>
         <sentence>Ciao!</sentence>
-    </azione>
-    <azione>
-        <subject>Cameriere</subject>
-        <method>setSpeakScenario</method>
-        <what>src/main/resources/scenari/piano terra/InfoCameriere.xml</what>
     </azione>
     <azione>
         <subject>PT-B</subject>

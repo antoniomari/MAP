@@ -42,7 +42,7 @@ public class Room
     private final int bHeight;  // altezza in blocchi
 
     // posizione di default all'entrata del protagonista
-    private BlockPosition defaultPosition;
+    private final BlockPosition defaultPosition;
 
 
     public Room(String name, String path, String jsonPath)
@@ -202,6 +202,7 @@ public class Room
         EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
 
         // Esegui scenario on enter se è entrato il giocatore
+        System.out.println("1 d 2: " + String.valueOf(p.equals(PlayingCharacter.getPlayer())) + " " +String.valueOf(scenarioOnEnter != null));
         if(p.equals(PlayingCharacter.getPlayer()) && scenarioOnEnter != null)
         {
             GameManager.startScenario(scenarioOnEnter);

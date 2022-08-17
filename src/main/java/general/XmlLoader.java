@@ -409,8 +409,8 @@ public class XmlLoader
         String scenarioPath = getTagValue(eAction, "what");
 
         Document document = openXml(scenarioPath);
-        return () -> (GameManager.getRoom(subject))
-                .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement()));
+        return () -> {(GameManager.getRoom(subject))
+                .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement())); System.out.println("Settato");};
     }
 
     /**

@@ -1,6 +1,8 @@
 package entity;
 
 import entity.characters.GameCharacter;
+import entity.characters.NPC;
+import entity.characters.PlayingCharacter;
 import events.EventHandler;
 import events.GamePieceEvent;
 import events.ItemInteractionEvent;
@@ -172,6 +174,11 @@ public class GamePiece
     /**
      * Imposta la stanza in cui è presente this.
      *
+     * Se this è il giocatore allora come side effect, per la chiamata
+     * a {@link Room#addPiece(GamePiece, BlockPosition)} allora viene
+     * iniziato lo scenario di ingresso nella stanza;
+     * altrimenti viene continuato lo scenario in corso (se presente).
+     *
      * @param room la stanza in cui aggiungere l'oggetto
      * @param pos la posizione in cui aggiungere l'oggetto
      */
@@ -180,12 +187,18 @@ public class GamePiece
         Objects.requireNonNull(room);
         Objects.requireNonNull(pos);
 
-        // aggiungilo nella stanza
-        room.addPiece(this, pos);
         // imposta attributo
         this.locationRoom = room;
 
-        GameManager.continueScenario();
+        // aggiungilo nella stanza
+        room.addPiece(this, pos);
+
+        // se non è il giocatore allora continua scenario
+        // infatti uno scenario in corso non può prevedere
+        // l'inserimento del giocatore in una stanza
+        // TODO: controllare in futuro se questo potrà essere possibile
+        if(!(this instanceof PlayingCharacter))
+            GameManager.continueScenario();
     }
 
     /**
