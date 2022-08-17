@@ -177,6 +177,9 @@ public class XmlLoader
             case "playMusic":
                 actionParsed = parsePlayMusic(actionElement);
                 break;
+            case "playSound":
+                actionParsed = parsePlaySound(actionElement);
+                break;
             case "setScenarioOnEnter":
                 actionParsed = parseSetScenarioOnEnter(actionElement);
                 break;
@@ -402,7 +405,14 @@ public class XmlLoader
     {
         String musicPath = getTagValue(eAction, "what");
 
-        return () -> SoundHandler.playWav(musicPath);
+        return () -> SoundHandler.playWav(musicPath, "music");
+    }
+
+    private static Runnable parsePlaySound(Element eAction)
+    {
+        String soundPath = getTagValue(eAction, "what");
+
+        return () -> SoundHandler.playWav(soundPath, "sound");
     }
 
     private static Runnable parseSetScenarioOnEnter(Element eAction)
