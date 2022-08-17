@@ -7,44 +7,53 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class SoundHandler
 {
-    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException
+    private static MusicThread musicThread;
+
+    public static class MusicThread extends Thread
     {
-        Scanner scanner = new Scanner(System.in);
+        private AudioInputStream audioStream;
+        private Clip clip;
 
-        File file = new File("src/main/resources/audio/musica/Bagno1.wav");
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioStream);
+        public MusicThread(AudioInputStream audioStream, Clip clip)
+        {
+            this.audioStream = audioStream;
+            this.clip = clip;
+        }
 
-        String tasto = scanner.next();
-        tasto = tasto.toUpperCase();
+        @Override
+        public void run()
+        {
+            try
+            {
+                clip.open(audioStream);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                // clip.start();
 
-        while (!tasto.equals("Q")) {
-            System.out.println("P = Play, S = Stop, R = Reset, Q = Quit");
-            System.out.print("Clicca un tasto: ");
-
-            tasto = scanner.next();
-            tasto = tasto.toUpperCase();
-
-            switch (tasto){
-                case ("P"): clip.start();
-                break;
-                case ("S"): clip.stop();
-                break;
-                case ("R"): clip.setMicrosecondPosition(0);
-                break;
-                case ("Q"): clip.close();
-                break;
-                default: System.out.println("Tasto non valido.");
-
-                //modifica
+            }
+            catch(IOException | LineUnavailableException e)
+            {
+                // do nothing TODO: aggiustare
             }
         }
-        clip.start();
-        clip.loop(0);
+    }
+
+    public static void playWav(String wavPath)
+    {
+        try
+        {
+            File file = new File(wavPath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+
+            musicThread = new MusicThread(audioStream, clip);
+            musicThread.start();
+        }
+        catch(UnsupportedAudioFileException | IOException | LineUnavailableException e)
+        {
+            // TODO: fai qualcosa
+        }
     }
 }

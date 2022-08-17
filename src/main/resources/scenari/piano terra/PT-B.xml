@@ -4,6 +4,10 @@
     <json>/img/PT/PT-B.json</json>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <method>playMusic</method>
+            <what>src/main/resources/audio/musica/PT.wav</what>
+        </azione>
         <azione num="1">
             <subject>PT-B</subject>
             <method>add</method>

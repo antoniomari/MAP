@@ -12,6 +12,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import sound.SoundHandler;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -172,6 +173,9 @@ public class XmlLoader
                 break;
             case "setSpeakSentence":
                 actionParsed = parseSetSpeakSentence(actionElement);
+                break;
+            case "playMusic":
+                actionParsed = parsePlayMusic(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -387,6 +391,13 @@ public class XmlLoader
         String sentence = getTagValue(eAction, "sentence");
 
         return () -> ((NPC) GameManager.getPiece(subject)).setSpeakSentence(sentence);
+    }
+
+    private static Runnable parsePlayMusic(Element eAction)
+    {
+        String musicPath = getTagValue(eAction, "what");
+
+        return () -> SoundHandler.playWav(musicPath);
     }
 
 

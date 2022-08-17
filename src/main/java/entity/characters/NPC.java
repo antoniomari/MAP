@@ -2,6 +2,7 @@ package entity.characters;
 
 
 import general.ActionSequence;
+import general.GameException;
 import general.GameManager;
 
 public class NPC extends GameCharacter
@@ -33,8 +34,9 @@ public class NPC extends GameCharacter
     @Override
     public void speak()
     {
-        if (speakScenario != null) {
+        if (speakScenario != null)
             GameManager.startScenario(speakScenario);
-        }
+        else
+            throw new GameException("speakScenario non impostato");
     }
 }
