@@ -1,6 +1,7 @@
 package sound;
 
 import general.GameException;
+import general.GameManager;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -36,7 +37,11 @@ public class SoundHandler
                 if(mode.equals("music"))
                     clip.loop(Clip.LOOP_CONTINUOUSLY);
                 else if (mode.equals("sound"))
+                {
                     clip.start();
+                    // TODO: controllare continueScenario
+                    // GameManager.continueScenario();
+                }
                 else
                     throw new GameException("Modalità audio non esistente");
 
@@ -58,6 +63,9 @@ public class SoundHandler
 
             musicThread = new MusicThread(audioStream, clip, mode);
             musicThread.start();
+            // TODO: aggiustare il join
+            //if(mode.equals("sound"))
+            //    musicThread.join();
         }
         catch(UnsupportedAudioFileException | IOException | LineUnavailableException e)
         {

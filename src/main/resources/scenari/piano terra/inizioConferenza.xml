@@ -178,6 +178,10 @@
         <sentence>kill chef, chef must die! </sentence>
     </azione>
     <azione>
+        <method>playSound</method>
+        <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
+    </azione>
+    <azione>
         <subject>CuocoNero</subject>
         <method>speak</method>
         <sentence>AHHHHHHHH!!!</sentence>
