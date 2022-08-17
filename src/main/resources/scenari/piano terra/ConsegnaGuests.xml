@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>18</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>PT-A</subject>
+        <method>add</method>
+        <what>Diego</what>
+        <x>16</x>
+        <y>14</y>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>28</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>PT-A</subject>
+        <method>add</method>
+        <what>Nicolas</what>
+        <x>16</x>
+        <y>14</y>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>25</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>PT-A</subject>
+        <method>add</method>
+        <what>Antonio</what>
+        <x>16</x>
+        <y>14</y>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>22</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Signor Schwartz il software di JDBC-20 (*) si è gravemente corrotto! </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>"Dobbiamo" assolutamente trovare (*) un modo per ripararlo. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Fortunatamente nei nostri laboratori (*) c'è tutto l'occorrente. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ogni laboratorio è posizionato su un (*) diverso piano di questo edificio. </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Ahimé, noi saremo impegnati a gestire (*) il panico tra gli invitati. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Quindi sarà lei a risolvere la situazione (*) riparando il software di JDBC-20. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Una volta raggiunto il robot al quarto piano (*) l'obiettivo primario sarà neutralizzarlo. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Per riuscirci occorre utilizzare il GO-TO-SHOCK (*) che si trova in un armadio del mio laboratorio </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>al piano MIST. (*) Si tratta di un registratore con il quale è </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>possibile riprodurre lezioni di (*) programmazione strutturata. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>ATTENZIONE! Le onde emesse stordirebbero (*) chiunque, anche te stesso ... </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Per questo motivo ti serviranno dei tappi (*) per orecchie che non possiedo. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Potresti crearteli tu. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Quando avrai recuperato l'occorrente torna (*) da me per ottenere la cassetta contenente </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence> le registrazioni. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Che giornataccia, questa mattina non ho (*) preso neppure un caffè e ora questo disastro! </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Ho dato un occhiata al robot prima della conferenza, (*) il suo sistema operativo sarà difficile da sabotare </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>ma non si preoccupi sto lavorando su un (*) gioiellino dell'elettronica, AXC8. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Questo dispositivo è in grado di hackerare qualsiasi sistema informatico. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Sfortunatamente sto ancora programmando (*) la logica di alcuni circuiti per farlo funzionare. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>So che lei è un rinomatissimo scienziato (*) dovrebbe quindi risultarle facile programmare </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>le logiche di tali circuiti. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Al piano ALU troverà dei pc accesi nel (*) mio studio e da li potrà sistemare i ciruiti. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Quando avrà terminato mi venga a cercare (*) e le fornirò l'AXC8 funzionante. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Caffè illy, caffè lavazza, caffè kimbo (*) AHHH che darei per un buon caffé! </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Una volta messo K.O. e dopo aver hackerato il (*) sistema operativo guadagnando i permessi da superuser </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>arriverà la parte più complicata, quella (*) di riprogrammare i moduli del kernel e </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>per farlo necessitera del prezioso cheatsheet (*) per dominare l'interfaccia commadline. </sentence>
+    </azione>
+
+    <!--
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence> </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence> </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence> </sentence>
+    </azione>
+    -->
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Professore contiamo su di lei (*) non ci deluda. </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Se ha bisogno potrà trovarci al bar. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Da dove possiamo avere tutto sotto (*) controllo anche gli cocktails. </sentence>
+    </azione>
+
+</scenario>

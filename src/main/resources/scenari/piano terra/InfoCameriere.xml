@@ -24,4 +24,9 @@
         <method>setSpeakSentence</method>
         <sentence>Il robot e lo chef si sono diretti (*) verso l'ascensore</sentence>
     </azione>
+    <azione>
+        <subject>PT-A</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano terra/ConsegnaGuests.xml</what>
+    </azione>
 </scenario>
