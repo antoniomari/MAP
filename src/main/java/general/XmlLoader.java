@@ -177,6 +177,9 @@ public class XmlLoader
             case "playMusic":
                 actionParsed = parsePlayMusic(actionElement);
                 break;
+            case "setScenarioOnEnter":
+                actionParsed = parseSetScenarioOnEnter(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -400,6 +403,15 @@ public class XmlLoader
         return () -> SoundHandler.playWav(musicPath);
     }
 
+    private static Runnable parseSetScenarioOnEnter(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        String scenarioPath = getTagValue(eAction, "what");
+
+        Document document = openXml(scenarioPath);
+        return () -> (GameManager.getRoom(subject))
+                .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement()));
+    }
 
     /**
      * Restituisce il GamePiece sulla base del nome: se non è già stato caricato

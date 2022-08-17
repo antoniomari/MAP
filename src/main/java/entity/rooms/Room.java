@@ -1,9 +1,11 @@
 package entity.rooms;
 
 import entity.GamePiece;
+import entity.characters.PlayingCharacter;
 import entity.items.Item;
 import events.EventHandler;
 import events.RoomEvent;
+import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import graphics.SpriteManager;
@@ -25,6 +27,8 @@ public class Room
     private Room south;
     private Room west;
     private Room east;
+
+    private ActionSequence scenarioOnEnter;
 
     private Map<String, BlockPosition> arrowPositionMap;
 
@@ -80,6 +84,11 @@ public class Room
         }
 
         GameManager.addRoom(this);
+    }
+
+    public void setScenarioOnEnter(ActionSequence scenario)
+    {
+        this.scenarioOnEnter = scenario;
     }
 
     public Room getEast()
@@ -189,7 +198,16 @@ public class Room
             safePieceInsert(p, pos);
 
         // Evento dalla prospettiva della stanza: Un GamePiece è stato aggiunto alla stanza
+
         EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
+
+        // Esegui scenario on enter se è entrato il giocatore
+        if(p.equals(PlayingCharacter.getPlayer()) && scenarioOnEnter != null)
+        {
+            GameManager.startScenario(scenarioOnEnter);
+            scenarioOnEnter = null;
+        }
+
     }
 
     private void safePieceInsert(GamePiece p, BlockPosition pos)

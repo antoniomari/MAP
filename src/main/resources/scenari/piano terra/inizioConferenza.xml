@@ -207,6 +207,16 @@
         <method>removeFromRoom</method>
     </azione>
     <azione>
+        <subject>Diego</subject>
+        <method>setSpeakSentence</method>
+        <sentence>J D B C im pa zzi to!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>setSpeakSentence</method>
+        <sentence>Da grandi poteri derivano... (*) Cosa derivano?</sentence>
+    </azione>
+    <azione>
         <subject>Antonio</subject>
         <method>setSpeakSentence</method>
         <sentence>Ciao!</sentence>
@@ -214,6 +224,11 @@
     <azione>
         <subject>Cameriere</subject>
         <method>setSpeakScenario</method>
+        <what>src/main/resources/scenari/piano terra/InfoCameriere.xml</what>
+    </azione>
+    <azione>
+        <subject>PT-B</subject>
+        <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano terra/InfoCameriere.xml</what>
     </azione>
 </scenario>
