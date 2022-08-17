@@ -40,6 +40,8 @@ public class SoundHandler
                 case ("Q"): clip.close();
                 break;
                 default: System.out.println("Tasto non valido.");
+
+                //modifica
             }
         }
         clip.start();
