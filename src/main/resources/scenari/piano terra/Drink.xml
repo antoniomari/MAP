@@ -21,4 +21,12 @@
         <x>20</x>
         <y>13</y>
     </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
 </scenario>
