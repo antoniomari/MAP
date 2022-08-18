@@ -97,14 +97,23 @@ public class RoomFloor
         if(!onFloor)
            return false;
 
+        // se interseca un ostacolo
+        if(intersectsObstacle(xBlock, yBlock))
+            return false;
+
+        // è sul pavimento e su nessun ostacolo
+        return true;
+    }
+
+    private boolean intersectsObstacle(int xBlock, int yBlock)
+    {
         // controlla ostacoli
         Rectangle feetArea = new Rectangle(xBlock, yBlock, 4, 1); // pedana
         for(Rectangle obstacleArea : obstacleRectangles)
             if(obstacleArea.intersects(feetArea))
-                return false;
+                return true;
 
-        // è sul pavimento e su nessun ostacolo
-        return true;
+        return false;
     }
 
     public boolean isWalkable(BlockPosition pos)
@@ -121,11 +130,13 @@ public class RoomFloor
     // TODO: aggiustare codice metodo
     public BlockPosition getNearestPlacement(BlockPosition tryPos, int spriteWidth, int spriteHeight)
     {
-
-        if(isWalkable(tryPos) && isWalkable(tryPos.relativePosition(spriteWidth - 1, 0)))
+        if(isWalkable(tryPos))
         {
             return tryPos;
         }
+
+        if(intersectsObstacle(tryPos.getX(), tryPos.getY()))
+            return null;
 
         for(Rectangle walkableArea : walkableRectangles)
         {

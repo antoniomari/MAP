@@ -221,7 +221,7 @@ public class Room
 
     private void safePieceInsert(GamePiece p, BlockPosition pos)
     {
-        if(canGo(p, pos))
+        if(canGo(p, pos) || !(p instanceof PlayingCharacter))
             pieceLocationMap.put(p, pos);
         else
             throw new GameException(p + " non può entrare in " + this + " alla posizione " + pos);
@@ -230,6 +230,7 @@ public class Room
 
     private boolean canGo(GamePiece p, BlockPosition pos)
     {
+        // TODO: controllare
         boolean fit = canFit(p, pos);
 
         if(p instanceof Item)
@@ -256,6 +257,8 @@ public class Room
      */
     private boolean canFit(GamePiece p, BlockPosition pos)
     {
+        // TODO: controllare
+
         Objects.requireNonNull(p);
         Objects.requireNonNull(pos);
 

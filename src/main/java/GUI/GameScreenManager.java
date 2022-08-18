@@ -4,6 +4,8 @@ import entity.rooms.BlockPosition;
 import general.GameManager;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -99,4 +101,13 @@ public class GameScreenManager
                         label.getIcon().getIconWidth(),
                         label.getIcon().getIconHeight());
     }
+
+    public static List<BlockPosition> calculatePath(BlockPosition initialPos, BlockPosition finalPos)
+    {
+        List<BlockPosition> positions = new ArrayList<>();
+        positions.add(finalPos);
+
+        return positions;
+    }
+
 }

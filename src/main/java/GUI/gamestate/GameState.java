@@ -19,10 +19,10 @@ import java.util.Objects;
 
 public class GameState
 {
-    private static State CURRENT_STATE;
+    private static State currentState;
     private static MainFrame mainFrame;
-    private static GameKeyListener ESC_LISTENER;
-    private static GameMouseListener DROP_LISTENER;
+    private static GameKeyListener escListener;
+    private static GameMouseListener dropListener;
 
     /** Azione per il movimento del giocatore. */
     private static final Runnable leftMouseClick = () ->
@@ -35,7 +35,7 @@ public class GameState
 
                     if(mainFrame.getCurrentRoom().getFloor().isWalkable(destinationPosition))
                     {
-                        PlayingCharacter.getPlayer().updatePosition(destinationPosition);
+                        PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(destinationPosition, PlayingCharacter.getPlayer()), "absolute", 0);
                     }
 
 
@@ -56,23 +56,23 @@ public class GameState
 
     static
     {
-        CURRENT_STATE = State.PLAYING;
+        currentState = State.PLAYING;
     }
 
     public static void setMainFrame(MainFrame frame)
     {
         mainFrame = frame;
 
-        ESC_LISTENER = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> mainFrame.showMenu(true), null);
-        mainFrame.addKeyListener(ESC_LISTENER);
+        escListener = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> mainFrame.showMenu(true), null);
+        mainFrame.addKeyListener(escListener);
 
         initListeners();
     }
 
     public static void initListeners()
     {
-        DROP_LISTENER = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
-        mainFrame.getGameScreenPanel().addMouseListener(DROP_LISTENER);
+        dropListener = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
+        mainFrame.getGameScreenPanel().addMouseListener(dropListener);
 
 
         KeyListener leftArrowListener = new GameKeyListener(KeyEvent.VK_LEFT,
@@ -83,7 +83,7 @@ public class GameState
                 if (west != null)
                 {
                     ActionSequence scenario = new ActionSequence("vai a ovest", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("west"), 100));
+                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("west").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 0));
                     scenario.append(() -> mainFrame.setCurrentRoom(west));
 
                     GameManager.startScenario(scenario);
@@ -98,7 +98,7 @@ public class GameState
                 if (east != null)
                 {
                     ActionSequence scenario = new ActionSequence("vai a est", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("east"), 100));
+                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("east").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 0));
                     scenario.append(() -> mainFrame.setCurrentRoom(east));
 
                     GameManager.startScenario(scenario);
@@ -113,7 +113,7 @@ public class GameState
                 if (north != null)
                 {
                     ActionSequence scenario = new ActionSequence("vai a nord", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("north"), 100));
+                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("north").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 0));
                     scenario.append(() -> mainFrame.setCurrentRoom(north));
 
                     GameManager.startScenario(scenario);
@@ -128,7 +128,7 @@ public class GameState
                 if (south != null)
                 {
                     ActionSequence scenario = new ActionSequence("vai a sud", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("south"), 100));
+                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("south").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 0));
                     scenario.append(() -> mainFrame.setCurrentRoom(south));
 
                     GameManager.startScenario(scenario);
@@ -150,17 +150,13 @@ public class GameState
     {
         Objects.requireNonNull(newState);
 
-        CURRENT_STATE = newState;
-        LogOutputManager.logOutput("Nuovo stato: " + CURRENT_STATE, LogOutputManager.GAMESTATE_COLOR);
+        currentState = newState;
+        LogOutputManager.logOutput("Nuovo stato: " + currentState, LogOutputManager.GAMESTATE_COLOR);
     }
 
     public static State getState()
     {
-        return CURRENT_STATE;
+        return currentState;
     }
-    // stato PLAYING
-    // stato MOVING
-    // stato visualizzazione barra di testo
-
 
 }
