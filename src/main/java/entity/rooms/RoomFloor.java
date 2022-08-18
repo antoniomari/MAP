@@ -5,6 +5,7 @@ import graphics.SpriteManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -97,8 +98,9 @@ public class RoomFloor
            return false;
 
         // controlla ostacoli
+        Rectangle feetArea = new Rectangle(xBlock, yBlock, 4, 1); // pedana
         for(Rectangle obstacleArea : obstacleRectangles)
-            if(obstacleArea.contains(xBlock, yBlock))
+            if(obstacleArea.intersects(feetArea))
                 return false;
 
         // è sul pavimento e su nessun ostacolo
