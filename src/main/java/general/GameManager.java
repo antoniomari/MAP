@@ -74,6 +74,9 @@ public class GameManager
                 scenarioStack.remove(top);
                 LogOutputManager.logOutput("Stack scenari: " + scenarioStack,
                                             LogOutputManager.SCENARIO_STACK_COLOR);
+
+                // continua lo scenario precedente nello stack
+                continueScenario();
             }
             else
                 top.runAction();

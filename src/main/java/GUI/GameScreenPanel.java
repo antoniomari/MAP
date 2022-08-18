@@ -13,6 +13,7 @@ import entity.items.Item;
 import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import graphics.SpriteManager;
@@ -92,6 +93,11 @@ public class GameScreenPanel extends JLayeredPane
         int y = backgroundLabel.getY();
 
         return new AbsPosition(x, y);
+    }
+
+    public Room getCurrentRoom()
+    {
+        return currentRoom;
     }
 
     /**
@@ -303,7 +309,12 @@ public class GameScreenPanel extends JLayeredPane
         Objects.requireNonNull(initialPos);
         Objects.requireNonNull(finalPos);
 
-        List<BlockPosition> positions = GameScreenManager.calculatePath(initialPos, finalPos);
+        List<BlockPosition> positions;
+
+        if(piece instanceof PlayingCharacter)
+            positions = GameScreenManager.calculatePath(initialPos, finalPos);
+        else
+            positions = GameScreenManager.calculatePathNPC(initialPos, finalPos);
 
         if(!withAnimation)
         {
@@ -313,15 +324,20 @@ public class GameScreenPanel extends JLayeredPane
         {
             BlockPosition pos1 = initialPos;
 
+            ActionSequence moveScenario = new ActionSequence("movimento", ActionSequence.Mode.SEQUENCE);
             for(BlockPosition pos2 : positions)
             {
                 MovingAnimation animation = createMoveAnimation(piece, pos1, pos2, millisecondWaitEnd);
                 // aggiorna posizione del pezzo
-                updatePiecePosition(piece, pos2, animation);
+
+
+                moveScenario.append(() -> updatePiecePosition(piece, pos2, animation));
 
                 // aggiorna pos1
                 pos1 = pos2;
             }
+
+            GameManager.startScenario(moveScenario);
         }
     }
 
