@@ -22,18 +22,27 @@ public class GameState
     private static GameKeyListener ESC_LISTENER;
     private static GameMouseListener DROP_LISTENER;
 
+    /** Azione per il movimento del giocatore. */
     private static Runnable leftMouseClick = () ->
             {
-                // se hai un elemento selezionato e click sinistro su oggetto prova "useWith"
+                // se non hai alcun elemento selezionato allora prova a muoverti
                 if (mainFrame.getInventoryPanel().getSelectedItem() == null)
                 {
-                    BlockPosition bp = GameScreenManager.calculateBlocks(
-                            new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-2, 0);
+                    BlockPosition destinationPosition = GameScreenManager.calculateBlocks(
+                            new AbsPosition(mainFrame.getMousePosition().x ,mainFrame.getMousePosition().y)).relativePosition(-2, 0); //nota: -2, 0 per le dim personaggi
 
-                    bp = mainFrame.getCurrentRoom().getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
-                    System.out.println("Schwartz va a " + bp);
-                    if(bp != null)
-                        PlayingCharacter.getPlayer().updatePosition(bp);
+                    if(mainFrame.getCurrentRoom().getFloor().isWalkable(destinationPosition))
+                    {
+                        PlayingCharacter.getPlayer().updatePosition(destinationPosition);
+                        System.out.println("Schwartz va a " + destinationPosition);
+                    }
+
+
+                            // TODO: ripristinare getNearestPlacement
+                    // bp = mainFrame.getCurrentRoom().getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
+
+                    //if(bp != null)
+                    //    PlayingCharacter.getPlayer().updatePosition(bp);
                 }
             };
 
