@@ -8,6 +8,8 @@ import GUI.MainFrame;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.ActionSequence;
+import general.GameManager;
 import general.LogOutputManager;
 
 import java.awt.event.KeyEvent;
@@ -23,7 +25,7 @@ public class GameState
     private static GameMouseListener DROP_LISTENER;
 
     /** Azione per il movimento del giocatore. */
-    private static Runnable leftMouseClick = () ->
+    private static final Runnable leftMouseClick = () ->
             {
                 // se non hai alcun elemento selezionato allora prova a muoverti
                 if (mainFrame.getInventoryPanel().getSelectedItem() == null)
@@ -34,7 +36,6 @@ public class GameState
                     if(mainFrame.getCurrentRoom().getFloor().isWalkable(destinationPosition))
                     {
                         PlayingCharacter.getPlayer().updatePosition(destinationPosition);
-                        System.out.println("Schwartz va a " + destinationPosition);
                     }
 
 
@@ -81,7 +82,11 @@ public class GameState
 
                 if (west != null)
                 {
-                    mainFrame.setCurrentRoom(west);
+                    ActionSequence scenario = new ActionSequence("vai a ovest", ActionSequence.Mode.SEQUENCE);
+                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("west"), 100));
+                    scenario.append(() -> mainFrame.setCurrentRoom(west));
+
+                    GameManager.startScenario(scenario);
                 }
             }, null, State.PLAYING);
 
@@ -92,7 +97,11 @@ public class GameState
 
                 if (east != null)
                 {
-                    mainFrame.setCurrentRoom(east);
+                    ActionSequence scenario = new ActionSequence("vai a est", ActionSequence.Mode.SEQUENCE);
+                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("east"), 100));
+                    scenario.append(() -> mainFrame.setCurrentRoom(east));
+
+                    GameManager.startScenario(scenario);
                 }
             }, null, State.PLAYING);
 
@@ -103,7 +112,11 @@ public class GameState
 
                 if (north != null)
                 {
-                    mainFrame.setCurrentRoom(north);
+                    ActionSequence scenario = new ActionSequence("vai a nord", ActionSequence.Mode.SEQUENCE);
+                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("north"), 100));
+                    scenario.append(() -> mainFrame.setCurrentRoom(north));
+
+                    GameManager.startScenario(scenario);
                 }
             }, null, State.PLAYING);
 
@@ -114,7 +127,11 @@ public class GameState
 
                 if (south != null)
                 {
-                    mainFrame.setCurrentRoom(south);
+                    ActionSequence scenario = new ActionSequence("vai a sud", ActionSequence.Mode.SEQUENCE);
+                    scenario.append(() -> PlayingCharacter.getPlayer().updatePosition(mainFrame.getCurrentRoom().getArrowPosition("south"), 100));
+                    scenario.append(() -> mainFrame.setCurrentRoom(south));
+
+                    GameManager.startScenario(scenario);
                 }
             }, null, State.PLAYING);
 
