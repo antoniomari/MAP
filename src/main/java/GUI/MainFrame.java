@@ -80,6 +80,9 @@ public class MainFrame extends JFrame {
      * */
     private JPanel mainPanel;
 
+    /** Schermata mostrata correntemente. Valori possibili: MENU, GAME. */
+    private String currentDisplaying;
+
     static
     {
         // Calcolo delle dimensioni dello schermo
@@ -283,6 +286,7 @@ public class MainFrame extends JFrame {
 
         // mostra la schermata di gioco
         cl.show(mainPanel, "GIOCO");
+        currentDisplaying = "GIOCO";
 
         mainPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
@@ -435,9 +439,26 @@ public class MainFrame extends JFrame {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
 
         if(b)
+        {
             cl.show(mainPanel, "MENU");
+            currentDisplaying = "MENU";
+        }
         else
+        {
             cl.show(mainPanel, "GIOCO");
+            currentDisplaying = "GIOCO";
+        }
+
+    }
+
+    /**
+     * Ritorna true se il MENU è correntemente visualizzato.
+     *
+     * @return true se il MENU è correntemente visualizzato, false altrimenti.
+     */
+    public boolean isMenuDisplaying()
+    {
+        return currentDisplaying.equals("MENU");
     }
 
     /**

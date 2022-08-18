@@ -63,7 +63,9 @@ public class GameState
     {
         mainFrame = frame;
 
-        escListener = new GameKeyListener(KeyEvent.VK_ESCAPE, () -> mainFrame.showMenu(true), null);
+        escListener = new GameKeyListener(
+                KeyEvent.VK_ESCAPE,
+                () -> mainFrame.showMenu(!mainFrame.isMenuDisplaying()), null);
         mainFrame.addKeyListener(escListener);
 
         initListeners();
