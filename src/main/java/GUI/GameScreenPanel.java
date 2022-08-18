@@ -16,7 +16,6 @@ import entity.rooms.Room;
 import general.GameException;
 import general.GameManager;
 import graphics.SpriteManager;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 import javax.swing.*;
 import java.awt.*;
@@ -286,7 +285,6 @@ public class GameScreenPanel extends JLayeredPane
             addGameCharacter((GameCharacter) piece, pos);
         else
             throw new GameException("GamePiece " + piece + " non valido");
-
     }
 
     /**
@@ -305,15 +303,26 @@ public class GameScreenPanel extends JLayeredPane
         Objects.requireNonNull(initialPos);
         Objects.requireNonNull(finalPos);
 
-        MovingAnimation animation;
-        // crea animazione
-        if(withAnimation)
-            animation = createMoveAnimation(piece, initialPos, finalPos, millisecondWaitEnd);
-        else
-            animation = null;
+        List<BlockPosition> positions = GameScreenManager.calculatePath(initialPos, finalPos);
 
-        // aggiorna posizione del pezzo
-        updatePiecePosition(piece, finalPos, animation);
+        if(!withAnimation)
+        {
+            updatePiecePosition(piece, finalPos, null);
+        }
+        else
+        {
+            BlockPosition pos1 = initialPos;
+
+            for(BlockPosition pos2 : positions)
+            {
+                MovingAnimation animation = createMoveAnimation(piece, pos1, pos2, millisecondWaitEnd);
+                // aggiorna posizione del pezzo
+                updatePiecePosition(piece, pos2, animation);
+
+                // aggiorna pos1
+                pos1 = pos2;
+            }
+        }
     }
 
     /**

@@ -12,6 +12,11 @@
     }
   ],
 
+  "ostacoli":
+  [
+
+  ],
+
   "default position":
   {
     "x": 8,
@@ -20,8 +25,8 @@
 ,
   "southArrow":
   {
-    "x": 15,
-    "y": 15,
+    "x": 16,
+    "y": 14,
     "finalX": 14,
     "finalY": 15
   }
