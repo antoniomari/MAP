@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>PT-A</subject>
+        <method>add</method>
+        <what>Tecnico</what>
+        <x>16</x>
+        <y>14</y>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>13</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Lei deve essere il professor Schwartz (*) la fama del suo nome la precede. </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Io sono Nikita, il tecnico, quella (*) canaglia di un robot sta manomettendo l'impianto </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>elettrico, ma avrà pane per i suoi denti. </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Sicuramente questi malfunzionamenti (*) continueranno anche ai prossimi piani </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>le lascio il mio numero in caso (*) di necessità e provvedo a rimettere in funzione </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>l'ascensore in modo che possa usarlo. </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Ecco fatto l'ascensore è funzionante, (*) Il mio numero è 3387645112. </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>16</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>removeFromRoom</method>
+    </azione>
+</scenario>

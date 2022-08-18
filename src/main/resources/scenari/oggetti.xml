@@ -126,9 +126,13 @@
     <oggetto nome="AscensorePT">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore viola.</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
         <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
+        <isLocked>false</isLocked>
+        <onOpen>
+            <mode>once</mode>
+            <effetto>src/main/resources/scenari/piano terra/ConoscenzaTecnico.xml</effetto>
+        </onOpen>
     </oggetto>
     <oggetto nome="Telefono">
         <classe>PickupableItem</classe>

@@ -14,7 +14,7 @@
         <spritesheet>/img/personaggi/cameriere.png</spritesheet>
     </personaggio>
     <personaggio nome="Tecnico">
-        <spritesheet>/img/personaggi/Tecnico.png</spritesheet>
+        <spritesheet>/img/personaggi/tecnico.png</spritesheet>
     </personaggio>
     <personaggio nome="Cuoco1">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
