@@ -386,7 +386,7 @@ public class MainFrame extends JFrame {
         menuPanel.setBackground(Color.BLACK);
 
 
-        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet("/img/lab1 blur.png"), rescalingFactor));
+        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet("/img/computersPause.png"), rescalingFactor));
 
         int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
 
