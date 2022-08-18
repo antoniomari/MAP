@@ -55,7 +55,7 @@ public class Room
         this.musicPath = musicPath;
         backgroundPath = path;
         backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
-        floor = SpriteManager.loadFloorFromJson(jsonPath);
+        floor = RoomFloor.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 
         bWidth = json.getInt("width");

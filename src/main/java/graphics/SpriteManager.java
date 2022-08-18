@@ -91,32 +91,6 @@ public class SpriteManager
         return spriteSheet.getSubimage(x, y, width, height);
     }
 
-    public static RoomFloor loadFloorFromJson(String jsonPath)
-    {
-        JSONObject json = getJsonFromFile(jsonPath);
-        JSONArray rectangleArray = json.getJSONArray("pavimento");
-
-        int roomWidth = json.getInt("width");
-        int roomHeight = json.getInt("height");
-
-        RoomFloor floor = new RoomFloor();
-
-        for (int i = 0; i < rectangleArray.length(); i++)
-        {
-            JSONObject rectangleJson = rectangleArray.getJSONObject(i);
-            if(rectangleJson.getInt("width") > roomWidth
-                    || rectangleJson.getInt("height") > roomHeight)
-                throw new JSONException("Pavimento non valido");
-
-            floor.addWalkableRectangle(rectangleJson.getInt("left"),
-                                        rectangleJson.getInt("top"),
-                                        rectangleJson.getInt("width"),
-                                        rectangleJson.getInt("height"));
-        }
-
-        return floor;
-    }
-
     public static JSONObject getJsonFromFile(String jsonPath)
     {
         InputStream is = SpriteManager.class.getResourceAsStream(jsonPath);

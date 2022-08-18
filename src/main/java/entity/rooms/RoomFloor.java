@@ -1,6 +1,10 @@
 package entity.rooms;
 
 import entity.GamePiece;
+import graphics.SpriteManager;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,11 +12,55 @@ import java.util.List;
 
 public class RoomFloor
 {
-    List<Rectangle> walkableRectangles;
+    private List<Rectangle> walkableRectangles;
+    private List<Rectangle> obstacleRectangles;
 
     public RoomFloor()
     {
         walkableRectangles = new ArrayList<>();
+        obstacleRectangles = new ArrayList<>();
+    }
+
+    // TODO: valutare se  cambiare classe di questo metodo
+    public static RoomFloor loadFloorFromJson(String jsonPath)
+    {
+        JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
+        JSONArray rectangleArray = json.getJSONArray("pavimento");
+
+        int roomWidth = json.getInt("width");
+        int roomHeight = json.getInt("height");
+
+        RoomFloor floor = new RoomFloor();
+
+        for (int i = 0; i < rectangleArray.length(); i++)
+        {
+            JSONObject rectangleJson = rectangleArray.getJSONObject(i);
+            if(rectangleJson.getInt("width") > roomWidth
+                    || rectangleJson.getInt("height") > roomHeight)
+                throw new JSONException("Pavimento non valido");
+
+            floor.addWalkableRectangle(rectangleJson.getInt("left"),
+                    rectangleJson.getInt("top"),
+                    rectangleJson.getInt("width"),
+                    rectangleJson.getInt("height"));
+        }
+
+        rectangleArray = json.getJSONArray("ostacoli");
+
+        for (int i = 0; i < rectangleArray.length(); i++)
+        {
+            JSONObject rectangleJson = rectangleArray.getJSONObject(i);
+            if(rectangleJson.getInt("width") > roomWidth
+                    || rectangleJson.getInt("height") > roomHeight)
+                throw new JSONException("Ostacolo non valido");
+
+            floor.addObstacleRectangle(rectangleJson.getInt("left"),
+                    rectangleJson.getInt("top"),
+                    rectangleJson.getInt("width"),
+                    rectangleJson.getInt("height"));
+        }
+
+        return floor;
     }
 
     // top left corner
@@ -26,13 +74,35 @@ public class RoomFloor
         walkableRectangles.add(new Rectangle(leftBlock, topBlock, width, height));
     }
 
+    public void addObstacleRectangle(int leftBlock, int topBlock, int width, int height)
+    {
+        // controlli su parametri
+        if(leftBlock < 0 || topBlock < 0 || width <= 0 || height <= 0)
+            throw new IllegalArgumentException();
+        // TODO: completare controlli
+
+        obstacleRectangles.add(new Rectangle(leftBlock, topBlock, width, height));
+    }
+
     public boolean isWalkable(int xBlock, int yBlock)
     {
+        boolean onFloor = false;
+
         for(Rectangle walkableArea : walkableRectangles)
             if(walkableArea.contains(xBlock, yBlock))
-                return true;
+                onFloor = true;
 
-        return false;
+        // caso sul muro
+        if(!onFloor)
+           return false;
+
+        // controlla ostacoli
+        for(Rectangle obstacleArea : obstacleRectangles)
+            if(obstacleArea.contains(xBlock, yBlock))
+                return false;
+
+        // è sul pavimento e su nessun ostacolo
+        return true;
     }
 
     public boolean isWalkable(BlockPosition pos)
