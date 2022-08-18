@@ -177,8 +177,8 @@ public class XmlLoader
             case "playMusic":
                 actionParsed = parsePlayMusic(actionElement);
                 break;
-            case "playSound":
-                actionParsed = parsePlaySound(actionElement);
+            case "playScenarioSound":
+                actionParsed = parsePlayScenarioSound(actionElement);
                 break;
             case "setScenarioOnEnter":
                 actionParsed = parseSetScenarioOnEnter(actionElement);
@@ -408,11 +408,11 @@ public class XmlLoader
         return () -> SoundHandler.playWav(musicPath, "music");
     }
 
-    private static Runnable parsePlaySound(Element eAction)
+    private static Runnable parsePlayScenarioSound(Element eAction)
     {
         String soundPath = getTagValue(eAction, "what");
 
-        return () -> SoundHandler.playWav(soundPath, "sound");
+        return () -> SoundHandler.playWav(soundPath, "scenarioSound");
     }
 
     private static Runnable parseSetScenarioOnEnter(Element eAction)
@@ -559,12 +559,12 @@ public class XmlLoader
                 if(onTriggerElement != null)
                 {
                     String scenarioPath = getTagValue(onTriggerElement, "effetto");
-                    // imposta trigger actiom
+                    // imposta trigger action
                     ((Triggerable) itemToLoad).setTriggerScenario(loadScenario(scenarioPath));
                     // imposta nome azione
                 }
 
-                // inferenza: se trovo questo tag allora è un doorlike TODO: aggiustare
+                // inferenza: se trovo questo tag allora è un doorLike TODO: aggiustare
                 Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
 
                 if (onOpenElement != null)

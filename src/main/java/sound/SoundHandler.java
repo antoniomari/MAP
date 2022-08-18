@@ -1,12 +1,9 @@
 package sound;
 
 import general.GameException;
+import general.GameManager;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -31,7 +28,7 @@ public class SoundHandler
                 playSound(wavPath);
                 break;
             case "scenarioSound":
-                // TODO: implementare
+                playScenarioSound(wavPath);
                 break;
             default:
                 throw new GameException("Modalità audio non esistente");
@@ -67,6 +64,23 @@ public class SoundHandler
     {
         Clip soundClip = openClip(wavPath);
         soundClip.start();
+    }
+
+    private static void playScenarioSound(String wavPath)
+    {
+        Clip scenarioSoundClip = openClip(wavPath);
+
+        scenarioSoundClip.addLineListener(event ->
+        {
+            if (event.getType() == LineEvent.Type.STOP)
+            {
+                scenarioSoundClip.close();
+                GameManager.continueScenario();
+            }
+
+        });
+
+        scenarioSoundClip.start();
     }
 
     private static Clip openClip(String wavPath)
