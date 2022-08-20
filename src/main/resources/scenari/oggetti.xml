@@ -179,4 +179,14 @@
         <descrizione>Ma questo pollo è ancora vivo...!</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="Libro">
+        <classe>PickupableItem</classe>
+        <descrizione>Progetto JDBC-20 - TOP-SECRET.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Fogli">
+        <classe>PickupableItem</classe>
+        <descrizione>Strani fogli comparsi dal nulla.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
 </oggetti>
