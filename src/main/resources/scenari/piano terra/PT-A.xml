@@ -17,12 +17,5 @@
             <x>14</x>
             <y>9</y>
         </azione>
-        <!--
-        <azione>
-            <subject>PT-A</subject>
-            <method>setNorth</method>
-            <what>src/main/resources/scenari/AITN/AIT1016.xml</what>
-        </azione>
-        -->
     </scenario>
 </stanza>
