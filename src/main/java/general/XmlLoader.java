@@ -425,7 +425,7 @@ public class XmlLoader
 
         Document document = openXml(scenarioPath);
         return () -> {(GameManager.getRoom(subject))
-                .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement())); System.out.println("Settato");};
+                .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement()));};
     }
 
     private static Runnable parseLoadFloor(Element eAction)
@@ -441,7 +441,6 @@ public class XmlLoader
         if(floorName.equals("MIST"))
         {
             floorPath = MIST_PATH;
-            scenario = loadRoomInit(floorPath);
         }
         else
             throw new GameException("Piano non valido");
@@ -449,10 +448,7 @@ public class XmlLoader
         return () ->
         {
             GameManager.getMainFrame().setCurrentRoom(loadRoom(floorPath));
-
-            System.out.println("Ciao");
-            GameManager.startScenario(scenario);
-            System.out.println("Ciao alla fine");
+            GameManager.startScenario(loadRoomInit(floorPath));
         };
     }
 

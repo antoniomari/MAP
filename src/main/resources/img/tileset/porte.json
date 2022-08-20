@@ -81,7 +81,7 @@
 
   "AscensoreMIST":
   {
-    "x": 0,
+    "x": 192,
     "y": 0,
     "width": 96,
     "height": 96
@@ -89,7 +89,7 @@
 
   "AscensoreMISTClosed":
   {
-    "x": 0,
+    "x": 192,
     "y": 0,
     "width": 96,
     "height": 96
@@ -97,7 +97,7 @@
 
   "AscensoreMISTOpen1":
   {
-    "x": 0,
+    "x": 192,
     "y": 96,
     "width": 96,
     "height": 96
@@ -105,7 +105,7 @@
 
   "AscensoreMISTOpen2":
   {
-    "x": 0,
+    "x": 192,
     "y": 192,
     "width": 96,
     "height": 96
@@ -113,7 +113,7 @@
 
   "AscensoreMISTOpen3":
   {
-    "x": 0,
+    "x": 192,
     "y": 288,
     "width": 96,
     "height": 96

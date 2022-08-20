@@ -76,6 +76,10 @@
         <canUse>false</canUse>
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
+        <onOpen>
+            <mode>once</mode>
+            <effetto>src/main/resources/scenari/fine.xml</effetto>
+        </onOpen>
     </oggetto>
     <oggetto nome="ArmadioMIST">
         <classe>Container</classe>
@@ -83,7 +87,7 @@
         <canUse>false</canUse>
         <onOpen>
             <mode>once</mode>
-            <effetto>src/main/resources/scenari/apri_armadioMIST.xml</effetto>
+            <effetto>src/main/resources/scenari/piano MIST/apri_armadioMIST.xml</effetto>
         </onOpen>
     </oggetto>
     <oggetto nome="Filamento">

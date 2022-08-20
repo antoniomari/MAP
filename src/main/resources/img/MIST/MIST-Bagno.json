@@ -10,5 +10,22 @@
       "width": 16,
       "height": 4
     }
-  ]
+  ],
+
+  "ostacoli":
+  [
+
+  ],
+
+  "default position":
+  {
+    "x": 12,
+    "y": 6
+  },
+
+  "eastArrow":
+  {
+    "x": 14,
+    "y": 6
+  }
 }

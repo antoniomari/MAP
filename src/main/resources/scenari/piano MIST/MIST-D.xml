@@ -4,16 +4,25 @@
     <json>/img/MIST/MIST-D.json</json>
     <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
-
-    <mode>instant</mode>
-        <!--
-    <azione num="1">
-        <subject>Mist-D</subject>
-        <method>add</method>
-        <what>Guanto</what>
-        <x>10</x>
-        <y>8</y>
-    </azione>
-    -->
+        <mode>instant</mode>
+        <azione>
+            <subject>Mist-D</subject>
+            <method>setNorth</method>
+            <what>src/main/resources/scenari/piano MIST/MIST-C.xml</what>
+        </azione>
+        <azione>
+            <subject>Mist-D</subject>
+            <method>add</method>
+            <what>Guanto</what>
+            <x>10</x>
+            <y>8</y>
+        </azione>
+        <azione>
+            <subject>Mist-D</subject>
+            <method>add</method>
+            <what>Filamento</what>
+            <x>10</x>
+            <y>8</y>
+        </azione>
     </scenario>
 </stanza>

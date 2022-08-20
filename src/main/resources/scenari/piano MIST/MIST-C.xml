@@ -8,7 +8,7 @@
         <azione num="2">
             <subject>Mist-C</subject>
             <method>setWest</method>
-            <what>src/main/resources/scenari/MIST-Bagno.xml</what>
+            <what>src/main/resources/scenari/piano MIST/MIST-Bagno.xml</what>
         </azione>
         <azione num="4">
             <subject>Mist-C</subject>

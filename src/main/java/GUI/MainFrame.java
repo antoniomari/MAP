@@ -95,14 +95,6 @@ public class MainFrame extends JFrame {
         DEFAULT_GAME_HEIGHT =  (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR);
     }
 
-    /* TODO: capire se eliminarlo
-    public double getScalingFactor()
-    {
-        return rescalingFactor;
-    }
-
-     */
-
     public InventoryPanel getInventoryPanel()
     {
         return inventoryPanel;

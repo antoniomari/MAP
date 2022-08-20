@@ -5,12 +5,5 @@
     <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <!--
-        <azione num="1">
-            <subject>Mist-B</subject>
-            <method>setSouth</method>
-            <what>src/main/resources/scenari/MIST-C.xml</what>
-        </azione>
-        -->
     </scenario>
 </stanza>
