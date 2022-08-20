@@ -434,7 +434,7 @@ public class XmlLoader
 
         String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
         String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
-        String PT_PATH = "src/main/resources/scenari/piano terra/PT-A.xml";
+        String BUG_PATH = "src/main/resources/scenari/piano terra/PT-A.xml";
 
         String floorPath;
 
@@ -446,8 +446,8 @@ public class XmlLoader
             case "ALU":
                 floorPath = ALU_PATH;
                 break;
-            case "PT":
-                floorPath = PT_PATH;
+            case "BUG":
+                floorPath = BUG_PATH;
                 break;
             default:
                 throw new GameException("Piano non valido");
