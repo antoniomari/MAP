@@ -21,13 +21,19 @@
   {
     "x": 8,
     "y": 11
-  }
-,
+  },
+
   "southArrow":
   {
     "x": 16,
     "y": 14,
     "finalX": 14,
     "finalY": 15
+  },
+
+  "northArrow":
+  {
+    "x": 16,
+    "y": 12
   }
 }

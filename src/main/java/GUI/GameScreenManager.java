@@ -106,6 +106,10 @@ public class GameScreenManager
 
     public static List<BlockPosition> calculatePath(BlockPosition initialPos, BlockPosition finalPos)
     {
+        return calculatePathNPC(initialPos, finalPos);
+        /*
+
+
         List<BlockPosition> positions = new ArrayList<>();
 
         BlockPosition nextStop = findNextStop(initialPos, finalPos);
@@ -119,12 +123,14 @@ public class GameScreenManager
             nextStop = findNextStop(nextStop, finalPos);
         }
 
-         */
+
 
         if(nextStop != finalPos)
             positions.add(finalPos);
         return positions;
+         */
     }
+
 
     private static BlockPosition findNextStop(BlockPosition initialPos, BlockPosition finalPos)
     {

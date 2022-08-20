@@ -5,10 +5,27 @@
   "pavimento":
   [
     {
-      "left": 1,
+      "left": 0,
       "top": 6,
-      "width": 3,
+      "width": 4,
       "height": 1
     }
-  ]
+  ],
+
+  "ostacoli":
+  [
+
+  ],
+
+  "default position":
+  {
+    "x": 0,
+    "y": 6
+  },
+
+  "southArrow":
+  {
+    "x": 0,
+    "y": 6
+  }
 }

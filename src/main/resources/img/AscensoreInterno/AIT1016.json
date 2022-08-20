@@ -7,8 +7,25 @@
     {
       "left": 3,
       "top": 13,
-      "width": 7,
+      "width": 5,
       "height": 3
     }
-  ]
+  ],
+
+  "ostacoli":
+  [
+
+  ],
+
+  "default position":
+  {
+    "x": 4,
+    "y": 14
+  },
+
+  "southArrow":
+  {
+    "x": 4,
+    "y": 14
+  }
 }

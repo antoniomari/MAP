@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Benvenuto in AsCeNsOrTe!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>L'ascensore che decide la tua sorte!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Aspetta, non me lo dire! (*) So io dove vuoi andare.</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Andiamo al piano...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>MIST!!!!</sentence>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/suono ascensore.wav</what>
+    </azione>
+</scenario>
