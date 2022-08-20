@@ -5,7 +5,6 @@
     <musica>src/main/resources/audio/musica/ALU.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <!--
         <azione num="2">
             <subject>ALUA</subject>
             <method>add</method>
@@ -13,8 +12,16 @@
             <x>14</x>
             <y>7</y>
         </azione>
-        -->
-        <!--
+        <azione>
+            <subject>Mist-A</subject>
+            <method>setNorth</method>
+            <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
+        </azione>
+        <azione>
+            <subject>Ascensore</subject>
+            <method>setScenarioOnEnter</method>
+            <what>src/main/resources/scenari/piano ALU/EntraAscensore.xml</what>
+        </azione>
         <azione num="3">
             <subject>ALUA</subject>
             <method>setEast</method>

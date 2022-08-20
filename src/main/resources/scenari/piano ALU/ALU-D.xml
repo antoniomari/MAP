@@ -2,4 +2,8 @@
 <stanza nome="ALUD">
     <png>/img/ALU/ALU-D.png</png>
     <json>/img/ALU/ALU-D.json</json>
+    <musica>src/main/resources/audio/musica/ALU.wav</musica>
+    <scenario>
+        <mode>instant</mode>
+    </scenario>
 </stanza>
