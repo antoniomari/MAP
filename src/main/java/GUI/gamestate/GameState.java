@@ -51,7 +51,8 @@ public class GameState
     {
         PLAYING,
         MOVING,
-        TEXT_BAR
+        TEXT_BAR,
+        SCENARIO_SOUND
     }
 
     static

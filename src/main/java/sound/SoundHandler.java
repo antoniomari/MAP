@@ -1,5 +1,6 @@
 package sound;
 
+import GUI.gamestate.GameState;
 import general.GameException;
 import general.GameManager;
 
@@ -75,12 +76,14 @@ public class SoundHandler
             if (event.getType() == LineEvent.Type.STOP)
             {
                 scenarioSoundClip.close();
+                GameState.changeState(GameState.State.PLAYING);
                 GameManager.continueScenario();
             }
 
         });
 
         scenarioSoundClip.start();
+        GameState.changeState(GameState.State.SCENARIO_SOUND);
     }
 
     private static Clip openClip(String wavPath)
