@@ -2,7 +2,7 @@
 <stanza nome="Bug-A">
     <png>/img/BUG/BUGA.png</png>
     <json>/img/BUG/BugA.json</json>
-    <musica>src/main/resources/audio/musica/Battaglia finale.wav</musica>
+    <musica>src/main/resources/audio/musica/Battaglia finale forse.wav</musica>
     <scenario>
         <mode>instant</mode>
         <azione>
