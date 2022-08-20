@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<stanza nome="Bug-A">
+    <png>/img/BUG/BUGA.png</png>
+    <json>/img/BUG/BugA.json</json>
+    <musica>src/main/resources/audio/musica/Battaglia finale.wav</musica>
+    <scenario>
+        <mode>instant</mode>
+        <azione>
+            <subject>Bug-A</subject>
+            <method>setWest</method>
+            <what>src/main/resources/scenari/piano BUG/BUG-B.xml</what>
+        </azione>
+    </scenario>
+</stanza>

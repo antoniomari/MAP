@@ -434,7 +434,7 @@ public class XmlLoader
 
         String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
         String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
-        String BUG_PATH = "src/main/resources/scenari/piano terra/PT-A.xml";
+        String BUG_PATH = "src/main/resources/scenari/piano BUG/BUG-A.xml";
 
         String floorPath;
 
