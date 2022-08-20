@@ -125,7 +125,7 @@ public class Room
 
         this.east = eastRoom;
 
-        if(eastRoom.getWest() == null)
+        if(eastRoom.getWest() == null || !this.equals(eastRoom.getWest()))
             eastRoom.setWest(this);
     }
 
@@ -135,7 +135,7 @@ public class Room
 
         this.west = westRoom;
 
-        if(westRoom.getEast() == null)
+        if(westRoom.getEast() == null || !this.equals(westRoom.getEast()))
             westRoom.setEast(this);
     }
 
@@ -145,7 +145,7 @@ public class Room
 
         this.south = southRoom;
 
-        if(southRoom.getNorth() == null)
+        if(southRoom.getNorth() == null || !this.equals(southRoom.getNorth()))
             southRoom.setNorth(this);
     }
 
@@ -155,7 +155,7 @@ public class Room
 
         this.north = northRoom;
 
-        if(northRoom.getSouth() == null)
+        if(northRoom.getSouth() == null || !this.equals(northRoom.getSouth()))
             northRoom.setSouth(this);
     }
 

@@ -433,17 +433,21 @@ public class XmlLoader
         String floorName = getTagValue(eAction, "floor");
 
         String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
+        String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
 
         String floorPath;
-        Room initialFloorRoom;
-        ActionSequence scenario;
 
-        if(floorName.equals("MIST"))
+        switch (floorName)
         {
-            floorPath = MIST_PATH;
+            case "MIST":
+                floorPath = MIST_PATH;
+                break;
+            case "ALU":
+                floorPath = ALU_PATH;
+                break;
+            default:
+                throw new GameException("Piano non valido");
         }
-        else
-            throw new GameException("Piano non valido");
 
         return () ->
         {
@@ -768,13 +772,21 @@ public class XmlLoader
         // creazione stanza
         Element roomElement = roomXml.getDocumentElement();
         String name = getXmlAttribute(roomElement, "nome");
-        String pngPath = getTagValue(roomElement, "png");
-        String jsonPath = getTagValue(roomElement, "json");
-        String musicPath = getTagValue(roomElement, "musica");
 
-        LogOutputManager.logOutput("Caricando stanza " + name, LogOutputManager.XML_COLOR);
+        if(GameManager.getRoom(name) != null) // se la room è stata già caricata TODO: documentare
+            return GameManager.getRoom(name);
+        else
+        {
+            String pngPath = getTagValue(roomElement, "png");
+            String jsonPath = getTagValue(roomElement, "json");
+            String musicPath = getTagValue(roomElement, "musica");
 
-        return new Room(name, pngPath, jsonPath, musicPath);
+            LogOutputManager.logOutput("Caricando stanza " + name, LogOutputManager.XML_COLOR);
+
+            return new Room(name, pngPath, jsonPath, musicPath);
+        }
+
+
     }
 
     /**
