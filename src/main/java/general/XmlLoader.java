@@ -183,6 +183,9 @@ public class XmlLoader
             case "setScenarioOnEnter":
                 actionParsed = parseSetScenarioOnEnter(actionElement);
                 break;
+            case "loadFloor":
+                actionParsed = parseLoadFloor(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -423,6 +426,34 @@ public class XmlLoader
         Document document = openXml(scenarioPath);
         return () -> {(GameManager.getRoom(subject))
                 .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement())); System.out.println("Settato");};
+    }
+
+    private static Runnable parseLoadFloor(Element eAction)
+    {
+        String floorName = getTagValue(eAction, "floor");
+
+        String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
+
+        String floorPath;
+        Room initialFloorRoom;
+        ActionSequence scenario;
+
+        if(floorName.equals("MIST"))
+        {
+            floorPath = MIST_PATH;
+            scenario = loadRoomInit(floorPath);
+        }
+        else
+            throw new GameException("Piano non valido");
+
+        return () ->
+        {
+            GameManager.getMainFrame().setCurrentRoom(loadRoom(floorPath));
+
+            System.out.println("Ciao");
+            GameManager.startScenario(scenario);
+            System.out.println("Ciao alla fine");
+        };
     }
 
     /**

@@ -215,6 +215,7 @@ public class MainFrame extends JFrame {
         GameState.setMainFrame(this);
         // registra il gameScreenPanel presso GameScreenManager
         GameScreenManager.setActivePanel(gameScreenPanel);
+        GameManager.setMainFrame(this);
 
         setupPlayground();
     }

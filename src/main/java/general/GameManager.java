@@ -1,5 +1,6 @@
 package general;
 
+import GUI.MainFrame;
 import entity.GamePiece;
 import entity.characters.PlayingCharacter;
 import entity.rooms.Room;
@@ -12,6 +13,8 @@ public class GameManager
 {
     public static final int BLOCK_SIZE = 24;
 
+    private static MainFrame mainFrame;
+
     private static final Map<String, Room> rooms = new HashMap<>();
     private static final Map<String, GamePiece> pieces = new HashMap<>();
 
@@ -21,6 +24,16 @@ public class GameManager
     {
         // load Schwartz
         pieces.put(PlayingCharacter.getPlayerName(), PlayingCharacter.getPlayer());
+    }
+
+    public static void setMainFrame(MainFrame m)
+    {
+        mainFrame = m;
+    }
+
+    public static MainFrame getMainFrame()
+    {
+        return mainFrame;
     }
 
     public static void addPiece(GamePiece p)

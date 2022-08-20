@@ -30,4 +30,8 @@
         <method>playScenarioSound</method>
         <what>src/main/resources/audio/effetti/suono ascensore.wav</what>
     </azione>
+    <azione>
+        <method>loadFloor</method>
+        <floor>MIST</floor>
+    </azione>
 </scenario>

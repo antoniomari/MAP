@@ -2,6 +2,7 @@
 <stanza nome="Mist-D">
     <png>/img/MIST/MIST-D.png</png>
     <json>/img/MIST/MIST-D.json</json>
+    <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
 
     <mode>instant</mode>

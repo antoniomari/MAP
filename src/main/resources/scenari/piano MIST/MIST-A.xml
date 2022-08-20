@@ -2,22 +2,26 @@
 <stanza nome="Mist-A">
     <png>/img/MIST/MIST-A.png</png>
     <json>/img/MIST/MIST-A.json</json>
+    <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
-        <mode>instant</mode>
-        <azione num="1">
+        <mode>sequence</mode>
+        <!--
+        <azione>
             <subject>Mist-A</subject>
             <method>add</method>
             <what>Schwartz</what>
             <x>0</x>
             <y>10</y>
         </azione>
-        <azione num="2">
+        -->
+        <azione>
             <subject>Mist-A</subject>
             <method>add</method>
             <what>AscensoreMIST</what>
             <x>14</x>
             <y>7</y>
         </azione>
+        <!--
         <azione num="3">
             <subject>Mist-A</subject>
             <method>setEast</method>
@@ -28,7 +32,6 @@
             <method>setWest</method>
             <what>src/main/resources/scenari/MIST-B.xml</what>
         </azione>
-        <!--
         <azione num="5">
             <subject>Mist-D</subject>
             <method>add</method>

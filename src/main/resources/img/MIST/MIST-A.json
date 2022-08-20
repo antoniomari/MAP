@@ -10,5 +10,17 @@
       "width": 32,
       "height": 8
     }
-  ]
+  ],
+
+  "ostacoli":
+  [
+
+  ],
+
+  "default position":
+  {
+    "x": 16,
+    "y": 13
+  }
+
 }
