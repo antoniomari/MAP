@@ -5,7 +5,7 @@
     <musica>src/main/resources/audio/musica/ALU.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <azione num="2">
+        <azione>
             <subject>ALUA</subject>
             <method>add</method>
             <what>AscensoreALU</what>

@@ -20,6 +20,7 @@ public class MovingAnimation extends Animation
 {
     private int delayMilliseconds;
     private boolean initialDelay;
+    private final double blockDistance;
     private final AbsPosition initialCoord;
     private final AbsPosition finalCoord;
     private List<AbsPosition> positionsList;
@@ -42,12 +43,19 @@ public class MovingAnimation extends Animation
         super(label, frames);
 
         this.initialDelay = initialDelay;
+
+        int initialX = initialPos.getX();
+        int finalX = finalPos.getX();
+        int initialY = initialPos.getY();
+        int finalY = finalPos.getY();
+        blockDistance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
+
         // initialCoord: coordinate iniziali dell'angolo in basso a sinistra
         this.initialCoord = GameScreenManager.calculateCoordinates(initialPos);
         // coordinate finali dell'angolo in basso a sinistra
         this.finalCoord = GameScreenManager.calculateCoordinates(finalPos);
 
-        this.speed = speed; // ok
+        this.speed = speed * 0.05; // ok
         setFinalDelay(millisecondWaitEnd);
 
         initCoordList();
@@ -62,9 +70,8 @@ public class MovingAnimation extends Animation
         int finalY = finalCoord.getY();
 
 
-        double distance = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow(finalY - initialY, 2));
         delayMilliseconds = (int) Math.round(1000.0 / FPS);
-        numFrames = (int) (FPS * distance / (1000 * speed));
+        numFrames = (int) (FPS * blockDistance / (1000 * speed));
 
         double deltaX = (double)(finalX- initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;

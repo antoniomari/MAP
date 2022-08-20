@@ -29,6 +29,12 @@ public class ActionSequence
         index = 0;
     }
 
+    public static ActionSequence voidScenario()
+    {
+        return new ActionSequence("Scenario vuoto", Mode.INSTANT);
+    }
+
+
     @Override
     public String toString()
     {

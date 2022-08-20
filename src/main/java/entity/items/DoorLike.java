@@ -16,7 +16,7 @@ public class DoorLike extends Item implements Openable, Lockable
     private boolean isLocked;
     private boolean isOpen;
 
-    private ActionSequence onOpen;
+    private ActionSequence onOpen = ActionSequence.voidScenario();
     private ActionSequence onClose;
 
     private ActionSequence onUnlock;

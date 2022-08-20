@@ -2,7 +2,7 @@
 <stanza nome="Ascensore">
     <png>/img/AscensoreInterno/AIT47.png</png>
     <json>/img/AscensoreInterno/AIT47.json</json>
-    <musica>src/main/resources/audio/musica/Rubik's Cube (Antonio forse).wav</musica>
+    <musica>src/main/resources/audio/musica/ascensoreinterno.wav</musica>
     <scenario>
         <mode>instant</mode>
         <azione>
