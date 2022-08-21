@@ -38,4 +38,9 @@
         <method>loadFloor</method>
         <floor>ALU</floor>
     </azione>
+    <azione>
+        <subject>ALUA</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano ALU/ArrivoPianoAlu.xml</what>
+    </azione>
 </scenario>

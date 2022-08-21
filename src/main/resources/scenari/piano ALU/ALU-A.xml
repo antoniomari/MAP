@@ -32,6 +32,5 @@
             <method>setWest</method>
             <what>src/main/resources/scenari/piano ALU/ALU-B.xml</what>
         </azione>
-        -->
     </scenario>
 </stanza>
