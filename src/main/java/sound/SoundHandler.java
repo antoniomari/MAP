@@ -12,10 +12,37 @@ import java.util.Objects;
 public class SoundHandler
 {
     public static final String PICKUP_SOUND_PATH = "src/main/resources/audio/effetti/pickupItem.wav";
+    public static final String SCROLL_BAR_PATH = "src/main/resources/audio/effetti/scroll.wav";
     private static Clip currentMusic;
     private static String currentMusicPath;
 
-    public static void playWav(String wavPath, String mode)
+    public enum Mode
+    {
+        MUSIC, SOUND, SCENARIO_SOUND
+    }
+
+    public static void playWav(String wavPath, Mode mode)
+    {
+        Objects.requireNonNull(wavPath);
+        Objects.requireNonNull(mode);
+
+        switch (mode)
+        {
+            case MUSIC:
+                insertCD(wavPath);
+                break;
+            case SOUND:
+                playSound(wavPath);
+                break;
+            case SCENARIO_SOUND:
+                playScenarioSound(wavPath);
+                break;
+            default:
+                throw new GameException("Modalità audio non esistente");
+        }
+    }
+
+    private static void playWav(String wavPath, String mode)
     {
         Objects.requireNonNull(wavPath);
         Objects.requireNonNull(mode);

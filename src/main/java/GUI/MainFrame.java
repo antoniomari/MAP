@@ -173,7 +173,7 @@ public class MainFrame extends JFrame {
         gameHeight = (int)(newRoom.getBHeight() * rescalingFactor * GameManager.BLOCK_SIZE);
 
         // imposta musica
-        SoundHandler.playWav(currentRoom.getMusicPath(), "music");
+        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
     }
 
     /**
@@ -197,7 +197,7 @@ public class MainFrame extends JFrame {
 
         // imposta stanza iniziale
         currentRoom = initialRoom;
-        SoundHandler.playWav(currentRoom.getMusicPath(), "music");
+        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
 
         // inizializzazione immagine di sfondo
         setupBackground();

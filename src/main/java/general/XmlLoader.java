@@ -408,14 +408,14 @@ public class XmlLoader
     {
         String musicPath = getTagValue(eAction, "what");
 
-        return () -> SoundHandler.playWav(musicPath, "music");
+        return () -> SoundHandler.playWav(musicPath, SoundHandler.Mode.MUSIC);
     }
 
     private static Runnable parsePlayScenarioSound(Element eAction)
     {
         String soundPath = getTagValue(eAction, "what");
 
-        return () -> SoundHandler.playWav(soundPath, "scenarioSound");
+        return () -> SoundHandler.playWav(soundPath, SoundHandler.Mode.SCENARIO_SOUND);
     }
 
     private static Runnable parseSetScenarioOnEnter(Element eAction)

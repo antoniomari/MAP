@@ -3,6 +3,8 @@ package GUI;
 import GUI.gamestate.GameState;
 import general.GameManager;
 import graphics.SpriteManager;
+import sound.SoundHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -109,6 +111,9 @@ public class TextBarPanel extends JLayeredPane
         barLabel.setIcon(null);
         textArea.setText(null);
         textArea.setVisible(false);
+
+        // riproduci suono scroll bar
+        SoundHandler.playWav(SoundHandler.SCROLL_BAR_PATH, SoundHandler.Mode.SOUND);
 
         // update GameState
         GameState.changeState(GameState.State.PLAYING);

@@ -55,7 +55,7 @@ public class EventHandler
             InventoryUpdateExecutor.executeAdd((PickupableItem) e.getItemInvolved()); //TODO: vedere se si può migliorare castr
 
             // TODO: aggiustare codice
-            SoundHandler.playWav(SoundHandler.PICKUP_SOUND_PATH, "sound");
+            SoundHandler.playWav(SoundHandler.PICKUP_SOUND_PATH, SoundHandler.Mode.SOUND);
         }
         if(e.getType() == InventoryEvent.Type.USE_ITEM)
             InventoryUpdateExecutor.executeDrop((PickupableItem) e.getItemInvolved());

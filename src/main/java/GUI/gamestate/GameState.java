@@ -37,13 +37,6 @@ public class GameState
                     {
                         PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(destinationPosition, PlayingCharacter.getPlayer()), "absolute", 0);
                     }
-
-
-                            // TODO: ripristinare getNearestPlacement
-                    // bp = mainFrame.getCurrentRoom().getFloor().getNearestPlacement(bp, PlayingCharacter.getPlayer().getBWidth(), PlayingCharacter.getPlayer().getBHeight());
-
-                    //if(bp != null)
-                    //    PlayingCharacter.getPlayer().updatePosition(bp);
                 }
             };
 
