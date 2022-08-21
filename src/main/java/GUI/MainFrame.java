@@ -133,7 +133,13 @@ public class MainFrame extends JFrame {
         double widthRescalingFactor = (double) SCREEN_WIDTH / (roomBWidth * GameManager.BLOCK_SIZE);
         widthRescalingFactor = Math.floor(widthRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
-        double heightRescalingFactor = (double) SCREEN_HEIGHT / (roomBHeight * GameManager.BLOCK_SIZE);
+        // se la DEFAULT_GAME_HEIGHT non è stata ancora inizializzata allora usa la SCREEN_HEIGHT
+        // questo perchè il metodo viene innanzitutto chiamato nell'inizializzazione della DEFAULT_GAME_HEIGHT,
+        // per cui serve utilizzare la SCREEN_HEIGH; in seguito per tutte le altre chiamate si utilizzerà
+        // regolarmente la DEFAULT_GAME_HEIGHT.
+        int height = DEFAULT_GAME_HEIGHT == 0 ? SCREEN_HEIGHT : DEFAULT_GAME_HEIGHT;
+
+        double heightRescalingFactor = (double) height / (roomBHeight * GameManager.BLOCK_SIZE);
         heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
         return Math.min(widthRescalingFactor, heightRescalingFactor);
