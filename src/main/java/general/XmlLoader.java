@@ -7,6 +7,7 @@ import entity.characters.PlayingCharacter;
 import entity.items.*;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import events.executors.TextBarUpdateExecutor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -186,6 +187,9 @@ public class XmlLoader
             case "loadFloor":
                 actionParsed = parseLoadFloor(actionElement);
                 break;
+            case "itemSpeak":
+                actionParsed = parseItemSpeak(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -258,6 +262,18 @@ public class XmlLoader
         String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
         // restituisci runnable corrispondente
         return () -> ((GameCharacter) GameManager.getPiece(subjectName)).speak(sentenceNewLined);
+    }
+
+    private static Runnable parseItemSpeak(Element eAction)
+    {
+        String subjectName = getTagValue(eAction, "subject");
+        // ricava stringa da stampare
+        String sentence = getTagValue(eAction, "sentence");
+        // formatta stringa (spazi)
+        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
+        String toPrint = subjectName + ": " + sentenceNewLined;
+        // restituisci runnable corrispondente
+        return () -> TextBarUpdateExecutor.executeDisplay(toPrint);
     }
 
     /**

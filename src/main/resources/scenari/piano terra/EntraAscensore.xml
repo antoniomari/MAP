@@ -10,28 +10,28 @@
         <finalWait>300</finalWait>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
-        <method>speak</method>
+        <subject>Ascensore</subject>
+        <method>itemSpeak</method>
         <sentence>Benvenuto in AsCeNsOrTe!</sentence>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
-        <method>speak</method>
+        <subject>Ascensore</subject>
+        <method>itemSpeak</method>
         <sentence>L'ascensore che decide la tua sorte!</sentence>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
-        <method>speak</method>
+        <subject>Ascensore</subject>
+        <method>itemSpeak</method>
         <sentence>Aspetta, non me lo dire! (*) So io dove vuoi andare.</sentence>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
-        <method>speak</method>
+        <subject>Ascensore</subject>
+        <method>itemSpeak</method>
         <sentence>Andiamo al piano...</sentence>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
-        <method>speak</method>
+        <subject>Ascensore</subject>
+        <method>itemSpeak</method>
         <sentence>MIST!!!!</sentence>
     </azione>
     <azione>
