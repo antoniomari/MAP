@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>11</x>
+        <y>13</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Dovrei essere giunto nella sala (*) dei pc, vedo troppi pc quale sarà quello giusto? </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>A costo di riprogrammarli tutti (*) lo troverò!!!  </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>20</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Questo pc alla mia sinistra (*) potrebbe competere con il P6060 della olivetti  </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Peccato che siamo nel 2025!! (*) Spero che quello scienziato non sia un ciarlatano. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Altro che gioiellino dell'elettronica (*) è tanto che abbia preso delle lezioni </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>di elettrotecnica </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>16</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ecco qui ci sono dei server (*) scommetto che ci gira su linux debian. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Maledetti comunisti! (*) Glielo do io il software libero.  </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Meglio che mi metta al lavoro. </sentence>
+    </azione>
+</scenario>
