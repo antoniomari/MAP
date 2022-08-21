@@ -122,6 +122,16 @@
         <descrizione>Una bottiglietta vuota.</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="DistributoreAcqua">
+        <classe>Item</classe>
+        <descrizione>Un distributore di acqua naturale.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="MacchinaCaffe">
+        <classe>Item</classe>
+        <descrizione>Una macchina da caffè espresso. Sembra manchi l'acqua.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
     <oggetto nome="Tazzina">
         <classe>PickupableItem</classe>
         <descrizione>Una tazza di caffè.</descrizione>

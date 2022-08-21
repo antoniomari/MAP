@@ -5,5 +5,26 @@
     <musica>src/main/resources/audio/musica/ALU.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <subject>ALUB</subject>
+            <method>add</method>
+            <what>MacchinaCaffe</what>
+            <x>1</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>ALUB</subject>
+            <method>add</method>
+            <what>DistributoreAcqua</what>
+            <x>29</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>ALUB</subject>
+            <method>add</method>
+            <what>Bottiglietta</what>
+            <x>16</x>
+            <y>8</y>
+        </azione>
     </scenario>
 </stanza>
