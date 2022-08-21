@@ -123,6 +123,16 @@
         <canUse>false</canUse>
         <onUseWith>
             <keep>false</keep>
+            <target>DistributoreAcqua</target>
+            <scenario>src/main/resources/scenari/piano ALU/RiempiAcqua.xml</scenario>
+        </onUseWith>
+    </oggetto>
+    <oggetto nome="BottigliettaPiena">
+        <classe>PickupableItem</classe>
+        <descrizione>Una bottiglietta piena d'acqua minerale.</descrizione>
+        <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
             <target>MacchinaCaffe</target>
             <scenario>src/main/resources/scenari/piano ALU/UtilizzaMacchinaCaffe.xml</scenario>
         </onUseWith>

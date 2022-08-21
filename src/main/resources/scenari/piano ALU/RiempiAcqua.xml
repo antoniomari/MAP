@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
-    <!--
     <azione>
         <subject>Schwartz</subject>
         <method>move</method>
@@ -25,5 +24,11 @@
         <method>speak</method>
         <sentence>Ahhh ecco fatto è piena. </sentence>
     </azione>
-    -->
+    <azione>
+        <subject>ALUB</subject>
+        <method>add</method>
+        <what>BottigliettaPiena</what>
+        <x>27</x>
+        <y>10</y>
+    </azione>
 </scenario>
