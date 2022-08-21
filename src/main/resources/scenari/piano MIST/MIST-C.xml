@@ -5,12 +5,12 @@
     <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <azione num="2">
+        <azione>
             <subject>Mist-C</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/piano MIST/MIST-Bagno.xml</what>
         </azione>
-        <azione num="4">
+        <azione>
             <subject>Mist-C</subject>
             <method>add</method>
             <what>ArmadioMIST</what>

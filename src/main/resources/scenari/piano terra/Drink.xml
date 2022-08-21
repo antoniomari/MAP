@@ -14,7 +14,7 @@
         <how>relative</how>
         <finalWait>1000</finalWait>
     </azione>
-    <azione num="5">
+    <azione>
         <subject>PT-B</subject>
         <method>add</method>
         <what>Cocktail</what>

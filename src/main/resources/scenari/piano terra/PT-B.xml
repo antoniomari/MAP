@@ -5,7 +5,7 @@
     <musica>src/main/resources/audio/musica/PT.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <azione num="1">
+        <azione>
             <subject>PT-B</subject>
             <method>add</method>
             <what>Schwartz</what>
@@ -16,43 +16,43 @@
             <method>addToInventory</method>
             <what>Telefono</what>
         </azione>
-        <azione num="2">
+        <azione>
             <subject>PT-B</subject>
             <method>setEast</method>
             <what>src/main/resources/scenari/piano terra/PT-D.xml</what>
         </azione>
-        <azione num="3">
+        <azione>
             <subject>PT-B</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/piano terra/PT-C.xml</what>
         </azione>
-        <azione num="4">
+        <azione>
             <subject>PT-B</subject>
             <method>setNorth</method>
             <what>src/main/resources/scenari/piano terra/PT-A.xml</what>
         </azione>
-        <azione num="5">
+        <azione>
             <subject>PT-B</subject>
             <method>add</method>
             <what>Cameriere</what>
             <x>20</x>
             <y>11</y>
         </azione>
-        <azione num="2">
+        <azione>
             <subject>PT-B</subject>
             <method>add</method>
             <what>Antonio</what>
             <x>30</x>
             <y>12</y>
         </azione>
-        <azione num="3">
+        <azione>
             <subject>PT-B</subject>
             <method>add</method>
             <what>Diego</what>
             <x>5</x>
             <y>13</y>
         </azione>
-        <azione num="4">
+        <azione>
             <subject>PT-B</subject>
             <method>add</method>
             <what>Nicolas</what>

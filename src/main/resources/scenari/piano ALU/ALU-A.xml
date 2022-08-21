@@ -22,12 +22,12 @@
             <method>setScenarioOnEnter</method>
             <what>src/main/resources/scenari/piano ALU/EntraAscensore.xml</what>
         </azione>
-        <azione num="3">
+        <azione>
             <subject>ALUA</subject>
             <method>setEast</method>
             <what>src/main/resources/scenari/piano ALU/ALU-D.xml</what>
         </azione>
-        <azione num="4">
+        <azione>
             <subject>ALUA</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/piano ALU/ALU-B.xml</what>

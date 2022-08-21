@@ -5,7 +5,7 @@
         <subject>Cuoco1</subject>
         <method>animate</method>
     </azione>
-    <azione num="1">
+    <azione>
         <subject>Cuoco1</subject>
         <method>speak</method>
         <sentence>AAAAAAAAAAAAAHHH!!!</sentence>

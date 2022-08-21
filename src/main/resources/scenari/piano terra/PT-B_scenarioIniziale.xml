@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <scenario>
 	<mode>sequence</mode>
-	<azione num="1">
+	<azione>
 		<subject>Schwartz</subject>
 		<method>move</method>
 		<x>0</x>
@@ -9,7 +9,7 @@
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
-	<azione num="5">
+	<azione>
 		<subject>Schwartz</subject>
 		<method>speak</method>
 		<sentence>Che bel posto</sentence>
@@ -19,7 +19,7 @@
 		<method>speak</method>
 		<sentence>Quasi quasi mi faccio un drink</sentence>
 	</azione>
-	<azione num="7">
+	<azione>
 		<subject>Antonio</subject>
 		<method>move</method>
 		<x>0</x>
@@ -27,7 +27,7 @@
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
-	<azione num="7">
+	<azione>
 		<subject>Antonio</subject>
 		<method>move</method>
 		<x>-5</x>
@@ -67,54 +67,52 @@
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
-
 	<azione>
 		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>PRESENTAZzzzzzzzzzzzIONE</sentence>
 	</azione>
-	<azione num="11">
+	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
 		<sentence>PRESENTAZIONE</sentence>
 	</azione>
-	<azione num="12">
+	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
 		<sentence>PRESENTAZIONE</sentence>
 	</azione>
-	<azione num="13">
+	<azione>
 		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>Siamo davvero orgogliosi</sentence>
 	</azione>
-	<azione num="14">
+	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
 		<sentence>di avere uno scienziato rinomato</sentence>
 	</azione>
-	<azione num="15">
+	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
 		<sentence>al nostro congresso sull'AI</sentence>
 	</azione>
-	<azione num="16">
+	<azione>
 		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>Lì c'è l'open bar</sentence>
 	</azione>
-	<azione num="17">
+	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
 		<sentence>perchè non vai a farti un drink?</sentence>
 	</azione>
-	<azione num="18">
+	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
 		<sentence>È tutto gratis!</sentence>
 	</azione>
-	
-	<azione num="19">
+	<azione>
 		<subject>Antonio</subject>
 		<method>move</method>
 		<x>36</x>
@@ -133,7 +131,7 @@
 		<x>2</x>
 		<y>18</y>
 	</azione>
-	<azione num="20">
+	<azione>
 		<subject>Diego</subject>
 		<method>move</method>
 		<x>36</x>
@@ -152,7 +150,7 @@
 		<x>14</x>
 		<y>14</y>
 	</azione>
-	<azione num="21">
+	<azione>
 		<subject>Nicolas</subject>
 		<method>move</method>
 		<x>36</x>

@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <scenario>
 	<mode>sequence</mode>
-	<azione num="1">
+	<azione>
 		<subject>Cameriere</subject>
 		<method>speak</method>
 		<sentence>Salve, posso prepararle un drink? (*) È gratis!</sentence>
 	</azione>
-	<azione num="2">
+	<azione>
 		<subject>Schwartz</subject>
 		<method>speak</method>
 		<sentence>Sì, ne vorrei uno che mi ricordi la mia terra natìa</sentence>
 	</azione>
-	<azione num="3">
+	<azione>
 		<subject>Cameriere</subject>
 		<method>speak</method>
 		<sentence>Posso farne di qualunque tipo...</sentence>
 	</azione>
-	<azione num="4">
+	<azione>
 		<subject>Cameriere</subject>
 		<method>speak</method>
 		<sentence>però dovrà essere lei a procurarmi (*) l'ingrediente principale del suo drink</sentence>
 	</azione>
-	<azione num="5">
+	<azione>
 		<subject>Cameriere</subject>
 		<method>speak</method>
 		<sentence>In questo posto abbiamo una cucina (*) ben fornita</sentence>

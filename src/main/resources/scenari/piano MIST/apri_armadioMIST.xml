@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
-    <azione num="1">
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Ho trovato qualcosa di utile.</sentence>
     </azione>
-    <azione num="2">
+    <azione>
         <subject>Mist-C</subject>
         <subjectClass>Room</subjectClass>
         <method>add</method>
@@ -14,7 +14,7 @@
         <x>22</x>
         <y>10</y>
     </azione>
-    <azione num="3">
+    <azione>
         <subject>Mist-C</subject>
         <subjectClass>Room</subjectClass>
         <method>add</method>
