@@ -121,6 +121,11 @@
         <classe>PickupableItem</classe>
         <descrizione>Una bottiglietta vuota.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>MacchinaCaffe</target>
+            <scenario>src/main/resources/scenari/piano ALU/UtilizzaMacchinaCaffe.xml</scenario>
+        </onUseWith>
     </oggetto>
     <oggetto nome="DistributoreAcqua">
         <classe>Item</classe>

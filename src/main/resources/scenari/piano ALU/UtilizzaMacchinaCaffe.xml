@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ecco, come pensavo gli serviva (*) solo dell'acqua ora funziona e posso farmi </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>un buon caffè. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Beh comprensibile che quello (*) scienzato strambo sul suo piano abbia una </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>macchina da caffè, quale (*) informatico avrebbe il coraggio di iniziare </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>a lavorare senza un buon (*) caffè. </sentence>
+    </azione>
+    <!--
+    // bisogna implementare la logica per far si che ora la tazzina di caffè
+    // compaia nell'invetario
+    -->
+</scenario>

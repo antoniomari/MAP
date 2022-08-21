@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <!--
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>28</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Va davvero lenta questa macchinetta (*) nell'erogare acqua. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>...... </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ahhh ecco fatto è piena. </sentence>
+    </azione>
+    -->
+</scenario>
