@@ -30,30 +30,32 @@ public class DoorLike extends Item implements Openable, Lockable
     private final static BufferedImage SPRITESHEET = SpriteManager.loadSpriteSheet(SPRITESHEET_PATH);
 
     // ANIMAZIONI
-    private static final List<Image> OPEN_FRAMES;
-    private static final List<Image> CLOSE_FRAMES;
+    private List<Image> openFrames;
+    private List<Image> closeFrames;
 
-    static
-    {
-        // inizializzazione frames
-        Image closed = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "closed");
-        Image open1 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open1");
-        Image open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open2");
-        Image open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, "open3");
-
-        OPEN_FRAMES = SpriteManager.getKeywordOrderedFrames(SPRITESHEET, JSON_PATH, "open");
-
-        CLOSE_FRAMES = new ArrayList<>();
-        CLOSE_FRAMES.add(open3);
-        CLOSE_FRAMES.add(open2);
-        CLOSE_FRAMES.add(open1);
-        CLOSE_FRAMES.add(closed);
-
-    }
 
     public DoorLike(String name, String description)
     {
         super(name, description, SPRITESHEET, JSON_PATH);
+
+        // inizializza frames di animazione
+        initFrames();
+    }
+
+    private void initFrames()
+    {
+        Image closed = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Closed");
+        Image open1 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Open1");
+        Image open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Open2");
+        Image open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Open3");
+
+        openFrames = SpriteManager.getKeywordOrderedFrames(SPRITESHEET, JSON_PATH, getName() + "Open");
+
+        closeFrames = new ArrayList<>();
+        closeFrames.add(open3);
+        closeFrames.add(open2);
+        closeFrames.add(open1);
+        closeFrames.add(closed);
     }
 
     public void setInitialState(boolean isOpen, boolean isLocked)
@@ -101,13 +103,13 @@ public class DoorLike extends Item implements Openable, Lockable
     @Override
     public List<Image> getOpenFrames()
     {
-        return OPEN_FRAMES;
+        return openFrames;
     }
 
     @Override
     public List<Image> getCloseFrames()
     {
-        return CLOSE_FRAMES;
+        return closeFrames;
     }
 
     @Override

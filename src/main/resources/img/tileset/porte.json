@@ -1,43 +1,4 @@
 {
-  "Ascensore":
-  {
-    "x": 0,
-    "y": 0,
-    "width": 96,
-    "height": 96
-  },
-
-  "closed":
-  {
-    "x": 0,
-    "y": 0,
-    "width": 96,
-    "height": 96
-  },
-
-  "open1":
-  {
-    "x": 0,
-    "y": 96,
-    "width": 96,
-    "height": 96
-  },
-
-  "open2":
-  {
-    "x": 0,
-    "y": 192,
-    "width": 96,
-    "height": 96
-  },
-
-  "open3":
-  {
-    "x": 0,
-    "y": 288,
-    "width": 96,
-    "height": 96
-  },
 
   "AscensoreALU":
   {
