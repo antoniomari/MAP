@@ -1,0 +1,97 @@
+{
+  "monitor1":
+  {
+    "x": 0,
+    "y": 24,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor2":
+  {
+    "x": 144,
+    "y": 24,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor3":
+  {
+    "x": 288,
+    "y": 24,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor4":
+  {
+    "x": 0,
+    "y": 120,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor5":
+  {
+    "x": 144,
+    "y": 120,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor6":
+  {
+    "x": 288,
+    "y": 120,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor7":
+  {
+    "x": 0,
+    "y": 216,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor8":
+  {
+    "x": 144,
+    "y": 216,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor9":
+  {
+    "x": 288,
+    "y": 216,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor10":
+  {
+    "x": 0,
+    "y": 312,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor11":
+  {
+    "x": 144,
+    "y": 312,
+    "width": 144,
+    "height": 72
+  },
+
+  "monitor12":
+  {
+    "x": 288,
+    "y": 312,
+    "width": 144,
+    "height": 72
+  }
+}

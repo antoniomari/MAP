@@ -1,0 +1,97 @@
+{
+  "radar1":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar2":
+  {
+    "x": 144,
+    "y": 0,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar3":
+  {
+    "x": 288,
+    "y": 0,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar4":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar5":
+  {
+    "x": 144,
+    "y": 96,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar6":
+  {
+    "x": 288,
+    "y": 96,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar7":
+  {
+    "x": 0,
+    "y": 192,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar8":
+  {
+    "x": 144,
+    "y": 192,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar9":
+  {
+    "x": 288,
+    "y": 192,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar10":
+  {
+    "x": 0,
+    "y": 288,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar11":
+  {
+    "x": 144,
+    "y": 288,
+    "width": 120,
+    "height": 96
+  },
+
+  "radar12":
+  {
+    "x": 288,
+    "y": 288,
+    "width": 120,
+    "height": 96
+  }
+}
