@@ -33,6 +33,8 @@ public class MainFrame extends JFrame {
     private static final double DEFAULT_SCALING_FACTOR;
     private static final int DEFAULT_GAME_HEIGHT;
 
+    private static final String STARTING_MUSIC_PATH = "src/main/resources/audio/musica/Menù iniziale.wav";
+
     /** Path cursore personalizzato. */
     private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
 
@@ -73,6 +75,8 @@ public class MainFrame extends JFrame {
     private JPanel gamePanel;
     /** Pannello contenente il menu di pausa. */
     private JLayeredPane menuPanel;
+    /** Pannello contenente il menu d'inizio. */
+    private JLayeredPane startingMenuPanel;
 
     /** Pannello padre di tutti gli altri.
      * Usa CardLayout per alternare la visualizzazione di
@@ -180,8 +184,6 @@ public class MainFrame extends JFrame {
      * Inizializza il frame, ponendolo a schermo intero, e lo registra
      * presso {@link Executor} e {@link GameState}.
      *
-     * Inizializza inoltre la scena iniziale del gioco tramite
-     * {@link MainFrame#setupPlayground()}.
      * Registra inoltre il {@link MainFrame#gameScreenPanel} presso
      * {@link GameScreenManager}.
      *
@@ -197,7 +199,6 @@ public class MainFrame extends JFrame {
 
         // imposta stanza iniziale
         currentRoom = initialRoom;
-        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
 
         // inizializzazione immagine di sfondo
         setupBackground();
@@ -214,8 +215,6 @@ public class MainFrame extends JFrame {
         // registra il gameScreenPanel presso GameScreenManager
         GameScreenManager.setActivePanel(gameScreenPanel);
         GameManager.setMainFrame(this);
-
-        setupPlayground();
     }
 
     // Inizializzazione cursore personalizzato
@@ -269,6 +268,7 @@ public class MainFrame extends JFrame {
         initInventoryPanel();
         initGamePanel();
         initMenuPanel();
+        initStartingMenuPanel();
 
         // -----------------------------------------------------
         //                  SETUP mainPanel
@@ -282,10 +282,13 @@ public class MainFrame extends JFrame {
         // aggiungi CARDS al mainPanel, con le rispettive etichette
         mainPanel.add(menuPanel, "MENU");
         mainPanel.add(gamePanel, "GIOCO");
+        mainPanel.add(startingMenuPanel, "INIZIO");
 
         // mostra la schermata di gioco
-        cl.show(mainPanel, "GIOCO");
-        currentDisplaying = "GIOCO";
+        cl.show(mainPanel, "INIZIO");
+        currentDisplaying = "INIZIO";
+        // imposta musica
+        SoundHandler.playWav(STARTING_MUSIC_PATH, SoundHandler.Mode.MUSIC);
 
         mainPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
@@ -299,12 +302,12 @@ public class MainFrame extends JFrame {
     }
 
     // setup scena iniziale di gioco TODO: deprecare
+    // TODO: posticipare correttamente caricamento, non deve avvenire all'inizio dell'esecuzione
+    // ma solo all'inizio del gioco
     private void setupPlayground()
     {
-        //DBManager.setupInventory();
+        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
 
-        // TODO: attenzione alla current room
-        // ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/demoRoom.xml");
         ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
         GameManager.startScenario(a);
     }
@@ -427,6 +430,34 @@ public class MainFrame extends JFrame {
         menuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
+    // inizializza menuPanel
+    public void initStartingMenuPanel()
+    {
+        startingMenuPanel = new JLayeredPane();
+
+        startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        startingMenuPanel.setOpaque(true);
+        startingMenuPanel.setBackground(Color.BLACK);
+
+
+        String MENU_BACK_PATH = "/img/schermataIniziale.png";
+
+        Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
+        double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
+
+        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
+                rescalingBackgroundFactor ));
+
+        int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
+
+        backLabel.setBounds(startingMenuPanel.getInsets().left + xBorder, startingMenuPanel.getInsets().top,
+                backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
+
+        startingMenuPanel.add(backLabel, Integer.valueOf(0));
+
+        startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+    }
+
     /**
      * Visualizza menu di gioco oppure chiude il menu di gioco.
      *
@@ -448,6 +479,22 @@ public class MainFrame extends JFrame {
             currentDisplaying = "GIOCO";
         }
 
+    }
+
+    public void play()
+    {
+        if(GameState.getState() != GameState.State.INIT)
+        {
+            return;
+        }
+
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+
+        cl.show(mainPanel, "GIOCO");
+        currentDisplaying = "GIOCO";
+
+        GameState.changeState(GameState.State.PLAYING);
+        setupPlayground();
     }
 
     /**
@@ -487,9 +534,7 @@ public class MainFrame extends JFrame {
         }
         //</editor-fold>
 
-        // Room cucina = DBManager.loadRoom("Cucina"); todo: riabilitare
         Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/piano terra/PT-B.xml");
-        // Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/demoRoom.xml");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));

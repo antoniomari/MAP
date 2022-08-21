@@ -42,6 +42,7 @@ public class GameState
 
     public enum State
     {
+        INIT,
         PLAYING,
         MOVING,
         TEXT_BAR,
@@ -50,7 +51,7 @@ public class GameState
 
     static
     {
-        currentState = State.PLAYING;
+        currentState = State.INIT;
     }
 
     public static void setMainFrame(MainFrame frame)
@@ -140,6 +141,11 @@ public class GameState
                                                                 mainFrame.getTextBarPanel()::hideTextBar,
                                                                 null, State.TEXT_BAR);
         mainFrame.addKeyListener(closeBarListener);
+
+        // listener per iniziare il gioco
+        GameKeyListener startGameListener = new GameKeyListener(KeyEvent.VK_SPACE, mainFrame::play, null,
+                State.INIT);
+        mainFrame.addKeyListener(startGameListener);
     }
 
     public static void changeState(State newState)
