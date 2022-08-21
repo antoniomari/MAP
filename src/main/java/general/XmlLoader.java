@@ -448,9 +448,10 @@ public class XmlLoader
     {
         String floorName = getTagValue(eAction, "floor");
 
-        String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
-        String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
-        String BUG_PATH = "src/main/resources/scenari/piano BUG/BUG-A.xml";
+        final String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
+        final String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
+        final String BUG_PATH = "src/main/resources/scenari/piano BUG/BUG-A.xml";
+        final String SERVER_PATH = "src/main/resources/scenari/piano SERVER/ServerRoom.xml";
 
         String floorPath;
 
@@ -464,6 +465,9 @@ public class XmlLoader
                 break;
             case "BUG":
                 floorPath = BUG_PATH;
+                break;
+            case "SERVER":
+                floorPath = SERVER_PATH;
                 break;
             default:
                 throw new GameException("Piano non valido");

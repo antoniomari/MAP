@@ -211,4 +211,15 @@
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
     </oggetto>
+    <oggetto nome="AscensoreSERVER">
+        <classe>DoorLike</classe>
+        <descrizione>Un ascensore rosso</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
+        <onOpen>
+            <mode>once</mode>
+            <effetto>src/main/resources/scenari/fine.xml</effetto>
+        </onOpen>
+    </oggetto>
 </oggetti>

@@ -14,6 +14,16 @@
         </azione>
         <azione>
             <subject>Bug-A</subject>
+            <method>setNorth</method>
+            <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
+        </azione>
+        <azione>
+            <subject>Ascensore</subject>
+            <method>setScenarioOnEnter</method>
+            <what>src/main/resources/scenari/piano BUG/EntraAscensore.xml</what>
+        </azione>
+        <azione>
+            <subject>Bug-A</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/piano BUG/BUG-B.xml</what>
         </azione>

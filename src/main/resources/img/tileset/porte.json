@@ -198,5 +198,45 @@
     "y": 288,
     "width": 96,
     "height": 96
+  },
+
+  "AscensoreSERVER":
+  {
+    "x": 576,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreSERVERClosed":
+  {
+    "x": 576,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreSERVEROpen1":
+  {
+    "x": 576,
+    "y": 96,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreSERVEROpen2":
+  {
+    "x": 576,
+    "y": 192,
+    "width": 96,
+    "height": 96
+  },
+
+  "AscensoreSERVEROpen3":
+  {
+    "x": 576,
+    "y": 288,
+    "width": 96,
+    "height": 96
   }
 }
