@@ -193,4 +193,15 @@
         <descrizione>Strani fogli comparsi dal nulla.</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="AscensoreBUG">
+        <classe>DoorLike</classe>
+        <descrizione>Un ascensore bianco</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
+        <onOpen>
+            <mode>once</mode>
+            <effetto>src/main/resources/scenari/fine.xml</effetto>
+        </onOpen>
+    </oggetto>
 </oggetti>

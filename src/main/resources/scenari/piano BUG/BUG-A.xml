@@ -7,6 +7,13 @@
         <mode>instant</mode>
         <azione>
             <subject>Bug-A</subject>
+            <method>add</method>
+            <what>AscensoreBUG</what>
+            <x>14</x>
+            <y>7</y>
+        </azione>
+        <azione>
+            <subject>Bug-A</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/piano BUG/BUG-B.xml</what>
         </azione>
