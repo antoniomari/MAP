@@ -197,5 +197,45 @@
     "y": 288,
     "width": 96,
     "height": 96
+  },
+
+  "PortaMIST":
+  {
+    "x": 480,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "PortaMISTClosed":
+  {
+    "x": 480,
+    "y": 0,
+    "width": 96,
+    "height": 96
+  },
+
+  "PortaMISTOpen1":
+  {
+    "x": 480,
+    "y": 96,
+    "width": 96,
+    "height": 96
+  },
+
+  "PortaMISTOpen2":
+  {
+    "x": 480,
+    "y": 192,
+    "width": 96,
+    "height": 96
+  },
+
+  "PortaMISTOpen3":
+  {
+    "x": 480,
+    "y": 288,
+    "width": 96,
+    "height": 96
   }
 }

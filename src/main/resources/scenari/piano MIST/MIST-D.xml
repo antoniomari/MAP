@@ -7,6 +7,13 @@
         <mode>instant</mode>
         <azione>
             <subject>Mist-D</subject>
+            <method>add</method>
+            <what>PortaMIST</what>
+            <x>18</x>
+            <y>8</y>
+        </azione>
+        <azione>
+            <subject>Mist-D</subject>
             <method>setNorth</method>
             <what>src/main/resources/scenari/piano MIST/MIST-C.xml</what>
         </azione>

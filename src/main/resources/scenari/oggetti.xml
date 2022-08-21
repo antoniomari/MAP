@@ -204,4 +204,11 @@
             <effetto>src/main/resources/scenari/fine.xml</effetto>
         </onOpen>
     </oggetto>
+    <oggetto nome="PortaMIST">
+        <classe>DoorLike</classe>
+        <descrizione>Una porta automatica</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
+    </oggetto>
 </oggetti>
