@@ -453,7 +453,7 @@ public class MainFrame extends JFrame {
 
         // bottoni-label
         JLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
-                "/img/Menu iniziale/nuovapartita pressed.png", null);
+                "/img/Menu iniziale/nuovapartita pressed.png", this::play);
 
         nuovaPartitaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
                 menuPanel.getInsets().top + (SCREEN_HEIGHT * 8) / 24,
@@ -476,7 +476,7 @@ public class MainFrame extends JFrame {
 
         // bottoni-label
         JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
-                "/img/Menu iniziale/esci pressed.png", null);
+                "/img/Menu iniziale/esci pressed.png", () -> System.exit(0));
 
         esciLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
                 menuPanel.getInsets().top + (SCREEN_HEIGHT * 20) / 24,
