@@ -1,7 +1,4 @@
 {
-  "width": 32,
-  "height": 16,
-
   "pavimento":
   [
     {
@@ -21,6 +18,12 @@
   {
     "x": 16,
     "y": 13
+  },
+
+  "eastArrow":
+  {
+    "x": 28,
+    "y": 12
   },
 
   "westArrow":
