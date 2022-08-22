@@ -380,12 +380,6 @@ public class MainFrame extends JFrame {
     public void initMenuPanel()
     {
         menuPanel = new JLayeredPane();
-
-        // Creazione bottoni per menuPanel TODO: modificare sta cacata
-        JButton okButton = new JButton("Ok");
-        JButton exitButton = new JButton("Esci");
-        exitButton.addActionListener((e) -> System.exit(0));
-
         menuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         menuPanel.setOpaque(true);
         menuPanel.setBackground(Color.BLACK);
@@ -399,32 +393,32 @@ public class MainFrame extends JFrame {
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
                                                                                         rescalingBackgroundFactor ));
 
-        int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
+        final int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
+        final int LEFT = menuPanel.getInsets().left;
+        final int TOP = menuPanel.getInsets().top;
 
-        backLabel.setBounds(menuPanel.getInsets().left + xBorder, menuPanel.getInsets().top, backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
+        backLabel.setBounds(LEFT + xBorder, TOP, backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
-        okButton.setBounds(menuPanel.getInsets().left + 100, menuPanel.getInsets().top + 100, 50, 50);
-        exitButton.setBounds(menuPanel.getInsets().left + 200, menuPanel.getInsets().top + 200, 50, 50);
+        JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
+            "/img/Menu iniziale/continua pressed.png", () -> showMenu(false));
+        continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
+                continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
 
+        JLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
+                "/img/Menu iniziale/impostazioni pressed.png", null);
+        impostazioniLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 16) / 24,
+                impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
 
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        JLabel impostLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet("/img/impostazioni.png"), rescalingFactor / 3));
-
-
-        buttonPanel.add(impostLabel, BorderLayout.CENTER);
-
-        buttonPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));  // TODO : capire dimensionamenti
-        buttonPanel.setBounds(menuPanel.getInsets().left, menuPanel.getInsets().top, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-        buttonPanel.setOpaque(true);
-        buttonPanel.setBackground(new Color(0, 0, 0, 0));
-
-        menuPanel.add(buttonPanel, Integer.valueOf(2));
+        JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
+                "/img/Menu iniziale/esci pressed.png", () -> System.exit(0));
+        esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
+                esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
 
         menuPanel.add(backLabel, Integer.valueOf(0));
+        menuPanel.add(continuaLabel, Integer.valueOf(1));
+        menuPanel.add(impostazioniLabel, Integer.valueOf(1));
+        menuPanel.add(esciLabel, Integer.valueOf(1));
 
-        // Aggiungi bottoni al menuPanel
-        menuPanel.add(okButton, Integer.valueOf(3));
-        menuPanel.add(exitButton, Integer.valueOf(3));
 
         menuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
@@ -446,40 +440,35 @@ public class MainFrame extends JFrame {
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
                 rescalingBackgroundFactor ));
 
-        int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
+        final int LEFT = startingMenuPanel.getInsets().left;
+        final int TOP = startingMenuPanel.getInsets().top;
 
-        backLabel.setBounds(startingMenuPanel.getInsets().left + xBorder, startingMenuPanel.getInsets().top,
+        final int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
+
+        backLabel.setBounds(LEFT + xBorder, TOP,
                 backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
         // bottoni-label
         JLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
                 "/img/Menu iniziale/nuovapartita pressed.png", this::play);
-
-        nuovaPartitaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
-                menuPanel.getInsets().top + (SCREEN_HEIGHT * 8) / 24,
+        nuovaPartitaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 8) / 24,
                     nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
 
         JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
                 "/img/Menu iniziale/continua pressed.png", null);
-
-        continuaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
-                menuPanel.getInsets().top + (SCREEN_HEIGHT * 12) / 24,
+        continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
                     continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
 
-        // bottoni-label
+
         JLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
                 "/img/Menu iniziale/impostazioni pressed.png", null);
-
-        impostazioniLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
-                menuPanel.getInsets().top + (SCREEN_HEIGHT * 16) / 24,
+        impostazioniLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 16) / 24,
                     impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
 
-        // bottoni-label
+
         JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
                 "/img/Menu iniziale/esci pressed.png", () -> System.exit(0));
-
-        esciLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
-                menuPanel.getInsets().top + (SCREEN_HEIGHT * 20) / 24,
+        esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
                     esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
 
 
@@ -523,11 +512,13 @@ public class MainFrame extends JFrame {
         {
             cl.show(mainPanel, "MENU");
             currentDisplaying = "MENU";
+            GameState.changeState(GameState.State.INIT);
         }
         else
         {
             cl.show(mainPanel, "GIOCO");
             currentDisplaying = "GIOCO";
+            GameState.changeState(GameState.State.PLAYING);
         }
 
     }
