@@ -11,15 +11,15 @@
         <subjectClass>Room</subjectClass>
         <method>add</method>
         <what>Filamento</what>
-        <x>22</x>
-        <y>10</y>
+        <x>4</x>
+        <y>11</y>
     </azione>
     <azione>
         <subject>Mist-C</subject>
         <subjectClass>Room</subjectClass>
         <method>add</method>
         <what>Registratore</what>
-        <x>24</x>
-        <y>10</y>
+        <x>6</x>
+        <y>11</y>
     </azione>
 </scenario>

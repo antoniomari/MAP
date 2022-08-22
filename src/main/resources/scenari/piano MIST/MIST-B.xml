@@ -5,5 +5,12 @@
     <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <subject>Mist-B</subject>
+            <method>add</method>
+            <what>Stampante</what>
+            <x>11</x>
+            <y>7</y>
+        </azione>
     </scenario>
 </stanza>

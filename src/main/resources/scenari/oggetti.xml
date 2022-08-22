@@ -85,14 +85,27 @@
         <classe>Container</classe>
         <descrizione>Un armadio bloccato, bisogna usare la forza</descrizione>
         <canUse>false</canUse>
+        <!--
+        <isLocked>true</isLocked>
+        -->
         <onOpen>
             <mode>once</mode>
-            <effetto>src/main/resources/scenari/piano MIST/apri_armadioMIST.xml</effetto>
+            <effetto>src/main/resources/scenari/piano MIST/RompeArmadio.xml</effetto>
         </onOpen>
+    </oggetto>
+    <oggetto nome="ArmadioAperto">
+        <classe>Container</classe>
+        <descrizione>Ehy, ormai è aperto</descrizione>
+        <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Filamento">
         <classe>PickupableItem</classe>
         <descrizione>Filamento per stampanti 3D.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Stampante">
+        <classe>Item</classe>
+        <descrizione>Stampante 3D.</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Registratore">
@@ -109,6 +122,11 @@
         <classe>PickupableItem</classe>
         <descrizione>Un guanto robotico.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>ArmadioMIST</target>
+            <scenario>src/main/resources/scenari/piano MIST/RompeArmadio.xml</scenario>
+        </onUseWith>
     </oggetto>
     <oggetto nome="Cassetta">
         <classe>PickupableItem</classe>

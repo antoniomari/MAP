@@ -71,6 +71,14 @@
     "height": 48
   },
 
+  "Stampante":
+  {
+    "x": 600,
+    "y": 168,
+    "width": 48,
+    "height": 48
+  },
+
   "Filamento":
   {
     "x": 384,

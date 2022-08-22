@@ -54,4 +54,9 @@
         <method>loadFloor</method>
         <floor>MIST</floor>
     </azione>
+    <azione>
+        <subject>Mist-A</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano MIST/ArrivoPianoMist.xml</what>
+    </azione>
 </scenario>

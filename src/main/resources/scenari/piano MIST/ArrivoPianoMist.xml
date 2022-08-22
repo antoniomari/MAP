@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>16</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Questo piano profuma di arancia...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>25</x>
+        <y>9</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Cosa? Un distributore di medicine gratis? (*) Questi scienziati sanno come divertirsi!</sentence>
+    </azione>
+    <!--
+    <azione>
+        <subject>ALUD</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano ALU/EntrataALU-D-ritrovoDeiPC.xml</what>
+    </azione>
+    -->
+</scenario>

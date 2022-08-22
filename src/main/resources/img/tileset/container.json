@@ -13,5 +13,13 @@
     "y": 288,
     "width": 48,
     "height": 96
+  },
+
+  "ArmadioAperto":
+  {
+    "x": 432,
+    "y": 192,
+    "width": 48,
+    "height": 96
   }
 }
