@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>ArmadioMIST</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Mist-C</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>ArmadioAperto</what>
+        <x>4</x>
+        <y>9</y>
+    </azione>
+    <azione>
+        <subject>Mist-C</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>Filamento</what>
+        <x>6</x>
+        <y>11</y>
+    </azione>
+    <azione>
+        <subject>Mist-C</subject>
+        <subjectClass>Room</subjectClass>
+        <method>add</method>
+        <what>Registratore</what>
+        <x>4</x>
+        <y>11</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>6</x>
+        <y>13</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Mamma che casino, ho spaccato tutto... </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Però ho trovato qualcosa di utile</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Questo guanto è potentissimo! </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Bingo! Questo deve essere il (*) registratore di cui parlava quello scienziato.</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ehy,ma qui c'è una bobina di (*) filamento per stampanti 3D... </sentence>
+    </azione>
+</scenario>

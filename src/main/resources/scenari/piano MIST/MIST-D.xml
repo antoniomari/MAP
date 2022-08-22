@@ -21,15 +21,8 @@
             <subject>Mist-D</subject>
             <method>add</method>
             <what>Guanto</what>
-            <x>10</x>
-            <y>8</y>
-        </azione>
-        <azione>
-            <subject>Mist-D</subject>
-            <method>add</method>
-            <what>Filamento</what>
-            <x>10</x>
-            <y>8</y>
+            <x>14</x>
+            <y>11</y>
         </azione>
     </scenario>
 </stanza>
