@@ -35,6 +35,15 @@ public class StillAnimation extends Animation
     }
 
     @Deprecated
+    public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, int finalWait,
+                          double rescalingFactor)
+    {
+        super(label, frames, rescalingFactor);
+        setDelay(delayMilliseconds);
+        setInitialDelay(initialDelay);
+        setFinalDelay(finalWait);
+    }
+
     public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, int finalWait)
     {
         super(label, frames);
@@ -122,13 +131,14 @@ public class StillAnimation extends Animation
 
 
     public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath, String name,
-                                                       JLabel animationLabel)
+                                                       JLabel animationLabel, double rescalingFactor)
     {
         BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         List<Image> frames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, name);
 
         // TODO: personalizzare delay milliseconds
-        return new StillAnimation(animationLabel, frames, 100, true);
+        return new StillAnimation(animationLabel, frames, 100, true, DEFAULT_END_MILLISECONDS,
+                rescalingFactor);
     }
 
 

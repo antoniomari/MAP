@@ -85,6 +85,14 @@ public abstract class Animation
         this.currentIndex = 0;
     }
 
+    protected Animation(JLabel labelToAnimate, List<Image> frames, double rescalingFactor)
+    {
+        this.label = labelToAnimate;
+        this.frames = frames;
+        resizeFrames(rescalingFactor);
+        this.currentIndex = 0;
+    }
+
     /**
      * Imposta tempo di attesa alla fine dell'esecuzione dell'animazione
      *
@@ -98,12 +106,18 @@ public abstract class Animation
         this.millisecondWaitEnd = milliseconds;
     }
 
+    public Icon getFirstFrameIcon()
+    {
+        return frameIcons.get(0);
+    }
+
+
 
     /**
      * Imposta frameIcons creando icone riscalate per adattarsi
      * alle dimensioni della label
      */
-    protected void resizeFrames()
+    private void resizeFrames()
     {
         // calcola rescaling factor
         frameIcons = new ArrayList<>(frames.size());
@@ -112,6 +126,15 @@ public abstract class Animation
         for(Image i : frames)
             frameIcons.add(SpriteManager.rescaledImageIcon(i, rescalingFactor));
     }
+
+    private void resizeFrames(double rescalingFactor)
+    {
+        frameIcons = new ArrayList<>(frames.size());
+
+        for(Image i : frames)
+            frameIcons.add(SpriteManager.rescaledImageIcon(i, rescalingFactor));
+    }
+
 
     /**
      * Restituisce l'icona successiva a quella attualmente

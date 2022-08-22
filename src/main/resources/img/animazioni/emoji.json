@@ -57,7 +57,7 @@
 
   "esclamativo8":
   {
-    "x": 326,
+    "x": 336,
     "y": 0,
     "width": 48,
     "height": 48
@@ -121,7 +121,7 @@
 
   "interrogativo8":
   {
-    "x": 326,
+    "x": 336,
     "y": 48,
     "width": 48,
     "height": 48
@@ -185,7 +185,7 @@
 
   "notaMusicale8":
   {
-    "x": 326,
+    "x": 336,
     "y": 96,
     "width": 48,
     "height": 48
@@ -249,7 +249,7 @@
 
   "cuore8":
   {
-    "x": 326,
+    "x": 336,
     "y": 144,
     "width": 48,
     "height": 48
@@ -314,7 +314,7 @@
 
   "provocazione8":
   {
-    "x": 326,
+    "x": 336,
     "y": 192,
     "width": 48,
     "height": 48

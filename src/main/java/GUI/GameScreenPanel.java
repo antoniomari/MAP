@@ -259,13 +259,14 @@ public class GameScreenPanel extends JLayeredPane
         //if(animationName.equals("Esplosione"))
         //{
         //JLabel effectLabel = new JLabel(pieceLabelMap.get(piece).getIcon());
-        JLabel effectLabel = new JLabel(piece.getScaledIconSprite(rescalingFactor));
+        JLabel effectLabel = new JLabel();
         add(effectLabel, EFFECT_LAYER);
 
-        GameScreenManager.updateLabelPosition(effectLabel, pos);
-
-        StillAnimation effectAnimation = StillAnimation.createCustomAnimation(spritesheetPath, jsonPath, animationName, effectLabel);
+        StillAnimation effectAnimation = StillAnimation.createCustomAnimation(spritesheetPath, jsonPath, animationName, effectLabel, rescalingFactor);
         effectAnimation.setFinalDelay(finalWait);
+
+        effectLabel.setIcon(effectAnimation.getFirstFrameIcon());
+        GameScreenManager.updateLabelPosition(effectLabel, pos);
 
         effectAnimation.setActionOnEnd(() ->
                     {
