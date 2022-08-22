@@ -1,10 +1,8 @@
 package GUI;
 
 import GUI.gamestate.GameState;
-import entity.characters.PlayingCharacter;
 import events.executors.Executor;
 import general.ActionSequence;
-import database.DBManager;
 import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.Room;
@@ -306,10 +304,10 @@ public class MainFrame extends JFrame {
     // ma solo all'inizio del gioco
     private void setupPlayground()
     {
-        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
-
         ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
+        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
         GameManager.startScenario(a);
+
     }
 
     // inizializza gameScreenPanel
@@ -440,7 +438,7 @@ public class MainFrame extends JFrame {
         startingMenuPanel.setBackground(Color.BLACK);
 
 
-        String MENU_BACK_PATH = "/img/schermataIniziale.png";
+        String MENU_BACK_PATH = "/img/Menu iniziale/background.png";
 
         Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
         double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
@@ -453,7 +451,47 @@ public class MainFrame extends JFrame {
         backLabel.setBounds(startingMenuPanel.getInsets().left + xBorder, startingMenuPanel.getInsets().top,
                 backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
+        // bottoni-label
+        JLabel nuovaPartitaLabel = new JLabel(SpriteManager.rescaledImageIcon(
+                                    SpriteManager.loadSpriteSheet("/img/Menu iniziale/nuovapartita.png"),
+                                    rescalingFactor / 2));
+
+        nuovaPartitaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
+                menuPanel.getInsets().top + (SCREEN_HEIGHT * 8) / 24,
+                    nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
+
+        JLabel continuaLabel = new JLabel(SpriteManager.rescaledImageIcon(
+                SpriteManager.loadSpriteSheet("/img/Menu iniziale/continua.png"),
+                rescalingFactor / 2));
+
+        continuaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
+                menuPanel.getInsets().top + (SCREEN_HEIGHT * 12) / 24,
+                    continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
+
+        // bottoni-label
+        JLabel impostazioniLabel = new JLabel(SpriteManager.rescaledImageIcon(
+                SpriteManager.loadSpriteSheet("/img/Menu iniziale/impostazioni.png"),
+                rescalingFactor / 2));
+
+        impostazioniLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
+                menuPanel.getInsets().top + (SCREEN_HEIGHT * 16) / 24,
+                    impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
+
+        // bottoni-label
+        JLabel esciLabel = new JLabel(SpriteManager.rescaledImageIcon(
+                SpriteManager.loadSpriteSheet("/img/Menu iniziale/esci.png"),
+                rescalingFactor / 2));
+
+        esciLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
+                menuPanel.getInsets().top + (SCREEN_HEIGHT * 20) / 24,
+                    esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
+
+
         startingMenuPanel.add(backLabel, Integer.valueOf(0));
+        startingMenuPanel.add(nuovaPartitaLabel, Integer.valueOf(1));
+        startingMenuPanel.add(continuaLabel, Integer.valueOf(1));
+        startingMenuPanel.add(impostazioniLabel, Integer.valueOf(1));
+        startingMenuPanel.add(esciLabel, Integer.valueOf(1));
 
         startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
