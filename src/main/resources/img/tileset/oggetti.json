@@ -79,10 +79,26 @@
     "height": 48
   },
 
+  "PortaFilamento":
+  {
+    "x": 720,
+    "y": 96,
+    "width": 48,
+    "height": 72
+  },
+
   "Filamento":
   {
     "x": 384,
     "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "Tappi":
+  {
+    "x": 480,
+    "y": 168,
     "width": 48,
     "height": 48
   },

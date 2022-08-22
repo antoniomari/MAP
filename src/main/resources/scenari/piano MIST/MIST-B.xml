@@ -8,9 +8,9 @@
         <azione>
             <subject>Mist-B</subject>
             <method>add</method>
-            <what>Stampante</what>
-            <x>11</x>
-            <y>7</y>
+            <what>PortaFilamento</what>
+            <x>9</x>
+            <y>10</y>
         </azione>
     </scenario>
 </stanza>

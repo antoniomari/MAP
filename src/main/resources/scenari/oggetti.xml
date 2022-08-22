@@ -102,10 +102,25 @@
         <classe>PickupableItem</classe>
         <descrizione>Filamento per stampanti 3D.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>PortaFilamento</target>
+            <scenario>src/main/resources/scenari/piano MIST/UtilizzaStampante.xml</scenario>
+        </onUseWith>
+    </oggetto>
+    <oggetto nome="PortaFilamento">
+        <classe>Item</classe>
+        <descrizione>Inserire il filamento per alimentare la stampante.</descrizione>
+        <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Stampante">
         <classe>Item</classe>
         <descrizione>Stampante 3D.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Tappi">
+        <classe>PickupableItem</classe>
+        <descrizione>Per far finta di ascoltare.</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Registratore">

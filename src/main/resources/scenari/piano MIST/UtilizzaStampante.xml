@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>9</x>
+        <y>13</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Guarda che bei tappi (*) sono riuscito a crearmi! </sentence>
+    </azione>
+    <azione>
+        <subject>Mist-B</subject>
+        <method>add</method>
+        <what>Tappi</what>
+        <x>17</x>
+        <y>14</y>
+    </azione>
+</scenario>
