@@ -20,6 +20,10 @@
         <sentence>...... </sentence>
     </azione>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/fill water.wav</what>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Ahhh ecco fatto è piena. </sentence>

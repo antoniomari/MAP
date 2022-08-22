@@ -183,7 +183,7 @@
             <scenario>src/main/resources/scenari/piano terra/Drink.xml</scenario>
         </onUseWith>
     </oggetto>
-    <oggetto nome="Acx8">
+    <oggetto nome="Axc8">
         <classe>PickupableItem</classe>
         <descrizione>Dispositivo hackerino.</descrizione>
         <canUse>false</canUse>

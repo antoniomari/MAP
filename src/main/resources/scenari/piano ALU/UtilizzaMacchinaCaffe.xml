@@ -20,6 +20,10 @@
         <sentence>un buon caffè. </sentence>
     </azione>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/macchina caffè.wav</what>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Beh comprensibile che quello (*) scienzato strambo sul suo piano abbia una </sentence>
