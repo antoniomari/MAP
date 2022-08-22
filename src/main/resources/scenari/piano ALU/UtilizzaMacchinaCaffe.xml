@@ -21,7 +21,7 @@
     </azione>
     <azione>
         <method>playScenarioSound</method>
-        <what>src/main/resources/audio/effetti/macchina caffè.wav</what>
+        <what>src/main/resources/audio/effetti/macchinacaffe.wav</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>
