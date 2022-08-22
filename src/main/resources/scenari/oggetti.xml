@@ -151,6 +151,13 @@
         <classe>PickupableItem</classe>
         <descrizione>Una tazza di caffè.</descrizione>
         <canUse>false</canUse>
+        <!--
+        <onUseWith>
+            <keep>false</keep>
+            <target>Diego</target>
+            <scenario>src/main/resources/scenari/piano ALU/RiempiAcqua.xml</scenario>
+        </onUseWith>
+        -->
     </oggetto>
     <oggetto nome="AscensorePT">
         <classe>DoorLike</classe>

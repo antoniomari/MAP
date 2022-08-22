@@ -19,10 +19,12 @@
         <method>speak</method>
         <sentence>un buon caffè. </sentence>
     </azione>
+    <!--
     <azione>
         <method>playScenarioSound</method>
         <what>src/main/resources/audio/effetti/macchina caffè.wav</what>
     </azione>
+    -->
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
@@ -38,8 +40,11 @@
         <method>speak</method>
         <sentence>a lavorare senza un buon (*) caffè. </sentence>
     </azione>
-    <!--
-    // bisogna implementare la logica per far si che ora la tazzina di caffè
-    // compaia nell'invetario
-    -->
+    <azione>
+        <subject>ALUB</subject>
+        <method>add</method>
+        <what>Tazzina</what>
+        <x>1</x>
+        <y>11</y>
+    </azione>
 </scenario>
