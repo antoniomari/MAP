@@ -34,5 +34,10 @@
             <method>setWest</method>
             <what>src/main/resources/scenari/piano BUG/BUG-B.xml</what>
         </azione>
+        <azione>
+            <subject>Bug-A</subject>
+            <method>setEast</method>
+            <what>src/main/resources/scenari/piano BUG/BUG-C.xml</what>
+        </azione>
     </scenario>
 </stanza>

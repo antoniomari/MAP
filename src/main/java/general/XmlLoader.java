@@ -347,11 +347,19 @@ public class XmlLoader
     {
         String subject = getTagValue(eAction, "subject");
 
-        String roomPath = getTagValue(eAction, "what");
-        Room room = loadRoom(roomPath);
-        ActionSequence roomScenario = loadRoomInit(roomPath);
+        String roomName = getTagValue(eAction, "what");
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = loadRoom(roomName);
+            ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> {GameManager.getRoom(subject).setEast(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setEast(room); GameManager.startScenario(roomScenario);};
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setEast(room);
+        }
     }
 
     private static Runnable parseSetWest(Element eAction)
@@ -359,10 +367,18 @@ public class XmlLoader
         String subject = getTagValue(eAction, "subject");
 
         String roomName = getTagValue(eAction, "what");
-        Room room = loadRoom(roomName);
-        ActionSequence roomScenario = loadRoomInit(roomName);
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = loadRoom(roomName);
+            ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> {GameManager.getRoom(subject).setWest(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setWest(room); GameManager.startScenario(roomScenario);};
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setWest(room);
+        }
     }
 
     private static Runnable parseSetNorth(Element eAction)
@@ -370,10 +386,18 @@ public class XmlLoader
         String subject = getTagValue(eAction, "subject");
 
         String roomName = getTagValue(eAction, "what");
-        Room room = loadRoom(roomName);
-        ActionSequence roomScenario = loadRoomInit(roomName);
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = loadRoom(roomName);
+            ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> {GameManager.getRoom(subject).setNorth(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setNorth(room); GameManager.startScenario(roomScenario);};
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setNorth(room);
+        }
     }
 
     private static Runnable parseSetSouth(Element eAction)
@@ -381,10 +405,19 @@ public class XmlLoader
         String subject = getTagValue(eAction, "subject");
 
         String roomName = getTagValue(eAction, "what");
-        Room room = loadRoom(roomName);
-        ActionSequence roomScenario = loadRoomInit(roomName);
 
-        return () -> {GameManager.getRoom(subject).setSouth(room); GameManager.startScenario(roomScenario);};
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = loadRoom(roomName);
+            ActionSequence roomScenario = loadRoomInit(roomName);
+
+            return () -> {GameManager.getRoom(subject).setSouth(room); GameManager.startScenario(roomScenario);};
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setSouth(room);
+        }
     }
 
     private static Runnable parseSetSpeakScenario(Element eAction)
