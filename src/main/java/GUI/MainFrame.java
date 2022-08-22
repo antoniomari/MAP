@@ -11,6 +11,7 @@ import sound.SoundHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame {
 
@@ -429,14 +430,13 @@ public class MainFrame extends JFrame {
     }
 
     // inizializza menuPanel
-    public void initStartingMenuPanel()
+    private void initStartingMenuPanel()
     {
         startingMenuPanel = new JLayeredPane();
 
         startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         startingMenuPanel.setOpaque(true);
         startingMenuPanel.setBackground(Color.BLACK);
-
 
         String MENU_BACK_PATH = "/img/Menu iniziale/background.png";
 
@@ -452,35 +452,31 @@ public class MainFrame extends JFrame {
                 backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
         // bottoni-label
-        JLabel nuovaPartitaLabel = new JLabel(SpriteManager.rescaledImageIcon(
-                                    SpriteManager.loadSpriteSheet("/img/Menu iniziale/nuovapartita.png"),
-                                    rescalingFactor / 2));
+        JLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
+                "/img/Menu iniziale/nuovapartita pressed.png", null);
 
         nuovaPartitaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
                 menuPanel.getInsets().top + (SCREEN_HEIGHT * 8) / 24,
                     nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
 
-        JLabel continuaLabel = new JLabel(SpriteManager.rescaledImageIcon(
-                SpriteManager.loadSpriteSheet("/img/Menu iniziale/continua.png"),
-                rescalingFactor / 2));
+        JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
+                "/img/Menu iniziale/continua pressed.png", null);
 
         continuaLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
                 menuPanel.getInsets().top + (SCREEN_HEIGHT * 12) / 24,
                     continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
 
         // bottoni-label
-        JLabel impostazioniLabel = new JLabel(SpriteManager.rescaledImageIcon(
-                SpriteManager.loadSpriteSheet("/img/Menu iniziale/impostazioni.png"),
-                rescalingFactor / 2));
+        JLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
+                "/img/Menu iniziale/impostazioni pressed.png", null);
 
         impostazioniLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
                 menuPanel.getInsets().top + (SCREEN_HEIGHT * 16) / 24,
                     impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
 
         // bottoni-label
-        JLabel esciLabel = new JLabel(SpriteManager.rescaledImageIcon(
-                SpriteManager.loadSpriteSheet("/img/Menu iniziale/esci.png"),
-                rescalingFactor / 2));
+        JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
+                "/img/Menu iniziale/esci pressed.png", null);
 
         esciLabel.setBounds(menuPanel.getInsets().left + SCREEN_WIDTH / 40,
                 menuPanel.getInsets().top + (SCREEN_HEIGHT * 20) / 24,
@@ -494,6 +490,22 @@ public class MainFrame extends JFrame {
         startingMenuPanel.add(esciLabel, Integer.valueOf(1));
 
         startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+    }
+
+    private JLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
+    {
+        GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, rescalingFactor/2);
+
+        GameMouseListener buttonListener = new GameMouseListener(
+                                            MouseEvent.BUTTON1, clickAction, null, GameState.State.INIT);
+        buttonListener.setMouseEnteredAction(
+                () -> buttonLabel.changeIcon(true));
+
+        buttonListener.setMouseExitedAction(
+                () -> buttonLabel.changeIcon(false));
+
+        buttonLabel.addMouseListener(buttonListener);
+        return buttonLabel;
     }
 
     /**

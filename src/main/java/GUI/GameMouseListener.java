@@ -10,6 +10,10 @@ public class GameMouseListener implements MouseListener
     private final int button;
     private final Runnable pressAction;
     private final Runnable releaseAction;
+
+    private Runnable enterAction = () -> {};
+    private Runnable exitAction = () -> {};
+
     private final GameState.State targetState;
 
     private boolean okFlag;
@@ -37,6 +41,17 @@ public class GameMouseListener implements MouseListener
         okFlag = false;
         this.targetState = targetState;
     }
+
+    public void setMouseEnteredAction(Runnable enterAction)
+    {
+        this.enterAction = enterAction;
+    }
+
+    public void setMouseExitedAction(Runnable exitAction)
+    {
+        this.exitAction = exitAction;
+    }
+
 
     @Override
     public void mouseClicked(MouseEvent e)
@@ -67,7 +82,10 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mouseEntered(MouseEvent e)
     {
-
+        if(GameState.getState() == targetState)
+        {
+            enterAction.run();
+        }
     }
 
     @Override
@@ -75,5 +93,10 @@ public class GameMouseListener implements MouseListener
     {
         if (GameState.getState() == targetState)
             okFlag = false;
+
+        if(GameState.getState() == targetState)
+        {
+            exitAction.run();
+        }
     }
 }
