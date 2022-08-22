@@ -494,6 +494,7 @@ public class MainFrame extends JFrame {
 
     private JLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
     {
+        // TODO: aggiustare rescalingFactor, non va bene
         GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, rescalingFactor/2);
 
         GameMouseListener buttonListener = new GameMouseListener(

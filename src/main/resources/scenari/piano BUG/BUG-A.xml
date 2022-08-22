@@ -6,6 +6,18 @@
     <scenario>
         <mode>instant</mode>
         <azione>
+            <method>addToInventory</method>
+            <what>Axc8</what>
+        </azione>
+        <azione>
+            <method>addToInventory</method>
+            <what>Registratore</what>
+        </azione>
+        <azione>
+            <method>addToInventory</method>
+            <what>Cheat Sheet</what>
+        </azione>
+        <azione>
             <subject>Bug-A</subject>
             <method>add</method>
             <what>AscensoreBUG</what>
@@ -31,6 +43,13 @@
             <subject>Bug-A</subject>
             <method>setEast</method>
             <what>src/main/resources/scenari/piano BUG/BUG-C.xml</what>
+        </azione>
+        <azione>
+            <subject>Bug-A</subject>
+            <method>add</method>
+            <what>Robot</what>
+            <x>8</x>
+            <y>12</y>
         </azione>
     </scenario>
 </stanza>
