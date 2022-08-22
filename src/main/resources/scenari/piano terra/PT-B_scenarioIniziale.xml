@@ -11,11 +11,6 @@
 	</azione>
 	<azione>
 		<subject>Schwartz</subject>
-		<method>playEmoji</method>
-		<what>esclamativo</what>
-	</azione>
-	<azione>
-		<subject>Schwartz</subject>
 		<method>speak</method>
 		<sentence>Che bel posto</sentence>
 	</azione>

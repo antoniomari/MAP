@@ -71,22 +71,15 @@ public class GameCharacter extends GamePiece
         Collections.reverse(animateFrames);
     }
 
-
-
-    //public void speak()
-    //{
-    //    speak(randomSentence());
-    //}
-
     public void speak(String sentence)
     {
         String toPrint =  getName() + ": " + sentence;
         EventHandler.sendEvent(new CharacterEvent(this, toPrint, CharacterEvent.Type.NPC_SPEAKS));
     }
 
-    public void playEmoji()
+    public void playEmoji(String emojiName)
     {
-        EventHandler.sendEvent(new CharacterEvent(this, "Ok", CharacterEvent.Type.EMOJI));
+        EventHandler.sendEvent(new CharacterEvent(this, emojiName, CharacterEvent.Type.EMOJI));
     }
 
 }

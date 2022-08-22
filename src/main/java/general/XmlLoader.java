@@ -521,7 +521,7 @@ public class XmlLoader
         String subject = getTagValue(eAction, "subject");
         String emojiName = getTagValue(eAction, "what");
 
-        return () -> ((GameCharacter) GameManager.getPiece(subject)).playEmoji();
+        return () -> ((GameCharacter) GameManager.getPiece(subject)).playEmoji(emojiName);
     }
 
     /**

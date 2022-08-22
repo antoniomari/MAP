@@ -91,9 +91,9 @@ public class EventHandler
             final String EMOJI_JSON_PATH = "/img/animazioni/emoji.json";
 
             AnimationExecutor.executeEffectAnimation(e.getCharacterInvolved(), EMOJI_SPRITESHEET_PATH, EMOJI_JSON_PATH,
-                    "esclamativo", e.getCharacterInvolved().getPosition().relativePosition(1, -4),
+                    e.getSentence(), e.getCharacterInvolved().getPosition().relativePosition(1, -4),
                     500);
-            // TODO: generalizzare, fuori "esclamativo"
+            // TODO: generalizzare, fuori e.getSentence, dentro nome animazione
         }
     }
 

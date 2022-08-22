@@ -318,5 +318,326 @@
     "y": 192,
     "width": 48,
     "height": 48
+  },
+
+  "goccia1":
+  {
+    "x": 0,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia2":
+  {
+    "x": 48,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia3":
+  {
+    "x": 96,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia4":
+  {
+    "x": 144,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia5":
+  {
+    "x": 192,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia6":
+  {
+    "x": 240,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia7":
+  {
+    "x": 288,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "goccia8":
+  {
+    "x": 336,
+    "y": 240,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo1":
+  {
+    "x": 0,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo2":
+  {
+    "x": 48,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo3":
+  {
+    "x": 96,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo4":
+  {
+    "x": 144,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo5":
+  {
+    "x": 192,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo6":
+  {
+    "x": 240,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo7":
+  {
+    "x": 288,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "fumo8":
+  {
+    "x": 336,
+    "y": 288,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini1":
+  {
+    "x": 0,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini2":
+  {
+    "x": 48,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini3":
+  {
+    "x": 96,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini4":
+  {
+    "x": 144,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini5":
+  {
+    "x": 192,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini6":
+  {
+    "x": 240,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini7":
+  {
+    "x": 288,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "puntini8":
+  {
+    "x": 336,
+    "y": 336,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi1":
+  {
+    "x": 0,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi2":
+  {
+    "x": 48,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi3":
+  {
+    "x": 96,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi4":
+  {
+    "x": 144,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi5":
+  {
+    "x": 192,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi6":
+  {
+    "x": 240,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi7":
+  {
+    "x": 288,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+  "enfasi8":
+  {
+    "x": 336,
+    "y": 384,
+    "width": 48,
+    "height": 48
+  },
+
+
+  "dormi1":
+  {
+    "x": 0,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi2":
+  {
+    "x": 48,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi3":
+  {
+    "x": 96,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi4":
+  {
+    "x": 144,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi5":
+  {
+    "x": 192,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi6":
+  {
+    "x": 240,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi7":
+  {
+    "x": 288,
+    "y": 432,
+    "width": 48,
+    "height": 48
+  },
+
+  "dormi8":
+  {
+    "x": 336,
+    "y": 432,
+    "width": 48,
+    "height": 48
   }
 }

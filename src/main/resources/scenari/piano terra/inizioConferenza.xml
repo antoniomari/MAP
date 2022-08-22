@@ -7,6 +7,56 @@
         <sentence>Eccola finalmente possiamo iniziare la (*) conferenza, prenda posto tra le prime file.</sentence>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>esclamativo</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>interrogativo</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>notaMusicale</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>cuore</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>fumo</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>puntini</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>dormi</what>
+    </azione>
+    <azione>
         <subject>Antonio</subject>
         <method>move</method>
         <x>18</x>
