@@ -119,4 +119,17 @@ public class StillAnimation extends Animation
         // TODO: personalizzare delay milliseconds
         return new StillAnimation(animationLabel, frames, 100, true);
     }
+
+
+    public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath, String name,
+                                                       JLabel animationLabel)
+    {
+        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
+        List<Image> frames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, name);
+
+        // TODO: personalizzare delay milliseconds
+        return new StillAnimation(animationLabel, frames, 100, true);
+    }
+
+
 }

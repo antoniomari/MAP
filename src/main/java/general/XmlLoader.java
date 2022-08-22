@@ -190,6 +190,9 @@ public class XmlLoader
             case "itemSpeak":
                 actionParsed = parseItemSpeak(actionElement);
                 break;
+            case "playEmoji":
+                actionParsed = parsePlayEmoji(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -478,6 +481,14 @@ public class XmlLoader
             GameManager.getMainFrame().setCurrentRoom(loadRoom(floorPath));
             GameManager.startScenario(loadRoomInit(floorPath));
         };
+    }
+
+    private static Runnable parsePlayEmoji(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        String emojiName = getTagValue(eAction, "what");
+
+        return () -> ((GameCharacter) GameManager.getPiece(subject)).playEmoji();
     }
 
     /**

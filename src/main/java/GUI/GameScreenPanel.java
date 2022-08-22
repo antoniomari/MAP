@@ -253,28 +253,29 @@ public class GameScreenPanel extends JLayeredPane
     }
 
     // TODO: aggiustare work in porgress
-    public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)
+    public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName, BlockPosition pos, int finalWait)
     {
         // TODO: aggiustare l'hard coding di "esplosione"
-        if(whatAnimation.equals("Esplosione"))
-        {
-            JLabel effectLabel = new JLabel(pieceLabelMap.get(piece).getIcon());
-            add(effectLabel, EFFECT_LAYER);
+        //if(animationName.equals("Esplosione"))
+        //{
+        //JLabel effectLabel = new JLabel(pieceLabelMap.get(piece).getIcon());
+        JLabel effectLabel = new JLabel(piece.getScaledIconSprite(rescalingFactor));
+        add(effectLabel, EFFECT_LAYER);
 
-            GameScreenManager.updateLabelPosition(effectLabel, pos);
+        GameScreenManager.updateLabelPosition(effectLabel, pos);
 
-            StillAnimation effectAnimation = StillAnimation.createCustomAnimation(spritesheetPath, jsonPath, effectLabel);
-            effectAnimation.setFinalDelay(finalWait);
+        StillAnimation effectAnimation = StillAnimation.createCustomAnimation(spritesheetPath, jsonPath, animationName, effectLabel);
+        effectAnimation.setFinalDelay(finalWait);
 
-            effectAnimation.setActionOnEnd(() ->
+        effectAnimation.setActionOnEnd(() ->
                     {
                         setLayer(effectLabel, GameScreenPanel.GARBAGE_LAYER);
                         effectLabel.setIcon(null);
                         this.remove(effectLabel);
                     });
 
-            effectAnimation.start();
-        }
+        effectAnimation.start();
+        //}
     }
 
     /**

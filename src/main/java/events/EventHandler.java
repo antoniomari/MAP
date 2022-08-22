@@ -85,6 +85,16 @@ public class EventHandler
         {
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
         }
+        else if(e.getType() == CharacterEvent.Type.EMOJI)
+        {
+            final String EMOJI_SPRITESHEET_PATH = "/img/animazioni/emoji.png";
+            final String EMOJI_JSON_PATH = "/img/animazioni/emoji.json";
+
+            AnimationExecutor.executeEffectAnimation(e.getCharacterInvolved(), EMOJI_SPRITESHEET_PATH, EMOJI_JSON_PATH,
+                    "esclamativo", e.getCharacterInvolved().getPosition().relativePosition(0, -4),
+                    500);
+            // TODO: generalizzare, fuori "esclamativo"
+        }
     }
 
     public static void executeGamePieceEvent(GamePieceEvent e)

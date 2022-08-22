@@ -14,6 +14,11 @@ public class GameCharacter extends GamePiece
     private String jsonPath;
     private BufferedImage spritesheet;
 
+    public enum Emoji
+    {
+
+    }
+
     public GameCharacter(String name, String spritePath)
     {
         super(name, spritePath);
@@ -77,6 +82,11 @@ public class GameCharacter extends GamePiece
     {
         String toPrint =  getName() + ": " + sentence;
         EventHandler.sendEvent(new CharacterEvent(this, toPrint, CharacterEvent.Type.NPC_SPEAKS));
+    }
+
+    public void playEmoji()
+    {
+        EventHandler.sendEvent(new CharacterEvent(this, "Ok", CharacterEvent.Type.EMOJI));
     }
 
 }

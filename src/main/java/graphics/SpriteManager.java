@@ -94,6 +94,7 @@ public class SpriteManager
     public static JSONObject getJsonFromFile(String jsonPath)
     {
         InputStream is = SpriteManager.class.getResourceAsStream(jsonPath);
+        assert is != null;
         JSONTokener tokener = new JSONTokener(is);
 
         return new JSONObject(tokener);

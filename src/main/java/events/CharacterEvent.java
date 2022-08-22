@@ -36,6 +36,14 @@ public class CharacterEvent extends GameEvent
                     {
                         return "animato";
                     }
+                },
+        EMOJI
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "emoji";
+                    }
                 }
 
     }
