@@ -3,7 +3,7 @@
     <mode>sequence</mode>
     <azione>
         <method>playScenarioSound</method>
-        <what>src/main/resources/audio/effetti/stampa 3d terminata.wav</what>
+        <what>src/main/resources/audio/effetti/stampante.wav</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>
