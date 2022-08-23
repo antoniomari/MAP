@@ -45,17 +45,14 @@ public class DoorLike extends Item implements Openable, Lockable
     private void initFrames()
     {
         Image closed = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Closed");
-        Image open1 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Open1");
-        Image open2 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Open2");
-        Image open3 = SpriteManager.loadSpriteByName(SPRITESHEET, JSON_PATH, getName() + "Open3");
 
         openFrames = SpriteManager.getKeywordOrderedFrames(SPRITESHEET, JSON_PATH, getName() + "Open");
+        openFrames.add(0, closed);
 
         closeFrames = new ArrayList<>();
-        closeFrames.add(open3);
-        closeFrames.add(open2);
-        closeFrames.add(open1);
-        closeFrames.add(closed);
+
+        for(int i = openFrames.size(); i > 0; i--)
+            closeFrames.add(openFrames.get(i - 1));
     }
 
     public void setInitialState(boolean isOpen, boolean isLocked)
