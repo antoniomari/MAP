@@ -82,12 +82,11 @@
         </onOpen>
     </oggetto>
     <oggetto nome="ArmadioMIST">
-        <classe>Container</classe>
+        <classe>DoorLike</classe>
         <descrizione>Un armadio bloccato, bisogna usare la forza</descrizione>
         <canUse>false</canUse>
-        <!--
+        <isOpen>false</isOpen>
         <isLocked>true</isLocked>
-        -->
         <onOpen>
             <mode>once</mode>
             <effetto>src/main/resources/scenari/piano MIST/RompeArmadio.xml</effetto>
@@ -136,12 +135,13 @@
     <oggetto nome="Guanto">
         <classe>PickupableItem</classe>
         <descrizione>Un guanto robotico.</descrizione>
-        <canUse>false</canUse>
         <onUseWith>
-            <keep>false</keep>
+            <keep>true</keep>
             <target>ArmadioMIST</target>
+            <method>unlock</method>
             <scenario>src/main/resources/scenari/piano MIST/RompeArmadio.xml</scenario>
         </onUseWith>
+        <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Cassetta">
         <classe>PickupableItem</classe>
