@@ -243,7 +243,7 @@
   "ArmadioMIST":
   {
     "x": 672,
-    "y": 0,
+    "y": 96,
     "width": 48,
     "height": 96
   },
@@ -251,7 +251,7 @@
   "ArmadioMISTClosed":
   {
     "x": 672,
-    "y": 0,
+    "y": 96,
     "width": 48,
     "height": 96
   },
@@ -259,7 +259,7 @@
   "ArmadioMISTOpen1":
   {
     "x": 672,
-    "y": 96,
+    "y": 0,
     "width": 48,
     "height": 96
   }

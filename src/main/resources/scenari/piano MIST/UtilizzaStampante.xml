@@ -2,6 +2,10 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/stampa 3d terminata.wav</what>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>move</method>
         <x>9</x>

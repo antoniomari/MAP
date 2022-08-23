@@ -2,6 +2,10 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/distruzionearmadio.wav</what>
+    </azione>
+    <azione>
         <subject>ArmadioMIST</subject>
         <method>removeFromRoom</method>
     </azione>
