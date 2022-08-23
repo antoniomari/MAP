@@ -306,7 +306,6 @@ public class XmlLoader
     {
         // non serve la classe, sappiamo che è una Room
         String subject = getTagValue(eAction, "subject");
-        Room subjectRoom = GameManager.getRoom(subject);
 
         // Carica il GamePiece da aggiungere
         String pieceName = getTagValue(eAction, "what");
@@ -315,7 +314,7 @@ public class XmlLoader
         int x = Integer.parseInt(getTagValue(eAction, "x"));
         int y = Integer.parseInt(getTagValue(eAction, "y"));
 
-        return () -> piece.addInRoom(subjectRoom, new BlockPosition(x, y));
+        return () -> piece.addInRoom(GameManager.getRoom(subject), new BlockPosition(x, y));
 
     }
 
