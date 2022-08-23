@@ -14,15 +14,15 @@
         <finalWait>500</finalWait>
     </azione>
     <azione>
-        <subject>Schwartz</subject>
-        <method>speak</method>
-        <sentence>Guarda che bei tappi (*) sono riuscito a crearmi! </sentence>
-    </azione>
-    <azione>
         <subject>Mist-B</subject>
         <method>add</method>
         <what>Tappi</what>
         <x>17</x>
         <y>14</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Guarda che bei tappi (*) sono riuscito a crearmi! </sentence>
     </azione>
 </scenario>
