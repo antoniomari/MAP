@@ -50,7 +50,7 @@ public abstract class Animation
         @Override
         public void run()
         {
-            if(GameState.getState() != GameState.State.MOVING)
+            if(GameState.getState() != GameState.State.MOVING && !(Animation.this instanceof PerpetualAnimation))
                GameState.changeState(GameState.State.MOVING);
 
             // template
@@ -65,7 +65,8 @@ public abstract class Animation
                 e.printStackTrace();
             }
 
-            GameState.changeState(GameState.State.PLAYING);
+            if(!(Animation.this instanceof PerpetualAnimation))
+                GameState.changeState(GameState.State.PLAYING);
 
             // template
             terminate();

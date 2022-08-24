@@ -21,6 +21,7 @@ public class SoundHandler
         MUSIC, SOUND, SCENARIO_SOUND
     }
 
+    // Todo: bufferizzazione
     public static void playWav(String wavPath, Mode mode)
     {
         Objects.requireNonNull(wavPath);
@@ -41,28 +42,6 @@ public class SoundHandler
                 throw new GameException("Modalità audio non esistente");
         }
     }
-
-    private static void playWav(String wavPath, String mode)
-    {
-        Objects.requireNonNull(wavPath);
-        Objects.requireNonNull(mode);
-
-        switch (mode)
-        {
-            case "music":
-                insertCD(wavPath);
-                break;
-            case "sound":
-                playSound(wavPath);
-                break;
-            case "scenarioSound":
-                playScenarioSound(wavPath);
-                break;
-            default:
-                throw new GameException("Modalità audio non esistente");
-        }
-    }
-
 
     /**
      * Riproduce in loop audio di sottofondo. Se uno è attualmente
