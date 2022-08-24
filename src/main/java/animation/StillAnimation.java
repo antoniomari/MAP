@@ -72,8 +72,8 @@ public class StillAnimation extends Animation
     {
         boolean delay = initialDelay;
 
-        if(GameState.getState() != GameState.State.MOVING)
-            GameState.changeState(GameState.State.MOVING);
+        //if(GameState.getState() != GameState.State.MOVING)
+        //    GameState.changeState(GameState.State.MOVING);
 
         for(Icon frame : frameIcons)
         {
@@ -91,7 +91,7 @@ public class StillAnimation extends Animation
             }
         }
 
-        GameState.changeState(GameState.State.PLAYING);
+        //GameState.changeState(GameState.State.PLAYING);
     }
 
     /**

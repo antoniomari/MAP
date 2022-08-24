@@ -50,6 +50,9 @@ public abstract class Animation
         @Override
         public void run()
         {
+            if(GameState.getState() != GameState.State.MOVING)
+               GameState.changeState(GameState.State.MOVING);
+
             // template
             execute();
 
@@ -62,8 +65,12 @@ public abstract class Animation
                 e.printStackTrace();
             }
 
+            GameState.changeState(GameState.State.PLAYING);
+
             // template
             terminate();
+
+
         }
     }
 

@@ -107,8 +107,8 @@ public class MovingAnimation extends Animation
     {
         boolean delay = initialDelay;
 
-        if(GameState.getState() != GameState.State.MOVING)
-            GameState.changeState(GameState.State.MOVING);
+        //if(GameState.getState() != GameState.State.MOVING)
+        //    GameState.changeState(GameState.State.MOVING);
 
         for(AbsPosition c : positionsList)
         {
@@ -133,7 +133,9 @@ public class MovingAnimation extends Animation
 
             label.setIcon(frameIcons.get(frameIcons.size() -1));
 
-            GameState.changeState(GameState.State.PLAYING);
+            //System.out.println("ejrhgeiorgh");
+
+            //GameState.changeState(GameState.State.PLAYING);
         }
     }
 
