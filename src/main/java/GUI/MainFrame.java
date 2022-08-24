@@ -1,6 +1,8 @@
 package GUI;
 
 import GUI.gamestate.GameState;
+import animation.PerpetualAnimation;
+import animation.StillAnimation;
 import events.executors.Executor;
 import general.ActionSequence;
 import general.GameManager;
@@ -11,7 +13,9 @@ import sound.SoundHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public class MainFrame extends JFrame {
 
@@ -471,12 +475,32 @@ public class MainFrame extends JFrame {
         esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
                     esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
 
+        // imposta titolo
+        BufferedImage titleImage  = SpriteManager.loadSpriteByName(
+                SpriteManager.loadSpriteSheet("/img/Menu iniziale/titolo.png"),
+                "/img/Menu iniziale/titolo.json", "1");
+        final double titleRescalingFactor = (double) SCREEN_WIDTH / (1.5 * titleImage.getWidth());
+        final int titleXOffset = (int) (SCREEN_WIDTH - titleImage.getWidth() * titleRescalingFactor) / 2;
+        JLabel titleLabel = new JLabel(SpriteManager.rescaledImageIcon(titleImage, titleRescalingFactor));
+
+        titleLabel.setBounds(LEFT + titleXOffset, TOP, titleLabel.getIcon().getIconWidth(), titleLabel.getIcon().getIconHeight());
+
+        PerpetualAnimation titleAnimation = PerpetualAnimation.createPerpetualAnimation(
+                "/img/Menu iniziale/titolo.png",
+                "/img/Menu iniziale/titolo.json",
+                titleLabel);
+        titleAnimation.setDelay(100);
+        titleAnimation.setFinalDelay(1000);
+
 
         startingMenuPanel.add(backLabel, Integer.valueOf(0));
         startingMenuPanel.add(nuovaPartitaLabel, Integer.valueOf(1));
         startingMenuPanel.add(continuaLabel, Integer.valueOf(1));
         startingMenuPanel.add(impostazioniLabel, Integer.valueOf(1));
         startingMenuPanel.add(esciLabel, Integer.valueOf(1));
+        startingMenuPanel.add(titleLabel, Integer.valueOf(1));
+
+        addKeyListener(new GameKeyListener(KeyEvent.VK_P, titleAnimation::start, null, GameState.State.INIT));
 
         startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }

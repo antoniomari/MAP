@@ -2,6 +2,7 @@ package animation;
 
 import GUI.AbsPosition;
 import GUI.GameScreenManager;
+import GUI.gamestate.GameState;
 import entity.rooms.BlockPosition;
 import general.GameManager;
 
@@ -106,6 +107,9 @@ public class MovingAnimation extends Animation
     {
         boolean delay = initialDelay;
 
+        if(GameState.getState() != GameState.State.MOVING)
+            GameState.changeState(GameState.State.MOVING);
+
         for(AbsPosition c : positionsList)
         {
             try
@@ -128,6 +132,8 @@ public class MovingAnimation extends Animation
             }
 
             label.setIcon(frameIcons.get(frameIcons.size() -1));
+
+            GameState.changeState(GameState.State.PLAYING);
         }
     }
 

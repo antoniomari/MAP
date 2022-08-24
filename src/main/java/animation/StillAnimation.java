@@ -1,5 +1,6 @@
 package animation;
 
+import GUI.gamestate.GameState;
 import general.GameException;
 import general.GameManager;
 import graphics.SpriteManager;
@@ -15,10 +16,10 @@ public class StillAnimation extends Animation
     private static final boolean DEFAULT_INITIAL_DELAY = true;
 
     /** Delay tra cambi di fotogrammi. */
-    private int delayMilliseconds = DEFAULT_DELAY_MILLISECONDS;
+    protected int delayMilliseconds = DEFAULT_DELAY_MILLISECONDS;
 
     /** Flag per segnalare se c'è delay iniziale. */
-    private boolean initialDelay = DEFAULT_INITIAL_DELAY;
+    protected boolean initialDelay = DEFAULT_INITIAL_DELAY;
 
     /** Codice da eseguire alla fine dell'animazione. */
     private Runnable onEndExecute;
@@ -71,6 +72,9 @@ public class StillAnimation extends Animation
     {
         boolean delay = initialDelay;
 
+        if(GameState.getState() != GameState.State.MOVING)
+            GameState.changeState(GameState.State.MOVING);
+
         for(Icon frame : frameIcons)
         {
             try
@@ -86,6 +90,8 @@ public class StillAnimation extends Animation
                 e.printStackTrace();
             }
         }
+
+        GameState.changeState(GameState.State.PLAYING);
     }
 
     /**

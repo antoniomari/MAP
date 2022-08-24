@@ -33,7 +33,7 @@ public abstract class Animation
     /** Millisecondi da attendere alla fine dell'animazione
      * (prima di tornare nel GameState Playing)
      */
-    private int millisecondWaitEnd = DEFAULT_END_MILLISECONDS;
+    protected int millisecondWaitEnd = DEFAULT_END_MILLISECONDS;
 
     /**
      * Thread di esecuzione dell'animazione.
@@ -50,9 +50,6 @@ public abstract class Animation
         @Override
         public void run()
         {
-            if(GameState.getState() != GameState.State.MOVING)
-                GameState.changeState(GameState.State.MOVING);
-
             // template
             execute();
 
@@ -65,7 +62,6 @@ public abstract class Animation
                 e.printStackTrace();
             }
 
-            GameState.changeState(GameState.State.PLAYING);
             // template
             terminate();
         }
