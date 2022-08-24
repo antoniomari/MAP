@@ -294,4 +294,15 @@
             <effetto>src/main/resources/scenari/fine.xml</effetto>
         </onOpen>
     </oggetto>
+    <oggetto nome="AscensoreEBERT">
+        <classe>DoorLike</classe>
+        <descrizione>Un ascensore verde</descrizione>
+        <canUse>false</canUse>
+        <isOpen>false</isOpen>
+        <isLocked>true</isLocked>
+        <onOpen>
+            <mode>once</mode>
+            <effetto>src/main/resources/scenari/fine.xml</effetto>
+        </onOpen>
+    </oggetto>
 </oggetti>

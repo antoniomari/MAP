@@ -5,15 +5,23 @@
     <musica>src/main/resources/audio/musica/Ebert.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <!--
         <azione>
-            <subject>ALUA</subject>
+            <subject>Ebert-A</subject>
             <method>add</method>
-            <what>AscensoreALU</what>
+            <what>AscensoreEBERT</what>
             <x>14</x>
             <y>7</y>
         </azione>
-        -->
+        <azione>
+            <subject>Ebert-A</subject>
+            <method>setNorth</method>
+            <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
+        </azione>
+        <azione>
+            <subject>Ascensore</subject>
+            <method>setScenarioOnEnter</method>
+            <what>src/main/resources/scenari/piano EBERT/EntraAscensore.xml</what>
+        </azione>
         <azione>
             <subject>Ebert-A</subject>
             <method>setSouth</method>
