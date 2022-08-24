@@ -50,6 +50,7 @@
         <how>relative</how>
         <finalWait>100</finalWait>
     </azione>
+    <!-- RIPRISTINARE QUA
     <azione>
         <method>loadFloor</method>
         <floor>MIST</floor>
@@ -58,5 +59,10 @@
         <subject>Mist-A</subject>
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano MIST/ArrivoPianoMist.xml</what>
+    </azione>
+    -->
+    <azione>
+        <method>loadFloor</method>
+        <floor>EBERT</floor>
     </azione>
 </scenario>

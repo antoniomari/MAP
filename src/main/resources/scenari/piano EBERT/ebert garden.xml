@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<stanza nome="Ebert Garden">
+    <png>/img/EBERT/ebert garden.png</png>
+    <json>/img/EBERT/ebert garden.json</json>
+    <musica>src/main/resources/audio/musica/Ebert.wav</musica>
+    <scenario>
+        <mode>instant</mode>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>setSouth</method>
+            <what>src/main/resources/scenari/piano EBERT/ebert briciola.xml</what>
+        </azione>
+    </scenario>
+</stanza>

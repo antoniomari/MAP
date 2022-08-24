@@ -1,0 +1,37 @@
+{
+  "width": 36,
+  "height": 24,
+
+  "pavimento":
+  [
+    {
+      "left": 4,
+      "top": 11,
+      "width": 28,
+      "height": 13
+    }
+  ],
+
+  "ostacoli":
+  [
+
+  ],
+
+  "default position":
+  {
+    "x": 18,
+    "y": 11
+  },
+
+  "southArrow":
+  {
+    "x": 18,
+    "y": 23
+  },
+
+  "northArrow":
+  {
+    "x": 18,
+    "y": 11
+  }
+}

@@ -31,4 +31,7 @@
     <personaggio nome="Robot">
         <spritesheet>/img/personaggi/Robot.png</spritesheet>
     </personaggio>
+    <personaggio nome="Briciola">
+        <spritesheet>/img/personaggi/Briciola.png</spritesheet>
+    </personaggio>
 </personaggi>

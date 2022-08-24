@@ -487,6 +487,7 @@ public class XmlLoader
         final String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
         final String BUG_PATH = "src/main/resources/scenari/piano BUG/BUG-A.xml";
         final String SERVER_PATH = "src/main/resources/scenari/piano SERVER/ServerRoom.xml";
+        final String EBERT_PATH = "src/main/resources/scenari/piano EBERT/ebert-a.xml";
 
         String floorPath;
 
@@ -503,6 +504,9 @@ public class XmlLoader
                 break;
             case "SERVER":
                 floorPath = SERVER_PATH;
+                break;
+            case "EBERT":
+                floorPath = EBERT_PATH;
                 break;
             default:
                 throw new GameException("Piano non valido");
