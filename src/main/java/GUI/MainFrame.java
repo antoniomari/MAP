@@ -485,6 +485,13 @@ public class MainFrame extends JFrame {
 
         titleLabel.setBounds(LEFT + titleXOffset, TOP, titleLabel.getIcon().getIconWidth(), titleLabel.getIcon().getIconHeight());
 
+
+        BufferedImage titleBackImage  = SpriteManager.loadSpriteSheet("/img/Menu iniziale/muro titolo.png");
+        JLabel titleBackLabel = new JLabel(SpriteManager.rescaledImageIcon(titleBackImage, titleRescalingFactor));
+
+        titleBackLabel.setBounds(LEFT + titleXOffset, TOP, titleBackLabel.getIcon().getIconWidth(), titleBackLabel.getIcon().getIconHeight());
+
+
         PerpetualAnimation titleAnimation = PerpetualAnimation.createPerpetualAnimation(
                 "/img/Menu iniziale/titolo.png",
                 "/img/Menu iniziale/titolo.json",
@@ -498,9 +505,12 @@ public class MainFrame extends JFrame {
         startingMenuPanel.add(continuaLabel, Integer.valueOf(1));
         startingMenuPanel.add(impostazioniLabel, Integer.valueOf(1));
         startingMenuPanel.add(esciLabel, Integer.valueOf(1));
-        startingMenuPanel.add(titleLabel, Integer.valueOf(1));
 
-        addKeyListener(new GameKeyListener(KeyEvent.VK_P, titleAnimation::start, null, GameState.State.INIT));
+        startingMenuPanel.add(titleBackLabel, Integer.valueOf(1));
+        startingMenuPanel.add(titleLabel, Integer.valueOf(2));
+
+        //addKeyListener(new GameKeyListener(KeyEvent.VK_P, titleAnimation::start, null, GameState.State.INIT));
+        titleAnimation.start();
 
         startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
