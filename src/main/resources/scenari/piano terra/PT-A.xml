@@ -2,7 +2,7 @@
 <stanza nome="PT-A">
     <png>/img/PT/PT-A.png</png>
     <json>/img/PT/PT-A.json</json>
-    <musica>src/main/resources/audio/musica/PT.wav</musica>
+    <musica>src/main/resources/audio/musica/CocktailParty.wav</musica>
     <scenario>
         <mode>instant</mode>
         <azione>

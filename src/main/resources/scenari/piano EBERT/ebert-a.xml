@@ -27,5 +27,10 @@
             <method>setSouth</method>
             <what>src/main/resources/scenari/piano EBERT/ebert garden.xml</what>
         </azione>
+        <azione>
+            <subject>Ebert-A</subject>
+            <method>setWest</method>
+            <what>src/main/resources/scenari/piano EBERT/ebert-b.xml</what>
+        </azione>
     </scenario>
 </stanza>
