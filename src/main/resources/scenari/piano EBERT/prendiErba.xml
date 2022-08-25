@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/suono ascensore.wav</what>
+    </azione>
+</scenario>

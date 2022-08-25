@@ -305,4 +305,34 @@
             <effetto>src/main/resources/scenari/fine.xml</effetto>
         </onOpen>
     </oggetto>
+    <oggetto nome="Sasso">
+        <classe>PickupableItem</classe>
+        <descrizione>Un sasso dalle strane proprietà.</descrizione>
+        <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>Briciola</target>
+            <scenario>src/main/resources/scenari/piano EBERT/catturaBriciola.xml</scenario>
+        </onUseWith>
+    </oggetto>
+    <oggetto nome="Fungo">
+        <classe>PickupableItem</classe>
+        <descrizione>Un fungo dalle strane proprietà.</descrizione>
+        <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>Briciola</target>
+            <scenario>src/main/resources/scenari/piano EBERT/catturaBriciola.xml</scenario>
+        </onUseWith>
+    </oggetto>
+    <oggetto nome="Cannabis">
+        <classe>Item</classe>
+        <descrizione>Una pianta dalle interessanti proprietà.</descrizione>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Raccogli fiori</actionName>
+            <effetto>src/main/resources/scenari/piano EBERT/prendiErba.xml</effetto>
+        </onUse>
+    </oggetto>
+
 </oggetti>
