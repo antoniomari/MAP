@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <personaggi>
     <personaggio nome="Nicolas">
-        <spritesheet>/img/personaggi/Nicolas spritesheet.png</spritesheet>
-        <json>/img/personaggi/nicolas.json</json>
+        <spritesheet>/img/personaggi/Nicolas.png</spritesheet>
     </personaggio>
     <personaggio nome="Antonio">
         <spritesheet>/img/personaggi/Antonio.png</spritesheet>
