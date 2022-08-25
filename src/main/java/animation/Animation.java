@@ -50,8 +50,6 @@ public abstract class Animation
         @Override
         public void run()
         {
-            if(GameState.getState() != GameState.State.MOVING && !(Animation.this instanceof PerpetualAnimation))
-               GameState.changeState(GameState.State.MOVING);
 
             // template
             execute();
@@ -65,13 +63,8 @@ public abstract class Animation
                 e.printStackTrace();
             }
 
-            if(!(Animation.this instanceof PerpetualAnimation))
-                GameState.changeState(GameState.State.PLAYING);
-
             // template
             terminate();
-
-
         }
     }
 
@@ -151,12 +144,13 @@ public abstract class Animation
      */
     protected Icon getNextIcon()
     {
-        if (currentIndex < frameIcons.size() - 1)
+        if (currentIndex < frameIcons.size())
             return frameIcons.get(currentIndex++);
         else
         {
             currentIndex = 0;
             return frameIcons.get(frameIcons.size() - 1);
+
         }
     }
 

@@ -29,6 +29,8 @@ public class MovingAnimation extends Animation
     private static final int FPS = 144;
     private final double speed;
 
+    private int currentIndex = 1;
+
 
     public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean initialDelay, List<Image> frames)
     {
@@ -56,7 +58,7 @@ public class MovingAnimation extends Animation
         // coordinate finali dell'angolo in basso a sinistra
         this.finalCoord = GameScreenManager.calculateCoordinates(finalPos);
 
-        this.speed = speed * 0.05; // ok
+        this.speed = speed * 0.03; // ok
         setFinalDelay(millisecondWaitEnd);
 
         initCoordList();
@@ -74,7 +76,7 @@ public class MovingAnimation extends Animation
         delayMilliseconds = (int) Math.round(1000.0 / FPS);
         numFrames = (int) (FPS * blockDistance / (1000 * speed));
 
-        double deltaX = (double)(finalX- initialX) / numFrames;
+        double deltaX = (double)(finalX - initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;
 
         positionsList = new ArrayList<>();
@@ -102,13 +104,27 @@ public class MovingAnimation extends Animation
                 '}';
     }
 
+    @Override
+    protected Icon getNextIcon()
+    {
+        if (currentIndex < frameIcons.size())
+            return frameIcons.get(currentIndex++);
+        else
+        {
+            currentIndex = 1;
+            return frameIcons.get(frameIcons.size() - 1);
+
+        }
+    }
+
+
 
     protected void execute()
     {
         boolean delay = initialDelay;
 
-        //if(GameState.getState() != GameState.State.MOVING)
-        //    GameState.changeState(GameState.State.MOVING);
+        if(GameState.getState() != GameState.State.MOVING)
+            GameState.changeState(GameState.State.MOVING);
 
         for(AbsPosition c : positionsList)
         {
@@ -118,6 +134,8 @@ public class MovingAnimation extends Animation
                 {
                     label.setIcon(getNextIcon());
                 }
+
+
 
                 if(delay)
                     Thread.sleep(delayMilliseconds);
@@ -130,13 +148,10 @@ public class MovingAnimation extends Animation
             {
                 e.printStackTrace();
             }
-
-            label.setIcon(frameIcons.get(frameIcons.size() -1));
-
-            //System.out.println("ejrhgeiorgh");
-
-            //GameState.changeState(GameState.State.PLAYING);
         }
+
+        label.setIcon(frameIcons.get(0));
+        GameState.changeState(GameState.State.PLAYING);
     }
 
     @Override

@@ -15,16 +15,17 @@ public class PlayingCharacter extends GameCharacter
     private static PlayingCharacter player;
     private static final String PLAYER_NAME = "Schwartz";
 
-    private PlayingCharacter(String name, String spritePath)
+    private PlayingCharacter(String name, String spritesheetPath, String jsonPath)
     {
-        super(name, spritePath);
+        super(name, spritesheetPath, jsonPath);
         this.inventory = new ArrayList<>();
     }
 
     public static PlayingCharacter getPlayer()
     {
         if(player == null)
-            player = new PlayingCharacter("Schwartz", "/img/personaggi/schwartz.png");
+            player = new PlayingCharacter("Schwartz", "/img/personaggi/Schwartz spritesheet.png",
+                    "/img/personaggi/Schwartz.json");
 
         return player;
     }

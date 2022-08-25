@@ -45,6 +45,8 @@ public class GameCharacter extends GamePiece
         {
             movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath,  getName() + "moving");
         }
+
+        System.out.println("Moving frames: " + movingFrames.size());
         movingFrames.add(0, getSprite());
     }
 
