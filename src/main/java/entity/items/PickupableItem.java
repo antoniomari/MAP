@@ -68,7 +68,8 @@ public class PickupableItem extends Item
                 PlayingCharacter.getPlayer().removeFromInventory(this);
 
             // imposta stato alla fine
-            gamePiece.setState(targetPieceFinalState);
+            // TODO: capire qua
+            // gamePiece.setState(targetPieceFinalState);
         }
 
     }
