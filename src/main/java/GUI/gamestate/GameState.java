@@ -15,6 +15,7 @@ import general.LogOutputManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class GameState
@@ -148,15 +149,16 @@ public class GameState
         mainFrame.addKeyListener(startGameListener);
     }
 
-    public static void changeState(State newState)
+    public static synchronized void changeState(State newState)
     {
         Objects.requireNonNull(newState);
 
         currentState = newState;
-        LogOutputManager.logOutput("Nuovo stato: " + currentState, LogOutputManager.GAMESTATE_COLOR);
+        LogOutputManager.logOutput("[" + LocalDateTime.now() + "] Nuovo stato: " + currentState, LogOutputManager.GAMESTATE_COLOR);
+
     }
 
-    public static State getState()
+    public static synchronized State getState()
     {
         return currentState;
     }

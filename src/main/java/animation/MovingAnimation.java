@@ -118,7 +118,6 @@ public class MovingAnimation extends Animation
     }
 
 
-
     protected void execute()
     {
         boolean delay = initialDelay;
@@ -134,8 +133,6 @@ public class MovingAnimation extends Animation
                 {
                     label.setIcon(getNextIcon());
                 }
-
-
 
                 if(delay)
                     Thread.sleep(delayMilliseconds);

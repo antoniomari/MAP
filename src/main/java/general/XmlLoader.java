@@ -623,11 +623,12 @@ public class XmlLoader
 
                 // carica speakScenarios
                 Element scenariosNode = (Element) characterElement.getElementsByTagName("speakScenarios").item(0);
+                Map<String, String> scenarioPathMap = new HashMap<>();
 
                 if(scenariosNode != null)
                 {
                     NodeList scenarioPathList = scenariosNode.getElementsByTagName("scenario");
-                    Map<String, String> scenarioPathMap = new HashMap<>();
+
 
                     for(int j = 0; j < scenarioPathList.getLength(); j++)
                     {
@@ -635,10 +636,10 @@ public class XmlLoader
                         String state = getXmlAttribute(element, "state");
                         scenarioPathMap.put(state, element.getTextContent());
                     }
-
-                    if(loaded instanceof NPC)
-                        ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
                 }
+
+                if(loaded instanceof NPC)
+                    ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
 
                 return loaded;
 
