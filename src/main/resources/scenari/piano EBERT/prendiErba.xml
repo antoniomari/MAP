@@ -2,7 +2,7 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
-        <method>playScenarioSound</method>
-        <what>src/main/resources/audio/effetti/suono ascensore.wav</what>
+        <method>addToInventory</method>
+        <what>Fiori interessanti</what>
     </azione>
 </scenario>

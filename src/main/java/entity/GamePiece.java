@@ -118,6 +118,11 @@ public class GamePiece
         this.state = state;
     }
 
+    public String getState()
+    {
+        return state;
+    }
+
     public String toString()
     {
         return name;

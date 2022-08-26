@@ -13,6 +13,8 @@ public class PickupableItem extends Item
     private boolean keepOnUseWith;
     private ActionSequence usewithAction;
     private String targetPieceName;
+    private String targetPieceInitState;
+    private String targetPieceFinalState;
 
     // costruttore che inizializza l'oggetto come presente nell'inventario
     public PickupableItem(String name, String description, boolean canUse)
@@ -48,21 +50,25 @@ public class PickupableItem extends Item
         this.usewithAction = usewithAction;
     }
 
-    public void setTargetPiece(String pieceName)
+    public void setTargetPiece(String pieceName, String initState, String finalState)
     {
         targetPieceName = pieceName;
+        targetPieceInitState = initState;
+        targetPieceFinalState = finalState;
     }
 
 
     public void useWith(GamePiece gamePiece)
     {
-        // System.out.println("entrato in useWith");
-        if(gamePiece.equals(GameManager.getPiece(targetPieceName)))
+        if(gamePiece.equals(GameManager.getPiece(targetPieceName)) && gamePiece.getState().equals(targetPieceInitState))
         {
             GameManager.startScenario(usewithAction);
 
             if(!keepOnUseWith)
                 PlayingCharacter.getPlayer().removeFromInventory(this);
+
+            // imposta stato alla fine
+            gamePiece.setState(targetPieceFinalState);
         }
 
     }

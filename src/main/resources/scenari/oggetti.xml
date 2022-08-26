@@ -345,7 +345,7 @@
         <onUseWith>
             <keep>false</keep>
             <target>Briciola</target>
-            <targetInitState>normale</targetInitState>
+            <targetInitState>init</targetInitState>
             <targetFinalState>fatto</targetFinalState>
             <scenario>src/main/resources/scenari/piano EBERT/BriciolaDrogato.xml</scenario>
         </onUseWith>

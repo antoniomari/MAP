@@ -640,10 +640,7 @@ public class XmlLoader
                         ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
                 }
 
-
                 return loaded;
-
-
 
             }
         }
@@ -735,6 +732,8 @@ public class XmlLoader
                 if (onUseWithElement != null)
                 {
                     String targetName = getTagValue(onUseWithElement, "target");
+                    Optional<String> targetInitState = getOptionalTagValue(onUseWithElement, "targetInitState");
+                    Optional<String> targetFinalState = getOptionalTagValue(onUseWithElement, "targetFinalState");
 
                     Optional<String> keepOptional = getOptionalTagValue(onUseWithElement, "keep");
                     if (keepOptional.isPresent())
@@ -743,7 +742,9 @@ public class XmlLoader
                         ((PickupableItem) itemToLoad).setKeepOnUseWith(keep);
                     }
 
-                    ((PickupableItem) itemToLoad).setTargetPiece(targetName);
+                    ((PickupableItem) itemToLoad).setTargetPiece(targetName,
+                                            targetInitState.orElse("init"),
+                                            targetFinalState.orElse("init"));
 
                     Optional<String> methodName = getOptionalTagValue(onUseWithElement, "method");
                     if(methodName.isPresent())
