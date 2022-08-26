@@ -28,8 +28,6 @@ public class GameCharacter extends GamePiece
     public GameCharacter(String name, String spritesheetPath, String jsonPath)
     {
         super(name, SpriteManager.loadSpriteSheet(spritesheetPath), jsonPath);
-        movingFrames = new ArrayList<>();
-        animateFrames = new ArrayList<>(); // TODO: aggiustare
         spritesheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         this.jsonPath = jsonPath;
         initMovingFrames();
@@ -39,15 +37,22 @@ public class GameCharacter extends GamePiece
 
     private void initMovingFrames()
     {
-        movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "moving");
+        // prova con leftMoving
+        leftMovingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "leftMoving");
+        rightMovingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "rightMoving");
 
-        if(movingFrames.isEmpty())
+        if(leftMovingFrames.isEmpty())
         {
-            movingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath,  getName() + "moving");
+            leftMovingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath,  getName() + "leftMoving");
         }
 
-        System.out.println("Moving frames: " + movingFrames.size());
-        movingFrames.add(0, getSprite());
+        if(rightMovingFrames.isEmpty())
+        {
+            rightMovingFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, getName() + "rightMoving");
+        }
+
+        leftMovingFrames.add(0, getSprite());
+        rightMovingFrames.add(0, getSprite());
     }
 
     private void initAnimateFrames()

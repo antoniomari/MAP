@@ -12,11 +12,13 @@
             <x>24</x>
             <y>11</y>
         </azione>
+        <!--
         <azione>
             <subject>Cuoco1</subject>
             <method>setSpeakScenario</method>
             <what>src/main/resources/scenari/piano terra/ParlaCuoco1.xml</what>
         </azione>
+        -->
         <azione>
             <subject>PT-C</subject>
             <method>add</method>
@@ -24,11 +26,13 @@
             <x>15</x>
             <y>11</y>
         </azione>
+        <!--
         <azione>
             <subject>Cuoco2</subject>
             <method>setSpeakScenario</method>
             <what>src/main/resources/scenari/piano terra/ParlaCuoco2.xml</what>
         </azione>
+        -->
         <azione>
             <subject>PT-C</subject>
             <method>add</method>

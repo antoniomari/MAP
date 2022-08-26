@@ -169,6 +169,7 @@
 		<x>22</x>
 		<y>14</y>
 	</azione>
+	<!--
 	<azione>
 		<subject>Cameriere</subject>
 		<method>setSpeakScenario</method>
@@ -179,4 +180,17 @@
 		<method>setSpeakScenario</method>
 		<what>src/main/resources/scenari/piano terra/inizioConferenza.xml</what>
 	</azione>
+	-->
+	<azione>
+		<subject>Cameriere</subject>
+		<method>setState</method>
+		<state>cocktail</state>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>setState</method>
+		<state>inizioConferenza</state>
+	</azione>
+
+
 </scenario>

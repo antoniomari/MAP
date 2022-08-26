@@ -30,7 +30,11 @@ import java.util.Objects;
  */
 public class GamePiece
 {
+
     private final String name;
+
+    /** Stato utilizzato per associare il comportamento del GamePiece. */
+    private String state = "init";
     protected Image sprite;
 
     protected int bWidth;  // larghezza in blocchi dell'elemento
@@ -45,7 +49,8 @@ public class GamePiece
     private BufferedImage spriteSheet;
     private String jsonPath;
 
-    protected List<Image> movingFrames;
+    protected List<Image> leftMovingFrames;
+    protected List<Image> rightMovingFrames;
     protected List<Image> animateFrames;
 
 
@@ -106,6 +111,13 @@ public class GamePiece
         GameManager.addPiece(this);
     }
 
+    public void setState(String state)
+    {
+        Objects.requireNonNull(state);
+
+        this.state = state;
+    }
+
     public String toString()
     {
         return name;
@@ -158,16 +170,23 @@ public class GamePiece
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, spritesheetPath, jsonPath, animationName, finalWait, ItemInteractionEvent.Type.EFFECT_ANIMATION));
     }
 
-    public List<Image> getMovingFrames()
+    public List<Image> getLeftMovingFrames()
     {
-        return movingFrames;
+        return leftMovingFrames;
+    }
+
+    public List<Image> getRightMovingFrames()
+    {
+        return rightMovingFrames;
     }
 
 
     private void fakeInitMovingFrames()
     {
-        movingFrames = new ArrayList<>();
-        movingFrames.add(sprite);
+        leftMovingFrames = new ArrayList<>();
+        leftMovingFrames.add(sprite);
+
+        rightMovingFrames = leftMovingFrames;
     }
 
 

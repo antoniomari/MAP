@@ -4,9 +4,15 @@ package entity.characters;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
+import general.XmlLoader;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NPC extends GameCharacter
 {
+    /** Dizionario STATO-> PATH SPEAK SCENARIO ASSOCIATO. */
+    private Map<String, String> speakScenarioMap;
     ActionSequence speakScenario;
 
     public NPC(String name, String spritesheetPath, String jsonPath)
@@ -20,9 +26,28 @@ public class NPC extends GameCharacter
         super(name, spritePath);
     }
 
+    public void loadSpeakScenarios(Map<String, String> speakScenarioMap)
+    {
+        this.speakScenarioMap = speakScenarioMap;
+    }
+
+
     public void setSpeakScenario(ActionSequence speakScenario)
     {
         this.speakScenario = speakScenario;
+
+        GameManager.continueScenario();
+    }
+
+
+    @Override
+    public void setState(String state)
+    {
+        super.setState(state);
+
+        String scenarioPath = speakScenarioMap.get(state);
+        if(scenarioPath != null)
+            speakScenario = XmlLoader.loadScenario(scenarioPath);
 
         GameManager.continueScenario();
     }

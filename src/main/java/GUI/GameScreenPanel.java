@@ -376,8 +376,16 @@ public class GameScreenPanel extends JLayeredPane
     {
         JLabel labelToAnimate = pieceLabelMap.get(piece);
 
+        List<Image> frames;
+        // caso spostamento verso destra
+        if(initialPos.getX() <= finalPos.getX())
+            frames = piece.getRightMovingFrames();
+        else
+            frames = piece.getLeftMovingFrames();
+
+
         return new MovingAnimation(labelToAnimate,
-                                    initialPos, finalPos, millisecondWaitEnd, true, piece.getMovingFrames());
+                                    initialPos, finalPos, millisecondWaitEnd, true, frames);
     }
 
 

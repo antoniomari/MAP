@@ -22,12 +22,17 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class XmlLoader
 {
     public static ActionSequence loadScenario(String scenarioPath)
     {
+        Objects.requireNonNull(scenarioPath);
+
         // STAMPA DI LOG
         LogOutputManager.logOutput("Parsing scenario " + scenarioPath, LogOutputManager.XML_COLOR);
 
@@ -192,6 +197,9 @@ public class XmlLoader
                 break;
             case "playEmoji":
                 actionParsed = parsePlayEmoji(actionElement);
+                break;
+            case "setState":
+                actionParsed = parseSetState(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -419,15 +427,19 @@ public class XmlLoader
         }
     }
 
+
     private static Runnable parseSetSpeakScenario(Element eAction)
     {
+        /*
         String subject = getTagValue(eAction, "subject");
 
         String scenarioPath = getTagValue(eAction, "what");
 
         Document document = openXml(scenarioPath);
         return () -> ((NPC) GameManager.getPiece(subject))
-                .setSpeakScenario(parseScenario(scenarioPath, document.getDocumentElement()));
+                .setSpeakScenario(parseScenario(scenarioPath, document.getDocumentElement())); */
+
+        throw new GameException("Deprecato");
     }
 
     private static Runnable parseRemoveFromRoom(Element eAction)
@@ -527,6 +539,13 @@ public class XmlLoader
         return () -> ((GameCharacter) GameManager.getPiece(subject)).playEmoji(emojiName);
     }
 
+    private static Runnable parseSetState(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        String state = getTagValue(eAction, "state");
+
+        return () -> GameManager.getPiece(subject).setState(state);
+    }
     /**
      * Restituisce il GamePiece sulla base del nome: se non è già stato caricato
      * in memoria allora lo cerca in "personaggi.xml" e in "oggetti.xml"
@@ -588,17 +607,43 @@ public class XmlLoader
                 String spritesheetPath = getTagValue(characterElement, "spritesheet");
                 Optional<String> jsonPath = getOptionalTagValue(characterElement, "json");
 
+                GameCharacter loaded;
+
                 if(jsonPath.isPresent())
                 {
                     if(name.equals(PlayingCharacter.getPlayerName()))
-                        return new GameCharacter(name, spritesheetPath, jsonPath.get());
+                        loaded = new GameCharacter(name, spritesheetPath, jsonPath.get());
                     else
-                        return new NPC(name, spritesheetPath, jsonPath.get());
+                        loaded = new NPC(name, spritesheetPath, jsonPath.get());
                 }
                 else
                 {
-                    return new NPC(name, spritesheetPath);
+                    loaded = new NPC(name, spritesheetPath);
                 }
+
+                // carica speakScenarios
+                Element scenariosNode = (Element) characterElement.getElementsByTagName("speakScenarios").item(0);
+
+                if(scenariosNode != null)
+                {
+                    NodeList scenarioPathList = scenariosNode.getElementsByTagName("scenario");
+                    Map<String, String> scenarioPathMap = new HashMap<>();
+
+                    for(int j = 0; j < scenarioPathList.getLength(); j++)
+                    {
+                        Element element = (Element) scenarioPathList.item(j);
+                        String state = getXmlAttribute(element, "state");
+                        scenarioPathMap.put(state, element.getTextContent());
+                    }
+
+                    if(loaded instanceof NPC)
+                        ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
+                }
+
+
+                return loaded;
+
+
 
             }
         }

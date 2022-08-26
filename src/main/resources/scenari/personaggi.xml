@@ -5,12 +5,21 @@
     </personaggio>
     <personaggio nome="Antonio">
         <spritesheet>/img/personaggi/Antonio.png</spritesheet>
+        <speakScenarios>
+            <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
+            <scenario state="fineConferenza"></scenario>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="Diego">
         <spritesheet>/img/personaggi/Diego.png</spritesheet>
     </personaggio>
     <personaggio nome="Cameriere">
         <spritesheet>/img/personaggi/cameriere.png</spritesheet>
+        <initialState>cocktail</initialState>
+        <speakScenarios>
+            <scenario state="cocktail">src/main/resources/scenari/piano terra/ConoscenzaCameriere.xml</scenario>
+            <scenario state="fineConferenza"></scenario>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="Tecnico">
         <spritesheet>/img/personaggi/tecnico.png</spritesheet>
@@ -18,10 +27,16 @@
     <personaggio nome="Cuoco1">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
         <json>/img/personaggi/cuochi.json</json>
+        <speakScenarios>
+            <scenario state="init">src/main/resources/scenari/piano terra/ParlaCuoco1.xml</scenario>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="Cuoco2">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
         <json>/img/personaggi/cuochi.json</json>
+        <speakScenarios>
+            <scenario state="init">src/main/resources/scenari/piano terra/ParlaCuoco2.xml</scenario>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="CuocoNero">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
