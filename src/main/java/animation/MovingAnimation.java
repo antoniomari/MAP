@@ -148,12 +148,12 @@ public class MovingAnimation extends Animation
         }
 
         label.setIcon(frameIcons.get(0));
-        GameState.changeState(GameState.State.PLAYING);
     }
 
     @Override
     protected void terminate()
     {
+        // GameState.changeState(GameState.State.PLAYING);
         GameManager.continueScenario();
     }
 

@@ -115,9 +115,6 @@ public class TextBarPanel extends JLayeredPane
         // riproduci suono scroll bar
         SoundHandler.playWav(SoundHandler.SCROLL_BAR_PATH, SoundHandler.Mode.SOUND);
 
-        // update GameState
-        GameState.changeState(GameState.State.PLAYING);
-
         GameManager.continueScenario();
     }
 }

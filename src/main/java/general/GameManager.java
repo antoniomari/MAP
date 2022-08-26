@@ -1,6 +1,7 @@
 package general;
 
 import GUI.MainFrame;
+import GUI.gamestate.GameState;
 import entity.GamePiece;
 import entity.characters.PlayingCharacter;
 import entity.rooms.Room;
@@ -77,7 +78,10 @@ public class GameManager
     public static synchronized void continueScenario()
     {
         if(scenarioStack.isEmpty())
+        {
+            GameState.changeState(GameState.State.PLAYING);
             return;
+        }
 
         ActionSequence top = scenarioStack.peek();
         if(top.getMode() == ActionSequence.Mode.SEQUENCE)
