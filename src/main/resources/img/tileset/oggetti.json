@@ -74,9 +74,9 @@
   "Stampante":
   {
     "x": 600,
-    "y": 168,
+    "y": 144,
     "width": 144,
-    "height": 96
+    "height": 120
   },
 
   "PortaFilamento":

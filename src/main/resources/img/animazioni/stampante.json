@@ -125,5 +125,125 @@
     "y": 456,
     "width": 144,
     "height": 120
+  },
+
+  "Stampanteanimate17":
+  {
+    "x": 432,
+    "y": 312,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate18":
+  {
+    "x": 432,
+    "y": 168,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate19":
+  {
+    "x": 432,
+    "y": 24,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate20":
+  {
+    "x": 288,
+    "y": 456,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate21":
+  {
+    "x": 288,
+    "y": 312,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate22":
+  {
+    "x": 288,
+    "y": 168,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate23":
+  {
+    "x": 288,
+    "y": 24,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate24":
+  {
+    "x": 144,
+    "y": 456,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate25":
+  {
+    "x": 144,
+    "y": 312,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate26":
+  {
+    "x": 144,
+    "y": 168,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate27":
+  {
+    "x": 144,
+    "y": 24,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate28":
+  {
+    "x": 0,
+    "y": 456,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate29":
+  {
+    "x": 0,
+    "y": 312,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate30":
+  {
+    "x": 0,
+    "y": 168,
+    "width": 144,
+    "height": 120
+  },
+
+  "Stampanteanimate31":
+  {
+    "x": 0,
+    "y": 24,
+    "width": 144,
+    "height": 120
   }
 }
