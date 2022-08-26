@@ -4,11 +4,11 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Ora sembra molto contento.</sentence>
+        <sentence>Ora sembra ancooora più contento.</sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Si sente un rombo proveniente dal suo stomaco.</sentence>
+        <sentence>Sta per addormentarsi!</sentence>
     </azione>
 </scenario>

@@ -326,7 +326,7 @@
             <target>Briciola</target>
             <targetInitState>fatto</targetInitState>
             <targetFinalState>mangiato</targetFinalState>
-            <scenario>src/main/resources/scenari/piano EBERT/catturaBriciola.xml</scenario>
+            <scenario>src/main/resources/scenari/piano EBERT/BriciolaMangia.xml</scenario>
         </onUseWith>
     </oggetto>
     <oggetto nome="Cannabis">

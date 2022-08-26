@@ -32,12 +32,15 @@ public class NPC extends GameCharacter
     }
 
 
+    /*
     public void setSpeakScenario(ActionSequence speakScenario)
     {
         this.speakScenario = speakScenario;
 
         GameManager.continueScenario();
     }
+
+     */
 
 
     @Override
@@ -49,7 +52,7 @@ public class NPC extends GameCharacter
         if(scenarioPath != null)
             speakScenario = XmlLoader.loadScenario(scenarioPath);
 
-        GameManager.continueScenario();
+        // GameManager.continueScenario();
     }
 
     public void setSpeakSentence(String sentence)
