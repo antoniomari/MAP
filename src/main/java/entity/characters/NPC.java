@@ -52,7 +52,8 @@ public class NPC extends GameCharacter
         if(scenarioPath != null)
             speakScenario = XmlLoader.loadScenario(scenarioPath);
 
-        // GameManager.continueScenario();
+        // TODO: aggiustare
+        GameManager.continueScenario();
     }
 
     public void setSpeakSentence(String sentence)
