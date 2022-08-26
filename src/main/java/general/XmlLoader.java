@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import sound.SoundHandler;
 
+import javax.swing.text.html.Option;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -330,14 +331,14 @@ public class XmlLoader
     {
         String subject = getTagValue(eAction, "subject");
 
-        return () -> ((GameCharacter) GameManager.getPiece(subject)).animate();
+        return () -> GameManager.getPiece(subject).animate();
     }
 
     private static Runnable parseAnimateReverse(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
 
-        return () -> ((GameCharacter) GameManager.getPiece(subject)).animateReverse();
+        return () -> GameManager.getPiece(subject).animateReverse();
     }
 
     private static Runnable parseAddPickup(Element eAction)
@@ -683,6 +684,16 @@ public class XmlLoader
                 else
                     throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
                 // TODO : rimpiazzare if-else
+
+                // caricamento animazione
+                Optional<String> animationSpritesheetPath = getOptionalTagValue(itemElement, "animationSpritesheet");
+                Optional<String> animationJsonPath = getOptionalTagValue(itemElement, "animationJson");
+
+                // TODO: controlli??
+                if(animationSpritesheetPath.isPresent())
+                {
+                    itemToLoad.initAnimateFrames(animationSpritesheetPath.get(), animationJsonPath.get());
+                }
 
 
                 // setup onUse action

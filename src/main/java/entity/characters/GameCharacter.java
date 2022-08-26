@@ -55,6 +55,7 @@ public class GameCharacter extends GamePiece
         rightMovingFrames.add(0, getSprite());
     }
 
+    //TODO: eliminare copia
     private void initAnimateFrames()
     {
         animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "animate");
@@ -66,6 +67,7 @@ public class GameCharacter extends GamePiece
         animateFrames.add(0, getSprite());
     }
 
+    /*
     public void animate()
     {
         EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
@@ -77,6 +79,8 @@ public class GameCharacter extends GamePiece
         EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
         Collections.reverse(animateFrames);
     }
+
+     */
 
     public void speak(String sentence)
     {

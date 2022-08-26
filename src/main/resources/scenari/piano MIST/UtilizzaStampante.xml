@@ -6,6 +6,10 @@
         <what>src/main/resources/audio/effetti/stampante.wav</what>
     </azione>
     <azione>
+        <subject>Stampante</subject>
+        <method>animate</method>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>move</method>
         <x>9</x>

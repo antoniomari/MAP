@@ -116,6 +116,8 @@
         <classe>Item</classe>
         <descrizione>Stampante 3D.</descrizione>
         <canUse>false</canUse>
+        <animationSpritesheet>/img/animazioni/stampante.png</animationSpritesheet>
+        <animationJson>/img/animazioni/stampante.json</animationJson>
     </oggetto>
     <oggetto nome="Tappi">
         <classe>PickupableItem</classe>

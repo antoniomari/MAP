@@ -3,6 +3,7 @@ package entity;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
+import events.AnimationEvent;
 import events.EventHandler;
 import events.GamePieceEvent;
 import events.ItemInteractionEvent;
@@ -18,6 +19,7 @@ import javax.swing.Icon;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -111,6 +113,20 @@ public class GamePiece
         GameManager.addPiece(this);
     }
 
+    public void initAnimateFrames(String spritesheetPath, String jsonPath)
+    {
+        BufferedImage spritesheet = SpriteManager.loadSpriteSheet(spritesheetPath);
+
+        animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "animate");
+
+        if(animateFrames.isEmpty())
+        {
+            animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, getName() + "animate");
+        }
+
+        // animateFrames.add(0, getSprite());
+    }
+
     public void setState(String state)
     {
         Objects.requireNonNull(state);
@@ -161,6 +177,7 @@ public class GamePiece
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, ItemInteractionEvent.Type.UPDATE_SPRITE));
     }
 
+    @Deprecated
     public void executeEffectAnimation(String animationName, int finalWait)
     {
         // TODO: generalizzare, probabilmente utilizzare map delle animazioni in qualche classe
@@ -173,6 +190,18 @@ public class GamePiece
         }
 
         EventHandler.sendEvent(new ItemInteractionEvent((Item) this, spritesheetPath, jsonPath, animationName, finalWait, ItemInteractionEvent.Type.EFFECT_ANIMATION));
+    }
+
+    public void animate()
+    {
+        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
+    }
+
+    public void animateReverse()
+    {
+        Collections.reverse(animateFrames);
+        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
+        Collections.reverse(animateFrames);
     }
 
     public List<Image> getLeftMovingFrames()

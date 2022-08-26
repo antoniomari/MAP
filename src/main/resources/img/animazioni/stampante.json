@@ -1,117 +1,117 @@
 {
-  "stampante1":
+  "Stampanteanimate1":
   {
     "x": 0,
-    "y": 48,
+    "y": 24,
     "width": 144,
     "height": 120
   },
 
-  "stampante2":
+  "Stampanteanimate2":
   {
     "x": 0,
-    "y": 192,
+    "y": 168,
     "width": 144,
     "height": 120
   },
 
-  "stampante3":
+  "Stampanteanimate3":
   {
     "x": 0,
-    "y": 336,
+    "y": 312,
     "width": 144,
     "height": 120
   },
 
-  "stampante4":
+  "Stampanteanimate4":
   {
     "x": 0,
-    "y": 480,
+    "y": 456,
     "width": 144,
     "height": 120
   },
 
-  "stampante5":
+  "Stampanteanimate5":
   {
     "x": 144,
-    "y": 48,
+    "y": 24,
     "width": 144,
     "height": 120
   },
 
-  "stampante6":
+  "Stampanteanimate6":
   {
     "x": 144,
-    "y": 192,
+    "y": 168,
     "width": 144,
     "height": 120
   },
 
-  "stampante7":
+  "Stampanteanimate7":
   {
     "x": 144,
-    "y": 336,
+    "y": 312,
     "width": 144,
     "height": 120
   },
 
-  "stampante8":
+  "Stampanteanimate8":
   {
     "x": 144,
-    "y": 480,
+    "y": 456,
     "width": 144,
     "height": 120
   },
 
-  "stampante9":
+  "Stampanteanimate9":
   {
     "x": 288,
-    "y": 48,
+    "y": 24,
     "width": 144,
     "height": 120
   },
 
-  "stampante10":
+  "Stampanteanimate10":
   {
     "x": 288,
-    "y": 192,
+    "y": 168,
     "width": 144,
     "height": 120
   },
 
-  "stampante11":
+  "Stampanteanimate11":
   {
     "x": 288,
-    "y": 336,
+    "y": 312,
     "width": 144,
     "height": 120
   },
 
-  "stampante12":
+  "Stampanteanimate12":
   {
     "x": 288,
-    "y": 480,
+    "y": 456,
     "width": 144,
     "height": 120
   },
 
-  "stampante13":
+  "Stampanteanimate13":
   {
     "x": 432,
-    "y": 48,
+    "y": 24,
     "width": 144,
     "height": 120
   },
 
-  "stampante14":
+  "Stampanteanimate14":
   {
     "x": 432,
-    "y": 192,
+    "y": 168,
     "width": 144,
     "height": 120
   },
 
-  "stampante15":
+  "Stampanteanimate15":
   {
     "x": 432,
     "y": 312,
@@ -119,7 +119,7 @@
     "height": 120
   },
 
-  "stampante16":
+  "Stampanteanimate16":
   {
     "x": 432,
     "y": 456,
