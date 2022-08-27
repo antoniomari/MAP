@@ -69,7 +69,7 @@ public class PickupableItem extends Item
 
             // imposta stato alla fine
             // TODO: capire qua
-            // gamePiece.setState(targetPieceFinalState);
+            gamePiece.setState(targetPieceFinalState, false);
         }
 
     }

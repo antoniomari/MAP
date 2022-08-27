@@ -48,4 +48,7 @@
     <personaggio nome="Briciola">
         <spritesheet>/img/personaggi/Briciola.png</spritesheet>
     </personaggio>
+    <personaggio nome="MA-D">
+        <spritesheet>/img/personaggi/MA-D.png</spritesheet>
+    </personaggio>
 </personaggi>

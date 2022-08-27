@@ -44,16 +44,17 @@ public class NPC extends GameCharacter
 
 
     @Override
-    public void setState(String state)
+    public void setState(String state, boolean continueScenario)
     {
-        super.setState(state);
+        this.state = state;
 
         String scenarioPath = speakScenarioMap.get(state);
         if(scenarioPath != null)
             speakScenario = XmlLoader.loadScenario(scenarioPath);
 
         // TODO: aggiustare
-        GameManager.continueScenario();
+        if(continueScenario)
+            GameManager.continueScenario();
     }
 
     public void setSpeakSentence(String sentence)

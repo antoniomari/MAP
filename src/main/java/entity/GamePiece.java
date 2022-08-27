@@ -36,7 +36,7 @@ public class GamePiece
     private final String name;
 
     /** Stato utilizzato per associare il comportamento del GamePiece. */
-    private String state = "init";
+    protected String state = "init";
     protected Image sprite;
 
     protected int bWidth;  // larghezza in blocchi dell'elemento
@@ -127,11 +127,14 @@ public class GamePiece
         // animateFrames.add(0, getSprite());
     }
 
-    public void setState(String state)
+    public void setState(String state, boolean continueScenario)
     {
         Objects.requireNonNull(state);
 
         this.state = state;
+
+        if(continueScenario)
+            GameManager.continueScenario();
     }
 
     public String getState()

@@ -545,7 +545,7 @@ public class XmlLoader
         String subject = getTagValue(eAction, "subject");
         String state = getTagValue(eAction, "state");
 
-        return () -> GameManager.getPiece(subject).setState(state);
+        return () -> GameManager.getPiece(subject).setState(state, true);
     }
     /**
      * Restituisce il GamePiece sulla base del nome: se non è già stato caricato
