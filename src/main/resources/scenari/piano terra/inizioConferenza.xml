@@ -6,6 +6,7 @@
         <method>speak</method>
         <sentence>Eccola finalmente possiamo iniziare la (*) conferenza, prenda posto tra le prime file.</sentence>
     </azione>
+    <!--
     <azione>
         <subject>Schwartz</subject>
         <method>playEmoji</method>
@@ -56,6 +57,7 @@
         <method>playEmoji</method>
         <what>dormi</what>
     </azione>
+    -->
     <azione>
         <subject>Antonio</subject>
         <method>move</method>

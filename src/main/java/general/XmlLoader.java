@@ -639,6 +639,7 @@ public class XmlLoader
                     }
                 }
 
+
                 if(loaded instanceof NPC)
                     ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
 

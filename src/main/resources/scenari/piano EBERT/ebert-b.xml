@@ -5,5 +5,12 @@
     <musica>src/main/resources/audio/musica/Ebert.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <subject>Ebert-B</subject>
+            <method>add</method>
+            <what>MA-D</what>
+            <x>10</x>
+            <y>14</y>
+        </azione>
     </scenario>
 </stanza>

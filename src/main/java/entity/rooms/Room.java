@@ -97,6 +97,8 @@ public class Room
     public void setScenarioOnEnter(ActionSequence scenario)
     {
         this.scenarioOnEnter = scenario;
+
+        GameManager.continueScenario();
     }
 
     public Room getEast()
