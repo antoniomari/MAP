@@ -51,7 +51,7 @@ public class LogicQuestC
 
         // creazione titolo del minigioco e imagine gioco
         description = new JLabel("Circuito logico type C", SwingConstants.CENTER);
-        icon = new ImageIcon("src/com/company/img/fruitEquation2.png");
+        icon = new ImageIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
         image = new JLabel("" ,icon, JLabel.CENTER);
 
         font = new Font("Agency FB", Font.BOLD , 40);

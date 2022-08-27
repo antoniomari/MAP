@@ -50,7 +50,7 @@ public class LogicQuestA
 
         // creazione titolo del minigioco e imagine gioco
         description = new JLabel("Circuito logico type A", SwingConstants.CENTER);
-        icon = new ImageIcon("src/com/company/img/geometryEquation.png");
+        icon = new ImageIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
         image = new JLabel("" ,icon, JLabel.CENTER);
 
         font = new Font("Agency FB", Font.BOLD , 40);
@@ -111,7 +111,7 @@ public class LogicQuestA
             button.addActionListener((e) -> {
                 if (e.getActionCommand().equals("1")) {
                     showInfoResult(VICTORY);
-                   // SwingUtilities.invokeLater(() -> new LogicQuestB());
+                    SwingUtilities.invokeLater(() -> new LogicQuestB());
                     mainFrame.dispose();
                 }
                 else {

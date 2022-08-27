@@ -51,7 +51,7 @@ public class LogicQuestB
 
         // creazione titolo del minigioco e imagine gioco
         description = new JLabel("Circuito logico type B", SwingConstants.CENTER);
-        icon = new ImageIcon("src/com/company/img/sweetEquation.png");
+        icon = new ImageIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
         image = new JLabel("" ,icon, JLabel.CENTER);
 
         font = new Font("Agency FB", Font.BOLD , 40);
@@ -112,7 +112,7 @@ public class LogicQuestB
             button.addActionListener((e) -> {
                 if (e.getActionCommand().equals("3, 2, 1")) {
                     showInfoResult(VICTORY);
-                    //SwingUtilities.invokeLater(() -> new LogicQuestC());
+                    SwingUtilities.invokeLater(() -> new LogicQuestC());
                     mainFrame.dispose();
                 }
                 else {
