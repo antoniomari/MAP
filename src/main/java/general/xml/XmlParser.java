@@ -234,6 +234,9 @@ public class XmlParser
             case "executeTest":
                 actionParsed = parseExecuteTest(actionElement);
                 break;
+            case "setCanUse":
+                actionParsed = parseSetCanUse(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -590,6 +593,14 @@ public class XmlParser
             return () -> SwingUtilities.invokeLater(TestMist::new);
         else
             throw new GameException("Nome del test non valido");
+    }
+
+    private static Runnable parseSetCanUse(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        boolean canUse = Boolean.parseBoolean(getTagValue(eAction, "canUse"));
+
+        return () -> ((Item) GameManager.getPiece(subject)).setCanUse(canUse);
     }
 
     /*

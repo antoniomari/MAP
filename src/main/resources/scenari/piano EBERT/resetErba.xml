@@ -9,7 +9,7 @@
     <azione>
         <subject>RightErbaBlu</subject>
         <method>setState</method>
-        <state>init</state>
+        <state>pronto</state>
     </azione>
     <azione>
         <subject>RightErbaRossa</subject>

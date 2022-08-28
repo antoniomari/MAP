@@ -379,7 +379,7 @@
         <onUse>
             <actionName>Calpesta</actionName>
             <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
-            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+            <useScenario state="pronto">src/main/resources/scenari/piano EBERT/calpesta3.xml</useScenario>
         </onUse>
     </oggetto>
     <oggetto nome="RightErbaVerde">
@@ -389,7 +389,7 @@
         <onUse>
             <actionName>Calpesta</actionName>
             <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
-            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+            <useScenario state="pronto">src/main/resources/scenari/piano EBERT/calpesta4.xml</useScenario>
         </onUse>
     </oggetto>
     <oggetto nome="RightErbaGialla">
@@ -399,7 +399,7 @@
         <onUse>
             <actionName>Calpesta</actionName>
             <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
-            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+            <useScenario state="pronto">src/main/resources/scenari/piano EBERT/calpesta2.xml</useScenario>
         </onUse>
     </oggetto>
     <oggetto nome="RightErbaBlu">

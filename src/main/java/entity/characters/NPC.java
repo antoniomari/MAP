@@ -64,10 +64,16 @@ public class NPC extends GameCharacter
         GameManager.continueScenario();
     }
 
+    // TODO :Aggiustare chiamatre
     public void speak()
     {
         if (speakScenario != null)
             GameManager.startScenario(speakScenario);
+        else if(speakScenarioMap.containsKey(state))
+        {
+            speakScenario = XmlParser.loadScenario(speakScenarioMap.get(state));
+            GameManager.startScenario(speakScenario);
+        }
         else
             throw new GameException("speakScenario non impostato");
     }

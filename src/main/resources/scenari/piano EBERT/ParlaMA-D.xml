@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ciao!</sentence>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setState</method>
+        <state>pronto</state>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaGialla</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaRossa</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaVerde</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+</scenario>

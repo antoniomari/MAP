@@ -108,8 +108,14 @@ public class Item extends GamePiece implements Observable
     {
         if(canUse)
         {
-            GameManager.startScenario(useScenario);
+            if(useScenario != null)
+                GameManager.startScenario(useScenario);
 
+            else if(useScenarioMap.containsKey(state))
+            {
+                useScenario = XmlParser.loadScenario(useScenarioMap.get(state));
+                GameManager.startScenario(useScenario);
+            }
             if(usability == USE_ONCE)
                 canUse = false;
         }
@@ -126,9 +132,12 @@ public class Item extends GamePiece implements Observable
         this.useActionName = s;
     }
 
+    // TODO: attenzione, non usarlo normalmente in quanto manda avanti lo scenario
     public void setCanUse(boolean canUse)
     {
         this.canUse = canUse;
+
+        GameManager.continueScenario();
     }
 
     public boolean canUse()

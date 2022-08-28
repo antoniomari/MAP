@@ -64,5 +64,8 @@
     </personaggio>
     <personaggio nome="MA-D">
         <spritesheet>/img/personaggi/MA-D.png</spritesheet>
+        <speakScenarios>
+            <scenario state="init">src/main/resources/scenari/piano EBERT/ParlaMA-D.xml</scenario>
+        </speakScenarios>
     </personaggio>
 </personaggi>
