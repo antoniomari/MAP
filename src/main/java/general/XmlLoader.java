@@ -2,6 +2,7 @@ package general;
 
 import GUI.GameScreenPanel;
 import GUI.miniGames.LogicQuest;
+import GUI.miniGames.TestMist;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
@@ -560,6 +561,8 @@ public class XmlLoader
 
         if(what.equals("ALU"))
             return () -> SwingUtilities.invokeLater(() -> LogicQuest.createLogicQuest(1));
+        else if(what.equals("MIST"))
+            return () -> SwingUtilities.invokeLater(TestMist::new);
         else
             throw new GameException("Nome del test non valido");
     }

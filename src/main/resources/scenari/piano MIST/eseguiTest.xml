@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <method>executeTest</method>
+        <what>MIST</what>
+    </azione>
+</scenario>

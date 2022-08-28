@@ -75,10 +75,10 @@
         <descrizione>Un ascensore arancione</descrizione>
         <canUse>false</canUse>
         <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
+        <isLocked>false</isLocked>
         <onOpen>
-            <mode>once</mode>
-            <effetto>src/main/resources/scenari/fine.xml</effetto>
+            <mode>infty</mode>
+            <effetto>src/main/resources/scenari/piano MIST/eseguiTest.xml</effetto>
         </onOpen>
     </oggetto>
     <oggetto nome="ArmadioMIST">

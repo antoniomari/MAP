@@ -14,49 +14,49 @@ import java.awt.event.WindowEvent;
 
 public class TestMist
 {
-    private JFrame mainFrame;
+    private final JFrame questFrame;
 
     //JLabel e ImageIcon per creazione background
-    private JLabel backgroundLabel;
-    private ImageIcon backgroundImageIcon;
-    private JScrollPane scrollPane;
+    private final JLabel backgroundLabel;
+    private final ImageIcon backgroundImageIcon;
+    private final JScrollPane scrollPane;
 
     //JLabel per il titolo e l'intestazione del test
-    private JLabel title;
-    private JLabel description;
+    private final JLabel title;
+    private final JLabel description;
 
     //JPanel per contenere titolo e intestazione
-    private JPanel headingPanel;
+    private final JPanel headingPanel;
 
     // Questo container è dedicato a contenere tutti gli altri
     // componenti JPanel presenti e a suo tempo è incapsulato in
     // uno JScrollPane per permettere la visulizzazione del
     // contenuto in modo ottimale
-    private JPanel testPanel;
+    private final JPanel testPanel;
 
     // conterrà l'array contenente le domande del test
-    private JPanel questPanel;
+    private final JPanel questPanel;
 
     //JPanel per contenere i due array paralleli di checkbox
-    private JPanel answerPanel[] = new JPanel[ANSWERS];
-    private JCheckBox answerS[] = new JCheckBox[ANSWERS];
-    private JCheckBox answerN[] = new JCheckBox[ANSWERS];
+    private final JPanel[] answerPanel = new JPanel[ANSWERS];
+    private final JCheckBox[] answerS = new JCheckBox[ANSWERS];
+    private final JCheckBox[] answerN = new JCheckBox[ANSWERS];
 
-    private Font fontQuestion;
-    private Font fontTitle;
-    private Font fontDescription;
+    private final Font fontQuestion;
+    private final Font fontTitle;
+    private final Font fontDescription;
 
-    private JButton checkTest;
+    private final JButton checkTest;
 
     // Utilizzati per la comunicazione di messaggi con l'utente
-    private JDialog infoPlayer;
-    private JLabel dialogLabel;
+    private final JDialog infoPlayer;
+    private final JLabel dialogLabel;
 
     // questWrapper e una JLabel con funzione di wrapper attorno ad un elemento questions
     // e altri due swing components rispettivamente una answerS e un answerN che sono
     // JCheckBox i tre componenti assieme formano una singola Label del array questWrapper
-    private JLabel questWrapper[] = new JLabel[ANSWERS];
-    private JLabel questions[] = { new JLabel("1. Il Blackjack è un gioco di carte?"),
+    private final JLabel[] questWrapper = new JLabel[ANSWERS];
+    private final JLabel[] questions = { new JLabel("1. Il Blackjack è un gioco di carte?"),
             new JLabel("2. Babbo Natale consegna i regali a Pasqua?"),
             new JLabel("3. Il legno più duro del diamante? "),
             new JLabel("4. Usualmente, necessitiamo della luce per vedere?"),
@@ -78,7 +78,7 @@ public class TestMist
             new JLabel("20. La gravidanza è contagiosa?"),
     };
 
-    private final boolean CORRECT_ANSWER[] = { true, false, false, true, false,
+    private final boolean[] CORRECT_ANSWER = { true, false, false, true, false,
             true, true, false, false, true,
             false, false, true, false, true,
             false, true, false, false, false };
@@ -91,7 +91,7 @@ public class TestMist
 
 
     public TestMist() {
-        mainFrame = new JFrame();
+        questFrame = new JFrame();
 
         backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(backgroundImageIcon);
@@ -176,18 +176,18 @@ public class TestMist
         backgroundLabel.add(checkTest, BorderLayout.SOUTH);
 
         // aggiunta di tutti i componenti nel mainframe
-        mainFrame.add(scrollPane, BorderLayout.CENTER);
+        questFrame.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void setDetails() {
         checkTest.setBackground(new Color(225, 198,153));
-        //mainFrame.pack();
-        mainFrame.setSize(1000, 600);
-        mainFrame.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
+        //questFrame.pack();
+        questFrame.setSize(1000, 600);
+        questFrame.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
                 backgroundImageIcon.getIconHeight()));
-        mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mainFrame.setVisible(true);
+        questFrame.setResizable(false);
+        questFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        questFrame.setVisible(true);
     }
 
     private void setupListener() {
@@ -204,7 +204,7 @@ public class TestMist
             public void windowClosing(WindowEvent arg0)
             {
                 System.out.println("Window closing");
-                mainFrame.dispose();
+                questFrame.dispose();
             }
         });
     }
@@ -269,11 +269,7 @@ public class TestMist
         infoPlayer.setLocationRelativeTo(null);
         infoPlayer.setVisible(true);
         infoPlayer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        mainFrame.setVisible(false);
-    }
-
-    public static void main(String args[]) {
-        SwingUtilities.invokeLater(() -> new TestMist());
+        questFrame.setVisible(false);
     }
 }
 

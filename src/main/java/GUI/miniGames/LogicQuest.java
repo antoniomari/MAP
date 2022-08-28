@@ -77,10 +77,6 @@ public class LogicQuest
 
         infoWindow = new JDialog();
         infoText = new JLabel("", SwingConstants.CENTER);
-
-        setup();
-        setupListener();
-        addDetails();
     }
 
     private void initButtons(String[] buttonsText)
@@ -124,12 +120,23 @@ public class LogicQuest
         else if(number == 2)
         {
             quest.initButtons(QUEST_2_BUTTONS_TEXT);
+            quest.victoryText = "Secondo Circuito settato correttamente.";
+            quest.lostText = "Ops! Hai fuso il circuito.";
+            quest.setIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
 
         }
         else // number = 3
         {
             quest.initButtons(QUEST_3_BUTTONS_TEXT);
+            quest.victoryText = "Complimenti hai settato tutti i circuiti logici!";
+            quest.lostText = "Peccato c'eri quasi, ma hai fuso il circuito.";
+            quest.setIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
         }
+
+
+        quest.setup();
+        quest.setupListener();
+        quest.addDetails();
 
         return quest;
     }
