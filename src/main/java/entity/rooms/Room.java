@@ -8,6 +8,7 @@ import events.RoomEvent;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
+import general.xml.XmlParser;
 import graphics.SpriteManager;
 import org.json.JSONObject;
 
@@ -28,8 +29,8 @@ public class Room
     private Room west;
     private Room east;
 
-    /** Scenario da eseguire nel momento in cui si entra nella stanza. */
-    private ActionSequence scenarioOnEnter;
+    /** Path dello scenario da eseguire nel momento in cui si entra nella stanza. */
+    private String scenarioOnEnterPath;
 
     /** Dizionario che contiene la posizione delle frecce per il cambio stanza
      * per i punti cardinali disponibili a seconda della stanza.
@@ -44,7 +45,10 @@ public class Room
     private BufferedImage backgroundImage;
 
 
+    /** Dizionario contenente tutti i GamePiece presenti nella stanza, assieme alle loro posizioni (in blocchi). */
     private final Map<GamePiece, BlockPosition> pieceLocationMap;
+
+    /** Pavimento della stanza, viene caricato dal JSON della stanza. */
     private final RoomFloor floor;
 
     private final int bWidth;  // larghezza in blocchi
@@ -102,9 +106,9 @@ public class Room
         return MUSIC_PATH;
     }
 
-    public void setScenarioOnEnter(ActionSequence scenario)
+    public void setScenarioOnEnter(String scenarioPath)
     {
-        this.scenarioOnEnter = scenario;
+        this.scenarioOnEnterPath = scenarioPath;
 
         GameManager.continueScenario();
     }
@@ -220,11 +224,10 @@ public class Room
         EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
 
         // Esegui scenario on enter se è entrato il giocatore
-        System.out.println("1 d 2: " + String.valueOf(p.equals(PlayingCharacter.getPlayer())) + " " +String.valueOf(scenarioOnEnter != null));
-        if(p.equals(PlayingCharacter.getPlayer()) && scenarioOnEnter != null)
+        if(p.equals(PlayingCharacter.getPlayer()) && scenarioOnEnterPath != null)
         {
-            GameManager.startScenario(scenarioOnEnter);
-            scenarioOnEnter = null;
+            GameManager.startScenario(XmlParser.loadScenario(scenarioOnEnterPath));
+            scenarioOnEnterPath = null;
         }
 
     }

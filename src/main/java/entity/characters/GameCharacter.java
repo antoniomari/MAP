@@ -67,20 +67,6 @@ public class GameCharacter extends GamePiece
         animateFrames.add(0, getSprite());
     }
 
-    /*
-    public void animate()
-    {
-        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
-    }
-
-    public void animateReverse()
-    {
-        Collections.reverse(animateFrames);
-        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
-        Collections.reverse(animateFrames);
-    }
-
-     */
 
     public void speak(String sentence)
     {

@@ -3,26 +3,20 @@
     <personaggio nome="Nicolas">
         <spritesheet>/img/personaggi/Nicolas.png</spritesheet>
         <speakScenarios>
-            <!--
             <sentence state="fineConferenza">Fa freddo</sentence>
-            -->
         </speakScenarios>
     </personaggio>
     <personaggio nome="Antonio">
         <spritesheet>/img/personaggi/Antonio.png</spritesheet>
         <speakScenarios>
             <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
-            <!--
             <sentence state="fineConferenza">Conferenza breve ma intensa!</sentence>
-            -->
         </speakScenarios>
     </personaggio>
     <personaggio nome="Diego">
         <spritesheet>/img/personaggi/Diego.png</spritesheet>
         <speakScenarios>
-            <!--
             <sentence state="fineConferenza">J D B C im-pa-z-z-i-t-o !!</sentence>
-            -->
         </speakScenarios>
     </personaggio>
     <personaggio nome="Cameriere">
@@ -30,9 +24,7 @@
         <initialState>cocktail</initialState>
         <speakScenarios>
             <scenario state="cocktail">src/main/resources/scenari/piano terra/ConoscenzaCameriere.xml</scenario>
-            <!--
-            <sentence state="fineConferenza">oeirjhgoierhgoiuerhgoerighoi</sentence>
-            -->
+            <sentence state="fineConferenza">Il robot e lo chef si sono diretti (*) verso l'ascensore</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Tecnico">

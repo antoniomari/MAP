@@ -19,10 +19,17 @@
         <method>speak</method>
         <sentence>Lo teneva stretto tra le braccia, (*) si sono diretti verso l'ascensore </sentence>
     </azione>
+    <!--
     <azione>
         <subject>Cameriere</subject>
         <method>setSpeakSentence</method>
         <sentence>Il robot e lo chef si sono diretti (*) verso l'ascensore</sentence>
+    </azione>
+    -->
+    <azione>
+        <subject>Cameriere</subject>
+        <method>setState</method>
+        <state>fineConferenza</state>
     </azione>
     <azione>
         <subject>PT-A</subject>

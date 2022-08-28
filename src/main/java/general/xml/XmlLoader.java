@@ -15,6 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.SequenceInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -129,22 +130,30 @@ class XmlLoader
         // carica speakScenarios
         Element scenariosNode = (Element) characterElement.getElementsByTagName("speakScenarios").item(0);
         Map<String, String> scenarioPathMap = new HashMap<>();
+        Map<String, String> sentenceSpeakMap = new HashMap<>();
 
         if(scenariosNode != null)
         {
-            NodeList scenarioPathList = scenariosNode.getElementsByTagName("scenario");
+            List<Element> scenarioPathList = XmlParser.getTagsList(scenariosNode, "scenario");
 
-
-            for(int j = 0; j < scenarioPathList.getLength(); j++)
+            for(Element scenarioElement : scenarioPathList)
             {
-                Element element = (Element) scenarioPathList.item(j);
-                String state = XmlParser.getXmlAttribute(element, "state");
-                scenarioPathMap.put(state, element.getTextContent());
+                String state = XmlParser.getXmlAttribute(scenarioElement, "state");
+                scenarioPathMap.put(state, scenarioElement.getTextContent());
+            }
+
+            // leggi le sentence e crea scenari da esse
+            List<Element> sentenceElementList = XmlParser.getTagsList(scenariosNode, "sentence");
+
+            for(Element sentenceElement : sentenceElementList)
+            {
+                String state = XmlParser.getXmlAttribute(sentenceElement, "state");
+                sentenceSpeakMap.put(state, sentenceElement.getTextContent());
             }
         }
 
         if(loaded instanceof NPC)
-            ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
+            ((NPC) loaded).loadSpeakScenarios(scenarioPathMap, sentenceSpeakMap);
 
         return loaded;
     }

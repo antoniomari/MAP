@@ -207,9 +207,9 @@ public class XmlParser
             case "addToInventory":
                 actionParsed = parseAddToInventory(actionElement);
                 break;
-            case "setSpeakSentence":
-                actionParsed = parseSetSpeakSentence(actionElement);
-                break;
+            //case "setSpeakSentence":
+            //    actionParsed = parseSetSpeakSentence(actionElement);
+            //    break;
             case "playMusic":
                 actionParsed = parsePlayMusic(actionElement);
                 break;
@@ -493,6 +493,7 @@ public class XmlParser
         return () -> PlayingCharacter.getPlayer().addToInventory(it);
     }
 
+    /*
     private static Runnable parseSetSpeakSentence(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -502,6 +503,8 @@ public class XmlParser
 
         return () -> ((NPC) GameManager.getPiece(subject)).setSpeakSentence(sentenceNewLined);
     }
+
+     */
 
     private static Runnable parsePlayMusic(Element eAction)
     {
@@ -522,9 +525,7 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String scenarioPath = getTagValue(eAction, "what");
 
-        Document document = openXml(scenarioPath);
-        return () -> {(GameManager.getRoom(subject))
-                .setScenarioOnEnter(parseScenario(scenarioPath, document.getDocumentElement()));};
+        return () -> (GameManager.getRoom(subject)).setScenarioOnEnter(scenarioPath);
     }
 
     private static Runnable parseLoadFloor(Element eAction)

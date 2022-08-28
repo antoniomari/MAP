@@ -12,6 +12,7 @@ public class NPC extends GameCharacter
 {
     /** Dizionario STATO-> PATH SPEAK SCENARIO ASSOCIATO. */
     private Map<String, String> speakScenarioMap;
+    private Map<String, String> speakSentenceMap;
     ActionSequence speakScenario;
 
     public NPC(String name, String spritesheetPath, String jsonPath)
@@ -25,9 +26,10 @@ public class NPC extends GameCharacter
         super(name, spritePath);
     }
 
-    public void loadSpeakScenarios(Map<String, String> speakScenarioMap)
+    public void loadSpeakScenarios(Map<String, String> speakScenarioMap, Map<String, String> speakSentenceMap)
     {
         this.speakScenarioMap = speakScenarioMap;
+        this.speakSentenceMap = speakSentenceMap;
     }
 
 
@@ -48,13 +50,29 @@ public class NPC extends GameCharacter
         this.state = state;
 
         String scenarioPath = speakScenarioMap.get(state);
+
         if(scenarioPath != null)
             speakScenario = XmlParser.loadScenario(scenarioPath);
+        else
+        {
+            String sentence = speakSentenceMap.get(state);
+
+            if(sentence != null)
+            {
+                // TODO: aggiustare replica codice
+                speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
+                speakScenario.append(() -> speak(sentence));
+            }
+        }
 
         // TODO: aggiustare
         if(continueScenario)
             GameManager.continueScenario();
     }
+
+    /*
+
+    TODO : rimuovere
 
     public void setSpeakSentence(String sentence)
     {
@@ -64,6 +82,9 @@ public class NPC extends GameCharacter
         GameManager.continueScenario();
     }
 
+     */
+
+
     // TODO :Aggiustare chiamatre
     public void speak()
     {
@@ -72,6 +93,13 @@ public class NPC extends GameCharacter
         else if(speakScenarioMap.containsKey(state))
         {
             speakScenario = XmlParser.loadScenario(speakScenarioMap.get(state));
+            GameManager.startScenario(speakScenario);
+        }
+        else if(speakSentenceMap.containsKey(state))
+        {
+            this.speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
+            speakScenario.append(() -> this.speak(speakSentenceMap.get(state)));
+
             GameManager.startScenario(speakScenario);
         }
         else

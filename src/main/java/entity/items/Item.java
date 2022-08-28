@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Item extends GamePiece implements Observable
 {
-    // private final String name;
+    /** Descrizione dell'oggetto. Caricata dall'XML dell'oggetto. */
     private final String description;
 
     // PATH TILESET OGGETTI
@@ -24,7 +24,7 @@ public class Item extends GamePiece implements Observable
     // SPRITESHEET OGGETTI
     private static final BufferedImage SPRITESHEET;
 
-    // flag utilizzabile
+    /** Flag che indica se è abilitata l'azione specifica dell'oggetto. */
     private boolean canUse;
 
     // modalità: è utilizzabile una volta//infinite volte

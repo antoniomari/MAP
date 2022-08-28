@@ -10,10 +10,20 @@ import general.GameManager;
 
 public class PickupableItem extends Item
 {
+    /** Flag che indica se l'oggetto dev'essere mantenuto nell'inventario una volta utilizzato. */
     private boolean keepOnUseWith;
-    private ActionSequence usewithAction;
+
+    /** Scenario da eseguire quando l'oggetto viene utilizzato con l'oggetto target. */
+    private ActionSequence useWithScenario;
+
+    /** Nome del GamePiece target dell'azione useWith di this. */
     private String targetPieceName;
+    /** Stato in cui il target si deve trovare per poter eseguire lo scenario dell'azione useWith. */
     private String targetPieceInitState;
+
+    /** Stato in cui il target si trova alla fine dell'azione useWith */
+    @Deprecated
+    // TODO: controllare la deprecaggine
     private String targetPieceFinalState;
 
     // costruttore che inizializza l'oggetto come presente nell'inventario
@@ -45,9 +55,9 @@ public class PickupableItem extends Item
         PlayingCharacter.getPlayer().removeFromInventory(this);
     }
 
-    public void setUseWithAction(ActionSequence usewithAction)
+    public void setUseWithAction(ActionSequence useWithScenario)
     {
-        this.usewithAction = usewithAction;
+        this.useWithScenario = useWithScenario;
     }
 
     public void setTargetPiece(String pieceName, String initState, String finalState)
@@ -62,7 +72,7 @@ public class PickupableItem extends Item
     {
         if(gamePiece.equals(GameManager.getPiece(targetPieceName)) && gamePiece.getState().equals(targetPieceInitState))
         {
-            GameManager.startScenario(usewithAction);
+            GameManager.startScenario(useWithScenario);
 
             if(!keepOnUseWith)
                 PlayingCharacter.getPlayer().removeFromInventory(this);

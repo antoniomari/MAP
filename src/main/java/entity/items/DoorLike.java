@@ -17,10 +17,10 @@ public class DoorLike extends Item implements Openable, Lockable
     private boolean isOpen;
 
     private ActionSequence onOpen = ActionSequence.voidScenario();
-    private ActionSequence onClose;
+    //private ActionSequence onClose;
 
-    private ActionSequence onUnlock;
-    private ActionSequence onLock;
+    //private ActionSequence onUnlock;
+    //private ActionSequence onLock;
 
     // PATH SPRITESHEET (png + json)
     private final static String SPRITESHEET_PATH = "/img/tileset/porte.png";
@@ -118,7 +118,7 @@ public class DoorLike extends Item implements Openable, Lockable
     @Override
     public void setCloseEffect(ActionSequence effect)
     {
-        this.onClose = effect;
+        // this.onClose = effect;
     }
 
     @Override

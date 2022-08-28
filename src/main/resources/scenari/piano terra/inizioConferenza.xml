@@ -264,18 +264,18 @@
     </azione>
     <azione>
         <subject>Diego</subject>
-        <method>setSpeakSentence</method>
-        <sentence>J D B C im pa zzi to!!!</sentence>
+        <method>setState</method>
+        <state>fineConferenza</state>
     </azione>
     <azione>
         <subject>Nicolas</subject>
-        <method>setSpeakSentence</method>
-        <sentence>Da grandi poteri derivano...</sentence>
+        <method>setState</method>
+        <state>fineConferenza</state>
     </azione>
     <azione>
         <subject>Antonio</subject>
-        <method>setSpeakSentence</method>
-        <sentence>Ciao!</sentence>
+        <method>setState</method>
+        <state>fineConferenza</state>
     </azione>
     <azione>
         <subject>PT-B</subject>
