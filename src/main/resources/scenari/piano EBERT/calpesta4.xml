@@ -11,7 +11,7 @@
         <state>init</state>
     </azione>
     <azione>
-        <subject>playScenarioSound</subject>
+        <method>playScenarioSound</method>
         <what>src/main/resources/audio/effetti/dingerba.wav</what>
     </azione>
 </scenario>
