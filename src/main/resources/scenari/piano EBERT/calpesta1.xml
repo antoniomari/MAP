@@ -3,7 +3,7 @@
     <mode>sequence</mode>
     <azione>
         <method>playScenarioSound</method>
-        <what>src/main/resources/audio/effetti/dingerba.wav</what>
+        <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
     </azione>
     <azione>
         <subject>RightErbaBlu</subject>

@@ -537,6 +537,7 @@ public class XmlParser
         final String BUG_PATH = "src/main/resources/scenari/piano BUG/BUG-A.xml";
         final String SERVER_PATH = "src/main/resources/scenari/piano SERVER/ServerRoom.xml";
         final String EBERT_PATH = "src/main/resources/scenari/piano EBERT/ebert-a.xml";
+        final String FLASH_PATH = "src/main/resources/scenari/piano FLASH/FlashRoom.xml";
 
         String floorPath;
 
@@ -556,6 +557,9 @@ public class XmlParser
                 break;
             case "EBERT":
                 floorPath = EBERT_PATH;
+                break;
+            case "FLASH":
+                floorPath = FLASH_PATH;
                 break;
             default:
                 throw new GameException("Piano non valido");

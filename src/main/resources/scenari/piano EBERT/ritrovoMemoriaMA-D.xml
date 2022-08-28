@@ -3,11 +3,6 @@
     <mode>sequence</mode>
     <azione>
         <subject>MA-D</subject>
-        <method>playEmoji</method>
-        <what>interrogativo</what>
-    </azione>
-    <azione>
-        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Ciao!</sentence>
     </azione>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Dove mi trovo?</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>1</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>1500</finalWait>
+    </azione>
+    <!--
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>Ebert Garden</where>
+    </azione>
+    -->
+</scenario>
