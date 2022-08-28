@@ -22,8 +22,6 @@ public class GameState
 {
     private static State currentState;
     private static MainFrame mainFrame;
-    private static GameKeyListener escListener;
-    private static GameMouseListener dropListener;
 
     /** Azione per il movimento del giocatore. */
     private static final Runnable leftMouseClick = () ->
@@ -59,7 +57,7 @@ public class GameState
     {
         mainFrame = frame;
 
-        escListener = new GameKeyListener(
+        GameKeyListener escListener = new GameKeyListener(
                 KeyEvent.VK_ESCAPE,
                 () -> mainFrame.showMenu(!mainFrame.isMenuDisplaying()), null);
         mainFrame.addKeyListener(escListener);
@@ -69,8 +67,8 @@ public class GameState
 
     public static void initListeners()
     {
-        dropListener = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
-        mainFrame.getGameScreenPanel().addMouseListener(dropListener);
+        // GameMouseListener dropListener = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
+        // mainFrame.getGameScreenPanel().addMouseListener(dropListener);
 
 
         KeyListener leftArrowListener = new GameKeyListener(KeyEvent.VK_LEFT,
