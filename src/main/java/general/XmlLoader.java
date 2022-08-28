@@ -1,5 +1,7 @@
 package general;
 
+import GUI.GameScreenPanel;
+import GUI.miniGames.LogicQuest;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.NPC;
@@ -15,6 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import sound.SoundHandler;
 
+import javax.swing.*;
 import javax.swing.text.html.Option;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -201,6 +204,9 @@ public class XmlLoader
                 break;
             case "setState":
                 actionParsed = parseSetState(actionElement);
+                break;
+            case "executeTest":
+                actionParsed = parseExecuteTest(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -547,6 +553,17 @@ public class XmlLoader
 
         return () -> GameManager.getPiece(subject).setState(state, true);
     }
+
+    private static Runnable parseExecuteTest(Element eAction)
+    {
+        String what = getTagValue(eAction, "what");
+
+        if(what.equals("ALU"))
+            return () -> SwingUtilities.invokeLater(() -> LogicQuest.createLogicQuest(1));
+        else
+            throw new GameException("Nome del test non valido");
+    }
+
     /**
      * Restituisce il GamePiece sulla base del nome: se non è già stato caricato
      * in memoria allora lo cerca in "personaggi.xml" e in "oggetti.xml"

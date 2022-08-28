@@ -1,13 +1,13 @@
-package miniGames;
+package GUI.miniGames;
 
-// TODO: possibilità di implementare il factory design pattern
+// TODO: possibilità di implementare factory d.p.
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class LogicQuestA
+public class LogicQuestB
 {
     private JFrame mainFrame;
 
@@ -27,19 +27,20 @@ public class LogicQuestA
 
     // Pannello per il layout dei buttoni
     private JPanel optionPanel;
-    private JButton buttons[] = { new JButton("7"), new JButton("2"),
-            new JButton("5"), new JButton("1")  };
+    private JButton buttons[] = { new JButton("3, 2, 1"), new JButton("5, 4, 8"),
+            new JButton("3, 2, 5"), new JButton("3, 6, 1")
+    };
 
     // componenti Swing per comunicazione con utente
     private JDialog infoWindow;
     private JLabel infoText;
-    private static final String VICTORY = "Primo Circuito settato correttamente.";
+    private static final String VICTORY = "Secondo Circuito settato correttamente.";
     private static final String LOST = "Ophs! Hai fuso il circuito.";
 
     private Font font;
 
     // costruttore
-    public LogicQuestA() {
+    public LogicQuestB() {
         mainFrame = new JFrame("PIANO ALU PROVA DEI CIRCUITI LOGICI");
         mainWrapper = new JPanel(new BorderLayout());
 
@@ -49,8 +50,8 @@ public class LogicQuestA
         imagePannel = new JPanel(new GridLayout(1,1));
 
         // creazione titolo del minigioco e imagine gioco
-        description = new JLabel("Circuito logico type A", SwingConstants.CENTER);
-        icon = new ImageIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
+        description = new JLabel("Circuito logico type B", SwingConstants.CENTER);
+        icon = new ImageIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
         image = new JLabel("" ,icon, JLabel.CENTER);
 
         font = new Font("Agency FB", Font.BOLD , 40);
@@ -69,7 +70,7 @@ public class LogicQuestA
         description.setFont(font);
         image.setBackground(Color.BLUE);
         imagePannel.add(image);
-        imagePannel.setToolTipText("risolvi l'equazione geometrica");
+        imagePannel.setToolTipText("risolvi l'equazione logica dei gelati");
         imagePannel.setBackground(Color.BLUE);
         container.add(imagePannel);
 
@@ -109,9 +110,9 @@ public class LogicQuestA
         for (JButton button : buttons)
         {// gestione dei listener tramite espressioni lambda
             button.addActionListener((e) -> {
-                if (e.getActionCommand().equals("1")) {
+                if (e.getActionCommand().equals("3, 2, 1")) {
                     showInfoResult(VICTORY);
-                    SwingUtilities.invokeLater(() -> new LogicQuestB());
+                    SwingUtilities.invokeLater(() -> new LogicQuestC());
                     mainFrame.dispose();
                 }
                 else {
@@ -144,7 +145,7 @@ public class LogicQuestA
     }
 
     public static void main(String args[]) {
-        SwingUtilities.invokeLater(() -> new LogicQuestA());
+        SwingUtilities.invokeLater(() -> new LogicQuestB());
     }
 }
 

@@ -198,6 +198,15 @@
             <scenario>src/main/resources/scenari/piano ALU/RiempiAcqua.xml</scenario>
         </onUseWith>
         -->
+    <oggetto nome="ComputerALU">
+        <classe>Item</classe>
+        <descrizione>Un computer strano</descrizione>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Accendi</actionName>
+            <effetto>src/main/resources/scenari/piano ALU/accendiComputer.xml</effetto>
+        </onUse>
+    </oggetto>
     </oggetto>
     <oggetto nome="AscensorePT">
         <classe>DoorLike</classe>

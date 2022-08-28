@@ -151,6 +151,14 @@
     "height": 72
   },
 
+  "ComputerALU":
+  {
+    "x": 600,
+    "y": 288,
+    "width": 120,
+    "height": 96
+  },
+
   "Telefono":
   {
     "x": 240,

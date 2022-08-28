@@ -5,5 +5,12 @@
     <musica>src/main/resources/audio/musica/ALU.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <subject>ALUD</subject>
+            <method>add</method>
+            <what>ComputerALU</what>
+            <x>3</x>
+            <y>9</y>
+        </azione>
     </scenario>
 </stanza>
