@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/dingerba.wav</what>
+    </azione>
+    <azione>
+        <subject>RightErbaVerde</subject>
+        <method>setState</method>
+        <state>init</state>
+    </azione>
+    <azione>
+        <subject>playScenarioSound</subject>
+        <what>src/main/resources/audio/effetti/dingerba.wav</what>
+    </azione>
+</scenario>

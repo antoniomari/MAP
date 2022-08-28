@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <oggetti>
+    <!--
     <oggetto nome="Barile">
         <classe>TriggerableItem</classe>
         <descrizione>Un barile scemo come basile</descrizione>
@@ -9,6 +10,7 @@
             <effetto>src/main/resources/scenari/esplosioneBarile.xml</effetto>
         </onTrigger>
     </oggetto>
+    -->
     <oggetto nome="Ascensore">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore per salire</descrizione>
@@ -385,21 +387,41 @@
         <classe>Item</classe>
         <descrizione>Una zona d'erba intrisa di sangue.</descrizione>
         <canUse>false</canUse>
+        <onUse>
+            <actionName>Calpesta</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
+            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="RightErbaVerde">
         <classe>Item</classe>
         <descrizione>Una zona d'erba al profumo di rugiada.</descrizione>
         <canUse>false</canUse>
+        <onUse>
+            <actionName>Calpesta</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
+            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="RightErbaGialla">
         <classe>Item</classe>
         <descrizione>Una zona d'erba schifosa e puzzolente.</descrizione>
         <canUse>false</canUse>
+        <onUse>
+            <actionName>Calpesta</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
+            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="RightErbaBlu">
         <classe>Item</classe>
         <descrizione>L'erba blu? Ma dove siamo arrivati...</descrizione>
         <canUse>false</canUse>
+        <onUse>
+            <actionName>Calpesta</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
+            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+        </onUse>
     </oggetto>
 
 </oggetti>

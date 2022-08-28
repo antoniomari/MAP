@@ -4,9 +4,8 @@ package entity.characters;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
-import general.XmlLoader;
+import general.xml.XmlLoader;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class NPC extends GameCharacter

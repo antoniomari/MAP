@@ -1,6 +1,5 @@
-package general;
+package general.xml;
 
-import GUI.GameScreenPanel;
 import GUI.miniGames.LogicQuest;
 import GUI.miniGames.TestMist;
 import entity.GamePiece;
@@ -11,6 +10,10 @@ import entity.items.*;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import events.executors.TextBarUpdateExecutor;
+import general.ActionSequence;
+import general.GameException;
+import general.GameManager;
+import general.LogOutputManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,7 +22,6 @@ import org.xml.sax.SAXException;
 import sound.SoundHandler;
 
 import javax.swing.*;
-import javax.swing.text.html.Option;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,13 +29,47 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class XmlLoader
 {
+
+    private static final String CHARACTER_XML_PATH = "src/main/resources/scenari/personaggi.xml";
+    private static final String ITEM_XML_PATH = "src/main/resources/scenari/personaggi.xml";
+
+    static Map<String, Element> pieceElementMap;
+
+    static
+    {
+        pieceElementMap = new HashMap<>();
+
+        Document characterXml = XmlLoader.openXml(CHARACTER_XML_PATH);
+        Document itemXml = XmlLoader.openXml(ITEM_XML_PATH);
+
+        List<Element> characterElementList = getTagsList((Element) characterXml, "oggetto");
+        List<Element> itemElementList = getTagsList((Element) itemXml, "personaggio");
+
+        // TODO: capire funzionamento flatMap
+        List<Element> pieceElementList = Stream.of(characterElementList, itemElementList)
+                                        .flatMap(Collection::stream)
+                                        .collect(Collectors.toList());
+
+        for(Element pieceElement : pieceElementList)
+        {
+            String name = getXmlAttribute(pieceElement, "nome");
+            if(!pieceElementMap.containsKey(name))
+                pieceElementMap.put(name, pieceElement);
+            else
+            {
+                throw new GameException("GamePiece " + name + " duplicato");
+            }
+        }
+
+    }
+
+
     public static ActionSequence loadScenario(String scenarioPath)
     {
         Objects.requireNonNull(scenarioPath);
@@ -45,7 +81,7 @@ public class XmlLoader
         return parseScenario(scenarioPath, document.getDocumentElement());
     }
 
-    private static String getTagValue(Element xmlElement, String tagName)
+    static String getTagValue(Element xmlElement, String tagName)
     {
         Optional<String> value = getOptionalTagValue(xmlElement, tagName);
 
@@ -55,7 +91,7 @@ public class XmlLoader
             return value.get();
     }
 
-    private static Optional<String> getOptionalTagValue(Element xmlElement, String tagName)
+    static Optional<String> getOptionalTagValue(Element xmlElement, String tagName)
     {
         NodeList elements = xmlElement.getElementsByTagName(tagName);
 
@@ -68,6 +104,19 @@ public class XmlLoader
             return Optional.of(elements.item(0).getTextContent());
     }
 
+    static List<Element> getTagsList(Element xmlElement, String tagName)
+    {
+        NodeList nodes = xmlElement.getElementsByTagName(tagName);
+
+        List<Element> elementList = new ArrayList<>(nodes.getLength());
+
+        for(int i = 0; i < nodes.getLength(); i++)
+            elementList.add((Element) nodes.item(i));
+
+        return elementList;
+
+    }
+
     /**
      * Restituisce l'attributo {@code attributeName} dell'elemento xml {@code xmlElement}.
      *
@@ -76,7 +125,7 @@ public class XmlLoader
      * @return il valore dell'attributo corrispondente
      * @throws GameException se {@code xmlElement} non presenta l'attributo {@code attributeName}
      */
-    private static String getXmlAttribute(Element xmlElement, String attributeName)
+    static String getXmlAttribute(Element xmlElement, String attributeName)
     {
         Node valueNode = xmlElement.getAttributes().getNamedItem(attributeName);
 
@@ -86,7 +135,7 @@ public class XmlLoader
             return valueNode.getNodeValue();
     }
 
-    private static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
+    static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
     {
         // ricava tipo scenario
         String modeString = getTagValue(scenarioElement, "mode");
@@ -887,7 +936,7 @@ public class XmlLoader
      * @return Document del file
      * @throws GameException se si verifica un problema nell'aprire e caricare il file
      */
-    private static Document openXml(String path)
+    static Document openXml(String path)
     {
         try
         {

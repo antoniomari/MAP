@@ -2,18 +2,16 @@ package GUI;
 
 import GUI.gamestate.GameState;
 import animation.PerpetualAnimation;
-import animation.StillAnimation;
 import events.executors.Executor;
 import general.ActionSequence;
 import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.Room;
-import general.XmlLoader;
+import general.xml.XmlLoader;
 import sound.SoundHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>RightErbaVerde</subject>
+        <method>setState</method>
+        <state>init</state>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setState</method>
+        <state>init</state>
+    </azione>
+    <azione>
+        <subject>RightErbaRossa</subject>
+        <method>setState</method>
+        <state>init</state>
+    </azione>
+    <azione>
+        <subject>RightErbaGialla</subject>
+        <method>setState</method>
+        <state>init</state>
+    </azione>
+</scenario>
