@@ -322,7 +322,7 @@
   "RightErbaRossa":
   {
     "x": 0,
-    "y": 480,
+    "y": 528,
     "width": 96,
     "height": 96
   },
@@ -330,7 +330,7 @@
   "RightErbaGialla":
   {
     "x": 96,
-    "y": 480,
+    "y": 528,
     "width": 96,
     "height": 96
   }

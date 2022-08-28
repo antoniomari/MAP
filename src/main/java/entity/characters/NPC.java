@@ -4,7 +4,7 @@ package entity.characters;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
-import general.xml.XmlLoader;
+import general.xml.XmlParser;
 
 import java.util.Map;
 
@@ -49,7 +49,7 @@ public class NPC extends GameCharacter
 
         String scenarioPath = speakScenarioMap.get(state);
         if(scenarioPath != null)
-            speakScenario = XmlLoader.loadScenario(scenarioPath);
+            speakScenario = XmlParser.loadScenario(scenarioPath);
 
         // TODO: aggiustare
         if(continueScenario)

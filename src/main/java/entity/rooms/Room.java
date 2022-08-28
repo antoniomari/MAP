@@ -39,7 +39,7 @@ public class Room
     /** Path della musica della stanza. Viene caricato dall'XML della stanza. */
     private final String MUSIC_PATH;
     /** Path dell'immagine di background della stanza. Viene caricato dall'XML della stanza. */
-    private final String BACKGORUND_PATH;
+    private final String BACKGROUND_PATH;
     /** Immagine di background della stanza. */
     private BufferedImage backgroundImage;
 
@@ -61,8 +61,8 @@ public class Room
         arrowPositionMap = new HashMap<>();
 
         this.MUSIC_PATH = MUSIC_PATH;
-        BACKGORUND_PATH = path;
-        backgroundImage = SpriteManager.loadSpriteSheet(BACKGORUND_PATH);
+        BACKGROUND_PATH = path;
+        backgroundImage = SpriteManager.loadSpriteSheet(BACKGROUND_PATH);
         floor = RoomFloor.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 

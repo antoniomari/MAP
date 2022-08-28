@@ -5,9 +5,11 @@ import entity.GamePiece;
 import events.EventHandler;
 import events.ItemInteractionEvent;
 import general.GameManager;
+import general.xml.XmlParser;
 import graphics.SpriteManager;
 
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 public class Item extends GamePiece implements Observable
 {
@@ -30,7 +32,9 @@ public class Item extends GamePiece implements Observable
 
     // default per il nome dell'azione (viene modificato con il setter)
     private String useActionName = "Usa";
-    private ActionSequence useAction;
+    private ActionSequence useScenario;
+
+    private Map<String, String> useScenarioMap;
 
 
     public static final int USE_ONCE = 1;
@@ -41,6 +45,25 @@ public class Item extends GamePiece implements Observable
     static
     {
         SPRITESHEET = SpriteManager.loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
+    }
+
+    public void loadUseScenarios(Map<String, String> useScenarioMap)
+    {
+        this.useScenarioMap = useScenarioMap;
+    }
+
+    @Override
+    public void setState(String state, boolean continueScenario)
+    {
+        this.state = state;
+
+        String scenarioPath = useScenarioMap.get(state);
+        if(scenarioPath != null)
+            useScenario = XmlParser.loadScenario(scenarioPath);
+
+        // TODO: aggiustare
+        if(continueScenario)
+            GameManager.continueScenario();
     }
 
     public Item(String name, String description)
@@ -76,16 +99,16 @@ public class Item extends GamePiece implements Observable
             throw new IllegalArgumentException("usability non valida");
     }
 
-    public void setUseAction(ActionSequence useEffect)
+    public void setUseAction(ActionSequence useScenario)
     {
-        this.useAction = useEffect;
+        this.useScenario = useScenario;
     }
 
     public void use()
     {
         if(canUse)
         {
-            GameManager.startScenario(useAction);
+            GameManager.startScenario(useScenario);
 
             if(usability == USE_ONCE)
                 canUse = false;

@@ -7,7 +7,7 @@ import general.ActionSequence;
 import general.GameManager;
 import graphics.SpriteManager;
 import entity.rooms.Room;
-import general.xml.XmlLoader;
+import general.xml.XmlParser;
 import sound.SoundHandler;
 
 import javax.swing.*;
@@ -307,7 +307,7 @@ public class MainFrame extends JFrame {
     // ma solo all'inizio del gioco
     private void setupPlayground()
     {
-        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
+        ActionSequence a = XmlParser.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
         SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
         GameManager.startScenario(a);
 
@@ -608,7 +608,7 @@ public class MainFrame extends JFrame {
         }
         //</editor-fold>
 
-        Room demoRoom = XmlLoader.loadRoom("src/main/resources/scenari/piano terra/PT-B.xml");
+        Room demoRoom = XmlParser.loadRoom("src/main/resources/scenari/piano terra/PT-B.xml");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));

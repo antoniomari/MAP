@@ -1,16 +1,5 @@
 <?xml version="1.0"?>
 <oggetti>
-    <!--
-    <oggetto nome="Barile">
-        <classe>TriggerableItem</classe>
-        <descrizione>Un barile scemo come basile</descrizione>
-        <canUse>false</canUse>
-        <directlyTriggered>false</directlyTriggered>
-        <onTrigger>
-            <effetto>src/main/resources/scenari/esplosioneBarile.xml</effetto>
-        </onTrigger>
-    </oggetto>
-    -->
     <oggetto nome="Ascensore">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore per salire</descrizione>
@@ -420,7 +409,7 @@
         <onUse>
             <actionName>Calpesta</actionName>
             <useScenario state="init">src/main/resources/scenari/piano EBERT/resetErba.xml</useScenario>
-            <useScenario state="pronto" finalState="init">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
+            <useScenario state="pronto">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
         </onUse>
     </oggetto>
 
