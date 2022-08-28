@@ -7,7 +7,9 @@ import entity.characters.PlayingCharacter;
 import entity.rooms.Room;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 public class GameManager
@@ -50,6 +52,10 @@ public class GameManager
     public static Room getRoom(String roomName)
     {
         return rooms.get(roomName);
+    }
+
+    public static Set<String> getRoomNames() {
+        return rooms.keySet();
     }
 
     public static synchronized void startScenario(ActionSequence scenario)

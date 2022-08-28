@@ -101,6 +101,10 @@ public class Room
         GameManager.addRoom(this);
     }
 
+    public String getScenarioOnEnterPath() {
+        return scenarioOnEnterPath;
+    }
+
     public String getMusicPath()
     {
         return MUSIC_PATH;
