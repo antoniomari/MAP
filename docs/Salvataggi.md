@@ -8,8 +8,8 @@ lo stato del gioco. Queste sono:
 1. Dati sui piani
     - La mappa è statica, per cui non c'è bisogno di salvare i collegamenti tra le stanze (eccezione: ascensore)
 2. Dati sulle stanze
-    - _scenarioOnEnter_ -> si risolve con stati per stanze
-    - location
+    - scenarioOnEnterPath
+    - le location
 3. Dati sugli oggetti
     - Nome
     - Stato
@@ -17,3 +17,5 @@ lo stato del gioco. Queste sono:
     - canUse
 4. Dati protagonista
    - Inventario
+
+Struttura DATABASE
