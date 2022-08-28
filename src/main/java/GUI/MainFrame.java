@@ -142,10 +142,10 @@ public class MainFrame extends JFrame {
         // questo perchè il metodo viene innanzitutto chiamato nell'inizializzazione della DEFAULT_GAME_HEIGHT,
         // per cui serve utilizzare la SCREEN_HEIGH; in seguito per tutte le altre chiamate si utilizzerà
         // regolarmente la DEFAULT_GAME_HEIGHT.
-        int height = DEFAULT_GAME_HEIGHT == 0 ? SCREEN_HEIGHT : DEFAULT_GAME_HEIGHT;
+        int height = (DEFAULT_GAME_HEIGHT == 0) ? SCREEN_HEIGHT : DEFAULT_GAME_HEIGHT;
 
         double heightRescalingFactor = (double) height / (roomBHeight * GameManager.BLOCK_SIZE);
-        heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
+        //heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
         return Math.min(widthRescalingFactor, heightRescalingFactor);
     }
@@ -336,7 +336,7 @@ public class MainFrame extends JFrame {
         textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
 
         // nota: questi numeri sono per centrare sullo schermo la textBar
-        int x_offset = (int)(6 * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR); // TODO : aggiustare questi
+        int x_offset = (int) (SCREEN_WIDTH - textBarPanel.getPreferredSize().getWidth()) / 2;
         int y_offset = (int)(7 * DEFAULT_SCALING_FACTOR);
 
         // impostazione posizione del textBarPanel
