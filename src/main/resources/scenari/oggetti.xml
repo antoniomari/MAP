@@ -352,5 +352,45 @@
             <scenario>src/main/resources/scenari/piano EBERT/BriciolaDrogato.xml</scenario>
         </onUseWith>
     </oggetto>
+    <oggetto nome="LeftErbaRossa">
+        <classe>Item</classe>
+        <descrizione>Una zona d'erba intrisa di sangue.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="LeftErbaVerde">
+        <classe>Item</classe>
+        <descrizione>Una zona d'erba al profumo di rugiada.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="LeftErbaGialla">
+        <classe>Item</classe>
+        <descrizione>Una zona d'erba schifosa e puzzolente.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="LeftErbaBlu">
+        <classe>Item</classe>
+        <descrizione>L'erba blu? Ma dove siamo arrivati...</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="RightErbaRossa">
+        <classe>Item</classe>
+        <descrizione>Una zona d'erba intrisa di sangue.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="RightErbaVerde">
+        <classe>Item</classe>
+        <descrizione>Una zona d'erba al profumo di rugiada.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="RightErbaGialla">
+        <classe>Item</classe>
+        <descrizione>Una zona d'erba schifosa e puzzolente.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="RightErbaBlu">
+        <classe>Item</classe>
+        <descrizione>L'erba blu? Ma dove siamo arrivati...</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
 
 </oggetti>

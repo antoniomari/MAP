@@ -10,5 +10,61 @@
             <method>setSouth</method>
             <what>src/main/resources/scenari/piano EBERT/ebert briciola.xml</what>
         </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>LeftErbaBlu</what>
+            <x>5</x>
+            <y>14</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>LeftErbaRossa</what>
+            <x>9</x>
+            <y>14</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>LeftErbaGialla</what>
+            <x>5</x>
+            <y>18</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>LeftErbaVerde</what>
+            <x>9</x>
+            <y>18</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>RightErbaBlu</what>
+            <x>23</x>
+            <y>14</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>RightErbaRossa</what>
+            <x>23</x>
+            <y>18</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>RightErbaGialla</what>
+            <x>27</x>
+            <y>18</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>RightErbaVerde</what>
+            <x>27</x>
+            <y>14</y>
+        </azione>
     </scenario>
 </stanza>

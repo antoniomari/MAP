@@ -28,13 +28,21 @@ public class Room
     private Room west;
     private Room east;
 
+    /** Scenario da eseguire nel momento in cui si entra nella stanza. */
     private ActionSequence scenarioOnEnter;
 
+    /** Dizionario che contiene la posizione delle frecce per il cambio stanza
+     * per i punti cardinali disponibili a seconda della stanza.
+     * Queste informazioni vengono caricate sulla base del JSON della stanza. */
     private Map<String, BlockPosition> arrowPositionMap;
 
-    private final String musicPath;
-    private final String backgroundPath;
+    /** Path della musica della stanza. Viene caricato dall'XML della stanza. */
+    private final String MUSIC_PATH;
+    /** Path dell'immagine di background della stanza. Viene caricato dall'XML della stanza. */
+    private final String BACKGORUND_PATH;
+    /** Immagine di background della stanza. */
     private BufferedImage backgroundImage;
+
 
     private final Map<GamePiece, BlockPosition> pieceLocationMap;
     private final RoomFloor floor;
@@ -46,15 +54,15 @@ public class Room
     private final BlockPosition defaultPosition;
 
 
-    public Room(String name, String path, String jsonPath, String musicPath)
+    public Room(String name, String path, String jsonPath, String MUSIC_PATH)
     {
         this.roomName = name;
         pieceLocationMap = new HashMap<>();
         arrowPositionMap = new HashMap<>();
 
-        this.musicPath = musicPath;
-        backgroundPath = path;
-        backgroundImage = SpriteManager.loadSpriteSheet(backgroundPath);
+        this.MUSIC_PATH = MUSIC_PATH;
+        BACKGORUND_PATH = path;
+        backgroundImage = SpriteManager.loadSpriteSheet(BACKGORUND_PATH);
         floor = RoomFloor.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 
@@ -91,7 +99,7 @@ public class Room
 
     public String getMusicPath()
     {
-        return musicPath;
+        return MUSIC_PATH;
     }
 
     public void setScenarioOnEnter(ActionSequence scenario)

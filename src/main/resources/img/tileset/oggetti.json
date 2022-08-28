@@ -261,6 +261,70 @@
     "y": 0,
     "width": 120,
     "height": 144
+  },
+
+  "LeftErbaVerde":
+  {
+    "x": 0,
+    "y": 432,
+    "width": 96,
+    "height": 96
+  },
+
+  "LeftErbaBlu":
+  {
+    "x": 96,
+    "y": 432,
+    "width": 96,
+    "height": 96
+  },
+
+  "LeftErbaRossa":
+  {
+    "x": 0,
+    "y": 480,
+    "width": 96,
+    "height": 96
+  },
+
+  "LeftErbaGialla":
+  {
+    "x": 96,
+    "y": 480,
+    "width": 96,
+    "height": 96
+  },
+
+  "RightErbaVerde":
+  {
+    "x": 0,
+    "y": 432,
+    "width": 96,
+    "height": 96
+  },
+
+  "RightErbaBlu":
+  {
+    "x": 96,
+    "y": 432,
+    "width": 96,
+    "height": 96
+  },
+
+  "RightErbaRossa":
+  {
+    "x": 0,
+    "y": 480,
+    "width": 96,
+    "height": 96
+  },
+
+  "RightErbaGialla":
+  {
+    "x": 96,
+    "y": 480,
+    "width": 96,
+    "height": 96
   }
 
 }
