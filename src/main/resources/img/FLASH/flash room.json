@@ -1,14 +1,14 @@
 {
   "width": 32,
-  "height": 16,
+  "height": 24,
 
   "pavimento":
   [
     {
-      "left": 14,
-      "top": 9,
-      "width": 18,
-      "height": 7
+      "left": 0,
+      "top": 13,
+      "width": 32,
+      "height": 11
     }
   ],
 
@@ -19,13 +19,8 @@
 
   "default position":
   {
-    "x": 16,
-    "y": 13
-  },
-
-  "northArrow":
-  {
-    "x": 16,
-    "y": 9
+    "x": 15,
+    "y": 11
   }
+
 }
