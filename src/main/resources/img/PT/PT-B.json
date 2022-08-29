@@ -1,6 +1,6 @@
 {
   "width": 40,
-  "height": 28,
+  "height": 26,
 
   "pavimento":
   [
@@ -8,7 +8,7 @@
       "left": 0,
       "top": 10,
       "width": 40,
-      "height": 18
+      "height": 16
     }
   ],
 
