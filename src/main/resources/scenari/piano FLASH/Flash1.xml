@@ -14,11 +14,9 @@
         <how>relative</how>
         <finalWait>1500</finalWait>
     </azione>
-    <!--
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
         <where>Ebert Garden</where>
     </azione>
-    -->
 </scenario>

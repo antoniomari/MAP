@@ -237,6 +237,9 @@ public class XmlParser
             case "setCanUse":
                 actionParsed = parseSetCanUse(actionElement);
                 break;
+            case "teleport":
+                actionParsed = parseTeleport(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -606,6 +609,14 @@ public class XmlParser
         boolean canUse = Boolean.parseBoolean(getTagValue(eAction, "canUse"));
 
         return () -> ((Item) GameManager.getPiece(subject)).setCanUse(canUse);
+    }
+
+    private static Runnable parseTeleport(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        String roomName = getTagValue(eAction, "where");
+
+        return () -> GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
     }
 
     /*
