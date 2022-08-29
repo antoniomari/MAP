@@ -49,6 +49,9 @@ public class MainFrame extends JFrame {
     /** Dimensione in pixel dell'altezza dello schermo. */
     private static final int SCREEN_HEIGHT;
 
+    private static final BufferedImage BLACK_SCREEN;
+    private static final String BLACK_SCREEN_PATH = "/img/sfondo nero.png";
+
     /** Dimensione in pixel della larghezza della schermata di gioco. */
     private int gameWidth;
     /** Dimensione in pixel dell'altezza della schermata di gioco. */
@@ -98,6 +101,9 @@ public class MainFrame extends JFrame {
         // calcolo del fattore di riscalamento di default e dell'altezza
         DEFAULT_SCALING_FACTOR = calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
         DEFAULT_GAME_HEIGHT =  (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR);
+
+        // caricamento sfondo nero per transizioni
+        BLACK_SCREEN = SpriteManager.loadSpriteSheet(BLACK_SCREEN_PATH).getSubimage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public InventoryPanel getInventoryPanel()
@@ -118,6 +124,11 @@ public class MainFrame extends JFrame {
     public Room getCurrentRoom()
     {
         return currentRoom;
+    }
+
+    public Image getBlackScreen()
+    {
+        return BLACK_SCREEN;
     }
 
     /**
@@ -145,7 +156,6 @@ public class MainFrame extends JFrame {
         int height = (DEFAULT_GAME_HEIGHT == 0) ? SCREEN_HEIGHT : DEFAULT_GAME_HEIGHT;
 
         double heightRescalingFactor = (double) height / (roomBHeight * GameManager.BLOCK_SIZE);
-        //heightRescalingFactor = Math.floor(heightRescalingFactor * GameManager.BLOCK_SIZE) / GameManager.BLOCK_SIZE;
 
         return Math.min(widthRescalingFactor, heightRescalingFactor);
     }

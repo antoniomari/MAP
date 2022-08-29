@@ -3,6 +3,7 @@ package GUI;
 import animation.MovingAnimation;
 import animation.StillAnimation;
 
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 import entity.GamePiece;
@@ -41,6 +42,8 @@ public class GameScreenPanel extends JLayeredPane
     public static final Integer EFFECT_LAYER = 4;
     /** Utilizzato per visualizzare la barra di testo. */
     public static final Integer TEXT_BAR_LEVEL = 5;
+    /** Utilizzato per stampare lo schermo nero per caricamento. */
+    public static final Integer BLACK_SCREEN_LEVEL = 6;
     // TODO: aggiungere algoritmo per posizionare correttamente secondo la prospettiva sia gli oggetti che i personaggi
     // tale algoritmo deve far sì che tutto ciò che sta sopra a te sia dietro e cosa sta sotto di te
     // sia davanti
@@ -135,6 +138,17 @@ public class GameScreenPanel extends JLayeredPane
             cardinal = null;
         }
 
+        // esegui screenShot
+        BufferedImage screenShot = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        paint(screenShot.getGraphics());
+
+        JLabel screenShotLabel = new JLabel(new ImageIcon(screenShot));
+        add(screenShotLabel, BLACK_SCREEN_LEVEL);
+        screenShotLabel.setBounds(getInsets().left, getInsets().top,
+                screenShot.getWidth(null),
+                screenShot.getHeight(null));
+
+
         // rimuovi giocatore dalla room
         PlayingCharacter.getPlayer().removeFromRoom();
 
@@ -166,6 +180,11 @@ public class GameScreenPanel extends JLayeredPane
                     .addInRoom(newRoom, newRoom.getFloor().getNearestPlacement(
                             newRoom.getArrowPosition(cardinal).relativePosition(-2,0),
                             PlayingCharacter.getPlayer()));
+
+        //Sposta screenShot
+        setLayer(screenShotLabel, GARBAGE_LAYER);
+        screenShotLabel.setIcon(null);
+        remove(screenShotLabel);
     }
 
     /**
