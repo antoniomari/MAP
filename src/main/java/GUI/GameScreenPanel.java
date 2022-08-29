@@ -56,6 +56,8 @@ public class GameScreenPanel extends JLayeredPane
 
     /** Stanza in cui si trova il Player. */
     private Room currentRoom;
+
+    private JLabel roomEffectLabel;
     /**
      * Dizionario che contiene i GamePiece presenti nella stanza (currentRoom)
      * e le JLabel a essi associate.
@@ -109,6 +111,34 @@ public class GameScreenPanel extends JLayeredPane
         return currentRoom;
     }
 
+    public void addCurrentRoomEffect(Image effectImage)
+    {
+        Objects.requireNonNull(effectImage);
+        Icon backgroundIcon =  backgroundLabel.getIcon();
+        roomEffectLabel = new JLabel(SpriteManager.rescaledImageIcon(effectImage, backgroundIcon.getIconWidth(),
+                backgroundIcon.getIconHeight()));
+
+        Icon effectIcon = roomEffectLabel.getIcon();
+        roomEffectLabel.setBounds(backgroundLabel.getX(), backgroundLabel.getY(), effectIcon.getIconWidth(),
+                effectIcon.getIconHeight() );
+
+        add(roomEffectLabel, EFFECT_LAYER);
+
+        GameManager.continueScenario();
+    }
+
+    public void removeCurrentRoomEffect()
+    {
+        //Sposta etichetta nel layer per la rimozione
+        setLayer(roomEffectLabel, GARBAGE_LAYER);
+        roomEffectLabel.setIcon(null);
+
+        // rimuovere la JLabel dal gameScreenPanel
+        remove(roomEffectLabel);
+
+        roomEffectLabel = null;
+    }
+
     /**
      * Esegue il cambio stanza, posizionando il Player all'entrata
      * opportuna se si è entrati da una porta, alla posizione di default
@@ -160,6 +190,12 @@ public class GameScreenPanel extends JLayeredPane
 
         // rimuovi oggetti e personaggi
         removeAllPiecesFromScreen();
+
+        // rimuovi effetto (se c'è)
+        if(roomEffectLabel != null)
+        {
+            removeCurrentRoomEffect();
+        }
 
         // aggiorna currentRoom
         this.currentRoom = newRoom;

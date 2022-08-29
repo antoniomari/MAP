@@ -2,9 +2,18 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <method>addRoomEffect</method>
+        <what>/img/FLASH/FogFlash1.png</what>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Dove mi trovo?</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>

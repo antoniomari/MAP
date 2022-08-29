@@ -33,17 +33,6 @@ public class NPC extends GameCharacter
     }
 
 
-    /*
-    public void setSpeakScenario(ActionSequence speakScenario)
-    {
-        this.speakScenario = speakScenario;
-
-        GameManager.continueScenario();
-    }
-
-     */
-
-
     @Override
     public void setState(String state, boolean continueScenario)
     {
@@ -69,20 +58,6 @@ public class NPC extends GameCharacter
         if(continueScenario)
             GameManager.continueScenario();
     }
-
-    /*
-
-    TODO : rimuovere
-
-    public void setSpeakSentence(String sentence)
-    {
-        this.speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
-        speakScenario.append(() -> this.speak(sentence));
-
-        GameManager.continueScenario();
-    }
-
-     */
 
 
     // TODO :Aggiustare chiamatre

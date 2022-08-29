@@ -14,6 +14,7 @@ import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
+import graphics.SpriteManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -207,9 +208,6 @@ public class XmlParser
             case "addToInventory":
                 actionParsed = parseAddToInventory(actionElement);
                 break;
-            //case "setSpeakSentence":
-            //    actionParsed = parseSetSpeakSentence(actionElement);
-            //    break;
             case "playMusic":
                 actionParsed = parsePlayMusic(actionElement);
                 break;
@@ -239,6 +237,9 @@ public class XmlParser
                 break;
             case "teleport":
                 actionParsed = parseTeleport(actionElement);
+                break;
+            case "addRoomEffect":
+                actionParsed = parseAddRoomEffect(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -619,267 +620,13 @@ public class XmlParser
         return () -> GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
     }
 
-    /*
-     * Restituisce il GamePiece sulla base del nome: se non è già stato caricato
-     * in memoria allora lo cerca in "personaggi.xml" e in "oggetti.xml"
-     *
-     * @param name nome del GamePiece cercato
-     * @return GamePiece cercato
-     * @throws GameException se non esiste un GamePiece di nome {@code name}
-    private static GamePiece loadPiece(String name)
+    private static Runnable parseAddRoomEffect(Element eAction)
     {
-        // 1: cerca in gameManager (caso in cui è già stato caricato in memoria)
-        GamePiece piece = GameManager.getPiece(name);
-        if(piece != null)
-            return piece;
+        String effectPath = getTagValue(eAction, "what");
 
-        // cerca tra i personaggi (file xml)
-        piece = loadCharacter(name);
-        if(piece != null)
-            return piece;
-
-        // cerca tra gli oggetti (file xml)
-        piece = loadItem(name);
-        if(piece != null)
-            return piece;
-
-        // piece non presente, lancia eccezione
-        throw new GameException("GamePiece inesistente");
+        return () -> GameManager.getMainFrame().getGameScreenPanel()
+                    .addCurrentRoomEffect(SpriteManager.loadSpriteSheet(effectPath));
     }
-
-
-    /**
-     * Carica un GameCharacter dal rispettivo file (personaggi.xml).
-     *
-     * Cerca il GameCharacter (elemento xml con tag {@literal <personaggio>} il cui nome
-     * è {@code name}. Nella costruzione dell'oggetto utilizza il contenuto dei seguenti tag:
-     * <ul>
-     *     <li>{@literal <spritesheet>} path dello spritesheet del personaggio</li>
-     *
-     *    <li>{@literal <json>} path del json associato allo spritesheet del personaggio</li>
-     * </ul>
-     *
-     * @param name nome del GameCharacter da caricare
-     * @return il GameCharacter caricato, {@code null} se non esiste un GameCharacter
-     * il cui nome sia {@code name}
-
-    private static GameCharacter loadCharacter(String name)
-    {
-        Document characterXml = openXml("src/main/resources/scenari/personaggi.xml");
-
-        NodeList characterNodeList = characterXml.getElementsByTagName("personaggio");
-
-        // per ogni personaggio controlla l'atttibuto "nome"
-        for(int i = 0; i < characterNodeList.getLength(); i++)
-        {
-            Element characterElement = (Element) characterNodeList.item(i);
-            String elementName = getXmlAttribute(characterElement, "nome");
-
-            if (elementName.equals(name))
-            {
-                String spritesheetPath = getTagValue(characterElement, "spritesheet");
-                Optional<String> jsonPath = getOptionalTagValue(characterElement, "json");
-
-                GameCharacter loaded;
-
-                if(jsonPath.isPresent())
-                {
-                    if(name.equals(PlayingCharacter.getPlayerName()))
-                        loaded = new GameCharacter(name, spritesheetPath, jsonPath.get());
-                    else
-                        loaded = new NPC(name, spritesheetPath, jsonPath.get());
-                }
-                else
-                {
-                    loaded = new NPC(name, spritesheetPath);
-                }
-
-                // carica speakScenarios
-                Element scenariosNode = (Element) characterElement.getElementsByTagName("speakScenarios").item(0);
-                Map<String, String> scenarioPathMap = new HashMap<>();
-
-                if(scenariosNode != null)
-                {
-                    NodeList scenarioPathList = scenariosNode.getElementsByTagName("scenario");
-
-
-                    for(int j = 0; j < scenarioPathList.getLength(); j++)
-                    {
-                        Element element = (Element) scenarioPathList.item(j);
-                        String state = getXmlAttribute(element, "state");
-                        scenarioPathMap.put(state, element.getTextContent());
-                    }
-                }
-
-
-                if(loaded instanceof NPC)
-                    ((NPC) loaded).loadSpeakScenarios(scenarioPathMap);
-
-                return loaded;
-
-            }
-        }
-        // personaggio non presente
-        return null;
-    }
-
-    // TODO : documentazion e modularizzazione
-    private static Item loadItem(String name)
-    {
-        Document itemXml = openXml("src/main/resources/scenari/oggetti.xml");
-
-        NodeList itemNodeList = itemXml.getElementsByTagName("oggetto");
-
-        // per ogni oggetto cerca
-        for(int i = 0; i < itemNodeList.getLength(); i++)
-        {
-            Element itemElement = (Element) itemNodeList.item(i);
-            String elementName = getXmlAttribute(itemElement, "nome");
-
-            if (elementName.equals(name))
-            {
-                String className = getTagValue(itemElement, "classe");
-                String description = getTagValue(itemElement, "descrizione");
-                boolean canUse = Boolean.parseBoolean(getTagValue(itemElement, "canUse"));
-
-                // TODO: caricare l'opportuna classe IMPORTANTEEEEE!"!!!!!!1
-                Item itemToLoad;
-                if(className.equals("Item"))
-                    itemToLoad = new Item(name, description, canUse);
-                else if (className.equals("PickupableItem"))
-                    itemToLoad = new PickupableItem(name, description, canUse);
-                else if (className.equals("DoorLike"))
-                    itemToLoad = new DoorLike(name, description);
-                else if (className.equals("Container"))
-                    itemToLoad = new Container(name, description);
-                else if (className.equals("TriggerableItem"))
-                    itemToLoad = new TriggerableItem(name, description, false);
-                else
-                    throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
-                // TODO : rimpiazzare if-else
-
-                // caricamento animazione
-                Optional<String> animationSpritesheetPath = getOptionalTagValue(itemElement, "animationSpritesheet");
-                Optional<String> animationJsonPath = getOptionalTagValue(itemElement, "animationJson");
-
-                // TODO: controlli??
-                if(animationSpritesheetPath.isPresent())
-                {
-                    itemToLoad.initAnimateFrames(animationSpritesheetPath.get(), animationJsonPath.get());
-                }
-
-
-                // setup onUse action
-                Element onUseElement = (Element) itemElement.getElementsByTagName("onUse").item(0);
-
-                if (onUseElement != null)
-                {
-                    String scenarioPath = getTagValue(onUseElement, "effetto");
-                    // imposta useAction
-                    itemToLoad.setUseAction(loadScenario(scenarioPath));
-
-                    // imposta nome azione
-                    itemToLoad.setUseActionName(getTagValue(onUseElement, "actionName"));
-                }
-
-                // setup onTrigger action
-                Element onTriggerElement = (Element) itemElement.getElementsByTagName("onTrigger").item(0);
-                // TODO: aggiungere directlyTriggered
-                if(onTriggerElement != null)
-                {
-                    String scenarioPath = getTagValue(onTriggerElement, "effetto");
-                    // imposta trigger action
-                    ((Triggerable) itemToLoad).setTriggerScenario(loadScenario(scenarioPath));
-                    // imposta nome azione
-                }
-
-                // inferenza: se trovo questo tag allora è un doorLike TODO: aggiustare
-                Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
-
-                if (onOpenElement != null)
-                {
-                    String scenarioPath = getTagValue(onOpenElement, "effetto");
-                    // imposta openEffect TODO: rinominare in setOpenAction
-                    ((Openable) itemToLoad).setOpenEffect(loadScenario(scenarioPath));
-
-                    if(itemToLoad.getClass() == DoorLike.class)
-                    {
-                        boolean isOpen = Boolean.parseBoolean(getTagValue(itemElement, "isOpen"));
-                        boolean isLocked = Boolean.parseBoolean(getTagValue(itemElement, "isLocked"));
-                        ((DoorLike) itemToLoad).setInitialState(isOpen, isLocked);
-                    }
-
-                }
-
-                Element onUseWithElement = (Element) itemElement.getElementsByTagName("onUseWith").item(0);
-
-                // TODO : completare
-                if (onUseWithElement != null)
-                {
-                    String targetName = getTagValue(onUseWithElement, "target");
-                    Optional<String> targetInitState = getOptionalTagValue(onUseWithElement, "targetInitState");
-                    Optional<String> targetFinalState = getOptionalTagValue(onUseWithElement, "targetFinalState");
-
-                    Optional<String> keepOptional = getOptionalTagValue(onUseWithElement, "keep");
-                    if (keepOptional.isPresent())
-                    {
-                        boolean keep = Boolean.parseBoolean(keepOptional.get());
-                        ((PickupableItem) itemToLoad).setKeepOnUseWith(keep);
-                    }
-
-                    ((PickupableItem) itemToLoad).setTargetPiece(targetName,
-                                            targetInitState.orElse("init"),
-                                            targetFinalState.orElse("init"));
-
-                    Optional<String> methodName = getOptionalTagValue(onUseWithElement, "method");
-                    if(methodName.isPresent())
-                    {
-                        Method method;
-                        GamePiece target;
-                        try
-                        {
-                            target = GameManager.getPiece(targetName);
-                            method = target.getClass().getMethod(methodName.get());
-                        }
-                        catch(NoSuchMethodException e)
-                        {
-                            throw new GameException("metodo non trovato");
-                        }
-
-                        // TODO: generalizzare
-                        ActionSequence useWithScenario = new ActionSequence("useWithScenario", ActionSequence.Mode.INSTANT);
-                        useWithScenario.append(() ->
-                        {
-                            try
-                            {
-                                method.invoke(target);
-                            } catch (IllegalAccessException | InvocationTargetException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        });
-
-                        ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
-                    }
-                    else
-                    {
-                        String scenarioPath = getTagValue(onUseWithElement, "scenario");
-                        ActionSequence useWithScenario = loadScenario(scenarioPath);
-
-                        ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
-                    }
-
-                }
-
-                return itemToLoad;
-            }
-        }
-
-        // non trovato
-        return null;
-    }
-
-     */
 
     /**
      * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
