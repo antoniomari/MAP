@@ -4,6 +4,7 @@
     <json>/img/PT/PT-D.json</json>
     <musica>src/main/resources/audio/musica/CocktailParty.wav</musica>
     <scenario>
+        <mode>sequence</mode>
         <azione>
             <subject>PT-B</subject>
             <method>add</method>

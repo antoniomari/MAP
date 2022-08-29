@@ -148,7 +148,7 @@
 		<method>add</method>
 		<what>Diego</what>
 		<x>14</x>
-		<y>14</y>
+		<y>13</y>
 	</azione>
 	<azione>
 		<subject>Nicolas</subject>
@@ -167,7 +167,7 @@
 		<method>add</method>
 		<what>Nicolas</what>
 		<x>22</x>
-		<y>14</y>
+		<y>13</y>
 	</azione>
 	<!--
 	<azione>
