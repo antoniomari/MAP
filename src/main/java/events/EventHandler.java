@@ -90,6 +90,8 @@ public class EventHandler
             final String EMOJI_SPRITESHEET_PATH = "/img/animazioni/emoji.png";
             final String EMOJI_JSON_PATH = "/img/animazioni/emoji.json";
 
+            SoundHandler.playWav(SoundHandler.EMOJI_SOUND_PATH, SoundHandler.Mode.SOUND);
+
             AnimationExecutor.executeEffectAnimation(e.getCharacterInvolved(), EMOJI_SPRITESHEET_PATH, EMOJI_JSON_PATH,
                     e.getSentence(), e.getCharacterInvolved().getPosition().relativePosition(1, - e.getCharacterInvolved().getBHeight()),
                     500);

@@ -13,6 +13,7 @@ public class SoundHandler
 {
     public static final String PICKUP_SOUND_PATH = "src/main/resources/audio/effetti/pickupItem.wav";
     public static final String SCROLL_BAR_PATH = "src/main/resources/audio/effetti/scroll.wav";
+    public static final String EMOJI_SOUND_PATH = "src/main/resources/audio/effetti/emojiSound.wav";
     private static Clip currentMusic;
     private static String currentMusicPath;
 
