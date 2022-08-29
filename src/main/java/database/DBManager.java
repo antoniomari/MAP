@@ -25,12 +25,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.PropertyPermission;
 
 public class DBManager
 {
 
     private static Connection conn;
     private final static String DATABASE_PATH = "jdbc:h2:./db";
+    private final static String[] LINK_TABLE_NAMES = {"itemLocation", "characterLocation"};
+    private final static String[] PURE_TABLE_NAMES = {"room", "item", "gameCharacter", "inventory"};
 
 
     private static void startConnection() throws SQLException
@@ -41,6 +44,19 @@ public class DBManager
         }
     }
 
+    private static void closeConnection()
+    {
+        try
+        {
+            if(conn != null)
+                conn.close();
+        }
+        catch(SQLException e)
+        {
+            throw new GameException("Impossibile chiudere la connessione con database per salvataggi");
+        }
+
+    }
 
     public static void loadPieces()
     {
@@ -116,10 +132,12 @@ public class DBManager
             while(rs.next())
             {
                 String name = rs.getString(1);
-                String xmlPath= rs.getString(2);
+                String xmlPath = rs.getString(2);
                 String scenarioOnEnterPath = rs.getString(3);
 
                 Room loadedRoom = XmlLoader.loadRoom(xmlPath);
+                loadedRoom.setScenarioOnEnter(scenarioOnEnterPath);
+
                 ActionSequence loadedRoomInitScenario = XmlLoader.loadRoomInit(xmlPath);
                 GameManager.startScenario(loadedRoomInitScenario);
             }
@@ -160,8 +178,8 @@ public class DBManager
 
     }
 
-    public static void saveInventory() throws SQLException {
-        PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?");
+    private static void saveInventory() throws SQLException {
+        PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?)");
 
         // cicla sugli oggetti recuperati dal Inventory e per ogni oggetto prepara la
         // query da eseguire per il salvataggio
@@ -171,17 +189,17 @@ public class DBManager
             pstmInventory.setInt(2, PlayingCharacter.getPlayer().
                                                    getInventory().indexOf(it));
 
-            ResultSet rsINV = pstmInventory.executeQuery();
+            pstmInventory.executeUpdate();
         }
     }
 
-    public static void saveGamePieces() throws SQLException
+    private static void saveGamePieces() throws SQLException
     {
         // gli statemente servo per preparere le diverse operazioni di aggiunta dati al database
         PreparedStatement pstmItem = conn.prepareStatement("INSERT INTO game.item values(?, ?, ?)");
         PreparedStatement pstmCharacters = conn.prepareStatement("INSERT INTO game.gamecharacter values(?, ?)");
-        PreparedStatement pstmItemLoc = conn.prepareStatement("INSERT INTO game.itemlocation values(?, ?, ?, ?");
-        PreparedStatement pstmCharacterLoc = conn.prepareStatement("INSERT INTO game.characterlocation values(?, ?, ?, ?");
+        PreparedStatement pstmItemLoc = conn.prepareStatement("INSERT INTO game.itemlocation values(?, ?, ?, ?)");
+        PreparedStatement pstmCharacterLoc = conn.prepareStatement("INSERT INTO game.characterlocation values(?, ?, ?, ?)");
 
         // ciclo che recupera ogni stanza dalla quale vengono prelevati oggetti e personaggi
         // per essere salvati nel database
@@ -204,13 +222,13 @@ public class DBManager
                     {
                         pstmItem.setBoolean(3, false);
                     }
-                    ResultSet rsPIT = pstmItem.executeQuery();
+                    pstmItem.executeUpdate();
                     chosenStatement = pstmItemLoc;
                 }
                 else if(gp instanceof GameCharacter) {
                     pstmCharacters.setString(1,gp.getName());
                     pstmCharacters.setString(2,gp.getState());
-                    ResultSet rsPCH= pstmCharacters.executeQuery();
+                     pstmCharacters.executeUpdate();
                     chosenStatement = pstmCharacterLoc;
                 }
                 else
@@ -222,14 +240,13 @@ public class DBManager
                 chosenStatement.setString(2, r);
                 chosenStatement.setInt(3,gp.getPosition().getX());
                 chosenStatement.setInt(4,gp.getPosition().getY());
-                ResultSet rsPIC = chosenStatement.executeQuery();
+                chosenStatement.executeUpdate();
             }
         }
     }
 
-    public static void saveRooms() throws SQLException
+    private static void saveRooms() throws SQLException
     {
-        startConnection();
         PreparedStatement pstm1= conn.prepareStatement("INSERT INTO game.room values(?, ?, ?)");
 
         for (String name : GameManager.getRoomNames())
@@ -237,10 +254,43 @@ public class DBManager
             pstm1.setString(1,name);
             pstm1.setString(2, GameManager.getRoom(name).getXmlPath());
             pstm1.setString(3, GameManager.getRoom(name).getScenarioOnEnterPath());
-            ResultSet rs1= pstm1.executeQuery();
+            pstm1.executeUpdate();
+        }
+    }
+
+    private static void deleteDatabaseContent() throws SQLException
+    {
+        PreparedStatement deleteStatement;
+        for(final String TABLE : LINK_TABLE_NAMES)
+        {
+            deleteStatement = conn.prepareStatement("DELETE FROM game." + TABLE);
+            deleteStatement.executeUpdate();
         }
 
-        pstm1.close();
-        conn.close();
+        for(final String TABLE : PURE_TABLE_NAMES)
+        {
+            deleteStatement = conn.prepareStatement("DELETE FROM game." + TABLE);
+            deleteStatement.executeUpdate();
+        }
+    }
+
+    public static void save()
+    {
+        try
+        {
+            startConnection();
+
+            deleteDatabaseContent();
+
+            saveRooms();
+            saveGamePieces();
+            saveInventory();
+        }
+        catch(SQLException e)
+        {
+            closeConnection();
+            throw new Error(e);
+        }
+
     }
 }

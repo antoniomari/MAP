@@ -602,16 +602,7 @@ public class MainFrame extends JFrame {
 
     private void save()
     {
-        try
-        {
-            DBManager.saveRooms();
-            DBManager.saveGamePieces();
-            DBManager.saveInventory();
-        }
-        catch(SQLException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
+        DBManager.save();
     }
 
     /**

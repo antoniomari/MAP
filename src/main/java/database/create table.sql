@@ -1,6 +1,7 @@
 create table room
 (
     name varchar(50),
+    xmlPath varchar(200),
     scenarioOnEnterPath varchar(200),
     primary key(name)
 );
