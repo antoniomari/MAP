@@ -6,7 +6,7 @@
     <scenario>
         <mode>sequence</mode>
         <azione>
-            <subject>PT-B</subject>
+            <subject>PT-D</subject>
             <method>add</method>
             <what>ScrivaniaPT</what>
             <x>14</x>
