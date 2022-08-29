@@ -58,127 +58,111 @@ public class DBManager
 
     }
 
-    public static void loadPieces()
+    public static void loadGameData()
     {
         try
         {
             startConnection();
-            PreparedStatement pstm= conn.prepareStatement("SELECT name, state, canUse, room, x, y FROM game.item JOIN game.itemLocation ON name=item");
-            ResultSet rs= pstm.executeQuery();
 
-            while(rs.next())
-            {
-                String name = rs.getString(1);
-                String state = rs.getString(2);
-                boolean canUse = rs.getBoolean(3);
-
-                Item loadedItem = (Item) XmlLoader.loadPiece(name);
-                loadedItem.setState(state, false);
-                loadedItem.setCanUse(canUse);
-
-                String roomName = rs.getString(4);
-                int xPos = rs.getInt(5);
-                int yPos = rs.getInt(6);
-
-                loadedItem.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
-            }
-            rs.close();
-            pstm.close();
-            conn.close();
-
-
-            PreparedStatement pstm1= conn.prepareStatement("SELECT name, state, room, x, y FROM game.gameCharacter JOIN game.characterLocation ON name=gameCharacter");
-            ResultSet rs1 = pstm1.executeQuery();
-
-            while(rs.next())
-            {
-                String name = rs1.getString(1);
-                String state = rs1.getString(2);
-                String roomName = rs.getString(3);
-                int xPos = rs.getInt(4);
-                int yPos = rs.getInt(5);
-
-                if(!name.equals(PlayingCharacter.getPlayerName()))
-                {
-                    GameCharacter loadedCharacter = (GameCharacter) XmlLoader.loadPiece(name);
-                    loadedCharacter.setState(state, false);
-                    loadedCharacter.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
-                }
-                else  // sei schwartz
-                {
-                    PlayingCharacter.getPlayer().addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
-                }
-            }
-            rs.close();
-            pstm1.close();
-            conn.close();
-
-
+            loadRooms();
+            loadPieces();
+            loadInventory();
         }
-        catch (SQLException e)
+        catch(SQLException e)
         {
-            LogOutputManager.logOutput(e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
-            throw new IOError(e); // TODO: migliorare
+            closeConnection();
+            throw new Error(e);
         }
+
     }
 
-    public static void loadRooms()
+    public static void loadPieces() throws SQLException
     {
-        try
+        PreparedStatement pstm= conn.prepareStatement("SELECT name, state, canUse, room, x, y FROM game.item JOIN game.itemLocation ON name=item");
+        ResultSet rs= pstm.executeQuery();
+
+        while(rs.next())
         {
-            startConnection();
-            PreparedStatement pstm= conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.stanza");
-            ResultSet rs= pstm.executeQuery();
-            while(rs.next())
+            String name = rs.getString(1);
+            String state = rs.getString(2);
+            boolean canUse = rs.getBoolean(3);
+
+            Item loadedItem = (Item) XmlLoader.loadPiece(name);
+            loadedItem.setState(state, false);
+            loadedItem.setCanUse(canUse);
+
+            String roomName = rs.getString(4);
+            int xPos = rs.getInt(5);
+            int yPos = rs.getInt(6);
+
+            loadedItem.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
+        }
+        rs.close();
+        pstm.close();
+
+        PreparedStatement pstm1= conn.prepareStatement("SELECT name, state, room, x, y FROM game.gameCharacter JOIN game.characterLocation ON name=gameCharacter");
+        ResultSet rs1 = pstm1.executeQuery();
+
+        while(rs1.next())
+        {
+            String name = rs1.getString(1);
+            String state = rs1.getString(2);
+            String roomName = rs1.getString(3);
+            int xPos = rs1.getInt(4);
+            int yPos = rs1.getInt(5);
+
+            if(!name.equals(PlayingCharacter.getPlayerName()))
             {
-                String name = rs.getString(1);
-                String xmlPath = rs.getString(2);
-                String scenarioOnEnterPath = rs.getString(3);
-
-                Room loadedRoom = XmlLoader.loadRoom(xmlPath);
-                loadedRoom.setScenarioOnEnter(scenarioOnEnterPath);
-
-                ActionSequence loadedRoomInitScenario = XmlLoader.loadRoomInit(xmlPath);
-                GameManager.startScenario(loadedRoomInitScenario);
+                GameCharacter loadedCharacter = (GameCharacter) XmlLoader.loadPiece(name);
+                loadedCharacter.setState(state, false);
+                loadedCharacter.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
             }
-            rs.close();
-            pstm.close();
-            conn.close();
+            else  // sei schwartz
+            {
+                PlayingCharacter.getPlayer().addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
+            }
         }
-        catch (SQLException e)
-        {
-            LogOutputManager.logOutput(e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
-            throw new IOError(e); // TODO: migliorare
-        }
+        rs1.close();
+        pstm1.close();
     }
 
-
-    public static void loadInventory()
+    public static void loadRooms() throws SQLException
     {
-        try
+        PreparedStatement pstm= conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
+        ResultSet rs= pstm.executeQuery();
+        while(rs.next())
         {
-            startConnection();
-            PreparedStatement pstm= conn.prepareStatement("SELECT item, index FROM game.inventory");
-            ResultSet rs= pstm.executeQuery();
+            String name = rs.getString(1);
+            String xmlPath = rs.getString(2);
+            String scenarioOnEnterPath = rs.getString(3);
 
-            while(rs.next())
-            {
-                String name = rs.getString(1);
-                PlayingCharacter.getPlayer().addToInventory((PickupableItem) XmlLoader.loadPiece(name));
-            }
-            rs.close();
-            pstm.close();
-            conn.close();
-        }
-        catch (SQLException e)
-        {
-            LogOutputManager.logOutput(e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
-            throw new IOError(e); // TODO: migliorare
-        }
+            Room loadedRoom = XmlLoader.loadRoom(xmlPath);
+            loadedRoom.setScenarioOnEnter(scenarioOnEnterPath);
 
+            ActionSequence loadedRoomInitScenario = XmlLoader.loadRoomInitDB(xmlPath);
+            GameManager.startScenario(loadedRoomInitScenario);
+        }
+        rs.close();
+        pstm.close();
     }
 
-    private static void saveInventory() throws SQLException {
+
+    public static void loadInventory() throws SQLException
+    {
+        PreparedStatement pstm= conn.prepareStatement("SELECT item, index FROM game.inventory");
+        ResultSet rs= pstm.executeQuery();
+
+        while(rs.next())
+        {
+            String name = rs.getString(1);
+            PlayingCharacter.getPlayer().addToInventory((PickupableItem) XmlLoader.loadPiece(name));
+        }
+        rs.close();
+        pstm.close();
+    }
+
+    private static void saveInventory() throws SQLException
+    {
         PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?)");
 
         // cicla sugli oggetti recuperati dal Inventory e per ogni oggetto prepara la

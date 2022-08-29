@@ -3,6 +3,7 @@ package GUI;
 import GUI.gamestate.GameState;
 import animation.PerpetualAnimation;
 import database.DBManager;
+import entity.characters.PlayingCharacter;
 import events.executors.Executor;
 import general.ActionSequence;
 import general.GameException;
@@ -17,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.sql.SQLException;
 
 public class MainFrame extends JFrame {
@@ -475,7 +477,7 @@ public class MainFrame extends JFrame {
                     nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
 
         JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
-                "/img/Menu iniziale/continua pressed.png", null);
+                "/img/Menu iniziale/continua pressed.png", this::loadSavings);
         continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
                     continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
 
@@ -603,6 +605,31 @@ public class MainFrame extends JFrame {
     private void save()
     {
         DBManager.save();
+    }
+
+    private void loadSavings()
+    {
+        DBManager.loadGameData();
+
+        currentRoom = PlayingCharacter.getPlayer().getLocationRoom();
+
+        // TODO: evitare copia
+        // inizializzazione immagine di sfondo
+        setupBackground();
+        // inizializzazione componenti
+        initGameScreenPanel();
+        initTextBarPanel();
+        initGamePanel();
+
+        gameScreenPanel.changeRoom(currentRoom, SCREEN_WIDTH);
+
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+
+        cl.show(mainPanel, "GIOCO");
+        currentDisplaying = "GIOCO";
+
+        GameState.changeState(GameState.State.PLAYING);
+        SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
     }
 
     /**
