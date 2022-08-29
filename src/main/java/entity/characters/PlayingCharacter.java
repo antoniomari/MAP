@@ -30,6 +30,7 @@ public class PlayingCharacter extends GameCharacter
         return player;
     }
 
+    // TODO : addToInventory con l'indice per caricamento da db
     public void addToInventory(PickupableItem i)
     {
         inventory.add(i);

@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class XmlLoader
+public class XmlLoader
 {
     private static final String CHARACTER_XML_PATH = "src/main/resources/scenari/personaggi.xml";
     private static final String ITEM_XML_PATH = "src/main/resources/scenari/oggetti.xml";
@@ -65,7 +65,7 @@ class XmlLoader
      * @return GamePiece cercato
      * @throws GameException se non esiste un GamePiece di nome {@code name}
      */
-    static GamePiece loadPiece(String name)
+    public static GamePiece loadPiece(String name)
     {
         // 1: cerca in gameManager (caso in cui è già stato caricato in memoria)
         GamePiece piece = GameManager.getPiece(name);
@@ -343,7 +343,10 @@ class XmlLoader
 
             LogOutputManager.logOutput("Caricando stanza " + name, LogOutputManager.XML_COLOR);
 
-            return new Room(name, pngPath, jsonPath, musicPath);
+            Room room = new Room(name, pngPath, jsonPath, musicPath);
+            room.setXmlPath(roomPath);
+
+            return room;
         }
     }
 
@@ -360,5 +363,14 @@ class XmlLoader
         Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
 
         return XmlParser.parseScenario("init Room " + roomPath, (Element) scenarioNode);
+    }
+
+
+    public static ActionSequence loadRoomInitDB(String roomPath)
+    {
+        Document roomXml = XmlParser.openXml(roomPath);
+        Node scenarioNode = roomXml.getElementsByTagName("scenario").item(0);
+
+        return XmlParser.parseInitRoomDB("init Room " + roomPath, (Element) scenarioNode);
     }
 }

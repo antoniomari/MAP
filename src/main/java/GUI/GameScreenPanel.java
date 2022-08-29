@@ -75,10 +75,14 @@ public class GameScreenPanel extends JLayeredPane
      *
      * @param initialRoom stanza iniziale
      */
-    public GameScreenPanel(Room initialRoom)
+    public GameScreenPanel()
     {
         super();
         pieceLabelMap = new HashMap<>();
+    }
+
+    void setInitialRoom(Room initialRoom)
+    {
         currentRoom = initialRoom;
     }
 

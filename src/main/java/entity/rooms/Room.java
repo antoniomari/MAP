@@ -29,6 +29,8 @@ public class Room
     private Room west;
     private Room east;
 
+    /** Path dell'xml della stanza. */
+    private String xmlPath;
     /** Path dello scenario da eseguire nel momento in cui si entra nella stanza. */
     private String scenarioOnEnterPath;
 
@@ -99,6 +101,16 @@ public class Room
         }
 
         GameManager.addRoom(this);
+    }
+
+    public String getXmlPath()
+    {
+        return xmlPath;
+    }
+
+    public void setXmlPath(String xmlPath)
+    {
+        this.xmlPath = xmlPath;
     }
 
     public String getScenarioOnEnterPath() {

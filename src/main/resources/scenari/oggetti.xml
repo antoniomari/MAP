@@ -166,6 +166,8 @@
         <onUseWith>
             <keep>false</keep>
             <target>Cameriere</target>
+            <targetInitState>cocktail</targetInitState>
+            <targetFinalState>cocktail</targetFinalState>
             <scenario>src/main/resources/scenari/piano terra/Drink.xml</scenario>
         </onUseWith>
     </oggetto>

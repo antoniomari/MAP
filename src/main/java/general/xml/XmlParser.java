@@ -112,6 +112,129 @@ public class XmlParser
             return valueNode.getNodeValue();
     }
 
+    static ActionSequence parseInitRoomDB(String roomName, Element roomInitScenarioElement)
+    {
+        // ottieni lista di azioni
+        List<Element> actionList = XmlParser.getTagsList(roomInitScenarioElement, "azione");
+
+        ActionSequence scenarioSequence = new ActionSequence("Caricamento stanza db", ActionSequence.Mode.INSTANT);
+
+        Set<String> affectedMethodNames = new HashSet<>(4);
+        affectedMethodNames.add("setNorth");
+        affectedMethodNames.add("setWest");
+        affectedMethodNames.add("setSouth");
+        affectedMethodNames.add("setEast");
+
+        for(Element action : actionList)
+        {
+            if(affectedMethodNames.contains(getTagValue(action, "method")))
+                scenarioSequence.append(parseActionLoadFromDB(action));
+        }
+
+        return scenarioSequence;
+    }
+
+    private static Runnable parseActionLoadFromDB(Element actionElement)
+    {
+        // prendi nome metodo
+        String methodName = getTagValue(actionElement, "method");
+        LogOutputManager.logOutput("Azione da DB " + methodName, LogOutputManager.XML_COLOR);
+        Runnable actionParsed;
+
+        switch(methodName)
+        {
+            case "setNorth":
+                actionParsed = parseSetNorthDB(actionElement);
+                break;
+            case "setWest":
+                actionParsed = parseSetWestDB(actionElement);
+                break;
+            case "setEast":
+                actionParsed = parseSetEastDB(actionElement);
+                break;
+            case "setSouth":
+                actionParsed = parseSetSouthDB(actionElement);
+                break;
+            default:
+                throw new GameException("metodo non valido");
+        }
+
+        return actionParsed;
+    }
+
+    private static Runnable parseSetEastDB(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = XmlLoader.loadRoom(roomName);
+
+            return () -> GameManager.getRoom(subject).setEast(room);
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setEast(room);
+        }
+    }
+
+    private static Runnable parseSetWestDB(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = XmlLoader.loadRoom(roomName);
+
+            return () -> GameManager.getRoom(subject).setWest(room);
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setWest(room);
+        }
+    }
+
+    private static Runnable parseSetNorthDB(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = XmlLoader.loadRoom(roomName);
+
+            return () -> GameManager.getRoom(subject).setNorth(room);
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setNorth(room);
+        }
+    }
+
+    private static Runnable parseSetSouthDB(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = XmlLoader.loadRoom(roomName);
+
+            return () -> GameManager.getRoom(subject).setSouth(room);
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () -> GameManager.getRoom(subject).setSouth(room);
+        }
+    }
+
     static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
     {
         // ricava tipo scenario
@@ -130,14 +253,13 @@ public class XmlParser
         ActionSequence scenarioSequence = new ActionSequence(scenarioName, mode);
 
         // ottieni lista di azioni
-        NodeList actionList = scenarioElement.getElementsByTagName("azione");
+        List<Element> actionList = XmlParser.getTagsList(scenarioElement, "azione");
 
-        // cicla sulle azioni
-        for (int i = 0; i < actionList.getLength(); i++)
+        for(Element action : actionList)
         {
-            Element eAction =  (Element) actionList.item(i);
-            scenarioSequence.append(parseAction(eAction));
+            scenarioSequence.append(parseAction(action));
         }
+
 
         // prendi scenario eventuale alla fine
         Optional<String> nextScenario = getOptionalTagValue(scenarioElement, "executeScenario");
@@ -397,8 +519,8 @@ public class XmlParser
         String roomName = getTagValue(eAction, "what");
         if(GameManager.getRoom(roomName) == null)
         {
-            Room room = loadRoom(roomName);
-            ActionSequence roomScenario = loadRoomInit(roomName);
+            Room room = XmlLoader.loadRoom(roomName);
+            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
             return () -> {GameManager.getRoom(subject).setEast(room); GameManager.startScenario(roomScenario);};
         }
@@ -416,8 +538,8 @@ public class XmlParser
         String roomName = getTagValue(eAction, "what");
         if(GameManager.getRoom(roomName) == null)
         {
-            Room room = loadRoom(roomName);
-            ActionSequence roomScenario = loadRoomInit(roomName);
+            Room room = XmlLoader.loadRoom(roomName);
+            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
             return () -> {GameManager.getRoom(subject).setWest(room); GameManager.startScenario(roomScenario);};
         }
@@ -435,8 +557,8 @@ public class XmlParser
         String roomName = getTagValue(eAction, "what");
         if(GameManager.getRoom(roomName) == null)
         {
-            Room room = loadRoom(roomName);
-            ActionSequence roomScenario = loadRoomInit(roomName);
+            Room room = XmlLoader.loadRoom(roomName);
+            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
             return () -> {GameManager.getRoom(subject).setNorth(room); GameManager.startScenario(roomScenario);};
         }
@@ -455,8 +577,8 @@ public class XmlParser
 
         if(GameManager.getRoom(roomName) == null)
         {
-            Room room = loadRoom(roomName);
-            ActionSequence roomScenario = loadRoomInit(roomName);
+            Room room = XmlLoader.loadRoom(roomName);
+            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
             return () -> {GameManager.getRoom(subject).setSouth(room); GameManager.startScenario(roomScenario);};
         }
@@ -571,8 +693,8 @@ public class XmlParser
 
         return () ->
         {
-            GameManager.getMainFrame().setCurrentRoom(loadRoom(floorPath));
-            GameManager.startScenario(loadRoomInit(floorPath));
+            GameManager.getMainFrame().setCurrentRoom(XmlLoader.loadRoom(floorPath));
+            GameManager.startScenario(XmlLoader.loadRoomInit(floorPath));
         };
     }
 
@@ -709,13 +831,15 @@ public class XmlParser
         }
     }
 
+    /*
+
     /**
      * Crea una Room descritta nel file xml corrispondente.
      *
      * @param roomPath path del file xml contenente i dati della Room
      *                 (root tag: {@literal <stanza>})
      * @return stanza corrispondente
-     */
+
     @Deprecated
     public static Room loadRoom(String roomPath)
     {
@@ -728,11 +852,14 @@ public class XmlParser
      *
      * @param roomPath path del file xml contenente i dati della Room
      * @return ActionSequence che comprende le azioni d'inizializzazione stanza
-     */
+
     @Deprecated
     public static ActionSequence loadRoomInit(String roomPath)
     {
         return XmlLoader.loadRoomInit(roomPath);
     }
+
+
+     */
 
 }

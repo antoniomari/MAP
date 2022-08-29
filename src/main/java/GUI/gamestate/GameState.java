@@ -62,10 +62,10 @@ public class GameState
                 () -> mainFrame.showMenu(!mainFrame.isMenuDisplaying()), null);
         mainFrame.addKeyListener(escListener);
 
-        initListeners();
+        initGameListeners();
     }
 
-    public static void initListeners()
+    public static void initGameListeners()
     {
         // GameMouseListener dropListener = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
         // mainFrame.getGameScreenPanel().addMouseListener(dropListener);
@@ -144,11 +144,6 @@ public class GameState
                                                                 mainFrame.getTextBarPanel()::hideTextBar,
                                                                 null, State.TEXT_BAR);
         mainFrame.addKeyListener(closeBarListener);
-
-        // listener per iniziare il gioco
-        GameKeyListener startGameListener = new GameKeyListener(KeyEvent.VK_SPACE, mainFrame::play, null,
-                State.INIT);
-        mainFrame.addKeyListener(startGameListener);
     }
 
     public static synchronized void changeState(State newState)

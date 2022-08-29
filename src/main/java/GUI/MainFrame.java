@@ -2,9 +2,12 @@ package GUI;
 
 import GUI.gamestate.GameState;
 import animation.PerpetualAnimation;
+import database.DBManager;
 import events.executors.Executor;
 import general.ActionSequence;
+import general.GameException;
 import general.GameManager;
+import general.xml.XmlLoader;
 import graphics.SpriteManager;
 import entity.rooms.Room;
 import general.xml.XmlParser;
@@ -14,6 +17,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 
 public class MainFrame extends JFrame {
 
@@ -41,6 +45,9 @@ public class MainFrame extends JFrame {
 
     /** Stanza in cui il giocatore si trova attualmente. */
     private Room currentRoom;
+
+    private String initialRoomPath;
+
     /** Immagine di background (riscalata) corrispondente alla currentRoom*/
     private Icon backgroundImg;
 
@@ -198,9 +205,9 @@ public class MainFrame extends JFrame {
      * Registra inoltre il {@link MainFrame#gameScreenPanel} presso
      * {@link GameScreenManager}.
      *
-     * @param initialRoom stanza iniziale da impostare come {@link MainFrame#currentRoom}
+     * @param initialRoomPath path della stanza iniziale da impostare come {@link MainFrame#currentRoom}
      */
-    public MainFrame(Room initialRoom)
+    public MainFrame(String initialRoomPath)
     {
         // Chiudi l'app alla chiusura della finestra
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -209,10 +216,11 @@ public class MainFrame extends JFrame {
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
         // imposta stanza iniziale
-        currentRoom = initialRoom;
+        //currentRoom = initialRoom;
+        this.initialRoomPath = initialRoomPath;
 
         // inizializzazione immagine di sfondo
-        setupBackground();
+        // setupBackground();
         // inizializzazione componenti
         initComponents();
         // inizializzazione cursore
@@ -271,13 +279,12 @@ public class MainFrame extends JFrame {
     private void initComponents()
     {
         //Creazione componenti
+        gameScreenPanel = new GameScreenPanel();
         mainPanel = new JPanel();
         gamePanel = new JPanel();
+        textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
+        inventoryPanel = new InventoryPanel(SCREEN_HEIGHT - DEFAULT_GAME_HEIGHT);
 
-        initGameScreenPanel();
-        initTextBarPanel();
-        initInventoryPanel();
-        initGamePanel();
         initMenuPanel();
         initStartingMenuPanel();
 
@@ -307,7 +314,7 @@ public class MainFrame extends JFrame {
         //                  SETUP MainFrame
         // -----------------------------------------------------
         add(mainPanel, BorderLayout.CENTER);
-        //addKeyListener(ESC_LISTENER);
+
         pack();
 
     }
@@ -317,7 +324,7 @@ public class MainFrame extends JFrame {
     // ma solo all'inizio del gioco
     private void setupPlayground()
     {
-        ActionSequence a = XmlParser.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
+        ActionSequence a = XmlLoader.loadRoomInit("src/main/resources/scenari/piano terra/PT-B.xml");
         SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
         GameManager.startScenario(a);
 
@@ -326,7 +333,8 @@ public class MainFrame extends JFrame {
     // inizializza gameScreenPanel
     private void initGameScreenPanel()
     {
-        gameScreenPanel = new GameScreenPanel(currentRoom);
+        gameScreenPanel.setInitialRoom(currentRoom);
+        // gameScreenPanel = new GameScreenPanel(currentRoom);
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         // Crea nuova label per visualizzare l'immagine di sfondo
@@ -343,7 +351,7 @@ public class MainFrame extends JFrame {
     // inizializza textBarPanel
     private void initTextBarPanel()
     {
-        textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
+        // textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
 
         // nota: questi numeri sono per centrare sullo schermo la textBar
         int x_offset = (int) (SCREEN_WIDTH - textBarPanel.getPreferredSize().getWidth()) / 2;
@@ -354,12 +362,6 @@ public class MainFrame extends JFrame {
                 (int) textBarPanel.getPreferredSize().getWidth(), (int) textBarPanel.getPreferredSize().getHeight());
         // aggiungi a gameScreenPanel
         gameScreenPanel.add(textBarPanel, GameScreenPanel.TEXT_BAR_LEVEL);
-    }
-
-    // inizializza inventoryPanel
-    private void initInventoryPanel()
-    {
-        inventoryPanel = new InventoryPanel(SCREEN_HEIGHT - DEFAULT_GAME_HEIGHT);
     }
 
     // inizializza gamePanel
@@ -413,8 +415,13 @@ public class MainFrame extends JFrame {
 
         JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
             "/img/Menu iniziale/continua pressed.png", () -> showMenu(false));
-        continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
+        continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 8) / 24,
                 continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
+
+        JLabel salvaLabel = makeMenuButton("/img/Menu iniziale/salva.png",
+                "/img/Menu iniziale/salva pressed.png", this::save);
+        salvaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
+                salvaLabel.getIcon().getIconWidth(), salvaLabel.getIcon().getIconHeight());
 
         JLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
                 "/img/Menu iniziale/impostazioni pressed.png", null);
@@ -428,6 +435,7 @@ public class MainFrame extends JFrame {
 
         menuPanel.add(backLabel, Integer.valueOf(0));
         menuPanel.add(continuaLabel, Integer.valueOf(1));
+        menuPanel.add(salvaLabel, Integer.valueOf(1));
         menuPanel.add(impostazioniLabel, Integer.valueOf(1));
         menuPanel.add(esciLabel, Integer.valueOf(1));
 
@@ -526,7 +534,7 @@ public class MainFrame extends JFrame {
     private JLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
     {
         // TODO: aggiustare rescalingFactor, non va bene
-        GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, rescalingFactor/2);
+        GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, DEFAULT_SCALING_FACTOR / 3);
 
         GameMouseListener buttonListener = new GameMouseListener(
                                             MouseEvent.BUTTON1, clickAction, null, GameState.State.INIT);
@@ -565,12 +573,23 @@ public class MainFrame extends JFrame {
 
     }
 
-    public void play()
+
+    /** Chiamato per iniziare una nuova partita. */
+    private void play()
     {
         if(GameState.getState() != GameState.State.INIT)
         {
             return;
         }
+
+        currentRoom = XmlLoader.loadRoom(initialRoomPath);
+
+        // inizializzazione immagine di sfondo
+        setupBackground();
+        // inizializzazione componenti
+        initGameScreenPanel();
+        initTextBarPanel();
+        initGamePanel();
 
         CardLayout cl = (CardLayout) mainPanel.getLayout();
 
@@ -579,6 +598,20 @@ public class MainFrame extends JFrame {
 
         GameState.changeState(GameState.State.PLAYING);
         setupPlayground();
+    }
+
+    private void save()
+    {
+        try
+        {
+            DBManager.saveRooms();
+            DBManager.saveGamePieces();
+            DBManager.saveInventory();
+        }
+        catch(SQLException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
@@ -618,9 +651,9 @@ public class MainFrame extends JFrame {
         }
         //</editor-fold>
 
-        Room demoRoom = XmlParser.loadRoom("src/main/resources/scenari/piano terra/PT-B.xml");
+        String initialRoomPath = "src/main/resources/scenari/piano terra/PT-B.xml";
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(demoRoom).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(initialRoomPath).setVisible(true));
     }
 }

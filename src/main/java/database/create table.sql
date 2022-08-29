@@ -2,7 +2,7 @@ create table room
 (
     name varchar(50),
     scenarioOnEnterPath varchar(200),
-    primary key name
+    primary key(name)
 );
 
 create table item
@@ -10,19 +10,19 @@ create table item
     name varchar(50),
     state varchar(50),
     canUse bit,
-    primary key name
+    primary key(name)
 );
 
 create table gameCharacter
 (
     name varchar(50),
     state varchar(50),
-    primary key name
+    primary key(name)
 );
 
 create table itemLocation
 (
-    item varch(50),
+    item varchar(50),
     room varchar(50),
     x int,
     y int,

@@ -6,11 +6,15 @@ import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import entity.items.Item;
 import entity.items.PickupableItem;
+import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
+import general.xml.XmlLoader;
 import org.h2.command.Prepared;
+import org.h2.store.fs.retry.FilePathRetryOnInterrupt;
 
 import java.io.IOError;
 import java.security.Key;
@@ -26,7 +30,7 @@ public class DBManager
 {
 
     private static Connection conn;
-    private final static String DATABASE_PATH = "jdbc:h2:./db/gamedb";
+    private final static String DATABASE_PATH = "jdbc:h2:./db";
 
 
     private static void startConnection() throws SQLException
@@ -37,31 +41,112 @@ public class DBManager
         }
     }
 
-    /*
-    private static void process(PreparedStatement pstm) throws SQLException
-    {
-        startConnection();
-        ResultSet rs = pstm.executeQuery();
-        while (rs.next())
-        {
 
-        }
-        rs.close();
-        pstm.close();
-        conn.close();
-    }
-    */
-
-    public static void setupInventory()
+    public static void loadPieces()
     {
         try
         {
             startConnection();
-            PreparedStatement pstm= conn.prepareStatement("SELECT nomeoggetto, descrizione FROM gamedb.inventario");
+            PreparedStatement pstm= conn.prepareStatement("SELECT name, state, canUse, room, x, y FROM game.item JOIN game.itemLocation ON name=item");
+            ResultSet rs= pstm.executeQuery();
+
+            while(rs.next())
+            {
+                String name = rs.getString(1);
+                String state = rs.getString(2);
+                boolean canUse = rs.getBoolean(3);
+
+                Item loadedItem = (Item) XmlLoader.loadPiece(name);
+                loadedItem.setState(state, false);
+                loadedItem.setCanUse(canUse);
+
+                String roomName = rs.getString(4);
+                int xPos = rs.getInt(5);
+                int yPos = rs.getInt(6);
+
+                loadedItem.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
+            }
+            rs.close();
+            pstm.close();
+            conn.close();
+
+
+            PreparedStatement pstm1= conn.prepareStatement("SELECT name, state, room, x, y FROM game.gameCharacter JOIN game.characterLocation ON name=gameCharacter");
+            ResultSet rs1 = pstm1.executeQuery();
+
+            while(rs.next())
+            {
+                String name = rs1.getString(1);
+                String state = rs1.getString(2);
+                String roomName = rs.getString(3);
+                int xPos = rs.getInt(4);
+                int yPos = rs.getInt(5);
+
+                if(!name.equals(PlayingCharacter.getPlayerName()))
+                {
+                    GameCharacter loadedCharacter = (GameCharacter) XmlLoader.loadPiece(name);
+                    loadedCharacter.setState(state, false);
+                    loadedCharacter.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
+                }
+                else  // sei schwartz
+                {
+                    PlayingCharacter.getPlayer().addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
+                }
+            }
+            rs.close();
+            pstm1.close();
+            conn.close();
+
+
+        }
+        catch (SQLException e)
+        {
+            LogOutputManager.logOutput(e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
+            throw new IOError(e); // TODO: migliorare
+        }
+    }
+
+    public static void loadRooms()
+    {
+        try
+        {
+            startConnection();
+            PreparedStatement pstm= conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.stanza");
             ResultSet rs= pstm.executeQuery();
             while(rs.next())
             {
-                PlayingCharacter.getPlayer().addToInventory(new PickupableItem(rs.getString(1), rs.getString(2), false));
+                String name = rs.getString(1);
+                String xmlPath= rs.getString(2);
+                String scenarioOnEnterPath = rs.getString(3);
+
+                Room loadedRoom = XmlLoader.loadRoom(xmlPath);
+                ActionSequence loadedRoomInitScenario = XmlLoader.loadRoomInit(xmlPath);
+                GameManager.startScenario(loadedRoomInitScenario);
+            }
+            rs.close();
+            pstm.close();
+            conn.close();
+        }
+        catch (SQLException e)
+        {
+            LogOutputManager.logOutput(e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
+            throw new IOError(e); // TODO: migliorare
+        }
+    }
+
+
+    public static void loadInventory()
+    {
+        try
+        {
+            startConnection();
+            PreparedStatement pstm= conn.prepareStatement("SELECT item, index FROM game.inventory");
+            ResultSet rs= pstm.executeQuery();
+
+            while(rs.next())
+            {
+                String name = rs.getString(1);
+                PlayingCharacter.getPlayer().addToInventory((PickupableItem) XmlLoader.loadPiece(name));
             }
             rs.close();
             pstm.close();
@@ -75,12 +160,12 @@ public class DBManager
 
     }
 
-    private static void saveInventory() throws SQLException {
-        PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO inventory VALUES(?, ?");
+    public static void saveInventory() throws SQLException {
+        PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?");
 
         // cicla sugli oggetti recuperati dal Inventory e per ogni oggetto prepara la
         // query da eseguire per il salvataggio
-        for (Item it : PlayingCharacter.getPlayer().getInventory())
+        for (PickupableItem it : PlayingCharacter.getPlayer().getInventory())
         {
             pstmInventory.setString(1, it.getName());
             pstmInventory.setInt(2, PlayingCharacter.getPlayer().
@@ -90,13 +175,13 @@ public class DBManager
         }
     }
 
-    private static void saveGamePices() throws SQLException
+    public static void saveGamePieces() throws SQLException
     {
         // gli statemente servo per preparere le diverse operazioni di aggiunta dati al database
-        PreparedStatement pstmItem = conn.prepareStatement("INSERT INTO item values(?, ?, ?)");
-        PreparedStatement pstmCharacters = conn.prepareStatement("INSERT INTO gamecharacter values(?, ?)");
-        PreparedStatement pstmItemLoc = conn.prepareStatement("INSERT INTO itemlocation values(?, ?, ?, ?");
-        PreparedStatement pstmCharacterLoc = conn.prepareStatement("INSERT INTO characterlocation values(?, ?, ?, ?");
+        PreparedStatement pstmItem = conn.prepareStatement("INSERT INTO game.item values(?, ?, ?)");
+        PreparedStatement pstmCharacters = conn.prepareStatement("INSERT INTO game.gamecharacter values(?, ?)");
+        PreparedStatement pstmItemLoc = conn.prepareStatement("INSERT INTO game.itemlocation values(?, ?, ?, ?");
+        PreparedStatement pstmCharacterLoc = conn.prepareStatement("INSERT INTO game.characterlocation values(?, ?, ?, ?");
 
         // ciclo che recupera ogni stanza dalla quale vengono prelevati oggetti e personaggi
         // per essere salvati nel database
@@ -145,104 +230,17 @@ public class DBManager
     public static void saveRooms() throws SQLException
     {
         startConnection();
-        PreparedStatement pstm1= conn.prepareStatement("INSERT INTO room values(?, ?)");
+        PreparedStatement pstm1= conn.prepareStatement("INSERT INTO game.room values(?, ?, ?)");
 
         for (String name : GameManager.getRoomNames())
         {
             pstm1.setString(1,name);
-            pstm1.setString(2, GameManager.getRoom(name).getScenarioOnEnterPath());
+            pstm1.setString(2, GameManager.getRoom(name).getXmlPath());
+            pstm1.setString(3, GameManager.getRoom(name).getScenarioOnEnterPath());
             ResultSet rs1= pstm1.executeQuery();
         }
 
-        saveGamePices();
-        saveInventory();
-
         pstm1.close();
         conn.close();
-
-
-
-        /*
-        if (!rs1.next())
-            return null;
-
-        Room room = new Room(name, rs1.getString(1));
-        rs1.close();
-        pstm1.close();
-
-        PreparedStatement pstm= conn.prepareStatement("SELECT O.nome, O.classe, O.descrizione, D.x, D.y FROM gamedb.stanza S JOIN gamedb.disposizione D ON S.nome = D.nomestanza" +
-                " JOIN gamedb.oggetto O ON D.nomeoggetto = O.nome WHERE S.nome = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-        pstm.setString(1,name);
-        ResultSet rs= pstm.executeQuery();
-        if (!rs.next())
-            return null;
-
-        rs.beforeFirst();
-
-        Item item;
-        Class itemClass;
-
-        while(rs.next())
-        {
-            itemClass = Class.forName("items." + rs.getString(2));
-
-            Constructor<?> cons = itemClass.getConstructor(String.class, String.class);
-            item = (Item) cons.newInstance(rs.getString(1), rs.getString(3));
-            room.addItem(item, new Coordinates(rs.getInt(4), rs.getInt(5)));
-        }
-
-        rs.close();
-        pstm.close();
-        conn.close();
-
-        return room;
-
-         */
     }
-
-
-
-    /*
-    public static Room loadRoom(String name) throws SQLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
-    {
-        startConnection();
-        PreparedStatement pstm1= conn.prepareStatement("SELECT path FROM gamedb.stanza WHERE nome = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-        pstm1.setString(1,name);
-        ResultSet rs1= pstm1.executeQuery();
-        if (!rs1.next())
-            return null;
-
-        Room room = new Room(name, rs1.getString(1));
-        rs1.close();
-        pstm1.close();
-
-        PreparedStatement pstm= conn.prepareStatement("SELECT O.nome, O.classe, O.descrizione, D.x, D.y FROM gamedb.stanza S JOIN gamedb.disposizione D ON S.nome = D.nomestanza" +
-                " JOIN gamedb.oggetto O ON D.nomeoggetto = O.nome WHERE S.nome = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-        pstm.setString(1,name);
-        ResultSet rs= pstm.executeQuery();
-        if (!rs.next())
-            return null;
-
-        rs.beforeFirst();
-
-        Item item;
-        Class itemClass;
-
-        while(rs.next())
-        {
-            itemClass = Class.forName("items." + rs.getString(2));
-
-            Constructor<?> cons = itemClass.getConstructor(String.class, String.class);
-            item = (Item) cons.newInstance(rs.getString(1), rs.getString(3));
-            room.addItem(item, new Coordinates(rs.getInt(4), rs.getInt(5)));
-        }
-
-        rs.close();
-        pstm.close();
-        conn.close();
-
-        return room;
-    }
-
-     */
 }
