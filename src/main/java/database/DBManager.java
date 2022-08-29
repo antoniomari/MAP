@@ -1,16 +1,26 @@
 package database;
 
+import entity.GamePiece;
+import entity.characters.GameCharacter;
+import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
+import entity.items.Item;
 import entity.items.PickupableItem;
+import entity.rooms.Room;
+import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
+import org.h2.command.Prepared;
 
 import java.io.IOError;
+import java.security.Key;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 public class DBManager
 {
@@ -65,7 +75,74 @@ public class DBManager
 
     }
 
-    public static void saveRooms () throws SQLException
+    private static void saveInventory() throws SQLException {
+        PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO inventory VALUES(?, ?");
+
+        // cicla sugli oggetti recuperati dal Inventory e per ogni oggetto prepara la
+        // query da eseguire per il salvataggio
+        for (Item it : PlayingCharacter.getPlayer().getInventory())
+        {
+            pstmInventory.setString(1, it.getName());
+            pstmInventory.setInt(2, PlayingCharacter.getPlayer().
+                                                   getInventory().indexOf(it));
+
+            ResultSet rsINV = pstmInventory.executeQuery();
+        }
+    }
+
+    private static void saveGamePices() throws SQLException
+    {
+        // gli statemente servo per preparere le diverse operazioni di aggiunta dati al database
+        PreparedStatement pstmItem = conn.prepareStatement("INSERT INTO item values(?, ?, ?)");
+        PreparedStatement pstmCharacters = conn.prepareStatement("INSERT INTO gamecharacter values(?, ?)");
+        PreparedStatement pstmItemLoc = conn.prepareStatement("INSERT INTO itemlocation values(?, ?, ?, ?");
+        PreparedStatement pstmCharacterLoc = conn.prepareStatement("INSERT INTO characterlocation values(?, ?, ?, ?");
+
+        // ciclo che recupera ogni stanza dalla quale vengono prelevati oggetti e personaggi
+        // per essere salvati nel database
+        for(String r :  GameManager.getRoomNames())
+        {
+            List<GamePiece> list = GameManager.getRoom(r).getPiecesPresent();
+
+            for( GamePiece gp : list ) {
+
+                PreparedStatement chosenStatement;
+
+                if(gp instanceof Item) {
+                    pstmItem.setString(1,gp.getName());
+                    pstmItem.setString(2,gp.getState());
+                    if(((Item)gp).canUse())
+                    {
+                        pstmItem.setBoolean(3, true);
+                    }
+                    else
+                    {
+                        pstmItem.setBoolean(3, false);
+                    }
+                    ResultSet rsPIT = pstmItem.executeQuery();
+                    chosenStatement = pstmItemLoc;
+                }
+                else if(gp instanceof GameCharacter) {
+                    pstmCharacters.setString(1,gp.getName());
+                    pstmCharacters.setString(2,gp.getState());
+                    ResultSet rsPCH= pstmCharacters.executeQuery();
+                    chosenStatement = pstmCharacterLoc;
+                }
+                else
+                {
+                    throw new GameException("error");
+                }
+
+                chosenStatement.setString(1,gp.getName());
+                chosenStatement.setString(2, r);
+                chosenStatement.setInt(3,gp.getPosition().getX());
+                chosenStatement.setInt(4,gp.getPosition().getY());
+                ResultSet rsPIC = chosenStatement.executeQuery();
+            }
+        }
+    }
+
+    public static void saveRooms() throws SQLException
     {
         startConnection();
         PreparedStatement pstm1= conn.prepareStatement("INSERT INTO room values(?, ?)");
@@ -76,6 +153,9 @@ public class DBManager
             pstm1.setString(2, GameManager.getRoom(name).getScenarioOnEnterPath());
             ResultSet rs1= pstm1.executeQuery();
         }
+
+        saveGamePices();
+        saveInventory();
 
         pstm1.close();
         conn.close();
