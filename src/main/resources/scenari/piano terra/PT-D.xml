@@ -4,6 +4,12 @@
     <json>/img/PT/PT-D.json</json>
     <musica>src/main/resources/audio/musica/CocktailParty.wav</musica>
     <scenario>
-        <mode>instant</mode>
+        <azione>
+            <subject>PT-B</subject>
+            <method>add</method>
+            <what>ScrivaniaPT</what>
+            <x>14</x>
+            <y>14</y>
+        </azione>
     </scenario>
 </stanza>

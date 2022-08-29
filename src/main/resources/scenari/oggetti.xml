@@ -351,5 +351,10 @@
             <useScenario state="pronto">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
         </onUse>
     </oggetto>
+    <oggetto nome="ScrivaniaPT">
+        <classe>Item</classe>
+        <descrizione>Una scrivania di un bel colore vivace.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
 
 </oggetti>

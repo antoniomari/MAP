@@ -333,6 +333,14 @@
     "y": 528,
     "width": 96,
     "height": 96
+  },
+
+  "ScrivaniaPT":
+  {
+    "x": 384,
+    "y": 672,
+    "width": 288,
+    "height": 72
   }
 
 }
