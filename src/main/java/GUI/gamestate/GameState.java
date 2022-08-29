@@ -78,6 +78,7 @@ public class GameState
 
                 if (west != null)
                 {
+                    GameState.changeState(State.MOVING);
                     ActionSequence scenario = new ActionSequence("vai a ovest", ActionSequence.Mode.SEQUENCE);
                     scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("west").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
                     scenario.append(() -> mainFrame.setCurrentRoom(west));
@@ -93,6 +94,7 @@ public class GameState
 
                 if (east != null)
                 {
+                    GameState.changeState(State.MOVING);
                     ActionSequence scenario = new ActionSequence("vai a est", ActionSequence.Mode.SEQUENCE);
                     scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("east").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
                     scenario.append(() -> mainFrame.setCurrentRoom(east));
@@ -108,6 +110,7 @@ public class GameState
 
                 if (north != null)
                 {
+                    GameState.changeState(State.MOVING);
                     ActionSequence scenario = new ActionSequence("vai a nord", ActionSequence.Mode.SEQUENCE);
                     scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("north").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
                     scenario.append(() -> mainFrame.setCurrentRoom(north));
@@ -123,6 +126,7 @@ public class GameState
 
                 if (south != null)
                 {
+                    GameState.changeState(State.MOVING);
                     ActionSequence scenario = new ActionSequence("vai a sud", ActionSequence.Mode.SEQUENCE);
                     scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("south").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
                     scenario.append(() -> mainFrame.setCurrentRoom(south));

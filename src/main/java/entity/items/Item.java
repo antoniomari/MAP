@@ -28,7 +28,7 @@ public class Item extends GamePiece implements Observable
     private boolean canUse;
 
     // modalità: è utilizzabile una volta//infinite volte
-    private int usability;
+    private int usability = USE_INFTY;
 
     // default per il nome dell'azione (viene modificato con il setter)
     private String useActionName = "Usa";
@@ -86,7 +86,6 @@ public class Item extends GamePiece implements Observable
         super(name, spriteSheet, jsonPath);
         this.description = description;
         this.canUse = canUse;
-        this.usability = USE_ONCE;
     }
 
     public void setUsability(int usability)
