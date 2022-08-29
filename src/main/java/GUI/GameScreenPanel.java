@@ -38,12 +38,18 @@ public class GameScreenPanel extends JLayeredPane
     public static final Integer ITEM_LAYER = 2;
     /** Utilizzato per inserire GameCharacter nella stanza. */
     public static final Integer CHARACTER_LAYER = 3;
+    /*
+        Nota: il layer dal 10 in poi (fino a 99) vengono utilizzati per il corretto posizionamento dei pezzi
+        sullo schermo: il layer x + 10 corrisponde a tutti i GamePiece posizionati alla ordinata x nella stanza
+     */
+    public static final Integer BASE_GAMEPIECE_LAYER = 10;
+
     /** Utilizzato per gli effetti animati. */
-    public static final Integer EFFECT_LAYER = 4;
+    public static final Integer EFFECT_LAYER = 100;
     /** Utilizzato per visualizzare la barra di testo. */
-    public static final Integer TEXT_BAR_LEVEL = 5;
+    public static final Integer TEXT_BAR_LEVEL = 101;
     /** Utilizzato per stampare lo schermo nero per caricamento. */
-    public static final Integer BLACK_SCREEN_LEVEL = 6;
+    public static final Integer BLACK_SCREEN_LEVEL = 102;
     // TODO: aggiungere algoritmo per posizionare correttamente secondo la prospettiva sia gli oggetti che i personaggi
     // tale algoritmo deve far sì che tutto ciò che sta sopra a te sia dietro e cosa sta sotto di te
     // sia davanti

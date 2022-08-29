@@ -98,6 +98,8 @@ public class GameScreenManager
         // pos è angolo in basso a sinistra, dobbiamo calcolarci l'angolo in alto a sinistra
         AbsPosition leftUpCornerPos = new AbsPosition(pos.getX(), pos.getY() - offsetHeight);
 
+        active_panel.setLayer(label, pos.getY() + GameScreenPanel.BASE_GAMEPIECE_LAYER);
+
         label.setBounds(leftUpCornerPos.getX(),
                         leftUpCornerPos.getY(),
                         label.getIcon().getIconWidth(),
@@ -132,6 +134,7 @@ public class GameScreenManager
     }
 
 
+    /*
     private static BlockPosition findNextStop(BlockPosition initialPos, BlockPosition finalPos)
     {
         List<BlockPosition> intermediatePositions = new ArrayList<>(100);
@@ -184,6 +187,8 @@ public class GameScreenManager
         }
 
     }
+
+     */
 
 
 
