@@ -6,20 +6,16 @@ import database.DBManager;
 import entity.characters.PlayingCharacter;
 import events.executors.Executor;
 import general.ActionSequence;
-import general.GameException;
 import general.GameManager;
 import general.xml.XmlLoader;
 import graphics.SpriteManager;
 import entity.rooms.Room;
-import general.xml.XmlParser;
 import sound.SoundHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.sql.SQLException;
 
 public class MainFrame extends JFrame {
 
@@ -221,8 +217,6 @@ public class MainFrame extends JFrame {
         //currentRoom = initialRoom;
         this.initialRoomPath = initialRoomPath;
 
-        // inizializzazione immagine di sfondo
-        // setupBackground();
         // inizializzazione componenti
         initComponents();
         // inizializzazione cursore
@@ -401,7 +395,7 @@ public class MainFrame extends JFrame {
         menuPanel.setBackground(Color.BLACK);
 
 
-        String MENU_BACK_PATH = "/img/computersPause.png";
+        final String MENU_BACK_PATH = "/img/computersPause.png";
 
         Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
         double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
