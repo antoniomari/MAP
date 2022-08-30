@@ -7,11 +7,12 @@ import general.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.desktop.QuitEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LogicQuest
 {
@@ -80,6 +81,12 @@ public class LogicQuest
         infoWindow.setModal(true);
         infoText = new JLabel("", SwingConstants.CENTER);
 
+    }
+
+    public static void executeTest()
+    {
+        SwingUtilities.invokeLater(() -> LogicQuest.createLogicQuest(1));
+        GameManager.continueScenario();
     }
 
     private void initButtons(String[] buttonsText)
