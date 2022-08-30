@@ -4,7 +4,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Riprova, sarai più fortunato.</sentence>
+        <sentence>Ehy, non voglio essere rinchiuso! (*) Concentrati.</sentence>
     </azione>
     <azione>
         <method>executeTest</method>

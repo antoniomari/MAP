@@ -93,7 +93,7 @@ public class TestMist
 
 
     public TestMist() {
-        questDialog = new JDialog(GameManager.getMainFrame(), "TEST DI TUR... PSICOLOGICO");
+        questDialog = new JDialog(GameManager.getMainFrame(), "TEST PSICOLOGICO");
 
         backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(backgroundImageIcon);
