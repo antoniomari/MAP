@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
-
     <azione>
         <subject>Mist-A</subject>
         <method>add</method>
@@ -216,6 +215,11 @@
         <subject>Tecnico</subject>
         <method>speak</method>
         <sentence>Vabbè forse le medicine... (*) Lascia stare. Ecco il test</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>erogaTestMist</state>
     </azione>
     <azione>
         <method>executeTest</method>

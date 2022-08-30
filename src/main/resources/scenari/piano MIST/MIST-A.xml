@@ -18,6 +18,12 @@
             <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
         </azione>
         <azione>
+            <subject>Mist-A</subject>
+            <method>lockEntrance</method>
+            <cardinal>north</cardinal>
+            <lock>true</lock>
+        </azione>
+        <azione>
             <subject>Ascensore</subject>
             <method>setScenarioOnEnter</method>
             <what>src/main/resources/scenari/piano MIST/EntraAscensore.xml</what>

@@ -71,7 +71,7 @@ public class GameState
         Room adjacent = currentRoom.getAdjacentRoom(cardinal);
         PlayingCharacter schwartz = PlayingCharacter.getPlayer();
 
-        if (adjacent != null)
+        if (adjacent != null && !currentRoom.isAdjacentLocked(cardinal))
         {
             GameState.changeState(State.MOVING);
             ActionSequence scenario = new ActionSequence("vai a" + cardinal.toString(),

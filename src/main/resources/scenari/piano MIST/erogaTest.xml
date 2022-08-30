@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Riprova, sarai più fortunato.</sentence>
+    </azione>
+    <azione>
+        <method>executeTest</method>
+        <what>MIST</what>
+    </azione>
+</scenario>

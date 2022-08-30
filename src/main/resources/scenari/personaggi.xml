@@ -29,6 +29,9 @@
     </personaggio>
     <personaggio nome="Tecnico">
         <spritesheet>/img/personaggi/tecnico.png</spritesheet>
+        <speakScenarios>
+            <scenario state="erogaTestMist">src/main/resources/scenari/piano MIST/erogaTest.xml</scenario>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="Cuoco1">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
