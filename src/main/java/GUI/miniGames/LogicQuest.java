@@ -25,7 +25,7 @@ public class LogicQuest
 
     private static Map<Integer, Character> numberTypeMap;
 
-    private final JFrame questFrame;
+    private final JDialog questDialog;
 
     private final JPanel mainWrapper;
     private final JPanel container;
@@ -65,7 +65,7 @@ public class LogicQuest
     private LogicQuest(int questNumber) {
 
         this.questNumber = questNumber;
-        questFrame = new JFrame("PIANO ALU PROVA DEI CIRCUITI LOGICI");
+        questDialog = new JDialog(GameManager.getMainFrame(), "PIANO ALU PROVA DEI CIRCUITI LOGICI");
         mainWrapper = new JPanel(new BorderLayout());
 
         // creazione pannelli principali
@@ -76,8 +76,10 @@ public class LogicQuest
         // creazione titolo del minigioco
         description = new JLabel("Circuito logico type " + numberTypeMap.get(questNumber), SwingConstants.CENTER);
 
-        infoWindow = new JDialog();
+        infoWindow = new JDialog(questDialog);
+        infoWindow.setModal(true);
         infoText = new JLabel("", SwingConstants.CENTER);
+
     }
 
     private void initButtons(String[] buttonsText)
@@ -179,22 +181,23 @@ public class LogicQuest
         // wrapper finale per ottimizzare la visualizzazione
         // e gerarchia dei pannelli
         JScrollPane scrollWrapper = new JScrollPane(mainWrapper);
-        questFrame.add(scrollWrapper, BorderLayout.CENTER);
+        questDialog.add(scrollWrapper, BorderLayout.CENTER);
     }
 
     final void addDetails() {
         // TODO: modificare size
-        questFrame.setSize(600, 700);
-        questFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        questFrame.setResizable(false);
+        questDialog.setSize(600, 700);
+        questDialog.setModal(true);
+        questDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        questDialog.setResizable(false);
 
         // imposta come "figlio"
-        questFrame.setLocationRelativeTo(GameManager.getMainFrame());
+        // questDialog.setLocationRelativeTo(GameManager.getMainFrame());
         imagePanel.setBackground(Color.BLUE);
         optionPanel.setBackground(Color.DARK_GRAY);
-        questFrame.setBackground(Color.BLUE);
-        questFrame.getContentPane().setBackground(Color.BLUE);
-        questFrame.setVisible(true);
+        questDialog.setBackground(Color.BLUE);
+        questDialog.getContentPane().setBackground(Color.BLUE);
+        questDialog.setVisible(true);
     }
 
     private void setupListener() {
@@ -208,7 +211,7 @@ public class LogicQuest
                     if(questNumber < 3)
                         SwingUtilities.invokeLater(() -> createLogicQuest(questNumber + 1));
 
-                    questFrame.dispose();
+                    questDialog.dispose();
                 }
                 else {
                     showInfoResult(lostText);
@@ -224,26 +227,20 @@ public class LogicQuest
             public void windowClosing(WindowEvent arg0)
             {
                 // System.out.println("Window closing");
-                questFrame.dispose();
+                questDialog.dispose();
             }
         });
     }
 
-    private void showInfoResult(String msg) {
+    private void showInfoResult(String msg)
+    {
         infoText.setText(msg);
         infoWindow.add(infoText);
         infoWindow.setSize(450, 100);
-        infoWindow.setLocationRelativeTo(null);
+        infoWindow.setLocationRelativeTo(questDialog);
         infoWindow.setVisible(true);
         infoWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        questFrame.setVisible(false);
+        questDialog.setVisible(false);
     }
-
-    /*
-    public static void main(String args[]) {
-        SwingUtilities.invokeLater(() -> new LogicQuestA());
-    }
-
-     */
 }
 
