@@ -69,5 +69,13 @@
     "y": 0,
     "width": 96,
     "height": 120
+  },
+
+  "speaking":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 120
   }
 }

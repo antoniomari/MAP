@@ -1,12 +1,14 @@
 package events;
 
 import animation.Animation;
-import entity.GamePiece;
-import entity.rooms.Room;
+import java.util.List;
 import events.executors.*;
 import entity.items.PickupableItem;
 import general.LogOutputManager;
 import sound.SoundHandler;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class EventHandler
 {
@@ -76,13 +78,17 @@ public class EventHandler
 
     public static void executeCharacterEvent(CharacterEvent e)
     {
+        /*
         if(e.getType() == CharacterEvent.Type.MOVE)
         {
             CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getOldPosition(), e.getPosition(), e.getMillisecondWaitEnd());
             // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
-        else if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
+
+         */
+        if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {
+            //e.getCharacterInvolved().updateSprite("speaking");
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
         }
         else if(e.getType() == CharacterEvent.Type.EMOJI)

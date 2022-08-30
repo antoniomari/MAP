@@ -24,6 +24,8 @@ public class StillAnimation extends Animation
     /** Codice da eseguire alla fine dell'animazione. */
     private Runnable onEndExecute;
 
+    // private boolean blocking = true;
+
 
     @Deprecated
     public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
@@ -48,6 +50,15 @@ public class StillAnimation extends Animation
         setInitialDelay(initialDelay);
         setFinalDelay(finalWait);
     }
+
+    /*
+
+    private void setBlocking(boolean b)
+    {
+        blocking = b;
+    }
+
+     */
 
 
     public void setDelay(int milliseconds)
@@ -142,6 +153,18 @@ public class StillAnimation extends Animation
         return new StillAnimation(animationLabel, frames, 100, true, DEFAULT_END_MILLISECONDS,
                 rescalingFactor);
     }
+
+    /*
+    public static StillAnimation createNonBlockingAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
+    {
+        StillAnimation anim = new StillAnimation(label, frames, delayMilliseconds, initialDelay);
+        anim.setBlocking(false);
+
+        return anim;
+    }
+
+     */
+
 
 
 }

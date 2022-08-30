@@ -2,7 +2,6 @@ package GUI.gamestate;
 
 import GUI.AbsPosition;
 import GUI.GameKeyListener;
-import GUI.GameMouseListener;
 import GUI.GameScreenManager;
 import GUI.MainFrame;
 import entity.characters.PlayingCharacter;
@@ -14,7 +13,6 @@ import general.LogOutputManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

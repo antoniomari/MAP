@@ -5,14 +5,19 @@ import events.AnimationEvent;
 import events.CharacterEvent;
 import events.EventHandler;
 import graphics.SpriteManager;
+import org.json.JSONException;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
 
 public class GameCharacter extends GamePiece
 {
     private String jsonPath;
     private BufferedImage spritesheet;
+
+    private Image speakFrame;
 
     public enum Emoji
     {
@@ -22,6 +27,7 @@ public class GameCharacter extends GamePiece
     public GameCharacter(String name, String spritePath)
     {
         super(name, spritePath);
+        fakeInitSpeakFrame();
     }
 
 
@@ -32,6 +38,7 @@ public class GameCharacter extends GamePiece
         this.jsonPath = jsonPath;
         initMovingFrames();
         initAnimateFrames();
+        initSpeakFrame();
     }
 
 
@@ -66,6 +73,30 @@ public class GameCharacter extends GamePiece
         }
         animateFrames.add(0, getSprite());
     }
+
+    private void initSpeakFrame()
+    {
+        try
+        {
+            speakFrame = SpriteManager.loadSpriteByName(spritesheet, jsonPath, "speaking");
+        }
+        catch(JSONException e)
+        {
+            fakeInitSpeakFrame();
+        }
+
+    }
+
+    private void fakeInitSpeakFrame()
+    {
+        speakFrame = sprite;
+    }
+
+    public Image getSpeakFrame()
+    {
+        return speakFrame;
+    }
+
 
 
     public void speak(String sentence)
