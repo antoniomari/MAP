@@ -28,4 +28,9 @@
         <method>teleport</method>
         <where>Ebert Garden</where>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ma dove ero finito? (*) Ho avuto un'allucinazione.</sentence>
+    </azione>
 </scenario>
