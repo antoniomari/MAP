@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
     private static final String STARTING_MUSIC_PATH = "src/main/resources/audio/musica/Menù iniziale.wav";
 
     /** Path cursore personalizzato. */
-    private static final String CURSOR_PATH = "src/main/resources/img/HUD/cursoreneonnero.png";
+    private static final String CURSOR_PATH = "/img/HUD/cursoreneonnero1.png";
 
     /** Stanza in cui il giocatore si trova attualmente. */
     private Room currentRoom;
@@ -236,8 +236,9 @@ public class MainFrame extends JFrame {
     private void initCursor()
     {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage(CURSOR_PATH);
-        Cursor c = toolkit.createCustomCursor(image , new Point(getX(), getY()), "img");
+        Dimension cursorDimension = toolkit.getBestCursorSize(32,32);
+        Image cursorImage = SpriteManager.loadSpriteSheet(CURSOR_PATH).getScaledInstance(cursorDimension.width, cursorDimension.height, Image.SCALE_SMOOTH);
+        Cursor c = toolkit.createCustomCursor(cursorImage , new Point(0,0), "img");
         setCursor(c);
     }
 
