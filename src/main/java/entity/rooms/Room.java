@@ -8,6 +8,7 @@ import events.RoomEvent;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
+import general.ScenarioMethod;
 import general.xml.XmlParser;
 import graphics.SpriteManager;
 import org.json.JSONObject;
@@ -19,25 +20,93 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Room
 {
-    private final static String[] CARDINALS = {"north", "west", "east", "south"};
+    public enum Cardinal
+    {
+        NORTH
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "north";
+                    }
+                },
+        WEST
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "west";
+                    }
+                },
+        EAST
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "east";
+                    }
+                },
+        SOUTH
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "south";
+                    }
+                };
+
+        private Cardinal opposite;
+
+        static
+        {
+            NORTH.setOpposite(SOUTH);
+            SOUTH.setOpposite(NORTH);
+            WEST.setOpposite(EAST);
+            EAST.setOpposite(WEST);
+        }
+
+        private void setOpposite(Cardinal opposite)
+        {
+            this.opposite = opposite;
+        }
+
+        public Cardinal getOpposite()
+        {
+            return opposite;
+        }
+    }
+
+    private static class Entrance
+    {
+        private Room adjacentRoom;
+        private boolean isLocked;
+        private BlockPosition arrowPosition;
+
+        Entrance(BlockPosition arrowPosition)
+        {
+            this.arrowPosition = arrowPosition;
+        }
+    }
+
+
     private final String roomName;
-    private Room north;
-    private Room south;
-    private Room west;
-    private Room east;
+
+
+    /** Dizionario che contiene la posizione delle frecce per il cambio stanza
+     * per i punti cardinali disponibili a seconda della stanza.
+     * Queste informazioni vengono caricate sulla base del JSON della stanza. */
+
+    private final Map<Cardinal, Entrance> entranceMap = new HashMap<>(Cardinal.values().length);
 
     /** Path dell'xml della stanza. */
     private String xmlPath;
     /** Path dello scenario da eseguire nel momento in cui si entra nella stanza. */
     private String scenarioOnEnterPath;
 
-    /** Dizionario che contiene la posizione delle frecce per il cambio stanza
-     * per i punti cardinali disponibili a seconda della stanza.
-     * Queste informazioni vengono caricate sulla base del JSON della stanza. */
-    private Map<String, BlockPosition> arrowPositionMap;
 
     /** Path della musica della stanza. Viene caricato dall'XML della stanza. */
     private final String MUSIC_PATH;
@@ -64,7 +133,6 @@ public class Room
     {
         this.roomName = name;
         pieceLocationMap = new HashMap<>();
-        arrowPositionMap = new HashMap<>();
 
         this.MUSIC_PATH = MUSIC_PATH;
         BACKGROUND_PATH = path;
@@ -75,28 +143,21 @@ public class Room
         bWidth = json.getInt("width");
         bHeight = json.getInt("height");
 
-        // leggi default position
-        if(json.has("default position"))
-        {
-            JSONObject defaultJson = json.getJSONObject("default position");
-            int xDefault = defaultJson.getInt("x");
-            int yDefault = defaultJson.getInt("y");
+        JSONObject defaultJson = json.getJSONObject("default position");
+        int xDefault = defaultJson.getInt("x");
+        int yDefault = defaultJson.getInt("y");
 
-            defaultPosition = new BlockPosition(xDefault, yDefault);
-        }
-        else //TODO: modificare
-        {
-            defaultPosition = new BlockPosition(10, 8);
-        }
+        defaultPosition = new BlockPosition(xDefault, yDefault);
+
 
         // recupera posizione delle frecce
-        for(String cardinal : CARDINALS)
+        for(Cardinal cardinal : Cardinal.values())
         {
             if(json.has(cardinal + "Arrow"))
             {
                 JSONObject cardinalJson = json.getJSONObject(cardinal + "Arrow");
-                arrowPositionMap.put(cardinal,
-                        new BlockPosition(cardinalJson.getInt("x"), cardinalJson.getInt("y")));
+                entranceMap.put(cardinal,
+                        new Entrance(new BlockPosition(cardinalJson.getInt("x"), cardinalJson.getInt("y"))));
             }
         }
 
@@ -113,7 +174,8 @@ public class Room
         this.xmlPath = xmlPath;
     }
 
-    public String getScenarioOnEnterPath() {
+    public String getScenarioOnEnterPath()
+    {
         return scenarioOnEnterPath;
     }
 
@@ -122,6 +184,7 @@ public class Room
         return MUSIC_PATH;
     }
 
+    @ScenarioMethod
     public void setScenarioOnEnter(String scenarioPath)
     {
         this.scenarioOnEnterPath = scenarioPath;
@@ -129,65 +192,80 @@ public class Room
         GameManager.continueScenario();
     }
 
-    public Room getEast()
+
+    /**
+     * Restituisce la direzione verso la quale la stanza {@code this} è
+     * collegata alla stanza {@code adjacentRoom}, {@code null} se non è collegata
+     * direttamente.
+     *
+     * @param adjacentRoom stanza collegata a this
+     *
+     * @return direzione di collegamento o {@code null} se non c'è collegamento diretto
+     */
+    public Cardinal getAdjacentDirection(Room adjacentRoom)
     {
-        return east;
+
+        List<Map.Entry<Cardinal, Entrance>> list =  entranceMap
+                .entrySet().stream()
+                .filter(e -> e.getValue().adjacentRoom.equals(adjacentRoom))
+                .collect(Collectors.toList());
+
+        if(list.size() != 0)
+            return list.get(0).getKey();
+        else
+            return null;
     }
 
-    public Room getWest()
+    /**
+     * Restituisce la stanza collegata al punto cardinale specificato
+     * rispetto a this.
+     *
+     * @param cardinal punto cardinale della stanza adiacente rispetto a this
+     * @return la stanza collegata, {@code null} se this non ha alcuna stanza collegata
+     * nella direzione di tale punto cardinale
+     */
+    public Room getAdjacentRoom(Cardinal cardinal)
     {
-        return west;
+        Objects.requireNonNull(cardinal);
+
+        return entranceMap.get(cardinal).adjacentRoom;
     }
 
-    public Room getNorth()
+    public void setAdjacentRoom(Cardinal cardinal, Room room)
     {
-        return north;
+        Objects.requireNonNull(cardinal);
+
+        entranceMap.get(cardinal).adjacentRoom = room;
+
+        Cardinal opposite = cardinal.opposite;
+
+        if(room.getAdjacentRoom(opposite) == null || !this.equals(room.getAdjacentRoom(opposite)))
+            room.setAdjacentRoom(opposite, this);
     }
 
-    public Room getSouth()
+    /**
+     * Restituisce {@code true} se l'accesso alla stanza adiacente a this nella direzione di
+     * {@code cardinal} è bloccato, false altrimenti.
+     *
+     * @param cardinal direzione verso cui controllare il blocco dell'accesso.
+     * @return {@code true} se l'accesso alla stanza adiacente è bloccato, {@code false}
+     * se l'accesso non è bloccato o se non vi è alcuna stanza adiacente nella direzione {@code cardinal}.
+     *
+     */
+    public boolean isAdjacentLocked(Cardinal cardinal)
     {
-        return south;
+        Objects.requireNonNull(cardinal);
+
+        return entranceMap.containsKey(cardinal) && entranceMap.get(cardinal).isLocked;
     }
 
-    public void setEast(Room eastRoom)
+    public void setAdjacentLocked(Cardinal cardinal, boolean locked)
     {
-        Objects.requireNonNull(eastRoom);
+        Objects.requireNonNull(cardinal);
 
-        this.east = eastRoom;
-
-        if(eastRoom.getWest() == null || !this.equals(eastRoom.getWest()))
-            eastRoom.setWest(this);
+        entranceMap.get(cardinal).isLocked = locked;
     }
 
-    public void setWest(Room westRoom)
-    {
-        Objects.requireNonNull(westRoom);
-
-        this.west = westRoom;
-
-        if(westRoom.getEast() == null || !this.equals(westRoom.getEast()))
-            westRoom.setEast(this);
-    }
-
-    public void setSouth(Room southRoom)
-    {
-        Objects.requireNonNull(southRoom);
-
-        this.south = southRoom;
-
-        if(southRoom.getNorth() == null || !this.equals(southRoom.getNorth()))
-            southRoom.setNorth(this);
-    }
-
-    public void setNorth(Room northRoom)
-    {
-        Objects.requireNonNull(northRoom);
-
-        this.north = northRoom;
-
-        if(northRoom.getSouth() == null || !this.equals(northRoom.getSouth()))
-            northRoom.setSouth(this);
-    }
 
     public String toString()
     {
@@ -339,15 +417,17 @@ public class Room
 
     }
 
-    public BlockPosition getArrowPosition(String cardinal)
+    public BlockPosition getArrowPosition(Cardinal cardinal)
     {
-        if(!arrowPositionMap.containsKey(cardinal))
+        Objects.requireNonNull(cardinal);
+
+        if(!entranceMap.containsKey(cardinal))
         {
             throw new GameException("Punto cardinale non valido");
         }
         else
         {
-            return arrowPositionMap.get(cardinal);
+            return entranceMap.get(cardinal).arrowPosition;
         }
     }
 

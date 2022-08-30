@@ -65,75 +65,43 @@ public class GameState
         initGameListeners();
     }
 
+    private static void arrowMovement(Room.Cardinal cardinal)
+    {
+        Room currentRoom = mainFrame.getCurrentRoom();
+        Room adjacent = currentRoom.getAdjacentRoom(cardinal);
+        PlayingCharacter schwartz = PlayingCharacter.getPlayer();
+
+        if (adjacent != null)
+        {
+            GameState.changeState(State.MOVING);
+            ActionSequence scenario = new ActionSequence("vai a" + cardinal.toString(),
+                                                        ActionSequence.Mode.SEQUENCE);
+
+            BlockPosition entrancePos = currentRoom.getFloor()
+                    .getNearestPlacement(
+                            currentRoom.getArrowPosition(cardinal).relativePosition(-2,0), schwartz);
+
+            scenario.append(() -> schwartz.move(entrancePos, "absolute", 200));
+            scenario.append(() -> mainFrame.setCurrentRoom(adjacent));
+
+            GameManager.startScenario(scenario);
+        }
+    }
+
     public static void initGameListeners()
     {
-        // GameMouseListener dropListener = new GameMouseListener(MouseEvent.BUTTON1, null, leftMouseClick, State.PLAYING);
-        // mainFrame.getGameScreenPanel().addMouseListener(dropListener);
-
 
         KeyListener leftArrowListener = new GameKeyListener(KeyEvent.VK_LEFT,
-            () ->
-            {
-                Room west = mainFrame.getCurrentRoom().getWest();
-
-                if (west != null)
-                {
-                    GameState.changeState(State.MOVING);
-                    ActionSequence scenario = new ActionSequence("vai a ovest", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("west").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
-                    scenario.append(() -> mainFrame.setCurrentRoom(west));
-
-                    GameManager.startScenario(scenario);
-                }
-            }, null, State.PLAYING);
+            () -> arrowMovement(Room.Cardinal.WEST), null, State.PLAYING);
 
         KeyListener rightArrowListener = new GameKeyListener(KeyEvent.VK_RIGHT,
-            () ->
-            {
-                Room east = mainFrame.getCurrentRoom().getEast();
-
-                if (east != null)
-                {
-                    GameState.changeState(State.MOVING);
-                    ActionSequence scenario = new ActionSequence("vai a est", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("east").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
-                    scenario.append(() -> mainFrame.setCurrentRoom(east));
-
-                    GameManager.startScenario(scenario);
-                }
-            }, null, State.PLAYING);
+            () -> arrowMovement(Room.Cardinal.EAST), null, State.PLAYING);
 
         KeyListener upArrowListener = new GameKeyListener(KeyEvent.VK_UP,
-            () ->
-            {
-                Room north = mainFrame.getCurrentRoom().getNorth();
-
-                if (north != null)
-                {
-                    GameState.changeState(State.MOVING);
-                    ActionSequence scenario = new ActionSequence("vai a nord", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("north").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
-                    scenario.append(() -> mainFrame.setCurrentRoom(north));
-
-                    GameManager.startScenario(scenario);
-                }
-            }, null, State.PLAYING);
+            () -> arrowMovement(Room.Cardinal.NORTH), null, State.PLAYING);
 
         KeyListener downArrowListener = new GameKeyListener(KeyEvent.VK_DOWN,
-            () ->
-            {
-                Room south = mainFrame.getCurrentRoom().getSouth();
-
-                if (south != null)
-                {
-                    GameState.changeState(State.MOVING);
-                    ActionSequence scenario = new ActionSequence("vai a sud", ActionSequence.Mode.SEQUENCE);
-                    scenario.append(() -> PlayingCharacter.getPlayer().move(mainFrame.getCurrentRoom().getFloor().getNearestPlacement(mainFrame.getCurrentRoom().getArrowPosition("south").relativePosition(-2,0), PlayingCharacter.getPlayer()), "absolute", 200));
-                    scenario.append(() -> mainFrame.setCurrentRoom(south));
-
-                    GameManager.startScenario(scenario);
-                }
-            }, null, State.PLAYING);
+            () -> arrowMovement(Room.Cardinal.SOUTH), null, State.PLAYING);
 
         mainFrame.addKeyListener(leftArrowListener);
         mainFrame.addKeyListener(rightArrowListener);

@@ -174,12 +174,12 @@ public class XmlParser
         {
             Room room = XmlLoader.loadRoom(roomName);
 
-            return () -> GameManager.getRoom(subject).setEast(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setEast(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
         }
     }
 
@@ -192,12 +192,12 @@ public class XmlParser
         {
             Room room = XmlLoader.loadRoom(roomName);
 
-            return () -> GameManager.getRoom(subject).setWest(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setWest(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
         }
     }
 
@@ -210,12 +210,12 @@ public class XmlParser
         {
             Room room = XmlLoader.loadRoom(roomName);
 
-            return () -> GameManager.getRoom(subject).setNorth(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setNorth(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
         }
     }
 
@@ -229,12 +229,12 @@ public class XmlParser
         {
             Room room = XmlLoader.loadRoom(roomName);
 
-            return () -> GameManager.getRoom(subject).setSouth(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setSouth(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
         }
     }
 
@@ -365,6 +365,9 @@ public class XmlParser
                 break;
             case "addRoomEffect":
                 actionParsed = parseAddRoomEffect(actionElement);
+                break;
+            case "lockEntrance":
+                actionParsed = parseLockEntrance(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -525,12 +528,13 @@ public class XmlParser
             Room room = XmlLoader.loadRoom(roomName);
             ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
-            return () -> {GameManager.getRoom(subject).setEast(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
+                            GameManager.startScenario(roomScenario);};
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setEast(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
         }
     }
 
@@ -544,12 +548,13 @@ public class XmlParser
             Room room = XmlLoader.loadRoom(roomName);
             ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
-            return () -> {GameManager.getRoom(subject).setWest(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
+                            GameManager.startScenario(roomScenario);};
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setWest(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
         }
     }
 
@@ -563,12 +568,13 @@ public class XmlParser
             Room room = XmlLoader.loadRoom(roomName);
             ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
-            return () -> {GameManager.getRoom(subject).setNorth(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
+                            GameManager.startScenario(roomScenario);};
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setNorth(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
         }
     }
 
@@ -583,12 +589,13 @@ public class XmlParser
             Room room = XmlLoader.loadRoom(roomName);
             ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
 
-            return () -> {GameManager.getRoom(subject).setSouth(room); GameManager.startScenario(roomScenario);};
+            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
+                            GameManager.startScenario(roomScenario);};
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setSouth(room);
+            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
         }
     }
 
@@ -751,6 +758,15 @@ public class XmlParser
 
         return () -> GameManager.getMainFrame().getGameScreenPanel()
                     .addCurrentRoomEffect(SpriteManager.loadSpriteSheet(effectPath));
+    }
+
+    private static Runnable parseLockEntrance(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+        Room.Cardinal cardinal = Room.Cardinal.valueOf(getTagValue(eAction, "cardinal").toUpperCase());
+        boolean lock = Boolean.parseBoolean(getTagValue(eAction, "lock"));
+
+        return () -> GameManager.getRoom(subject).setAdjacentLocked(cardinal, lock);
     }
 
     /**

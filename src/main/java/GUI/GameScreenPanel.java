@@ -152,29 +152,10 @@ public class GameScreenPanel extends JLayeredPane
     public void changeRoom(Room newRoom, int screenWidth)
     {
         // punto cardinale dell'entrata di newRoom
-        String cardinal;
-        // controlla se newRoom è collegata con la vecchia stanza
-        if(newRoom.equals(currentRoom.getNorth()))
-        {
-            cardinal = "south";
-        }
-        else if (newRoom.equals(currentRoom.getSouth()))
-        {
-            cardinal = "north";
-        }
-        else if (newRoom.equals(currentRoom.getWest()))
-        {
-            cardinal = "east";
-        }
-        else if (newRoom.equals(currentRoom.getEast()))
-        {
-            cardinal = "west";
-        }
-        else
-        {
-            // se le due stanze non sono direttamente collegate
-            cardinal = null;
-        }
+        Room.Cardinal cardinal = currentRoom.getAdjacentDirection(newRoom);
+
+        if(cardinal != null)
+            cardinal = cardinal.getOpposite();
 
         // esegui screenShot
         BufferedImage screenShot = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
