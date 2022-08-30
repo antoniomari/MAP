@@ -7,6 +7,8 @@ package GUI.miniGames;
  */
 // TODO: possibilità di applicare factory design pattern
 
+import general.GameManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -14,7 +16,7 @@ import java.awt.event.WindowEvent;
 
 public class TestMist
 {
-    private final JFrame questFrame;
+    private final JDialog questDialog;
 
     //JLabel e ImageIcon per creazione background
     private final JLabel backgroundLabel;
@@ -58,7 +60,7 @@ public class TestMist
     private final JLabel[] questWrapper = new JLabel[ANSWERS];
     private final JLabel[] questions = { new JLabel("1. Il Blackjack è un gioco di carte?"),
             new JLabel("2. Babbo Natale consegna i regali a Pasqua?"),
-            new JLabel("3. Il legno più duro del diamante? "),
+            new JLabel("3. Il legno è più duro del diamante? "),
             new JLabel("4. Usualmente, necessitiamo della luce per vedere?"),
             new JLabel("5. L'aria è un solido?"),
             new JLabel("6. La via Lattea è una galassia?"),
@@ -87,11 +89,11 @@ public class TestMist
     private static final String VICTORY = "Test passato con successo!";
     private static final String LOST = "Test errato! Sei psicologicamente instabile.";
     private static final String ERROR = "ERRORE:  " +
-            "controlla di aver dato una sola risposta per ogni domanda.";
+            "controlla di aver dato una ed una sola risposta per ogni domanda.";
 
 
     public TestMist() {
-        questFrame = new JFrame();
+        questDialog = new JDialog(GameManager.getMainFrame(), "TEST DI TUR... PSICOLOGICO");
 
         backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(backgroundImageIcon);
@@ -110,7 +112,8 @@ public class TestMist
         fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
         fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
 
-        infoPlayer = new JDialog();
+        infoPlayer = new JDialog(questDialog);
+        infoPlayer.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
         dialogLabel = new JLabel("", SwingConstants.CENTER);
         scrollPane = new JScrollPane(backgroundLabel);
 
@@ -121,6 +124,12 @@ public class TestMist
         setup();
         setupListener();
         setDetails();
+    }
+
+    public static void executeTest()
+    {
+        SwingUtilities.invokeLater(TestMist::new);
+        GameManager.continueScenario();
     }
 
     private void setup() {
@@ -176,18 +185,19 @@ public class TestMist
         backgroundLabel.add(checkTest, BorderLayout.SOUTH);
 
         // aggiunta di tutti i componenti nel mainframe
-        questFrame.add(scrollPane, BorderLayout.CENTER);
+        questDialog.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void setDetails() {
         checkTest.setBackground(new Color(225, 198,153));
         //questFrame.pack();
-        questFrame.setSize(1000, 600);
-        questFrame.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
+        questDialog.setSize(1000, 600);
+        questDialog.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
                 backgroundImageIcon.getIconHeight()));
-        questFrame.setResizable(false);
-        questFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        questFrame.setVisible(true);
+        questDialog.setLocationRelativeTo(null);
+        questDialog.setResizable(false);
+        questDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        questDialog.setVisible(true);
     }
 
     private void setupListener() {
@@ -204,7 +214,7 @@ public class TestMist
             public void windowClosing(WindowEvent arg0)
             {
                 System.out.println("Window closing");
-                questFrame.dispose();
+                questDialog.dispose();
             }
         });
     }
@@ -266,10 +276,13 @@ public class TestMist
         dialogLabel.setText(msg);
         infoPlayer.add(dialogLabel);
         infoPlayer.setSize(450, 100);
-        infoPlayer.setLocationRelativeTo(null);
+        infoPlayer.setLocationRelativeTo(dialogLabel);
         infoPlayer.setVisible(true);
         infoPlayer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        questFrame.setVisible(false);
+        questDialog.setVisible(!msg.equals(VICTORY));
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(TestMist::new);
     }
 }
-

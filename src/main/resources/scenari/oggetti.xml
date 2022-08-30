@@ -7,7 +7,7 @@
         <isOpen>false</isOpen>
         <isLocked>false</isLocked>
         <onOpen>
-            <mode>infty</mode>
+            <mode>once</mode>
             <effetto>src/main/resources/scenari/piano MIST/eseguiTest.xml</effetto>
         </onOpen>
     </oggetto>

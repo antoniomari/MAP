@@ -4,9 +4,10 @@ import GUI.miniGames.LogicQuest;
 import GUI.miniGames.TestMist;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
-import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
-import entity.items.*;
+import entity.items.Container;
+import entity.items.Item;
+import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 import events.executors.TextBarUpdateExecutor;
@@ -22,15 +23,17 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import sound.SoundHandler;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 public class XmlParser
 {
@@ -719,9 +722,9 @@ public class XmlParser
         String what = getTagValue(eAction, "what");
 
         if(what.equals("ALU"))
-            return () -> SwingUtilities.invokeLater(() -> LogicQuest.createLogicQuest(1));
+            return LogicQuest::executeTest;
         else if(what.equals("MIST"))
-            return () -> SwingUtilities.invokeLater(TestMist::new);
+            return TestMist::executeTest;
         else
             throw new GameException("Nome del test non valido");
     }
