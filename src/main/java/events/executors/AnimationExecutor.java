@@ -1,9 +1,7 @@
 package events.executors;
 
-import GUI.MainFrame;
 import animation.StillAnimation;
 import entity.GamePiece;
-import entity.items.Item;
 import entity.rooms.BlockPosition;
 
 import java.util.List;
@@ -27,6 +25,4 @@ public class AnimationExecutor extends Executor
     {
         gameScreenPanel.effectAnimation(piece, spritesheetPath, jsonPath, whatAnimation, pos, finalWait);
     }
-
-
 }

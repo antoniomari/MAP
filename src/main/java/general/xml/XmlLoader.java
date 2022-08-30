@@ -127,6 +127,7 @@ public class XmlLoader
             loaded = new NPC(name, spritesheetPath);
         }
 
+        // carica animazioni TODO
         // carica speakScenarios
         Element scenariosNode = (Element) characterElement.getElementsByTagName("speakScenarios").item(0);
         Map<String, String> scenarioPathMap = new HashMap<>();
@@ -189,6 +190,15 @@ public class XmlLoader
         if(animationSpritesheetPath.isPresent())
         {
             itemToLoad.initAnimateFrames(animationSpritesheetPath.get(), animationJsonPath.get());
+        }
+
+        // carica animazione perpetua
+        Optional<String> perpetualAnimationPath = XmlParser.getOptionalTagValue(itemElement,"animazionePerpetuaPng");
+        Optional<String> perpetualAnimationJson = XmlParser.getOptionalTagValue(itemElement, "animazionePerpetuaJson");
+
+        if(perpetualAnimationJson.isPresent())
+        {
+            itemToLoad.initPerpetualAnimationFrame(perpetualAnimationPath.get(), perpetualAnimationJson.get());
         }
 
         loadOnUse(itemElement, itemToLoad);

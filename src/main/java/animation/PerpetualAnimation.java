@@ -17,7 +17,7 @@ public class PerpetualAnimation extends StillAnimation
         super(label, frames, delayMilliseconds, initialDelay);
     }
 
-    public PerpetualAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, int finalWait,
+    private PerpetualAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, int finalWait,
                           double rescalingFactor)
     {
         super(label, frames, delayMilliseconds, initialDelay, finalWait, rescalingFactor);

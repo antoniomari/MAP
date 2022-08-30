@@ -142,6 +142,8 @@
         <classe>Item</classe>
         <descrizione>Un radar che radarizza.</descrizione>
         <canUse>false</canUse>
+        <animazionePerpetuaPng>/img/animazioni/radar.png</animazionePerpetuaPng>
+        <animazionePerpetuaJson>/img/animazioni/radar.json</animazionePerpetuaJson>
     </oggetto>
     <oggetto nome="AscensorePT">
         <classe>DoorLike</classe>

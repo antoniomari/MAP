@@ -8,6 +8,7 @@ import general.GameManager;
 import general.xml.XmlParser;
 import graphics.SpriteManager;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 

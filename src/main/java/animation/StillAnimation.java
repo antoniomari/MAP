@@ -24,10 +24,6 @@ public class StillAnimation extends Animation
     /** Codice da eseguire alla fine dell'animazione. */
     private Runnable onEndExecute;
 
-    public StillAnimation(JLabel label, List<Image> frames)
-    {
-        super(label, frames);
-    }
 
     @Deprecated
     public StillAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)

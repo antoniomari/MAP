@@ -1,6 +1,7 @@
 package GUI;
 
 import animation.MovingAnimation;
+import animation.PerpetualAnimation;
 import animation.StillAnimation;
 
 import java.awt.image.BufferedImage;
@@ -70,10 +71,7 @@ public class GameScreenPanel extends JLayeredPane
     private JLabel backgroundLabel;
 
     /**
-     * Inizializza il pannello, impostando {@code initialRoom}
-     * come stanza iniziale.
-     *
-     * @param initialRoom stanza iniziale
+     * Inizializza il pannello
      */
     public GameScreenPanel()
     {
@@ -352,12 +350,56 @@ public class GameScreenPanel extends JLayeredPane
      */
     public void addPieceOnScreen(GamePiece piece , BlockPosition pos)
     {
+        // recupera lo sprite della giusta dimensione
+        Icon rescaledSprite = piece.getScaledIconSprite(rescalingFactor);
+
+        // crea la label corrispondente all'Item
+        JLabel pieceLabel = new JLabel(rescaledSprite);
+
+        if (piece.hasPerpetualAnimation())
+        {
+            PerpetualAnimation anim = new PerpetualAnimation(pieceLabel, piece.getPerpetualAnimationFrames(),
+                    100, true);
+            anim.start();
+        }
+
+        // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
+        if(!(piece instanceof PlayingCharacter))
+        {
+            GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
+                    null, () -> PopMenuManager.showMenu(piece, pieceLabel, 0, 0));
+            pieceLabel.addMouseListener(popMenuListener);
+        }
+
+        // crea listener per il tasto sinistro
+        GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+                null,
+                () ->
+                {
+                    InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
+                    PickupableItem selectedItem = inventoryPanel.getSelectedItem();
+                    if(selectedItem != null)
+                        selectedItem.useWith(piece);
+                });
+        pieceLabel.addMouseListener(interactionListener);
+
+        // metti la coppia Item JLabel nel dizionario
+        pieceLabelMap.put(piece, pieceLabel);
+
+        // aggiungi la label nell'ITEM_LAYER TODO: cambiare in ITEMLAYER e CHARACTERLAYER ???
+        add(pieceLabel, ITEM_LAYER);
+
+        updatePiecePosition(piece, pos, null);
+
+        /*
         if (piece instanceof Item)
             addGameItem((Item) piece, pos);
         else if (piece instanceof GameCharacter)
             addGameCharacter((GameCharacter) piece, pos);
         else
             throw new GameException("GamePiece " + piece + " non valido");
+
+         */
     }
 
     /**
@@ -461,6 +503,7 @@ public class GameScreenPanel extends JLayeredPane
      * @param it Item del quale aggiungere la label
      * @param pos posizione del blocco in basso a sinistra dell'Item
      */
+    @Deprecated
     private void addGameItem(Item it, BlockPosition pos)
     {
         // TODO: controllare se c'è codice duplicato
@@ -503,6 +546,7 @@ public class GameScreenPanel extends JLayeredPane
      * @param ch GameCharacter del quale aggiungere la label
      * @param pos posizione del blocco in basso a sinistra del GameCharacter
      */
+    @Deprecated
     private void addGameCharacter(GameCharacter ch, BlockPosition pos)
     {
         // recupera lo sprite della giusta dimensione

@@ -1,7 +1,6 @@
 package entity;
 
 import entity.characters.GameCharacter;
-import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import events.AnimationEvent;
 import events.EventHandler;
@@ -54,6 +53,7 @@ public class GamePiece
     protected List<Image> leftMovingFrames;
     protected List<Image> rightMovingFrames;
     protected List<Image> animateFrames;
+    protected List<Image> perpetualAnimationFrames;
 
 
     // tutti i costruttori sono protetti per far sì che non sia
@@ -127,6 +127,23 @@ public class GamePiece
         // animateFrames.add(0, getSprite());
     }
 
+    public boolean hasPerpetualAnimation()
+    {
+        return perpetualAnimationFrames != null;
+    }
+
+    public List<Image> getPerpetualAnimationFrames()
+    {
+        return perpetualAnimationFrames;
+    }
+
+    public void initPerpetualAnimationFrame(String spriteSheetPath, String jsonPath)
+    {
+        BufferedImage spritesheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+
+        perpetualAnimationFrames = SpriteManager.getOrderedFrames(spritesheet, jsonPath);
+    }
+
     public void setState(String state, boolean continueScenario)
     {
         Objects.requireNonNull(state);
@@ -177,7 +194,7 @@ public class GamePiece
         this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
 
-        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, ItemInteractionEvent.Type.UPDATE_SPRITE));
+        EventHandler.sendEvent(new GamePieceEvent(this, GamePieceEvent.Type.UPDATE_SPRITE));
     }
 
     @Deprecated

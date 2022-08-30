@@ -3,6 +3,7 @@ package GUI.miniGames;
 // TODO: possibilità di implementare il factory design pattern
 
 import general.GameException;
+import general.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -186,6 +187,9 @@ public class LogicQuest
         questFrame.setSize(600, 700);
         questFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         questFrame.setResizable(false);
+
+        // imposta come "figlio"
+        questFrame.setLocationRelativeTo(GameManager.getMainFrame());
         imagePanel.setBackground(Color.BLUE);
         optionPanel.setBackground(Color.DARK_GRAY);
         questFrame.setBackground(Color.BLUE);

@@ -8,6 +8,13 @@
         <azione>
             <subject>Mist-B</subject>
             <method>add</method>
+            <what>Radar</what>
+            <x>17</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>Mist-B</subject>
+            <method>add</method>
             <what>PortaFilamento</what>
             <x>9</x>
             <y>10</y>

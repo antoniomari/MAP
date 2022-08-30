@@ -34,7 +34,14 @@ public class GamePieceEvent extends GameEvent
                     {
                         return "si è spostato";
                     }
-                }
+                },
+        UPDATE_SPRITE
+                {
+                    public String toString()
+                    {
+                        return " aggiornato sprite";
+                    }
+                },
     }
 
     public GamePieceEvent(GamePiece pieceInvolved, Type type)
