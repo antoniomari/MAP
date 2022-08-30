@@ -128,6 +128,7 @@
             <scenario>src/main/resources/scenari/piano ALU/RiempiAcqua.xml</scenario>
         </onUseWith>
         -->
+    </oggetto>
     <oggetto nome="ComputerALU">
         <classe>Item</classe>
         <descrizione>Un computer strano</descrizione>
@@ -137,6 +138,10 @@
             <effetto>src/main/resources/scenari/piano ALU/accendiComputer.xml</effetto>
         </onUse>
     </oggetto>
+    <oggetto nome="Radar">
+        <classe>Item</classe>
+        <descrizione>Un radar che radarizza.</descrizione>
+        <canUse>false</canUse>
     </oggetto>
     <oggetto nome="AscensorePT">
         <classe>DoorLike</classe>

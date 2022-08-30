@@ -335,6 +335,14 @@
     "height": 96
   },
 
+  "Radar":
+  {
+    "x": 600,
+    "y": 288,
+    "width": 144,
+    "height": 96
+  },
+
   "ScrivaniaPT":
   {
     "x": 384,
