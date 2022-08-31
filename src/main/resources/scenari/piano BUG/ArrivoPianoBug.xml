@@ -2,6 +2,19 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>2</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>esclamativo</what>
+    </azione>
+    <azione>
         <subject>Bug-A</subject>
         <method>add</method>
         <what>Robot</what>
@@ -87,22 +100,4 @@
         <method>speak</method>
         <sentence>Schwartz dei miei stivali</sentence>
     </azione>
-
-
-    <!--
-    <azione>
-        <subject>ALUB</subject>
-        <method>add</method>
-        <what>Registratore</what>
-        <x>21</x>
-        <y>9</y>
-    </azione>
-    <azione>
-        <subject>ALUB</subject>
-        <method>add</method>
-        <what>Cassetta</what>
-        <x>19</x>
-        <y>9</y>
-    </azione>
-    -->
 </scenario>

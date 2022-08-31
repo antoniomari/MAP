@@ -57,6 +57,6 @@
     <azione>
         <subject>Bug-A</subject>
         <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano MIST/ArrivoPianoBug.xml</what>
+        <what>src/main/resources/scenari/piano BUG/ArrivoPianoBug.xml</what>
     </azione>
 </scenario>
