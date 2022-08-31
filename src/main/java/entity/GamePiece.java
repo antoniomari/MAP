@@ -1,5 +1,6 @@
 package entity;
 
+import GUI.InventoryPanel;
 import entity.characters.GameCharacter;
 import entity.characters.PlayingCharacter;
 import events.AnimationEvent;
@@ -200,20 +201,18 @@ public class GamePiece
     @Deprecated
     public void executeEffectAnimation(String animationName, int finalWait, boolean isPerpetual)
     {
-        String spritesheetPath = null;
-        String jsonPath = null;
+        InventoryPanel.Pair<String, String> animationPaths = SpriteManager.getAnimationPaths(animationName);
 
-        if(isPerpetual)
-        {
-            EventHandler.sendEvent(new GamePieceEvent( this, GamePieceEvent.Type.PERPETUAL_EFFECT_ANIMATION));
-        }
-        else
-        {
-            EventHandler.sendEvent(new GamePieceEvent( this, GamePieceEvent.Type.EFFECT_ANIMATION));
-        }
+        String spritesheetPath = animationPaths.getObject1();
+        String jsonPath = animationPaths.getObject2();
 
+        GamePieceEvent.Type eventType = isPerpetual ?
+                GamePieceEvent.Type.PERPETUAL_EFFECT_ANIMATION :
+                GamePieceEvent.Type.EFFECT_ANIMATION;
 
-
+        GamePieceEvent effectEvent = new GamePieceEvent( this, eventType);
+        effectEvent.setAnimationInfo(spritesheetPath, jsonPath, animationName);
+        EventHandler.sendEvent(effectEvent);
     }
 
     public void animate()

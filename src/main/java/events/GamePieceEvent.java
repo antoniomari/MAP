@@ -3,6 +3,8 @@ package events;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
 
+import java.util.Objects;
+
 /**
  * Classe che rappresenta un evento di gioco legato a un {@link entity.GamePiece},
  * inviato da un metodo di tale classe all'{@link EventHandler}.
@@ -14,6 +16,11 @@ public class GamePieceEvent extends GameEvent
     private BlockPosition newPosition;
     private final GamePiece pieceInvolved;
     private int millisecondWaitEnd;
+
+    // dati per mandare informazioni sull'animazione da eseguire (eventuale)
+    private String spritesheetPath;
+    private String jsonPath;
+    private String animationName;
 
     public enum Type
     {
@@ -70,12 +77,12 @@ public class GamePieceEvent extends GameEvent
         this.newPosition = newPosition;
     }
 
-    public BlockPosition getNewPosition()
+    BlockPosition getNewPosition()
     {
         return newPosition;
     }
 
-    public BlockPosition getOldPosition()
+    BlockPosition getOldPosition()
     {
         return oldPosition;
     }
@@ -85,7 +92,7 @@ public class GamePieceEvent extends GameEvent
         this.oldPosition = oldPosition;
     }
 
-    public int getMillisecondWaitEnd()
+    int getMillisecondWaitEnd()
     {
         return millisecondWaitEnd;
     }
@@ -105,12 +112,35 @@ public class GamePieceEvent extends GameEvent
         return pieceInvolved;
     }
 
+    @Override
     public String getEventString()
     {
         if(type == GamePieceEvent.Type.MOVE)
-            return eventTime.toString() + " -> " + " [" + pieceInvolved + "] "+ type
+            return eventTime.toString() + " -> " + " [" + pieceInvolved + "] " + type
                     + " in posizione " + newPosition;
         else
             return "NON PRESENTE";
+    }
+
+    public void setAnimationInfo(String spritesheetPath, String jsonPath, String animationName)
+    {
+        this.spritesheetPath = Objects.requireNonNull(spritesheetPath);
+        this.jsonPath = Objects.requireNonNull(jsonPath);
+        this.animationName = Objects.requireNonNull(animationName);
+    }
+
+    String getAnimationSpritesheet()
+    {
+        return spritesheetPath;
+    }
+
+    String getAnimationJson()
+    {
+        return jsonPath;
+    }
+
+    String getAnimationName()
+    {
+        return animationName;
     }
 }

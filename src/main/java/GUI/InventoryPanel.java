@@ -94,7 +94,7 @@ public class InventoryPanel extends JLayeredPane
         private final t1 object1;
         private final t2 object2;
 
-        Pair(t1 object1, t2 object2)
+        public Pair(t1 object1, t2 object2)
         {
             this.object1 = object1;
             this.object2 = object2;

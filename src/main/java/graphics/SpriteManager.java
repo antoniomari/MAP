@@ -1,5 +1,6 @@
 package graphics;
 
+import GUI.InventoryPanel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,11 +14,20 @@ import java.awt.image.BufferedImage;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SpriteManager
 {
+    public static final String ANIMATION_FOLDER_PATH = "/img/animazioni";
+
+    public static InventoryPanel.Pair<String, String> getAnimationPaths(String animationName)
+    {
+        return new InventoryPanel.Pair<>(ANIMATION_FOLDER_PATH + animationName + ".png",
+                ANIMATION_FOLDER_PATH + animationName + ".json");
+    }
     /**
      * Carica uno spritesheet.
      *
