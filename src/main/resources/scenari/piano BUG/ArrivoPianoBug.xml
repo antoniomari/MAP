@@ -5,7 +5,7 @@
         <subject>Bug-A</subject>
         <method>add</method>
         <what>Robot</what>
-        <x>1</x>
+        <x>8</x>
         <y>12</y>
     </azione>
     <azione>
@@ -33,8 +33,63 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Se voglio salvare il cuoco devo riuscire (*) ad entrare a tutti i costi.</sentence>
+        <sentence>Se voglio salvare Luigi devo riuscire (*) ad entrare a tutti i costi.</sentence>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>12</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>move</method>
+        <x>8</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>9</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>move</method>
+        <x>5</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>fumo</what>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>Te l'ho detto! (*) non riuscirai mai a passare</sentence>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>Schwartz dei miei stivali</sentence>
+    </azione>
+
+
+    <!--
     <azione>
         <subject>ALUB</subject>
         <method>add</method>
@@ -49,4 +104,5 @@
         <x>19</x>
         <y>9</y>
     </azione>
+    -->
 </scenario>
