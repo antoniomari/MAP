@@ -129,7 +129,7 @@ public class MovingAnimation extends Animation
         {
             try
             {
-                if(positionsList.indexOf(c) % 10 == 0)
+                if(positionsList.indexOf(c) % 10 == 1)
                 {
                     label.setIcon(getNextIcon());
                 }

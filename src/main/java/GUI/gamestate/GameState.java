@@ -15,11 +15,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Random;
 
 public class GameState
 {
     private static State currentState;
     private static MainFrame mainFrame;
+    private static final String[] ROOM_LOCKED_SENTENCES = {"Non si vuole aprire", "L'entrata è chiusa",
+                                                    "Accipicchia, non passo!", "Infami, hanno chiuso!",
+                                                    "La porta è bloccata", "AIUTO! NON SI APRE!",
+                                                    "Tecnicooo! La porta è bloccata", "Mi sa che da qui non si va"};
 
     /** Azione per il movimento del giocatore. */
     private static final Runnable leftMouseClick = () ->
@@ -63,13 +68,21 @@ public class GameState
         initGameListeners();
     }
 
+    private static <T>  T randomChoice(T[] array)
+    {
+        Random random = new Random();
+
+        //numero da 0 a len-1
+        return array[random.nextInt(array.length + 1) - 1];
+    }
+
     private static void arrowMovement(Room.Cardinal cardinal)
     {
         Room currentRoom = mainFrame.getCurrentRoom();
         Room adjacent = currentRoom.getAdjacentRoom(cardinal);
         PlayingCharacter schwartz = PlayingCharacter.getPlayer();
 
-        if (adjacent != null && !currentRoom.isAdjacentLocked(cardinal))
+        if (adjacent != null)
         {
             GameState.changeState(State.MOVING);
             ActionSequence scenario = new ActionSequence("vai a" + cardinal.toString(),
@@ -80,7 +93,16 @@ public class GameState
                             currentRoom.getArrowPosition(cardinal).relativePosition(-2,0), schwartz);
 
             scenario.append(() -> schwartz.move(entrancePos, "absolute", 200));
-            scenario.append(() -> mainFrame.setCurrentRoom(adjacent));
+
+
+            if(currentRoom.isAdjacentLocked(cardinal))
+            {
+                scenario.append(() -> schwartz.playEmoji("fumo"));
+                scenario.append(() -> schwartz.speak(randomChoice(ROOM_LOCKED_SENTENCES)));
+            }
+
+            else
+                scenario.append(() -> mainFrame.setCurrentRoom(adjacent));
 
             GameManager.startScenario(scenario);
         }

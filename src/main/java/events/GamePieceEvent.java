@@ -12,7 +12,7 @@ public class GamePieceEvent extends GameEvent
     private final Type type;
     private BlockPosition oldPosition;
     private BlockPosition newPosition;
-    private GamePiece pieceInvolved;
+    private final GamePiece pieceInvolved;
     private int millisecondWaitEnd;
 
     public enum Type

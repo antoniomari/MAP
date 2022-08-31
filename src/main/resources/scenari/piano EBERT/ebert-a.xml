@@ -29,6 +29,12 @@
         </azione>
         <azione>
             <subject>Ebert-A</subject>
+            <method>lockEntrance</method>
+            <cardinal>south</cardinal>
+            <lock>true</lock>
+        </azione>
+        <azione>
+            <subject>Ebert-A</subject>
             <method>setWest</method>
             <what>src/main/resources/scenari/piano EBERT/ebert-b.xml</what>
         </azione>
