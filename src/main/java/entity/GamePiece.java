@@ -203,13 +203,8 @@ public class GamePiece
         // TODO: generalizzare, probabilmente utilizzare map delle animazioni in qualche classe
         String spritesheetPath = null;
         String jsonPath = null;
-        if(animationName.equals( "Esplosione"))
-        {
-            spritesheetPath = "/img/animazioni/esplosione.png";
-            jsonPath = "/img/animazioni/esplosione.json";
-        }
 
-        EventHandler.sendEvent(new ItemInteractionEvent((Item) this, spritesheetPath, jsonPath, animationName, finalWait, ItemInteractionEvent.Type.EFFECT_ANIMATION));
+        EventHandler.sendEvent(new GamePieceEvent( this, GamePieceEvent.Type.EFFECT_ANIMATION));
     }
 
     public void animate()

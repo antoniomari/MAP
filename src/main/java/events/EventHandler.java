@@ -4,6 +4,7 @@ import GUI.gamestate.GameState;
 import animation.Animation;
 import java.util.List;
 
+import entity.GamePiece;
 import entity.characters.GameCharacter;
 import events.executors.*;
 import entity.items.PickupableItem;
@@ -48,8 +49,6 @@ public class EventHandler
             TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
         if(e.getType() == ItemInteractionEvent.Type.UPDATE_SPRITE)
             PieceUpdateExecutor.executeUpdateSprite(e.getItemInvolved());
-        if(e.getType() == ItemInteractionEvent.Type.EFFECT_ANIMATION)  // TODO: modificare in gamePiece da item
-            AnimationExecutor.executeEffectAnimation(e.getItemInvolved(), e.getSpritesheetPath(), e.getJsonPath(), e.getAnimationName(), e.getItemInvolved().getPosition(), e.getFinalWait());
 
     }
 
@@ -111,6 +110,12 @@ public class EventHandler
 
     public static void executeGamePieceEvent(GamePieceEvent e)
     {
+        GamePiece piece = e.getPieceInvolved();
+        if(e.getType() == GamePieceEvent.Type.EFFECT_ANIMATION)  // TODO: modificare in gamePiece da item
+            AnimationExecutor.executeEffectAnimation(piece,
+                    "/img/animazioni/stordimento.png",
+                    "/img/animazioni/stordimento.json",
+                    "", piece.getPosition(),  500);
         if(e.getType() == GamePieceEvent.Type.MOVE)
         {
             CharacterUpdateExecutor.executeMove(e.getPieceInvolved(), e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());

@@ -42,6 +42,13 @@ public class GamePieceEvent extends GameEvent
                         return " aggiornato sprite";
                     }
                 },
+        EFFECT_ANIMATION
+                {
+                    public String toString()
+                    {
+                        return " effetto animato";
+                    }
+                }
     }
 
     public GamePieceEvent(GamePiece pieceInvolved, Type type)
