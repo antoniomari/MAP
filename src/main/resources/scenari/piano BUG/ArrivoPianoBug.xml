@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Bug-A</subject>
+        <method>add</method>
+        <what>Robot</what>
+        <x>1</x>
+        <y>12</y>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>speak</method>
+        <sentence>Tu non puoi passareeeee! (*) -cit</sentence>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>21</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Quelle urla provengono dalla (*) stanza bloccata dal robot!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Se voglio salvare il cuoco devo riuscire (*) ad entrare a tutti i costi.</sentence>
+    </azione>
+    <azione>
+        <subject>ALUB</subject>
+        <method>add</method>
+        <what>Registratore</what>
+        <x>21</x>
+        <y>9</y>
+    </azione>
+    <azione>
+        <subject>ALUB</subject>
+        <method>add</method>
+        <what>Cassetta</what>
+        <x>19</x>
+        <y>9</y>
+    </azione>
+</scenario>
