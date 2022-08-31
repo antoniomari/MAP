@@ -44,7 +44,12 @@
             <method>setEast</method>
             <what>src/main/resources/scenari/piano BUG/BUG-C.xml</what>
         </azione>
-        <!--
+        <azione>
+            <subject>Bug-A</subject>
+            <method>lockEntrance</method>
+            <cardinal>east</cardinal>
+            <lock>true</lock>
+        </azione>
         <azione>
             <subject>Bug-A</subject>
             <method>add</method>
@@ -52,6 +57,5 @@
             <x>8</x>
             <y>12</y>
         </azione>
-        -->
     </scenario>
 </stanza>

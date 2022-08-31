@@ -58,6 +58,13 @@
         <classe>PickupableItem</classe>
         <descrizione>Un registratore vuoto.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>true</keep>
+            <target>Robot</target>
+            <targetInitState>prontoPerRegistratore</targetInitState>
+            <targetFinalState>stordito</targetFinalState>
+            <scenario>src/main/resources/scenari/piano BUG/primoStordimento.xml</scenario>
+        </onUseWith>
     </oggetto>
     <oggetto nome="Cheat Sheet">
         <classe>PickupableItem</classe>

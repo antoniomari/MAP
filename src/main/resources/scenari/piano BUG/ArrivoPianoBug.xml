@@ -5,7 +5,7 @@
         <subject>Schwartz</subject>
         <method>move</method>
         <x>0</x>
-        <y>2</y>
+        <y>-1</y>
         <how>relative</how>
         <finalWait>500</finalWait>
     </azione>
@@ -13,13 +13,6 @@
         <subject>Schwartz</subject>
         <method>playEmoji</method>
         <what>esclamativo</what>
-    </azione>
-    <azione>
-        <subject>Bug-A</subject>
-        <method>add</method>
-        <what>Robot</what>
-        <x>8</x>
-        <y>12</y>
     </azione>
     <azione>
         <subject>Robot</subject>
@@ -100,4 +93,27 @@
         <method>speak</method>
         <sentence>Schwartz dei miei stivali</sentence>
     </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>setState</method>
+        <state>prontoPerRegistratore</state>
+    </azione>
+
+
+    <!--
+    <azione>
+        <subject>ALUB</subject>
+        <method>add</method>
+        <what>Registratore</what>
+        <x>21</x>
+        <y>9</y>
+    </azione>
+    <azione>
+        <subject>ALUB</subject>
+        <method>add</method>
+        <what>Cassetta</what>
+        <x>19</x>
+        <y>9</y>
+    </azione>
+    -->
 </scenario>

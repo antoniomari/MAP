@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Robot</subject>
+        <method>setState</method>
+        <state>stordito</state>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>effectAnimation</method>
+        <animationName>a</animationName>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Robot</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
+    </azione>
+</scenario>
