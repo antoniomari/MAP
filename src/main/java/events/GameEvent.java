@@ -7,7 +7,7 @@ import entity.rooms.Room;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class GameEvent
+public abstract class GameEvent
 {
     protected LocalDateTime eventTime;
     protected String toPrint;
@@ -15,7 +15,6 @@ public class GameEvent
     protected GameCharacter characterInvolved;
     protected Room roomInvolved;
     protected BlockPosition pos;
-    protected BlockPosition finalPos;
 
 
     public GameEvent(String toPrint)
@@ -26,7 +25,6 @@ public class GameEvent
         this.toPrint = toPrint;
     }
 
-
     public String getEventString()
     {
         return eventTime.toString();
@@ -36,10 +34,4 @@ public class GameEvent
     {
         return itemInvolved;
     }
-
-    //public GameCharacter getCharacterInvolved()
-    //{
-
-    //    return characterInvolved;
-    //}
 }

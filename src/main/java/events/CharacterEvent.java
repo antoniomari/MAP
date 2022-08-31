@@ -1,7 +1,6 @@
 package events;
 
 import entity.characters.GameCharacter;
-import entity.rooms.BlockPosition;
 
 public class CharacterEvent extends GameEvent
 {
