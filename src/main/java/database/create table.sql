@@ -6,6 +6,15 @@ create table room
     primary key(name)
 );
 
+create table lockEntrance
+(
+    room varchar(50),
+    cardinal char(5),
+
+    primary key(room, cardinal),
+    foreign key (room) references room(name)
+);
+
 create table item
 (
     name varchar(50),

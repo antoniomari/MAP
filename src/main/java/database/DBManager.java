@@ -32,7 +32,7 @@ public class DBManager
 
     private static Connection conn;
     private final static String DATABASE_PATH = "jdbc:h2:./db";
-    private final static String[] LINK_TABLE_NAMES = {"itemLocation", "characterLocation"};
+    private final static String[] LINK_TABLE_NAMES = {"itemLocation", "characterLocation", "lockEntrance"};
     private final static String[] PURE_TABLE_NAMES = {"room", "item", "gameCharacter", "inventory"};
 
 
@@ -144,6 +144,21 @@ public class DBManager
         }
         rs.close();
         pstm.close();
+
+
+        // load roomLocks
+        PreparedStatement lockPstm = conn.prepareStatement("SELECT room, cardinal FROM game.lockEntrance");
+        ResultSet lockResult = lockPstm.executeQuery();
+
+        while(lockResult.next())
+        {
+            String roomName = lockResult.getString(1);
+            String cardinal = lockResult.getString(2);
+
+            GameManager.getRoom(roomName).setAdjacentLocked(Room.Cardinal.valueOf(cardinal.toUpperCase()), true);
+        }
+        lockPstm.close();
+        lockResult.close();
     }
 
 
@@ -232,13 +247,25 @@ public class DBManager
     private static void saveRooms() throws SQLException
     {
         PreparedStatement pstm1= conn.prepareStatement("INSERT INTO game.room values(?, ?, ?)");
+        PreparedStatement lockStm = conn.prepareStatement("INSERT INTO game.lockEntrance values(?, ?)");
 
         for (String name : GameManager.getRoomNames())
         {
+            Room room = GameManager.getRoom(name);
+
             pstm1.setString(1,name);
-            pstm1.setString(2, GameManager.getRoom(name).getXmlPath());
-            pstm1.setString(3, GameManager.getRoom(name).getScenarioOnEnterPath());
+            pstm1.setString(2, room.getXmlPath());
+            pstm1.setString(3, room.getScenarioOnEnterPath());
             pstm1.executeUpdate();
+
+            // salva locks
+            for(Room.Cardinal cardinal : Room.Cardinal.values())
+                if(room.isAdjacentLocked(cardinal))
+                {
+                    lockStm.setString(1, name);
+                    lockStm.setString(2, cardinal.toString());
+                    lockStm.executeUpdate();
+                }
         }
     }
 

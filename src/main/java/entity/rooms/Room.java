@@ -204,10 +204,9 @@ public class Room
      */
     public Cardinal getAdjacentDirection(Room adjacentRoom)
     {
-
         List<Map.Entry<Cardinal, Entrance>> list =  entranceMap
                 .entrySet().stream()
-                .filter(e -> e.getValue().adjacentRoom.equals(adjacentRoom))
+                .filter(e -> adjacentRoom.equals(e.getValue().adjacentRoom))
                 .collect(Collectors.toList());
 
         if(list.size() != 0)
