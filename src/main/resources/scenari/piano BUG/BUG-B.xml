@@ -10,5 +10,17 @@
             <method>setWest</method>
             <what>src/main/resources/scenari/piano BUG/BUG-C.xml</what>
         </azione>
+        <azione>
+            <subject>Bug-B</subject>
+            <method>add</method>
+            <what>CuocoNero</what>
+            <x>4</x>
+            <y>9</y>
+        </azione>
+        <azione>
+            <subject>Bug-B</subject>
+            <method>setScenarioOnEnter</method>
+            <what>src/main/resources/scenari/piano BUG/TrovaCuoco.xml</what>
+        </azione>
     </scenario>
 </stanza>

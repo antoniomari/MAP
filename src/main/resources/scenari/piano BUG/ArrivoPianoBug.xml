@@ -98,22 +98,4 @@
         <method>setState</method>
         <state>prontoPerRegistratore</state>
     </azione>
-
-
-    <!--
-    <azione>
-        <subject>ALUB</subject>
-        <method>add</method>
-        <what>Registratore</what>
-        <x>21</x>
-        <y>9</y>
-    </azione>
-    <azione>
-        <subject>ALUB</subject>
-        <method>add</method>
-        <what>Cassetta</what>
-        <x>19</x>
-        <y>9</y>
-    </azione>
-    -->
 </scenario>
