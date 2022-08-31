@@ -86,7 +86,7 @@ public class Captcha
     }
 
 
-    public static Captcha createLogicQuest()
+    public static Captcha createCaptcha()
     {
         Captcha captcha = new Captcha();
 
