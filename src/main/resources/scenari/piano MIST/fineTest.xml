@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Grazie.</sentence>
+    </azione>
+    <azione>
+        <subject>Mist-A</subject>
+        <method>lockEntrance</method>
+        <cardinal>north</cardinal>
+        <lock>false</lock>
+    </azione>
+</scenario>

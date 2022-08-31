@@ -259,11 +259,14 @@ public class Room
         return entranceMap.containsKey(cardinal) && entranceMap.get(cardinal).isLocked;
     }
 
+    @ScenarioMethod
     public void setAdjacentLocked(Cardinal cardinal, boolean locked)
     {
         Objects.requireNonNull(cardinal);
 
         entranceMap.get(cardinal).isLocked = locked;
+
+        GameManager.continueScenario();
     }
 
 

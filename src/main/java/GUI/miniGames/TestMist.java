@@ -8,6 +8,8 @@ package GUI.miniGames;
 // TODO: possibilità di applicare factory design pattern
 
 import general.GameManager;
+import general.ScenarioMethod;
+import general.xml.XmlParser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +55,8 @@ public class TestMist
     // Utilizzati per la comunicazione di messaggi con l'utente
     private final JDialog infoPlayer;
     private final JLabel dialogLabel;
+
+    private final String scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
 
     // questWrapper e una JLabel con funzione di wrapper attorno ad un elemento questions
     // e altri due swing components rispettivamente una answerS e un answerN che sono
@@ -211,10 +215,11 @@ public class TestMist
         infoPlayer.addWindowListener(new WindowAdapter()
         {
             @Override
+            @ScenarioMethod
             public void windowClosing(WindowEvent arg0)
             {
-                System.out.println("Window closing");
-                questDialog.dispose();
+                if(checkTestResult())
+                    GameManager.startScenario(XmlParser.loadScenario(scenarioOnWinPath));
             }
         });
     }
@@ -247,29 +252,28 @@ public class TestMist
             if (counter == ANSWERS) {
                 completed = true;
                 //System.out.println("si è completato il test");
-                checkTestResult();
+                if(checkTestResult())
+                    showResult(VICTORY);
+                else
+                    showResult(LOST);
+
             }
         }
     }
 
-    private void checkTestResult() {
+    private boolean checkTestResult() {
         boolean checkSingleAnswer = true;
 
-        for (int i = 0; i < ANSWERS; i++) {
-            //System.out.println(answerN[i].isSelected() + " - " + CORRECT_ANSWER[i]);
-            if (answerN[i].isSelected()==CORRECT_ANSWER[i]) {
+        for (int i = 0; i < ANSWERS; i++)
+        {
+            if (answerN[i].isSelected() == CORRECT_ANSWER[i])
+            {
                 checkSingleAnswer = false;
                 break;
             }
         }
-        if (checkSingleAnswer) {
-            //System.out.println("Test corretto");
-            showResult(VICTORY);
-        } else
-        {
-            //System.out.println("Test errato");
-            showResult(LOST);
-        }
+
+        return checkSingleAnswer;
     }
 
     private void showResult(String msg) {
@@ -280,9 +284,5 @@ public class TestMist
         infoPlayer.setVisible(true);
         infoPlayer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         questDialog.setVisible(!msg.equals(VICTORY));
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(TestMist::new);
     }
 }
