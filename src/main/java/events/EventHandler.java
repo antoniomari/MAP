@@ -81,14 +81,7 @@ public class EventHandler
     public static void executeCharacterEvent(CharacterEvent e)
     {
         GameCharacter ch = e.getCharacterInvolved();
-        /*
-        if(e.getType() == CharacterEvent.Type.MOVE)
-        {
-            CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getOldPosition(), e.getPosition(), e.getMillisecondWaitEnd());
-            // lavora sulla currentRoom TODO: migliorare quest'aspetto
-        }
 
-         */
         if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {
             TextBarUpdateExecutor.executeDisplay(e.getSentence());

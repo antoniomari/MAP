@@ -6,35 +6,16 @@ import entity.rooms.BlockPosition;
 public class CharacterEvent extends GameEvent
 {
     private Type type;
-    private BlockPosition oldPosition;
-    private BlockPosition position;
     private String sentence;
-    private int millisecondWaitEnd;
 
     public enum Type
     {
-        MOVE
-                {
-                    @Override
-                    public String toString()
-            {
-                return "si è spostato";
-            }
-                },
         NPC_SPEAKS
                 {
                     @Override
                     public String toString()
                     {
                         return "ha parlato";
-                    }
-                },
-        ANIMATE
-                {
-                    @Override
-                    public String toString()
-                    {
-                        return "animato";
                     }
                 },
         EMOJI
@@ -48,15 +29,6 @@ public class CharacterEvent extends GameEvent
 
     }
 
-    public CharacterEvent(GameCharacter ch, BlockPosition oldPos, BlockPosition newPos, int millisecondWaitEnd, Type type)
-    {
-        super(type.toString());
-        this.type = type;
-        this.oldPosition = oldPos;
-        this.position = newPos;
-        this.characterInvolved = ch;
-        this.millisecondWaitEnd = millisecondWaitEnd;
-    }
 
     public CharacterEvent(GameCharacter ch, String sentence, Type type)
     {
@@ -71,20 +43,6 @@ public class CharacterEvent extends GameEvent
         return this.type;
     }
 
-    public BlockPosition getOldPosition()
-    {
-        return oldPosition;
-    }
-
-    public BlockPosition getPosition()
-    {
-        return this.position;
-    }
-
-    public int getMillisecondWaitEnd()
-    {
-        return  millisecondWaitEnd;
-    }
 
     public GameCharacter getCharacterInvolved()
     {
@@ -94,11 +52,7 @@ public class CharacterEvent extends GameEvent
 
     public String getEventString()
     {
-        if(type == Type.MOVE)
-        return eventTime.toString() + " -> " + " [" + characterInvolved + "] "+ type
-                + " in posizione " + position;
-        else
-            return eventTime.toString() + " -> " + "[" + characterInvolved + "] " + type;
+        return eventTime.toString() + " -> " + "[" + characterInvolved + "] " + type;
     }
 
     public String getSentence()
