@@ -111,11 +111,14 @@ public class EventHandler
     public static void executeGamePieceEvent(GamePieceEvent e)
     {
         GamePiece piece = e.getPieceInvolved();
-        if(e.getType() == GamePieceEvent.Type.EFFECT_ANIMATION)  // TODO: modificare in gamePiece da item
+        if(e.getType() == GamePieceEvent.Type.EFFECT_ANIMATION)
+        {
             AnimationExecutor.executeEffectAnimation(piece,
                     "/img/animazioni/stordimento.png",
                     "/img/animazioni/stordimento.json",
-                    "", piece.getPosition(),  500);
+                    "stordimento", piece.getPosition(),  500);
+        }
+
         if(e.getType() == GamePieceEvent.Type.MOVE)
         {
             CharacterUpdateExecutor.executeMove(e.getPieceInvolved(), e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
