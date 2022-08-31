@@ -16,13 +16,19 @@ public class StillAnimation extends Animation
     private static final int DEFAULT_DELAY_MILLISECONDS = 200;
     private static final boolean DEFAULT_INITIAL_DELAY = true;
 
-    /** Delay tra cambi di fotogrammi. */
+    /**
+     * Delay tra cambi di fotogrammi.
+     */
     protected int delayMilliseconds = DEFAULT_DELAY_MILLISECONDS;
 
-    /** Flag per segnalare se c'è delay iniziale. */
+    /**
+     * Flag per segnalare se c'è delay iniziale.
+     */
     protected boolean initialDelay = DEFAULT_INITIAL_DELAY;
 
-    /** Codice da eseguire alla fine dell'animazione. */
+    /**
+     * Codice da eseguire alla fine dell'animazione.
+     */
     protected Runnable onEndExecute;
 
     // private boolean blocking = true;
@@ -64,7 +70,7 @@ public class StillAnimation extends Animation
 
     public void setDelay(int milliseconds)
     {
-        if(milliseconds < 0)
+        if (milliseconds < 0)
             throw new IllegalArgumentException("tempo di delay negativo");
 
         this.delayMilliseconds = milliseconds;
@@ -80,14 +86,14 @@ public class StillAnimation extends Animation
     {
         boolean delay = initialDelay;
 
-        if(GameState.getState() != GameState.State.MOVING)
+        if (GameState.getState() != GameState.State.MOVING)
             GameState.changeState(GameState.State.MOVING);
 
-        for(Icon frame : frameIcons)
+        for (Icon frame : frameIcons)
         {
             try
             {
-                if(delay)
+                if (delay)
                     Thread.sleep(delayMilliseconds);
                 else
                     delay = true;
@@ -117,7 +123,7 @@ public class StillAnimation extends Animation
     @ScenarioMethod
     protected void terminate()
     {
-        if(onEndExecute != null)
+        if (onEndExecute != null)
             onEndExecute.run();
 
         GameManager.continueScenario();
@@ -129,13 +135,12 @@ public class StillAnimation extends Animation
      *
      * @param spritesheetPath path dello spritesheet da cui ricavare i fotogrammi
      *                        dell'animazione
-     * @param jsonPath path del json che contiene i dati dei fotogrammi dell'animazione
-     * @param animationLabel JLabel da animare
-     *
+     * @param jsonPath        path del json che contiene i dati dei fotogrammi dell'animazione
+     * @param animationLabel  JLabel da animare
      * @return StillAnimation creata
      */
     public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath,
-                                                                            JLabel animationLabel)
+                                                       JLabel animationLabel)
     {
         BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
@@ -155,18 +160,4 @@ public class StillAnimation extends Animation
         return new StillAnimation(animationLabel, frames, 100, true, DEFAULT_END_MILLISECONDS,
                 rescalingFactor);
     }
-
-    /*
-    public static StillAnimation createNonBlockingAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
-    {
-        StillAnimation anim = new StillAnimation(label, frames, delayMilliseconds, initialDelay);
-        anim.setBlocking(false);
-
-        return anim;
-    }
-
-     */
-
-
-
 }

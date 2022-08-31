@@ -37,8 +37,8 @@ public class GameCharacter extends GamePiece
         super(name, SpriteManager.loadSpriteSheet(spritesheetPath), jsonPath);
         spritesheet = SpriteManager.loadSpriteSheet(spritesheetPath);
         this.jsonPath = jsonPath;
-        initMovingFrames();
         initAnimateFrames();
+        initMovingFrames();
         initSpeakFrame();
     }
 
@@ -69,9 +69,8 @@ public class GameCharacter extends GamePiece
         animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "animate");
 
         if(animateFrames.isEmpty())
-        {
             animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, getName() + "animate");
-        }
+
         animateFrames.add(0, getSprite());
     }
 
@@ -102,8 +101,6 @@ public class GameCharacter extends GamePiece
 
         return speakFrames;
     }
-
-
 
     public void speak(String sentence)
     {

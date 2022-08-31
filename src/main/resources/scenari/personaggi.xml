@@ -7,7 +7,8 @@
         </speakScenarios>
     </personaggio>
     <personaggio nome="Antonio">
-        <spritesheet>/img/personaggi/Antonio.png</spritesheet>
+        <spritesheet>/img/personaggi/Antonio spritesheet.png</spritesheet>
+        <json>/img/personaggi/Antonio.json</json>
         <speakScenarios>
             <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
             <sentence state="fineConferenza">Conferenza breve ma intensa!</sentence>
