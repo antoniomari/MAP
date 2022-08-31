@@ -353,9 +353,18 @@ public class GameScreenPanel extends JLayeredPane
 
         effectLabel.setIcon(effectAnimation.getFirstFrameIcon());
         GameScreenManager.updateLabelPosition(effectLabel, pos);
+
+        effectAnimation.setActionOnEnd(() ->
+        {
+            setLayer(effectLabel, GameScreenPanel.GARBAGE_LAYER);
+            effectLabel.setIcon(null);
+            this.remove(effectLabel);
+        });
+        activePerpetualAnimation.put(piece, effectAnimation);
+
         effectAnimation.start();
 
-        activePerpetualAnimation.put(piece, effectAnimation);
+
 
         /*
         effectAnimation.setActionOnEnd(() ->
