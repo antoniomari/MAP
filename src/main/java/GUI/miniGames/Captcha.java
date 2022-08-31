@@ -104,10 +104,13 @@ public class Captcha
     private void setIcon(Set<String> path)
     {
         String[] pathString =  path.toArray(new String[0]);
-        int max = 9;
-        int min = 0;
+
+        // int num = (int) (Math.random()*10)
+        // int max = 9;
+        // int min = 0;
         // avvolte da eccezione capire perchè
-        setImgKeyPath(pathString[(int) (Math.random()*(max-min)) + min]);
+        // (int) (Math.random()*(max-min)) + min]
+        setImgKeyPath(pathString[(int) (Math.random()*10)]);
 
         ImageIcon icon = new ImageIcon(imgKeyPath);
         image = new JLabel(icon, JLabel.CENTER);
