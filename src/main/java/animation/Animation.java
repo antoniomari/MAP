@@ -35,6 +35,8 @@ public abstract class Animation
      */
     protected int millisecondWaitEnd = DEFAULT_END_MILLISECONDS;
 
+    protected AnimationThread thread;
+
     /**
      * Thread di esecuzione dell'animazione.
      *
@@ -44,7 +46,7 @@ public abstract class Animation
      * All'inizio imposta lo stato di gioco Moving, viene eseguita l'animazione,
      * vengono attesi {@link Animation#millisecondWaitEnd} e infine viene terminata.
      */
-    private class AnimationThread extends Thread
+    protected class AnimationThread extends Thread
     {
 
         @Override
@@ -65,6 +67,8 @@ public abstract class Animation
 
             // template
             terminate();
+
+            thread = null;
         }
     }
 
@@ -159,7 +163,8 @@ public abstract class Animation
      */
     public void start()
     {
-        new Animation.AnimationThread().start();
+        thread = new Animation.AnimationThread();
+        thread.start();
     }
 
 

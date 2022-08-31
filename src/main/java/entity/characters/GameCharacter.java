@@ -93,9 +93,14 @@ public class GameCharacter extends GamePiece
         speakFrame = sprite;
     }
 
-    public Image getSpeakFrame()
+    public List<Image> getSpeakFrames()
     {
-        return speakFrame;
+        List<Image> speakFrames = new ArrayList<>();
+        speakFrames.add(speakFrame);
+        speakFrames.add(speakFrame);
+        speakFrames.add(sprite);
+
+        return speakFrames;
     }
 
 

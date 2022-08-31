@@ -3,6 +3,7 @@ package animation;
 import GUI.gamestate.GameState;
 import general.GameException;
 import general.GameManager;
+import general.ScenarioMethod;
 import graphics.SpriteManager;
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class StillAnimation extends Animation
     protected boolean initialDelay = DEFAULT_INITIAL_DELAY;
 
     /** Codice da eseguire alla fine dell'animazione. */
-    private Runnable onEndExecute;
+    protected Runnable onEndExecute;
 
     // private boolean blocking = true;
 
@@ -113,6 +114,7 @@ public class StillAnimation extends Animation
     }
 
     @Override
+    @ScenarioMethod
     protected void terminate()
     {
         if(onEndExecute != null)

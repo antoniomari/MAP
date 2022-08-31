@@ -100,7 +100,10 @@ public class GameScreenManager
 
         // imposta layer corretto
         BlockPosition bp = calculateBlocks(pos);
-        active_panel.setLayer(label, bp.getY() + GameScreenPanel.BASE_GAMEPIECE_LAYER);
+
+        // aggiorna layer per le label che non sono nell'effect layer
+        if(GameScreenPanel.getLayer(label) != GameScreenPanel.EFFECT_LAYER)
+            active_panel.setLayer(label, bp.getY() + GameScreenPanel.BASE_GAMEPIECE_LAYER);
 
         label.setBounds(leftUpCornerPos.getX(),
                         leftUpCornerPos.getY(),
@@ -111,86 +114,9 @@ public class GameScreenManager
     public static List<BlockPosition> calculatePath(BlockPosition initialPos, BlockPosition finalPos)
     {
         return calculatePathNPC(initialPos, finalPos);
-        /*
-
-
-        List<BlockPosition> positions = new ArrayList<>();
-
-        BlockPosition nextStop = findNextStop(initialPos, finalPos);
-
-        positions.add(nextStop);
-
-        /*
-        while(nextStop != finalPos)
-        {
-            positions.add(nextStop);
-            nextStop = findNextStop(nextStop, finalPos);
-        }
-
-
-
-        if(nextStop != finalPos)
-            positions.add(finalPos);
-        return positions;
-         */
     }
 
 
-    /*
-    private static BlockPosition findNextStop(BlockPosition initialPos, BlockPosition finalPos)
-    {
-        List<BlockPosition> intermediatePositions = new ArrayList<>(100);
-
-        AbsPosition initialAbsPos = GameScreenManager.calculateCoordinates(initialPos);
-        AbsPosition finalAbsPos = GameScreenManager.calculateCoordinates(finalPos);
-
-        int deltaX = (finalAbsPos.getX() - initialAbsPos.getY()) / 100;
-        int deltaY = (finalAbsPos.getY() - initialAbsPos.getY()) / 100;
-
-
-        // suddivisione in 100 punti
-        for(int i = 0; i < 100; i++)
-        {
-            intermediatePositions.add(GameScreenManager.calculateBlocks(new AbsPosition(initialAbsPos.getX() + i * deltaX, initialAbsPos.getY() + i * deltaY)));
-            if(!active_panel.getCurrentRoom().getFloor().isWalkable(intermediatePositions.get(i)))
-            {
-                System.out.println("non puoi camminare su " + intermediatePositions.get(intermediatePositions.size() - 1));
-                System.out.println("ti fermi su " + intermediatePositions.get(intermediatePositions.size() - 2));
-
-                return intermediatePositions.get(intermediatePositions.size() - 2);
-            }
-        }
-
-        return finalPos;
-    }
-
-    private static void goOn(RoomFloor rf, BlockPosition initialPos, BlockPosition finalPos)
-    {
-        // positiva se final a destra di initial, negativa altrimenti
-        int rightDistance = finalPos.getX() - initialPos.getX();
-        // positiva se final sotto initial, negativa altrimenti
-        int downDistance = finalPos.getY() - initialPos.getY();
-
-        // true se l'asse x ha movimento libero verso la direzione target
-        boolean xFree;
-        // true se l'asse y ha movimento libero verso la direzione target
-        boolean yFree;
-
-        // CASO vai a destra
-        if(rightDistance > 0)
-        {
-            xFree = rf.isWalkable(initialPos.relativePosition(1, 0));
-        }
-
-        // CASO: vai sotto
-        if(downDistance > 0)
-        {
-            yFree = rf.isWalkable(initialPos.relativePosition(0, 1));
-        }
-
-    }
-
-     */
 
 
 

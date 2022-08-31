@@ -1,7 +1,10 @@
 package events;
 
+import GUI.gamestate.GameState;
 import animation.Animation;
 import java.util.List;
+
+import entity.characters.GameCharacter;
 import events.executors.*;
 import entity.items.PickupableItem;
 import general.LogOutputManager;
@@ -78,6 +81,7 @@ public class EventHandler
 
     public static void executeCharacterEvent(CharacterEvent e)
     {
+        GameCharacter ch = e.getCharacterInvolved();
         /*
         if(e.getType() == CharacterEvent.Type.MOVE)
         {
@@ -88,8 +92,8 @@ public class EventHandler
          */
         if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {
-            //e.getCharacterInvolved().updateSprite("speaking");
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
+            AnimationExecutor.executePerpetualStateBasedAnimation(ch, ch.getSpeakFrames(), 300, GameState.State.TEXT_BAR);
         }
         else if(e.getType() == CharacterEvent.Type.EMOJI)
         {

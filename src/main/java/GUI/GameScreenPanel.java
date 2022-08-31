@@ -1,5 +1,6 @@
 package GUI;
 
+import animation.Animation;
 import animation.MovingAnimation;
 import animation.PerpetualAnimation;
 import animation.StillAnimation;
@@ -64,6 +65,7 @@ public class GameScreenPanel extends JLayeredPane
      * e le JLabel a essi associate.
      */
     private Map<GamePiece, JLabel> pieceLabelMap;
+    private final Map<GamePiece, PerpetualAnimation> activePerpetualAnimation;
 
     /** Fattore di riscalamento per le icone (lo stesso del MainFrame). */
     private double rescalingFactor;
@@ -77,6 +79,7 @@ public class GameScreenPanel extends JLayeredPane
     {
         super();
         pieceLabelMap = new HashMap<>();
+        activePerpetualAnimation = new HashMap<>();
     }
 
     void setInitialRoom(Room initialRoom)
@@ -276,6 +279,11 @@ public class GameScreenPanel extends JLayeredPane
 
         // elimina la voce dal dizionario
         pieceLabelMap.remove(piece);
+
+        // concludi animazione
+        if(activePerpetualAnimation.containsKey(piece))
+            activePerpetualAnimation.get(piece).stop();
+
     }
 
     /**
@@ -339,9 +347,12 @@ public class GameScreenPanel extends JLayeredPane
 
         if (piece.hasPerpetualAnimation())
         {
+            // TODO: rimuovere
             PerpetualAnimation anim = new PerpetualAnimation(pieceLabel, piece.getPerpetualAnimationFrames(),
                     100, true);
             anim.start();
+
+            activePerpetualAnimation.put(piece, anim);
         }
 
         // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale

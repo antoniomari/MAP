@@ -73,7 +73,7 @@ public class GameState
         Random random = new Random();
 
         //numero da 0 a len-1
-        return array[random.nextInt(array.length + 1) - 1];
+        return array[random.nextInt(array.length)];
     }
 
     private static void arrowMovement(Room.Cardinal cardinal)

@@ -1,5 +1,7 @@
 package events.executors;
 
+import GUI.gamestate.GameState;
+import animation.PerpetualAnimation;
 import animation.StillAnimation;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
@@ -20,6 +22,11 @@ public class AnimationExecutor extends Executor
     public static void executeAnimation(GamePiece piece, List<Image> frames, int delayMilliseconds)
     {
         new StillAnimation(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, true).start();
+    }
+
+    public static void executePerpetualStateBasedAnimation(GamePiece piece, List<Image> frames, int delayMilliseconds, GameState.State runningState)
+    {
+        PerpetualAnimation.animateWhileGameState(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, false, runningState).start();
     }
 
     /*
