@@ -23,21 +23,7 @@ public class ItemInteractionEvent extends GameEvent
             {
                 return "osservata";
             }
-        },
-        UPDATE_SPRITE
-                {
-                    public String toString()
-                    {
-                        return " aggiornato sprite";
-                    }
-                },
-        EFFECT_ANIMATION
-                {
-                    public String toString()
-                    {
-                        return " eseguito effetto animato";
-                    }
-                }
+        }
     }
 
 
@@ -46,20 +32,6 @@ public class ItemInteractionEvent extends GameEvent
         this(item, type.toString());
         this.type = type;
 
-    }
-
-    public String getAnimationName()
-    {
-        return whatAnimation;
-    }
-
-    public ItemInteractionEvent(Item item, String spritesheetPath, String jsonPath, String whatAnimation, int finalWait, Type type)
-    {
-        this(item, type);
-        this.spritesheetPath = spritesheetPath;
-        this.jsonPath = jsonPath;
-        this.whatAnimation = whatAnimation;
-        this.finalWait = finalWait;
     }
 
     public String getSpritesheetPath()

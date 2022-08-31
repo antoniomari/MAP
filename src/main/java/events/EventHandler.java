@@ -47,9 +47,6 @@ public class EventHandler
             AnimationExecutor.executeAnimation(e.getItemInvolved(), e.getFrames());
         if (e.getType() == ItemInteractionEvent.Type.OBSERVE)
             TextBarUpdateExecutor.executeDisplay(e.getItemInvolved().getDescription());
-        if(e.getType() == ItemInteractionEvent.Type.UPDATE_SPRITE)
-            PieceUpdateExecutor.executeUpdateSprite(e.getItemInvolved());
-
     }
 
     public static void executeInventoryEvent(InventoryEvent e)
@@ -81,14 +78,7 @@ public class EventHandler
     public static void executeCharacterEvent(CharacterEvent e)
     {
         GameCharacter ch = e.getCharacterInvolved();
-        /*
-        if(e.getType() == CharacterEvent.Type.MOVE)
-        {
-            CharacterUpdateExecutor.executeMove(e.getCharacterInvolved(), e.getOldPosition(), e.getPosition(), e.getMillisecondWaitEnd());
-            // lavora sulla currentRoom TODO: migliorare quest'aspetto
-        }
 
-         */
         if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
