@@ -198,13 +198,22 @@ public class GamePiece
     }
 
     @Deprecated
-    public void executeEffectAnimation(String animationName, int finalWait)
+    public void executeEffectAnimation(String animationName, int finalWait, boolean isPerpetual)
     {
-        // TODO: generalizzare, probabilmente utilizzare map delle animazioni in qualche classe
         String spritesheetPath = null;
         String jsonPath = null;
 
-        EventHandler.sendEvent(new GamePieceEvent( this, GamePieceEvent.Type.EFFECT_ANIMATION));
+        if(isPerpetual)
+        {
+            EventHandler.sendEvent(new GamePieceEvent( this, GamePieceEvent.Type.PERPETUAL_EFFECT_ANIMATION));
+        }
+        else
+        {
+            EventHandler.sendEvent(new GamePieceEvent( this, GamePieceEvent.Type.EFFECT_ANIMATION));
+        }
+
+
+
     }
 
     public void animate()

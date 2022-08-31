@@ -101,9 +101,9 @@ public class GameScreenManager
         // imposta layer corretto
         BlockPosition bp = calculateBlocks(pos);
 
-        // aggiorna layer per le label che non sono nell'effect layer
-        if(GameScreenPanel.getLayer(label) != GameScreenPanel.EFFECT_LAYER)
-            active_panel.setLayer(label, bp.getY() + GameScreenPanel.BASE_GAMEPIECE_LAYER);
+        // aggiorna layer per le label che non sono nell'effect layer TODO: documentare la scelta
+        if(GameScreenPanel.getLayer(label) != GameScreenPanel.EFFECT_LAYER && GameScreenPanel.getLayer(label) % 2 == 0)
+            active_panel.setLayer(label, bp.getY() * 2 + GameScreenPanel.BASE_GAMEPIECE_LAYER);
 
         label.setBounds(leftUpCornerPos.getX(),
                         leftUpCornerPos.getY(),

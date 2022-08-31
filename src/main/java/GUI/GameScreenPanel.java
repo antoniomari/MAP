@@ -65,7 +65,7 @@ public class GameScreenPanel extends JLayeredPane
      * e le JLabel a essi associate.
      */
     private Map<GamePiece, JLabel> pieceLabelMap;
-    private final Map<GamePiece, PerpetualAnimation> activePerpetualAnimation;
+    private Map<GamePiece, PerpetualAnimation> activePerpetualAnimation;
 
     /** Fattore di riscalamento per le icone (lo stesso del MainFrame). */
     private double rescalingFactor;
@@ -282,7 +282,11 @@ public class GameScreenPanel extends JLayeredPane
 
         // concludi animazione
         if(activePerpetualAnimation.containsKey(piece))
+        {
             activePerpetualAnimation.get(piece).stop();
+            activePerpetualAnimation.remove(piece);
+        }
+
 
     }
 
@@ -301,16 +305,22 @@ public class GameScreenPanel extends JLayeredPane
         }
         pieceLabelMap = new HashMap<>();
 
+
+        // rimuovi animazioni perpetue
+        Collection<PerpetualAnimation> activeAnimations = activePerpetualAnimation.values();
+        for(PerpetualAnimation anim : activeAnimations)
+        {
+            anim.stop();
+        }
+        activePerpetualAnimation = new HashMap<>();
+
         // TODO: controllare se si può aggiustare con il metodo precedente
     }
 
     // TODO: aggiustare work in porgress
-    public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName, BlockPosition pos, int finalWait)
+    public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName,
+                                BlockPosition pos, int finalWait)
     {
-        // TODO: aggiustare l'hard coding di "esplosione"
-        //if(animationName.equals("Esplosione"))
-        //{
-        //JLabel effectLabel = new JLabel(pieceLabelMap.get(piece).getIcon());
         JLabel effectLabel = new JLabel();
         add(effectLabel, EFFECT_LAYER);
 
@@ -328,7 +338,36 @@ public class GameScreenPanel extends JLayeredPane
                     });
 
         effectAnimation.start();
-        //}
+
+    }
+
+    public void perpetualEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName,
+                                         BlockPosition pos, int finalWait)
+    {
+        JLabel effectLabel = new JLabel();
+        add(effectLabel, Integer.valueOf(getLayer(pieceLabelMap.get(piece)) + 1)); // TODO: aggiustare
+
+        PerpetualAnimation effectAnimation = PerpetualAnimation.createPerpetualAnimation(
+                        spritesheetPath, jsonPath, animationName, effectLabel, rescalingFactor);
+        effectAnimation.setFinalDelay(finalWait);
+
+        effectLabel.setIcon(effectAnimation.getFirstFrameIcon());
+        GameScreenManager.updateLabelPosition(effectLabel, pos);
+        effectAnimation.start();
+
+        activePerpetualAnimation.put(piece, effectAnimation);
+
+        /*
+        effectAnimation.setActionOnEnd(() ->
+        {
+            setLayer(effectLabel, GameScreenPanel.GARBAGE_LAYER);
+            effectLabel.setIcon(null);
+            this.remove(effectLabel);
+        });
+
+         */
+
+
     }
 
     /**

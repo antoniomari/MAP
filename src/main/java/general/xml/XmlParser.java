@@ -818,8 +818,9 @@ public class XmlParser
         // recupera il nome dell'animazione
         String animationName = getTagValue(eAction, "animationName");
         int finalWait = Integer.parseInt(getTagValue(eAction, "finalWait"));
+        boolean isPerpetual = Boolean.parseBoolean(getTagValue(eAction, "isPerpetual"));
 
-        return () -> GameManager.getPiece(subject).executeEffectAnimation(animationName, finalWait);
+        return () -> GameManager.getPiece(subject).executeEffectAnimation(animationName, finalWait, isPerpetual);
     }
 
     /**

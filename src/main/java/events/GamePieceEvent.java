@@ -48,6 +48,13 @@ public class GamePieceEvent extends GameEvent
                     {
                         return " effetto animato";
                     }
+                },
+        PERPETUAL_EFFECT_ANIMATION
+                {
+                    public String toString()
+                    {
+                        return " effetto animato continuo";
+                    }
                 }
     }
 

@@ -36,8 +36,16 @@ public class AnimationExecutor extends Executor
     }
 
      */
-    public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String whatAnimation, BlockPosition pos, int finalWait)
+    public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath,
+                                              String whatAnimation, BlockPosition pos, int finalWait)
     {
         gameScreenPanel.effectAnimation(piece, spritesheetPath, jsonPath, whatAnimation, pos, finalWait);
     }
+
+    public static void executePerpetualEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath,
+                                                       String whatAnimation, BlockPosition pos, int finalWait)
+    {
+        gameScreenPanel.perpetualEffectAnimation(piece, spritesheetPath, jsonPath, whatAnimation, pos, finalWait);
+    }
+
 }

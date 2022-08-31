@@ -119,6 +119,14 @@ public class EventHandler
                     "stordimento", piece.getPosition(),  500);
         }
 
+        if(e.getType() == GamePieceEvent.Type.PERPETUAL_EFFECT_ANIMATION)
+        {
+            AnimationExecutor.executePerpetualEffectAnimation(piece,
+                    "/img/animazioni/stordimento.png",
+                    "/img/animazioni/stordimento.json",
+                    "stordimento", piece.getPosition(),  500);
+        }
+
         if(e.getType() == GamePieceEvent.Type.MOVE)
         {
             CharacterUpdateExecutor.executeMove(e.getPieceInvolved(), e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
