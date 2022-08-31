@@ -9,7 +9,7 @@
     <azione>
         <subject>Robot</subject>
         <method>effectAnimation</method>
-        <animationName>a</animationName>
+        <animationName>stordimento</animationName>
         <finalWait>0</finalWait>
         <isPerpetual>false</isPerpetual>
     </azione>
@@ -28,7 +28,7 @@
     <azione>
         <subject>Robot</subject>
         <method>effectAnimation</method>
-        <animationName>a</animationName>
+        <animationName>stordimento</animationName>
         <finalWait>0</finalWait>
         <isPerpetual>true</isPerpetual>
     </azione>

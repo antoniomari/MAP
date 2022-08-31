@@ -10,6 +10,7 @@ import events.ItemInteractionEvent;
 import general.GameError;
 import general.GameException;
 import general.GameManager;
+import general.Pair;
 import graphics.SpriteManager;
 import entity.items.Item;
 import entity.rooms.BlockPosition;
@@ -201,7 +202,7 @@ public class GamePiece
     @Deprecated
     public void executeEffectAnimation(String animationName, int finalWait, boolean isPerpetual)
     {
-        InventoryPanel.Pair<String, String> animationPaths = SpriteManager.getAnimationPaths(animationName);
+        Pair<String, String> animationPaths = SpriteManager.getAnimationPaths(animationName);
 
         String spritesheetPath = animationPaths.getObject1();
         String jsonPath = animationPaths.getObject2();

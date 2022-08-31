@@ -1,6 +1,8 @@
 package graphics;
 
 import GUI.InventoryPanel;
+import general.GameException;
+import general.Pair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,11 +23,11 @@ import java.util.stream.Collectors;
 
 public class SpriteManager
 {
-    public static final String ANIMATION_FOLDER_PATH = "/img/animazioni";
+    public static final String ANIMATION_FOLDER_PATH = "/img/animazioni/";
 
-    public static InventoryPanel.Pair<String, String> getAnimationPaths(String animationName)
+    public static Pair<String, String> getAnimationPaths(String animationName)
     {
-        return new InventoryPanel.Pair<>(ANIMATION_FOLDER_PATH + animationName + ".png",
+        return new Pair<>(ANIMATION_FOLDER_PATH + animationName + ".png",
                 ANIMATION_FOLDER_PATH + animationName + ".json");
     }
     /**
@@ -41,10 +43,9 @@ public class SpriteManager
         {
             return ImageIO.read(SpriteManager.class.getResource(spriteSheetPath));
         }
-        catch (IOException e)
+        catch (Exception e)
         {
-            // Errore caricamento background
-            throw new IOError(e);
+            throw new GameException("Impossibile caricare " + spriteSheetPath);
         }
     }
 
