@@ -15,51 +15,31 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Room
 {
     public enum Cardinal
     {
-        NORTH
-                {
-                    @Override
-                    public String toString()
-                    {
-                        return "north";
-                    }
-                },
-        WEST
-                {
-                    @Override
-                    public String toString()
-                    {
-                        return "west";
-                    }
-                },
-        EAST
-                {
-                    @Override
-                    public String toString()
-                    {
-                        return "east";
-                    }
-                },
-        SOUTH
-                {
-                    @Override
-                    public String toString()
-                    {
-                        return "south";
-                    }
-                };
+        NORTH,
+        WEST,
+        EAST,
+        SOUTH;
 
         private Cardinal opposite;
+
+        public static Cardinal fromString(String cardinal)
+        {
+            // ignore spaces
+            cardinal = cardinal.strip();
+
+            for(Cardinal c : Cardinal.values())
+                if(cardinal.equalsIgnoreCase(String.valueOf(c)))
+                    return c;
+            throw new IllegalArgumentException("Punto cardinale inesistente: " + cardinal);
+        }
 
         static
         {
@@ -153,9 +133,11 @@ public class Room
         // recupera posizione delle frecce
         for(Cardinal cardinal : Cardinal.values())
         {
-            if(json.has(cardinal + "Arrow"))
+            String tag = cardinal.toString().toLowerCase(Locale.ROOT) + "Arrow";
+
+            if(json.has(tag))
             {
-                JSONObject cardinalJson = json.getJSONObject(cardinal + "Arrow");
+                JSONObject cardinalJson = json.getJSONObject(tag);
                 entranceMap.put(cardinal,
                         new Entrance(new BlockPosition(cardinalJson.getInt("x"), cardinalJson.getInt("y"))));
             }

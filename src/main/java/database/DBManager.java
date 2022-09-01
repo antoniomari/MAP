@@ -155,7 +155,7 @@ public class DBManager
             String roomName = lockResult.getString(1);
             String cardinal = lockResult.getString(2);
 
-            GameManager.getRoom(roomName).setAdjacentLocked(Room.Cardinal.valueOf(cardinal.toUpperCase()), true);
+            GameManager.getRoom(roomName).setAdjacentLocked(Room.Cardinal.fromString(cardinal), true);
         }
         lockPstm.close();
         lockResult.close();
@@ -263,7 +263,7 @@ public class DBManager
                 if(room.isAdjacentLocked(cardinal))
                 {
                     lockStm.setString(1, name);
-                    lockStm.setString(2, cardinal.toString());
+                    lockStm.setString(2, String.valueOf(cardinal));
                     lockStm.executeUpdate();
                 }
         }
