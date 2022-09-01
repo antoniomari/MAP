@@ -102,7 +102,11 @@ public class GameState
             }
 
             else
-                scenario.append(() -> mainFrame.setCurrentRoom(adjacent));
+                scenario.append(() ->
+                {
+                    mainFrame.setCurrentRoom(adjacent);
+                    GameManager.continueScenario();
+                });
 
             GameManager.startScenario(scenario);
         }
@@ -128,9 +132,10 @@ public class GameState
         mainFrame.addKeyListener(upArrowListener);
         mainFrame.addKeyListener(downArrowListener);
 
-        GameKeyListener closeBarListener = new GameKeyListener(KeyEvent.VK_SPACE,
-                                                                mainFrame.getTextBarPanel()::hideTextBar,
-                                                                null, State.TEXT_BAR);
+        GameKeyListener closeBarListener = new GameKeyListener(
+                KeyEvent.VK_SPACE,
+                () -> {mainFrame.getTextBarPanel().hideTextBar(); GameManager.continueScenario();},
+                null, State.TEXT_BAR);
         mainFrame.addKeyListener(closeBarListener);
     }
 

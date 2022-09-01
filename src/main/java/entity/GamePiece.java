@@ -146,14 +146,11 @@ public class GamePiece
         perpetualAnimationFrames = SpriteManager.getOrderedFrames(spritesheet, jsonPath);
     }
 
-    public void setState(String state, boolean continueScenario)
+    public void setState(String state)
     {
         Objects.requireNonNull(state);
 
         this.state = state;
-
-        if(continueScenario)
-            GameManager.continueScenario();
     }
 
     public String getState()
@@ -269,13 +266,6 @@ public class GamePiece
 
         // aggiungilo nella stanza
         room.addPiece(this, pos);
-
-        // se non è il giocatore allora continua scenario
-        // infatti uno scenario in corso non può prevedere
-        // l'inserimento del giocatore in una stanza
-        // TODO: controllare in futuro se questo potrà essere possibile
-        if(!(this instanceof PlayingCharacter))
-            GameManager.continueScenario();
     }
 
     /**
@@ -286,8 +276,6 @@ public class GamePiece
     {
         locationRoom.removePiece(this);
         this.locationRoom = null;
-
-        GameManager.continueScenario();
     }
 
 

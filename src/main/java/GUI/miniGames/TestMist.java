@@ -133,7 +133,6 @@ public class TestMist
     public static void executeTest()
     {
         SwingUtilities.invokeLater(TestMist::new);
-        GameManager.continueScenario();
     }
 
     private void setup() {

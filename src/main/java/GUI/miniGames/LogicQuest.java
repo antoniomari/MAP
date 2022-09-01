@@ -86,7 +86,6 @@ public class LogicQuest
     public static void executeTest()
     {
         SwingUtilities.invokeLater(() -> LogicQuest.createLogicQuest(1));
-        GameManager.continueScenario();
     }
 
     private void initButtons(String[] buttonsText)

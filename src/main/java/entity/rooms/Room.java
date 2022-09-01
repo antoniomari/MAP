@@ -184,12 +184,9 @@ public class Room
         return MUSIC_PATH;
     }
 
-    @ScenarioMethod
     public void setScenarioOnEnter(String scenarioPath)
     {
         this.scenarioOnEnterPath = scenarioPath;
-
-        GameManager.continueScenario();
     }
 
 
@@ -264,8 +261,6 @@ public class Room
         Objects.requireNonNull(cardinal);
 
         entranceMap.get(cardinal).isLocked = locked;
-
-        GameManager.continueScenario();
     }
 
 

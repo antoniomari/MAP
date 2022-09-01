@@ -54,17 +54,14 @@ public class Item extends GamePiece implements Observable
     }
 
     @Override
-    public void setState(String state, boolean continueScenario)
+    public void setState(String state)
     {
-        this.state = state;
+        super.setState(state);
 
+        // imposta useScenario in base allo state
         String scenarioPath = useScenarioMap.get(state);
         if(scenarioPath != null)
             useScenario = XmlParser.loadScenario(scenarioPath);
-
-        // TODO: aggiustare
-        if(continueScenario)
-            GameManager.continueScenario();
     }
 
     public Item(String name, String description)
@@ -136,8 +133,6 @@ public class Item extends GamePiece implements Observable
     public void setCanUse(boolean canUse)
     {
         this.canUse = canUse;
-
-        GameManager.continueScenario();
     }
 
     public boolean canUse()

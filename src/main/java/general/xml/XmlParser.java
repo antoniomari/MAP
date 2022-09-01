@@ -490,7 +490,12 @@ public class XmlParser
         int x = Integer.parseInt(getTagValue(eAction, "x"));
         int y = Integer.parseInt(getTagValue(eAction, "y"));
 
-        return () -> piece.addInRoom(GameManager.getRoom(subject), new BlockPosition(x, y));
+        return () ->
+        {
+            piece.addInRoom(GameManager.getRoom(subject), new BlockPosition(x, y));
+            GameManager.continueScenario();
+            // TODO: controllare correttezza nel caso in cui venga aggiunto schwartz
+        };
 
     }
 
@@ -618,7 +623,11 @@ public class XmlParser
     {
         String subject = getTagValue(eAction,"subject");
 
-        return () -> GameManager.getPiece(subject).removeFromRoom();
+        return () ->
+        {
+            GameManager.getPiece(subject).removeFromRoom();
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parseAddToInventory(Element eAction)
@@ -661,7 +670,11 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String scenarioPath = getTagValue(eAction, "what");
 
-        return () -> (GameManager.getRoom(subject)).setScenarioOnEnter(scenarioPath);
+        return () ->
+        {
+            (GameManager.getRoom(subject)).setScenarioOnEnter(scenarioPath);
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parseLoadFloor(Element eAction)
@@ -703,8 +716,13 @@ public class XmlParser
 
         return () ->
         {
-            GameManager.getMainFrame().setCurrentRoom(XmlLoader.loadRoom(floorPath));
+            // carica piano nel gioco tramite room iniziale
+            XmlLoader.loadRoom(floorPath);
             GameManager.startScenario(XmlLoader.loadRoomInit(floorPath));
+            // GameManager.getMainFrame().setCurrentRoom(XmlLoader.loadRoom(floorPath));
+            GameManager.continueScenario();
+            //TODO : contollare urgente
+
         };
     }
 
@@ -721,7 +739,11 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String state = getTagValue(eAction, "state");
 
-        return () -> GameManager.getPiece(subject).setState(state, true);
+        return () ->
+        {
+            GameManager.getPiece(subject).setState(state);
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parseExecuteTest(Element eAction)
@@ -729,9 +751,9 @@ public class XmlParser
         String what = getTagValue(eAction, "what");
 
         if(what.equals("ALU"))
-            return LogicQuest::executeTest;
+            return () -> {LogicQuest.executeTest(); GameManager.continueScenario();};
         else if(what.equals("MIST"))
-            return TestMist::executeTest;
+            return () -> {TestMist.executeTest(); GameManager.continueScenario();};
         else
             throw new GameException("Nome del test non valido");
     }
@@ -741,7 +763,11 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         boolean canUse = Boolean.parseBoolean(getTagValue(eAction, "canUse"));
 
-        return () -> ((Item) GameManager.getPiece(subject)).setCanUse(canUse);
+        return () ->
+        {
+            ((Item) GameManager.getPiece(subject)).setCanUse(canUse);
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parseTeleport(Element eAction)
@@ -749,15 +775,22 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String roomName = getTagValue(eAction, "where");
 
-        return () -> GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
+        return () ->
+        {
+            GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parseAddRoomEffect(Element eAction)
     {
         String effectPath = getTagValue(eAction, "what");
 
-        return () -> GameManager.getMainFrame().getGameScreenPanel()
-                    .addCurrentRoomEffect(SpriteManager.loadSpriteSheet(effectPath));
+        return () ->
+        {GameManager.getMainFrame()
+                .getGameScreenPanel()
+                .addCurrentRoomEffect(SpriteManager.loadSpriteSheet(effectPath));
+            GameManager.continueScenario();};
     }
 
     private static Runnable parseLockEntrance(Element eAction)
@@ -766,7 +799,11 @@ public class XmlParser
         Room.Cardinal cardinal = Room.Cardinal.valueOf(getTagValue(eAction, "cardinal").toUpperCase());
         boolean lock = Boolean.parseBoolean(getTagValue(eAction, "lock"));
 
-        return () -> GameManager.getRoom(subject).setAdjacentLocked(cardinal, lock);
+        return () ->
+        {
+            GameManager.getRoom(subject).setAdjacentLocked(cardinal, lock);
+            GameManager.continueScenario();
+        };
     }
 
     /**

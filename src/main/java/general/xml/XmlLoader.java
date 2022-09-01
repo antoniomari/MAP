@@ -286,6 +286,7 @@ public class XmlLoader
                     targetInitState.orElse("init"),
                     targetFinalState.orElse("init"));
 
+            /*
             Optional<String> methodName = XmlParser.getOptionalTagValue(onUseWithElement, "method");
             if(methodName.isPresent())
             {
@@ -318,11 +319,13 @@ public class XmlLoader
             }
             else
             {
-                String scenarioPath = XmlParser.getTagValue(onUseWithElement, "scenario");
-                ActionSequence useWithScenario = XmlParser.loadScenario(scenarioPath);
 
-                ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
-            }
+             */
+            String scenarioPath = XmlParser.getTagValue(onUseWithElement, "scenario");
+            ActionSequence useWithScenario = XmlParser.loadScenario(scenarioPath);
+
+            ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
+
 
         }
     }

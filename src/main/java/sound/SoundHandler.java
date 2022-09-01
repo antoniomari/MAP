@@ -83,10 +83,10 @@ public class SoundHandler
             if (event.getType() == LineEvent.Type.STOP)
             {
                 scenarioSoundClip.close();
+                GameManager.continueScenario(); // TODO: controllare qua la coerenza
                 GameState.changeState(GameState.State.PLAYING);
-                GameManager.continueScenario();
-            }
 
+            }
         });
 
         scenarioSoundClip.start();

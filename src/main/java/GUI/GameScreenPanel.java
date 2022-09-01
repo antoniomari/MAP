@@ -19,6 +19,7 @@ import entity.rooms.Room;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
+import general.ScenarioMethod;
 import graphics.SpriteManager;
 
 import javax.swing.*;
@@ -122,6 +123,7 @@ public class GameScreenPanel extends JLayeredPane
         return currentRoom;
     }
 
+
     public void addCurrentRoomEffect(Image effectImage)
     {
         Objects.requireNonNull(effectImage);
@@ -134,8 +136,6 @@ public class GameScreenPanel extends JLayeredPane
                 effectIcon.getIconHeight() );
 
         add(roomEffectLabel, EFFECT_LAYER);
-
-        GameManager.continueScenario();
     }
 
     public void removeCurrentRoomEffect()

@@ -88,7 +88,7 @@ public class DBManager
             boolean canUse = rs.getBoolean(3);
 
             Item loadedItem = (Item) XmlLoader.loadPiece(name);
-            loadedItem.setState(state, false);
+            loadedItem.setState(state);
             loadedItem.setCanUse(canUse);
 
             String roomName = rs.getString(4);
@@ -114,7 +114,7 @@ public class DBManager
             if(!name.equals(PlayingCharacter.getPlayerName()))
             {
                 GameCharacter loadedCharacter = (GameCharacter) XmlLoader.loadPiece(name);
-                loadedCharacter.setState(state, false);
+                loadedCharacter.setState(state);
                 loadedCharacter.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
             }
             else  // sei schwartz

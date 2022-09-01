@@ -34,10 +34,11 @@ public class NPC extends GameCharacter
 
 
     @Override
-    public void setState(String state, boolean continueScenario)
+    public void setState(String state)
     {
-        this.state = state;
+        super.setState(state);
 
+        // imposta speak scenario (o speak sentence) in base a state
         String scenarioPath = speakScenarioMap.get(state);
 
         if(scenarioPath != null)
@@ -53,10 +54,6 @@ public class NPC extends GameCharacter
                 speakScenario.append(() -> speak(sentence));
             }
         }
-
-        // TODO: aggiustare
-        if(continueScenario)
-            GameManager.continueScenario();
     }
 
 
@@ -74,7 +71,6 @@ public class NPC extends GameCharacter
         {
             this.speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
             speakScenario.append(() -> this.speak(speakSentenceMap.get(state)));
-
             GameManager.startScenario(speakScenario);
         }
         else

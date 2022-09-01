@@ -19,4 +19,9 @@
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano FLASH/Flash1.xml</what>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>FlashRoom</where>
+    </azione>
 </scenario>

@@ -54,4 +54,9 @@
         <method>loadFloor</method>
         <floor>EBERT</floor>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>Ebert-A</where>
+    </azione>
 </scenario>

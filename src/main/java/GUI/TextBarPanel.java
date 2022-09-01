@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.gamestate.GameState;
 import general.GameManager;
+import general.ScenarioMethod;
 import graphics.SpriteManager;
 import sound.SoundHandler;
 
@@ -106,6 +107,7 @@ public class TextBarPanel extends JLayeredPane
         textArea.setVisible(true);
     }
 
+    @ScenarioMethod
     public void hideTextBar()
     {
         barLabel.setIcon(null);
@@ -114,7 +116,5 @@ public class TextBarPanel extends JLayeredPane
 
         // riproduci suono scroll bar
         SoundHandler.playWav(SoundHandler.SCROLL_BAR_PATH, SoundHandler.Mode.SOUND);
-
-        GameManager.continueScenario();
     }
 }
