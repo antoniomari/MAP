@@ -26,12 +26,21 @@ public class ActionSequence
         this.mode = mode;
 
         actionList = new ArrayList<>();
+        actionList.add(GameManager::continueScenario);
         index = 0;
     }
 
     public static ActionSequence voidScenario()
     {
-        return new ActionSequence("Scenario vuoto", Mode.INSTANT);
+        ActionSequence voidScenario = new ActionSequence("Scenario vuoto", Mode.SEQUENCE);
+        voidScenario.append(GameManager::continueScenario);
+
+        return voidScenario;
+    }
+
+    public int length()
+    {
+       return actionList.size();
     }
 
 

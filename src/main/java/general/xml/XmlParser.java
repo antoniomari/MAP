@@ -225,13 +225,12 @@ public class XmlParser
 
         String roomName = getTagValue(eAction, "what");
 
-        if(GameManager.getRoom(roomName) == null)
+        if (GameManager.getRoom(roomName) == null)
         {
             Room room = XmlLoader.loadRoom(roomName);
 
             return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
-        }
-        else
+        } else
         {
             Room room = GameManager.getRoom(roomName);
             return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
@@ -240,20 +239,8 @@ public class XmlParser
 
     static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
     {
-        // ricava tipo scenario
-        String modeString = getTagValue(scenarioElement, "mode");
-        ActionSequence.Mode mode = null;
-
-        // controlla se il valore del tag "mode" corrisponde a un tipo scenario
-        for(ActionSequence.Mode m : ActionSequence.Mode.values())
-            if(m.toString().equals(modeString.toUpperCase()))
-                mode = m;
-
-        // se mode non corrisponde allora lancia eccezione
-        if(mode == null)
-            throw new GameException("Tag xml \"mode\" xml non valido");
-
-        ActionSequence scenarioSequence = new ActionSequence(scenarioName, mode);
+        // TODO: abolire mode scenari
+        ActionSequence scenarioSequence = new ActionSequence(scenarioName, ActionSequence.Mode.SEQUENCE);
 
         // ottieni lista di azioni
         List<Element> actionList = XmlParser.getTagsList(scenarioElement, "azione");
@@ -272,6 +259,9 @@ public class XmlParser
             String nextScenarioPath = nextScenario.get();
             scenarioSequence.append(() -> GameManager.startScenario(loadScenario(nextScenarioPath)));
         }
+
+        if(scenarioSequence.length() == 0)
+            scenarioSequence = ActionSequence.voidScenario();
 
         return scenarioSequence;
     }
@@ -317,9 +307,6 @@ public class XmlParser
                 break;
             case "setSouth":
                 actionParsed = parseSetSouth(actionElement);
-                break;
-            case "setSpeakScenario":
-                actionParsed = parseSetSpeakScenario(actionElement);
                 break;
             case "animate":
                 actionParsed = parseAnimate(actionElement);
@@ -414,7 +401,7 @@ public class XmlParser
                 .getElementsByTagName("finalWait")
                 .item(0).getTextContent());
 
-        // ritorna runnable
+        // lo scenario viene mandato avanti dal thread dell'animazione creata
         return () -> (GameManager.getPiece(subjectName)).move(new BlockPosition(x, y), type, millisecondEndWait);
     }
 
@@ -439,7 +426,8 @@ public class XmlParser
         String sentence = getTagValue(eAction, "sentence");
         // formatta stringa (spazi)
         String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
-        // restituisci runnable corrispondente
+
+        // lo scenario viene mandato avanti dall'input utente (chiusura textBar)
         return () -> ((GameCharacter) GameManager.getPiece(subjectName)).speak(sentenceNewLined);
     }
 
@@ -451,7 +439,9 @@ public class XmlParser
         // formatta stringa (spazi)
         String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
         String toPrint = subjectName + ": " + sentenceNewLined;
-        // restituisci runnable corrispondente
+
+        // lo scenario viene mandato avanti dall'input utente (chiusura textBar)
+        // TODO: fix code
         return () -> TextBarUpdateExecutor.executeDisplay(toPrint);
     }
 
@@ -490,6 +480,7 @@ public class XmlParser
         int x = Integer.parseInt(getTagValue(eAction, "x"));
         int y = Integer.parseInt(getTagValue(eAction, "y"));
 
+        // scenario viene mandato avanti qui
         return () ->
         {
             piece.addInRoom(GameManager.getRoom(subject), new BlockPosition(x, y));
@@ -503,6 +494,7 @@ public class XmlParser
     {
         String subject = getTagValue(eAction, "subject");
 
+        // scenario portato avanti dall'animazione
         return () -> GameManager.getPiece(subject).animate();
     }
 
@@ -510,6 +502,7 @@ public class XmlParser
     {
         String subject = getTagValue(eAction, "subject");
 
+        // scenario portato avanti dall'animazione
         return () -> GameManager.getPiece(subject).animateReverse();
     }
 
@@ -520,109 +513,67 @@ public class XmlParser
         String pickupName = getTagValue(eAction, "what");
         PickupableItem pickup = (PickupableItem) GameManager.getPiece(pickupName);
 
-        return () -> ((Container) GameManager.getPiece(subject)).addPickup(pickup);
+        // scenario portato avanti qui
+        return () ->
+        {
+            ((Container) GameManager.getPiece(subject)).addPickup(pickup);
+            GameManager.continueScenario();
+        };
+    }
+
+    private static Runnable parseSetAdjacentRoom(Element eAction, Room.Cardinal cardinal)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        String roomName = getTagValue(eAction, "what");
+        if(GameManager.getRoom(roomName) == null)
+        {
+            Room room = XmlLoader.loadRoom(roomName);
+            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
+
+            return () ->
+            {
+                GameManager.getRoom(subject).setAdjacentRoom(cardinal, room);
+                GameManager.startScenario(roomScenario);
+            };
+        }
+        else
+        {
+            Room room = GameManager.getRoom(roomName);
+            return () ->
+            {
+                GameManager.getRoom(subject).setAdjacentRoom(cardinal, room);
+                GameManager.continueScenario();
+            };
+        }
     }
 
     private static Runnable parseSetEast(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-        if(GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
-
-            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
-                            GameManager.startScenario(roomScenario);};
-        }
-        else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
-        }
+        return parseSetAdjacentRoom(eAction, Room.Cardinal.EAST);
     }
 
     private static Runnable parseSetWest(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-        if(GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
-
-            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
-                            GameManager.startScenario(roomScenario);};
-        }
-        else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
-        }
+        return parseSetAdjacentRoom(eAction, Room.Cardinal.WEST);
     }
 
     private static Runnable parseSetNorth(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-        if(GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
-
-            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
-                            GameManager.startScenario(roomScenario);};
-        }
-        else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
-        }
+        return parseSetAdjacentRoom(eAction, Room.Cardinal.NORTH);
     }
 
     private static Runnable parseSetSouth(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-
-        if(GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-            ActionSequence roomScenario = XmlLoader.loadRoomInit(roomName);
-
-            return () -> {GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
-                            GameManager.startScenario(roomScenario);};
-        }
-        else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
-        }
+        return parseSetAdjacentRoom(eAction, Room.Cardinal.SOUTH);
     }
 
-
-    private static Runnable parseSetSpeakScenario(Element eAction)
-    {
-        /*
-        String subject = getTagValue(eAction, "subject");
-
-        String scenarioPath = getTagValue(eAction, "what");
-
-        Document document = openXml(scenarioPath);
-        return () -> ((NPC) GameManager.getPiece(subject))
-                .setSpeakScenario(parseScenario(scenarioPath, document.getDocumentElement())); */
-
-        throw new GameException("Deprecato");
-    }
 
     private static Runnable parseRemoveFromRoom(Element eAction)
     {
         String subject = getTagValue(eAction,"subject");
 
+        // lo scenario viene mandato avanti qui
         return () ->
         {
             GameManager.getPiece(subject).removeFromRoom();
@@ -634,34 +585,34 @@ public class XmlParser
     {
         String itemName = getTagValue(eAction, "what");
         PickupableItem it = (PickupableItem) XmlLoader.loadPiece(itemName);
-        // TODO: controllare correttezza
-        return () -> PlayingCharacter.getPlayer().addToInventory(it);
+
+        // lo scenario viene mandato avanti qui
+        return () ->
+        {
+            PlayingCharacter.getPlayer().addToInventory(it);
+            GameManager.continueScenario();
+        };
+
     }
 
-    /*
-    private static Runnable parseSetSpeakSentence(Element eAction)
-    {
-        String subject = getTagValue(eAction, "subject");
-        String sentence = getTagValue(eAction, "sentence");
-        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
-
-
-        return () -> ((NPC) GameManager.getPiece(subject)).setSpeakSentence(sentenceNewLined);
-    }
-
-     */
 
     private static Runnable parsePlayMusic(Element eAction)
     {
         String musicPath = getTagValue(eAction, "what");
 
-        return () -> SoundHandler.playWav(musicPath, SoundHandler.Mode.MUSIC);
+        // lo scenario viene mandato avanti qui
+        return () ->
+        {
+            SoundHandler.playWav(musicPath, SoundHandler.Mode.MUSIC);
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parsePlayScenarioSound(Element eAction)
     {
         String soundPath = getTagValue(eAction, "what");
 
+        // lo scenario viene mandato avanti nel soundhandler
         return () -> SoundHandler.playWav(soundPath, SoundHandler.Mode.SCENARIO_SOUND);
     }
 
@@ -670,6 +621,7 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String scenarioPath = getTagValue(eAction, "what");
 
+        // lo scenario viene mandato avanti qui
         return () ->
         {
             (GameManager.getRoom(subject)).setScenarioOnEnter(scenarioPath);
@@ -719,10 +671,7 @@ public class XmlParser
             // carica piano nel gioco tramite room iniziale
             XmlLoader.loadRoom(floorPath);
             GameManager.startScenario(XmlLoader.loadRoomInit(floorPath));
-            // GameManager.getMainFrame().setCurrentRoom(XmlLoader.loadRoom(floorPath));
-            GameManager.continueScenario();
-            //TODO : contollare urgente
-
+            // TODO: controllare se funziona
         };
     }
 
@@ -731,7 +680,11 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String emojiName = getTagValue(eAction, "what");
 
-        return () -> ((GameCharacter) GameManager.getPiece(subject)).playEmoji(emojiName);
+        // lo scenario viene mandato avanti dall'animazione
+        return () ->
+        {
+            ((GameCharacter) GameManager.getPiece(subject)).playEmoji(emojiName);
+        };
     }
 
     private static Runnable parseSetState(Element eAction)
@@ -739,6 +692,7 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String state = getTagValue(eAction, "state");
 
+        // lo scenario viene mandato avanti qui
         return () ->
         {
             GameManager.getPiece(subject).setState(state);
@@ -750,10 +704,19 @@ public class XmlParser
     {
         String what = getTagValue(eAction, "what");
 
+        // lo scenario viene mandato avanti qui
         if(what.equals("ALU"))
-            return () -> {LogicQuest.executeTest(); GameManager.continueScenario();};
+            return () ->
+            {
+                LogicQuest.executeTest();
+                GameManager.continueScenario();
+            };
         else if(what.equals("MIST"))
-            return () -> {TestMist.executeTest(); GameManager.continueScenario();};
+            return () ->
+            {
+                TestMist.executeTest();
+                GameManager.continueScenario();
+            };
         else
             throw new GameException("Nome del test non valido");
     }
@@ -763,6 +726,7 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         boolean canUse = Boolean.parseBoolean(getTagValue(eAction, "canUse"));
 
+        // lo scenario viene mandato avanti qui
         return () ->
         {
             ((Item) GameManager.getPiece(subject)).setCanUse(canUse);
@@ -775,6 +739,7 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String roomName = getTagValue(eAction, "where");
 
+        // lo scenario viene mandato avanti qui
         return () ->
         {
             GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
@@ -786,11 +751,15 @@ public class XmlParser
     {
         String effectPath = getTagValue(eAction, "what");
 
+        // lo scenario viene mandato avanti qui
         return () ->
-        {GameManager.getMainFrame()
+        {
+            GameManager.getMainFrame()
                 .getGameScreenPanel()
                 .addCurrentRoomEffect(SpriteManager.loadSpriteSheet(effectPath));
-            GameManager.continueScenario();};
+
+            GameManager.continueScenario();
+        };
     }
 
     private static Runnable parseLockEntrance(Element eAction)
@@ -799,6 +768,7 @@ public class XmlParser
         Room.Cardinal cardinal = Room.Cardinal.valueOf(getTagValue(eAction, "cardinal").toUpperCase());
         boolean lock = Boolean.parseBoolean(getTagValue(eAction, "lock"));
 
+        // lo scenario viene mandato avanti qui
         return () ->
         {
             GameManager.getRoom(subject).setAdjacentLocked(cardinal, lock);
@@ -831,7 +801,13 @@ public class XmlParser
 
         String spriteName = getTagValue(eAction, "spriteName");
 
-        return () -> piece.updateSprite(spriteName);
+        // lo scenario viene mandato avanti qui
+        return () ->
+        {
+            piece.updateSprite(spriteName);
+            GameManager.continueScenario();
+        };
+
     }
 
     /**
@@ -857,7 +833,15 @@ public class XmlParser
         int finalWait = Integer.parseInt(getTagValue(eAction, "finalWait"));
         boolean isPerpetual = Boolean.parseBoolean(getTagValue(eAction, "isPerpetual"));
 
-        return () -> GameManager.getPiece(subject).executeEffectAnimation(animationName, finalWait, isPerpetual);
+        // lo scenario viene mandato avanti dall'animazione (o qui se essa è perpetua)f
+        return () ->
+        {
+            GameManager.getPiece(subject).executeEffectAnimation(animationName, finalWait, isPerpetual);
+
+            if(isPerpetual)
+                GameManager.continueScenario();
+        };
+
     }
 
     /**

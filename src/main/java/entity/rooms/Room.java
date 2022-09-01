@@ -313,12 +313,27 @@ public class Room
         // Evento dalla prospettiva della stanza: Un GamePiece è stato aggiunto alla stanza
 
         EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
+    }
 
-        // Esegui scenario on enter se è entrato il giocatore
-        if(p.equals(PlayingCharacter.getPlayer()) && scenarioOnEnterPath != null)
+    /**
+     * Inizia lo scenarioOnEnter della stanza, se presente; altrimenti
+     * continua lo scenario corrente.
+     *
+     * Viene invocato nello scenario di movimento che fa cambiare stanza,
+     * per cui è necessario mandare avanti lo scenario corrente se non vi è
+     * alcun scenarioOnEnter da eseguire.
+     */
+    public void startScenarioOnEnter()
+    {
+        // TODO: pre-caricare per ridurre delay?
+        if(scenarioOnEnterPath != null)
         {
             GameManager.startScenario(XmlParser.loadScenario(scenarioOnEnterPath));
             scenarioOnEnterPath = null;
+        }
+        else
+        {
+            GameManager.continueScenario();
         }
 
     }

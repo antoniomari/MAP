@@ -20,6 +20,7 @@ import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import general.ScenarioMethod;
+import general.xml.XmlParser;
 import graphics.SpriteManager;
 
 import javax.swing.*;
