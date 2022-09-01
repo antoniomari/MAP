@@ -739,11 +739,10 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
         String roomName = getTagValue(eAction, "where");
 
-        // lo scenario viene mandato avanti qui
+        // lo scenario viene mandato avanti in setCurrentRoom, dallo scenarioOnEnter
         return () ->
         {
             GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
-            GameManager.continueScenario();
         };
     }
 

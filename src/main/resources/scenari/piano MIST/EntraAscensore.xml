@@ -59,4 +59,9 @@
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano ALU/ArrivoPianoAlu.xml</what>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>ALU-A</where>
+    </azione>
 </scenario>

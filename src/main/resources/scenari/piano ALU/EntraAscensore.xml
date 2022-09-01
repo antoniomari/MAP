@@ -59,4 +59,9 @@
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano BUG/ArrivoPianoBug.xml</what>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>BUG-A</where>
+    </azione>
 </scenario>

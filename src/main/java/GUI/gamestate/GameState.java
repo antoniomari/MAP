@@ -105,7 +105,6 @@ public class GameState
                 scenario.append(() ->
                 {
                     mainFrame.setCurrentRoom(adjacent);
-                    adjacent.startScenarioOnEnter();
                 });
 
             GameManager.startScenario(scenario);

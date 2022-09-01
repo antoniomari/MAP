@@ -59,4 +59,9 @@
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano MIST/ArrivoPianoMist.xml</what>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>Mist-A</where>
+    </azione>
 </scenario>

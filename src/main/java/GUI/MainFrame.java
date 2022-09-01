@@ -194,6 +194,8 @@ public class MainFrame extends JFrame {
 
         // imposta musica
         SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
+
+        newRoom.startScenarioOnEnter();
     }
 
     /**
