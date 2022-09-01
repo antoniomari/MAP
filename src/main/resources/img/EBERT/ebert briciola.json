@@ -5,10 +5,10 @@
   "pavimento":
   [
     {
-      "left": 3,
-      "top": 6,
-      "width": 28,
-      "height": 14
+      "left": 0,
+      "top": 8,
+      "width": 36,
+      "height": 16
     }
   ],
 
@@ -19,14 +19,14 @@
 
   "default position":
   {
-    "x": 16,
-    "y": 9
+    "x": 17,
+    "y": 14
   },
 
-  "northArrow":
+  "westArrow":
   {
-    "x": 18,
-    "y": 7
+    "x": 1,
+    "y": 12
   }
 
 }

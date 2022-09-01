@@ -367,6 +367,13 @@
             <useScenario state="pronto">src/main/resources/scenari/piano EBERT/calpesta1.xml</useScenario>
         </onUse>
     </oggetto>
+    <oggetto nome="Acquario">
+        <classe>Item</classe>
+        <descrizione>Quei pesci sono immobili!</descrizione>
+        <canUse>false</canUse>
+        <animazionePerpetuaPng>/img/animazioni/Acquario.png</animazionePerpetuaPng>
+        <animazionePerpetuaJson>/img/animazioni/Acquario.json</animazionePerpetuaJson>
+    </oggetto>
     <oggetto nome="ScrivaniaPT">
         <classe>Item</classe>
         <descrizione>Una scrivania di un bel colore vivace.</descrizione>

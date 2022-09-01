@@ -20,14 +20,14 @@
   "default position":
   {
     "x": 24,
-    "y": 10
+    "y": 12
   },
 
 
   "eastArrow":
   {
     "x": 28,
-    "y": 10
+    "y": 12
   }
 
 }

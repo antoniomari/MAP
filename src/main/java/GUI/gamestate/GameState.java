@@ -85,14 +85,14 @@ public class GameState
         if (adjacent != null)
         {
             GameState.changeState(State.MOVING);
-            ActionSequence scenario = new ActionSequence("vai a" + cardinal.toString(),
+            ActionSequence scenario = new ActionSequence("vai a " + cardinal.toString(),
                                                         ActionSequence.Mode.SEQUENCE);
 
             BlockPosition entrancePos = currentRoom.getFloor()
                     .getNearestPlacement(
                             currentRoom.getArrowPosition(cardinal).relativePosition(-2,0), schwartz);
 
-            scenario.append(() -> schwartz.move(entrancePos, "absolute", 200));
+            scenario.append(() -> schwartz.move(entrancePos, "absolute", 0));
 
 
             if(currentRoom.isAdjacentLocked(cardinal))

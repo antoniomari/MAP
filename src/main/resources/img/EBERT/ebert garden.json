@@ -19,14 +19,8 @@
 
   "default position":
   {
-    "x": 18,
-    "y": 11
-  },
-
-  "southArrow":
-  {
-    "x": 18,
-    "y": 23
+    "x": 16,
+    "y": 14
   },
 
   "northArrow":
