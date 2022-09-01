@@ -62,6 +62,6 @@
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
-        <where>ALU-A</where>
+        <where>ALUA</where>
     </azione>
 </scenario>
