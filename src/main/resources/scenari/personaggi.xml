@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <personaggi>
     <personaggio nome="Nicolas">
-        <spritesheet>/img/personaggi/Nicolas.png</spritesheet>
+        <spritesheet>/img/personaggi/Nicolas spritesheet.png</spritesheet>
+        <json>/img/personaggi/Nicolas.json</json>
         <speakScenarios>
             <sentence state="fineConferenza">Fa freddo</sentence>
         </speakScenarios>
@@ -15,7 +16,8 @@
         </speakScenarios>
     </personaggio>
     <personaggio nome="Diego">
-        <spritesheet>/img/personaggi/Diego.png</spritesheet>
+        <spritesheet>/img/personaggi/Diego spritesheet.png</spritesheet>
+        <json>/img/personaggi/Diego.json</json>
         <speakScenarios>
             <sentence state="fineConferenza">J D B C im-pa-z-z-i-t-o !!</sentence>
         </speakScenarios>
