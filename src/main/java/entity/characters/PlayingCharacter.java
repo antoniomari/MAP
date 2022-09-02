@@ -9,7 +9,10 @@ import java.util.List;
 
 public class PlayingCharacter extends GameCharacter
 {
-    public static final int INVENTORY_SIZE = 30;
+    public static final int INVENTORY_SIZE = 16;
+
+    private static final String SCHWARTZ_SPRITESHEET_PATH = "/img/personaggi/Schwartz spritesheet.png";
+    private static final String SCHWARTZ_JSON_PATH = "/img/personaggi/Schwartz.json";
 
     List<PickupableItem> inventory;
     private static PlayingCharacter player;
@@ -24,8 +27,7 @@ public class PlayingCharacter extends GameCharacter
     public static PlayingCharacter getPlayer()
     {
         if(player == null)
-            player = new PlayingCharacter("Schwartz", "/img/personaggi/Schwartz spritesheet.png",
-                    "/img/personaggi/Schwartz.json");
+            player = new PlayingCharacter("Schwartz", SCHWARTZ_SPRITESHEET_PATH, SCHWARTZ_JSON_PATH);
 
         return player;
     }

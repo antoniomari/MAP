@@ -35,7 +35,7 @@
     </azione>
     <azione>
         <method>playScenarioSound</method>
-        <what>src/main/resources/audio/effetti/gattotrans.wav</what>
+        <what>src/main/resources/audio/effetti/ruggito.wav</what>
     </azione>
     <azione>
         <subject>Briciola</subject>

@@ -2,8 +2,12 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
-        <method>playScenarioSound</method>
-        <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>27</x>
+        <y>18</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>RightErbaGialla</subject>
