@@ -198,6 +198,7 @@ public class TestMist extends JDialog
         checkTest.setBackground(new Color(225, 198,153));
         //questFrame.pack();
 
+        setType(Window.Type.POPUP);
         this.setPreferredSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
         this.setBounds(mainFrameInsets.left, mainFrameInsets.top, (int) getPreferredSize().getWidth(),
                 (int) getPreferredSize().getHeight());
