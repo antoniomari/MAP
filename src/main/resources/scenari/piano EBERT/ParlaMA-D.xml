@@ -9,7 +9,202 @@
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Ciao!</sentence>
+        <sentence>Non sei Antonio! (*) Che ci fai qui?</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Stai interrompendo la mia (*) contemplazione dell'acquario.</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Solo questa ci mancava!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>E tu chi saresti?</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Vieni nel mio territorio (*) e osi parlarmi così?</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Sono la ragazza-robot di Antonio...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>esclamativo</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>RAGAZZA ROBOT?!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>L'unione civile ha fatto (*) passi da gigante!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Tu invece non mi hai ancora detto (*) chi sei.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Aspetta! (*) Forse ho capito...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>10</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>esclamativo</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>SE IL TECNICO DELL'ASCENSORE!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>puntini</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>No... Sono il dr. Schwartz, (*) incaricato di eseguire il test finale</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>su JDBC-20. (*) Quella specie di robot poi è scappato...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Lo "scienziato" Antonio mi ha detto (*) che qui troverò il cheat sheet</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Per poter fermare JDBC-20 (*) e salvare il cuoco!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Quella specia di robot ?!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Non parlare così di uno (*) della mia specie!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>-5</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Tuttavia...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>5</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Dato che ti ha mandato Antonio (*) allora devo aiutarti.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Io posso recuperare per te il cheat sheet!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>cuore</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Però c'è un problema. (*) Non ricordo dove sta.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ho perso la mia ultima (*) scheda di memoria.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ho perso la mia ultima (*) scheda di memoria.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Probabilmente l'ha presa (*) il nostro GRAZIOSO ANIMALETTO,</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>si chiama Briciola!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Adesso vado ad aprirti (*) l'altra sala, così puoi coccolarlo.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Ebert-A</subject>
+        <method>add</method>
+        <what>MA-D</what>
+        <x>28</x>
+        <y>12</y>
     </azione>
     <azione>
         <subject>RightErbaBlu</subject>
