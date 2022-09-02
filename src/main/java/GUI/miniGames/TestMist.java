@@ -7,6 +7,7 @@ package GUI.miniGames;
  */
 // TODO: possibilità di applicare factory design pattern
 
+import GUI.GameScreenPanel;
 import GUI.MainFrame;
 import GUI.gamestate.GameState;
 import general.GameManager;
@@ -19,7 +20,9 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class TestMist extends JDialog
+import static GUI.GameScreenPanel.TEXT_BAR_LEVEL;
+
+public class TestMist extends JPanel
 {
     //private final JDialog this;
 
@@ -56,7 +59,7 @@ public class TestMist extends JDialog
     private final JButton checkTest;
 
     // Utilizzati per la comunicazione di messaggi con l'utente
-    private final JDialog infoPlayer;
+    private final JPanel infoPlayer;
     private final JLabel dialogLabel;
 
     private final String scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
@@ -100,7 +103,7 @@ public class TestMist extends JDialog
 
 
     public TestMist() {
-        super(GameManager.getMainFrame(), "TEST PSICOLOGICO");
+        super();
 
         backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(backgroundImageIcon);
@@ -119,10 +122,12 @@ public class TestMist extends JDialog
         fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
         fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
 
-        infoPlayer = new JDialog(this);
-        infoPlayer.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+        infoPlayer = new JPanel();
+        //add(infoPlayer);
         dialogLabel = new JLabel("", SwingConstants.CENTER);
         scrollPane = new JScrollPane(backgroundLabel);
+
+        scrollPane.setBounds(0, 0, 1000, 800);
 
         setup();
         setupListener();
@@ -133,7 +138,8 @@ public class TestMist extends JDialog
     {
         LogOutputManager.logOutput("Iniziando Test MIST: ", LogOutputManager.GAMESTATE_COLOR);
         GameState.changeState(GameState.State.TEST);
-        SwingUtilities.invokeLater(TestMist::new);
+        TestMist testMist = new TestMist();
+        GameManager.getMainFrame().getGameScreenPanel().add(testMist, GameScreenPanel.TEXT_BAR_LEVEL);
     }
 
     private void setup() {
@@ -198,18 +204,15 @@ public class TestMist extends JDialog
         checkTest.setBackground(new Color(225, 198,153));
         //questFrame.pack();
 
-        setType(Window.Type.POPUP);
         this.setPreferredSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
+        setSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
+
         this.setBounds(mainFrameInsets.left, mainFrameInsets.top, (int) getPreferredSize().getWidth(),
                 (int) getPreferredSize().getHeight());
 
-        // this.setLocationRelativeTo(GameManager.getMainFrame());
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         System.out.println("Prima");
         this.setVisible(true);
         System.out.println("Dopo");
-        pack();
     }
 
     private void setupListener() {
@@ -220,27 +223,6 @@ public class TestMist extends JDialog
 
         // listener sulla finestra della jdialog
         // per la comunicazione con l'utente
-        infoPlayer.addWindowListener(new WindowAdapter()
-        {
-            @Override
-            @ScenarioMethod
-            public void windowClosing(WindowEvent arg0)
-            {
-                if(checkTestResult())
-                    GameManager.startScenario(XmlParser.loadScenario(scenarioOnWinPath));
-            }
-        });
-
-        this.addWindowListener(new WindowAdapter()
-        {
-            @Override
-            @ScenarioMethod
-            public void windowClosing(WindowEvent arg0)
-            {
-                LogOutputManager.logOutput("Chiudendo Test MIST: ", LogOutputManager.GAMESTATE_COLOR);
-                GameManager.continueScenario();
-            }
-        });
     }
 
     private void checkTestCompleted() {
@@ -299,9 +281,7 @@ public class TestMist extends JDialog
         dialogLabel.setText(msg);
         infoPlayer.add(dialogLabel);
         infoPlayer.setSize(450, 100);
-        infoPlayer.setLocationRelativeTo(dialogLabel);
         infoPlayer.setVisible(true);
-        infoPlayer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(!msg.equals(VICTORY));
     }
 }
