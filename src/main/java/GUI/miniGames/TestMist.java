@@ -12,31 +12,27 @@ import GUI.MainFrame;
 import GUI.gamestate.GameState;
 import general.GameManager;
 import general.LogOutputManager;
-import general.ScenarioMethod;
-import general.xml.XmlParser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import static GUI.GameScreenPanel.TEXT_BAR_LEVEL;
 
 public class TestMist extends JPanel
 {
-    //private final JDialog this;
+    private static final Integer BACKGROUND_LAYER = 0;
+    private static final Integer CONTENT_LAYER = 1;
+    private static final Integer RESULT_LAYER = 2;
 
     //JLabel e ImageIcon per creazione background
-    private final JLabel backgroundLabel;
-    private final ImageIcon backgroundImageIcon;
+    private JLabel backgroundLabel;
+    private ImageIcon backgroundImageIcon;
     private final JScrollPane scrollPane;
 
     //JLabel per il titolo e l'intestazione del test
-    private final JLabel title;
-    private final JLabel description;
+    private JLabel title;
+    private JLabel description;
 
     //JPanel per contenere titolo e intestazione
-    private final JPanel headingPanel;
+    private JPanel headingPanel;
 
     // Questo container è dedicato a contenere tutti gli altri
     // componenti JPanel presenti e a suo tempo è incapsulato in
@@ -45,22 +41,22 @@ public class TestMist extends JPanel
     private final JPanel testPanel;
 
     // conterrà l'array contenente le domande del test
-    private final JPanel questPanel;
+    private JPanel questPanel;
 
     //JPanel per contenere i due array paralleli di checkbox
     private final JPanel[] answerPanel = new JPanel[ANSWERS];
     private final JCheckBox[] answerS = new JCheckBox[ANSWERS];
     private final JCheckBox[] answerN = new JCheckBox[ANSWERS];
 
-    private final Font fontQuestion;
-    private final Font fontTitle;
-    private final Font fontDescription;
+    private Font fontQuestion;
+    private Font fontTitle;
+    private Font fontDescription;
 
-    private final JButton checkTest;
+    private JButton checkTest;
 
     // Utilizzati per la comunicazione di messaggi con l'utente
-    private final JPanel infoPlayer;
-    private final JLabel dialogLabel;
+    private JPanel infoPlayer;
+    private JLabel dialogLabel;
 
     private final String scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
 
@@ -104,34 +100,66 @@ public class TestMist extends JPanel
 
     public TestMist() {
         super();
+        setLayout(null);
 
+        Insets mainFrameInsets = GameManager.getMainFrame().getInsets();
+
+        setPreferredSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
+        //setSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
+
+        setBounds(mainFrameInsets.left, mainFrameInsets.top, (int) getPreferredSize().getWidth(),
+                (int) getPreferredSize().getHeight());
+
+        testPanel = new JPanel(new BorderLayout());
+
+        /*
         backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(backgroundImageIcon);
+
+         */
+        // backgroundLabel.setBounds(getInsets().left, getInsets().top, getPreferredSize().width, getPreferredSize().height);
+        // add(backgroundLabel, BACKGROUND_LAYER);
+
 
         headingPanel = new JPanel(new GridLayout(2,1));;
         title = new JLabel("Minimum intelligence signal text", SwingConstants.CENTER);
         description = new JLabel("Test psicologico intelletivo somministrato dalla Dott.ssa Gastani Frinzi.",
                 SwingConstants.CENTER);
 
-        testPanel = new JPanel(new BorderLayout());
+
+
         questPanel = new JPanel(new GridLayout(20,1));
 
         checkTest = new JButton("Verifica");
+        checkTest.setBackground(new Color(225, 198,153));
 
         fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
         fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
         fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
 
+
+
+        /*
         infoPlayer = new JPanel();
         //add(infoPlayer);
         dialogLabel = new JLabel("", SwingConstants.CENTER);
-        scrollPane = new JScrollPane(backgroundLabel);
+        //scrollPane.setBounds(getInsets().left, getInsets().top, 500, 200);
+        // aggiunta di tutti i componenti nel mainframe
+        //this.add(scrollPane, BorderLayout.CENTER);
 
-        scrollPane.setBounds(0, 0, 1000, 800);
+         */
+        scrollPane = new JScrollPane(testPanel);
 
+
+
+        testPanel.setBackground(new Color(127,127,127));
+        testPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height * 2));
+        scrollPane.setBounds(getInsets().left, getInsets().top, (int) getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
+        add(scrollPane);
         setup();
-        setupListener();
-        setDetails();
+        //setupListener();
+        this.setVisible(true);
+
     }
 
     public static void executeTest()
@@ -174,9 +202,9 @@ public class TestMist extends JPanel
         }
 
         // composizioni dei componenti swing sul layer centrale
-        questPanel.setOpaque(false);
+         questPanel.setOpaque(false);
         testPanel.add(questPanel, BorderLayout.CENTER);
-        testPanel.setOpaque(false);
+        //testPanel.setOpaque(false);
         scrollPane.setOpaque(false);
 
         // composizione dei componenti swing sul layer in alto
@@ -186,34 +214,20 @@ public class TestMist extends JPanel
         headingPanel.add(description);
         headingPanel.setOpaque(false);
         testPanel.add(headingPanel, BorderLayout.NORTH);
+        checkTest.setFont(fontDescription);
+        testPanel.add(checkTest, BorderLayout.SOUTH);
 
         // composizione del testPanel all'interno del background
         // fornito dall'imagine contenuta nella JLabel
+        /*
         backgroundLabel.setLayout(new BorderLayout());
         backgroundLabel.add(testPanel, BorderLayout.CENTER);
-        checkTest.setFont(fontDescription);
+
         backgroundLabel.add(checkTest, BorderLayout.SOUTH);
 
-        // aggiunta di tutti i componenti nel mainframe
-        this.add(scrollPane, BorderLayout.CENTER);
+         */
     }
 
-    private void setDetails() {
-        Insets mainFrameInsets = GameManager.getMainFrame().getInsets();
-
-        checkTest.setBackground(new Color(225, 198,153));
-        //questFrame.pack();
-
-        this.setPreferredSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
-        setSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
-
-        this.setBounds(mainFrameInsets.left, mainFrameInsets.top, (int) getPreferredSize().getWidth(),
-                (int) getPreferredSize().getHeight());
-
-        System.out.println("Prima");
-        this.setVisible(true);
-        System.out.println("Dopo");
-    }
 
     private void setupListener() {
         // Listener per il bottone di verifica test
