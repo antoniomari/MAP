@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +42,8 @@ public class SpriteManager
     {
         try
         {
-            return ImageIO.read(SpriteManager.class.getResource(spriteSheetPath));
+            spriteSheetPath = "src/main/resources" + spriteSheetPath;
+            return ImageIO.read((new File(spriteSheetPath)).toURI().toURL());
         }
         catch (Exception e)
         {

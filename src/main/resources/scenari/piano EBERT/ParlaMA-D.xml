@@ -178,11 +178,6 @@
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Ho perso la mia ultima (*) scheda di memoria.</sentence>
-    </azione>
-    <azione>
-        <subject>MA-D</subject>
-        <method>speak</method>
         <sentence>Probabilmente l'ha presa (*) il nostro GRAZIOSO ANIMALETTO,</sentence>
     </azione>
     <azione>
@@ -194,6 +189,19 @@
         <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Adesso vado ad aprirti (*) l'altra sala, così puoi coccolarlo.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Devi convincerlo a farti dare (*) la scheda di memoria.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>28</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>MA-D</subject>
