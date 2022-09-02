@@ -104,6 +104,13 @@ public class InventoryPanel extends JLayeredPane
 
         // lo scalingFactor è il rapporto tra l'altezza del menu e quella delle icone originali
         scalingFactor = (double) preferredHeight / ORIGINAL_ITEM_SIZE;
+
+        int inventoryWidth = BAR_IMAGE.getWidth() + 2 * ORIGINAL_ITEM_SIZE + TEXT_BOARD_IMAGE.getWidth();
+        int scaledWidth = (int) (scalingFactor * inventoryWidth);
+        if (scaledWidth > MainFrame.SCREEN_WIDTH)
+        {
+            scalingFactor = (double) MainFrame.SCREEN_WIDTH/inventoryWidth;
+        }
         scaledItemSize = (int) (ORIGINAL_ITEM_SIZE * scalingFactor);
 
         initItemIconList();  // inizializza sulla base dell'inventario corrente del giocatore

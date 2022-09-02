@@ -50,9 +50,9 @@ public class MainFrame extends JFrame {
     private Icon backgroundImg;
 
     /** Dimensione in pixel della larghezza dello schermo. */
-    private static final int SCREEN_WIDTH;
+    public static final int SCREEN_WIDTH;
     /** Dimensione in pixel dell'altezza dello schermo. */
-    private static final int SCREEN_HEIGHT;
+    public static final int SCREEN_HEIGHT;
 
     private static final BufferedImage BLACK_SCREEN;
     private static final String BLACK_SCREEN_PATH = "/img/sfondo nero.png";
@@ -401,10 +401,10 @@ public class MainFrame extends JFrame {
         final String MENU_BACK_PATH = "/img/computersPause.png";
 
         Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
-        double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
+        //double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
 
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
-                                                                                        rescalingBackgroundFactor ));
+                                                                                        SCREEN_WIDTH,SCREEN_HEIGHT ));
 
         final int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
         final int LEFT = menuPanel.getInsets().left;
@@ -454,10 +454,8 @@ public class MainFrame extends JFrame {
         String MENU_BACK_PATH = "/img/Menu iniziale/background.png";
 
         Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
-        double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
-
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
-                rescalingBackgroundFactor ));
+                SCREEN_WIDTH, SCREEN_HEIGHT ));
 
         final int LEFT = startingMenuPanel.getInsets().left;
         final int TOP = startingMenuPanel.getInsets().top;
