@@ -5,7 +5,7 @@
         <subject>Schwartz</subject>
         <method>move</method>
         <x>0</x>
-        <y>-1</y>
+        <y>3</y>
         <how>relative</how>
         <finalWait>500</finalWait>
     </azione>

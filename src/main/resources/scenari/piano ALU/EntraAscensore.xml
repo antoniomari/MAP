@@ -62,6 +62,6 @@
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
-        <where>BUG-A</where>
+        <where>Bug-A</where>
     </azione>
 </scenario>
