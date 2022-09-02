@@ -48,7 +48,8 @@ public class GameState
         PLAYING,
         MOVING,
         TEXT_BAR,
-        SCENARIO_SOUND
+        SCENARIO_SOUND,
+        TEST
     }
 
     static

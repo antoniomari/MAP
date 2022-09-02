@@ -704,7 +704,7 @@ public class XmlParser
     {
         String what = getTagValue(eAction, "what");
 
-        // lo scenario viene mandato avanti qui
+        // lo scenario viene mandato avanti dall'input di chiusura del JDialog del test inserito dall'utente
         if(what.equals("ALU"))
             return () ->
             {
@@ -712,11 +712,7 @@ public class XmlParser
                 GameManager.continueScenario();
             };
         else if(what.equals("MIST"))
-            return () ->
-            {
-                TestMist.executeTest();
-                GameManager.continueScenario();
-            };
+            return TestMist::executeTest;
         else
             throw new GameException("Nome del test non valido");
     }

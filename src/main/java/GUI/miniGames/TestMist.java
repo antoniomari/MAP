@@ -7,7 +7,9 @@ package GUI.miniGames;
  */
 // TODO: possibilità di applicare factory design pattern
 
+import GUI.gamestate.GameState;
 import general.GameManager;
+import general.LogOutputManager;
 import general.ScenarioMethod;
 import general.xml.XmlParser;
 
@@ -16,9 +18,9 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class TestMist
+public class TestMist extends JDialog
 {
-    private final JDialog questDialog;
+    //private final JDialog this;
 
     //JLabel e ImageIcon per creazione background
     private final JLabel backgroundLabel;
@@ -97,7 +99,7 @@ public class TestMist
 
 
     public TestMist() {
-        questDialog = new JDialog(GameManager.getMainFrame(), "TEST PSICOLOGICO");
+        super(GameManager.getMainFrame(), "TEST PSICOLOGICO");
 
         backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(backgroundImageIcon);
@@ -116,7 +118,7 @@ public class TestMist
         fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
         fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
 
-        infoPlayer = new JDialog(questDialog);
+        infoPlayer = new JDialog(this);
         infoPlayer.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
         dialogLabel = new JLabel("", SwingConstants.CENTER);
         scrollPane = new JScrollPane(backgroundLabel);
@@ -132,7 +134,9 @@ public class TestMist
 
     public static void executeTest()
     {
-        new TestMist();
+        LogOutputManager.logOutput("Iniziando Test MIST: ", LogOutputManager.GAMESTATE_COLOR);
+        GameState.changeState(GameState.State.TEST);
+        SwingUtilities.invokeLater(TestMist::new);
     }
 
     private void setup() {
@@ -188,25 +192,27 @@ public class TestMist
         backgroundLabel.add(checkTest, BorderLayout.SOUTH);
 
         // aggiunta di tutti i componenti nel mainframe
-        questDialog.add(scrollPane, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void setDetails() {
         checkTest.setBackground(new Color(225, 198,153));
         //questFrame.pack();
-        questDialog.setSize(1000, 600);
-        questDialog.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
+        this.setSize(1000, 600);
+        this.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
                 backgroundImageIcon.getIconHeight()));
-        questDialog.setLocationRelativeTo(null);
-        questDialog.setResizable(false);
-        questDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        questDialog.setVisible(true);
+        this.setLocationRelativeTo(GameManager.getMainFrame());
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        System.out.println("Prima");
+        this.setVisible(true);
+        System.out.println("Dopo");
     }
 
     private void setupListener() {
         // Listener per il bottone di verifica test
         checkTest.addActionListener((ae) -> {
-            checkTestCompleted();;
+            checkTestCompleted();
         });
 
         // listener sulla finestra della jdialog
@@ -219,6 +225,17 @@ public class TestMist
             {
                 if(checkTestResult())
                     GameManager.startScenario(XmlParser.loadScenario(scenarioOnWinPath));
+            }
+        });
+
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            @ScenarioMethod
+            public void windowClosing(WindowEvent arg0)
+            {
+                LogOutputManager.logOutput("Chiudendo Test MIST: ", LogOutputManager.GAMESTATE_COLOR);
+                GameManager.continueScenario();
             }
         });
     }
@@ -282,6 +299,6 @@ public class TestMist
         infoPlayer.setLocationRelativeTo(dialogLabel);
         infoPlayer.setVisible(true);
         infoPlayer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        questDialog.setVisible(!msg.equals(VICTORY));
+        this.setVisible(!msg.equals(VICTORY));
     }
 }
