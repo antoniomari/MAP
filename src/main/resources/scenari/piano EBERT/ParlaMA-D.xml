@@ -215,6 +215,11 @@
         <y>12</y>
     </azione>
     <azione>
+        <subject>Ebert-A</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano EBERT/dopoParlaMA-D.xml</what>
+    </azione>
+    <azione>
         <subject>RightErbaBlu</subject>
         <method>setState</method>
         <state>pronto</state>

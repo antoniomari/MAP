@@ -374,6 +374,11 @@
         <animazionePerpetuaPng>/img/animazioni/Acquario.png</animazionePerpetuaPng>
         <animazionePerpetuaJson>/img/animazioni/Acquario.json</animazionePerpetuaJson>
     </oggetto>
+    <oggetto nome="Bomba">
+        <classe>Item</classe>
+        <descrizione>Una bomba!</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
     <oggetto nome="ScrivaniaPT">
         <classe>Item</classe>
         <descrizione>Una scrivania di un bel colore vivace.</descrizione>
