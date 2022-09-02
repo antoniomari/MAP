@@ -7,6 +7,7 @@ package GUI.miniGames;
  */
 // TODO: possibilità di applicare factory design pattern
 
+import GUI.MainFrame;
 import GUI.gamestate.GameState;
 import general.GameManager;
 import general.LogOutputManager;
@@ -123,10 +124,6 @@ public class TestMist extends JDialog
         dialogLabel = new JLabel("", SwingConstants.CENTER);
         scrollPane = new JScrollPane(backgroundLabel);
 
-        // TODO: considerare implementazione design pattern factory
-        // queste 3 funzioni simulano una factory methods e servono
-        // per fornire un oggetto che sia in un determinato stato prima
-        // del suo utilizzo
         setup();
         setupListener();
         setDetails();
@@ -196,17 +193,22 @@ public class TestMist extends JDialog
     }
 
     private void setDetails() {
+        Insets mainFrameInsets = GameManager.getMainFrame().getInsets();
+
         checkTest.setBackground(new Color(225, 198,153));
         //questFrame.pack();
-        this.setSize(1000, 600);
-        this.setMaximumSize(new Dimension(backgroundImageIcon.getIconWidth(),
-                backgroundImageIcon.getIconHeight()));
-        this.setLocationRelativeTo(GameManager.getMainFrame());
+
+        this.setPreferredSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
+        this.setBounds(mainFrameInsets.left, mainFrameInsets.top, (int) getPreferredSize().getWidth(),
+                (int) getPreferredSize().getHeight());
+
+        // this.setLocationRelativeTo(GameManager.getMainFrame());
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         System.out.println("Prima");
         this.setVisible(true);
         System.out.println("Dopo");
+        pack();
     }
 
     private void setupListener() {
