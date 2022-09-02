@@ -8,30 +8,9 @@
         <azione>
             <subject>Ebert Briciola</subject>
             <method>add</method>
-            <what>Briciola</what>
-            <x>18</x>
-            <y>19</y>
-        </azione>
-        <azione>
-            <subject>Ebert Briciola</subject>
-            <method>add</method>
-            <what>Fungo</what>
-            <x>29</x>
-            <y>7</y>
-        </azione>
-        <azione>
-            <subject>Ebert Briciola</subject>
-            <method>add</method>
-            <what>Sasso</what>
-            <x>9</x>
-            <y>8</y>
-        </azione>
-        <azione>
-            <subject>Ebert Briciola</subject>
-            <method>add</method>
-            <what>Cannabis</what>
-            <x>12</x>
-            <y>11</y>
+            <what>Briciolina</what>
+            <x>28</x>
+            <y>21</y>
         </azione>
     </scenario>
 </stanza>

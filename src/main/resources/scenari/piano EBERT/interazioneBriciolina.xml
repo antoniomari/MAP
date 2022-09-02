@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/miao2.wav</what>
+    </azione>
+    <azione>
+        <subject>Briciolina</subject>
+        <method>speak</method>
+        <sentence>MIAAAAAAAOOOOOOO</sentence>
+    </azione>
+    <azione>
+        <subject>Briciolina</subject>
+        <method>effectAnimation</method>
+        <animationName>esplosione</animationName>
+        <isPerpetual>false</isPerpetual>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>Briciolina</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>add</method>
+        <what>Briciola</what>
+        <x>26</x>
+        <y>21</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/gattotrans.wav</what>
+    </azione>
+    <azione>
+        <subject>Briciola</subject>
+        <method>speak</method>
+        <sentence>MIAAAAAOOO (*) ["vattene da qua"]</sentence>
+    </azione>
+</scenario>

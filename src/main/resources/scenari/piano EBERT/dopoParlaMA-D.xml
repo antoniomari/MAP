@@ -65,4 +65,9 @@
         <cardinal>east</cardinal>
         <lock>false</lock>
     </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano EBERT/arrivoStanzaBriciola.xml</what>
+    </azione>
 </scenario>

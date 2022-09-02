@@ -61,5 +61,26 @@
             <x>27</x>
             <y>15</y>
         </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>Fungo</what>
+            <x>29</x>
+            <y>7</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>Sasso</what>
+            <x>9</x>
+            <y>8</y>
+        </azione>
+        <azione>
+            <subject>Ebert Garden</subject>
+            <method>add</method>
+            <what>Cannabis</what>
+            <x>12</x>
+            <y>11</y>
+        </azione>
     </scenario>
 </stanza>

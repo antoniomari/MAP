@@ -37,11 +37,13 @@
             <method>setEast</method>
             <what>src/main/resources/scenari/piano EBERT/ebert briciola.xml</what>
         </azione>
+        <!--
         <azione>
             <subject>Ebert-A</subject>
             <method>lockEntrance</method>
             <cardinal>east</cardinal>
             <lock>true</lock>
         </azione>
+        -->
     </scenario>
 </stanza>
