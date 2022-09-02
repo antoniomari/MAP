@@ -132,7 +132,7 @@ public class TestMist
 
     public static void executeTest()
     {
-        SwingUtilities.invokeLater(TestMist::new);
+        new TestMist();
     }
 
     private void setup() {
