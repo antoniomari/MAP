@@ -59,17 +59,17 @@ public class LogicQuest extends MiniGame
     }
 
     // costruttore
-    private LogicQuest(int questNumber)
+    private LogicQuest(int questNumber, String winText, String loseText, String[] buttonTexts,
+                       String iconPath)
     {
-        super("Primo Circuito settato correttamente.",
-                "Ops! Hai fuso il circuito.", "");
+        super(winText, loseText, "");
 
         scenarioOnWinPath = "src/main/resources/scenari/piano ALU/winLogicQuest.xml";
 
-        initContent(questNumber);
+        initContent(questNumber, buttonTexts, iconPath);
     }
 
-    private void initContent(int questNumber)
+    private void initContent(int questNumber, String[] buttonTexts, String iconPath)
     {
         this.questNumber = questNumber;
         mainWrapper = new JPanel(new BorderLayout());
@@ -82,8 +82,8 @@ public class LogicQuest extends MiniGame
         // creazione titolo del minigioco
         description = new JLabel("Circuito logico type " + numberTypeMap.get(questNumber), SwingConstants.CENTER);
 
-        initButtons(QUEST_1_BUTTONS_TEXT);
-        setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
+        initButtons(buttonTexts);
+        setIcon(iconPath);
 
         description.setForeground(Color.RED);
         description.setBackground(Color.BLUE);
@@ -145,53 +145,6 @@ public class LogicQuest extends MiniGame
         }
 
          */
-
-        /**************
-
-        JLayeredPane testPanelWrapper = new JLayeredPane();
-        scrollPane = new JScrollPane(testPanelWrapper);
-        testPanel = new JPanel();
-        testPanel.setLayout(new BorderLayout());
-
-        testPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height * 2));
-        testPanel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
-                testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
-
-
-        Image backgroundImage = SpriteManager.loadSpriteSheet("/img/ImageMiniGames/sfondofoglio.jpg");
-        backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(backgroundImage, testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
-
-        backgroundLabel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
-                testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
-
-
-        testPanelWrapper.setPreferredSize(new Dimension(testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
-        testPanelWrapper.add(testPanel,  Integer.valueOf(2));
-        testPanelWrapper.add(backgroundLabel, Integer.valueOf(1));
-
-
-        scrollPane.setBounds(getInsets().left, getInsets().top, (int) getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
-        add(scrollPane, TEST_LAYER);
-
-
-
-        headingPanel = new JPanel(new GridLayout(2,1));;
-        title = new JLabel("Minimum intelligence signal text", SwingConstants.CENTER);
-        description = new JLabel("Test psicologico intelletivo somministrato dalla Dott.ssa Gastani Frinzi.",
-                SwingConstants.CENTER);
-
-
-
-        questPanel = new JPanel(new GridLayout(20,1));
-
-        checkTest = new JButton("Verifica");
-        checkTest.setFocusable(false);
-        checkTest.setBackground(new Color(225, 198,153));
-
-        fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
-        fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
-        fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
-         */
         setupListener();
         // TODO: modificare size
         imagePanel.setBackground(Color.BLUE);
@@ -213,7 +166,7 @@ public class LogicQuest extends MiniGame
             MiniGame.setCurrentTest(lastTest);
         else
         {
-            MiniGame.setCurrentTest(new LogicQuest(1));
+            MiniGame.setCurrentTest(createLogicQuest(1));
         }
     }
 
@@ -242,7 +195,7 @@ public class LogicQuest extends MiniGame
         winButtonText = winButton;
     }
 
-    /*
+
     public static LogicQuest createLogicQuest(int number)
     {
         if(number < 1 || number > 3)
@@ -255,40 +208,24 @@ public class LogicQuest extends MiniGame
         if(number == 1)
         {
             quest = new LogicQuest(number, "Primo Circuito settato correttamente.",
-                    "Ops! Hai fuso il circuito.");
-            quest.initButtons(QUEST_1_BUTTONS_TEXT);
-            quest.setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
-
+                    "Ops! Hai fuso il circuito.", QUEST_1_BUTTONS_TEXT,
+                    "src/main/resources/img/ImageMiniGames/geometryEquation.png");
         }
         else if(number == 2)
         {
             quest = new LogicQuest(number, "Secondo Circuito settato correttamente.",
-                    "Ops! Hai fuso il circuito.");
-            quest.initButtons(QUEST_2_BUTTONS_TEXT);
-            quest.setIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
-
+                    "Ops! Hai fuso il circuito.", QUEST_2_BUTTONS_TEXT,
+                    "src/main/resources/img/ImageMiniGames/sweetEquation.png");
         }
         else // number = 3
         {
             quest = new LogicQuest(number, "Complimenti hai settato tutti i circuiti logici!",
-                    "Peccato c'eri quasi, ma hai fuso il circuito.");
-            quest.initButtons(QUEST_3_BUTTONS_TEXT);
-            quest.setIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
+                    "Peccato c'eri quasi, ma hai fuso il circuito.", QUEST_3_BUTTONS_TEXT,
+                    "src/main/resources/img/ImageMiniGames/fruitEquation.png");
         }
-
-
-
-
-        quest.setup();
-        quest.setupListener();
-        quest.addDetails();
-
-        quest.setVisible(true);
-
         return quest;
     }
 
-     */
 
 
     private void setIcon(String iconPath)
