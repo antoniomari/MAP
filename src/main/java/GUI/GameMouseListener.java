@@ -36,6 +36,7 @@ public class GameMouseListener implements MouseListener
                     @Override
                     boolean checkButton(MouseEvent e)
                     {
+                        System.out.println("tasto destro? " + SwingUtilities.isRightMouseButton(e));
                         return SwingUtilities.isRightMouseButton(e);
                     }
                 };
