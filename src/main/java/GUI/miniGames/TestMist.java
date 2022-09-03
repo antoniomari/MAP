@@ -52,7 +52,7 @@ public class TestMist extends MiniGame
     private final JCheckBox[] answerS = new JCheckBox[ANSWERS];
     private final JCheckBox[] answerN = new JCheckBox[ANSWERS];
 
-    public final static String QUESTION_FONT_PATH = "src/main/resources/font/BASKE9.ttf";
+    public final static String QUESTION_FONT_PATH = "src/main/resources/font/AmericanTypewriter.ttf";
     public final static String TITLE_FONT_PATH = "src/main/resources/font/FontMaledetto.ttf";
     public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/Bookman Old Style Regular.ttf";
     private static Font ORIGINAL_QUESTION_FONT;
@@ -162,10 +162,9 @@ public class TestMist extends MiniGame
                 SwingConstants.CENTER);
 
         // resize font
-        QUESTION_FONT = ORIGINAL_QUESTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 100));
-        TITLE_FONT = ORIGINAL_TITLE_FONT.deriveFont((float)(getPreferredSize().getWidth() / 100));
-        DESCRIPTION_FONT = ORIGINAL_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 100));
-
+        QUESTION_FONT = ORIGINAL_QUESTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 40));
+        TITLE_FONT = ORIGINAL_TITLE_FONT.deriveFont((float)(getPreferredSize().getWidth() / 25));
+        DESCRIPTION_FONT = ORIGINAL_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 50));
 
         questPanel = new JPanel(new GridLayout(20,1));
 
