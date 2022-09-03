@@ -13,6 +13,7 @@ import GUI.MainFrame;
 import GUI.gamestate.GameState;
 import general.GameManager;
 import general.LogOutputManager;
+import general.xml.XmlParser;
 import graphics.SpriteManager;
 
 import javax.swing.*;
@@ -22,9 +23,7 @@ import java.awt.event.KeyEvent;
 public class TestMist extends MiniGame
 {
 
-    private static final Integer BACKGROUND_LAYER = 0;
-    private static final Integer TEST_LAYER = 1;
-    private static final Integer RESULT_LAYER = 2;
+
     //JLabel e ImageIcon per creazione background
     private JLabel backgroundLabel;
     private JScrollPane scrollPane;
@@ -56,11 +55,6 @@ public class TestMist extends MiniGame
 
     private JButton checkTest;
 
-    // Utilizzati per la comunicazione di messaggi con l'utente
-    private JPanel resultPanel;
-    private JLabel dialogLabel;
-
-    private final String scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
 
     // questWrapper e una JLabel con funzione di wrapper attorno ad un elemento questions
     // e altri due swing components rispettivamente una answerS e un answerN che sono
@@ -101,40 +95,7 @@ public class TestMist extends MiniGame
 
 
     public TestMist() {
-        super();
-        setLayout(null);
-
-        GameScreenPanel gameScreenPanel = GameManager.getMainFrame().getGameScreenPanel();
-
-        Insets screenInsets = gameScreenPanel.getInsets();
-        final int width = gameScreenPanel.getWidth() * 3 / 4;
-        final int height = gameScreenPanel.getHeight() * 3 / 4;
-
-        final int xOffset = gameScreenPanel.getWidth() / 8;
-        final int yOffset =  gameScreenPanel.getHeight() / 8;
-
-        setPreferredSize(new Dimension(width, height));
-        setBounds(screenInsets.left + xOffset, screenInsets.top + yOffset,
-                width, height);
-
-        resultPanel = new JPanel();
-        resultPanel.setLayout(new BorderLayout());
-
-        resultPanel.setPreferredSize(new Dimension(width/2, height/2));
-        //resultPanel.setLocation((int) (getInsets().left + getPreferredSize().getWidth() / 4), (int) (getInsets().top + getPreferredSize().getHeight() / 4));
-        resultPanel.setBounds(width/4, height/4, width/2, height/2);
-        dialogLabel = new JLabel("", SwingConstants.CENTER);
-        resultPanel.add(dialogLabel, BorderLayout.CENTER);
-
-        JButton okButton = new JButton("Ok");
-        okButton.addActionListener((e) ->
-        {
-            resultPanel.setVisible(false);
-            remove(resultPanel);
-            GameState.changeState(GameState.State.TEST);
-        });
-
-        resultPanel.add(okButton, BorderLayout.SOUTH);
+        super(VICTORY, LOST, ERROR);
         initContent();
     }
 
@@ -177,6 +138,7 @@ public class TestMist extends MiniGame
         questPanel = new JPanel(new GridLayout(20,1));
 
         checkTest = new JButton("Verifica");
+        checkTest.setFocusable(false);
         checkTest.setBackground(new Color(225, 198,153));
 
         fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
@@ -211,9 +173,11 @@ public class TestMist extends MiniGame
         for (int i = 0; i < ANSWERS; i++) {
             answerPanel[i] = new JPanel(new GridLayout(1,2));
             answerS[i] = new JCheckBox("SI");
+            answerS[i].setFocusable(false);
             answerS[i].setOpaque(false);
             answerS[i].setFont(fontQuestion);
             answerN[i] = new JCheckBox("NO");
+            answerN[i].setFocusable(false);
             answerN[i].setOpaque(false);
             answerN[i].setFont(fontQuestion);
             answerPanel[i].add(answerS[i]);
@@ -257,16 +221,11 @@ public class TestMist extends MiniGame
 
 
     private void setupListener() {
-        // Listener per il bottone di verifica test
-        checkTest.addActionListener((ae) -> {
-            checkTestCompleted();
-        });
 
-        // listener sulla finestra della jdialog
-        // per la comunicazione con l'utente
+        checkTest.addActionListener((ae) -> checkTestCompleted());
     }
 
-    private void checkTestCompleted() {
+    protected void checkTestCompleted() {
         // elaborazione del test
         boolean completed = false;
         int counter = 1;
@@ -303,7 +262,7 @@ public class TestMist extends MiniGame
         }
     }
 
-    private boolean checkTestResult() {
+    protected boolean checkTestResult() {
         boolean checkSingleAnswer = true;
 
         for (int i = 0; i < ANSWERS; i++)
@@ -316,14 +275,5 @@ public class TestMist extends MiniGame
         }
 
         return checkSingleAnswer;
-    }
-
-    private void showResult(String msg)
-    {
-        GameState.changeState(GameState.State.TEST_RESULT);
-        dialogLabel.setText(msg);
-        add(resultPanel, RESULT_LAYER);
-        resultPanel.setVisible(true);
-        //this.setVisible(!msg.equals(VICTORY));
     }
 }

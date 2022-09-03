@@ -46,6 +46,7 @@ public class GameKeyListener implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
+        System.out.println("PREMUTA: " + pressed);
         if (GameState.getState() == targetState &&  e.getKeyCode() == keyCode)
         {
             if(!pressed)
