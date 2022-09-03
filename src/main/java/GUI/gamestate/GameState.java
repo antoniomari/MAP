@@ -4,6 +4,7 @@ import GUI.AbsPosition;
 import GUI.GameKeyListener;
 import GUI.GameScreenManager;
 import GUI.MainFrame;
+import GUI.miniGames.MiniGame;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
@@ -49,7 +50,8 @@ public class GameState
         MOVING,
         TEXT_BAR,
         SCENARIO_SOUND,
-        TEST
+        TEST,
+        TEST_RESULT
     }
 
     static
@@ -137,6 +139,12 @@ public class GameState
                 () -> {mainFrame.getTextBarPanel().hideTextBar(); GameManager.continueScenario();},
                 null, State.TEXT_BAR);
         mainFrame.addKeyListener(closeBarListener);
+
+
+        // aggiungi esclistener
+        GameKeyListener quitTestListener = new GameKeyListener(KeyEvent.VK_ESCAPE, MiniGame::quitCurrentTest,
+                null, State.TEST);
+        mainFrame.addKeyListener(quitTestListener);
     }
 
     public static synchronized void changeState(State newState)

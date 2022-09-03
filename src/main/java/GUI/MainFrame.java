@@ -340,7 +340,7 @@ public class MainFrame extends JFrame {
         JLabel backgroundLabel = new JLabel(backgroundImg);
 
         // Imposta dimensioni pannello sfruttando la larghezza dello schermo
-        gameScreenPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, gameHeight)); // SCREEN_WIDTH / 2));
+        gameScreenPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, gameHeight));
 
         // Aggiungi background al layer 0
         gameScreenPanel.add(backgroundLabel, GameScreenPanel.BACKGROUND_LAYER);

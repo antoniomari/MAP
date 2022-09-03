@@ -7,25 +7,27 @@ package GUI.miniGames;
  */
 // TODO: possibilità di applicare factory design pattern
 
+import GUI.GameKeyListener;
 import GUI.GameScreenPanel;
 import GUI.MainFrame;
 import GUI.gamestate.GameState;
 import general.GameManager;
 import general.LogOutputManager;
+import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
-public class TestMist extends JPanel
+public class TestMist extends MiniGame
 {
-    private static final Integer BACKGROUND_LAYER = 0;
-    private static final Integer CONTENT_LAYER = 1;
-    private static final Integer RESULT_LAYER = 2;
 
+    private static final Integer BACKGROUND_LAYER = 0;
+    private static final Integer TEST_LAYER = 1;
+    private static final Integer RESULT_LAYER = 2;
     //JLabel e ImageIcon per creazione background
     private JLabel backgroundLabel;
-    private ImageIcon backgroundImageIcon;
-    private final JScrollPane scrollPane;
+    private JScrollPane scrollPane;
 
     //JLabel per il titolo e l'intestazione del test
     private JLabel title;
@@ -38,7 +40,7 @@ public class TestMist extends JPanel
     // componenti JPanel presenti e a suo tempo è incapsulato in
     // uno JScrollPane per permettere la visulizzazione del
     // contenuto in modo ottimale
-    private final JPanel testPanel;
+    private JPanel testPanel;
 
     // conterrà l'array contenente le domande del test
     private JPanel questPanel;
@@ -55,7 +57,7 @@ public class TestMist extends JPanel
     private JButton checkTest;
 
     // Utilizzati per la comunicazione di messaggi con l'utente
-    private JPanel infoPlayer;
+    private JPanel resultPanel;
     private JLabel dialogLabel;
 
     private final String scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
@@ -102,23 +104,67 @@ public class TestMist extends JPanel
         super();
         setLayout(null);
 
-        Insets mainFrameInsets = GameManager.getMainFrame().getInsets();
+        GameScreenPanel gameScreenPanel = GameManager.getMainFrame().getGameScreenPanel();
 
-        setPreferredSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
-        //setSize(new Dimension((MainFrame.SCREEN_WIDTH * 3) / 4, (MainFrame.SCREEN_HEIGHT * 3) / 4));
+        Insets screenInsets = gameScreenPanel.getInsets();
+        final int width = gameScreenPanel.getWidth() * 3 / 4;
+        final int height = gameScreenPanel.getHeight() * 3 / 4;
 
-        setBounds(mainFrameInsets.left, mainFrameInsets.top, (int) getPreferredSize().getWidth(),
-                (int) getPreferredSize().getHeight());
+        final int xOffset = gameScreenPanel.getWidth() / 8;
+        final int yOffset =  gameScreenPanel.getHeight() / 8;
 
-        testPanel = new JPanel(new BorderLayout());
+        setPreferredSize(new Dimension(width, height));
+        setBounds(screenInsets.left + xOffset, screenInsets.top + yOffset,
+                width, height);
 
-        /*
-        backgroundImageIcon = new ImageIcon("src/main/resources/img/ImageMiniGames/sfondofoglio.jpg");
-        backgroundLabel = new JLabel(backgroundImageIcon);
+        resultPanel = new JPanel();
+        resultPanel.setLayout(new BorderLayout());
 
-         */
-        // backgroundLabel.setBounds(getInsets().left, getInsets().top, getPreferredSize().width, getPreferredSize().height);
-        // add(backgroundLabel, BACKGROUND_LAYER);
+        resultPanel.setPreferredSize(new Dimension(width/2, height/2));
+        //resultPanel.setLocation((int) (getInsets().left + getPreferredSize().getWidth() / 4), (int) (getInsets().top + getPreferredSize().getHeight() / 4));
+        resultPanel.setBounds(width/4, height/4, width/2, height/2);
+        dialogLabel = new JLabel("", SwingConstants.CENTER);
+        resultPanel.add(dialogLabel, BorderLayout.CENTER);
+
+        JButton okButton = new JButton("Ok");
+        okButton.addActionListener((e) ->
+        {
+            resultPanel.setVisible(false);
+            remove(resultPanel);
+            GameState.changeState(GameState.State.TEST);
+        });
+
+        resultPanel.add(okButton, BorderLayout.SOUTH);
+        initContent();
+    }
+
+    public void initContent()
+    {
+        JLayeredPane testPanelWrapper = new JLayeredPane();
+        scrollPane = new JScrollPane(testPanelWrapper);
+        testPanel = new JPanel();
+        testPanel.setLayout(new BorderLayout());
+
+        testPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height * 2));
+        testPanel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
+                testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
+
+
+        Image backgroundImage = SpriteManager.loadSpriteSheet("/img/ImageMiniGames/sfondofoglio.jpg");
+        backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(backgroundImage, testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
+
+        backgroundLabel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
+                testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
+
+
+        testPanelWrapper.setPreferredSize(new Dimension(testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
+        testPanelWrapper.add(testPanel,  Integer.valueOf(2));
+        testPanelWrapper.add(backgroundLabel, Integer.valueOf(1));
+
+
+        scrollPane.setBounds(getInsets().left, getInsets().top, (int) getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
+        add(scrollPane, TEST_LAYER);
+
 
 
         headingPanel = new JPanel(new GridLayout(2,1));;
@@ -139,35 +185,25 @@ public class TestMist extends JPanel
 
 
 
-        /*
-        infoPlayer = new JPanel();
-        //add(infoPlayer);
-        dialogLabel = new JLabel("", SwingConstants.CENTER);
-        //scrollPane.setBounds(getInsets().left, getInsets().top, 500, 200);
-        // aggiunta di tutti i componenti nel mainframe
-        //this.add(scrollPane, BorderLayout.CENTER);
 
-         */
-        scrollPane = new JScrollPane(testPanel);
-
-
-
-        testPanel.setBackground(new Color(127,127,127));
-        testPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height * 2));
-        scrollPane.setBounds(getInsets().left, getInsets().top, (int) getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
-        add(scrollPane);
         setup();
-        //setupListener();
-        this.setVisible(true);
-
+        setupListener();
+        setVisible(true);
     }
 
     public static void executeTest()
     {
         LogOutputManager.logOutput("Iniziando Test MIST: ", LogOutputManager.GAMESTATE_COLOR);
         GameState.changeState(GameState.State.TEST);
-        TestMist testMist = new TestMist();
-        GameManager.getMainFrame().getGameScreenPanel().add(testMist, GameScreenPanel.TEXT_BAR_LEVEL);
+
+        MiniGame lastTest = MiniGame.getLastQuitTest();
+
+        if(lastTest instanceof TestMist)
+            MiniGame.setCurrentTest(lastTest);
+        else
+        {
+            MiniGame.setCurrentTest(new TestMist());
+        }
     }
 
     private void setup() {
@@ -202,9 +238,8 @@ public class TestMist extends JPanel
         }
 
         // composizioni dei componenti swing sul layer centrale
-         questPanel.setOpaque(false);
-        testPanel.add(questPanel, BorderLayout.CENTER);
-        //testPanel.setOpaque(false);
+        questPanel.setOpaque(false);
+        testPanel.setOpaque(false);
         scrollPane.setOpaque(false);
 
         // composizione dei componenti swing sul layer in alto
@@ -213,19 +248,11 @@ public class TestMist extends JPanel
         headingPanel.add(title);
         headingPanel.add(description);
         headingPanel.setOpaque(false);
-        testPanel.add(headingPanel, BorderLayout.NORTH);
         checkTest.setFont(fontDescription);
+
+        testPanel.add(questPanel, BorderLayout.CENTER);
+        testPanel.add(headingPanel, BorderLayout.NORTH);
         testPanel.add(checkTest, BorderLayout.SOUTH);
-
-        // composizione del testPanel all'interno del background
-        // fornito dall'imagine contenuta nella JLabel
-        /*
-        backgroundLabel.setLayout(new BorderLayout());
-        backgroundLabel.add(testPanel, BorderLayout.CENTER);
-
-        backgroundLabel.add(checkTest, BorderLayout.SOUTH);
-
-         */
     }
 
 
@@ -291,11 +318,12 @@ public class TestMist extends JPanel
         return checkSingleAnswer;
     }
 
-    private void showResult(String msg) {
+    private void showResult(String msg)
+    {
+        GameState.changeState(GameState.State.TEST_RESULT);
         dialogLabel.setText(msg);
-        infoPlayer.add(dialogLabel);
-        infoPlayer.setSize(450, 100);
-        infoPlayer.setVisible(true);
-        this.setVisible(!msg.equals(VICTORY));
+        add(resultPanel, RESULT_LAYER);
+        resultPanel.setVisible(true);
+        //this.setVisible(!msg.equals(VICTORY));
     }
 }
