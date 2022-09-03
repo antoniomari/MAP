@@ -2,8 +2,11 @@ package GUI.miniGames;
 
 // TODO: possibilità di implementare il factory design pattern
 
+import GUI.gamestate.GameState;
 import general.GameException;
 import general.GameManager;
+import general.LogOutputManager;
+import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LogicQuest
+public class LogicQuest extends MiniGame
 {
 
     //TODO: modificare size
@@ -26,31 +29,24 @@ public class LogicQuest
 
     private static Map<Integer, Character> numberTypeMap;
 
-    private final JDialog questDialog;
+   // private final JPanel this;
 
-    private final JPanel mainWrapper;
-    private final JPanel container;
+    private JPanel mainWrapper;
+    private JPanel container;
 
     // titolo del primo enigma
     private JLabel description;
 
     // componeti per la gestione dell'immagine
-    private final JPanel imagePanel;
+    private JPanel imagePanel;
     private JLabel image;
 
     // Pannello per il layout dei buttoni
-    private final JPanel optionPanel;
+    private JPanel optionPanel;
 
     // TODO: parametrizzare
     private JButton[] buttons;
     private String winButtonText;
-
-    // componenti Swing per comunicazione con utente
-    private final JDialog infoWindow;
-    private final JLabel infoText;
-    private String victoryText;
-    private String lostText;
-
 
     private int questNumber;
 
@@ -63,10 +59,19 @@ public class LogicQuest
     }
 
     // costruttore
-    private LogicQuest(int questNumber) {
+    private LogicQuest(int questNumber)
+    {
+        super("Primo Circuito settato correttamente.",
+                "Ops! Hai fuso il circuito.", "");
 
+        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/winLogicQuest.xml";
+
+        initContent(questNumber);
+    }
+
+    private void initContent(int questNumber)
+    {
         this.questNumber = questNumber;
-        questDialog = new JDialog(GameManager.getMainFrame(), "PIANO ALU PROVA DEI CIRCUITI LOGICI");
         mainWrapper = new JPanel(new BorderLayout());
 
         // creazione pannelli principali
@@ -77,88 +82,9 @@ public class LogicQuest
         // creazione titolo del minigioco
         description = new JLabel("Circuito logico type " + numberTypeMap.get(questNumber), SwingConstants.CENTER);
 
-        infoWindow = new JDialog(questDialog);
-        infoWindow.setModal(true);
-        infoText = new JLabel("", SwingConstants.CENTER);
+        initButtons(QUEST_1_BUTTONS_TEXT);
+        setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
 
-    }
-
-    public static void executeTest()
-    {
-        SwingUtilities.invokeLater(() -> LogicQuest.createLogicQuest(1));
-    }
-
-    private void initButtons(String[] buttonsText)
-    {
-        String winButton = buttonsText[0];
-
-        buttons = new JButton[4];
-
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(0);
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        java.util.Collections.shuffle(list);
-
-        buttons[list.get(0)] = new JButton(winButton);
-        buttons[list.get(1)] = new JButton(buttonsText[1]);
-        buttons[list.get(2)] = new JButton(buttonsText[2]);
-        buttons[list.get(3)] = new JButton(buttonsText[3]);
-
-        winButtonText = winButton;
-    }
-
-    public static LogicQuest createLogicQuest(int number)
-    {
-        if(number < 1 || number > 3)
-        {
-            throw new GameException("Logic quest number non valido");
-        }
-
-        LogicQuest quest = new LogicQuest(number);
-
-        if(number == 1)
-        {
-            quest.initButtons(QUEST_1_BUTTONS_TEXT);
-            quest.victoryText = "Primo Circuito settato correttamente.";
-            quest.lostText = "Ops! Hai fuso il circuito.";
-            quest.setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
-
-        }
-        else if(number == 2)
-        {
-            quest.initButtons(QUEST_2_BUTTONS_TEXT);
-            quest.victoryText = "Secondo Circuito settato correttamente.";
-            quest.lostText = "Ops! Hai fuso il circuito.";
-            quest.setIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
-
-        }
-        else // number = 3
-        {
-            quest.initButtons(QUEST_3_BUTTONS_TEXT);
-            quest.victoryText = "Complimenti hai settato tutti i circuiti logici!";
-            quest.lostText = "Peccato c'eri quasi, ma hai fuso il circuito.";
-            quest.setIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
-        }
-
-
-        quest.setup();
-        quest.setupListener();
-        quest.addDetails();
-
-        return quest;
-    }
-
-
-    private void setIcon(String iconPath)
-    {
-        ImageIcon icon = new ImageIcon(iconPath);
-        image = new JLabel(icon, JLabel.CENTER);
-    }
-
-
-    private void setup() {
         description.setForeground(Color.RED);
         description.setBackground(Color.BLUE);
         description.setFont(FONT);
@@ -186,67 +112,204 @@ public class LogicQuest
         mainWrapper.add(container, BorderLayout.CENTER);
         // wrapper finale per ottimizzare la visualizzazione
         // e gerarchia dei pannelli
-        JScrollPane scrollWrapper = new JScrollPane(mainWrapper);
-        questDialog.add(scrollWrapper, BorderLayout.CENTER);
-    }
+        int xOffset = (int) getPreferredSize().getWidth() / 4;
+        int yOffset = 0;
+        mainWrapper.setBounds(getInsets().left + xOffset, getInsets().top, (int) getPreferredSize().getWidth() / 2, (int)getPreferredSize().getHeight());
+        add(mainWrapper, TEST_LAYER);
 
-    final void addDetails() {
-        // TODO: modificare size
-        questDialog.setSize(600, 700);
-        questDialog.setModal(true);
-        questDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        questDialog.setResizable(false);
 
-        // imposta come "figlio"
-        // questDialog.setLocationRelativeTo(GameManager.getMainFrame());
-        imagePanel.setBackground(Color.BLUE);
-        optionPanel.setBackground(Color.DARK_GRAY);
-        questDialog.setBackground(Color.BLUE);
-        questDialog.getContentPane().setBackground(Color.BLUE);
-        questDialog.setVisible(true);
-    }
+        /*
 
-    private void setupListener() {
+        if(questNumber == 1)
+        {
+            quest = new LogicQuest(questNumber, "Primo Circuito settato correttamente.",
+                    "Ops! Hai fuso il circuito.");
+            quest.initButtons(QUEST_1_BUTTONS_TEXT);
+            quest.setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
 
-        for (JButton button : buttons)
-        {// gestione dei listener tramite espressioni lambda
-            button.addActionListener((e) -> {
-                if (e.getActionCommand().equals(winButtonText)) {
-                    showInfoResult(victoryText);
+        }
+        else if(number == 2)
+        {
+            quest = new LogicQuest(questNumber, "Secondo Circuito settato correttamente.",
+                    "Ops! Hai fuso il circuito.");
+            quest.initButtons(QUEST_2_BUTTONS_TEXT);
+            quest.setIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
 
-                    if(questNumber < 3)
-                        SwingUtilities.invokeLater(() -> createLogicQuest(questNumber + 1));
-
-                    questDialog.dispose();
-                }
-                else {
-                    showInfoResult(lostText);
-                }
-            });
+        }
+        else // number = 3
+        {
+            quest = new LogicQuest(number, "Complimenti hai settato tutti i circuiti logici!",
+                    "Peccato c'eri quasi, ma hai fuso il circuito.");
+            quest.initButtons(QUEST_3_BUTTONS_TEXT);
+            quest.setIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
         }
 
-        // listener sulla finestra della jdialog
-        // per la comunicazione con l'utente
-        infoWindow.addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing(WindowEvent arg0)
-            {
-                // System.out.println("Window closing");
-                questDialog.dispose();
-            }
-        });
+         */
+
+        /**************
+
+        JLayeredPane testPanelWrapper = new JLayeredPane();
+        scrollPane = new JScrollPane(testPanelWrapper);
+        testPanel = new JPanel();
+        testPanel.setLayout(new BorderLayout());
+
+        testPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height * 2));
+        testPanel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
+                testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
+
+
+        Image backgroundImage = SpriteManager.loadSpriteSheet("/img/ImageMiniGames/sfondofoglio.jpg");
+        backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(backgroundImage, testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
+
+        backgroundLabel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
+                testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
+
+
+        testPanelWrapper.setPreferredSize(new Dimension(testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
+        testPanelWrapper.add(testPanel,  Integer.valueOf(2));
+        testPanelWrapper.add(backgroundLabel, Integer.valueOf(1));
+
+
+        scrollPane.setBounds(getInsets().left, getInsets().top, (int) getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
+        add(scrollPane, TEST_LAYER);
+
+
+
+        headingPanel = new JPanel(new GridLayout(2,1));;
+        title = new JLabel("Minimum intelligence signal text", SwingConstants.CENTER);
+        description = new JLabel("Test psicologico intelletivo somministrato dalla Dott.ssa Gastani Frinzi.",
+                SwingConstants.CENTER);
+
+
+
+        questPanel = new JPanel(new GridLayout(20,1));
+
+        checkTest = new JButton("Verifica");
+        checkTest.setFocusable(false);
+        checkTest.setBackground(new Color(225, 198,153));
+
+        fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
+        fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
+        fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
+         */
+        setupListener();
+        // TODO: modificare size
+        imagePanel.setBackground(Color.BLUE);
+        optionPanel.setBackground(Color.DARK_GRAY);
+        this.setBackground(Color.BLUE);
+
+        setVisible(true);
     }
 
-    private void showInfoResult(String msg)
+
+    public static void executeTest()
     {
-        infoText.setText(msg);
-        infoWindow.add(infoText);
-        infoWindow.setSize(450, 100);
-        infoWindow.setLocationRelativeTo(questDialog);
-        infoWindow.setVisible(true);
-        infoWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        questDialog.setVisible(false);
+        LogOutputManager.logOutput("Iniziando Test ALU: ", LogOutputManager.GAMESTATE_COLOR);
+        GameState.changeState(GameState.State.TEST);
+
+        MiniGame lastTest = MiniGame.getLastQuitTest();
+
+        if(lastTest instanceof LogicQuest)
+            MiniGame.setCurrentTest(lastTest);
+        else
+        {
+            MiniGame.setCurrentTest(new LogicQuest(1));
+        }
     }
+
+    private void initButtons(String[] buttonsText)
+    {
+        String winButton = buttonsText[0];
+
+        buttons = new JButton[4];
+
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        java.util.Collections.shuffle(list);
+
+        buttons[list.get(0)] = new JButton(winButton);
+        buttons[list.get(0)].setFocusable(false);
+        buttons[list.get(1)] = new JButton(buttonsText[1]);
+        buttons[list.get(1)].setFocusable(false);
+        buttons[list.get(2)] = new JButton(buttonsText[2]);
+        buttons[list.get(2)].setFocusable(false);
+        buttons[list.get(3)] = new JButton(buttonsText[3]);
+        buttons[list.get(3)].setFocusable(false);
+
+        winButtonText = winButton;
+    }
+
+    /*
+    public static LogicQuest createLogicQuest(int number)
+    {
+        if(number < 1 || number > 3)
+        {
+            throw new GameException("Logic quest number non valido");
+        }
+
+        LogicQuest quest; //= new LogicQuest(number);
+
+        if(number == 1)
+        {
+            quest = new LogicQuest(number, "Primo Circuito settato correttamente.",
+                    "Ops! Hai fuso il circuito.");
+            quest.initButtons(QUEST_1_BUTTONS_TEXT);
+            quest.setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
+
+        }
+        else if(number == 2)
+        {
+            quest = new LogicQuest(number, "Secondo Circuito settato correttamente.",
+                    "Ops! Hai fuso il circuito.");
+            quest.initButtons(QUEST_2_BUTTONS_TEXT);
+            quest.setIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
+
+        }
+        else // number = 3
+        {
+            quest = new LogicQuest(number, "Complimenti hai settato tutti i circuiti logici!",
+                    "Peccato c'eri quasi, ma hai fuso il circuito.");
+            quest.initButtons(QUEST_3_BUTTONS_TEXT);
+            quest.setIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
+        }
+
+
+
+
+        quest.setup();
+        quest.setupListener();
+        quest.addDetails();
+
+        quest.setVisible(true);
+
+        return quest;
+    }
+
+     */
+
+
+    private void setIcon(String iconPath)
+    {
+        ImageIcon icon = new ImageIcon(iconPath);
+        image = new JLabel(icon, JLabel.CENTER);
+    }
+
+    private void setupListener()
+    {
+
+        for (JButton button : buttons)
+            button.addActionListener((e) ->
+            {
+                if (e.getActionCommand().equals(winButtonText))
+                    showResult(victory);
+                else
+                    showResult(lost);
+            });
+
+    }
+
 }
 

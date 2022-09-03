@@ -43,12 +43,14 @@ public abstract class MiniGame extends JLayeredPane
 
     private JPanel resultPanel;
     private JLabel resultLabel;
-    private String victory;
-    private String lost;
-    private String error;
+    protected String victory;
+    protected String lost;
+    protected String error;
     static final Integer TEST_LAYER = 1;
     static final Integer RESULT_LAYER = 2;
-    final String scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
+    String scenarioOnWinPath;
+
+    private boolean win = false;
 
     MiniGame(String victory, String lost, String error)
     {
@@ -92,7 +94,7 @@ public abstract class MiniGame extends JLayeredPane
             resultPanel.setVisible(false);
             remove(resultPanel);
 
-            if(checkTestResult())
+            if(win)
             {
                 GameState.changeState(GameState.State.PLAYING);
                 quit();
@@ -107,14 +109,15 @@ public abstract class MiniGame extends JLayeredPane
         resultPanel.add(okButton, BorderLayout.SOUTH);
     }
 
-    protected abstract boolean checkTestResult();
-
-
     protected void showResult(String msg)
     {
         GameState.changeState(GameState.State.TEST_RESULT);
         resultLabel.setText(msg);
         add(resultPanel, RESULT_LAYER);
+
+        if(msg.equals(victory))
+            win = true;
+
         resultPanel.setVisible(true);
     }
 

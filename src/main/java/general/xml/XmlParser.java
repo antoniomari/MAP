@@ -706,11 +706,7 @@ public class XmlParser
 
         // lo scenario viene mandato avanti dall'input di chiusura del JDialog del test inserito dall'utente
         if(what.equals("ALU"))
-            return () ->
-            {
-                LogicQuest.executeTest();
-                GameManager.continueScenario();
-            };
+            return LogicQuest::executeTest;
         else if(what.equals("MIST"))
             return TestMist::executeTest;
         else

@@ -55,9 +55,13 @@ public class TestMist extends MiniGame
     public final static String QUESTION_FONT_PATH = "src/main/resources/font/BASKE9.ttf";
     public final static String TITLE_FONT_PATH = "src/main/resources/font/FontMaledetto.ttf";
     public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/Bookman Old Style Regular.ttf";
-    private static Font QUESTION_FONT;
-    private static Font TITLE_FONT;
-    private static Font DESCRIPTION_FONT;
+    private static Font ORIGINAL_QUESTION_FONT;
+    private static Font ORIGINAL_TITLE_FONT;
+    private static Font ORIGINAL_DESCRIPTION_FONT;
+
+    private Font QUESTION_FONT;
+    private Font TITLE_FONT;
+    private Font DESCRIPTION_FONT;
 
     private JButton checkTest;
 
@@ -99,9 +103,27 @@ public class TestMist extends MiniGame
     private static final String ERROR = "ERRORE:  " +
             "controlla di aver dato una ed una sola risposta per ogni domanda.";
 
+    static
+    {
+        // Caricamento Font
+        try
+        {
+            ORIGINAL_QUESTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(QUESTION_FONT_PATH));
+            ORIGINAL_DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(DESCRIPTION_FONT_PATH));
+            ORIGINAL_TITLE_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(TITLE_FONT_PATH));
+        }
+        catch (IOException | FontFormatException e)
+        {
+            // errore nel caricamento del font
+            throw new IOError(e);
+        }
+    }
 
-    public TestMist() {
+
+    public TestMist()
+    {
         super(VICTORY, LOST, ERROR);
+        scenarioOnWinPath = "src/main/resources/scenari/piano MIST/fineTest.xml";
         initContent();
     }
 
@@ -139,6 +161,10 @@ public class TestMist extends MiniGame
         description = new JLabel("Test psicologico intelletivo somministrato dalla Dott.ssa Gastani Frinzi.",
                 SwingConstants.CENTER);
 
+        // resize font
+        QUESTION_FONT = ORIGINAL_QUESTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 100));
+        TITLE_FONT = ORIGINAL_TITLE_FONT.deriveFont((float)(getPreferredSize().getWidth() / 100));
+        DESCRIPTION_FONT = ORIGINAL_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 100));
 
 
         questPanel = new JPanel(new GridLayout(20,1));
@@ -146,23 +172,6 @@ public class TestMist extends MiniGame
         checkTest = new JButton("Verifica");
         checkTest.setFocusable(false);
         checkTest.setBackground(new Color(225, 198,153));
-
-        // Caricamento Font
-        try
-        {
-            QUESTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(QUESTION_FONT_PATH));
-            DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(DESCRIPTION_FONT_PATH));
-            TITLE_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(TITLE_FONT_PATH));
-        }
-        catch (IOException | FontFormatException e)
-        {
-            // errore nel caricamento del font
-            throw new IOError(e);
-        }
-
-        //fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
-        //fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
-        //fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
 
         setup();
         setupListener();
@@ -184,7 +193,8 @@ public class TestMist extends MiniGame
         }
     }
 
-    private void setup() {
+    private void setup()
+    {
         // settaggio dei jcheckBox per risposte si e no
         for (int i = 0; i < ANSWERS; i++) {
             answerPanel[i] = new JPanel(new GridLayout(1,2));
