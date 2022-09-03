@@ -52,9 +52,9 @@ public class TestMist extends MiniGame
     private final JCheckBox[] answerS = new JCheckBox[ANSWERS];
     private final JCheckBox[] answerN = new JCheckBox[ANSWERS];
 
-    public final static String QUESTION_FONT_PATH = "src/main/resources/font/BASKVILL.ttf";
-    public final static String TITLE_FONT_PATH = "src/main/resources/font/Castellar.ttf";
-    public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/BOOKOS.ttf";
+    public final static String QUESTION_FONT_PATH = "src/main/resources/font/BASKE9.ttf";
+    public final static String TITLE_FONT_PATH = "src/main/resources/font/FontMaledetto.ttf";
+    public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/Bookman Old Style Regular.ttf";
     private static Font QUESTION_FONT;
     private static Font TITLE_FONT;
     private static Font DESCRIPTION_FONT;
