@@ -5,7 +5,6 @@ import graphics.SpriteManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.ArrayList;

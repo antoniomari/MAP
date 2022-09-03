@@ -53,7 +53,7 @@ public class XmlParser
     {
         Optional<String> value = getOptionalTagValue(xmlElement, tagName);
 
-        if(value.isEmpty())
+        if(!value.isPresent())
             throw new GameException("tag [" + tagName + "] non presente in xml");
         else
             return value.get();
@@ -425,7 +425,7 @@ public class XmlParser
         // ricava stringa da stampare
         String sentence = getTagValue(eAction, "sentence");
         // formatta stringa (spazi)
-        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
+        String sentenceNewLined = sentence.trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
 
         // lo scenario viene mandato avanti dall'input utente (chiusura textBar)
         return () -> ((GameCharacter) GameManager.getPiece(subjectName)).speak(sentenceNewLined);
@@ -437,7 +437,7 @@ public class XmlParser
         // ricava stringa da stampare
         String sentence = getTagValue(eAction, "sentence");
         // formatta stringa (spazi)
-        String sentenceNewLined = sentence.strip().replaceAll("\\s\\(\\*\\)\\s", "\n");
+        String sentenceNewLined = sentence.trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
         String toPrint = subjectName + ": " + sentenceNewLined;
 
         // lo scenario viene mandato avanti dall'input utente (chiusura textBar)
