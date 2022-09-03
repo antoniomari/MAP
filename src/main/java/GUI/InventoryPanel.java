@@ -191,9 +191,9 @@ public class InventoryPanel extends JLayeredPane
 
         // aggiungi MouseListener per il tasto sinistro
         GameMouseListener upListener = new GameMouseListener(
-                            MouseEvent.BUTTON1, () -> {UP_BUTTON_PRESS.start();visualizePreviousBar();}, null);
+                            GameMouseListener.Button.LEFT, () -> {UP_BUTTON_PRESS.start();visualizePreviousBar();}, null);
         GameMouseListener downListener = new GameMouseListener(
-                            MouseEvent.BUTTON1, () -> {DOWN_BUTTON_PRESS.start(); visualizeNextBar(); }, null);
+                            GameMouseListener.Button.LEFT, () -> {DOWN_BUTTON_PRESS.start(); visualizeNextBar(); }, null);
         // registra listener
         upButtonLabel.addMouseListener(upListener);
         downButtonLabel.addMouseListener(downListener);
@@ -275,7 +275,7 @@ public class InventoryPanel extends JLayeredPane
 
             // aggiungi MouseListener per la selezione (tasto sinistro)
             GameMouseListener selectionListener = new GameMouseListener(
-                        MouseEvent.BUTTON1,
+                        GameMouseListener.Button.LEFT,
                     () ->
                     {
                         selectItem(itemLabelList.indexOf(tempLabel));
@@ -284,7 +284,7 @@ public class InventoryPanel extends JLayeredPane
                     }, null);
 
             GameMouseListener observeListener = new GameMouseListener(
-                    MouseEvent.BUTTON3,
+                    GameMouseListener.Button.RIGHT,
                     () ->
                     {
                         if(selectedItem != null)  // TODO : aggiustare in modo tale che esca descrizione click solo item
