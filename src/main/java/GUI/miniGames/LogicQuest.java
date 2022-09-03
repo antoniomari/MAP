@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +24,9 @@ public class LogicQuest extends MiniGame
 {
 
     //TODO: modificare size
-    private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
+   // private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
+    public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/FbiOld.ttf";
+    private static Font FB_FONT;
 
     private static String[] QUEST_1_BUTTONS_TEXT = {"1", "2", "5", "7"};
     private static String[] QUEST_2_BUTTONS_TEXT = {"3, 2, 1", "5, 4, 8", "3, 2, 5", "3, 6, 1"};
@@ -56,6 +61,18 @@ public class LogicQuest extends MiniGame
         numberTypeMap.put(1, 'A');
         numberTypeMap.put(2, 'B');
         numberTypeMap.put(3, 'C');
+
+        // Caricamento Font
+        try
+        {
+            FB_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(DESCRIPTION_FONT_PATH));
+        }
+        catch (IOException | FontFormatException e)
+        {
+            // errore nel caricamento del font
+            throw new IOError(e);
+        }
+
     }
 
     // costruttore
@@ -87,7 +104,8 @@ public class LogicQuest extends MiniGame
 
         description.setForeground(Color.RED);
         description.setBackground(Color.BLUE);
-        description.setFont(FONT);
+        // description.setFont(FONT);
+        description.setFont(FB_FONT.deriveFont((float)(getPreferredSize().getWidth() / 10)));
         image.setBackground(Color.BLUE);
         imagePanel.add(image);
         imagePanel.setToolTipText("Risolvi l'equazione");
@@ -98,7 +116,8 @@ public class LogicQuest extends MiniGame
         {
             button.setBackground(Color.BLUE);
             button.setForeground(Color.RED);
-            button.setFont(FONT);
+            //  button.setFont(FONT);
+            button.setFont(FB_FONT.deriveFont((float)(getPreferredSize().getWidth() / 15)));
             button.setToolTipText("Click sinistro per rispondere");
             optionPanel.add(button);
         };
