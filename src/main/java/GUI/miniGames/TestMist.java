@@ -19,6 +19,9 @@ import graphics.SpriteManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 
 public class TestMist extends MiniGame
 {
@@ -49,9 +52,12 @@ public class TestMist extends MiniGame
     private final JCheckBox[] answerS = new JCheckBox[ANSWERS];
     private final JCheckBox[] answerN = new JCheckBox[ANSWERS];
 
-    private Font fontQuestion;
-    private Font fontTitle;
-    private Font fontDescription;
+    public final static String QUESTION_FONT_PATH = "src/main/resources/font/BASKVILL.ttf";
+    public final static String TITLE_FONT_PATH = "src/main/resources/font/Castellar.ttf";
+    public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/BOOKOS.ttf";
+    private static Font QUESTION_FONT;
+    private static Font TITLE_FONT;
+    private static Font DESCRIPTION_FONT;
 
     private JButton checkTest;
 
@@ -141,12 +147,22 @@ public class TestMist extends MiniGame
         checkTest.setFocusable(false);
         checkTest.setBackground(new Color(225, 198,153));
 
-        fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
-        fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
-        fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
+        // Caricamento Font
+        try
+        {
+            QUESTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(QUESTION_FONT_PATH));
+            DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(DESCRIPTION_FONT_PATH));
+            TITLE_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(TITLE_FONT_PATH));
+        }
+        catch (IOException | FontFormatException e)
+        {
+            // errore nel caricamento del font
+            throw new IOError(e);
+        }
 
-
-
+        //fontQuestion = new Font("Baskerville Old Face", Font.ITALIC,18);
+        //fontDescription = new Font("Bookman Old Style", Font.PLAIN, 20);
+        //fontTitle = new Font("Castellar", Font.BOLD | Font.ITALIC, 34);
 
         setup();
         setupListener();
@@ -175,11 +191,11 @@ public class TestMist extends MiniGame
             answerS[i] = new JCheckBox("SI");
             answerS[i].setFocusable(false);
             answerS[i].setOpaque(false);
-            answerS[i].setFont(fontQuestion);
+            answerS[i].setFont(QUESTION_FONT);
             answerN[i] = new JCheckBox("NO");
             answerN[i].setFocusable(false);
             answerN[i].setOpaque(false);
-            answerN[i].setFont(fontQuestion);
+            answerN[i].setFont(QUESTION_FONT);
             answerPanel[i].add(answerS[i]);
             answerPanel[i].add(answerN[i]);
             answerPanel[i].setOpaque(false);
@@ -194,7 +210,7 @@ public class TestMist extends MiniGame
             //questions[j].setLayout(new BorderLayout());
             //questions[j].add(answerPanel[j],BorderLayout.EAST);
             questions[j].setOpaque(false);
-            questions[j].setFont(fontQuestion);
+            questions[j].setFont(QUESTION_FONT);
             questWrapper[j].add(questions[j]);
             questWrapper[j].add(answerPanel[j]);
             questWrapper[j].setOpaque(false);
@@ -207,12 +223,12 @@ public class TestMist extends MiniGame
         scrollPane.setOpaque(false);
 
         // composizione dei componenti swing sul layer in alto
-        title.setFont(fontTitle);
-        description.setFont(fontDescription);
+        title.setFont(TITLE_FONT);
+        description.setFont(DESCRIPTION_FONT);
         headingPanel.add(title);
         headingPanel.add(description);
         headingPanel.setOpaque(false);
-        checkTest.setFont(fontDescription);
+        checkTest.setFont(DESCRIPTION_FONT);
 
         testPanel.add(questPanel, BorderLayout.CENTER);
         testPanel.add(headingPanel, BorderLayout.NORTH);
