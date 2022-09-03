@@ -33,7 +33,7 @@ public class Room
         public static Cardinal fromString(String cardinal)
         {
             // ignore spaces
-            cardinal = cardinal.strip();
+            cardinal = cardinal.trim();
 
             for(Cardinal c : Cardinal.values())
                 if(cardinal.equalsIgnoreCase(String.valueOf(c)))

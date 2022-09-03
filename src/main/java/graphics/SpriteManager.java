@@ -13,10 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,11 +103,19 @@ public class SpriteManager
 
     public static JSONObject getJsonFromFile(String jsonPath)
     {
-        InputStream is = SpriteManager.class.getResourceAsStream(jsonPath);
-        assert is != null;
-        JSONTokener tokener = new JSONTokener(is);
+        try
+        {
+            jsonPath = "src/main/resources" + jsonPath;
+            InputStream is = new FileInputStream(jsonPath);
+            // InputStream is = SpriteManager.class.getResourceAsStream(jsonPath);
+            JSONTokener tokener = new JSONTokener(is);
 
-        return new JSONObject(tokener);
+            return new JSONObject(tokener);
+        }
+        catch(FileNotFoundException e)
+        {
+            throw new GameException("Errore nel caricamento del json " + jsonPath);
+        }
     }
 
 

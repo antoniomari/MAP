@@ -399,13 +399,13 @@ public class GameScreenPanel extends JLayeredPane
         // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
         if(!(piece instanceof PlayingCharacter))
         {
-            GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
+            GameMouseListener popMenuListener = new GameMouseListener(GameMouseListener.Button.RIGHT,
                     null, () -> PopMenuManager.showMenu(piece, pieceLabel, 0, 0));
             pieceLabel.addMouseListener(popMenuListener);
         }
 
         // crea listener per il tasto sinistro
-        GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+        GameMouseListener interactionListener = new GameMouseListener(GameMouseListener.Button.LEFT,
                 null,
                 () ->
                 {
@@ -547,12 +547,12 @@ public class GameScreenPanel extends JLayeredPane
         JLabel itemLabel = new JLabel(rescaledSprite);
 
         // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
-        GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
+        GameMouseListener popMenuListener = new GameMouseListener(GameMouseListener.Button.RIGHT,
                 null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
         itemLabel.addMouseListener(popMenuListener);
 
         // crea listener per il tasto sinistro
-        GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+        GameMouseListener interactionListener = new GameMouseListener(GameMouseListener.Button.LEFT,
                 null,
                 () ->
                 {
@@ -589,7 +589,7 @@ public class GameScreenPanel extends JLayeredPane
         JLabel characterLabel = new JLabel(rescaledSprite);
 
         // TODO: aggiustare per evitare copia
-        GameMouseListener interactionListener = new GameMouseListener(MouseEvent.BUTTON1,
+        GameMouseListener interactionListener = new GameMouseListener(GameMouseListener.Button.LEFT,
                 null,
                 () ->
                 {
@@ -603,7 +603,7 @@ public class GameScreenPanel extends JLayeredPane
         if(ch instanceof NPC)
         {
             // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
-            GameMouseListener popMenuListener = new GameMouseListener(MouseEvent.BUTTON3,
+            GameMouseListener popMenuListener = new GameMouseListener(GameMouseListener.Button.RIGHT,
                     null, () -> PopMenuManager.showMenu(ch, characterLabel, 0, 0));
             characterLabel.addMouseListener(popMenuListener);
         }

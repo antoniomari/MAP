@@ -76,15 +76,22 @@ public class GameCharacter extends GamePiece
 
     private void initSpeakFrame()
     {
+
         try
         {
             speakFrame = SpriteManager.loadSpriteByName(spritesheet, jsonPath, "speaking");
         }
         catch(JSONException e)
         {
-            fakeInitSpeakFrame();
+            try
+            {
+                speakFrame = SpriteManager.loadSpriteByName(spritesheet, jsonPath, getName() + "speaking");
+            }
+            catch(JSONException eg)
+            {
+                fakeInitSpeakFrame();
+            }
         }
-
     }
 
     private void fakeInitSpeakFrame()

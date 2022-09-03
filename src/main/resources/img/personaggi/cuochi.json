@@ -23,6 +23,14 @@
     "height": 120
   },
 
+  "Cuoco1speaking":
+  {
+    "x": 96,
+    "y": 0,
+    "width": 48,
+    "height": 120
+  },
+
   "Cuoco1":
   {
     "x": 144,
@@ -32,6 +40,14 @@
   },
 
   "Cuoco2animate2":
+  {
+    "x": 0,
+    "y": 120,
+    "width": 48,
+    "height": 120
+  },
+
+  "Cuoco2speaking":
   {
     "x": 0,
     "y": 120,

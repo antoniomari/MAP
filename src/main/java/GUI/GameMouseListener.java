@@ -1,13 +1,15 @@
 package GUI;
 
 import GUI.gamestate.GameState;
+import general.GameManager;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class GameMouseListener implements MouseListener
 {
-    private final int button;
+    private final Button button;
     private final Runnable pressAction;
     private final Runnable releaseAction;
 
@@ -18,13 +20,35 @@ public class GameMouseListener implements MouseListener
 
     private boolean okFlag;
 
+    public enum Button
+    {
+        LEFT
+                {
+                    @Override
+                    boolean checkButton(MouseEvent e)
+                 {
 
-    public GameMouseListener(int button, Runnable pressAction, Runnable releaseAction)
+                     return SwingUtilities.isLeftMouseButton(e);
+                 }
+                },
+        RIGHT
+                {
+                    @Override
+                    boolean checkButton(MouseEvent e)
+                    {
+                        return SwingUtilities.isRightMouseButton(e);
+                    }
+                };
+
+        abstract boolean checkButton(MouseEvent e);
+    }
+
+    public GameMouseListener(Button button, Runnable pressAction, Runnable releaseAction)
     {
         this(button, pressAction, releaseAction, GameState.State.PLAYING);
     }
 
-    public GameMouseListener(int button, Runnable pressAction, Runnable releaseAction, GameState.State targetState)
+    public GameMouseListener(Button button, Runnable pressAction, Runnable releaseAction, GameState.State targetState)
     {
         this.button = button;
 
@@ -62,7 +86,7 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mousePressed(MouseEvent e)
     {
-        if (GameState.getState() == targetState &&  e.getButton() == button)
+        if (GameState.getState() == targetState &&  button.checkButton(e))
         {
             pressAction.run();
             okFlag = true;
@@ -72,7 +96,7 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mouseReleased(MouseEvent e)
     {
-        if (GameState.getState() == targetState && e.getButton() == button)
+        if (GameState.getState() == targetState && button.checkButton(e))
         {
             if(okFlag)
                 releaseAction.run();

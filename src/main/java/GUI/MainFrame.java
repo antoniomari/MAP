@@ -534,7 +534,7 @@ public class MainFrame extends JFrame {
         GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, DEFAULT_SCALING_FACTOR / 3);
 
         GameMouseListener buttonListener = new GameMouseListener(
-                                            MouseEvent.BUTTON1, clickAction, null, GameState.State.INIT);
+                                            GameMouseListener.Button.LEFT, clickAction, null, GameState.State.INIT);
         buttonListener.setMouseEnteredAction(
                 () -> {buttonLabel.changeIcon(true); SoundHandler.playWav("src/main/resources/audio/effetti/bottone selezione mouse.wav", SoundHandler.Mode.SOUND);});
 

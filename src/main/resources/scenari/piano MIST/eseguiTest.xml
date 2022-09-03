@@ -9,221 +9,220 @@
         <x>0</x>
         <y>12</y>
     </azione>
-    <!--
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>TAH DAAAAH, eccomi quaaa!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>move</method>
-    <x>13</x>
-    <y>11</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Come ho fatto a raggiungerla? Bhe...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>... ho preso le scale!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Fammi dare un'occhiata</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>move</method>
-    <x>18</x>
-    <y>9</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Mmmmhhhh</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>move</method>
-    <x>13</x>
-    <y>9</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Mmhhh... Mmmmmmhh</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>move</method>
-    <x>15</x>
-    <y>14</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>....mmmmhhhhhhh....</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>move</method>
-    <x>15</x>
-    <y>10</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Credo sia bloccato.</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Credo serva chiamare un tecnico che (*) ci capisca qualcosa di queste cose...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Aspetta, io dovrei saperne (*) qualcosa di queste cose!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Però ora non posso aggiustarlo, (*) non ho tempo!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>move</method>
-    <x>25</x>
-    <y>9</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Devo fare una specie di test...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>A quella pazza della mia psicologa (*) piace farmi perdere tempo.</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Lei non sa che io devo lavorare!!!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Mio nonno diceva sempre che (*) il lavoro rende liberi...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Lui si che era un vecchio (*) tedesco di sani princìpi!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Però aveva delle strane abitudini</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Vestiva sempre di nero e diceva di (*) chiamarsi Ariano... o qualcosa di simile</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>O qualcosa di simile</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Non mi ha mai parlato della sua gioventù, (*) soprattutto della guerra</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Di solito i vecchi parlano spesso (*) della guerra</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Ma lui cambiava sempre discorso</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Avrebbe dovuto conoscerlo, (*) gli piacevano gli scienzati!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Comunque, mi è venuta una brillante idea</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Se tu completassi il test al posto mio, (*) io avrei il tempo di aggiustare questo ascensore!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Sembri uno InTeLlIgEnTe... (*) mi fido di te</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Ecco a te il foglio delle domande, (*) è un pò stropicciato ma non farci caso</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Occhio a non sbagliare!!!</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Non vorrai farmi chiudere in un manicomio (*) pieno di pazzi e di medicine...</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>speak</method>
-    <sentence>Vabbè forse le medicine... (*) Lascia stare. Ecco il test</sentence>
-</azione>
-<azione>
-    <subject>Tecnico</subject>
-    <method>setState</method>
-    <state>erogaTestMist</state>
-</azione>
--->
+
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>TAH DAAAAH, eccomi quaaa!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>13</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Come ho fatto a raggiungerla? Bhe...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>... ho preso le scale!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Fammi dare un'occhiata</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>18</x>
+        <y>9</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Mmmmhhhh</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>13</x>
+        <y>9</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Mmhhh... Mmmmmmhh</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>15</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>....mmmmhhhhhhh....</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>15</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Credo sia bloccato.</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Credo serva chiamare un tecnico che (*) ci capisca qualcosa di queste cose...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Aspetta, io dovrei saperne (*) qualcosa di queste cose!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Però ora non posso aggiustarlo, (*) non ho tempo!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>25</x>
+        <y>9</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Devo fare una specie di test...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>A quella pazza della mia psicologa (*) piace farmi perdere tempo.</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Lei non sa che io devo lavorare!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Mio nonno diceva sempre che (*) il lavoro rende liberi...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Lui si che era un vecchio (*) tedesco di sani princìpi!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Però aveva delle strane abitudini</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Vestiva sempre di nero e diceva di (*) chiamarsi Ariano... o qualcosa di simile</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>O qualcosa di simile</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Non mi ha mai parlato della sua gioventù, (*) soprattutto della guerra</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Di solito i vecchi parlano spesso (*) della guerra</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Ma lui cambiava sempre discorso</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Avrebbe dovuto conoscerlo, (*) gli piacevano gli scienzati!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Comunque, mi è venuta una brillante idea</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Se tu completassi il test al posto mio, (*) io avrei il tempo di aggiustare questo ascensore!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Sembri uno InTeLlIgEnTe... (*) mi fido di te</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Ecco a te il foglio delle domande, (*) è un pò stropicciato ma non farci caso</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Occhio a non sbagliare!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Non vorrai farmi chiudere in un manicomio (*) pieno di pazzi e di medicine...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Vabbè forse le medicine... (*) Lascia stare. Ecco il test</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>erogaTestMist</state>
+    </azione>
     <azione>
         <method>executeTest</method>
         <what>MIST</what>
