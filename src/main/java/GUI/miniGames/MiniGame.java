@@ -13,6 +13,7 @@ public abstract class MiniGame extends JLayeredPane
 
     private static MiniGame currentTest;
     private static MiniGame lastQuitTest;
+    private boolean closeOnFail = false;
 
     private int gameNumber;
 
@@ -105,6 +106,11 @@ public abstract class MiniGame extends JLayeredPane
             else
             {
                 GameState.changeState(GameState.State.TEST);
+
+                if(closeOnFail)
+                {
+                    quitCurrentTest();
+                }
             }
         });
 
@@ -121,6 +127,11 @@ public abstract class MiniGame extends JLayeredPane
             win = true;
 
         resultPanel.setVisible(true);
+    }
+
+    protected void setCloseOnFail(boolean b)
+    {
+        this.closeOnFail = b;
     }
 
 }

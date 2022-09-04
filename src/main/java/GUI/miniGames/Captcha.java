@@ -1,6 +1,7 @@
 package GUI.miniGames;
 
 import GUI.gamestate.GameState;
+import general.GameManager;
 import general.LogOutputManager;
 import general.Util;
 
@@ -69,6 +70,9 @@ public class Captcha extends MiniGame
     private Captcha()
     {
         super(WIN, LOSE, "");
+
+        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/provaAscensore.xml";
+        setCloseOnFail(true);
 
 
         // creazione della jdialog con connesione al pannello del mainframde del gioco
@@ -235,6 +239,8 @@ public class Captcha extends MiniGame
             {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     System.out.println(captAnswer.getText());
+
+                    GameManager.getMainFrame().requestFocus();
 
                     // gestione della risposta data dall'utente
                     if (checkAnswer(captAnswer.getText()))

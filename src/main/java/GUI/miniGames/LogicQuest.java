@@ -82,6 +82,7 @@ public class LogicQuest extends MiniGame
         super(winText, loseText, "");
 
         scenarioOnWinPath = "src/main/resources/scenari/piano ALU/winLogicQuest" + questNumber + ".xml";
+        setCloseOnFail(true);
 
         initContent(questNumber, buttonTexts, iconPath);
     }
