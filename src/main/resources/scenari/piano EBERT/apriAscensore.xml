@@ -23,9 +23,15 @@
         <method>speak</method>
         <sentence>Ogni volta che lo chiami non arriva mai e ...</sentence>
     </azione>
-    <!--
-    APRI LE PORTE DELL'ASCENSORE
-    -->
+    <azione>
+        <subject>AscensoreEBERT</subject>
+        <method>setState</method>
+        <state>canOpen</state>
+    </azione>
+    <azione>
+        <subject>AscensoreEBERT</subject>
+        <method>open</method>
+    </azione>
     <azione>
         <subject>Ebert-A</subject>
         <method>lockEntrance</method>

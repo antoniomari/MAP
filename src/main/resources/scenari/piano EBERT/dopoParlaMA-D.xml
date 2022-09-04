@@ -74,4 +74,9 @@
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano EBERT/arrivoStanzaBriciola.xml</what>
     </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>setState</method>
+        <state>aspettaPalla</state>
+    </azione>
 </scenario>

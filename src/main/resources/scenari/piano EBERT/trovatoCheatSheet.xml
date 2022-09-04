@@ -69,9 +69,4 @@
         <method>speak</method>
         <sentence>Addio, tecnico dell'ascensore!</sentence>
     </azione>
-    <azione>
-        <subject>AscensoreEBERT</subject>
-        <method>setState</method>
-        <state>ready</state>
-    </azione>
 </scenario>

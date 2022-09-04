@@ -141,7 +141,7 @@
         <canUse>true</canUse>
         <onUse>
             <actionName>Accendi</actionName>
-            <scenario>src/main/resources/scenari/piano ALU/accendiComputer.xml</scenario>
+            <useScenario state="init">src/main/resources/scenari/piano ALU/accendiComputer.xml</useScenario>
         </onUse>
     </oggetto>
     <oggetto nome="Radar">
@@ -251,12 +251,11 @@
     <oggetto nome="AscensoreEBERT">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore verde</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
         <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
+        <isLocked>false</isLocked>
         <onOpen>
-            <mode>once</mode>
-            <scenario state="init">src/main/resources/scenari/fine.xml</scenario>
+                <scenario state="init">src/main/resources/scenari/piano EBERT/apriAscensore.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="Sasso">
@@ -289,7 +288,7 @@
         <canUse>true</canUse>
         <onUse>
             <actionName>Raccogli fiori</actionName>
-            <scenario>src/main/resources/scenari/piano EBERT/prendiErba.xml</scenario>
+            <useScenario state="init">src/main/resources/scenari/piano EBERT/prendiErba.xml</useScenario>
         </onUse>
     </oggetto>
     <oggetto nome="Fiori interessanti">

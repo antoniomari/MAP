@@ -7,6 +7,7 @@ import entity.characters.GameCharacter;
 import entity.characters.PlayingCharacter;
 import entity.items.Container;
 import entity.items.Item;
+import entity.items.Openable;
 import entity.items.PickupableItem;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
@@ -355,6 +356,9 @@ public class XmlParser
                 break;
             case "lockEntrance":
                 actionParsed = parseLockEntrance(actionElement);
+                break;
+            case "open":
+                actionParsed = parseOpen(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -765,6 +769,13 @@ public class XmlParser
             GameManager.getRoom(subject).setAdjacentLocked(cardinal, lock);
             GameManager.continueScenario();
         };
+    }
+
+    private static Runnable parseOpen(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        return () -> ((Openable) GameManager.getPiece(subject)).open();
     }
 
     /**
