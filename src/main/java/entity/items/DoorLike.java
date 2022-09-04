@@ -56,7 +56,6 @@ public class DoorLike extends Item implements Openable
                 {
                     EventHandler.sendEvent(
                             new ItemInteractionEvent(this, "Si è aperta", getOpenFrames()));
-                    GameManager.continueScenario();
                 });
         successOpenScenario.append(
                 () ->
