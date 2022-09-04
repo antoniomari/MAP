@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Ebert-A</subject>
+        <method>add</method>
+        <what>Tecnico</what>
+        <x>11</x>
+        <y>13</y>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Salve! Sono sempre io! (*) Nikita l'aggiusta tutto!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Su questo piano l'ascensore ha (*) un problema molto grave!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Ogni volta che lo chiami non arriva mai e ...</sentence>
+    </azione>
+    <!--
+    APRI LE PORTE DELL'ASCENSORE
+    -->
+    <azione>
+        <subject>Ebert-A</subject>
+        <method>lockEntrance</method>
+        <cardinal>north</cardinal>
+        <lock>false</lock>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Mhhh...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Sto diventando bravo come tecnico!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Ora vado! Gli scienziati mi aspettano (*) per un drin...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Ehmm.. un ..</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>ESPERIMENTO IMPORTANTE!</sentence>
+    </azione>
+</scenario>

@@ -17,7 +17,7 @@
     <azione>
         <subject>Ebert Briciola</subject>
         <method>add</method>
-        <what>Sasso Pieno</what>
+        <what>Sasso</what>
         <x>16</x>
         <y>9</y>
     </azione>
@@ -32,5 +32,23 @@
     <azione>
         <subject>Briciola</subject>
         <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Sasso</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>add</method>
+        <what>Sasso Pieno</what>
+        <x>25</x>
+        <y>15</y>
+    </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>add</method>
+        <what>Palla Memoria</what>
+        <x>25</x>
+        <y>19</y>
     </azione>
 </scenario>

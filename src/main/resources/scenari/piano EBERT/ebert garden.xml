@@ -65,21 +65,21 @@
             <subject>Ebert Garden</subject>
             <method>add</method>
             <what>Fungo</what>
-            <x>29</x>
-            <y>7</y>
+            <x>31</x>
+            <y>12</y>
         </azione>
         <azione>
             <subject>Ebert Garden</subject>
             <method>add</method>
             <what>Sasso</what>
-            <x>9</x>
-            <y>8</y>
+            <x>3</x>
+            <y>12</y>
         </azione>
         <azione>
             <subject>Ebert Garden</subject>
             <method>add</method>
             <what>Cannabis</what>
-            <x>12</x>
+            <x>8</x>
             <y>11</y>
         </azione>
     </scenario>

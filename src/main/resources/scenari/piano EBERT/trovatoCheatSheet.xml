@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ce ne hai messo di tempo!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Mi sono ricordata del Cheat sheet!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>E si trova...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ecco...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>L'ho buttato perché pensavo (*) fosse spazzatura (e tutt'ora lo penso).</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Però...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Posso stampartene una copia...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Con la mia stampante incorporata!!</sentence>
+    </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>add</method>
+        <what>Cheat Sheet</what>
+        <x>15</x>
+        <y>15</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>12</x>
+        <y>15</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Cheat Sheet</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <method>addToInventory</method>
+        <what>Cheat Sheet</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Addio, tecnico dell'ascensore!</sentence>
+    </azione>
+    <azione>
+        <subject>AscensoreEBERT</subject>
+        <method>setState</method>
+        <state>ready</state>
+    </azione>
+</scenario>

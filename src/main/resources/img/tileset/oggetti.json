@@ -197,6 +197,12 @@
     "width": 48,
     "height": 48
   },
+  "Sasso Pieno": {
+    "x": 480,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
   "Cannabis": {
     "x": 576,
     "y": 0,
@@ -268,5 +274,32 @@
     "y": 480,
     "width": 384,
     "height": 144
+  },
+  "Palla Memoria": {
+    "x": 192,
+    "y": 720,
+    "width": 48,
+    "height": 48
+  },
+
+  "Fiori interessanti": {
+    "x": 0,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "Bomba": {
+    "x": 48,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "Cheat Sheet": {
+    "x": 96,
+    "y": 0,
+    "width": 48,
+    "height": 48
   }
 }

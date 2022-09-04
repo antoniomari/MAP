@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Allora, fammi controllare qui!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Vestiti, cibo per Briciola (cadaveri), (*) scorie nucleari, larve ...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Vediamo qui a destra: (*) carne diventata blu, coltellazzo da cucina</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>un semaforo ... ha la luce gialla (*) accesa, la rossa e la verde funzionano anche</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ma... cosa stavo cercando?</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>E tu, chi sei? (*) Via dalla mia proprietà!</sentence>
+    </azione>
+</scenario>

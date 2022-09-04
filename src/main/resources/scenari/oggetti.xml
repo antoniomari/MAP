@@ -68,7 +68,7 @@
     </oggetto>
     <oggetto nome="Cheat Sheet">
         <classe>PickupableItem</classe>
-        <descrizione>Cheat sheet donata da Lanubile.</descrizione>
+        <descrizione>Sembra scritto in arabo!</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Guanto">
@@ -379,10 +379,26 @@
         <descrizione>Una bomba!</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="Sasso Pieno">
+        <classe>Item</classe>
+        <descrizione>Troppo pesante per sollevarlo!</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="Palla Memoria">
+        <classe>PickupableItem</classe>
+        <descrizione>A me sembra una palla normalissima. (*) Qua tutti mi prendono in giro.</descrizione>
+        <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>MA-D</target>
+            <targetInitState>init</targetInitState>
+            <targetFinalState>init</targetFinalState>
+            <scenario>src/main/resources/scenari/piano EBERT/ritrovoMemoriaMA-D.xml</scenario>
+        </onUseWith>
+    </oggetto>
     <oggetto nome="ScrivaniaPT">
         <classe>Item</classe>
         <descrizione>Una scrivania di un bel colore vivace.</descrizione>
         <canUse>false</canUse>
     </oggetto>
-
 </oggetti>

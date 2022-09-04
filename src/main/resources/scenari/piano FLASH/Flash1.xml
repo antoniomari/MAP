@@ -33,4 +33,9 @@
         <method>speak</method>
         <sentence>Ma dove ero finito? (*) Ho avuto un'allucinazione.</sentence>
     </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano EBERT/trovatoCheatSheet.xml</what>
+    </azione>
 </scenario>

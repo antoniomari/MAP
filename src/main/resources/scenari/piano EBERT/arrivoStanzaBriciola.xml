@@ -21,7 +21,7 @@
         <x>16</x>
         <y>0</y>
         <how>relative</how>
-        <finalWait>1000</finalWait>
+        <finalWait>100</finalWait>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -29,7 +29,7 @@
         <x>0</x>
         <y>9</y>
         <how>relative</how>
-        <finalWait>1000</finalWait>
+        <finalWait>100</finalWait>
     </azione>
     <azione>
         <subject>Schwartz</subject>

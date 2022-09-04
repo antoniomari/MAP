@@ -1,0 +1,177 @@
+{
+  "evoluzione1":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione2":
+  {
+    "x": 48,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione3":
+  {
+    "x": 96,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione4":
+  {
+    "x": 144,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione5":
+  {
+    "x": 192,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione6":
+  {
+    "x": 0,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione7":
+  {
+    "x": 48,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione8":
+  {
+    "x": 96,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione9":
+  {
+    "x": 144,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione10":
+  {
+    "x": 192,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione11":
+  {
+    "x": 0,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione12":
+  {
+    "x": 48,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione13":
+  {
+    "x": 96,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione14":
+  {
+    "x": 144,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione15":
+  {
+    "x": 192,
+    "y": 96,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione16":
+  {
+    "x": 0,
+    "y": 144,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione17":
+  {
+    "x": 48,
+    "y": 144,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione18":
+  {
+    "x": 96,
+    "y": 144,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione19":
+  {
+    "x": 144,
+    "y": 144,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione20":
+  {
+    "x": 192,
+    "y": 144,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione21":
+  {
+    "x": 0,
+    "y": 192,
+    "width": 48,
+    "height": 48
+  },
+
+  "evoluzione22":
+  {
+    "x": 48,
+    "y": 192,
+    "width": 48,
+    "height": 48
+  }
+}

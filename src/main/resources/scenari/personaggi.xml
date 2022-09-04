@@ -70,6 +70,7 @@
         <spritesheet>/img/personaggi/MA-D.png</spritesheet>
         <speakScenarios>
             <scenario state="init">src/main/resources/scenari/piano EBERT/ParlaMA-D.xml</scenario>
+            <scenario state="ricerca">src/main/resources/scenari/piano EBERT/ritrovoMemoria2.xml</scenario>
         </speakScenarios>
     </personaggio>
 </personaggi>

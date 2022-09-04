@@ -60,6 +60,10 @@
         <finalWait>1000</finalWait>
     </azione>
     <azione>
+        <subject>Bomba</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
         <subject>Ebert-A</subject>
         <method>lockEntrance</method>
         <cardinal>east</cardinal>
