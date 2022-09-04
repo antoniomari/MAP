@@ -74,7 +74,7 @@
         <classe>PickupableItem</classe>
         <descrizione>Un guanto da giardinaggio con delle strane lucine.</descrizione>
         <onUseWith>
-            <keep>true</keep>
+            <keep>true</keep >
             <target>ArmadioMIST</target>
             <method>unlock</method>
             <scenario>src/main/resources/scenari/piano MIST/RompeArmadio.xml</scenario>
@@ -91,7 +91,10 @@
         <descrizione>Un ascensore blue</descrizione>
         <canUse>false</canUse>
         <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
+        <isLocked>false</isLocked>
+        <onOpen>
+            <scenario state="init">src/main/resources/scenari/piano ALU/CaptchaTest.xml</scenario>
+        </onOpen>
     </oggetto>
     <oggetto nome="Bottiglietta">
         <classe>PickupableItem</classe>

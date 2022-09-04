@@ -35,4 +35,16 @@
         <x>27</x>
         <y>10</y>
     </azione>
+    <!--
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano FLASH/FlashAlu.xml</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>FlashRoom</where>
+    </azione>
+    -->
 </scenario>

@@ -4,6 +4,91 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Ho vinto</sentence>
+        <sentence>Bene dovrei aver sistemato i (*) circuiti logici.</sentence>
     </azione>
+    <azione>
+        <subject>ALUD</subject>
+        <method>add</method>
+        <what>Diego</what>
+        <x>2</x>
+        <y>12</y>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>12</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Strepitoso, professore Schwartz (*) la ringrazio per il suo aiuto</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>non avevo dubbi che ci sarebbe (*) riuscito.</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Devo dire che la logica dei sui (*) circuiti è abbastanza elementare </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>mettiamola così non ho avuto orgasmi (*) scientifici nel sistemare il suo giocattolo. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Mi auguro per lo meno che sia (*) funzionante. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Vecchio pazzo!!! pensa di essere (*) il migliore solo perchè insignito </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>del titolo di emerito professore (*) dell'AI.</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Sotto specie di scimmia cybernetica, (*) mi vada a fare un caffè corto ristretto </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>senza zucchero e forse potrei (*) dimenticare questa storia e darle</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>il mio prezioso ACX8. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>20</x>
+        <y>13</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <!--
+     <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>FlashRoom</where>
+    </azione>
+    -->
 </scenario>
