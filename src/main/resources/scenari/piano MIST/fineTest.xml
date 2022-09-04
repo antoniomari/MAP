@@ -7,9 +7,8 @@
         <sentence>Grazie.</sentence>
     </azione>
     <azione>
-        <subject>Mist-A</subject>
-        <method>lockEntrance</method>
-        <cardinal>north</cardinal>
-        <lock>false</lock>
+        <subject>AscensoreMIST</subject>
+        <method>setState</method>
+        <state>canOpen</state>
     </azione>
 </scenario>

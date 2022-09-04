@@ -7,7 +7,6 @@
         <isOpen>false</isOpen>
         <isLocked>false</isLocked>
         <onOpen>
-            <mode>once</mode>
             <scenario state="init">src/main/resources/scenari/piano MIST/eseguiTest.xml</scenario>
         </onOpen>
     </oggetto>
