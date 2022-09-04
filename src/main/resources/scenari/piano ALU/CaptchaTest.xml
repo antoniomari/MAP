@@ -1,0 +1,139 @@
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>ALUA</subject>
+        <method>add</method>
+        <what>Tecnico</what>
+        <x>0</x>
+        <y>12</y>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>BAAH BUUUM, eccomi quaaa!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>13</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Sempre di su, sempre di giù e che (*) cosa vuoi di più....</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>a destra a sinistra a destra a (*) sinistra fate largo gente pistaaaa!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>e di qua e di la trullalle trullalla (*) e fai questo e fai quello... in vacanza </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>vado sempre con l'ombrello. </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>18</x>
+        <y>9</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Mmmmhhhh</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>13</x>
+        <y>9</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Mmhhh... Mmmmmmhh</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>15</x>
+        <y>14</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>....mmmmhhhhhhh....</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>15</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>...</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>E dillo se c'hai un problema (*) che al giorno d'oggi ti aiutano, ti danno una cura </sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>e dopo ti passa..., professore caro (*) quando vuole mi può sempre chiamare.</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>move</method>
+        <x>12</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>playEmoji</method>
+        <what>interrogativo</what>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>MAYDAY-MAYDAY.... qui i problemi (*) sono miei. Huston we have a problem</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>L'ascensore è bloccato! sul (*) pannello di controllo c'è una strana scritta</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>professore ci dia un occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
+    </azione>
+    <!--
+    <azione>
+        <method>executeTest</method>
+        <what>MIST</what>
+    </azione>
+    -->
+</scenario>
