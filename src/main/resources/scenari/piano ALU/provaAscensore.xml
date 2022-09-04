@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>MIAAAAAAAOOOOOOO</sentence>
+    </azione>
+    <azione>
+        <subject>AscensoreALU</subject>
+        <method>setState</method>
+        <state>canOpen</state>
+    </azione>
+</scenario>
