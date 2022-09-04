@@ -10,6 +10,7 @@
         <method>speak</method>
         <sentence>MIAAAAAAAOOOOOOO</sentence>
     </azione>
+    <!--
     <azione>
         <subject>Briciolina</subject>
         <method>effectAnimation</method>
@@ -17,6 +18,7 @@
         <isPerpetual>false</isPerpetual>
         <finalWait>1000</finalWait>
     </azione>
+    -->
     <azione>
         <subject>Briciolina</subject>
         <method>removeFromRoom</method>

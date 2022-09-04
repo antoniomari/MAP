@@ -26,7 +26,7 @@ public class MovingAnimation extends Animation
     private final AbsPosition finalCoord;
     private List<AbsPosition> positionsList;
 
-    private static final int FPS = 144;
+    private static final int FPS = 60;
     private final double speed;
 
     private int currentIndex = 1;
@@ -75,6 +75,8 @@ public class MovingAnimation extends Animation
 
         delayMilliseconds = (int) Math.round(1000.0 / FPS);
         numFrames = (int) (FPS * blockDistance / (1000 * speed));
+
+        System.out.println("Num frame animazione: " + numFrames);
 
         double deltaX = (double)(finalX - initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;
