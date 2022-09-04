@@ -247,12 +247,19 @@ public class XmlLoader
     {
         // inferenza: se trovo questo tag allora è un doorLike TODO: aggiustare
         Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
+        Map<String, String> scenarioPathMap = new HashMap<>();
 
         if (onOpenElement != null)
         {
-            String scenarioPath = XmlParser.getTagValue(onOpenElement, "effetto");
-            // imposta openEffect TODO: rinominare in setOpenAction
-            ((Openable) itemToLoad).setOpenEffect(XmlParser.loadScenario(scenarioPath));
+            List<Element> effetti = XmlParser.getTagsList(onOpenElement, "scenario");
+
+            for(Element effettoElement : effetti)
+            {
+                String state = XmlParser.getXmlAttribute(effettoElement, "state");
+                scenarioPathMap.put(state, effettoElement.getTextContent());
+            }
+
+            ((Openable) itemToLoad).loadOpenScenarios(scenarioPathMap);
 
             if(itemToLoad.getClass() == DoorLike.class)
             {

@@ -1,9 +1,8 @@
 package entity.items;
 
-import general.ActionSequence;
-
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public interface Openable
 {
@@ -18,10 +17,5 @@ public interface Openable
 
     boolean isOpen();
 
-    void setOpenEffect(ActionSequence effect);
-
-    void setCloseEffect(ActionSequence effect);
-
-
-
+    void loadOpenScenarios(Map<String, String> openScenarios);
 }

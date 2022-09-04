@@ -1,26 +1,31 @@
 package entity.items;
 
+import entity.rooms.Room;
+import general.GameException;
 import general.GameManager;
 import general.ActionSequence;
 import events.EventHandler;
 import events.ItemInteractionEvent;
+import general.xml.XmlParser;
 import graphics.SpriteManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
-public class DoorLike extends Item implements Openable, Lockable
+public class DoorLike extends Item implements Openable
 {
     private boolean isLocked;
     private boolean isOpen;
 
-    private ActionSequence onOpen = ActionSequence.voidScenario();
-    //private ActionSequence onClose;
+    private ActionSequence openScenario;
+    private Map<String, String> openScenarioMap;
 
-    //private ActionSequence onUnlock;
-    //private ActionSequence onLock;
+    private final ActionSequence successOpenScenario;
+    private final ActionSequence closeScenario;
+
 
     // PATH SPRITESHEET (png + json)
     private final static String SPRITESHEET_PATH = "/img/tileset/porte.png";
@@ -40,7 +45,59 @@ public class DoorLike extends Item implements Openable, Lockable
 
         // inizializza frames di animazione
         initFrames();
+
+
+        // crea scenario di apertura
+        //crea scenario sequenziale animazione apertura + scenario effetto
+        successOpenScenario = new ActionSequence("apertura + effetto",
+                ActionSequence.Mode.SEQUENCE);
+        successOpenScenario.append(
+                () ->
+                {
+                    EventHandler.sendEvent(
+                            new ItemInteractionEvent(this, "Si è aperta", getOpenFrames()));
+                    GameManager.continueScenario();
+                });
+        successOpenScenario.append(
+                () ->
+                {
+                    getLocationRoom().setAdjacentLocked(Room.Cardinal.NORTH, false);
+                    GameManager.continueScenario();
+                });
+
+        closeScenario = new ActionSequence("chiusura + effetto", ActionSequence.Mode.SEQUENCE);
+        closeScenario.append(
+                () ->
+                {
+                    EventHandler.sendEvent(
+                            new ItemInteractionEvent(this, "Si è chiusa", getCloseFrames()));
+                    GameManager.continueScenario();
+                });
+        closeScenario.append(
+                () ->
+                {
+                    getLocationRoom().setAdjacentLocked(Room.Cardinal.NORTH, true);
+                    GameManager.continueScenario();
+                }
+        );
     }
+
+    @Override
+    public void setState(String state)
+    {
+        super.setState(state);
+
+        // imposta useScenario in base allo state
+        String scenarioPath = openScenarioMap.get(state);
+        if(scenarioPath != null)
+            openScenario = XmlParser.loadScenario(scenarioPath);
+    }
+
+    public void loadOpenScenarios(Map<String, String> openScenarioMap)
+    {
+        this.openScenarioMap = openScenarioMap;
+    }
+
 
     private void initFrames()
     {
@@ -70,18 +127,24 @@ public class DoorLike extends Item implements Openable, Lockable
         {
             if(!isOpen)
             {
-                // cambia stato in open
-                isOpen = true;
-
-                //crea scenario sequenziale animazione apertura + scenario effetto
-                ActionSequence scenarioWithOpenAnimation = new ActionSequence("apertura + effetto",
-                                                                            ActionSequence.Mode.SEQUENCE);
-                scenarioWithOpenAnimation.append(() -> EventHandler.sendEvent(
-                                new ItemInteractionEvent(this, "Si è aperta", getOpenFrames())));
-                scenarioWithOpenAnimation.append(() -> GameManager.startScenario(onOpen));
-
-                // esegui scenario completo
-                GameManager.startScenario(scenarioWithOpenAnimation);
+                if(state.equals("canOpen"))
+                {
+                    // cambia stato in open
+                    isOpen = true;
+                    // esegui scenario completo
+                    GameManager.startScenario(successOpenScenario);
+                }
+                else if(openScenario != null)
+                    GameManager.startScenario(openScenario);
+                else if(openScenarioMap.containsKey(state))
+                {
+                    openScenario = XmlParser.loadScenario(openScenarioMap.get(state));
+                    GameManager.startScenario(openScenario);
+                }
+                else
+                {
+                    throw new GameException("Scenario non disponibile per l'apertura di " + getName());
+                }
             }
         }
     }
@@ -91,7 +154,7 @@ public class DoorLike extends Item implements Openable, Lockable
     {
         if(isOpen())
         {
-            EventHandler.sendEvent(new ItemInteractionEvent(this, "Si è chiusa", getCloseFrames()));
+            GameManager.startScenario(closeScenario);
             // cambia stato in close
             isOpen = false;
         }
@@ -110,31 +173,8 @@ public class DoorLike extends Item implements Openable, Lockable
     }
 
     @Override
-    public void setOpenEffect(ActionSequence effect)
-    {
-        this.onOpen = effect;
-    }
-
-    @Override
-    public void setCloseEffect(ActionSequence effect)
-    {
-        // this.onClose = effect;
-    }
-
-    @Override
     public boolean isOpen()
     {
         return isOpen;
-    }
-
-
-    public void lock()
-    {
-        isLocked = true;
-    }
-
-    public void unlock()
-    {
-        isLocked = false;
     }
 }

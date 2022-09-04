@@ -129,7 +129,6 @@ public class Item extends GamePiece implements Observable
         this.useActionName = s;
     }
 
-    // TODO: attenzione, non usarlo normalmente in quanto manda avanti lo scenario
     public void setCanUse(boolean canUse)
     {
         this.canUse = canUse;

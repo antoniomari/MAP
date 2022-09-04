@@ -49,7 +49,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Ecco fatto l'ascensore è funzionante, (*) Il mio numero è 3387645112. </sentence>
+        <sentence>Ecco fatto l'ascensore è funzionante, (*) Il mio numero è 8367697779. </sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
@@ -62,5 +62,10 @@
     <azione>
         <subject>Tecnico</subject>
         <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>AscensorePT</subject>
+        <method>setState</method>
+        <state>canOpen</state>
     </azione>
 </scenario>

@@ -12,6 +12,12 @@
         </azione>
         <azione>
             <subject>PT-A</subject>
+            <method>lockEntrance</method>
+            <cardinal>north</cardinal>
+            <lock>true</lock>
+        </azione>
+        <azione>
+            <subject>PT-A</subject>
             <method>add</method>
             <what>AscensorePT</what>
             <x>14</x>

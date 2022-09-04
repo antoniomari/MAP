@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Container extends Item implements Openable
 {
@@ -28,6 +29,13 @@ public class Container extends Item implements Openable
     {
         super(name, description, SPRITESHEET, JSON_PATH);
         containedPickups = new ArrayList<>();
+    }
+
+    @Override
+    public void loadOpenScenarios(Map<String, String> f)
+    {
+
+        // ojefjhngoierhngoiuejo eirnglikjuedshnlòipoukjsdrhgpoiudzjpòoiuhgtrewsò
     }
 
     public void addPickup(PickupableItem it)
@@ -69,18 +77,4 @@ public class Container extends Item implements Openable
     {
         return false;
     }
-
-    @Override
-    public void setOpenEffect(ActionSequence effect)
-    {
-        this.openEffect = effect;
-    }
-
-    @Override
-    public void setCloseEffect(ActionSequence effect)
-    {
-
-    }
-
-    // TODO : finire impleemntaziopne openable
 }

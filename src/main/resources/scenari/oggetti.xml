@@ -8,7 +8,7 @@
         <isLocked>false</isLocked>
         <onOpen>
             <mode>once</mode>
-            <effetto>src/main/resources/scenari/piano MIST/eseguiTest.xml</effetto>
+            <scenario state="init">src/main/resources/scenari/piano MIST/eseguiTest.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="ArmadioMIST">
@@ -19,7 +19,7 @@
         <isLocked>true</isLocked>
         <onOpen>
             <mode>once</mode>
-            <effetto>src/main/resources/scenari/piano MIST/RompeArmadio.xml</effetto>
+            <scenario state="init">src/main/resources/scenari/piano MIST/RompeArmadio.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="ArmadioAperto">
@@ -142,7 +142,7 @@
         <canUse>true</canUse>
         <onUse>
             <actionName>Accendi</actionName>
-            <effetto>src/main/resources/scenari/piano ALU/accendiComputer.xml</effetto>
+            <scenario>src/main/resources/scenari/piano ALU/accendiComputer.xml</scenario>
         </onUse>
     </oggetto>
     <oggetto nome="Radar">
@@ -159,8 +159,7 @@
         <isOpen>false</isOpen>
         <isLocked>false</isLocked>
         <onOpen>
-            <mode>once</mode>
-            <effetto>src/main/resources/scenari/piano terra/ConoscenzaTecnico.xml</effetto>
+            <scenario state="init">src/main/resources/scenari/piano terra/ConoscenzaTecnico.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="Telefono">
@@ -229,7 +228,7 @@
         <!--
         <onOpen>
             <mode>once</mode>
-            <effetto>src/main/resources/scenari/fine.xml</effetto>
+            <scenario>src/main/resources/scenari/fine.xml</scenario>
         </onOpen>
         -->
     </oggetto>
@@ -247,8 +246,7 @@
         <isOpen>false</isOpen>
         <isLocked>true</isLocked>
         <onOpen>
-            <mode>once</mode>
-            <effetto>src/main/resources/scenari/fine.xml</effetto>
+            <scenario state="init">src/main/resources/scenari/fine.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="AscensoreEBERT">
@@ -259,7 +257,7 @@
         <isLocked>true</isLocked>
         <onOpen>
             <mode>once</mode>
-            <effetto>src/main/resources/scenari/fine.xml</effetto>
+            <scenario state="init">src/main/resources/scenari/fine.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="Sasso">
@@ -292,7 +290,7 @@
         <canUse>true</canUse>
         <onUse>
             <actionName>Raccogli fiori</actionName>
-            <effetto>src/main/resources/scenari/piano EBERT/prendiErba.xml</effetto>
+            <scenario>src/main/resources/scenari/piano EBERT/prendiErba.xml</scenario>
         </onUse>
     </oggetto>
     <oggetto nome="Fiori interessanti">
