@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <!--
+    <azione>
+        <method>addRoomEffect</method>
+        <what>/img/FLASH/FogFlash3.png</what>
+    </azione>
+    -->
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Di nuovo?</sentence>
+    </azione>
+    <!--
+    <azione>
+        <subject>Cameriere</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>add</method>
+        <what>Cameriere</what>
+        <x>1</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>1500</finalWait>
+    </azione>
+    -->
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>1</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>1500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>Ebert Garden</where>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ma dove ero finito? (*) Ho avuto un'allucinazione.</sentence>
+    </azione>
+    <azione>
+        <subject>Ebert Briciola</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano EBERT/trovatoCheatSheet.xml</what>
+    </azione>
+</scenario>

@@ -4,6 +4,6 @@
     <azione>
         <method>executeTest</method>
         <what>ALU</what>
-        <number>1</number>
+        <number>2</number>
     </azione>
 </scenario>

@@ -14,6 +14,8 @@ public abstract class MiniGame extends JLayeredPane
     private static MiniGame currentTest;
     private static MiniGame lastQuitTest;
 
+    private int gameNumber;
+
     public static void quitCurrentTest()
     {
         System.out.println("PREMUTO");

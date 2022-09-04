@@ -21,7 +21,7 @@
     <azione>
         <subject>FlashRoom</subject>
         <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano FLASH/Flash1.xml</what>
+        <what>src/main/resources/scenari/piano FLASH/FlashEbert.xml</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>

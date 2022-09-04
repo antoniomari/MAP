@@ -713,9 +713,16 @@ public class XmlParser
 
         // lo scenario viene mandato avanti dall'input di chiusura del JDialog del test inserito dall'utente
         if(what.equals("ALU"))
-            return LogicQuest::executeTest;
+        {
+            int number = Integer.parseInt(getTagValue(eAction, "number"));
+            return () -> LogicQuest.executeTest(number);
+        }
+
         else if(what.equals("MIST"))
+        {
             return TestMist::executeTest;
+        }
+
         else
             throw new GameException("Nome del test non valido");
     }

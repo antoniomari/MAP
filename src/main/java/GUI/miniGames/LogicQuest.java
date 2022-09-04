@@ -81,7 +81,7 @@ public class LogicQuest extends MiniGame
     {
         super(winText, loseText, "");
 
-        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/winLogicQuest.xml";
+        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/winLogicQuest" + questNumber + ".xml";
 
         initContent(questNumber, buttonTexts, iconPath);
     }
@@ -174,19 +174,12 @@ public class LogicQuest extends MiniGame
     }
 
 
-    public static void executeTest()
+    public static void executeTest(int number)
     {
         LogOutputManager.logOutput("Iniziando Test ALU: ", LogOutputManager.GAMESTATE_COLOR);
         GameState.changeState(GameState.State.TEST);
 
-        MiniGame lastTest = MiniGame.getLastQuitTest();
-
-        if(lastTest instanceof LogicQuest)
-            MiniGame.setCurrentTest(lastTest);
-        else
-        {
-            MiniGame.setCurrentTest(createLogicQuest(1));
-        }
+        MiniGame.setCurrentTest(createLogicQuest(number));
     }
 
     private void initButtons(String[] buttonsText)
@@ -195,7 +188,7 @@ public class LogicQuest extends MiniGame
 
         buttons = new JButton[4];
 
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         list.add(0);
         list.add(1);
         list.add(2);

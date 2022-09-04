@@ -14,7 +14,7 @@ import java.util.Set;
  *  La classe serve a simulare un captcha per il riconoscimento dell'interazione con
  *  un umano.
  */
-public class Captcha
+public class Captcha extends MiniGame
 {
     private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
     private final String WIN = "Captcha risolto sei umano!";
@@ -49,6 +49,11 @@ public class Captcha
     // inizializzazione e permette di risalire al valore associato
     // nel dizionario
     private String imgKeyPath;
+
+    public static void executeTestCaptcha()
+    {
+
+    }
 
     // costruttore
     private Captcha() {
@@ -113,6 +118,8 @@ public class Captcha
         setImgKeyPath(pathString[(int) (Math.random()*10)]);
 
         ImageIcon icon = new ImageIcon(imgKeyPath);
+        // Rimpiazzare set immagine
+
         image = new JLabel(icon, JLabel.CENTER);
         System.out.println(image.getIcon().toString());
     }
