@@ -82,7 +82,7 @@ public class EventHandler
         if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
-            AnimationExecutor.executePerpetualStateBasedAnimation(ch, ch.getSpeakFrames(), 300, GameState.State.TEXT_BAR);
+            AnimationExecutor.executeSpeakAnimation(ch, ch.getSpeakFrames(), 300, GameState.State.TEXT_BAR);
         }
         else if(e.getType() == CharacterEvent.Type.EMOJI)
         {
@@ -123,9 +123,12 @@ public class EventHandler
 
         if(e.getType() == GamePieceEvent.Type.MOVE)
         {
-            CharacterUpdateExecutor.executeMove(e.getPieceInvolved(), e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
+            CharacterUpdateExecutor.executeMove(piece, e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
             // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
+
+        if(e.getType() == GamePieceEvent.Type.UPDATE_SPRITE)
+            PieceUpdateExecutor.executeUpdateSprite(piece);
     }
 
     public static void executeAnimationEvent(AnimationEvent e)

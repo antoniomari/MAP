@@ -288,9 +288,12 @@ public class XmlParser
             case "add":
                 actionParsed = parseAdd(actionElement);
                 break;
+                /*
             case "updateSprite":
                 actionParsed = parseUpdateSprite(actionElement);
                 break;
+
+                 */
             case "effectAnimation":
                 actionParsed = parseEffectAnimation(actionElement);
                 break;
@@ -778,7 +781,7 @@ public class XmlParser
         return () -> ((Openable) GameManager.getPiece(subject)).open();
     }
 
-    /**
+    /*
      * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
      * che contiene il valore {@code updateSprite} per il tag {@literal  <method>}.
      *
@@ -792,7 +795,7 @@ public class XmlParser
      * @param eAction elemento corrispondente all'azione xml
      * @return Runnable associata al comando updateSprite
      * @throws GameException se {@literal <subject>} non è stato trovato nel GameManager
-     */
+     *
     private static Runnable parseUpdateSprite(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -811,6 +814,8 @@ public class XmlParser
         };
 
     }
+
+     */
 
     /**
      * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})

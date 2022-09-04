@@ -13,6 +13,8 @@ import java.awt.*;
 public class AnimationExecutor extends Executor
 {
 
+    private static PerpetualAnimation speakAnimation;
+
     public static void executeAnimation(GamePiece piece, List<Image> frames)
     {
         executeAnimation(piece, frames, 200);
@@ -24,10 +26,23 @@ public class AnimationExecutor extends Executor
                 gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, true).start();
     }
 
-    public static void executePerpetualStateBasedAnimation(GamePiece piece, List<Image> frames,
+    public static void executeSpeakAnimation(GamePiece piece, List<Image> frames,
                                                            int delayMilliseconds, GameState.State runningState)
     {
-        PerpetualAnimation.animateWhileGameState(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, false, runningState).start();
+        // stoppa la precedente (eventuale)
+        stopSpeakAnimation(piece);
+        speakAnimation = PerpetualAnimation.animateWhileGameState(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, false, runningState);
+        speakAnimation.start();
+    }
+
+    public static void stopSpeakAnimation(GamePiece piece)
+    {
+        if(speakAnimation != null)
+        {
+            speakAnimation.stop();
+            piece.refreshMainSprite();
+        }
+
     }
 
     public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath,

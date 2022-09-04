@@ -107,7 +107,6 @@ public class TextBarPanel extends JLayeredPane
         textArea.setVisible(true);
     }
 
-    @ScenarioMethod
     public void hideTextBar()
     {
         barLabel.setIcon(null);

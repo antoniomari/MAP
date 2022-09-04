@@ -38,7 +38,7 @@ public class GamePiece
 
     /** Stato utilizzato per associare il comportamento del GamePiece. */
     protected String state = "init";
-    protected Image sprite;
+    protected final Image sprite;
 
     protected int bWidth;  // larghezza in blocchi dell'elemento
     protected int bHeight;  // altezza in blocchi dell'elemento
@@ -183,6 +183,12 @@ public class GamePiece
         return bHeight;
     }
 
+    public void refreshMainSprite()
+    {
+        EventHandler.sendEvent(new GamePieceEvent(this, GamePieceEvent.Type.UPDATE_SPRITE));
+    }
+
+    /*
     public void updateSprite(String spriteName)
     {
         sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, spriteName);
@@ -195,6 +201,8 @@ public class GamePiece
 
         EventHandler.sendEvent(new GamePieceEvent(this, GamePieceEvent.Type.UPDATE_SPRITE));
     }
+
+     */
 
     @Deprecated
     public void executeEffectAnimation(String animationName, int finalWait, boolean isPerpetual)

@@ -54,7 +54,7 @@ public class PerpetualAnimation extends StillAnimation
         }
         catch (InterruptedException e)
         {
-            e.printStackTrace();
+            // e.printStackTrace();
             System.out.println("Animazione interrotta");
         }
 
@@ -73,8 +73,12 @@ public class PerpetualAnimation extends StillAnimation
      */
     public void stop()
     {
+
         if(thread != null)
         {
+            thread.interrupt();
+
+            /*
             canRun = false;
             try
             {
@@ -85,6 +89,8 @@ public class PerpetualAnimation extends StillAnimation
             {
                 throw new GameException("Errore in thread animazione");
             }
+
+             */
         }
     }
 

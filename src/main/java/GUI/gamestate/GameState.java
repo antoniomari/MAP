@@ -8,6 +8,7 @@ import GUI.miniGames.MiniGame;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
+import events.executors.AnimationExecutor;
 import general.ActionSequence;
 import general.GameManager;
 import general.LogOutputManager;
@@ -50,6 +51,7 @@ public class GameState
         MOVING,
         TEXT_BAR,
         SCENARIO_SOUND,
+        SCENARIO_TRANSITION,
         TEST,
         TEST_RESULT
     }
@@ -136,7 +138,11 @@ public class GameState
 
         GameKeyListener closeBarListener = new GameKeyListener(
                 KeyEvent.VK_SPACE,
-                () -> {mainFrame.getTextBarPanel().hideTextBar(); GameManager.continueScenario();},
+                () ->
+                {
+                    mainFrame.getTextBarPanel().hideTextBar();
+                    GameManager.continueScenario();
+                    },
                 null, State.TEXT_BAR);
         mainFrame.addKeyListener(closeBarListener);
 
