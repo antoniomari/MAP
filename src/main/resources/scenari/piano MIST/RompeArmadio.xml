@@ -2,6 +2,13 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <subject>ArmadioMIST</subject>
+        <method>effectAnimation</method>
+        <animationName>esplosione</animationName>
+        <finalWait>0</finalWait>
+        <isPerpetual>false</isPerpetual>
+    </azione>
+    <azione>
         <method>playScenarioSound</method>
         <what>src/main/resources/audio/effetti/distruzionearmadio.wav</what>
     </azione>

@@ -69,8 +69,32 @@
 	</azione>
 	<azione>
 		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>PRESENTAZzzzzzzzzzzzIONE</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Diego</subject>
@@ -83,9 +107,91 @@
 		<sentence>da sempre scienza e conoscenza.</sentence>
 	</azione>
 	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
-		<sentence>PRESENTAZIONE</sentence>
+		<sentence>Che ono-scerla cono-re dottor Schwartz!</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>Io sono il dottor Nicolas, (*) respon-torio del labora-sabile al primo piano</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>anche denominato piano MIST.</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>La mia ricerca consiste nell'idealizzare (*) stru-dibili atten-menti per la misurazione</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>delle prestazioni delle (*) intelli-ciali artifi-genze</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>basati sulla somministrazione di domande (*) atte a provare le abilità</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>di comprensione di un testo e (*) di forni-sta una rispo-re adeguata.</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>Spero di essere stato chiaro (*) nonostante il mio stra-do mo-no</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>di parlare!</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>Per qualsi-enza eveni-asi (*) si senta pure libero di</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>speak</method>
+		<sentence>contattare me o i miei colleghi.</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Antonio</subject>
@@ -93,9 +199,41 @@
 		<sentence>Siamo davvero orgogliosi</sentence>
 	</azione>
 	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
 		<sentence>di avere uno scienziato rinomato</sentence>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Nicolas</subject>
@@ -103,19 +241,75 @@
 		<sentence>al nostro congresso sull'AI</sentence>
 	</azione>
 	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
 		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>Lì c'è l'open bar</sentence>
 	</azione>
 	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
-		<sentence>perchè non vai a farti un drink?</sentence>
+		<sentence>perché non va a farsi un drink?</sentence>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
 		<sentence>È tutto gratis!</sentence>
+	</azione>
+	<azione>
+		<subject>Nicolas</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-1</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Antonio</subject>

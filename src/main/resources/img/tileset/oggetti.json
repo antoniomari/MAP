@@ -308,6 +308,20 @@
     "y": 432,
     "width": 144,
     "height": 168
-  }
+  },
+
+  "TastoWC": {
+    "x": 672,
+    "y": 0,
+    "width": 48,
+    "height": 48
+  },
+
+  "WCPulito": {
+    "x": 672,
+    "y": 48,
+    "width": 48,
+    "height": 96
+  },
 
 }
