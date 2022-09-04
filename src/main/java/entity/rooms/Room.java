@@ -206,7 +206,9 @@ public class Room
     {
         Objects.requireNonNull(cardinal);
 
-        return entranceMap.get(cardinal).adjacentRoom;
+        Entrance entrance = entranceMap.get(cardinal);
+
+        return entrance == null? null : entrance.adjacentRoom;
     }
 
     public void setAdjacentRoom(Cardinal cardinal, Room room)
