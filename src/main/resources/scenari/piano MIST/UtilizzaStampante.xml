@@ -29,4 +29,29 @@
         <method>speak</method>
         <sentence>Guarda che bei tappi (*) sono riuscito a crearmi! </sentence>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>14</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Tappi</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <method>addToInventory</method>
+        <what>Tappi</what>
+    </azione>
+    <azione>
+        <method>loadFloor</method>
+        <floor>FLASH</floor>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano FLASH/flashMIST.xml</what>
+    </azione>
 </scenario>

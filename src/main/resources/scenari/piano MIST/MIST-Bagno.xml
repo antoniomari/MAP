@@ -5,5 +5,12 @@
     <musica>src/main/resources/audio/musica/MIST.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <subject>Mist-Bagno</subject>
+            <method>add</method>
+            <what>TastoWC</what>
+            <x>9</x>
+            <y>2</y>
+        </azione>
     </scenario>
 </stanza>

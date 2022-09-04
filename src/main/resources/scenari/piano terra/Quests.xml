@@ -69,7 +69,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Signor Schwartz, il software di JDBC-20 (*) si è gravemente corrotto! </sentence>
+        <sentence>Signor Schwartz, il software di JDBC-20 (*) si è gravem-otto corrott-emente! </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -84,12 +84,12 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Ogni laboratorio è posizionato su un (*) diverso piano di questo edificio. </sentence>
+        <sentence>Ogni labor-ionato è posiz-ionatorio su un (*) diverso piano di questo edificio. </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Ahimé, noi saremo impegnati a gestire (*) il panico tra gli invitati. </sentence>
+        <sentence>Ahimè, noi saremo impegnati a gestire (*) il panico tra gli invitati. </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -99,7 +99,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Una volta raggiunto il robot al quarto (*) piano l'obiettivo primario sarà neutralizzarlo. </sentence>
+        <sentence>Una volta raggiunto il robot al quarto (*) piano l'obiett-ario prim-ivo sarà neutralizzarlo. </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -109,32 +109,42 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>del mio laboratorio al piano MIST. (*) Si tratta di un registratore con il quale è </sentence>
+        <sentence>nel mio laboratorio al piano MIST. (*) Si tratta di un registratore con il quale è </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>possibile riprodurre lezioni di (*) programmazione strutturata. </sentence>
+        <sentence>possibile riprodurre lezioni di (*) programma-rata struttu-zione. </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>ATTENZIONE! Le onde emesse (*) stordirebbero chiunque, anche te stesso ... </sentence>
+        <sentence>ATTENZIONE! Le onde emesse (*) stordirebbero chiunque, anche lei stesso... </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Per questo motivo ti serviranno dei tappi (*) per orecchie, che non possiedo. </sentence>
+        <sentence>Per questo motivo le serviranno dei tappi (*) per orecchie, che non possiedo. </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Quando avrai recuperato l'occorrente (*) torna da me per ottenere la cassetta contenente </sentence>
+        <sentence>Sono sicuro che un genio come il suo (*) non avrà gro-mi proble-ssi nel trovare</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence> le registrazioni.</sentence>
+        <sentence>una soluzione per procurarseli...</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Quando avrà recuperato l'occorrente (*) la raggiungerò per consegnarle</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>la cassetta contenente le registrazioni.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -184,7 +194,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Quando avrà terminato mi venga a cercare (*) e le fornirò l'AXC8 funzionante. </sentence>
+        <sentence>Quando avrà terminato la verrò a cercare (*) e le fornirò l'AXC8 funzionante. </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>

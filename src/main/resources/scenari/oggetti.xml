@@ -405,4 +405,14 @@
         <descrizione>Una scrivania di un bel colore vivace.</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="TastoWC">
+        <classe>Item</classe>
+        <descrizione>Cancella i brutti ricordi.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="WCPulito">
+        <classe>Item</classe>
+        <descrizione>Ha visto cose che nessuno immagina.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
 </oggetti>

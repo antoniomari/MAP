@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
-
     <azione>
         <subject>Mist-A</subject>
         <method>add</method>
