@@ -31,7 +31,8 @@
         </speakScenarios>
     </personaggio>
     <personaggio nome="Tecnico">
-        <spritesheet>/img/personaggi/tecnico.png</spritesheet>
+        <spritesheet>/img/personaggi/Tecnico spritesheet.png</spritesheet>
+        <json>/img/personaggi/Tecnico.json</json>
         <speakScenarios>
             <scenario state="erogaTestMist">src/main/resources/scenari/piano MIST/erogaTest.xml</scenario>
         </speakScenarios>

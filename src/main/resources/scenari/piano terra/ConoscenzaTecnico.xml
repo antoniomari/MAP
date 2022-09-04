@@ -11,7 +11,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>move</method>
-        <x>13</x>
+        <x>5</x>
         <y>11</y>
         <how>absolute</how>
         <finalWait>500</finalWait>

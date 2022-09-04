@@ -211,49 +211,49 @@
   },
   "LeftErbaVerde": {
     "x": 0,
-    "y": 432,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "LeftErbaBlu": {
-    "x": 96,
-    "y": 432,
+    "x": 0,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "LeftErbaRossa": {
     "x": 0,
-    "y": 528,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "LeftErbaGialla": {
-    "x": 96,
-    "y": 528,
+    "x": 0,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "RightErbaVerde": {
     "x": 0,
-    "y": 432,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "RightErbaBlu": {
-    "x": 96,
-    "y": 432,
+    "x": 0,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "RightErbaRossa": {
     "x": 0,
-    "y": 528,
+    "y": 600,
     "width": 96,
     "height": 96
   },
   "RightErbaGialla": {
-    "x": 96,
-    "y": 528,
+    "x": 0,
+    "y": 600,
     "width": 96,
     "height": 96
   },
@@ -301,5 +301,13 @@
     "y": 0,
     "width": 48,
     "height": 48
+  },
+
+  "Filo spinato": {
+    "x": 0,
+    "y": 432,
+    "width": 144,
+    "height": 168
   }
+
 }

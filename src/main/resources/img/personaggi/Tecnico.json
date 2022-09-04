@@ -1,0 +1,81 @@
+{
+  "Tecnico":
+  {
+    "x": 0,
+    "y": 120,
+    "width": 96,
+    "height": 120
+  },
+
+  "rightMoving1":
+  {
+    "x": 96,
+    "y": 120,
+    "width": 96,
+    "height": 120
+  },
+
+  "rightMoving2":
+  {
+    "x": 192,
+    "y": 120,
+    "width": 96,
+    "height": 120
+  },
+
+  "rightMoving3":
+  {
+    "x": 288,
+    "y": 120,
+    "width": 96,
+    "height": 120
+  },
+
+  "rightMoving4":
+  {
+    "x": 192,
+    "y": 120,
+    "width": 96,
+    "height": 120
+  },
+
+  "leftMoving1":
+  {
+    "x": 96,
+    "y": 0,
+    "width": 96,
+    "height": 120
+  },
+
+  "leftMoving2":
+  {
+    "x": 192,
+    "y": 0,
+    "width": 96,
+    "height": 120
+  },
+
+  "leftMoving3":
+  {
+    "x": 288,
+    "y": 0,
+    "width": 96,
+    "height": 120
+  },
+
+  "leftMoving4":
+  {
+    "x": 192,
+    "y": 0,
+    "width": 96,
+    "height": 120
+  },
+
+  "speaking":
+  {
+    "x": 0,
+    "y": 0,
+    "width": 96,
+    "height": 120
+  }
+}

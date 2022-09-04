@@ -394,6 +394,11 @@
             <scenario>src/main/resources/scenari/piano EBERT/ritrovoMemoriaMA-D.xml</scenario>
         </onUseWith>
     </oggetto>
+    <oggetto nome="Filo spinato">
+        <classe>Item</classe>
+        <descrizione>Io non lo toccherei.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
     <oggetto nome="ScrivaniaPT">
         <classe>Item</classe>
         <descrizione>Una scrivania di un bel colore vivace.</descrizione>
