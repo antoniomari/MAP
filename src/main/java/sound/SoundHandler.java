@@ -25,6 +25,7 @@ public class SoundHandler
     // Todo: bufferizzazione
     public static void playWav(String wavPath, Mode mode)
     {
+        /*
         Objects.requireNonNull(wavPath);
         Objects.requireNonNull(mode);
 
@@ -42,6 +43,8 @@ public class SoundHandler
             default:
                 throw new GameException("Modalità audio non esistente");
         }
+
+         */
     }
 
     /**
