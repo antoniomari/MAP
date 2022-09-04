@@ -1,5 +1,6 @@
 package general.xml;
 
+import GUI.miniGames.Captcha;
 import GUI.miniGames.LogicQuest;
 import GUI.miniGames.TestMist;
 import entity.GamePiece;
@@ -712,19 +713,18 @@ public class XmlParser
         String what = getTagValue(eAction, "what");
 
         // lo scenario viene mandato avanti dall'input di chiusura del JDialog del test inserito dall'utente
-        if(what.equals("ALU"))
+        switch (what)
         {
-            int number = Integer.parseInt(getTagValue(eAction, "number"));
-            return () -> LogicQuest.executeTest(number);
+            case "ALU":
+                int number = Integer.parseInt(getTagValue(eAction, "number"));
+                return () -> LogicQuest.executeTest(number);
+            case "MIST":
+                return TestMist::executeTest;
+            case "CAPTCHA":
+                return Captcha::executeTest;
+            default:
+                throw new GameException("Nome del test non valido");
         }
-
-        else if(what.equals("MIST"))
-        {
-            return TestMist::executeTest;
-        }
-
-        else
-            throw new GameException("Nome del test non valido");
     }
 
     private static Runnable parseSetCanUse(Element eAction)

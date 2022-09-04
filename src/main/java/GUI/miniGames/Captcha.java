@@ -1,5 +1,9 @@
 package GUI.miniGames;
 
+import GUI.gamestate.GameState;
+import general.LogOutputManager;
+import general.Util;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -17,16 +21,16 @@ import java.util.Set;
 public class Captcha extends MiniGame
 {
     private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
-    private final String WIN = "Captcha risolto sei umano!";
-    private final String LOSE = "Accesso negato ai Robot del laboratorio!";
+    private static final String WIN = "Captcha risolto sei umano!";
+    private static final String LOSE = "Accesso negato ai Robot del laboratorio!";
 
     // dizionario contenente per ogni imagine captcha la stringa di soluzione associata
     private static Map<String, String> captchaMatch;
 
-    // La captchaDialog rappresenta la finestra contenente il captcha
+    // La captchaPanel rappresenta la finestra contenente il captcha
     // e il mainWrapper contiene tutti i componenti swing quali imagine
     // e barra di testo interattiva per l'utente.
-    private final JDialog captchaDialog;
+    private final JPanel captchaPanel;
     private final JPanel mainWrapper;
 
     // titolo della finestra captcha
@@ -42,24 +46,33 @@ public class Captcha extends MiniGame
     private JTextField captAnswer;
 
     // componenti Swing per comunicazione con utente
+    /*
     private final JDialog infoWindow;
     private final JLabel infoText;
+
+     */
 
     // contiene il path dell'imagine captcha scelta in fase di
     // inizializzazione e permette di risalire al valore associato
     // nel dizionario
     private String imgKeyPath;
 
-    public static void executeTestCaptcha()
+    public static void executeTest()
     {
+        LogOutputManager.logOutput("Iniziando Test CAPTCHA: ", LogOutputManager.GAMESTATE_COLOR);
+        GameState.changeState(GameState.State.TEST);
 
+        MiniGame.setCurrentTest( new Captcha());
     }
 
     // costruttore
-    private Captcha() {
+    private Captcha()
+    {
+        super(WIN, LOSE, "");
+
 
         // creazione della jdialog con connesione al pannello del mainframde del gioco
-        captchaDialog = new JDialog(/*GameManager.getMainFrame(), "CAPTCHA TEXT"*/);
+        captchaPanel = new JPanel(/*GameManager.getMainFrame(), "CAPTCHA TEXT"*/);
         mainWrapper = new JPanel(new BorderLayout());
 
         // creazione pannelli principali
@@ -69,28 +82,31 @@ public class Captcha extends MiniGame
         // componeti per interazione con l'utente
         istruction = new JLabel("Digitare la parola visualizzata nell'immagine.", SwingConstants.LEFT);
         captAnswer = new JTextField();
+        // captAnswer.setFocusable(false);
 
         // creazione titolo del minigioco
         description = new JLabel("Controllo di sicurezza \n  ", SwingConstants.CENTER);
 
-        // creazione componenti interazione con utente in risposta
-        // alle azioni compiute dall'utente servono a dare risposta
-        // di quello che sta accadendo
-        infoWindow = new JDialog(captchaDialog);
-        infoWindow.setModal(true);
-        infoText = new JLabel("", SwingConstants.CENTER);
 
         // creazione e caricamento del coppie del dizionario e settagio dell'imagine del captcha
         captchaMatch = initMacth();
         setIcon(captchaMatch.keySet());
 
+
+
         // TODO: da spostare nel factory method
         setup();
         setupListener();
         addDetails();
+
+        add(captchaPanel, TEST_LAYER);
+        captchaPanel.setBounds(getInsets().left, getInsets().top,
+                (int) captchaPanel.getPreferredSize().getWidth(),
+                (int) captchaPanel.getPreferredSize().getHeight());
     }
 
 
+    /*
     public static Captcha createCaptcha()
     {
         Captcha captcha = new Captcha();
@@ -101,6 +117,8 @@ public class Captcha extends MiniGame
 
         return captcha;
     }
+
+     */
 
     private void setImgKeyPath(String key) {
         imgKeyPath = key;
@@ -115,7 +133,8 @@ public class Captcha extends MiniGame
         // int min = 0;
         // avvolte da eccezione capire perchè
         // (int) (Math.random()*(max-min)) + min]
-        setImgKeyPath(pathString[(int) (Math.random()*10)]);
+        setImgKeyPath(Util.randomChoice(pathString));
+
 
         ImageIcon icon = new ImageIcon(imgKeyPath);
         // Rimpiazzare set immagine
@@ -128,7 +147,7 @@ public class Captcha extends MiniGame
     {
         Map<String, String> solution = new HashMap<>();
 
-        String imgPath[] = {
+        String[] imgPath = {
                 "src/main/resources/img/captchaImg/captcha1.png",
                 "src/main/resources/img/captchaImg/captcha2.png",
                 "src/main/resources/img/captchaImg/captcha3.png",
@@ -182,25 +201,29 @@ public class Captcha extends MiniGame
 
         // wrapper finale per ottimizzare la visualizzazione
         // e gerarchia dei pannelli
-        JScrollPane scrollWrapper = new JScrollPane(mainWrapper);
-        captchaDialog.add(scrollWrapper, BorderLayout.CENTER);
+        //JScrollPane scrollWrapper = new JScrollPane(mainWrapper);
+        captchaPanel.add(mainWrapper, BorderLayout.CENTER);
     }
 
     final void addDetails()
     {
-        captchaDialog.setSize(700, 700);
+        captchaPanel.setPreferredSize(new Dimension(700, 700));
         // TODO: da reimpostare setModal per frezzare le sottostanti finestre aperte
-        // captchaDialog.setModal(true);
-        captchaDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        captchaDialog.setResizable(false);
+        // captchaPanel.setModal(true);
+
+        /*
+        captchaPanel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        captchaPanel.setResizable(false);
+
+         */
 
         // imposta come "figlio"
-        // captchaDialog.setLocationRelativeTo(GameManager.getMainFrame());
+        // captchaPanel.setLocationRelativeTo(GameManager.getMainFrame());
         // (new Color 16, 44, 84) blue navy dark color
         imagePanel.setBackground((new Color (16, 44, 84)));
-        captchaDialog.setBackground((new Color( 16, 44, 84)));
-        captchaDialog.getContentPane().setBackground((new Color (16, 44, 84)));
-        captchaDialog.setVisible(true);
+        captchaPanel.setBackground((new Color( 16, 44, 84)));
+        captchaPanel.setBackground((new Color (16, 44, 84)));
+        captchaPanel.setVisible(true);
     }
 
     private void setupListener()
@@ -216,25 +239,13 @@ public class Captcha extends MiniGame
                     // gestione della risposta data dall'utente
                     if (checkAnswer(captAnswer.getText()))
                     {
-                        showInfoResult(WIN);
+                        showResult(WIN);
                     }
                     else
-                        showInfoResult(LOSE);
+                        showResult(LOSE);
 
                     // captAnswer.setText("");
                 }
-            }
-        });
-
-        // listener sulla finestra della jdialog
-        // per la comunicazione con l'utente
-        infoWindow.addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing(WindowEvent arg0)
-            {
-                // System.out.println("Window closing");
-                captchaDialog.dispose();
             }
         });
     }
@@ -246,21 +257,6 @@ public class Captcha extends MiniGame
         passed = answer.equalsIgnoreCase(captchaMatch.get(imgKeyPath));
 
         return passed;
-    }
-
-    private void showInfoResult(String msg)
-    {
-        infoText.setText(msg);
-        infoWindow.add(infoText);
-        infoWindow.setSize(450, 100);
-        infoWindow.setLocationRelativeTo(captchaDialog);
-        infoWindow.setVisible(true);
-        infoWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        captchaDialog.setVisible(false);
-    }
-
-    public static void main(String args[]) {
-        SwingUtilities.invokeLater(() -> new Captcha());
     }
 }
 

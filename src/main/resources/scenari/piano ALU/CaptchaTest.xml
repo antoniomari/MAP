@@ -130,10 +130,8 @@
         <method>speak</method>
         <sentence>professore ci dia un occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
     </azione>
-    <!--
     <azione>
         <method>executeTest</method>
-        <what>MIST</what>
+        <what>CAPTCHA</what>
     </azione>
-    -->
 </scenario>
