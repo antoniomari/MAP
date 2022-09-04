@@ -75,7 +75,12 @@
 	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
-		<sentence>PRESENTAZIONE</sentence>
+		<sentence>Salve, il mio nome è Diego sono un (*) informatico e adoro i numeri, inseguo </sentence>
+	</azione>
+	<azione>
+		<subject>Diego</subject>
+		<method>speak</method>
+		<sentence>da sempre scienza e conoscenza.</sentence>
 	</azione>
 	<azione>
 		<subject>Nicolas</subject>
