@@ -2,15 +2,18 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
-        <subject>Schwartz</subject>
+        <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>MIAAAAAAAOOOOOOO</sentence>
+        <sentence>Sei troppo iNtElLiGeNtE!</sentence>
     </azione>
     <azione>
         <subject>AscensoreALU</subject>
         <method>setState</method>
         <state>canOpen</state>
     </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>fineCaptcha</state>
+    </azione>
 </scenario>
-
-provaAscensore

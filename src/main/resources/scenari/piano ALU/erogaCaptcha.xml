@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Conto sul tuo aiuto!</sentence>
+    </azione>
+    <azione>
+        <method>executeTest</method>
+        <what>CAPTCHA</what>
+    </azione>
+</scenario>
+executeTest

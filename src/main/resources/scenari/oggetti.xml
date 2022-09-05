@@ -73,7 +73,7 @@
         <canUse>false</canUse>
         <onUseWith>
             <keep>true</keep>
-            <target>Robot</target>
+            <target>JDBC-20</target>
             <targetInitState>prontoPerRegistratore</targetInitState>
             <targetFinalState>stordito</targetFinalState>
             <scenario>src/main/resources/scenari/piano BUG/primoStordimento.xml</scenario>

@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
     <azione>
@@ -128,7 +129,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>professore ci dia un occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
+        <sentence>professore ci dia un'occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>

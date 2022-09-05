@@ -15,7 +15,7 @@
         <what>esclamativo</what>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>Tu non puoi passareeeee! (*) -cit</sentence>
     </azione>
@@ -50,7 +50,7 @@
         <finalWait>0</finalWait>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>move</method>
         <x>8</x>
         <y>14</y>
@@ -71,7 +71,7 @@
         <finalWait>0</finalWait>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>move</method>
         <x>5</x>
         <y>12</y>
@@ -84,17 +84,17 @@
         <what>fumo</what>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>Te l'ho detto! (*) non riuscirai mai a passare</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>Schwartz dei miei stivali</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>setState</method>
         <state>prontoPerRegistratore</state>
     </azione>
