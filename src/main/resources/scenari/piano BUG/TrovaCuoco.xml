@@ -51,7 +51,7 @@
             <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
         </azione>
         <azione>
-            <subject>CuocoNero</subject>
+            <subject>Cuoco Luigi</subject>
             <method>move</method>
             <x>0</x>
             <y>12</y>

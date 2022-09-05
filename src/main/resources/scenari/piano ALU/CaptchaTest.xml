@@ -1,5 +1,10 @@
+<?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>removeFromRoom</method>
+    </azione>
     <azione>
         <subject>ALUA</subject>
         <method>add</method>
@@ -128,7 +133,17 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>professore ci dia un occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
+        <sentence>professore ci dia un'occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>erogaCaptcha</state>
+    </azione>
+    <azione>
+        <subject>AscensoreAlU</subject>
+        <method>setState</method>
+        <state>aspettaCaptcha</state>
     </azione>
     <azione>
         <subject>AscensoreALU</subject>

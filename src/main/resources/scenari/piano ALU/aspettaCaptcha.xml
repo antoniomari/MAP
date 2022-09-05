@@ -4,7 +4,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Se riprovi ad aprirlo (*) senza eseguire il test</sentence>
+        <sentence>Se riprovi ad aprirlo (*) senza eseguire il captcha</sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>

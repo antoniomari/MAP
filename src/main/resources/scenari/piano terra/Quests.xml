@@ -68,8 +68,32 @@
     </azione>
     <azione>
         <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>Signor Schwartz, il software di JDBC-20 (*) si è gravem-otto corrott-emente! </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -77,9 +101,41 @@
         <sentence>"Dobbiamo" assolutamente trovare (*) un modo per ripararlo. </sentence>
     </azione>
     <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>Diego</subject>
         <method>speak</method>
         <sentence>Fortunatamente nei nostri laboratori (*) c'è tutto l'occorrente. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -87,9 +143,41 @@
         <sentence>Ogni labor-ionato è posiz-ionatorio su un (*) diverso piano di questo edificio. </sentence>
     </azione>
     <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>Antonio</subject>
         <method>speak</method>
         <sentence>Ahimè, noi saremo impegnati a gestire (*) il panico tra gli invitati. </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -97,9 +185,20 @@
         <sentence>Quindi sarà lei a risolvere la situazione, (*) riparando il software di JDBC-20. </sentence>
     </azione>
     <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>Una volta raggiunto il robot al quarto (*) piano l'obiett-ario prim-ivo sarà neutralizzarlo. </sentence>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -145,6 +244,22 @@
         <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>la cassetta contenente le registrazioni.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -202,6 +317,22 @@
         <sentence>Caffè illy, caffè lavazza, caffè kimbo (*) AHHH che darei per un buon caffé!</sentence>
     </azione>
     <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>Antonio</subject>
         <method>speak</method>
         <sentence>Una volta messo K.O. e dopo aver (*) hackerato il sistema operativo guadagnando</sentence>
@@ -221,6 +352,14 @@
         <method>speak</method>
         <sentence>dominare l'interfaccia command-line. </sentence>
     </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
     <!--
     <azione>
         <subject>Antonio</subject>
@@ -235,8 +374,32 @@
     -->
     <azione>
         <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>Professore contiamo su di lei (*) non ci deluda.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -244,9 +407,33 @@
         <sentence>Se ha bisogno potrà trovarci al bar.</sentence>
     </azione>
     <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>Diego</subject>
         <method>speak</method>
         <sentence>Qui possiamo avere tutto sotto (*) controllo, anche i cocktails!</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>AscensorePT</subject>

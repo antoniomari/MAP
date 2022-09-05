@@ -4,11 +4,16 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Grazie.</sentence>
+        <sentence>Grazie. Sapevo di poter contare (*) sulla sua iNtElLiGeNzA!</sentence>
     </azione>
     <azione>
         <subject>AscensoreMIST</subject>
         <method>setState</method>
         <state>canOpen</state>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>fineTest</state>
     </azione>
 </scenario>

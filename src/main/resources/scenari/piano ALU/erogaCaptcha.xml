@@ -4,11 +4,11 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Sei troppo iNtElLiGeNtE!</sentence>
+        <sentence>Conto sul tuo aiuto!</sentence>
     </azione>
     <azione>
-        <subject>AscensoreALU</subject>
-        <method>setState</method>
-        <state>canOpen</state>
+        <method>executeTest</method>
+        <what>CAPTCHA</what>
     </azione>
 </scenario>
+
