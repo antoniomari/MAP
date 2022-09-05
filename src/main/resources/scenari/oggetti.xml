@@ -57,6 +57,15 @@
         <classe>PickupableItem</classe>
         <descrizione>Un registratore vuoto.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>false</keep>
+            <target>Nicolas</target>
+            <!--
+            <targetInitState>prontoPerRegistratore</targetInitState>
+            <targetFinalState>stordito</targetFinalState>
+            <scenario>src/main/resources/scenari/piano BUG/primoStordimento.xml</scenario>
+            -->
+        </onUseWith>
     </oggetto>
     <oggetto nome="RegistratorePieno">
         <classe>PickupableItem</classe>

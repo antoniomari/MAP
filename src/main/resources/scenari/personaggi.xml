@@ -5,6 +5,7 @@
         <json>/img/personaggi/Nicolas.json</json>
         <speakScenarios>
             <sentence state="fineConferenza">Fa freddo</sentence>
+            <sentence state="prontoPerRegistratore">Portami il registratore.</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Antonio">
