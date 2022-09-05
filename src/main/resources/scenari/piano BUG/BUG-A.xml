@@ -53,7 +53,7 @@
         <azione>
             <subject>Bug-A</subject>
             <method>add</method>
-            <what>Robot</what>
+            <what>JDBC-20</what>
             <x>8</x>
             <y>12</y>
         </azione>

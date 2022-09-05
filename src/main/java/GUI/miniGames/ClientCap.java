@@ -56,7 +56,7 @@ public class ClientCap extends MiniGame
 
         startConnection();
 
-        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/provaAscensore.xml";
+        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/dopoCaptcha.xml";
         setCloseOnFail(true);
 
         // creazione della jdialog con connesione al pannello del mainframde del gioco

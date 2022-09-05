@@ -2,7 +2,7 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>setState</method>
         <state>stordito</state>
     </azione>
@@ -11,7 +11,7 @@
         <what>src/main/resources/audio/effetti/zapRegistratore.wav</what>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>move</method>
         <x>2</x>
         <y>10</y>
@@ -23,7 +23,7 @@
         <what>src/main/resources/audio/effetti/stomp.wav</what>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>effectAnimation</method>
         <animationName>stordimento</animationName>
         <finalWait>0</finalWait>

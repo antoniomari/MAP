@@ -19,7 +19,7 @@
             <what>esclamativo</what>
         </azione>
         <azione>
-            <subject>CuocoNero</subject>
+            <subject>Cuoco Luigi</subject>
             <method>speak</method>
             <sentence>Aiutooooo!!! Quell'ammasso di latta è (*) completamente impazzito!</sentence>
         </azione>
@@ -34,12 +34,12 @@
         <azione>
             <subject>Bug-B</subject>
             <method>add</method>
-            <what>Robot</what>
+            <what>JDBC-20</what>
             <x>28</x>
             <y>12</y>
         </azione>
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>move</method>
             <x>21</x>
             <y>12</y>
@@ -59,7 +59,7 @@
             <finalWait>0</finalWait>
         </azione>
         <azione>
-            <subject>CuocoNero</subject>
+            <subject>Cuoco Luigi</subject>
             <method>removeFromRoom</method>
         </azione>
         <azione>
@@ -79,7 +79,7 @@
         </azione>
         <!--
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>setState</method>
             <state>prontoPerRegistratore</state>
         </azione>
@@ -106,7 +106,7 @@
             <finalWait>0</finalWait>
         </azione>
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>move</method>
             <x>8</x>
             <y>14</y>
@@ -127,7 +127,7 @@
             <finalWait>0</finalWait>
         </azione>
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>move</method>
             <x>5</x>
             <y>12</y>
@@ -140,17 +140,17 @@
             <what>fumo</what>
         </azione>
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>speak</method>
             <sentence>Te l'ho detto! (*) non riuscirai mai a passare</sentence>
         </azione>
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>speak</method>
             <sentence>Schwartz dei miei stivali</sentence>
         </azione>
         <azione>
-            <subject>Robot</subject>
+            <subject>JDBC-20</subject>
             <method>setState</method>
             <state>prontoPerRegistratore</state>
         </azione>

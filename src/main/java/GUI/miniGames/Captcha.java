@@ -71,7 +71,7 @@ public class Captcha extends MiniGame
     {
         super(WIN, LOSE, "");
 
-        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/provaAscensore.xml";
+        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/dopoCaptcha.xml";
         setCloseOnFail(true);
 
 

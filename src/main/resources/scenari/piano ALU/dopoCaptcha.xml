@@ -2,9 +2,9 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
-        <subject>Schwartz</subject>
+        <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>MIAAAAAAAOOOOOOO</sentence>
+        <sentence>Finalmente, bravo dottore!</sentence>
     </azione>
     <azione>
         <subject>AscensoreALU</subject>

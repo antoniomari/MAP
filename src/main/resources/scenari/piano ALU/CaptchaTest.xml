@@ -131,6 +131,16 @@
         <sentence>professore ci dia un occhiata (*) gentilmente, lei è InTeLLigenTE</sentence>
     </azione>
     <azione>
+        <subject>AscensoreALU</subject>
+        <method>setState</method>
+        <state>aspettaCaptcha</state>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>aspettaCaptcha</state>
+    </azione>
+    <azione>
         <method>executeTest</method>
         <what>CAPTCHA</what>
     </azione>
