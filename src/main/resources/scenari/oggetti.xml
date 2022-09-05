@@ -108,6 +108,7 @@
         <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/piano ALU/CaptchaTest.xml</scenario>
+            <scenario state="aspettaCaptcha">src/main/resources/scenari/piano ALU/aspettaCaptcha.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="Bottiglietta">

@@ -39,6 +39,9 @@
         <json>/img/personaggi/Tecnico.json</json>
         <speakScenarios>
             <scenario state="erogaTestMist">src/main/resources/scenari/piano MIST/erogaTest.xml</scenario>
+            <scenario state="fineTest">src/main/resources/scenari/piano MIST/fineTest.xml</scenario>
+            <scenario state="erogaCaptcha">src/main/resources/scenari/piano ALU/CaptchaTest.xml</scenario>
+            <scenario state="fineCaptcha">src/main/resources/scenari/piano ALU/provaAscensore.xml</scenario>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Cuoco1">
