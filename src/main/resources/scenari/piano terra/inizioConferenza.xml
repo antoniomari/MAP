@@ -124,7 +124,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>il test di Turing per poter (*) essere ufficialmente proclamata INTELLIGENTE.</sentence>
+        <sentence>il test di Turing per poter (*) essere ufficialmente procla-gente intelli-mata.</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -134,7 +134,7 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>di intelligenza artificiale.</sentence>
+        <sentence>di intelli-ciale artifi-genza.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
