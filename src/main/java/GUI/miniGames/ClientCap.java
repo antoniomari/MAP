@@ -1,26 +1,199 @@
 package GUI.miniGames;
 
+import GUI.gamestate.GameState;
+import general.GameManager;
+import general.LogOutputManager;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
 
-public class ClientCap
+
+/**
+ *  La classe serve a simulare un captcha per il riconoscimento dell'interazione con
+ *  un umano. In particolare tale classe implementerà un client che richiede ad un
+ *  server la ricezione di un test captcha.
+ */
+public class ClientCap extends MiniGame
 {
-    public static void main(String args[])
+    private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
+    private static final String WIN = "Captcha risolto sei umano!";
+    private static final String LOSE = "Accesso negato ai Robot del laboratorio!";
+
+    // La captchaPanel rappresenta la finestra contenente il captcha
+    // e il mainWrapper contiene tutti i componenti swing quali imagine
+    // e barra di testo interattiva per l'utente.
+    private final JPanel captchaPanel;
+    private final JPanel mainWrapper;
+
+    // titolo della finestra captcha
+    private final JLabel description;
+
+    // componeti swing per la gestione dell'immagine
+    private final JPanel imagePanel;
+    private JLabel image;
+
+    // componenti swing per l'interaizione dell'utente con la jdialog
+    private final JPanel interactionPanel;
+    private final JLabel istruction;
+    private JTextField captAnswer;
+
+    // costruttore
+    private ClientCap()
     {
-        JFrame jFrame = new JFrame("Client");
-        jFrame.setSize(600, 600);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super(WIN, LOSE, "");
 
-        JLabel jLabelText = new JLabel("Waiting for image from server...");
-        jFrame.add(jLabelText, BorderLayout.SOUTH);
+        startConnection();
 
-        jFrame.setVisible(true);
+        scenarioOnWinPath = "src/main/resources/scenari/piano ALU/provaAscensore.xml";
+        setCloseOnFail(true);
+
+        // creazione della jdialog con connesione al pannello del mainframde del gioco
+        captchaPanel = new JPanel(/*GameManager.getMainFrame(), "CAPTCHA TEXT"*/);
+        mainWrapper = new JPanel(new BorderLayout());
+
+        // creazione pannelli principali
+        imagePanel = new JPanel(new GridLayout(1,1));
+        interactionPanel = new JPanel(new GridLayout(2,1));
+
+        // componeti per interazione con l'utente
+        istruction = new JLabel("Digitare la parola visualizzata nell'immagine.", SwingConstants.LEFT);
+        captAnswer = new JTextField();
+        // captAnswer.setFocusable(false);
+
+        // creazione titolo del minigioco
+        description = new JLabel("Controllo di sicurezza \n  ", SwingConstants.CENTER);
+
+
+        // TODO: da spostare nel factory method
+        setup();
+        setupListener();
+        addDetails();
+
+        add(captchaPanel, TEST_LAYER);
+        captchaPanel.setBounds(getInsets().left, getInsets().top,
+                (int) captchaPanel.getPreferredSize().getWidth(),
+                (int) captchaPanel.getPreferredSize().getHeight());
+
+    }
+
+    private void setup()
+    {
+        description.setForeground(Color.RED);
+        description.setFont(FONT);
+        imagePanel.add(image);
+        imagePanel.setToolTipText("Risolvi il captcha.");
+        istruction.setBackground(new Color(156,156,156));
+        istruction.setFont(FONT);
+
+        // new Color(3, 187,133) blue-verde-smeraldo
+        // new Color(0, 143,57) verde really nice!
+        // 255, 165,0 orange
+        // new Color(173, 255,47) giallo limone cool!!
+        captAnswer.setForeground(new Color(173, 255,47));
+        captAnswer.setBackground(new Color(156,156,156));
+        captAnswer.setFont(FONT);
+        istruction.setToolTipText("digita i caratteri osservati e premi invio nella barra sottostante.");
+        captAnswer.setToolTipText("premi invio dopo aver digitato i caratteri.");
+        interactionPanel.setBackground(new Color(156,156,156));
+        interactionPanel.add(istruction);
+        interactionPanel.add(captAnswer);
+
+        // composizione dei componenti swing a matriosca
+        mainWrapper.setBackground(new Color(156,156,156));
+        mainWrapper.add(description, BorderLayout.NORTH);
+        mainWrapper.add(imagePanel, BorderLayout.CENTER );
+        mainWrapper.add(interactionPanel, BorderLayout.SOUTH);
+
+        // wrapper finale per ottimizzare la visualizzazione
+        // e gerarchia dei pannelli
+        //JScrollPane scrollWrapper = new JScrollPane(mainWrapper);
+        captchaPanel.add(mainWrapper, BorderLayout.CENTER);
+    }
+
+    final void addDetails()
+    {
+        captchaPanel.setPreferredSize(new Dimension(700, 700));
+        // TODO: da reimpostare setModal per frezzare le sottostanti finestre aperte
+        // captchaPanel.setModal(true);
+
+        // (new Color 16, 44, 84) blue navy dark color
+        imagePanel.setBackground((new Color (16, 44, 84)));
+        captchaPanel.setBackground((new Color( 16, 44, 84)));
+        captchaPanel.setBackground((new Color (16, 44, 84)));
+        captchaPanel.setVisible(true);
+    }
+
+
+    // inizializzazione dei listener per gli eventi generati dal captcha
+    private void setupListener()
+    {
+        captAnswer.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    System.out.println(captAnswer.getText());
+
+                    GameManager.getMainFrame().requestFocus();
+
+                    // gestione della risposta data dall'utente
+                    if (checkAnswer(captAnswer.getText()))
+                    {
+                        showResult(WIN);
+                    }
+                    else
+                        showResult(LOSE);
+
+                    // captAnswer.setText("");
+                }
+            }
+        });
+    }
+
+    // verifica del input inserito per il captcha
+    private boolean checkAnswer(String answer)
+    {
+        boolean passed;
+
+        passed = false;
+       // passed = answer.equalsIgnoreCase(captchaMatch.get(imgKeyPath));
+
+        return passed;
+    }
+
+    public void setImage(JLabel img) {
+        this.image = img;
+    }
+
+    // executor del test capcha
+    public static void executeTest()
+    {
+        LogOutputManager.logOutput("Iniziando Test CAPTCHA: ", LogOutputManager.GAMESTATE_COLOR);
+        GameState.changeState(GameState.State.TEST);
+
+        MiniGame.setCurrentTest( new ClientCap());
+    }
+
+
+    public void startConnection()
+    {
+
+        //JFrame jFrame = new JFrame("Client");
+        // jFrame.setSize(600, 600);
+        // jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // JLabel jLabelText = new JLabel("Waiting for image from server...");
+       // jFrame.add(jLabelText, BorderLayout.SOUTH);
+
+        // jFrame.setVisible(true);
 
         try (Socket socketDelServer = new Socket("localhost", 1234);
               BufferedInputStream bufferedInputStream = new
@@ -28,10 +201,11 @@ public class ClientCap
            Thread.sleep(2000);
             BufferedImage bufferedImage = ImageIO.read(bufferedInputStream);
 
-            JLabel jLabelPic = new JLabel(new ImageIcon(bufferedImage));
-            jLabelText.setText("image received");
+            setImage(new JLabel(new ImageIcon(bufferedImage)));
+           // client.image = new JLabel(new ImageIcon(bufferedImage));
+            //jLabelText.setText("image received");
 
-            jFrame.add(jLabelPic, BorderLayout.CENTER);
+            //jFrame.add(jLabelPic, BorderLayout.CENTER);
 
             //System.out.println(br.readLine());
         } catch (ConnectException ce) {

@@ -50,15 +50,15 @@ public class ServerCap
         Map<String, String> solution = new HashMap<>();
 
         String[] imgPath = {
-                "src/main/resources/img/captchaImg/captcha1.png",
-                "src/main/resources/img/captchaImg/captcha2.png",
-                "src/main/resources/img/captchaImg/captcha3.png",
-                "src/main/resources/img/captchaImg/captcha4.png",
-                "src/main/resources/img/captchaImg/captcha5.png",
-                "src/main/resources/img/captchaImg/captcha6.png",
-                "src/main/resources/img/captchaImg/captcha7.png",
-                "src/main/resources/img/captchaImg/captcha8.png",
-                "src/main/resources/img/captchaImg/captcha9.png"
+                "/img/captchaImg/captcha1.png",
+                "/img/captchaImg/captcha2.png",
+                "/img/captchaImg/captcha3.png",
+                "/img/captchaImg/captcha4.png",
+                "/img/captchaImg/captcha5.png",
+                "/img/captchaImg/captcha6.png",
+                "/img/captchaImg/captcha7.png",
+                "/img/captchaImg/captcha8.png",
+                "/img/captchaImg/captcha9.png"
         };
 
         String accessToken[] = {
