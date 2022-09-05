@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <scenario>
+    <!--
     <azione>
         <method>loadFloor</method>
         <floor>FINALE</floor>
@@ -14,4 +15,18 @@
         <method>teleport</method>
         <where>FlashRoomFinale</where>
     </azione>
-</scenario>
+    -->
+    <azione>
+        <method>loadFloor</method>
+        <floor>SERVER</floor>
+    </azione>
+    <azione>
+        <subject>ServerRoom</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano SERVER/entrataServerRoom.xml</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>ServerRoom</where>
+    </azione></scenario>

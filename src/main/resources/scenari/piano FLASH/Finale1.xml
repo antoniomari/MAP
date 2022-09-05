@@ -31,11 +31,11 @@
         <y>22</y>
     </azione>
     <azione>
-    <subject>FlashRoomFinale</subject>
-    <method>add</method>
-    <what>Nicolas</what>
-    <x>8</x>
-    <y>20</y>
+        <subject>FlashRoomFinale</subject>
+        <method>add</method>
+        <what>Nicolas</what>
+        <x>8</x>
+        <y>20</y>
     </azione>
     <azione>
         <subject>Antonio</subject>

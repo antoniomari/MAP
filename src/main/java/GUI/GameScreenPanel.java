@@ -128,6 +128,9 @@ public class GameScreenPanel extends JLayeredPane
     public void addCurrentRoomEffect(Image effectImage)
     {
         Objects.requireNonNull(effectImage);
+
+        removeCurrentRoomEffect();
+
         Icon backgroundIcon =  backgroundLabel.getIcon();
         roomEffectLabel = new JLabel(SpriteManager.rescaledImageIcon(effectImage, backgroundIcon.getIconWidth(),
                 backgroundIcon.getIconHeight()));
@@ -141,14 +144,18 @@ public class GameScreenPanel extends JLayeredPane
 
     public void removeCurrentRoomEffect()
     {
-        //Sposta etichetta nel layer per la rimozione
-        setLayer(roomEffectLabel, GARBAGE_LAYER);
-        roomEffectLabel.setIcon(null);
+        if(roomEffectLabel != null)
+        {
+            //Sposta etichetta nel layer per la rimozione
+            setLayer(roomEffectLabel, GARBAGE_LAYER);
+            roomEffectLabel.setIcon(null);
 
-        // rimuovere la JLabel dal gameScreenPanel
-        remove(roomEffectLabel);
+            // rimuovere la JLabel dal gameScreenPanel
+            remove(roomEffectLabel);
 
-        roomEffectLabel = null;
+            roomEffectLabel = null;
+        }
+
     }
 
     /**
