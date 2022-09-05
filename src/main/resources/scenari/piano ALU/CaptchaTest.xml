@@ -2,6 +2,10 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <subject>Tecnico</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
         <subject>ALUA</subject>
         <method>add</method>
         <what>Tecnico</what>
