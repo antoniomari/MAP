@@ -53,9 +53,14 @@
         <descrizione>Per far finta di ascoltare.</descrizione>
         <canUse>false</canUse>
     </oggetto>
-    <oggetto nome="Registratore">
+    <oggetto nome="RegistratoreVuoto">
         <classe>PickupableItem</classe>
         <descrizione>Un registratore vuoto.</descrizione>
+        <canUse>false</canUse>
+    </oggetto>
+    <oggetto nome="RegistratorePieno">
+        <classe>PickupableItem</classe>
+        <descrizione>Un registratore con cassetta.</descrizione>
         <canUse>false</canUse>
         <onUseWith>
             <keep>true</keep>

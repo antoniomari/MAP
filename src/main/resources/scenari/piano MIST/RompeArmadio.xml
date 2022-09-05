@@ -36,14 +36,14 @@
         <subject>Mist-C</subject>
         <subjectClass>Room</subjectClass>
         <method>add</method>
-        <what>Registratore</what>
-        <x>4</x>
+        <what>RegistratoreVuoto</what>
+        <x>5</x>
         <y>11</y>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>move</method>
-        <x>6</x>
+        <x>4</x>
         <y>13</y>
         <how>absolute</how>
         <finalWait>500</finalWait>

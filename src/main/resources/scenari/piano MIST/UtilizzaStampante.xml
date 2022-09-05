@@ -10,32 +10,24 @@
         <method>animate</method>
     </azione>
     <azione>
-        <subject>Schwartz</subject>
-        <method>move</method>
-        <x>9</x>
-        <y>13</y>
-        <how>absolute</how>
-        <finalWait>500</finalWait>
-    </azione>
-    <azione>
         <subject>Mist-B</subject>
         <method>add</method>
         <what>Tappi</what>
-        <x>13</x>
-        <y>9</y>
+        <x>14</x>
+        <y>11</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>11</x>
+        <y>11</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Guarda che bei tappi (*) sono riuscito a crearmi! </sentence>
-    </azione>
-    <azione>
-        <subject>Schwartz</subject>
-        <method>move</method>
-        <x>14</x>
-        <y>11</y>
-        <how>absolute</how>
-        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Tappi</subject>
@@ -45,6 +37,14 @@
         <method>addToInventory</method>
         <what>Tappi</what>
     </azione>
+    <azione>
+    <subject>Schwartz</subject>
+    <method>move</method>
+    <x>6</x>
+    <y>12</y>
+    <how>absolute</how>
+    <finalWait>500</finalWait>
+</azione>
     <azione>
         <method>loadFloor</method>
         <floor>FLASH</floor>

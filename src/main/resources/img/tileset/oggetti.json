@@ -47,8 +47,14 @@
     "width": 48,
     "height": 48
   },
-  "Registratore": {
+  "RegistratoreVuoto": {
     "x": 240,
+    "y": 48,
+    "width": 48,
+    "height": 48
+  },
+  "RegistratorePieno": {
+    "x": 144,
     "y": 48,
     "width": 48,
     "height": 48

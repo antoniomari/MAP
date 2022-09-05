@@ -11,7 +11,7 @@
         </azione>
         <azione>
             <method>addToInventory</method>
-            <what>Registratore</what>
+            <what>RegistratorePieno</what>
         </azione>
         <azione>
             <method>addToInventory</method>

@@ -117,7 +117,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>move</method>
-        <x>25</x>
+        <x>20</x>
         <y>9</y>
         <how>absolute</how>
         <finalWait>0</finalWait>
