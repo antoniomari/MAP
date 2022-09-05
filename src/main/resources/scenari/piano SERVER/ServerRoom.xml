@@ -12,5 +12,12 @@
             <x>14</x>
             <y>7</y>
         </azione>
+        <azione>
+            <subject>ServerRoom</subject>
+            <method>add</method>
+            <what>ComputerServer</what>
+            <x>23</x>
+            <y>9</y>
+        </azione>
     </scenario>
 </stanza>

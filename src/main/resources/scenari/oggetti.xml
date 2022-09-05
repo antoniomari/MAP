@@ -439,4 +439,9 @@
         <descrizione>Ha visto cose che nessuno immagina.</descrizione>
         <canUse>false</canUse>
     </oggetto>
+    <oggetto nome="ComputerServer">
+        <classe>Item</classe>
+        <descrizione>Gestisce i server di tutti i laboratori.</descrizione>
+        <canUse>true</canUse>
+    </oggetto>
 </oggetti>

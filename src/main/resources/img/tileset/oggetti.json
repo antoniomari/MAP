@@ -328,6 +328,12 @@
     "y": 48,
     "width": 48,
     "height": 96
-  }
+  },
 
+  "ComputerServer": {
+    "x": 768,
+    "y": 24,
+    "width": 144,
+    "height": 120
+  }
 }
