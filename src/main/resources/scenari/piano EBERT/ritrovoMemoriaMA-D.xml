@@ -4,15 +4,25 @@
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Grazie, ora posso recuperare (*) la mia memoria!</sentence>
+        <sentence>Grazie, ora posso ho recuperato (*) la mia memoria!</sentence>
     </azione>
-    <!--
-    METTI SCENARIO SOUND
-    -->
+    <azione>
+        <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
+    </azione>
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>ORA HO CAPITO!</sentence>
+        <sentence>ORA SO DOVE CERCARE!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>28</x>
+        <y>12</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>MA-D</subject>
@@ -29,5 +39,30 @@
         <subject>MA-D</subject>
         <method>setState</method>
         <state>ricerca</state>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setState</method>
+        <state>pronto</state>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaGialla</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaRossa</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaVerde</subject>
+        <method>setCanUse</method>
+        <canUse>true</canUse>
     </azione>
 </scenario>

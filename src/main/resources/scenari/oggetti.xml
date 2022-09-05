@@ -406,8 +406,8 @@
         <onUseWith>
             <keep>false</keep>
             <target>MA-D</target>
-            <targetInitState>init</targetInitState>
-            <targetFinalState>init</targetFinalState>
+            <targetInitState>aspettaPalla</targetInitState>
+            <targetFinalState>aspettaPalla</targetFinalState>
             <scenario>src/main/resources/scenari/piano EBERT/ritrovoMemoriaMA-D.xml</scenario>
         </onUseWith>
     </oggetto>
