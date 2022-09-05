@@ -412,7 +412,13 @@ public class GameScreenPanel extends JLayeredPane
                     InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
                     PickupableItem selectedItem = inventoryPanel.getSelectedItem();
                     if(selectedItem != null)
-                        selectedItem.useWith(piece);
+                    {
+                        if(piece instanceof PlayingCharacter)
+                            selectedItem.use();
+                        else
+                            selectedItem.useWith(piece);
+                    }
+
                 });
         pieceLabel.addMouseListener(interactionListener);
 

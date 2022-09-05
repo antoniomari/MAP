@@ -277,8 +277,11 @@ public class GamePiece
      */
     public void removeFromRoom()
     {
-        locationRoom.removePiece(this);
-        this.locationRoom = null;
+        if(locationRoom != null)
+        {
+            locationRoom.removePiece(this);
+            this.locationRoom = null;
+        }
     }
 
 

@@ -364,6 +364,9 @@ public class XmlParser
             case "open":
                 actionParsed = parseOpen(actionElement);
                 break;
+            case "makeSchwartzRobot":
+                actionParsed = parseMakeSchwartzRobot(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -653,6 +656,8 @@ public class XmlParser
         final String EBERT_NAME = "Ebert-A";
         final String FLASH_PATH = "src/main/resources/scenari/piano FLASH/FlashRoom.xml";
         final String FLASH_NAME = "FlashRoom";
+        final String FINALE_PATH = "src/main/resources/scenari/piano FLASH/FlashRoomFinale.xml";
+        final String FINALE_NAME = "FlashRoomFinale";
 
         String floorPath;
         String startingRoomName;
@@ -682,6 +687,10 @@ public class XmlParser
             case "FLASH":
                 floorPath = FLASH_PATH;
                 startingRoomName = FLASH_NAME;
+                break;
+            case "FINALE":
+                floorPath = FINALE_PATH;
+                startingRoomName = FINALE_NAME;
                 break;
             default:
                 throw new GameException("Piano non valido");
@@ -804,6 +813,15 @@ public class XmlParser
         String subject = getTagValue(eAction, "subject");
 
         return () -> ((Openable) GameManager.getPiece(subject)).open();
+    }
+
+    private static Runnable parseMakeSchwartzRobot(Element eAction)
+    {
+        return () ->
+        {
+            PlayingCharacter.makePlayerFinalForm();
+            GameManager.continueScenario();
+        };
     }
 
     /*

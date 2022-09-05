@@ -2,6 +2,15 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/ruggito.wav</what>
+    </azione>
+    <azione>
+        <subject>Briciola</subject>
+        <method>speak</method>
+        <sentence>MIAAAAAOOO (*) ["qual succulento micete ho fagocitato"]</sentence>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Ora sembra ancooora più contento.</sentence>
@@ -10,5 +19,10 @@
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Sta per addormentarsi!</sentence>
+    </azione>
+    <azione>
+        <subject>Briciola</subject>
+        <method>playEmoji</method>
+        <what>dormi</what>
     </azione>
 </scenario>

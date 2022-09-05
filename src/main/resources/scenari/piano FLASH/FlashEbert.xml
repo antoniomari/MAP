@@ -160,6 +160,31 @@
         <method>removeFromRoom</method>
     </azione>
     <azione>
+        <subject>Ebert Briciola</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano EBERT/trovatoCheatSheet.xml</what>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setCanUse</method>
+        <canUse>false</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaGialla</subject>
+        <method>setCanUse</method>
+        <canUse>false</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaRossa</subject>
+        <method>setCanUse</method>
+        <canUse>false</canUse>
+    </azione>
+    <azione>
+        <subject>RightErbaVerde</subject>
+        <method>setCanUse</method>
+        <canUse>false</canUse>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
         <where>Ebert Garden</where>
@@ -187,4 +212,5 @@
         <method>speak</method>
         <sentence>Stavo sognando? Stavo delirando?</sentence>
     </azione>
+
 </scenario>

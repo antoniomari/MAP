@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<scenario>
+    <azione>
+        <method>loadFloor</method>
+        <floor>FINALE</floor>
+    </azione>
+    <azione>
+        <subject>FlashRoomFinale</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano FLASH/Finale1.xml</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>FlashRoomFinale</where>
+    </azione>
+</scenario>

@@ -72,6 +72,11 @@ public class Room
         }
     }
 
+    public BlockPosition getDefaultPosition()
+    {
+        return defaultPosition;
+    }
+
 
     private final String roomName;
 

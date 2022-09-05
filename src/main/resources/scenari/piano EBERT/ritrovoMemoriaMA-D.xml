@@ -4,7 +4,7 @@
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Grazie, ora posso ho recuperato (*) la mia memoria!</sentence>
+        <sentence>Grazie, ora ho recuperato (*) la mia memoria!</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
@@ -17,11 +17,19 @@
         <sentence>ORA SO DOVE CERCARE!</sentence>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>-4</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
         <subject>MA-D</subject>
         <method>move</method>
         <x>28</x>
         <y>12</y>
-        <how>relative</how>
+        <how>absolute</how>
         <finalWait>500</finalWait>
     </azione>
     <azione>

@@ -3,6 +3,14 @@
     <mode>sequence</mode>
     <azione>
         <subject>MA-D</subject>
+        <method>move</method>
+        <x>-10</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>100</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Ce ne hai messo di tempo!</sentence>
     </azione>
@@ -18,13 +26,37 @@
     </azione>
     <azione>
         <subject>MA-D</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>100</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Ecco...</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>100</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>L'ho buttato perché pensavo (*) fosse spazzatura (e tutt'ora lo penso).</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>-8</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>100</finalWait>
     </azione>
     <azione>
         <subject>MA-D</subject>
@@ -42,17 +74,26 @@
         <sentence>Con la mia stampante incorporata!!</sentence>
     </azione>
     <azione>
+        <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/stampante.wav</what>
+    </azione>
+    <azione>
         <subject>Ebert Briciola</subject>
         <method>add</method>
         <what>Cheat Sheet</what>
-        <x>15</x>
-        <y>15</y>
+        <x>17</x>
+        <y>13</y>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>move</method>
-        <x>12</x>
-        <y>15</y>
+        <x>14</x>
+        <y>13</y>
         <how>absolute</how>
         <finalWait>500</finalWait>
     </azione>
@@ -63,6 +104,14 @@
     <azione>
         <method>addToInventory</method>
         <what>Cheat Sheet</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>-1</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>MA-D</subject>

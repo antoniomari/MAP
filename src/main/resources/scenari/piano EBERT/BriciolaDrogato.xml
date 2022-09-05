@@ -2,6 +2,15 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/ruggito.wav</what>
+    </azione>
+    <azione>
+        <subject>Briciola</subject>
+        <method>speak</method>
+        <sentence>MIAAAAAOOO (*) ["qual gioviale sballo mi hai fornito"]</sentence>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Ora sembra molto contento.</sentence>

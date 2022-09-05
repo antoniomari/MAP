@@ -8,8 +8,24 @@
     </azione>
     <azione>
         <subject>MA-D</subject>
+        <method>move</method>
+        <x>-2</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Vestiti, cibo per Briciola (cadaveri), (*) scorie nucleari, larve ...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>MA-D</subject>

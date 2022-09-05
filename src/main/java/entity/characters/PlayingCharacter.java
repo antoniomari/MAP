@@ -1,8 +1,11 @@
 package entity.characters;
 
+import entity.GamePiece;
 import entity.items.PickupableItem;
+import entity.rooms.Room;
 import events.EventHandler;
 import events.InventoryEvent;
+import general.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +27,31 @@ public class PlayingCharacter extends GameCharacter
         this.inventory = new ArrayList<>();
     }
 
+    private PlayingCharacter(String name, String spritePath)
+    {
+        super(name, spritePath);
+        this.inventory = new ArrayList<>();
+    }
+
     public static PlayingCharacter getPlayer()
     {
         if(player == null)
             player = new PlayingCharacter("Schwartz", SCHWARTZ_SPRITESHEET_PATH, SCHWARTZ_JSON_PATH);
 
         return player;
+    }
+
+    public static void makePlayerFinalForm()
+    {
+        if(player == null)
+        {
+            throw new IllegalStateException("Operazione non possibile, giocatore non creato");
+        }
+
+        player.removeFromRoom();
+        player = new PlayingCharacter("Dr. Schwartz", "/img/personaggi/Schwartz robot.png");
+        Room currentRoom = GameManager.getMainFrame().getCurrentRoom();
+        player.addInRoom(currentRoom, currentRoom.getDefaultPosition());
     }
 
     // TODO : addToInventory con l'indice per caricamento da db

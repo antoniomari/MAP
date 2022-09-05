@@ -181,7 +181,11 @@
     <oggetto nome="Telefono">
         <classe>PickupableItem</classe>
         <descrizione>Un telefono per telefonare.</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Accendi</actionName>
+            <useScenario state="init">src/main/resources/scenari/telefonoFinale.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="Cocktail">
         <classe>PickupableItem</classe>

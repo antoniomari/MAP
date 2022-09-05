@@ -51,4 +51,17 @@
         <x>32</x>
         <y>20</y>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>4</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Gotcha! (*) Briciola è stato catturato!</sentence>
+    </azione>
 </scenario>
