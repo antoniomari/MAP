@@ -27,11 +27,4 @@
         <method>speak</method>
         <sentence>Cosa? Un distributore di medicine gratis? (*) Questi scienziati sanno come divertirsi!</sentence>
     </azione>
-    <!--
-    <azione>
-        <subject>ALUD</subject>
-        <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano ALU/EntrataALU-D-ritrovoDeiPC.xml</what>
-    </azione>
-    -->
 </scenario>
