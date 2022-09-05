@@ -248,4 +248,9 @@
         <method>speak</method>
         <sentence>Qui possiamo avere tutto sotto (*) controllo, anche i cocktails! </sentence>
     </azione>
+    <azione>
+        <subject>AscensorePT</subject>
+        <method>setState</method>
+        <state>arrivaTecnico</state>
+    </azione>
 </scenario>

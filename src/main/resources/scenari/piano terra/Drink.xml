@@ -29,4 +29,20 @@
         <how>relative</how>
         <finalWait>1000</finalWait>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>19</x>
+        <y>16</y>
+        <how>absolute</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>Cocktail</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <method>addToInventory</method>
+        <what>Cocktail</what>
+    </azione>
 </scenario>

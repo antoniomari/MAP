@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Non ha un buon odore!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>fumo</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Sto per vomitare, (*) il peggiore Cocktail mai bevuto!</sentence>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>Ti ho sentito! (*) L'ingrediente te lo sei scelto tu!</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>setState</method>
+        <state>inizioConferenza</state>
+    </azione>
+</scenario>

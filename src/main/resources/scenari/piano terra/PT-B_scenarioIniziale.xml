@@ -62,7 +62,7 @@
 	<azione>
 		<subject>Nicolas</subject>
 		<method>move</method>
-		<x>-2</x>
+		<x>-3</x>
 		<y>-8</y>
 		<how>relative</how>
 		<finalWait>500</finalWait>
@@ -78,13 +78,91 @@
 	<azione>
 		<subject>Antonio</subject>
 		<method>speak</method>
-		<sentence>PRESENTAZzzzzzzzzzzzIONE</sentence>
+		<sentence>Io sono Antonio, e tutti mi (*) definirebbero come uno scienziato pazzo.</sentence>
 	</azione>
 	<azione>
 		<subject>Antonio</subject>
 		<method>move</method>
 		<x>0</x>
-		<y>-1</y>
+		<y>2</y>
+		<how>relative</how>
+		<finalWait>500</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>Lavoro nel campo dell'intelligenza (*) artificiale ibridata con forme viventi</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>-4</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>200</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>Mi diverto a mescolare animali (*) e programmi con l'obiettivo finale</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>-8</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>200</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>di potenziare le nostre capacità (*) e allargare i nostri limiti.</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>2</x>
+		<y>2</y>
+		<how>relative</how>
+		<finalWait>200</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>Pensa a quanto sarebbe bello (*) poter visualizzare con la mente</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>0</x>
+		<y>-2</y>
+		<how>relative</how>
+		<finalWait>200</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>Le foto del buongiorno mandate (*) sui gruppi whatsapp di famiglia</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>4</x>
+		<y>0</y>
+		<how>relative</how>
+		<finalWait>200</finalWait>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>speak</method>
+		<sentence>dalle tue zie più lontane!</sentence>
+	</azione>
+	<azione>
+		<subject>Antonio</subject>
+		<method>move</method>
+		<x>6</x>
+		<y>-3</y>
 		<how>relative</how>
 		<finalWait>500</finalWait>
 	</azione>
@@ -347,7 +425,7 @@
 		<method>add</method>
 		<what>Diego</what>
 		<x>14</x>
-		<y>14</y>
+		<y>13</y>
 	</azione>
 	<azione>
 		<subject>Nicolas</subject>
@@ -366,30 +444,23 @@
 		<method>add</method>
 		<what>Nicolas</what>
 		<x>22</x>
-		<y>14</y>
+		<y>13</y>
 	</azione>
-	<!--
-	<azione>
-		<subject>Cameriere</subject>
-		<method>setSpeakScenario</method>
-		<what>src/main/resources/scenari/piano terra/ConoscenzaCameriere.xml</what>
-	</azione>
-	<azione>
-		<subject>Antonio</subject>
-		<method>setSpeakScenario</method>
-		<what>src/main/resources/scenari/piano terra/inizioConferenza.xml</what>
-	</azione>
-	-->
 	<azione>
 		<subject>Cameriere</subject>
 		<method>setState</method>
 		<state>cocktail</state>
 	</azione>
+	<!--
 	<azione>
 		<subject>Antonio</subject>
 		<method>setState</method>
 		<state>inizioConferenza</state>
 	</azione>
-
-
+	-->
+	<azione>
+		<subject>Antonio</subject>
+		<method>setState</method>
+		<state>aspettaDrink</state>
+	</azione>
 </scenario>

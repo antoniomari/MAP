@@ -149,7 +149,7 @@ public class XmlLoader
             for(Element sentenceElement : sentenceElementList)
             {
                 String state = XmlParser.getXmlAttribute(sentenceElement, "state");
-                sentenceSpeakMap.put(state, sentenceElement.getTextContent());
+                sentenceSpeakMap.put(state, sentenceElement.getTextContent().trim().replaceAll("\\s\\(\\*\\)\\s", "\n"));
             }
         }
 

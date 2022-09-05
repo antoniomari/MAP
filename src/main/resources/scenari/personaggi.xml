@@ -4,7 +4,8 @@
         <spritesheet>/img/personaggi/Nicolas spritesheet.png</spritesheet>
         <json>/img/personaggi/Nicolas.json</json>
         <speakScenarios>
-            <sentence state="fineConferenza">Fa freddo</sentence>
+            <sentence state="init">Signor Schwartz, a breve inizi-enza (*) la confer-amo</sentence>
+            <sentence state="fineConferenza">Quel Robot si compo-mente strana-rta</sentence>
             <sentence state="prontoPerRegistratore">Portami il registratore.</sentence>
         </speakScenarios>
     </personaggio>
@@ -12,6 +13,7 @@
         <spritesheet>/img/personaggi/Antonio spritesheet.png</spritesheet>
         <json>/img/personaggi/Antonio.json</json>
         <speakScenarios>
+            <sentence state="aspettaDrink">Se non si rinfresca prima (*) con un Drink non iniziamo!</sentence>
             <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
             <sentence state="fineConferenza">Conferenza breve ma intensa!</sentence>
         </speakScenarios>
@@ -20,6 +22,7 @@
         <spritesheet>/img/personaggi/Diego spritesheet.png</spritesheet>
         <json>/img/personaggi/Diego.json</json>
         <speakScenarios>
+            <sentence state="init">Graaaa..ande Si.....gnor Svàrs!</sentence>
             <sentence state="fineConferenza">J D B C im-pa-z-z-i-t-o !!</sentence>
         </speakScenarios>
     </personaggio>

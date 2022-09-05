@@ -2,21 +2,26 @@
 <scenario>
 	<mode>sequence</mode>
 	<azione>
-            <subject>Cuoco2</subject>
-            <method>animate</method>
+		<subject>Cuoco2</subject>
+		<method>animate</method>
     </azione>
 	<azione>
 		<subject>Cuoco2</subject>
 		<method>speak</method>
-		<sentence>Non so leggere!</sentence>
+		<sentence>L'altro cuoco è proprio strano, (*) cucina sempre troppo piano</sentence>
 	</azione>
 	<azione>
-    		<subject>Cuoco2</subject>
-    		<method>speak</method>
-    		<sentence>AAAAAAAHHHH!</sentence>
+		<subject>Cuoco2</subject>
+		<method>speak</method>
+		<sentence>Ha un cappello troppo tondo, (*) sono io a fare il secondo!</sentence>
     </azione>
+	<azione>
+		<subject>Cuoco2</subject>
+		<method>speak</method>
+		<sentence>Guarda adesso dove ti metti, (*) anche di secondo gli spaghetti!</sentence>
+	</azione>
     <azione>
-            <subject>Cuoco2</subject>
-            <method>animateReverse</method>
+		<subject>Cuoco2</subject>
+		<method>animateReverse</method>
     </azione>
 </scenario>

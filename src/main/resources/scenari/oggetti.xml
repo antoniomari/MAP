@@ -175,7 +175,8 @@
         <isOpen>false</isOpen>
         <isLocked>false</isLocked>
         <onOpen>
-            <scenario state="init">src/main/resources/scenari/piano terra/ConoscenzaTecnico.xml</scenario>
+            <scenario state="arrivaTecnico">src/main/resources/scenari/piano terra/ConoscenzaTecnico.xml</scenario>
+            <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="Telefono">
@@ -190,7 +191,11 @@
     <oggetto nome="Cocktail">
         <classe>PickupableItem</classe>
         <descrizione>Un cocktail che ricorda la Puglia.</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Bevi</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano terra/beviCocktail.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="Rape">
         <classe>PickupableItem</classe>

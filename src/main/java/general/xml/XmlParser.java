@@ -918,7 +918,6 @@ public class XmlParser
         }
         catch (ParserConfigurationException | IOException | SAXException e)
         {
-            LogOutputManager.logOutput(e.getStackTrace().toString(), LogOutputManager.EXCEPTION_COLOR);
             throw new GameException("Errore nel caricamento dell'xml");
         }
     }

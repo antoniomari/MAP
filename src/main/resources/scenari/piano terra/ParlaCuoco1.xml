@@ -8,7 +8,17 @@
     <azione>
         <subject>Cuoco1</subject>
         <method>speak</method>
-        <sentence>AAAAAAAAAAAAAHHH!!!</sentence>
+        <sentence>Sono il cuoco primo, (*) adesso porto il primo!</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Faccio troppi dispetti, (*) son pronti gli spaghetti!</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Ora prendo la padella, (*) ci metto dentro mortadella!</sentence>
     </azione>
     <azione>
         <subject>Cuoco1</subject>
