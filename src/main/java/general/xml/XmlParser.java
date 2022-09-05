@@ -642,33 +642,46 @@ public class XmlParser
         String floorName = getTagValue(eAction, "floor");
 
         final String MIST_PATH = "src/main/resources/scenari/piano MIST/MIST-A.xml";
+        final String MIST_NAME = "Mist-A";
         final String ALU_PATH = "src/main/resources/scenari/piano ALU/ALU-A.xml";
+        final String ALU_NAME = "ALUA";
         final String BUG_PATH = "src/main/resources/scenari/piano BUG/BUG-A.xml";
+        final String BUG_NAME = "Bug-A";
         final String SERVER_PATH = "src/main/resources/scenari/piano SERVER/ServerRoom.xml";
+        final String SERVER_NAME = "ServerRoom";
         final String EBERT_PATH = "src/main/resources/scenari/piano EBERT/ebert-a.xml";
+        final String EBERT_NAME = "Ebert-A";
         final String FLASH_PATH = "src/main/resources/scenari/piano FLASH/FlashRoom.xml";
+        final String FLASH_NAME = "FlashRoom";
 
         String floorPath;
+        String startingRoomName;
 
         switch (floorName)
         {
             case "MIST":
                 floorPath = MIST_PATH;
+                startingRoomName = MIST_NAME;
                 break;
             case "ALU":
                 floorPath = ALU_PATH;
+                startingRoomName = ALU_NAME;
                 break;
             case "BUG":
                 floorPath = BUG_PATH;
+                startingRoomName = BUG_NAME;
                 break;
             case "SERVER":
                 floorPath = SERVER_PATH;
+                startingRoomName = SERVER_NAME;
                 break;
             case "EBERT":
                 floorPath = EBERT_PATH;
+                startingRoomName = EBERT_NAME;
                 break;
             case "FLASH":
                 floorPath = FLASH_PATH;
+                startingRoomName = FLASH_NAME;
                 break;
             default:
                 throw new GameException("Piano non valido");
@@ -676,10 +689,15 @@ public class XmlParser
 
         return () ->
         {
-            // carica piano nel gioco tramite room iniziale
-            XmlLoader.loadRoom(floorPath);
-            GameManager.startScenario(XmlLoader.loadRoomInit(floorPath));
-            // TODO: controllare se funziona
+            if(GameManager.getRoom(startingRoomName) == null)
+            {
+                XmlLoader.loadRoom(floorPath);
+                GameManager.startScenario(XmlLoader.loadRoomInit(floorPath));
+            }
+            else
+            {
+                GameManager.continueScenario();
+            }
         };
     }
 

@@ -2,6 +2,10 @@
 <scenario>
     <mode>sequence</mode>
     <azione>
+        <subject>Nicolas</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
         <subject>Mist-B</subject>
         <method>add</method>
         <what>Nicolas</what>
@@ -68,7 +72,7 @@
         <sentence>Senza di questa, il registratore (*) le sarebbe ben poco utile...</sentence>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
+        <subject>Nicolas</subject>
         <method>move</method>
         <x>13</x>
         <y>9</y>
@@ -95,7 +99,7 @@
         <sentence>discutere di cose importanti.</sentence>
     </azione>
     <azione>
-        <subject>Tecnico</subject>
+        <subject>Nicolas</subject>
         <method>move</method>
         <x>0</x>
         <y>12</y>

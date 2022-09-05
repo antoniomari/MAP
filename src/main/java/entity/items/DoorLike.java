@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 public class DoorLike extends Item implements Openable
 {
@@ -94,6 +95,7 @@ public class DoorLike extends Item implements Openable
 
     public void loadOpenScenarios(Map<String, String> openScenarioMap)
     {
+        Objects.requireNonNull(openScenarioMap);
         this.openScenarioMap = openScenarioMap;
     }
 

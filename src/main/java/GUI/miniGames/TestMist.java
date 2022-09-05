@@ -131,6 +131,7 @@ public class TestMist extends MiniGame
     {
         JLayeredPane testPanelWrapper = new JLayeredPane();
         scrollPane = new JScrollPane(testPanelWrapper);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         testPanel = new JPanel();
         testPanel.setLayout(new BorderLayout());
 

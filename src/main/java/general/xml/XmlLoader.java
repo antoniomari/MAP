@@ -261,13 +261,17 @@ public class XmlLoader
 
             ((Openable) itemToLoad).loadOpenScenarios(scenarioPathMap);
 
+            if(scenarioPathMap.keySet().isEmpty())
+            {
+                itemToLoad.setState("canOpen");
+            }
+
             if(itemToLoad.getClass() == DoorLike.class)
             {
                 boolean isOpen = Boolean.parseBoolean(XmlParser.getTagValue(itemElement, "isOpen"));
                 boolean isLocked = Boolean.parseBoolean(XmlParser.getTagValue(itemElement, "isLocked"));
                 ((DoorLike) itemToLoad).setInitialState(isOpen, isLocked);
             }
-
         }
     }
 

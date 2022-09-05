@@ -239,7 +239,9 @@
         <descrizione>Una porta automatica</descrizione>
         <canUse>false</canUse>
         <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
+        <isLocked>false</isLocked>
+        <onOpen>
+        </onOpen>
     </oggetto>
     <oggetto nome="AscensoreSERVER">
         <classe>DoorLike</classe>
