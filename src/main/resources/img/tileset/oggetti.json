@@ -47,13 +47,13 @@
     "width": 48,
     "height": 48
   },
-  "RegistratoreVuoto": {
+  "GO-TO-SHOCK vuoto": {
     "x": 240,
     "y": 48,
     "width": 48,
     "height": 48
   },
-  "RegistratorePieno": {
+  "GO-TO-SHOCK": {
     "x": 144,
     "y": 48,
     "width": 48,

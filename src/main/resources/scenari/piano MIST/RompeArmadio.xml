@@ -36,7 +36,7 @@
         <subject>Mist-C</subject>
         <subjectClass>Room</subjectClass>
         <method>add</method>
-        <what>RegistratoreVuoto</what>
+        <what>GO-TO-SHOCK vuoto</what>
         <x>5</x>
         <y>11</y>
     </azione>

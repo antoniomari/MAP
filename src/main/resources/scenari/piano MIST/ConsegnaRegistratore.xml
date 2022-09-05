@@ -46,7 +46,7 @@
     </azione>
     <azione>
         <method>addToInventory</method>
-        <what>RegistratorePieno</what>
+        <what>GO-TO-SHOCK</what>
     </azione>
     <azione>
         <subject>Nicolas</subject>

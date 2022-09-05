@@ -54,7 +54,7 @@
         <descrizione>Per far finta di ascoltare.</descrizione>
         <canUse>false</canUse>
     </oggetto>
-    <oggetto nome="RegistratoreVuoto">
+    <oggetto nome="GO-TO-SHOCK vuoto">
         <classe>PickupableItem</classe>
         <descrizione>Un registratore vuoto.</descrizione>
         <canUse>false</canUse>
@@ -67,7 +67,7 @@
 
         </onUseWith>
     </oggetto>
-    <oggetto nome="RegistratorePieno">
+    <oggetto nome="GO-TO-SHOCK">
         <classe>PickupableItem</classe>
         <descrizione>Un registratore con cassetta.</descrizione>
         <canUse>false</canUse>
