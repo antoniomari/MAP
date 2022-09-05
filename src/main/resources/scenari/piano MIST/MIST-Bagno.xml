@@ -2,7 +2,7 @@
 <stanza nome="Mist-Bagno">
     <png>/img/MIST/MIST-Bagno.png</png>
     <json>/img/MIST/MIST-Bagno.json</json>
-    <musica>src/main/resources/audio/musica/MIST.wav</musica>
+    <musica>src/main/resources/audio/musica/wcmusic.wav</musica>
     <scenario>
         <mode>instant</mode>
         <azione>
@@ -11,6 +11,11 @@
             <what>TastoWC</what>
             <x>9</x>
             <y>2</y>
+        </azione>
+        <azione>
+            <subject>Mist-Bagno</subject>
+            <method>setScenarioOnEnter</method>
+            <what>src/main/resources/scenari/piano MIST/EntraBagno.xml</what>
         </azione>
     </scenario>
 </stanza>

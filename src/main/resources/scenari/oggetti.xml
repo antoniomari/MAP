@@ -408,7 +408,11 @@
     <oggetto nome="TastoWC">
         <classe>Item</classe>
         <descrizione>Cancella i brutti ricordi.</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Premi</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano MIST/tiraScarico.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="WCPulito">
         <classe>Item</classe>

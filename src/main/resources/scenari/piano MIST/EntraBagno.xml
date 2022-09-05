@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>100</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Dio del cielo che odore (*) nauseabondo!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Potrei non fare nulla...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ma dovrei fare qualcosa!</sentence>
+    </azione>
+</scenario>
