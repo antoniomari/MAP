@@ -10,7 +10,7 @@
         <subject>Schwartz</subject>
         <method>move</method>
         <x>16</x>
-        <y>9</y>
+        <y>20</y>
         <how>absolute</how>
         <finalWait>2000</finalWait>
     </azione>
@@ -19,13 +19,13 @@
         <method>add</method>
         <what>Sasso</what>
         <x>16</x>
-        <y>9</y>
+        <y>20</y>
     </azione>
     <azione>
         <subject>Sasso</subject>
         <method>move</method>
-        <x>6</x>
-        <y>6</y>
+        <x>12</x>
+        <y>0</y>
         <how>relative</how>
         <finalWait>2000</finalWait>
     </azione>
@@ -41,14 +41,14 @@
         <subject>Ebert Briciola</subject>
         <method>add</method>
         <what>Sasso Pieno</what>
-        <x>25</x>
-        <y>15</y>
+        <x>28</x>
+        <y>20</y>
     </azione>
     <azione>
         <subject>Ebert Briciola</subject>
         <method>add</method>
         <what>Palla Memoria</what>
-        <x>25</x>
-        <y>19</y>
+        <x>32</x>
+        <y>20</y>
     </azione>
 </scenario>

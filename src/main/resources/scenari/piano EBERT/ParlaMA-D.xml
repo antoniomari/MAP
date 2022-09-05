@@ -8,6 +8,14 @@
     </azione>
     <azione>
         <subject>MA-D</subject>
+        <method>move</method>
+        <x>3</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Non sei Antonio! (*) Che ci fai qui?</sentence>
     </azione>
@@ -33,8 +41,13 @@
     </azione>
     <azione>
         <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Vieni nel mio territorio (*) e osi parlarmi così?</sentence>
+        <sentence>VIENI NEL MIO TERRITORIO (*) E OSI PARLARMI COSI'?</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
@@ -68,14 +81,45 @@
     </azione>
     <azione>
         <subject>MA-D</subject>
+        <method>playEmoji</method>
+        <what>puntini</what>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
         <method>speak</method>
         <sentence>Aspetta! (*) Forse ho capito...</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
         <method>move</method>
-        <x>10</x>
+        <x>9</x>
         <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Antipatico, brutto e sporco...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Fannullone e invasivo...</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>-2</x>
+        <y>-1</y>
         <how>relative</how>
         <finalWait>500</finalWait>
     </azione>
@@ -122,12 +166,12 @@
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Quella specia di robot ?!</sentence>
+        <sentence>Quella "specie di robot" ?!</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
-        <sentence>Non parlare così di uno (*) della mia specie!</sentence>
+        <sentence>Non parlare così di un mio simile!</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
@@ -140,12 +184,25 @@
     <azione>
         <subject>MA-D</subject>
         <method>speak</method>
+        <sentence>Ti ucciderei con i miei potentissimi laser!</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
         <sentence>Tuttavia...</sentence>
     </azione>
     <azione>
         <subject>MA-D</subject>
         <method>move</method>
-        <x>5</x>
+        <x>3</x>
         <y>0</y>
         <how>relative</how>
         <finalWait>500</finalWait>
@@ -198,6 +255,22 @@
     <azione>
         <subject>MA-D</subject>
         <method>move</method>
+        <x>24</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>2</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
         <x>28</x>
         <y>12</y>
         <how>absolute</how>
@@ -206,6 +279,14 @@
     <azione>
         <subject>MA-D</subject>
         <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-2</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Ebert-A</subject>
@@ -218,30 +299,5 @@
         <subject>Ebert-A</subject>
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano EBERT/dopoParlaMA-D.xml</what>
-    </azione>
-    <azione>
-        <subject>RightErbaBlu</subject>
-        <method>setState</method>
-        <state>pronto</state>
-    </azione>
-    <azione>
-        <subject>RightErbaBlu</subject>
-        <method>setCanUse</method>
-        <canUse>true</canUse>
-    </azione>
-    <azione>
-        <subject>RightErbaGialla</subject>
-        <method>setCanUse</method>
-        <canUse>true</canUse>
-    </azione>
-    <azione>
-        <subject>RightErbaRossa</subject>
-        <method>setCanUse</method>
-        <canUse>true</canUse>
-    </azione>
-    <azione>
-        <subject>RightErbaVerde</subject>
-        <method>setCanUse</method>
-        <canUse>true</canUse>
     </azione>
 </scenario>

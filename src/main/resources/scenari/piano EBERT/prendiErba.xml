@@ -5,4 +5,14 @@
         <method>addToInventory</method>
         <what>Fiori interessanti</what>
     </azione>
+    <azione>
+        <subject>Cannabis</subject>
+        <method>setState</method>
+        <state>fine</state>
+    </azione>
+    <azione>
+        <subject>Cannabis</subject>
+        <method>setCanUse</method>
+        <canUse>false</canUse>
+    </azione>
 </scenario>

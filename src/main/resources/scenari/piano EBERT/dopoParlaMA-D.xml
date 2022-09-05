@@ -70,6 +70,19 @@
         <lock>false</lock>
     </azione>
     <azione>
+        <subject>MA-D</subject>
+        <method>speak</method>
+        <sentence>Ora la porta è aperta, puoi proseguire.</sentence>
+    </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>move</method>
+        <x>1</x>
+        <y>-2</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
         <subject>Ebert Briciola</subject>
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano EBERT/arrivoStanzaBriciola.xml</what>
