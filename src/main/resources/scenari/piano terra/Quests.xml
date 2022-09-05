@@ -149,72 +149,72 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Che giornataccia, questa mattina non ho (*) preso neppure un caffè e ora questo disastro! </sentence>
+        <sentence>Che giornataccia, questa mattina non ho (*) preso neppure un caffè e ora questo disastro!</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Ho dato un occhiata al robot prima (*) della conferenza, il suo sistema operativo sarà </sentence>
+        <sentence>Ho dato un occhiata al robot prima (*) della conferenza, il suo sistema operativo sarà</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>difficile da sabotare, ma non si (*) preoccupi: sto lavorando su un gioiellino </sentence>
+        <sentence>difficile da sabotare, ma non si (*) preoccupi: sto lavorando su un gioiellino</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>dell'elettronica, AXC8. Questo dispositivo (*) è in grado di hackerare qualsiasi sistema </sentence>
+        <sentence>dell'elettronica, l'AXC8. Questo dispositivo (*) è in grado di hackerare</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>informatico. </sentence>
+        <sentence>qualsiasi sistema informatico.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Sfortunatamente sto ancora programmando (*) la logica di alcuni circuiti per farlo funzionare. </sentence>
+        <sentence>Sfortunatamente sto ancora programmando (*) la logica di alcuni circuiti per farlo funzionare.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>So che lei è un rinomatissimo scienziato, (*) dovrebbe quindi risultarle facile programmare </sentence>
+        <sentence>So che lei è un rinomatissimo scienziato, (*) dovrebbe quindi risultarle facile programmare</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>le logiche di tali circuiti. </sentence>
+        <sentence>le logiche di tali circuiti.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Al piano ALU troverà dei pc accesi nel (*) mio studio e da li potrà sistemare i circuiti. </sentence>
+        <sentence>Al piano ALU troverà dei pc accesi nel (*) mio studio e da li potrà sistemare i circuiti. /sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Quando avrà terminato la verrò a cercare (*) e le fornirò l'AXC8 funzionante. </sentence>
+        <sentence>Quando avrà terminato la verrò a cercare (*) e le fornirò l'AXC8 funzionante.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Caffè illy, caffè lavazza, caffè kimbo (*) AHHH che darei per un buon caffé! </sentence>
+        <sentence>Caffè illy, caffè lavazza, caffè kimbo (*) AHHH che darei per un buon caffé!</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Una volta messo K.O. e dopo aver (*) hackerato il sistema operativo guadagnando </sentence>
+        <sentence>Una volta messo K.O. e dopo aver (*) hackerato il sistema operativo guadagnando</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>i permessi di admin arriverà (*) la parte più complicata, quella di riprogrammare </sentence>
+        <sentence>i permessi di admin, arriverà (*) la parte più complicata, quella di riprogrammare</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>i moduli del kernel. Per farlo (*) necessiterà del prezioso cheat-sheet per </sentence>
+        <sentence>i moduli del kernel. Per farlo (*) necessiterà del prezioso cheat-sheet per</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -236,17 +236,17 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Professore contiamo su di lei (*) non ci deluda. </sentence>
+        <sentence>Professore contiamo su di lei (*) non ci deluda.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Se ha bisogno potrà trovarci al bar. </sentence>
+        <sentence>Se ha bisogno potrà trovarci al bar.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Qui possiamo avere tutto sotto (*) controllo, anche i cocktails! </sentence>
+        <sentence>Qui possiamo avere tutto sotto (*) controllo, anche i cocktails!</sentence>
     </azione>
     <azione>
         <subject>AscensorePT</subject>
