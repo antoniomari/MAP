@@ -223,6 +223,11 @@
         <state>erogaTestMist</state>
     </azione>
     <azione>
+        <subject>AscensoreMIST</subject>
+        <method>setState</method>
+        <state>aspettaTest</state>
+    </azione>
+    <azione>
         <method>executeTest</method>
         <what>MIST</what>
     </azione>

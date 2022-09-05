@@ -56,106 +56,36 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>L'ho trovata imbambolata nel (*) me-nza della sta-zzo</sentence>
+        <sentence>Ho sentito uno strano rumore (*) e sono corso da lei</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ora la trovo imbambolata nel (*) me-nza della sta-zzo</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>C'è qualcosa che non va?</sentence>
     </azione>
-    <!--Do per scontato che il giocatore abbia raccolto il registratore-->
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Aspetta, ma quello è il mio Go-To-Schock!</sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>È riusci-rlo a trova-to</sentence>
+        <sentence>Ad ogni modo</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Non avevo dubbi!</sentence>
+        <sentence>Quando trova il mio (*) GO-TO-Schock me lo consegni</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Ora neutralizzare quel (*) dannato robot sarà uno</sentence>
+        <sentence>così che io possa inserirvi la cassetta.</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>sche-zzi da raga-rzo!</sentence>
+        <method>setState</method>
+        <state>prontoPerRegistratore</state>
     </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>move</method>
-        <x>5</x>
-        <y>12</y>
-        <how>absolute</how>
-        <finalWait>0</finalWait>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>Ora ci inserisco la cassetta (*) con la registrazione stordente</sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>Senza di questa, il registratore (*) le sarebbe ben poco utile...</sentence>
-    </azione>
-    <azione>
-        <subject>RegistratoreVuoto</subject>
-        <method>removeFromInventory</method>
-    </azione>
-    <!--
-
-<azione>
-    <method>removeFromInventory</method>
-    <what>RegistratoreVuoto</what>
-</azione>
--->
-
-<azione>
-    <method>addToInventory</method>
-    <what>RegistratorePieno</what>
-</azione>
-<azione>
-    <subject>Nicolas</subject>
-    <method>move</method>
-    <x>3</x>
-    <y>12</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Nicolas</subject>
-    <method>speak</method>
-    <sentence>Bene, ora devo proprio andare</sentence>
-</azione>
-<azione>
-    <subject>Nicolas</subject>
-    <method>speak</method>
-    <sentence>I miei colleghi mi aspettano al bar per...</sentence>
-</azione>
-<azione>
-    <subject>Nicolas</subject>
-    <method>speak</method>
-    <sentence>discutere di cose importanti.</sentence>
-</azione>
-<azione>
-    <subject>Nicolas</subject>
-    <method>move</method>
-    <x>0</x>
-    <y>12</y>
-    <how>absolute</how>
-    <finalWait>0</finalWait>
-</azione>
-<azione>
-    <subject>Nicolas</subject>
-    <method>removeFromRoom</method>
-</azione>
 </scenario>

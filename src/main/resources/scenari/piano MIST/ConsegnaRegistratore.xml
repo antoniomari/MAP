@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Aspetta, ma quello è il mio Go-To-Schock!</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>È riusci-rlo a trova-to</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Non avevo dubbi!</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ora neutralizzare quel (*) dannato robot sarà uno</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>sche-zzi da raga-rzo!</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>5</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ora ci inserisco la cassetta (*) con la registrazione stordente</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Senza di questa, il registratore (*) le sarebbe ben poco utile...</sentence>
+    </azione>
+    <azione>
+        <method>addToInventory</method>
+        <what>RegistratorePieno</what>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>3</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Bene, ora devo proprio andare</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>I miei colleghi mi aspettano al bar per...</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>discutere di cose importanti.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>removeFromRoom</method>
+    </azione>
+</scenario>

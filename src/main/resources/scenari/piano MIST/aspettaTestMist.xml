@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Se riprovi ad aprirlo (*) senza eseguire il test</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>rimarrai su questo piano (*) per sempre.</sentence>
+    </azione>
+    <azione>
+        <method>executeTest</method>
+        <what>MIST</what>
+    </azione>
+</scenario>

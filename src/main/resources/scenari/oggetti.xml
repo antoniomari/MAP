@@ -8,6 +8,7 @@
         <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/piano MIST/eseguiTest.xml</scenario>
+            <scenario state="aspettaTest">src/main/resources/scenari/piano MIST/aspettaTestMist.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="ArmadioMIST">
@@ -60,11 +61,10 @@
         <onUseWith>
             <keep>false</keep>
             <target>Nicolas</target>
-            <!--
             <targetInitState>prontoPerRegistratore</targetInitState>
-            <targetFinalState>stordito</targetFinalState>
-            <scenario>src/main/resources/scenari/piano BUG/primoStordimento.xml</scenario>
-            -->
+            <targetFinalState>registratoreConsegnato</targetFinalState>
+            <scenario>src/main/resources/scenari/piano MIST/ConsegnaRegistratore.xml</scenario>
+
         </onUseWith>
     </oggetto>
     <oggetto nome="RegistratorePieno">
