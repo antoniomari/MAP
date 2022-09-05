@@ -55,11 +55,11 @@
             <scenario state="init">src/main/resources/scenari/piano terra/ParlaCuoco2.xml</scenario>
         </speakScenarios>
     </personaggio>
-    <personaggio nome="CuocoNero">
+    <personaggio nome="Cuoco Luigi">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
         <json>/img/personaggi/cuochi.json</json>
     </personaggio>
-    <personaggio nome="Robot">
+    <personaggio nome="JDBC-20">
         <spritesheet>/img/personaggi/Robot.png</spritesheet>
     </personaggio>
     <personaggio nome="Briciolina">

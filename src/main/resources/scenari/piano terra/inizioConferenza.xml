@@ -9,9 +9,25 @@
     <azione>
         <subject>Antonio</subject>
         <method>move</method>
-        <x>18</x>
-        <y>14</y>
+        <x>10</x>
+        <y>12</y>
         <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>16</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>1</y>
+        <how>relative</how>
         <finalWait>500</finalWait>
     </azione>
     <azione>
@@ -50,17 +66,21 @@
     <azione>
         <subject>PT-D</subject>
         <method>add</method>
-        <what>Robot</what>
+        <what>JDBC-20</what>
         <x>2</x>
         <y>18</y>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>move</method>
         <x>19</x>
         <y>18</y>
         <how>absolute</how>
-        <finalWait>2000</finalWait>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/applausi1.wav</what>
     </azione>
     <azione>
         <subject>Nicolas</subject>
@@ -83,6 +103,10 @@
         <sentence>"Si, ma hanno detto che non sono (*) stati loro" </sentence>
     </azione>
     <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/grilli.wav</what>
+    </azione>
+    <azione>
         <subject>Antonio</subject>
         <method>speak</method>
         <sentence>Ahahahah ahahahah!!! </sentence>
@@ -95,47 +119,72 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Torniamo seri, come da regolamento l'AI (*) arrivata in finale per essere valutata </sentence>
+        <sentence>Torniamo seri, come da regolamento l'AI (*) arrivata in finale deve superare </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>formalmente intelligente deve superare (*) un test la cui valutazione è effettuata dal più </sentence>
+        <sentence>il test di Turing per poter (*) essere ufficialmente proclamata INTELLIGENTE.</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>grande esperto mondiale di AI. </sentence>
+        <sentence>Per eseguire il test è con noi (*) il più grande esperto mondiale</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>di intelligenza artificiale.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Quest'anno abbiamo l'onore di avere (*) con noi il professore Schwartz. </sentence>
+        <sentence>Abbiamo l'onore di presentarvi (*) l'egregio dottor e professor Schwartz. </sentence>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/applausi1.wav</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>1</x>
+        <y>2</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Vi ringrazio per l'invito ricevuto (*) spero che la vostra AI sia all'altezza. </sentence>
+        <sentence>Vi ringrazio per l'invito ricevuto, (*) spero che JDBC-20 sia all'altezza.</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>-1</x>
+        <y>-2</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
     <subject>Diego</subject>
     <method>speak</method>
-    <sentence>Terminate le presentazioni possiamo (*) iniziare il rifresco preparato dal nostro </sentence>
+    <sentence>Termi.....nate le prese....ntazioni  (*) possiamo inizia....re il rifresco</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>caro cuoco Luigi. </sentence>
+        <sentence>prepara....to dal nostro (*) caro cuo....co Lu...i...gi. </sentence>
     </azione>
     <azione>
         <subject>PT-D</subject>
         <method>add</method>
-        <what>CuocoNero</what>
+        <what>Cuoco Luigi</what>
         <x>2</x>
         <y>18</y>
     </azione>
     <azione>
-        <subject>CuocoNero</subject>
+        <subject>Cuoco Luigi</subject>
         <method>move</method>
         <x>16</x>
         <y>18</y>
@@ -143,72 +192,226 @@
         <finalWait>1000</finalWait>
     </azione>
     <azione>
-        <subject>CuocoNero</subject>
+        <subject>Cuoco Luigi</subject>
         <method>speak</method>
         <sentence>Salve a tutti sono Luigi il cuoco. (*) Per deliziare le vostre papille gustative </sentence>
     </azione>
     <azione>
-        <subject>CuocoNero</subject>
+        <subject>Cuoco Luigi</subject>
         <method>speak</method>
         <sentence>ho preparato gli spaghetti (*) con le polpette.</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/applausi2.wav</what>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>2</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>L’umano vestito di nero ha parlato (*) di programmazione a spaghetti. </sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
+        <method>playEmoji</method>
+        <what>provocazione</what>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>La programmazione a spaghetti (*) è stata severamente proibita da decenni</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>poiché genera codice non strutturato.</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>Lo chef è obsoleto! (*) Deve essere riprogrammato...</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>JDBC-20</subject>
         <method>speak</method>
         <sentence>kill chef, chef must die! </sentence>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/robot sound(chefmustdie).wav</what>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/urlaFolla.wav</what>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>AHHHHHHHH!!!</sentence>
     </azione>
     <azione>
         <method>playScenarioSound</method>
         <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
     </azione>
     <azione>
-        <subject>CuocoNero</subject>
+        <subject>JDBC-20</subject>
+        <method>move</method>
+        <x>18</x>
+        <y>18</y>
+        <how>absolute</how>
+        <finalWait>2000</finalWait>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>18</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>18</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>playEmoji</method>
+        <what>interrogativo</what>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>-2</x>
+        <y>-1</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>-6</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>5</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>AHHHHHHHH!!!</sentence>
+        <sentence>Beh, è stato breve ma intenso!</sentence>
     </azione>
     <azione>
-        <subject>CuocoNero</subject>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>8</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Niente panico, la situazione (*) è sotto controllo.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>-8</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>-5</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>6</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
         <method>move</method>
         <x>2</x>
-        <y>18</y>
-        <how>absolute</how>
-        <finalWait>2000</finalWait>
+        <y>1</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
     </azione>
     <azione>
-        <subject>CuocoNero</subject>
-        <method>removeFromRoom</method>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ora Schwartz riporterà il Robot (*) per poter eseguire il test.</sentence>
     </azione>
     <azione>
-        <subject>Robot</subject>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Ma soprattutto...</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Riporterà il cuoco sano e salvo, (*) così mangeremo gli spaghetti!</sentence>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/applausi2.wav</what>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Nel fratte...mpo, (*) tutti al bar, cocktail alle rape offerto!</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
         <method>move</method>
-        <x>2</x>
-        <y>18</y>
-        <how>absolute</how>
-        <finalWait>2000</finalWait>
+        <x>-4</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
     </azione>
     <azione>
-        <subject>Robot</subject>
-        <method>removeFromRoom</method>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Signor Svàrs, con lei (*) ci vediamo all'ingresso-ascensore!</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
