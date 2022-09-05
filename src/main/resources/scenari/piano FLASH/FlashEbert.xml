@@ -1,18 +1,15 @@
 <?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
-    <!--
     <azione>
         <method>addRoomEffect</method>
         <what>/img/FLASH/FogFlash3.png</what>
     </azione>
-    -->
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Di nuovo?</sentence>
     </azione>
-    <!--
     <azione>
         <subject>Cameriere</subject>
         <method>removeFromRoom</method>
@@ -21,19 +18,146 @@
         <subject>FlashRoom</subject>
         <method>add</method>
         <what>Cameriere</what>
-        <x>1</x>
-        <y>1</y>
-        <how>relative</how>
-        <finalWait>1500</finalWait>
+        <x>8</x>
+        <y>20</y>
     </azione>
-    -->
+    <azione>
+        <subject>Cameriere</subject>
+        <method>move</method>
+        <x>8</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>1000</finalWait>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>Signore,vuole un Drink? </sentence>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>A breve arriverà anche il cuoco</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>NOOO, NOOOO !! (*) Tutto ciò è assurdo!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Cameriere! (*) Che cosa ci fai in questo posto?</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Dove mi avete rinchiuso? (*) Cosa hai messo nel mio drink?</sentence>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>add</method>
+        <what>Tecnico</what>
+        <x>8</x>
+        <y>18</y>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>move</method>
+        <x>12</x>
+        <y>-4</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>Salve! Sono Nikita, (*) il vostro adoratissimo tecnico!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>solo lui ci mancava!</sentence>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>speak</method>
+        <sentence>L'ASCENSORE FUNZIONA!</sentence>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>add</method>
+        <what>Antonio</what>
+        <x>25</x>
+        <y>22</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Tutto questo ...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>No!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Non è reale! Non può essere!</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>move</method>
+        <x>-8</x>
+        <y>-2</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Schwartz sta ... ... (*) ... ADESSO ?</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Riuscite ... ... cosa (*) ... si sente ... ?</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>CHE STAI DICEN</sentence>
+    </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>move</method>
-        <x>1</x>
-        <y>1</y>
+        <x>0</x>
+        <y>2</y>
         <how>relative</how>
-        <finalWait>1500</finalWait>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>removeFromRoom</method>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -42,12 +166,25 @@
     </azione>
     <azione>
         <subject>Schwartz</subject>
-        <method>speak</method>
-        <sentence>Ma dove ero finito? (*) Ho avuto un'allucinazione.</sentence>
+        <method>move</method>
+        <x>0</x>
+        <y>2</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
     </azione>
     <azione>
-        <subject>Ebert Briciola</subject>
-        <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano EBERT/trovatoCheatSheet.xml</what>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Quel posto...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Stavo sognando? Stavo delirando?</sentence>
     </azione>
 </scenario>

@@ -5,6 +5,7 @@ import animation.PerpetualAnimation;
 import animation.StillAnimation;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
+import graphics.SpriteManager;
 
 import java.util.List;
 
@@ -29,20 +30,12 @@ public class AnimationExecutor extends Executor
     public static void executeSpeakAnimation(GamePiece piece, List<Image> frames,
                                                            int delayMilliseconds, GameState.State runningState)
     {
-        // stoppa la precedente (eventuale)
-        stopSpeakAnimation(piece);
-        speakAnimation = PerpetualAnimation.animateWhileGameState(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, false, runningState);
-        speakAnimation.start();
-    }
-
-    public static void stopSpeakAnimation(GamePiece piece)
-    {
         if(speakAnimation != null)
-        {
             speakAnimation.stop();
-            piece.refreshMainSprite();
-        }
 
+        speakAnimation = PerpetualAnimation.animateWhileGameState(gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, false, runningState);
+        speakAnimation.setEndIcon(piece.getScaledIconSprite(mainFrame.getGameScreenPanel().getScalingFactor()));
+        speakAnimation.start();
     }
 
     public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath,

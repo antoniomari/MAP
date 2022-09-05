@@ -12,7 +12,22 @@
     <azione>
         <subject>RightErbaVerde</subject>
         <method>setState</method>
-        <state>init</state>
+        <state>fine</state>
+    </azione>
+    <azione>
+        <subject>RightErbaGialla</subject>
+        <method>setState</method>
+        <state>fine</state>
+    </azione>
+    <azione>
+        <subject>RightErbaRossa</subject>
+        <method>setState</method>
+        <state>fine</state>
+    </azione>
+    <azione>
+        <subject>RightErbaBlu</subject>
+        <method>setState</method>
+        <state>fine</state>
     </azione>
     <azione>
         <method>loadFloor</method>

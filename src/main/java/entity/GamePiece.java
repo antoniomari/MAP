@@ -183,11 +183,6 @@ public class GamePiece
         return bHeight;
     }
 
-    public void refreshMainSprite()
-    {
-        EventHandler.sendEvent(new GamePieceEvent(this, GamePieceEvent.Type.UPDATE_SPRITE));
-    }
-
     /*
     public void updateSprite(String spriteName)
     {

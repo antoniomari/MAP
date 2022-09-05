@@ -14,6 +14,7 @@ import java.util.Objects;
 public class PerpetualAnimation extends StillAnimation
 {
 
+    private Icon endIcon;
     private boolean canRun = true;
     private GameState.State runningState;
     private boolean stateEnabled = false;
@@ -27,6 +28,11 @@ public class PerpetualAnimation extends StillAnimation
                           double rescalingFactor)
     {
         super(label, frames, delayMilliseconds, initialDelay, finalWait, rescalingFactor);
+    }
+
+    public void setEndIcon(Icon endIcon)
+    {
+        this.endIcon = endIcon;
     }
 
     @Override
@@ -56,6 +62,13 @@ public class PerpetualAnimation extends StillAnimation
         {
             // e.printStackTrace();
             System.out.println("Animazione interrotta");
+
+            if(endIcon != null)
+            {
+                System.out.println("Rip");
+                label.setIcon(endIcon);
+            }
+
         }
 
     }

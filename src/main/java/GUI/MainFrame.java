@@ -16,6 +16,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame extends JFrame {
 
@@ -40,6 +42,13 @@ public class MainFrame extends JFrame {
 
     /** Path cursore personalizzato. */
     private static final String CURSOR_PATH = "/img/HUD/cursoreneonnero1.png";
+
+    // PATH ICONE
+    private static final String ICON16_PATH = "/img/HUD/gameIcon16.png";
+    private static final String ICON32_PATH = "/img/HUD/gameIcon32.png";
+    private static final String ICON64_PATH = "/img/HUD/gameIcon64.png";
+    private static final String ICON128_PATH = "/img/HUD/gameIcon128.png";
+
 
     /** Stanza in cui il giocatore si trova attualmente. */
     private Room currentRoom;
@@ -223,6 +232,8 @@ public class MainFrame extends JFrame {
         initComponents();
         // inizializzazione cursore
         initCursor();
+        // inizializzazione icona
+        initIcons();
         // attiva schermo intero
         fullScreenOn();
 
@@ -242,6 +253,17 @@ public class MainFrame extends JFrame {
         Image cursorImage = SpriteManager.loadSpriteSheet(CURSOR_PATH).getScaledInstance(cursorDimension.width, cursorDimension.height, Image.SCALE_SMOOTH);
         Cursor c = toolkit.createCustomCursor(cursorImage , new Point(0,0), "img");
         setCursor(c);
+    }
+
+    private void initIcons()
+    {
+        List<Image> iconsList = new ArrayList<>();
+        iconsList.add(SpriteManager.loadSpriteSheet(ICON16_PATH));
+        iconsList.add(SpriteManager.loadSpriteSheet(ICON32_PATH));
+        iconsList.add(SpriteManager.loadSpriteSheet(ICON64_PATH));
+        iconsList.add(SpriteManager.loadSpriteSheet(ICON128_PATH));
+
+        setIconImages(iconsList);
     }
 
     // Inizializzazione immagine di sfondo e gameWidth, gameHeight
