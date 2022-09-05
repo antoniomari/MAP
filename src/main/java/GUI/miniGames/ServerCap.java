@@ -7,8 +7,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -24,7 +27,7 @@ public class ServerCap
     // contiene il path dell'imagine captcha scelta in fase di
     // inizializzazione e permette di risalire al valore associato
     // nel dizionario
-    private String imgKeyPath;
+    private static String imgKeyPath;
 
     public ServerCap()
     {
@@ -73,6 +76,20 @@ public class ServerCap
         return solution;
     }
 
+    private String checkAnswer(String answer)
+    {
+        String result;
+
+        if (answer.equalsIgnoreCase(captchaMatch.get(imgKeyPath)))
+        {
+            result = "passed";
+        }
+        else
+            result ="failed";
+
+        return result;
+    }
+
 
     public static void main(String args[]) throws IOException
     {
@@ -92,10 +109,17 @@ public class ServerCap
                       BufferedOutputStream bufferedOutputStream = new
                               BufferedOutputStream(clientsocket.getOutputStream());) {
 
+                    System.out.println("connesso al client captcha");
                     // ImageIO it's a particular class that allow to decode and to encode image
                     ImageIO.write(bfi, "png", bufferedOutputStream);
 
-                    // TODO: passaggio tramite il socket della soluzione
+                    BufferedReader bufferReader = new BufferedReader(new
+                                                  InputStreamReader(clientsocket.getInputStream()));
+
+                    String response = serverCap.checkAnswer(bufferReader.readLine());
+
+                    PrintWriter printWriter = new PrintWriter(clientsocket.getOutputStream());
+                    printWriter.println(response);
 
                 } catch (IOException ioe) {
                     ioe.printStackTrace();

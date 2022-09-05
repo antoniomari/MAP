@@ -1,13 +1,57 @@
+<?xml version="1.0"?>
 <scenario>
     <mode>sequence</mode>
     <azione>
         <method>addRoomEffect</method>
-        <what>/img/FLASH/FogFlash1.png</what>
+        <what>/img/FLASH/FogFlash3.png</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Dove mi trovo?</sentence>
+        <sentence>Ma che diamine mi succede oggi?</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>add</method>
+        <what>Diego</what>
+        <x>8</x>
+        <y>20</y>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>add</method>
+        <what>Nicolas</what>
+        <x>10</x>
+        <y>20</y>
+    </azione>
+    <azione>
+        <subject>FlashRoom</subject>
+        <method>add</method>
+        <what>Antonio</what>
+        <x>12</x>
+        <y>20</y>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Il prototipo sta dando più (*) problemi del previsto, Nicolas </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>a che punto è il tuo processore (*) dei sentimenti?</sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -16,20 +60,82 @@
     </azione>
     <azione>
         <subject>Schwartz</subject>
-        <method>move</method>
-        <x>1</x>
-        <y>1</y>
-        <how>relative</how>
-        <finalWait>1500</finalWait>
+        <method>speak</method>
+        <sentence>Ma di che diamine di prototipo (*) parli?</sentence>
     </azione>
     <azione>
-        <subject>Schwartz</subject>
-        <method>teleport</method>
-        <where>ALUB</where>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>I sentimenti primordiali ci sono,(*) ma la coscenza è il vero problema.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>OTTIMIZZATE!! OTTIMIZZATE!! (*) non c'è tempo.</sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Ma dove ero finito? (*) Ho avuto un'allucinazione.</sentence>
+        <sentence>...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Che banda di pazzi ma qui nessuno (*) mi sente HELLOOOO!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence> --Speech language set: English-- (*) Hey there! Can you hear what I'm saying?</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>What a hell! Why do you treat me (*) like I'm invisible? Blink your eye </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>if you can see me.</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>2</y>
+        <how>relative</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>teleport</method>
+        <where>AlUB</where>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Forse ho un calo di zuccheri...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>.......mhha!...</sentence>
     </azione>
 </scenario>

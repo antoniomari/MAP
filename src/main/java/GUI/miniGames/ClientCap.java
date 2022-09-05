@@ -10,10 +10,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.Socket;
-
 
 /**
  *  La classe serve a simulare un captcha per il riconoscimento dell'interazione con
@@ -44,6 +47,8 @@ public class ClientCap extends MiniGame
     private final JLabel istruction;
     private JTextField captAnswer;
 
+    private boolean captchaResult = false;
+
     // costruttore
     private ClientCap()
     {
@@ -70,10 +75,9 @@ public class ClientCap extends MiniGame
         // creazione titolo del minigioco
         description = new JLabel("Controllo di sicurezza \n  ", SwingConstants.CENTER);
 
-
         // TODO: da spostare nel factory method
         setup();
-        setupListener();
+        //setupListener();
         addDetails();
 
         add(captchaPanel, TEST_LAYER);
@@ -130,7 +134,7 @@ public class ClientCap extends MiniGame
         captchaPanel.setVisible(true);
     }
 
-
+/*
     // inizializzazione dei listener per gli eventi generati dal captcha
     private void setupListener()
     {
@@ -140,6 +144,7 @@ public class ClientCap extends MiniGame
             public void keyPressed(KeyEvent e)
             {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    captAnswer.getText();
                     System.out.println(captAnswer.getText());
 
                     GameManager.getMainFrame().requestFocus();
@@ -157,14 +162,18 @@ public class ClientCap extends MiniGame
             }
         });
     }
-
+*/
     // verifica del input inserito per il captcha
     private boolean checkAnswer(String answer)
     {
         boolean passed;
 
-        passed = false;
-       // passed = answer.equalsIgnoreCase(captchaMatch.get(imgKeyPath));
+       if (answer.equalsIgnoreCase("passed"))
+       {
+           passed = true;
+       }
+       else
+           passed = false;
 
         return passed;
     }
@@ -182,19 +191,8 @@ public class ClientCap extends MiniGame
         MiniGame.setCurrentTest( new ClientCap());
     }
 
-
     public void startConnection()
     {
-
-        //JFrame jFrame = new JFrame("Client");
-        // jFrame.setSize(600, 600);
-        // jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // JLabel jLabelText = new JLabel("Waiting for image from server...");
-       // jFrame.add(jLabelText, BorderLayout.SOUTH);
-
-        // jFrame.setVisible(true);
-
         try (Socket socketDelServer = new Socket("localhost", 1234);
               BufferedInputStream bufferedInputStream = new
                              BufferedInputStream(socketDelServer.getInputStream())) {
@@ -202,12 +200,47 @@ public class ClientCap extends MiniGame
             BufferedImage bufferedImage = ImageIO.read(bufferedInputStream);
 
             setImage(new JLabel(new ImageIcon(bufferedImage)));
-           // client.image = new JLabel(new ImageIcon(bufferedImage));
+
+            captAnswer.addKeyListener(new KeyAdapter()
+            {
+                @Override
+                public void keyPressed(KeyEvent e)
+                {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    {
+                        try
+                        {
+                            // manda la stringa scritta dall'utente al server per il controllo
+                            PrintWriter printWriter = new PrintWriter(socketDelServer.getOutputStream(), true);
+                            printWriter.println(captAnswer.getText());
+
+                            BufferedReader bufferedReader = new BufferedReader(new
+                                                          InputStreamReader(socketDelServer.getInputStream()));
+
+                            GameManager.getMainFrame().requestFocus();
+
+                            // gestione della risposta data dall'utente
+                            if (checkAnswer(bufferedReader.readLine()))
+                            {
+                                showResult(WIN);
+                            }
+                            else
+                            {
+                                showResult(LOSE);
+                            }
+                            printWriter.close();
+                            bufferedReader.close();
+                            // captAnswer.setText("");
+                        }catch (IOException ioe)
+                        {
+                            ioe.printStackTrace();
+                        }
+                    }
+                }
+            });
+
             //jLabelText.setText("image received");
 
-            //jFrame.add(jLabelPic, BorderLayout.CENTER);
-
-            //System.out.println(br.readLine());
         } catch (ConnectException ce) {
             System.err.println("Non riesco a connettermi al server " + ce.getMessage());
         } catch (IOException ioe) {
@@ -215,7 +248,6 @@ public class ClientCap extends MiniGame
         } catch (InterruptedException ie) {
             ie.printStackTrace();
         }
-
     }
 }
 

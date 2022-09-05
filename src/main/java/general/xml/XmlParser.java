@@ -1,6 +1,7 @@
 package general.xml;
 
 import GUI.miniGames.Captcha;
+import GUI.miniGames.ClientCap;
 import GUI.miniGames.LogicQuest;
 import GUI.miniGames.TestMist;
 import entity.GamePiece;
@@ -739,7 +740,7 @@ public class XmlParser
             case "MIST":
                 return TestMist::executeTest;
             case "CAPTCHA":
-                return Captcha::executeTest;
+                return ClientCap::executeTest;
             default:
                 throw new GameException("Nome del test non valido");
         }
