@@ -749,7 +749,7 @@ public class XmlParser
             case "MIST":
                 return TestMist::executeTest;
             case "CAPTCHA":
-                return ClientCap::executeTest;
+                return Captcha::executeTest;
             default:
                 throw new GameException("Nome del test non valido");
         }
