@@ -19,12 +19,12 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Lei deve essere il professor Schwartz (*) la fama del suo nome la precede. </sentence>
+        <sentence>Lei deve essere il professor Schwartz, (*) la fama del suo nome la precede. </sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Io sono Nikita, il tecnico, quella (*) canaglia di un robot sta manomettendo l'impianto </sentence>
+        <sentence>Io sono Nikita, il tecnico. Quella (*) canaglia di un robot sta manomettendo l'impianto </sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
@@ -34,12 +34,12 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Sicuramente questi malfunzionamenti (*) continueranno anche ai prossimi piani </sentence>
+        <sentence>Sicuramente questi malfunzionamenti (*) continueranno anche ai prossimi piani,</sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>le lascio il mio numero in caso (*) di necessità e provvedo a rimettere in funzione </sentence>
+        <sentence>mi farò vivo io in caso (*) di necessità, aggiustando</sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
@@ -48,8 +48,16 @@
     </azione>
     <azione>
         <subject>Tecnico</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>0</y>
+        <how>relative</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>Ecco fatto l'ascensore è funzionante, (*) Il mio numero è 8367697779. </sentence>
+        <sentence>Ecco fatto l'ascensore è funzionante!</sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>

@@ -361,8 +361,8 @@
         <subject>PT-B</subject>
         <method>add</method>
         <what>Diego</what>
-        <x>21</x>
-        <y>15</y>
+        <x>22</x>
+        <y>16</y>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -373,8 +373,8 @@
         <subject>PT-B</subject>
         <method>add</method>
         <what>Antonio</what>
-        <x>18</x>
-        <y>15</y>
+        <x>17</x>
+        <y>16</y>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -385,8 +385,8 @@
         <subject>PT-B</subject>
         <method>add</method>
         <what>Nicolas</what>
-        <x>15</x>
-        <y>15</y>
+        <x>13</x>
+        <y>16</y>
     </azione>
     <azione>
         <subject>Nicolas</subject>
