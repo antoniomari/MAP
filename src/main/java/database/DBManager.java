@@ -227,7 +227,7 @@ public class DBManager
                 else if(gp instanceof GameCharacter) {
                     pstmCharacters.setString(1,gp.getName());
                     pstmCharacters.setString(2,gp.getState());
-                     pstmCharacters.executeUpdate();
+                    pstmCharacters.executeUpdate();
                     chosenStatement = pstmCharacterLoc;
                 }
                 else

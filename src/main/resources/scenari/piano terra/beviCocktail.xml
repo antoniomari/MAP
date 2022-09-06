@@ -21,11 +21,6 @@
         <sentence>Sto per vomitare, (*) il peggiore Cocktail mai bevuto!</sentence>
     </azione>
     <azione>
-        <subject>Cameriere</subject>
-        <method>speak</method>
-        <sentence>Ti ho sentito! (*) L'ingrediente te lo sei scelto tu!</sentence>
-    </azione>
-    <azione>
         <subject>Antonio</subject>
         <method>setState</method>
         <state>inizioConferenza</state>

@@ -64,7 +64,6 @@
             <targetInitState>prontoPerRegistratore</targetInitState>
             <targetFinalState>registratoreConsegnato</targetFinalState>
             <scenario>src/main/resources/scenari/piano MIST/ConsegnaRegistratore.xml</scenario>
-
         </onUseWith>
     </oggetto>
     <oggetto nome="GO-TO-SHOCK">

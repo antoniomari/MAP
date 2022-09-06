@@ -94,8 +94,49 @@
         <sentence>Schwartz dei miei stivali</sentence>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Non mi resta altra scelta...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Sentirai queste lezioni (*) di programmazione strutturata!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>8</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
         <subject>JDBC-20</subject>
         <method>setState</method>
-        <state>prontoPerRegistratore</state>
+        <state>stordito</state>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/zapRegistratore.wav</what>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>move</method>
+        <x>2</x>
+        <y>10</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/stomp.wav</what>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>effectAnimation</method>
+        <animationName>stordimento</animationName>
+        <finalWait>0</finalWait>
+        <isPerpetual>true</isPerpetual>
     </azione>
 </scenario>
