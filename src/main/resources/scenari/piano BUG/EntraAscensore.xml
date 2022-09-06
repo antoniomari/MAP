@@ -55,7 +55,7 @@
         <floor>SERVER</floor>
     </azione>
     <azione>
-        <subject>Mist-A</subject>
+        <subject>ServerRoom</subject>
         <method>setScenarioOnEnter</method>
         <what>src/main/resources/scenari/piano SERVER/entrataServerRoom.xml</what>
     </azione>

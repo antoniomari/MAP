@@ -249,7 +249,11 @@
     <oggetto nome="Libro">
         <classe>PickupableItem</classe>
         <descrizione>Progetto JDBC-20 - TOP-SECRET.</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Leggi</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano BUG/LeggiLibro.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="Fogli">
         <classe>PickupableItem</classe>

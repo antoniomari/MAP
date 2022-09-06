@@ -8,6 +8,12 @@
         <azione>
             <subject>Bug-C</subject>
             <method>lockEntrance</method>
+            <cardinal>west</cardinal>
+            <lock>true</lock>
+        </azione>
+        <azione>
+            <subject>Bug-C</subject>
+            <method>lockEntrance</method>
             <cardinal>east</cardinal>
             <lock>true</lock>
         </azione>

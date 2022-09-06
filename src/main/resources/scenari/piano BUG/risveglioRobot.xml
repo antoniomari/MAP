@@ -3,6 +3,21 @@
     <mode>sequence</mode>
     <azione>
         <subject>JDBC-20</subject>
+        <method>speak</method>
+        <sentence>NON _ MI _ (*) SCONFIGGERAI _ MAI!</sentence>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>speak</method>
+        <sentence>...01010101010... (*) ...01101BUG01010100101...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
         <method>move</method>
         <x>0</x>
         <y>12</y>
@@ -10,7 +25,42 @@
         <finalWait>0</finalWait>
     </azione>
     <azione>
+        <subject>Bug-C</subject>
+        <method>add</method>
+        <what>Libro</what>
+        <x>0</x>
+        <y>12</y>
+    </azione>
+    <azione>
         <subject>JDBC-20</subject>
         <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Quegli scienziati non ne hanno detta (*) una giusta!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ho fatto ciò che dicevano! (*) JDBC-20 è ancora attivo!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>interrogativo</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>4</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>E quello, cos'è?</sentence>
     </azione>
 </scenario>

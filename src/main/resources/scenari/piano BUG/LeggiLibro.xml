@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>LEGGO</sentence>
+    </azione>
+    <!--
+    scrivere tutta la laetutra virgolettata del vcontenuto
+    fake fine del robot, progetto ecc.
+    -->
+</scenario>

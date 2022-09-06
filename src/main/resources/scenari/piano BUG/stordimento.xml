@@ -27,14 +27,14 @@
         <method>effectAnimation</method>
         <animationName>stordimento</animationName>
         <finalWait>0</finalWait>
-        <isPerpetual>true</isPerpetual>
+        <isPerpetual>false</isPerpetual>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>move</method>
         <x>14</x>
-        <y>8</y>
+        <y>9</y>
         <how>absolute</how>
         <finalWait>500</finalWait>
-</azione>
+    </azione>
 </scenario>

@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<scenario>
-    <mode>sequence</mode>
-    <azione>
-        <subject>JDBC-20</subject>
-        <method>speak</method>
-        <sentence>...01110101000110110101011...</sentence>
-    </azione>
-</scenario>

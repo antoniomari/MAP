@@ -68,10 +68,10 @@
     <personaggio nome="JDBC-20">
         <spritesheet>/img/personaggi/Robot.png</spritesheet>
         <speakScenarios>
-            <scenario state="hackerato">src/main/resources/scenari/piano BUG/robotHackerato.xml</scenario>
-            <!--
-            <scenario state="prontoPerRegistratore">src/main/resources/scenari/piano EBERT/interazioneBriciolina.xml</scenario>
-            -->
+            <sentence state="hackerato">...01110101000110110101011...</sentence>
+            <sentence state="prontoPerRegistratore">..0101001010101010110..</sentence>
+            <sentence state="stordito">...00101020010 ... (*) Ops c'è un 2! ...</sentence>
+            <sentence state="completato">... [SYSTEM:null] ...</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Briciolina">
