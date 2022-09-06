@@ -102,11 +102,6 @@
         </onUseWith>
         <canUse>false</canUse>
     </oggetto>
-    <oggetto nome="Telefono">
-        <classe>PickupableItem</classe>
-        <descrizione>Hack</descrizione>
-        <canUse>false</canUse>
-    </oggetto>
     <oggetto nome="Cassetta">
         <classe>PickupableItem</classe>
         <descrizione>Una cassetta che contiene l'audio per stordire chiunque.</descrizione>
