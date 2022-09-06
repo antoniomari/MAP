@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>setState</method>
+        <state>hackerato</state>
+    </azione>
+</scenario>

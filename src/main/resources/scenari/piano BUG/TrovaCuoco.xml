@@ -93,25 +93,21 @@
             <subject>Bug-C</subject>
             <method>add</method>
             <what>JDBC-20</what>
-            <x>17</x>
+            <x>9</x>
             <y>12</y>
         </azione>
         <azione>
             <subject>Bug-C</subject>
             <method>add</method>
             <what>Cuoco Luigi</what>
-            <x>17</x>
+            <x>9</x>
             <y>9</y>
         </azione>
-        <!--
         <azione>
             <subject>JDBC-20</subject>
             <method>setState</method>
             <state>prontoPerRegistratore</state>
         </azione>
-        -->
-
-
         <!--
         <azione>
             <subject>Schwartz</subject>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>setState</method>
+        <state>completato</state>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>Ce l'hai fatta!</sentence>
+    </azione>
+    <!--
+    mettere documento top secret + cartello piano bug
+
+    settare lo scenario on enter bug-c di risveglio robot che scappa (a destra)
+
+    dopo aver letto il cartello spostare l'ascensore nello state canOpen
+    -->
+</scenario>
