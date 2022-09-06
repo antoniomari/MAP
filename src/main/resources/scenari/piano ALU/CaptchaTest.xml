@@ -141,17 +141,7 @@
         <state>erogaCaptcha</state>
     </azione>
     <azione>
-        <subject>AscensoreAlU</subject>
-        <method>setState</method>
-        <state>aspettaCaptcha</state>
-    </azione>
-    <azione>
         <subject>AscensoreALU</subject>
-        <method>setState</method>
-        <state>aspettaCaptcha</state>
-    </azione>
-    <azione>
-        <subject>Tecnico</subject>
         <method>setState</method>
         <state>aspettaCaptcha</state>
     </azione>
