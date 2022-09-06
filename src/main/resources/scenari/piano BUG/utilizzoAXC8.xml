@@ -6,4 +6,34 @@
         <method>setState</method>
         <state>hackerato</state>
     </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Perfetto, adesso posso avere accesso (*) alla console di sistema</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Però ho un problema, (*) questo terminale non supporta </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>la shell standard dei sistemi Unix-like!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Non so quali comandi inserire...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ehy aspetta, io dovrei avere (*) qualcosa di utile!</sentence>
+    </azione>
 </scenario>

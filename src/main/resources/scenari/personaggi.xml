@@ -65,6 +65,12 @@
     </personaggio>
     <personaggio nome="JDBC-20">
         <spritesheet>/img/personaggi/Robot.png</spritesheet>
+        <speakScenarios>
+            <scenario state="hackerato">src/main/resources/scenari/piano BUG/robotHackerato.xml</scenario>
+            <!--
+            <scenario state="prontoPerRegistratore">src/main/resources/scenari/piano EBERT/interazioneBriciolina.xml</scenario>
+            -->
+        </speakScenarios>
     </personaggio>
     <personaggio nome="Briciolina">
         <spritesheet>/img/personaggi/Briciolina.png</spritesheet>

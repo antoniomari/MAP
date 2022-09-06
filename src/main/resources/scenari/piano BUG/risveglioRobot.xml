@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>JDBC-20</subject>
+        <method>removeFromRoom</method>
+    </azione>
+</scenario>

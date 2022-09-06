@@ -7,9 +7,85 @@
         <state>completato</state>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Adesso non potrai rapire (*) più alcun cuoco!</sentence>
+    </azione>
+    <azione>
         <subject>Cuoco Luigi</subject>
         <method>speak</method>
-        <sentence>Ce l'hai fatta!</sentence>
+        <sentence>Ce l'hai fatta! (*) Devo trovare un modo</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>per ringraziarti di avermi salvato...</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>Ti preparerò un buon piatto (*) di spaghetti con le polpette!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>goccia</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>NO NO NO!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Grazie, ma credo che non mangerò (*) spaghetti per il resto della mia vita!</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>Io torno in cucinaaaa!</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>La cucina ha bisogno di me...</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>speak</method>
+        <sentence>...ed io di leiii!</sentence>
+    </azione>
+    <azione>
+        <method>playScenarioSound</method>
+        <what>src/main/resources/audio/effetti/urla cuoco.wav</what>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>move</method>
+        <x>0</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>0</finalWait>
+    </azione>
+    <azione>
+        <subject>Cuoco Luigi</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ma quel cuoco è completamente svitato...</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Non fa altro che cucinare (*) spaghetti e urlare in continuazione.</sentence>
+    </azione>
+    <azione>
+        <subject>Bug-C</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano BUG/risveglioRobot.xml</what>
     </azione>
     <!--
     mettere documento top secret + cartello piano bug
