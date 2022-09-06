@@ -50,7 +50,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Il BioALG1 è vivo!!! (*) Premio Nobel arriviamooooo!!!</sentence>
+        <sentence>Schwartz è vivo!!! (*) Premio Nobel arriviamooooo!!!</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -71,6 +71,56 @@
         <subject>Diego</subject>
         <method>speak</method>
         <sentence>La regina Elisabetta ci darà il (*) titolo di cavalieri dell'informatica</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Finalmente una nostra macchina (*) dopo tutti questi anni</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>è riuscita a passare (*) il test Global-AI-2025.</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Non ci sono dubbi, (*) l'idea vincente</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>è stata simulare quanto (*) accaduto nella precedente edizione.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Questo genere di test (*) fornisce la certezza matematica</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>che l'esito sia attendibile.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Infatti abbiamo creato una (*) macchina che ha le capacità di</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>risolvere i malfunzionamenti (*) di un'altra macchina</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>e di adempiere ad ogni richiesta, (*) non in modo meccanico, </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>ma in seguito ad una serie di (*) valutazioni effettuate sull'istanza.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -115,12 +165,12 @@
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Questo comporterebbe la scoperta del secolo.</sentence>
+        <sentence>Questo comporterebbe (*) la scoperta del secolo.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>La fusione perfetta tra algoritmo ed emozione.</sentence>
+        <sentence>La fusione perfetta tra (*) algoritmo ed emozione.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
