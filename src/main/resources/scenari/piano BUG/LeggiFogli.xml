@@ -7,6 +7,51 @@
         <sentence>LEGGO</sentence>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"Quello in cui ti trovi è uno (*) straaaano piano"</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"si trova tra il piano ALU (*) ed il piano Server"</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"ma a volte accade che l'ascensore (*) decida di fermarsi nel mezzo."</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"I pochi prescelti dall'ascensore (*) chiamano questo piano "BUG""</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"Ad ogni modo, quando accade (*) è sufficiente richiamarlo."</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"Così facendo si può raggiungere il vero piano Server."</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"Una volta l'azienda mi ha mandato (*) a risolvere questo problema"</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"ma ehy, non posso mica fare tutto io!"</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"Con affetto, (*) il vostro tecnico di fiducia!<3"</sentence>
+    </azione>
+    <azione>
         <subject>AscensoreBUG</subject>
         <method>setState</method>
         <state>canOpen</state>
