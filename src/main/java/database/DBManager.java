@@ -66,12 +66,16 @@ public class DBManager
             {
                 String name = resultSet.getString("TABLE_SCHEM");
 
-
                 // db presente
                 if(name.equalsIgnoreCase("GAME"))
+                {
+                    LogOutputManager.logOutput("DB esistente", LogOutputManager.EVENT_COLOR);
                     return;
+                }
+
             }
 
+            LogOutputManager.logOutput("Creazione DB", LogOutputManager.EVENT_COLOR);
             // db non presente
             PreparedStatement createStatement = conn.prepareStatement("CREATE SCHEMA GAME");
             createStatement.executeUpdate();
@@ -142,6 +146,8 @@ public class DBManager
                         "    primary key (item)\n" +
                         ");");
             createTable.executeUpdate();
+
+            LogOutputManager.logOutput("DB creato correttamente", LogOutputManager.EVENT_COLOR);
 
         } catch(SQLException e)
         {
