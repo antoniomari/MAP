@@ -54,8 +54,8 @@
     <azione>
         <subject>Tecnico</subject>
         <method>move</method>
-        <x>16</x>
-        <y>14</y>
+        <x>14</x>
+        <y>15</y>
         <how>absolute</how>
         <finalWait>500</finalWait>
     </azione>

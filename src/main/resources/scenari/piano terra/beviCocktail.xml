@@ -12,6 +12,10 @@
         <what>fumo</what>
     </azione>
     <azione>
+        <method>removeFromInventory</method>
+        <what>Cocktail</what>
+    </azione>
+    <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Sto per vomitare, (*) il peggiore Cocktail mai bevuto!</sentence>

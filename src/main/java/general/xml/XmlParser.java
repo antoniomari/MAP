@@ -368,6 +368,9 @@ public class XmlParser
             case "makeSchwartzRobot":
                 actionParsed = parseMakeSchwartzRobot(actionElement);
                 break;
+            case "removeFromInventory":
+                actionParsed = parseRemoveFromInventory(actionElement);
+                break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
         }
@@ -821,6 +824,17 @@ public class XmlParser
         return () ->
         {
             PlayingCharacter.makePlayerFinalForm();
+            GameManager.continueScenario();
+        };
+    }
+
+    private static Runnable parseRemoveFromInventory(Element eAction)
+    {
+        String what = getTagValue(eAction, "what");
+        return () ->
+        {
+            PlayingCharacter.getPlayer().removeFromInventory(
+                    (PickupableItem) GameManager.getPiece(what));
             GameManager.continueScenario();
         };
     }

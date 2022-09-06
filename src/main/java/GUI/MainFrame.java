@@ -15,6 +15,9 @@ import sound.SoundHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +62,9 @@ public class MainFrame extends JFrame {
     private Icon backgroundImg;
 
     /** Dimensione in pixel della larghezza dello schermo. */
-    public static final int SCREEN_WIDTH;
+    public static int SCREEN_WIDTH;
     /** Dimensione in pixel dell'altezza dello schermo. */
-    public static final int SCREEN_HEIGHT;
+    public static int SCREEN_HEIGHT;
 
     private static final BufferedImage BLACK_SCREEN;
     private static final String BLACK_SCREEN_PATH = "/img/sfondo nero.png";
