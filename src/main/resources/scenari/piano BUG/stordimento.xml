@@ -29,12 +29,4 @@
         <finalWait>0</finalWait>
         <isPerpetual>false</isPerpetual>
     </azione>
-    <azione>
-        <subject>Schwartz</subject>
-        <method>move</method>
-        <x>14</x>
-        <y>9</y>
-        <how>absolute</how>
-        <finalWait>500</finalWait>
-    </azione>
 </scenario>

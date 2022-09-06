@@ -5,6 +5,7 @@
     <musica>src/main/resources/audio/musica/PianoBUG.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <!--
         <azione>
             <method>addToInventory</method>
             <what>Axc8</what>
@@ -17,6 +18,7 @@
             <method>addToInventory</method>
             <what>Cheat Sheet</what>
         </azione>
+        -->
         <azione>
             <subject>Bug-A</subject>
             <method>add</method>

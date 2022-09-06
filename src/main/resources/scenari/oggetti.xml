@@ -256,22 +256,23 @@
         </onUse>
     </oggetto>
     <oggetto nome="Fogli">
-        <classe>PickupableItem</classe>
+        <classe>Item</classe>
         <descrizione>Strani fogli comparsi dal nulla.</descrizione>
-        <canUse>false</canUse>
+        <canUse>true</canUse>
+        <onUse>
+            <actionName>Leggi</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano BUG/LeggiFogli.xml</useScenario>
+        </onUse>
     </oggetto>
     <oggetto nome="AscensoreBUG">
         <classe>DoorLike</classe>
         <descrizione>Un ascensore bianco</descrizione>
-        <canUse>True</canUse>
+        <canUse>true</canUse>
         <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
-        <!--
+        <isLocked>false</isLocked>
         <onOpen>
-            <mode>once</mode>
-            <scenario>src/main/resources/scenari/fine.xml</scenario>
+            <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
         </onOpen>
-        -->
     </oggetto>
     <oggetto nome="PortaMIST">
         <classe>DoorLike</classe>
