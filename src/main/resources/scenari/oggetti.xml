@@ -449,5 +449,9 @@
         <classe>Item</classe>
         <descrizione>Gestisce i server di tutti i laboratori.</descrizione>
         <canUse>true</canUse>
+        <onUse>
+            <actionName>Spegni</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano SERVER/transizionePerFinale.xml</useScenario>
+        </onUse>
     </oggetto>
 </oggetti>
