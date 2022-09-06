@@ -1615,3 +1615,13 @@ INSERTO INTO game.lockEntrance values(?, ?) [42001-214]
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
 2022-08-31 16:32:11 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2022-09-06 18:17:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "TABLE_SCHEMA" not found [42122-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:301)
+	at database.DBManager.createGameDB(DBManager.java:68)
+	at GUI.MainFrame.main(MainFrame.java:693)

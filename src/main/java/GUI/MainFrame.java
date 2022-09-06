@@ -691,6 +691,8 @@ public class MainFrame extends JFrame {
 
         String initialRoomPath = "src/main/resources/scenari/piano terra/PT-B.xml";
 
+        DBManager.createGameDB();
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(initialRoomPath).setVisible(true));
     }

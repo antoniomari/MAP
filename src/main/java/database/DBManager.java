@@ -54,20 +54,95 @@ public class DBManager
 
     }
 
-    private static void createGameDB()
+    public static void createGameDB()
     {
         try
         {
             startConnection();
 
             DatabaseMetaData databaseMetaData = conn.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(null, null, null, new String[] {"TABLE"});
+            ResultSet resultSet = databaseMetaData.getSchemas();
             while (resultSet.next())
             {
-                String name = resultSet.getString("TABLE_NAME");
-                String schema = resultSet.getString("TABLE_SCHEMA");
-                System.out.println(name + " on schema " + schema);
+                String name = resultSet.getString("TABLE_SCHEM");
+
+
+                // db presente
+                if(name.equalsIgnoreCase("GAME"))
+                    return;
             }
+
+            // db non presente
+            PreparedStatement createStatement = conn.prepareStatement("CREATE SCHEMA GAME");
+            createStatement.executeUpdate();
+
+            // crea tabelle
+            PreparedStatement createTable = conn.prepareStatement(
+                    "create table game.room\n" +
+                    "(\n" +
+                    "    name varchar(50),\n" +
+                    "    xmlPath varchar(200),\n" +
+                    "    scenarioOnEnterPath varchar(200),\n" +
+                    "    primary key(name)\n" +
+                    ");");
+            createTable.executeUpdate();
+            createTable = conn.prepareStatement(
+                    "create table game.lockEntrance\n" +
+                    "(\n" +
+                    "    room varchar(50),\n" +
+                    "    cardinal char(5),\n" +
+                    "\n" +
+                    "    primary key(room, cardinal),\n" +
+                    "    foreign key (room) references room(name)\n" +
+                    ");");
+            createTable.executeUpdate();
+            createTable = conn.prepareStatement(
+                    "create table game.item\n" +
+                            "(\n" +
+                            "    name varchar(50),\n" +
+                            "    state varchar(50),\n" +
+                            "    canUse bit,\n" +
+                            "    primary key(name)\n" +
+                            ");");
+            createTable.executeUpdate();
+            createTable = conn.prepareStatement(
+                    "create table game.gameCharacter\n" +
+                            "(\n" +
+                            "    name varchar(50),\n" +
+                            "    state varchar(50),\n" +
+                            "    primary key(name)\n" +
+                            ");");
+            createTable.executeUpdate();createTable = conn.prepareStatement(
+                "create table game.itemLocation\n" +
+                        "(\n" +
+                        "    item varchar(50),\n" +
+                        "    room varchar(50),\n" +
+                        "    x int,\n" +
+                        "    y int,\n" +
+                        "    primary key (item),\n" +
+                        "    foreign key (item) references item (name),\n" +
+                        "    foreign key (room) references room (name)\n" +
+                        ");");
+            createTable.executeUpdate();createTable = conn.prepareStatement(
+                "create table game.characterLocation\n" +
+                        "(\n" +
+                        "    gamecharacter varchar(50),\n" +
+                        "    room varchar(50),\n" +
+                        "    x int,\n" +
+                        "    y int,\n" +
+                        "    primary key (gamecharacter),\n" +
+                        "    foreign key (gamecharacter) references gameCharacter (name),\n" +
+                        "    foreign key (room) references room (name)\n" +
+                        ");");
+            createTable.executeUpdate();createTable = conn.prepareStatement(
+                "create table game.inventory\n" +
+                        "(\n" +
+                        "    item varchar(50),\n" +
+                        "    index int,\n" +
+                        "    primary key (item)\n" +
+                        ");");
+            createTable.executeUpdate();
+
         } catch(SQLException e)
         {
             closeConnection();
