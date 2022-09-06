@@ -291,7 +291,7 @@
         <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
-            <scenario state="chiamaTecnico">src/main/resources/scenari/piano EBERT/apriAsfAscensore.xml</scenario>
+            <scenario state="chiamaTecnico">src/main/resources/scenari/piano EBERT/apriAscensore.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="Sasso">

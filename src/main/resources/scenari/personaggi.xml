@@ -44,6 +44,7 @@
         <json>/img/personaggi/Tecnico.json</json>
         <speakScenarios>
             <scenario state="erogaTestMist">src/main/resources/scenari/piano MIST/erogaTest.xml</scenario>
+            <sentence state="fineTestMist">Lo sapevo che eri InteLLigEntE!</sentence>
             <scenario state="aspettaCaptcha">src/main/resources/scenari/piano ALU/aspettaCaptcha.xml</scenario>
         </speakScenarios>
     </personaggio>

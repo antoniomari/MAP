@@ -53,6 +53,8 @@ public abstract class MiniGame extends JLayeredPane
     static final Integer RESULT_LAYER = 2;
     String scenarioOnWinPath;
 
+    private Component mainPanel;
+
     private boolean win = false;
 
     MiniGame(String victory, String lost, String error)
@@ -96,6 +98,7 @@ public abstract class MiniGame extends JLayeredPane
         {
             resultPanel.setVisible(false);
             remove(resultPanel);
+            mainPanel.setVisible(true);
 
             if(win)
             {
@@ -117,8 +120,15 @@ public abstract class MiniGame extends JLayeredPane
         resultPanel.add(okButton, BorderLayout.SOUTH);
     }
 
+    protected void setMainPanel(Component mainPanel)
+    {
+        this.mainPanel = mainPanel;
+        add(mainPanel, TEST_LAYER);
+    }
+
     protected void showResult(String msg)
     {
+        mainPanel.setVisible(false);
         GameState.changeState(GameState.State.TEST_RESULT);
         resultLabel.setText(msg);
         add(resultPanel, RESULT_LAYER);

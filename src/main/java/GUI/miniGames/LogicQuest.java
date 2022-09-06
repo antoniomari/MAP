@@ -135,7 +135,7 @@ public class LogicQuest extends MiniGame
         int xOffset = (int) getPreferredSize().getWidth() / 4;
         int yOffset = 0;
         mainWrapper.setBounds(getInsets().left + xOffset, getInsets().top, (int) getPreferredSize().getWidth() / 2, (int)getPreferredSize().getHeight());
-        add(mainWrapper, TEST_LAYER);
+        setMainPanel(mainWrapper);
 
 
         /*

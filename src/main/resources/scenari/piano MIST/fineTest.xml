@@ -14,6 +14,6 @@
     <azione>
         <subject>Tecnico</subject>
         <method>setState</method>
-        <state>fineTest</state>
+        <state>fineTestMist</state>
     </azione>
 </scenario>

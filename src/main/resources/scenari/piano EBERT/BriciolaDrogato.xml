@@ -18,6 +18,6 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Si sente un rombo proveniente dal suo stomaco.</sentence>
+        <sentence>Si sente un rombo proveniente (*) dal suo stomaco.</sentence>
     </azione>
 </scenario>

@@ -5,26 +5,12 @@
     <musica>src/main/resources/audio/musica/PianoBUG.wav</musica>
     <scenario>
         <mode>instant</mode>
-        <!--
-        <azione>
-            <method>addToInventory</method>
-            <what>Axc8</what>
-        </azione>
-        <azione>
-            <method>addToInventory</method>
-            <what>GO-TO-SHOCK</what>
-        </azione>
-        <azione>
-            <method>addToInventory</method>
-            <what>Cheat Sheet</what>
-        </azione>
-        -->
         <azione>
             <subject>Bug-A</subject>
             <method>add</method>
             <what>AscensoreBUG</what>
             <x>14</x>
-            <y>9</y>
+            <y>8</y>
         </azione>
         <azione>
             <subject>Bug-A</subject>

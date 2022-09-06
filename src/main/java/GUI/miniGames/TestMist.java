@@ -153,7 +153,7 @@ public class TestMist extends MiniGame
 
 
         scrollPane.setBounds(getInsets().left, getInsets().top, (int) getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
-        add(scrollPane, TEST_LAYER);
+        setMainPanel(scrollPane);
 
 
 
@@ -280,7 +280,11 @@ public class TestMist extends MiniGame
                 completed = true;
                 //System.out.println("si è completato il test");
                 if(checkTestResult())
+                {
+
                     showResult(VICTORY);
+                }
+
                 else
                     showResult(LOST);
 

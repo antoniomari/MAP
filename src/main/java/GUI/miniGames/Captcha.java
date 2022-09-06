@@ -103,7 +103,7 @@ public class Captcha extends MiniGame
         setupListener();
         addDetails();
 
-        add(captchaPanel, TEST_LAYER);
+        setMainPanel(captchaPanel);
         captchaPanel.setBounds(getInsets().left, getInsets().top,
                 (int) captchaPanel.getPreferredSize().getWidth(),
                 (int) captchaPanel.getPreferredSize().getHeight());
