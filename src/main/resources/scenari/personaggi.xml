@@ -8,6 +8,7 @@
             <sentence state="fineConferenza">Quel Robot si compo-mente strana-rta</sentence>
             <sentence state="prontoPerRegistratore">Portami il registratore.</sentence>
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiMist.xml</scenario>
+            <sentence state="endGame">Finalmente di beve! (*) Però la Raffo fa schifo...</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Antonio">
@@ -18,6 +19,7 @@
             <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
             <sentence state="fineConferenza">Conferenza breve ma intensa!</sentence>
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiEbert.xml</scenario>
+            <sentence state="endGame">Io ci sono sempre per (*) una bella birra sudata!</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Diego">
@@ -29,6 +31,7 @@
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiAlu.xml</scenario>
             <sentence state="aspettaCaffe">Portami il malede....tto (*) caf......fè!</sentence>
             <sentence state="dopoCaffe">Adesso sono sveglio!</sentence>
+            <sentence state="endGame">Ragazzi tranquilli! (*) Offro da bere per tutti!!!</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Cameriere">

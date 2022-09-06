@@ -52,6 +52,11 @@
         <sentence>"Con affetto, (*) il vostro tecnico di fiducia!"</sentence>
     </azione>
     <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
+    </azione>
+    <azione>
         <subject>AscensoreBUG</subject>
         <method>setState</method>
         <state>canOpen</state>

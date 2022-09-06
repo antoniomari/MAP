@@ -70,7 +70,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>La regina Elisabetta ci darà il (*) titolo di cavaglieri dell'informatica</sentence>
+        <sentence>La regina Elisabetta ci darà il (*) titolo di cavalieri dell'informatica</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -105,24 +105,56 @@
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>penoso  quando si parla di AI  </sentence>
+        <sentence>penoso quando si parla di AI (*) è l'inconcludenza nel riuscire</sentence>
     </azione>
-    <!--
-
-
-
-
-
-
-           è l'inconcludenza nel riuscire a padroneggiare i sentimenti che porterebbe la scoperta
-           del secolo, la fusione perfetta tra algoritmo ed emozione. Con questo obiettivo preciso
-           abbiamo unito le forze per riuscire a codificare la funsione perfetta e rendere una macchina
-           un evoluzione del uomo.
-   -->
-
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>a padroneggiare i sentimenti.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Questo comporterebbe la scoperta del secolo.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>La fusione perfetta tra algoritmo ed emozione.</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Con questo obiettivo preciso (*) abbiamo unito le forze per</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>riuscire a codificare la fusione (*) perfetta e rendere una macchina</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>l'evoluzione dell'uomo.</sentence>
+    </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Beh ragazzi direi che è guinto (*) il tempo di farsi due birre al pub.</sentence>
+        <sentence>Beh ragazzi direi che è giunto (*) il momento di farsi due birre al pub.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>setState</method>
+        <state>endGame</state>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>setState</method>
+        <state>endGame</state>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>setState</method>
+        <state>endGame</state>
     </azione>
 </scenario>

@@ -14,7 +14,7 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"JDBC-20 incorpora una teconologia (*) avanzata fornita da nuovi processori </sentence>
+        <sentence>"JDBC-20 incorpora una tecnologia (*) avanzata fornita da nuovi processori </sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -24,12 +24,12 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"inpulsi esterni in emozioni (*) rendendo perfetta la simbiosi tra software" </sentence>
+        <sentence>"impulsi esterni in emozioni (*) rendendo perfetta la simbiosi tra software" </sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"e psicoemotività. La connesione (*) con i server del laboratorio lo rendono sicuro </sentence>
+        <sentence>"e psicoemotività. La connessione (*) con i server del laboratorio lo rendono sicuro </sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -39,7 +39,7 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"trovano all'ultimo piano." </sentence>
+        <sentence>"trovano al piano Server." </sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -54,17 +54,12 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"ma dove diamine sono, l'ascensore (*) diceva di portarmi ai server." </sentence>
+        <sentence>ma dove diamine sono, l'ascensore (*) diceva di portarmi al piano Server. </sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Sicuramente il tecnico avrà (*) fatto qualche pasticcio. </sentence>
-    </azione>
-    <azione>
-        <subject>Schwartz</subject>
-        <method>speak</method>
-        <sentence>"trovano all'ultimo piano." </sentence>
     </azione>
     <!--
         Da anni si parla di AI, ma la verità è che i passi fatti fino ad ora
