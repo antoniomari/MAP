@@ -63,4 +63,9 @@
         <method>speak</method>
         <sentence>ESPERIMENTO IMPORTANTE!</sentence>
     </azione>
+    <azione>
+        <subject>AscensoreEBERT</subject>
+        <method>setState</method>
+        <state>canOpen</state>
+    </azione>
 </scenario>

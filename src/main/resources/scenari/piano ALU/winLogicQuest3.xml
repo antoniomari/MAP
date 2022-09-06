@@ -77,6 +77,11 @@
         <sentence>il mio prezioso AXC8. </sentence>
     </azione>
     <azione>
+        <subject>ComputerALU</subject>
+        <method>setCanUse</method>
+        <canUse>false</canUse>
+    </azione>
+    <azione>
         <subject>Diego</subject>
         <method>move</method>
         <x>20</x>
@@ -84,11 +89,9 @@
         <how>absolute</how>
         <finalWait>500</finalWait>
     </azione>
-    <!--
-     <azione>
-        <subject>Schwartz</subject>
-        <method>teleport</method>
-        <where>FlashRoom</where>
+    <azione>
+        <subject>Diego</subject>
+        <method>setState</method>
+        <state>aspettaCaffe</state>
     </azione>
-    -->
 </scenario>

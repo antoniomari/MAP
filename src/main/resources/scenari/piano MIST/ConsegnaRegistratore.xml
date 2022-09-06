@@ -83,4 +83,9 @@
         <subject>Nicolas</subject>
         <method>removeFromRoom</method>
     </azione>
+    <azione>
+        <subject>AscensoreMIST</subject>
+        <method>setState</method>
+        <state>chiamaTecnico</state>
+    </azione>
 </scenario>

@@ -12,6 +12,11 @@
         <state>canOpen</state>
     </azione>
     <azione>
+        <subject>Telefono</subject>
+        <method>setState</method>
+        <what>mist</what>
+    </azione>
+    <azione>
         <subject>Tecnico</subject>
         <method>setState</method>
         <state>fineTest</state>

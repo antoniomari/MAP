@@ -45,21 +45,18 @@
         <sentence>buon uso.</sentence>
     </azione>
     <azione>
-        <subject>ALUA</subject>
-        <method>add</method>
+        <method>addToInventory</method>
         <what>Axc8</what>
-        <x>23</x>
-        <y>12</y>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Bonne chance chère ami le Professeur, au revoir! </sentence>
+        <sentence>Bonne chance chère ami le Professeur, (*) au revoir! </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>move</method>
-        <x>29</x>
+        <x>0</x>
         <y>12</y>
         <how>absolute</how>
         <finalWait>500</finalWait>
@@ -67,13 +64,6 @@
     <azione>
         <subject>Diego</subject>
         <method>removeFromRoom</method>
-    </azione>
-    <azione>
-        <subject>ALUD</subject>
-        <method>add</method>
-        <what>Diego</what>
-        <x>19</x>
-        <y>12</y>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -84,5 +74,15 @@
         <subject>Schwartz</subject>
         <method>speak</method>
         <sentence>Or dunque ora che ho l'AXC8 posso (*) proseguire nelle mie gesta! </sentence>
+    </azione>
+    <azione>
+        <subject>AscensoreALU</subject>
+        <method>setState</method>
+        <state>chiamaTecnico</state>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>setState</method>
+        <state>dopoCaffe</state>
     </azione>
 </scenario>

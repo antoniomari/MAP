@@ -3,7 +3,7 @@
     <mode>sequence</mode>
     <azione>
         <method>addRoomEffect</method>
-        <what>/img/FLASH/FogFlash3.png</what>
+        <what>/img/FLASH/FogFlash4.png</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>
