@@ -34,7 +34,7 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"Così facendo si può raggiungere il vero piano Server."</sentence>
+        <sentence>"Così facendo si può raggiungere (*) il vero piano Server."</sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -49,7 +49,7 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>"Con affetto, (*) il vostro tecnico di fiducia!<3"</sentence>
+        <sentence>"Con affetto, (*) il vostro tecnico di fiducia!"</sentence>
     </azione>
     <azione>
         <subject>AscensoreBUG</subject>
