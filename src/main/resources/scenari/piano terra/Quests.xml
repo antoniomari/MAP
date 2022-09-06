@@ -365,6 +365,11 @@
         <y>15</y>
     </azione>
     <azione>
+        <subject>Diego</subject>
+        <method>setState</method>
+        <state>sintesiQuest</state>
+    </azione>
+    <azione>
         <subject>PT-B</subject>
         <method>add</method>
         <what>Antonio</what>
@@ -372,11 +377,21 @@
         <y>15</y>
     </azione>
     <azione>
+        <subject>Antonio</subject>
+        <method>setState</method>
+        <state>sintesiQuest</state>
+    </azione>
+    <azione>
         <subject>PT-B</subject>
         <method>add</method>
         <what>Nicolas</what>
         <x>15</x>
         <y>15</y>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>setState</method>
+        <state>sintesiQuest</state>
     </azione>
     <azione>
         <subject>AscensorePT</subject>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Ricorda: dal mio piano (*) devi recuperare il AXC8</sentence>
+    </azione>
+</scenario>

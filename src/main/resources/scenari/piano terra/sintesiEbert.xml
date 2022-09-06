@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Ricorda: dal mio piano (*) devi recuperare il cheat-sheet</sentence>
+    </azione>
+</scenario>
