@@ -265,32 +265,8 @@
 	</azione>
 	<azione>
 		<subject>Antonio</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
-		<subject>Antonio</subject>
 		<method>speak</method>
 		<sentence>Siamo davvero orgogliosi</sentence>
-	</azione>
-	<azione>
-		<subject>Antonio</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>-1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
-		<subject>Diego</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Diego</subject>
@@ -298,41 +274,9 @@
 		<sentence>di avere uno scienziato rinomato</sentence>
 	</azione>
 	<azione>
-		<subject>Diego</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>-1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
-		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
 		<sentence>al nostro congresso sull'AI</sentence>
-	</azione>
-	<azione>
-		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>-1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
-		<subject>Antonio</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Antonio</subject>
@@ -340,54 +284,14 @@
 		<sentence>Lì c'è l'open bar</sentence>
 	</azione>
 	<azione>
-		<subject>Antonio</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>-1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
-		<subject>Diego</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
 		<subject>Diego</subject>
 		<method>speak</method>
-		<sentence>perché non va a farsi un drink?</sentence>
-	</azione>
-	<azione>
-		<subject>Diego</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>-1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
-	</azione>
-	<azione>
-		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
+		<sentence>Perché non va a farsi un drink?</sentence>
 	</azione>
 	<azione>
 		<subject>Nicolas</subject>
 		<method>speak</method>
 		<sentence>È tutto gratis!</sentence>
-	</azione>
-	<azione>
-		<subject>Nicolas</subject>
-		<method>move</method>
-		<x>0</x>
-		<y>-1</y>
-		<how>relative</how>
-		<finalWait>500</finalWait>
 	</azione>
 	<azione>
 		<subject>Antonio</subject>
