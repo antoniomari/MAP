@@ -4,10 +4,78 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>LEGGO</sentence>
+        <sentence>"Magnum Opus intelligentiae (*) artificialis."</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"## TOP SECRET PROJECT JDBC-20 ##" </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"JDBC-20 incorpora una teconologia (*) avanzata fornita da nuovi processori </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"snap-ALU e octacore-Emotion. (*) Il S.O. BioALG1 è in grado di decodificare" </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"inpulsi esterni in emozioni (*) rendendo perfetta la simbiosi tra software" </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"e psicoemotività. La connesione (*) con i server del laboratorio lo rendono sicuro </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"e impossibile da disattivare se (*) non spegnendo manualmente i server che si" </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"trovano all'ultimo piano." </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>playEmoji</method>
+        <what>enfasi</what>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Quindi per mettere fine a quel (*) rottame ambulante dovrò spegnere i server, </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"ma dove diamine sono, l'ascensore (*) diceva di portarmi ai server." </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Sicuramente il tecnico avrà (*) fatto qualche pasticcio. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>"trovano all'ultimo piano." </sentence>
     </azione>
     <!--
-    scrivere tutta la laetutra virgolettata del vcontenuto
-    fake fine del robot, progetto ecc.
+        Da anni si parla di AI, ma la verità è che i passi fatti fino ad ora
+            risultano per lo più inconcludenti, quella che dovrebbe essere una macchina
+            intelligente finisce per essere solo un ammasso sconfinato di memoria capace di
+            eseguire calcoli complicati in tempi sempre più rapidi, ma in questi processi non
+            c'è gusto nella scelta della risoluzione del calcolo, non c'è stile nell'implementare
+            strategie di problem solving, e quello che è ancora più penoso quando si parla di AI
+            è l'inconcludenza nel riuscire a padroneggiare i sentimenti che porterebbe la scoperta
+            del secolo, la fusione perfetta tra algoritmo ed emozione. Con questo obiettivo preciso
+            abbiamo unito le forze per riuscire a codificare la funsione perfetta e rendere una macchina
+            un evoluzione del uomo.
     -->
 </scenario>
