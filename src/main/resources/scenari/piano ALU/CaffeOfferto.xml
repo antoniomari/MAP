@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<scenario>
+    <mode>sequence</mode>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>move</method>
+        <x>19</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Ecco il suo caffè.</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Finalmente il primo caffè della (*) giornata, sperando che possa proseguire </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>in tranquillità. Ma veniamo a noi, (*) Il suo comportamento non è stato degno di un </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>professore del suo calibro. (*) Tuttavia riconosco che la mancanza di caffeina </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>inebisca il mio buon senso. (*) Voglio lasciare alle spalle il nostro screzio </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>donandole quello che le avevo (*) promesso. Ecco tenga il mio AXC8 né faccia  </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>buon uso.</sentence>
+    </azione>
+    <azione>
+        <subject>ALUA</subject>
+        <method>add</method>
+        <what>Axc8</what>
+        <x>23</x>
+        <y>12</y>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Bonne chance chère ami le Professeur, au revoir! </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>move</method>
+        <x>29</x>
+        <y>12</y>
+        <how>absolute</how>
+        <finalWait>500</finalWait>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>removeFromRoom</method>
+    </azione>
+    <azione>
+        <subject>ALUD</subject>
+        <method>add</method>
+        <what>Diego</what>
+        <x>19</x>
+        <y>12</y>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Che psicopatico, sembra di essere (*) in una clinica psichiatrica. </sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Or dunque ora che ho l'AXC8 posso (*) proseguire nelle mie gesta! </sentence>
+    </azione>
+</scenario>
