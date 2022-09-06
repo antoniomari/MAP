@@ -22,5 +22,11 @@
             <method>setScenarioOnEnter</method>
             <what>src/main/resources/scenari/piano BUG/TrovaCuoco.xml</what>
         </azione>
+        <azione>
+            <subject>Bug-B</subject>
+            <method>lockEntrance</method>
+            <cardinal>east</cardinal>
+            <lock>true</lock>
+        </azione>
     </scenario>
 </stanza>

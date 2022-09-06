@@ -83,7 +83,7 @@ public class TestMist extends MiniGame
             new JLabel("11. Questa frase è in Spagnolo?"),
             new JLabel("12. Il nostro sole è l'unica stella nello spazio?"),
             new JLabel("13. A volte le persone mentono?"),
-            new JLabel("14. Le balene sono delle specie di pesci?"),
+            new JLabel("14. Le balene appartengono alla specie dei pesci?"),
             new JLabel("15. La notte è più buia del giorno?"),
             new JLabel("16. La guerra è meglio della pace?"),
             new JLabel("17. Un secondo è più breve di un minuto?"),

@@ -6,11 +6,7 @@ import entity.GamePiece;
 import entity.characters.PlayingCharacter;
 import entity.rooms.Room;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 public class GameManager
 {
@@ -42,6 +38,13 @@ public class GameManager
     public static void addPiece(GamePiece p)
     {
         pieces.put(p.getName(), p);
+    }
+
+    public static void removePiece(GamePiece p)
+    {
+        Objects.requireNonNull(p);
+
+        pieces.remove(p.getName());
     }
 
     public static void addRoom(Room room)

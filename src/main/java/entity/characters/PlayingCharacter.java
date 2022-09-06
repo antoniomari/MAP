@@ -49,7 +49,8 @@ public class PlayingCharacter extends GameCharacter
         }
 
         player.removeFromRoom();
-        player = new PlayingCharacter("Dr. Schwartz", "/img/personaggi/Schwartz robot.png");
+        GameManager.removePiece(player);
+        player = new PlayingCharacter("Schwartz", "/img/personaggi/Schwartz robot.png");
         Room currentRoom = GameManager.getMainFrame().getCurrentRoom();
         player.addInRoom(currentRoom, currentRoom.getDefaultPosition());
     }

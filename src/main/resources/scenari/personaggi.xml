@@ -7,6 +7,7 @@
             <sentence state="init">Signor Schwartz, a breve inizi-enza (*) la confer-amo</sentence>
             <sentence state="fineConferenza">Quel Robot si compo-mente strana-rta</sentence>
             <sentence state="prontoPerRegistratore">Portami il registratore.</sentence>
+            <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiMist.xml</scenario>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Antonio">
@@ -16,6 +17,7 @@
             <sentence state="aspettaDrink">Se non si rinfresca prima (*) con un Drink non iniziamo!</sentence>
             <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
             <sentence state="fineConferenza">Conferenza breve ma intensa!</sentence>
+            <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiEbert.xml</scenario>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Diego">
@@ -24,6 +26,7 @@
         <speakScenarios>
             <sentence state="init">Graaaa..ande Si.....gnor Svàrs!</sentence>
             <sentence state="fineConferenza">J D B C im-pa-z-z-i-t-o !!</sentence>
+            <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiAlu.xml</scenario>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Cameriere">

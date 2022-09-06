@@ -5,5 +5,11 @@
     <musica>src/main/resources/audio/musica/PianoBUG.wav</musica>
     <scenario>
         <mode>instant</mode>
+        <azione>
+            <subject>Bug-C</subject>
+            <method>lockEntrance</method>
+            <cardinal>east</cardinal>
+            <lock>true</lock>
+        </azione>
     </scenario>
 </stanza>

@@ -64,7 +64,6 @@
             <targetInitState>prontoPerRegistratore</targetInitState>
             <targetFinalState>registratoreConsegnato</targetFinalState>
             <scenario>src/main/resources/scenari/piano MIST/ConsegnaRegistratore.xml</scenario>
-
         </onUseWith>
     </oggetto>
     <oggetto nome="GO-TO-SHOCK">
@@ -76,13 +75,20 @@
             <target>JDBC-20</target>
             <targetInitState>prontoPerRegistratore</targetInitState>
             <targetFinalState>stordito</targetFinalState>
-            <scenario>src/main/resources/scenari/piano BUG/primoStordimento.xml</scenario>
+            <scenario>src/main/resources/scenari/piano BUG/stordimento.xml</scenario>
         </onUseWith>
     </oggetto>
     <oggetto nome="Cheat Sheet">
         <classe>PickupableItem</classe>
         <descrizione>Sembra scritto in arabo!</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>true</keep>
+            <target>JDBC-20</target>
+            <targetInitState>hackerato</targetInitState>
+            <targetFinalState>completato</targetFinalState>
+            <scenario>src/main/resources/scenari/piano BUG/utilizzoCheatSheet.xml</scenario>
+        </onUseWith>
     </oggetto>
     <oggetto nome="Guanto">
         <classe>PickupableItem</classe>
@@ -212,6 +218,13 @@
         <classe>PickupableItem</classe>
         <descrizione>Dispositivo hackerino.</descrizione>
         <canUse>false</canUse>
+        <onUseWith>
+            <keep>true</keep>
+            <target>JDBC-20</target>
+            <targetInitState>stordito</targetInitState>
+            <targetFinalState>hackerato</targetFinalState>
+            <scenario>src/main/resources/scenari/piano BUG/utilizzoAXC8.xml</scenario>
+        </onUseWith>
     </oggetto>
     <oggetto nome="Batterie">
         <classe>PickupableItem</classe>
@@ -447,5 +460,9 @@
         <classe>Item</classe>
         <descrizione>Gestisce i server di tutti i laboratori.</descrizione>
         <canUse>true</canUse>
+        <onUse>
+            <actionName>Spegni</actionName>
+            <useScenario state="init">src/main/resources/scenari/piano SERVER/transizionePerFinale.xml</useScenario>
+        </onUse>
     </oggetto>
 </oggetti>
