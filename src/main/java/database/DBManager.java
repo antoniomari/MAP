@@ -18,11 +18,7 @@ import org.h2.store.fs.retry.FilePathRetryOnInterrupt;
 
 import java.io.IOError;
 import java.security.Key;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 import java.util.PropertyPermission;
@@ -55,6 +51,30 @@ public class DBManager
         {
             throw new GameException("Impossibile chiudere la connessione con database per salvataggi");
         }
+
+    }
+
+    private static void createGameDB()
+    {
+        try
+        {
+            startConnection();
+
+            DatabaseMetaData databaseMetaData = conn.getMetaData();
+            ResultSet resultSet = databaseMetaData.getTables(null, null, null, new String[] {"TABLE"});
+            while (resultSet.next())
+            {
+                String name = resultSet.getString("TABLE_NAME");
+                String schema = resultSet.getString("TABLE_SCHEMA");
+                System.out.println(name + " on schema " + schema);
+            }
+        } catch(SQLException e)
+        {
+            closeConnection();
+            throw new Error(e);
+        }
+
+
 
     }
 

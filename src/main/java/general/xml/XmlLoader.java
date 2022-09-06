@@ -176,8 +176,6 @@ public class XmlLoader
             itemToLoad = new PickupableItem(name, description, canUse);
         else if (className.equals("DoorLike"))
             itemToLoad = new DoorLike(name, description);
-        else if (className.equals("Container"))
-            itemToLoad = new Container(name, description);
         else
             throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
         // TODO : rimpiazzare if-else

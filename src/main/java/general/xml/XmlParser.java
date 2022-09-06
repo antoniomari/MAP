@@ -7,7 +7,6 @@ import GUI.miniGames.TestMist;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.PlayingCharacter;
-import entity.items.Container;
 import entity.items.Item;
 import entity.items.Openable;
 import entity.items.PickupableItem;
@@ -299,9 +298,12 @@ public class XmlParser
             case "effectAnimation":
                 actionParsed = parseEffectAnimation(actionElement);
                 break;
+                /*
             case "addPickup":
                 actionParsed = parseAddPickup(actionElement);
                 break;
+
+                 */
             case "setEast":
                 actionParsed = parseSetEast(actionElement);
                 break;
@@ -522,6 +524,7 @@ public class XmlParser
         return () -> GameManager.getPiece(subject).animateReverse();
     }
 
+    /*
     private static Runnable parseAddPickup(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -536,6 +539,8 @@ public class XmlParser
             GameManager.continueScenario();
         };
     }
+
+     */
 
     private static Runnable parseSetAdjacentRoom(Element eAction, Room.Cardinal cardinal)
     {

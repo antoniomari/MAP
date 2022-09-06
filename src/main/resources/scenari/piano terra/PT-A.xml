@@ -10,12 +10,14 @@
             <method>setNorth</method>
             <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
         </azione>
+        <!--
         <azione>
             <subject>PT-A</subject>
             <method>lockEntrance</method>
             <cardinal>north</cardinal>
             <lock>true</lock>
         </azione>
+        -->
         <azione>
             <subject>PT-A</subject>
             <method>add</method>

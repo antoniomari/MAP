@@ -24,7 +24,7 @@
         </onOpen>
     </oggetto>
     <oggetto nome="ArmadioAperto">
-        <classe>Container</classe>
+        <classe>Item</classe>
         <descrizione>Ehy, ormai è aperto</descrizione>
         <canUse>false</canUse>
     </oggetto>
