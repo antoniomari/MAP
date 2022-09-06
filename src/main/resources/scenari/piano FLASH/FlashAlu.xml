@@ -11,23 +11,12 @@
         <sentence>Ma che diamine mi succede oggi?</sentence>
     </azione>
     <azione>
-        <subject>Diego</subject>
-        <method>removeFromRoom</method>
-    </azione>
-    <azione>
         <subject>Nicolas</subject>
         <method>removeFromRoom</method>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>removeFromRoom</method>
-    </azione>
-    <azione>
-        <subject>FlashRoom</subject>
-        <method>add</method>
-        <what>Diego</what>
-        <x>8</x>
-        <y>20</y>
     </azione>
     <azione>
         <subject>FlashRoom</subject>
@@ -44,14 +33,14 @@
         <y>20</y>
     </azione>
     <azione>
-        <subject>Diego</subject>
+        <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Il prototipo sta dando più (*) problemi del previsto, Nicolas </sentence>
+        <sentence>Il prototipo ..... (*) .... problemi del previsto ...</sentence>
     </azione>
     <azione>
-        <subject>Diego</subject>
+        <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>a che punto è il tuo processore (*) dei sentimenti?</sentence>
+        <sentence>a che punto ...  ... (*) ... processore ... ... ?</sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -66,12 +55,12 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>I sentimenti primordiali ci sono,(*) ma la coscenza è il vero problema.</sentence>
+        <sentence>I ... primordiali ci sono, (*) ...  vero problema... .</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>OTTIMIZZATE!! OTTIMIZZATE!! (*) non c'è tempo.</sentence>
+        <sentence>... .... OTTIMIZZA!! (*) ... c'è ... tempo.</sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -111,17 +100,13 @@
         <method>removeFromRoom</method>
     </azione>
     <azione>
-        <subject>Diego</subject>
-        <method>removeFromRoom</method>
-    </azione>
-    <azione>
         <subject>Nicolas</subject>
         <method>removeFromRoom</method>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
-        <where>AlUB</where>
+        <where>ALUB</where>
     </azione>
     <azione>
         <subject>Schwartz</subject>

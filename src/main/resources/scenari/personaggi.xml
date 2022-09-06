@@ -27,6 +27,8 @@
             <sentence state="init">Graaaa..ande Si.....gnor Svàrs!</sentence>
             <sentence state="fineConferenza">J D B C im-pa-z-z-i-t-o !!</sentence>
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiAlu.xml</scenario>
+            <sentence state="aspettaCaffe">Portami il malede....tto (*) caf......fè!</sentence>
+            <sentence state="dopoCaffe">Adesso sono sveglio!</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Cameriere">
