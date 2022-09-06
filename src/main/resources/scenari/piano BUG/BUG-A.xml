@@ -32,6 +32,12 @@
             <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
         </azione>
         <azione>
+            <subject>Bug-A</subject>
+            <method>lockEntrance</method>
+            <cardinal>north</cardinal>
+            <lock>true</lock>
+        </azione>
+        <azione>
             <subject>Ascensore</subject>
             <method>setScenarioOnEnter</method>
             <what>src/main/resources/scenari/piano BUG/EntraAscensore.xml</what>

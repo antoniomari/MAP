@@ -104,7 +104,7 @@
     </oggetto>
     <oggetto nome="Telefono">
         <classe>PickupableItem</classe>
-        <descrizione>goierng</descrizione>
+        <descrizione>Hack</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Cassetta">
@@ -281,16 +281,6 @@
         <isOpen>false</isOpen>
         <isLocked>false</isLocked>
         <onOpen>
-        </onOpen>
-    </oggetto>
-    <oggetto nome="AscensoreSERVER">
-        <classe>DoorLike</classe>
-        <descrizione>Un ascensore rosso</descrizione>
-        <canUse>false</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
-        <onOpen>
-            <scenario state="init">src/main/resources/scenari/fine.xml</scenario>
         </onOpen>
     </oggetto>
     <oggetto nome="AscensoreEBERT">

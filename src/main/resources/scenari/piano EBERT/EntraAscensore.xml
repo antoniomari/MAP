@@ -32,7 +32,7 @@
     <azione>
         <subject>Ascensore</subject>
         <method>itemSpeak</method>
-        <sentence>MIST!!!!</sentence>
+        <sentence>SERVER!!!!</sentence>
     </azione>
     <azione>
         <method>playScenarioSound</method>
@@ -52,16 +52,16 @@
     </azione>
     <azione>
         <method>loadFloor</method>
-        <floor>MIST</floor>
+        <floor>BUG</floor>
     </azione>
     <azione>
-        <subject>Mist-A</subject>
+        <subject>Bug-A</subject>
         <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano MIST/ArrivoPianoMist.xml</what>
+        <what>src/main/resources/scenari/piano BUG/ArrivoPianoBug.xml</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
-        <where>Mist-A</where>
+        <where>Bug-A</where>
     </azione>
 </scenario>

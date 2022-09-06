@@ -32,7 +32,7 @@
     <azione>
         <subject>Ascensore</subject>
         <method>itemSpeak</method>
-        <sentence>PIANO SERVER!!!!</sentence>
+        <sentence>EBERT!!!!</sentence>
     </azione>
     <azione>
         <method>playScenarioSound</method>
@@ -52,16 +52,11 @@
     </azione>
     <azione>
         <method>loadFloor</method>
-        <floor>BUG</floor>
-    </azione>
-    <azione>
-        <subject>Bug-A</subject>
-        <method>setScenarioOnEnter</method>
-        <what>src/main/resources/scenari/piano BUG/ArrivoPianoBug.xml</what>
+        <floor>EBERT</floor>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
-        <where>Bug-A</where>
+        <where>Ebert-A</where>
     </azione>
 </scenario>

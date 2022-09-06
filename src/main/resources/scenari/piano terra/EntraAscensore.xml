@@ -32,7 +32,7 @@
     <azione>
         <subject>Ascensore</subject>
         <method>itemSpeak</method>
-        <sentence>EBERT!!!!</sentence>
+        <sentence>MIST!!!!</sentence>
     </azione>
     <azione>
         <method>playScenarioSound</method>
@@ -52,11 +52,16 @@
     </azione>
     <azione>
         <method>loadFloor</method>
-        <floor>EBERT</floor>
+        <floor>MIST</floor>
+    </azione>
+    <azione>
+        <subject>Mist-A</subject>
+        <method>setScenarioOnEnter</method>
+        <what>src/main/resources/scenari/piano MIST/ArrivoPianoMist.xml</what>
     </azione>
     <azione>
         <subject>Schwartz</subject>
         <method>teleport</method>
-        <where>Ebert-A</where>
+        <where>Mist-A</where>
     </azione>
 </scenario>

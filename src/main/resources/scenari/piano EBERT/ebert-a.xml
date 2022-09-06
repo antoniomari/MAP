@@ -18,6 +18,12 @@
             <what>src/main/resources/scenari/piano terra/Ascensore.xml</what>
         </azione>
         <azione>
+            <subject>Ebert-A</subject>
+            <method>lockEntrance</method>
+            <cardinal>north</cardinal>
+            <lock>true</lock>
+        </azione>
+        <azione>
             <subject>Ascensore</subject>
             <method>setScenarioOnEnter</method>
             <what>src/main/resources/scenari/piano EBERT/EntraAscensore.xml</what>
@@ -37,13 +43,11 @@
             <method>setEast</method>
             <what>src/main/resources/scenari/piano EBERT/ebert briciola.xml</what>
         </azione>
-        <!--
         <azione>
             <subject>Ebert-A</subject>
             <method>lockEntrance</method>
             <cardinal>east</cardinal>
             <lock>true</lock>
         </azione>
-        -->
     </scenario>
 </stanza>
