@@ -47,4 +47,82 @@
         <method>speak</method>
         <sentence>Ce l'abbiamo fatta!</sentence>
     </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Il BioALG1 è vivo!!! (*) Premio Nobel arriviamooooo!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Turing Awards!! sei nostro (*) entreremo nella storia dell'informatica. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Premio Godel, premio Knuth, premio (*) Loebner ... ma quanti soldi ci daranno!!!</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Premio Nevanlinna, Presburger Award (*) premio Roger Needham siamo ricchiiii!</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>La regina Elisabetta ci darà il (*) titolo di cavaglieri dell'informatica</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Da anni si parla di AI, ma la (*) verità è che i passi fatti prima di oggi sono </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>risultati per lo più inconcludenti, (*) quella che dovrebbe essere una macchina </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>intelligente finiva per essere (*) solo un ammasso sconfinato di memoria capace </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>di eseguire calcoli complicati in (*) tempi sempre più rapidi, ma in questi </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>processi non c'è gusto nella (*) scelta della risoluzione del calcolo, non c'è </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>stile nell'implementare strategie (*) di problem solving e quello che è ancora più </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>penoso  quando si parla di AI  </sentence>
+    </azione>
+    <!--
+
+
+
+
+
+
+           è l'inconcludenza nel riuscire a padroneggiare i sentimenti che porterebbe la scoperta
+           del secolo, la fusione perfetta tra algoritmo ed emozione. Con questo obiettivo preciso
+           abbiamo unito le forze per riuscire a codificare la funsione perfetta e rendere una macchina
+           un evoluzione del uomo.
+   -->
+
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Beh ragazzi direi che è guinto (*) il tempo di farsi due birre al pub.</sentence>
+    </azione>
 </scenario>
