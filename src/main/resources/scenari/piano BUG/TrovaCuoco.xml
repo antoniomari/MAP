@@ -73,9 +73,35 @@
             <sentence>Allora questa volta devo (*) completare il lavoro!!!</sentence>
         </azione>
         <azione>
-            <subject>Schwartz</subject>
+            <subject>JDBC-20</subject>
             <method>speak</method>
-            <sentence>È arrivato il momento di seguire i (*) consigli di quei tre strani scienziati.</sentence>
+            <sentence>Non mi fermerai (*) CHEF MUST DIE!</sentence>
+        </azione>
+        <azione>
+            <subject>JDBC-20</subject>
+            <method>move</method>
+            <x>0</x>
+            <y>12</y>
+            <how>absolute</how>
+            <finalWait>0</finalWait>
+        </azione>
+        <azione>
+            <subject>JDBC-20</subject>
+            <method>removeFromRoom</method>
+        </azione>
+        <azione>
+            <subject>Bug-C</subject>
+            <method>add</method>
+            <what>JDBC-20</what>
+            <x>17</x>
+            <y>12</y>
+        </azione>
+        <azione>
+            <subject>Bug-C</subject>
+            <method>add</method>
+            <what>Cuoco Luigi</what>
+            <x>17</x>
+            <y>9</y>
         </azione>
         <!--
         <azione>
