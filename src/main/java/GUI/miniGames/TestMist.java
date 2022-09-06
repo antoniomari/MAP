@@ -11,6 +11,7 @@ import GUI.GameKeyListener;
 import GUI.GameScreenPanel;
 import GUI.MainFrame;
 import GUI.gamestate.GameState;
+import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
 import general.xml.XmlParser;
@@ -115,7 +116,10 @@ public class TestMist extends MiniGame
         catch (IOException | FontFormatException e)
         {
             // errore nel caricamento del font
-            throw new IOError(e);
+            LogOutputManager.logOutput("Errore caricamento font TEST_MIST", LogOutputManager.EXCEPTION_COLOR);
+            // utilizza i font di default
+            throw new GameException("Errore caricamento font");
+
         }
     }
 
