@@ -13,10 +13,6 @@
             <y>22</y>
         </azione>
         <azione>
-            <method>addToInventory</method>
-            <what>Telefono</what>
-        </azione>
-        <azione>
             <subject>PT-B</subject>
             <method>setEast</method>
             <what>src/main/resources/scenari/piano terra/PT-D.xml</what>
