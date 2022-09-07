@@ -8,39 +8,54 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class RecipeRestClient
 {
-    private static final Client client = ClientBuilder.newClient();
-    private static final String url = "https://www.themealdb.com/api/json/v1/1/random.php";
-    private static final WebTarget target = client.target(url);
-    private static final Response resp = target.request(MediaType.APPLICATION_JSON).get();
-    private static final JSONTokener jt = new JSONTokener(resp.readEntity(String.class));
-    private static final JSONObject jo = new JSONObject(jt);
-    private static final JSONObject meal = (JSONObject) jo.getJSONArray("meals").get(0);
+    private static final Client CLIENT = ClientBuilder.newClient();
+    private static final String URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+    private static final WebTarget TARGET = CLIENT.target(URL);
+    private static final Response RESP = TARGET.request(MediaType.APPLICATION_JSON).get();
+    private static final int STATUS = 404; //RESP.getStatus();
+    private static final JSONTokener JT = new JSONTokener(RESP.readEntity(String.class));
+    private static final JSONObject JO = new JSONObject(JT);
+    private static final JSONObject MEAL = (JSONObject) JO.getJSONArray("meals").get(0);
     private String getNameRecipe()
     {
-        return meal.getString("strMeal");
+        if (STATUS == 200)
+            return MEAL.getString("strMeal");
+        else
+        {
+            return "NomeDiDefault";
+        }
     }
 
     private String getProcedure()
     {
-        return meal.getString("strInstructions");
+        if (STATUS == 200)
+            return MEAL.getString("strInstructions");
+        else
+        {
+            return "ProceduraDiDefault";
+        }
     }
 
     private String[] getIngredients()
     {
-        String[] ingredient = new String[10];
-
-        for (int i=0; i<10; i++)
+        if (STATUS == 200)
         {
-            ingredient[i] = (meal.getString("strIngredient"+(i+1))+ ": " + meal.getString("strMeasure" + (i+1)));
+            String[] ingredient = new String[10];
+
+            for (int i=0; i<10; i++)
+            {
+                ingredient[i] = (MEAL.getString("strIngredient"+(i+1))+ ": " + MEAL.getString("strMeasure" + (i+1)));
+            }
+            return ingredient;
         }
-        return ingredient;
+        else
+        {
+            return new String[]{"Frigo","vuoto"};
+        }
     }
 
     public static void main (String[] args){
@@ -48,6 +63,7 @@ public class RecipeRestClient
         System.out.println(recipe.getNameRecipe());
         System.out.println(recipe.getProcedure());
         System.out.println(Arrays.toString(recipe.getIngredients()));
+        System.out.println("STATUS: " + STATUS);
     }
 
 }
