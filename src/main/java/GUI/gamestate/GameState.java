@@ -8,7 +8,6 @@ import GUI.miniGames.MiniGame;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
-import events.executors.AnimationExecutor;
 import general.ActionSequence;
 import general.GameManager;
 import general.LogOutputManager;

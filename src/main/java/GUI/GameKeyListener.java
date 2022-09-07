@@ -20,9 +20,9 @@ public class GameKeyListener implements KeyListener
     /** Flag che indica se il tasto è premuto. */
     private boolean pressed;
     /** Azione da eseguire alla pressione del tasto. */
-    private final Runnable pressAction;
+    private Runnable pressAction = () -> {};
     /** Azione da eseguire al rilascio del tasto. */
-    private final Runnable releaseAction;
+    private Runnable releaseAction = () -> {};
     /** Stato in cui il gioco deve trovarsi per l'esecuzione delle azioni. */
     private final GameState.State targetState;
 
@@ -47,14 +47,10 @@ public class GameKeyListener implements KeyListener
 
         this.keyCode = keyCode;
 
-        if(pressAction == null)
-            this.pressAction = () -> {};
-        else
+        if(pressAction != null)
             this.pressAction = pressAction;
 
-        if(releaseAction == null)
-            this.releaseAction = () -> {};
-        else
+        if(releaseAction != null)
             this.releaseAction = releaseAction;
 
         this.targetState = targetState;
