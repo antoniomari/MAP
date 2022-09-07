@@ -4,40 +4,54 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Classe che rappresenta una sequenza di azioni da eseguire.
+ */
 public class ActionSequence
 {
     private final List<Runnable> actionList;
     private int index;
-    private final Mode mode;
     private final String name;
 
-    public enum Mode
+    /**
+     * Crea un'ActionSequence, specificandone il nome.
+     *
+     * @param name nome dell'ActionSequence, utilizzato
+     *             solo ai fini di stampa documentativa
+     */
+    public ActionSequence(String name)
     {
-        INSTANT, SEQUENCE
-    }
-
-
-    public ActionSequence(String name, Mode mode)
-    {
-        Objects.requireNonNull(mode);
         Objects.requireNonNull(name);
 
         this.name = name;
-        this.mode = mode;
 
         actionList = new ArrayList<>();
-        actionList.add(GameManager::continueScenario);
+        append(GameManager::continueScenario);
         index = 0;
     }
 
+
+    /**
+     * Crea uno scenario vuoto.
+     *
+     * Da utilizzare nel caso in cui si debba costruire uno scenario
+     * che non fa nulla.
+     *
+     * Nota: non creare uno scenario senza aggiungere azioni: TODO: aggiungere eccezione
+     */
     public static ActionSequence voidScenario()
     {
-        ActionSequence voidScenario = new ActionSequence("Scenario vuoto", Mode.SEQUENCE);
+        ActionSequence voidScenario = new ActionSequence("Scenario vuoto");
         voidScenario.append(GameManager::continueScenario);
 
         return voidScenario;
     }
 
+    /**
+     * Restituisce il numero di azioni che compongono this
+     *
+     * @return numero di azioni che compongono this
+     */
     public int length()
     {
        return actionList.size();
@@ -47,37 +61,46 @@ public class ActionSequence
     @Override
     public String toString()
     {
-        return "[== " + name + " (" + mode + ") ==]";
+        return "[== " + name + " ==]";
     }
 
-    public Mode getMode()
-    {
-        return mode;
-    }
-
+    /**
+     * Aggiungi un'azione in coda.
+     *
+     * @param action azione da aggiungere
+     */
     public void append(Runnable action)
     {
         actionList.add(action);
     }
 
+    /**
+     * Esegue la prima azione non ancora eseguita.
+     *
+     * Il metodo è utilizzato da {@link GameManager}.
+     */
     void runAction()
     {
         if(!isConcluded())
             actionList.get(index++).run();
     }
 
+    /**
+     * Riporta lo scenario all'inizio.
+     *
+     * Il metodo è utilizzato da {@link GameManager}.
+     */
     void rewind()
     {
         index = 0;
     }
 
-    void runAll()
-    {
-        for(Runnable r : actionList)
-            r.run();
-    }
-
-    public boolean isConcluded()
+    /**
+     * Restituisce {@code true} se lo scenario è concluso.
+     *
+     * @return {@code true} se lo scenario è concluso, {@code false} altrimenti.
+     */
+    boolean isConcluded()
     {
         return index == actionList.size();
     }

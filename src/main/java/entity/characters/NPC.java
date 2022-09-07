@@ -50,7 +50,7 @@ public class NPC extends GameCharacter
             if(sentence != null)
             {
                 // TODO: aggiustare replica codice
-                speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
+                speakScenario = new ActionSequence("Parla");
                 speakScenario.append(() -> speak(sentence));
             }
         }
@@ -69,7 +69,7 @@ public class NPC extends GameCharacter
         }
         else if(speakSentenceMap.containsKey(state))
         {
-            this.speakScenario = new ActionSequence("Parla", ActionSequence.Mode.SEQUENCE);
+            this.speakScenario = new ActionSequence("Parla");
             speakScenario.append(() -> this.speak(speakSentenceMap.get(state)));
             GameManager.startScenario(speakScenario);
         }

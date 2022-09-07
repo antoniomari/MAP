@@ -50,8 +50,7 @@ public class DoorLike extends Item implements Openable
 
         // crea scenario di apertura
         //crea scenario sequenziale animazione apertura + scenario effetto
-        successOpenScenario = new ActionSequence("apertura + effetto",
-                ActionSequence.Mode.SEQUENCE);
+        successOpenScenario = new ActionSequence("apertura + effetto");
         successOpenScenario.append(
                 () ->
                 {
@@ -65,7 +64,7 @@ public class DoorLike extends Item implements Openable
                     GameManager.continueScenario();
                 });
 
-        closeScenario = new ActionSequence("chiusura + effetto", ActionSequence.Mode.SEQUENCE);
+        closeScenario = new ActionSequence("chiusura + effetto");
         closeScenario.append(
                 () ->
                 {

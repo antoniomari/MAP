@@ -90,8 +90,7 @@ public class GameState
         if (adjacent != null)
         {
             GameState.changeState(State.MOVING);
-            ActionSequence scenario = new ActionSequence("vai a " + cardinal.toString(),
-                                                        ActionSequence.Mode.SEQUENCE);
+            ActionSequence scenario = new ActionSequence("vai a " + cardinal.toString());
 
             BlockPosition entrancePos = currentRoom.getFloor()
                     .getNearestPlacement(

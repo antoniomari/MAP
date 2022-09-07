@@ -38,7 +38,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.zip.ZipEntry;
 
 public class XmlParser
 {
@@ -125,7 +124,7 @@ public class XmlParser
         // ottieni lista di azioni
         List<Element> actionList = XmlParser.getTagsList(roomInitScenarioElement, "azione");
 
-        ActionSequence scenarioSequence = new ActionSequence("Caricamento stanza db", ActionSequence.Mode.INSTANT);
+        ActionSequence scenarioSequence = new ActionSequence("Caricamento stanza db");
 
         Set<String> affectedMethodNames = new HashSet<>(4);
         affectedMethodNames.add("setNorth");
@@ -245,7 +244,7 @@ public class XmlParser
     static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
     {
         // TODO: abolire mode scenari
-        ActionSequence scenarioSequence = new ActionSequence(scenarioName, ActionSequence.Mode.SEQUENCE);
+        ActionSequence scenarioSequence = new ActionSequence(scenarioName);
 
         // ottieni lista di azioni
         List<Element> actionList = XmlParser.getTagsList(scenarioElement, "azione");
@@ -861,7 +860,7 @@ public class XmlParser
 
             RecipeRestClient.Recipe cocktailRecipe = RecipeRestClient.generateRecipe();
 
-            ActionSequence describeScenario = new ActionSequence("descrizione cocktail", ActionSequence.Mode.SEQUENCE);
+            ActionSequence describeScenario = new ActionSequence("descrizione cocktail");
             describeScenario.append(() -> speakingChar.speak("For " + cocktailRecipe.getCategory() + " cocktail:"));
 
             for(String ingredient : cocktailRecipe.getIngredients())

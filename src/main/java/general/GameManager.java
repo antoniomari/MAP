@@ -62,6 +62,14 @@ public class GameManager
         return rooms.keySet();
     }
 
+    /**
+     * Inizia l'esecuzione di uno scenario, eseguendo la sua prima azione.
+     *
+     * Se lo scenario si era già concluso (cioè sta venendo riutilizzato),
+     * allora viene ri-iniziato.
+     *
+     * @param scenario scenario da eseguire
+     */
     public static synchronized void startScenario(ActionSequence scenario)
     {
         scenarioStack.push(scenario);
@@ -72,19 +80,18 @@ public class GameManager
         if(scenario.isConcluded())
             scenario.rewind();
 
-        if(scenario.getMode() == ActionSequence.Mode.SEQUENCE)
-        {
-            scenario.runAction();
-        }
-        else
-        {
-            scenario.runAll();
-            scenarioStack.remove(scenario);
 
-            LogOutputManager.logOutput("Stack scenari: " + scenarioStack, LogOutputManager.SCENARIO_STACK_COLOR);
-        }
+        scenario.runAction();
     }
 
+    /**
+     * Continua l'esecuzione dell'ultimo scenario
+     * presente nella pila {@link GameManager#scenarioStack}.
+     *
+     * Se questo è ora finito, lo rimuove e riesegue l'operazione
+     * sul nuovo top, procedendo finché lo {@link GameManager#scenarioStack}
+     * non è vuoto
+     */
     public static synchronized void continueScenario()
     {
         if(scenarioStack.isEmpty())
@@ -94,8 +101,6 @@ public class GameManager
         }
 
         ActionSequence top = scenarioStack.peek();
-        if(top.getMode() == ActionSequence.Mode.SEQUENCE)
-        {
             if(top.isConcluded())
             {
                 scenarioStack.remove(top);
@@ -107,7 +112,6 @@ public class GameManager
             }
             else
                 top.runAction();
-        }
     }
 
     public static GamePiece getPiece(String name)

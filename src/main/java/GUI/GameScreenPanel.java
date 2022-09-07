@@ -479,7 +479,7 @@ public class GameScreenPanel extends JLayeredPane
         {
             BlockPosition pos1 = initialPos;
 
-            ActionSequence moveScenario = new ActionSequence("movimento", ActionSequence.Mode.SEQUENCE);
+            ActionSequence moveScenario = new ActionSequence("movimento");
             for(BlockPosition pos2 : positions)
             {
                 MovingAnimation animation = createMoveAnimation(piece, pos1, pos2, millisecondWaitEnd);
