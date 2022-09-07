@@ -38,7 +38,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>e di qua e di la trullalle trullalla (*) e fai questo e fai quello... in vacanza </sentence>
+        <sentence>e di qua e di là trullallè trullallà (*) e fai questo e fai quello... in vacanza </sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
@@ -128,7 +128,7 @@
     <azione>
         <subject>Tecnico</subject>
         <method>speak</method>
-        <sentence>L'ascensore è bloccato! sul (*) pannello di controllo c'è una strana scritta</sentence>
+        <sentence>L'ascensore è bloccato! Sul (*) pannello di controllo c'è una strana scritta</sentence>
     </azione>
     <azione>
         <subject>Tecnico</subject>
