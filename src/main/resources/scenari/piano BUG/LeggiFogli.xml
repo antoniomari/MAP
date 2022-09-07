@@ -4,11 +4,6 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>LEGGO</sentence>
-    </azione>
-    <azione>
-        <subject>Schwartz</subject>
-        <method>speak</method>
         <sentence>"Quello in cui ti trovi è uno (*) straaaano piano"</sentence>
     </azione>
     <azione>

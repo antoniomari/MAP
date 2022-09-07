@@ -146,7 +146,7 @@
     </oggetto>
     <oggetto nome="MacchinaCaffe">
         <classe>Item</classe>
-        <descrizione>Una macchina da caffè espresso. Sembra manchi l'acqua.</descrizione>
+        <descrizione>Una macchina da caffè espresso. (*) Sembra manchi l'acqua.</descrizione>
         <canUse>false</canUse>
     </oggetto>
     <oggetto nome="Tazzina">

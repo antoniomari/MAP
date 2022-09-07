@@ -165,7 +165,8 @@ public class XmlLoader
 
         String name = XmlParser.getXmlAttribute(itemElement, "nome");
         String className = XmlParser.getTagValue(itemElement, "classe");
-        String description = XmlParser.getTagValue(itemElement, "descrizione");
+        String description = XmlParser.getTagValue(itemElement, "descrizione")
+                .trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
         boolean canUse = Boolean.parseBoolean(XmlParser.getTagValue(itemElement, "canUse"));
 
         // TODO: caricare l'opportuna classe IMPORTANTEEEEE!"!!!!!!1
