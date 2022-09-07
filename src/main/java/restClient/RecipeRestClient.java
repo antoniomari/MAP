@@ -19,7 +19,7 @@ public class RecipeRestClient
 
     private static final String[] DEFAULT_INGREDIENTS = {"Onion: 10 cloves",
                                                         "Garlic: 40 cloves",
-                                                        "Basil: ",
+                                                        "Basil: 25 leaves",
                                                         "Parsley: a piacere",
                                                         "Cheese: too much",
                                                         "Tomato sauce 20 cups"};
