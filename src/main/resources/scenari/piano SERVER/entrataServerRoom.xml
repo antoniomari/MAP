@@ -131,4 +131,19 @@
         <method>speak</method>
         <sentence>CI VA DI MEZZO LA TUA STESSA VITA!</sentence>
     </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>setState</method>
+        <state>primaSpegniServer</state>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>setState</method>
+        <state>primaSpegniServer</state>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>setState</method>
+        <state>primaSpegniServer</state>
+    </azione>
 </scenario>

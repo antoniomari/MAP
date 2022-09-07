@@ -114,7 +114,7 @@
     <azione>
         <subject>JDBC-20</subject>
         <method>setState</method>
-        <state>stordito</state>
+        <state>storditoPrimaVolta</state>
     </azione>
     <azione>
         <method>playScenarioSound</method>

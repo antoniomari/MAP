@@ -12,9 +12,14 @@ public class FontManager
     private final static String MIST_TITLE_PATH = "src/main/resources/font/FontMaledetto.ttf";
     private final static String MIST_DESCRIPTION_PATH = "src/main/resources/font/Bookman Old Style Regular.ttf";
 
+    private final static String LOGIC_DESCRIPTION_PATH = "src/main/resources/font/FbiOld.ttf";
+    private final static String CAPTCHA_DESCRIPTION_PATH = "src/main/resources/font/AgencyFb.TTF";
+
     public static Font MIST_QUESTION_FONT;
     public static Font MIST_TITLE_FONT;
     public static Font MIST_DESCRIPTION_FONT;
+    public static Font LOGIC_DESCRIPTION_FONT;
+    public static Font CAPTCHA_DESCRIPTION_FONT;
 
     public static void loadFonts()
     {
@@ -22,43 +27,22 @@ public class FontManager
         try
         {
             MIST_QUESTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(MIST_QUESTION_PATH));
-
-        } catch (IOException | FontFormatException e)
-        {
-            // errore nel caricamento del font
-            LogOutputManager.logOutput("Errore caricamento font TEST_MIST", LogOutputManager.EXCEPTION_COLOR);
-            LogOutputManager.logOutput("Causato da: " + e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
-            LogOutputManager.logOutput("Dettagli: " + e.getLocalizedMessage(), LogOutputManager.EXCEPTION_COLOR);
-
-            // utilizza i font di default
-            throw new GameException("Errore caricamento font " + MIST_QUESTION_PATH);
-
-        }
-
-        // Caricamento Font
-        try
-        {
+            LogOutputManager.logOutput("[FONT] Caricato MIST_QUESTION");
             MIST_TITLE_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(MIST_TITLE_PATH));
-        } catch (IOException | FontFormatException e)
-        {
-            // errore nel caricamento del font
-            LogOutputManager.logOutput("Errore caricamento font TEST_MIST", LogOutputManager.EXCEPTION_COLOR);
-            LogOutputManager.logOutput("Causato da: " + e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
-            LogOutputManager.logOutput("Dettagli: " + e.getLocalizedMessage(), LogOutputManager.EXCEPTION_COLOR);
-
-            // utilizza i font di default
-            throw new GameException("Errore caricamento font " + MIST_QUESTION_PATH);
-
-        }
-
-        // Caricamento Font
-        try
-        {
+            LogOutputManager.logOutput("[FONT] Caricato MIST_TITLE");
             MIST_DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(MIST_DESCRIPTION_PATH));
+            LogOutputManager.logOutput("[FONT] Caricato MIST_DESCRIPTION");
+
+            LOGIC_DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(LOGIC_DESCRIPTION_PATH));
+            LogOutputManager.logOutput("[FONT] Caricato LOGIC_DESCRIPTION");
+
+            CAPTCHA_DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(CAPTCHA_DESCRIPTION_PATH));
+            LogOutputManager.logOutput("[FONT] Caricato CAPTCHA_DESCRIPTION");
+
         } catch (IOException | FontFormatException e)
         {
             // errore nel caricamento del font
-            LogOutputManager.logOutput("Errore caricamento font TEST_MIST", LogOutputManager.EXCEPTION_COLOR);
+            LogOutputManager.logOutput("Errore caricamento font", LogOutputManager.EXCEPTION_COLOR);
             LogOutputManager.logOutput("Causato da: " + e.getMessage(), LogOutputManager.EXCEPTION_COLOR);
             LogOutputManager.logOutput("Dettagli: " + e.getLocalizedMessage(), LogOutputManager.EXCEPTION_COLOR);
 

@@ -1,6 +1,7 @@
 package GUI.miniGames;
 
 import GUI.gamestate.GameState;
+import general.FontManager;
 import general.GameManager;
 import general.LogOutputManager;
 import general.Util;
@@ -19,7 +20,7 @@ import java.util.Set;
  */
 public class Captcha extends MiniGame
 {
-    private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
+    private static final Font FONT = FontManager.CAPTCHA_DESCRIPTION_FONT.deriveFont((float) 40);
     private static final String WIN = "Captcha risolto sei umano!";
     private static final String LOSE = "Accesso negato ai Robot del laboratorio!";
 
@@ -91,7 +92,7 @@ public class Captcha extends MiniGame
 
 
         // creazione e caricamento del coppie del dizionario e settagio dell'imagine del captcha
-        captchaMatch = initMacth();
+        captchaMatch = initMatch();
         setIcon(captchaMatch.keySet());
 
 
@@ -145,7 +146,7 @@ public class Captcha extends MiniGame
         System.out.println(image.getIcon().toString());
     }
 
-    private static Map<String, String> initMacth()
+    private static Map<String, String> initMatch()
     {
         Map<String, String> solution = new HashMap<>();
 

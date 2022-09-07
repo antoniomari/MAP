@@ -3,6 +3,7 @@ package GUI.miniGames;
 // TODO: possibilità di implementare il factory design pattern
 
 import GUI.gamestate.GameState;
+import general.FontManager;
 import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
@@ -23,16 +24,11 @@ import java.util.Map;
 public class LogicQuest extends MiniGame
 {
 
-    //TODO: modificare size
-   // private static final Font FONT = new Font("Agency FB", Font.BOLD , 40);
-    public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/FbiOld.ttf";
-    private static Font FB_FONT;
+    private static final String[] QUEST_1_BUTTONS_TEXT = {"1", "2", "5", "7"};
+    private static final String[] QUEST_2_BUTTONS_TEXT = {"3, 2, 1", "5, 4, 8", "3, 2, 5", "3, 6, 1"};
+    private static final String[] QUEST_3_BUTTONS_TEXT = {"31", "22", "12", "8"};
 
-    private static String[] QUEST_1_BUTTONS_TEXT = {"1", "2", "5", "7"};
-    private static String[] QUEST_2_BUTTONS_TEXT = {"3, 2, 1", "5, 4, 8", "3, 2, 5", "3, 6, 1"};
-    private static String[] QUEST_3_BUTTONS_TEXT = {"31", "22", "12", "8"};
-
-    private static Map<Integer, Character> numberTypeMap;
+    private static final Map<Integer, Character> numberTypeMap;
 
    // private final JPanel this;
 
@@ -61,17 +57,6 @@ public class LogicQuest extends MiniGame
         numberTypeMap.put(1, 'A');
         numberTypeMap.put(2, 'B');
         numberTypeMap.put(3, 'C');
-
-        // Caricamento Font
-        try
-        {
-            FB_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(DESCRIPTION_FONT_PATH));
-        }
-        catch (IOException | FontFormatException e)
-        {
-            // errore nel caricamento del font
-            throw new IOError(e);
-        }
 
     }
 
@@ -106,7 +91,7 @@ public class LogicQuest extends MiniGame
         description.setForeground(Color.RED);
         description.setBackground(Color.BLUE);
         // description.setFont(FONT);
-        description.setFont(FB_FONT.deriveFont((float)(getPreferredSize().getWidth() / 10)));
+        description.setFont(FontManager.LOGIC_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 10)));
         image.setBackground(Color.BLUE);
         imagePanel.add(image);
         imagePanel.setToolTipText("Risolvi l'equazione");
@@ -118,7 +103,7 @@ public class LogicQuest extends MiniGame
             button.setBackground(Color.BLUE);
             button.setForeground(Color.RED);
             //  button.setFont(FONT);
-            button.setFont(FB_FONT.deriveFont((float)(getPreferredSize().getWidth() / 15)));
+            button.setFont(FontManager.LOGIC_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 15)));
             button.setToolTipText("Click sinistro per rispondere");
             optionPanel.add(button);
         };
@@ -138,33 +123,6 @@ public class LogicQuest extends MiniGame
         setMainPanel(mainWrapper);
 
 
-        /*
-
-        if(questNumber == 1)
-        {
-            quest = new LogicQuest(questNumber, "Primo Circuito settato correttamente.",
-                    "Ops! Hai fuso il circuito.");
-            quest.initButtons(QUEST_1_BUTTONS_TEXT);
-            quest.setIcon("src/main/resources/img/ImageMiniGames/geometryEquation.png");
-
-        }
-        else if(number == 2)
-        {
-            quest = new LogicQuest(questNumber, "Secondo Circuito settato correttamente.",
-                    "Ops! Hai fuso il circuito.");
-            quest.initButtons(QUEST_2_BUTTONS_TEXT);
-            quest.setIcon("src/main/resources/img/ImageMiniGames/sweetEquation.png");
-
-        }
-        else // number = 3
-        {
-            quest = new LogicQuest(number, "Complimenti hai settato tutti i circuiti logici!",
-                    "Peccato c'eri quasi, ma hai fuso il circuito.");
-            quest.initButtons(QUEST_3_BUTTONS_TEXT);
-            quest.setIcon("src/main/resources/img/ImageMiniGames/fruitEquation.png");
-        }
-
-         */
         setupListener();
         // TODO: modificare size
         imagePanel.setBackground(Color.BLUE);
@@ -258,7 +216,6 @@ public class LogicQuest extends MiniGame
                 else
                     showResult(lost);
             });
-
     }
 
 }

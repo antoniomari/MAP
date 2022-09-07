@@ -8,6 +8,7 @@
             <sentence state="fineConferenza">Quel Robot si compo-mente strana-rta</sentence>
             <sentence state="prontoPerRegistratore">Portami il registratore.</sentence>
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiMist.xml</scenario>
+            <sentence state="primaSpegniServer">Attenzione allo spegni-lina (*) della centra-mento!</sentence>
             <sentence state="endGame">Finalmente si beve! (*) Però la Raffo fa schifo...</sentence>
         </speakScenarios>
     </personaggio>
@@ -19,6 +20,7 @@
             <scenario state="inizioConferenza">src/main/resources/scenari/piano terra/inizioConferenza.xml</scenario>
             <sentence state="fineConferenza">Conferenza breve ma intensa!</sentence>
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiEbert.xml</scenario>
+            <sentence state="primaSpegniServer">La decisione definitiva (*) sta solo a te!</sentence>
             <sentence state="endGame">Io ci sono sempre per (*) una bella birra sudata!</sentence>
         </speakScenarios>
     </personaggio>
@@ -31,6 +33,7 @@
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiAlu.xml</scenario>
             <sentence state="aspettaCaffe">Portami il malede....tto (*) caf......fè!</sentence>
             <sentence state="dopoCaffe">Adesso sono sveglio!</sentence>
+            <sentence state="primaSpegniServer">Non spegne....re, la tua (*) vita è in perico....loooo !</sentence>
             <sentence state="endGame">Ragazzi tranquilli! (*) Offro da bere per tutti!!!</sentence>
         </speakScenarios>
     </personaggio>
@@ -74,6 +77,7 @@
         <speakScenarios>
             <sentence state="hackerato">...01110101000110110101011...</sentence>
             <sentence state="prontoPerRegistratore">..0101001010101010110..</sentence>
+            <sentence state="storditoPrimaVolta">..0101001010101010110..</sentence>
             <sentence state="stordito">...00101020010 ... (*) Ops c'è un 2! ...</sentence>
             <sentence state="completato">... [SYSTEM:null] ...</sentence>
         </speakScenarios>

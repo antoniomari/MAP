@@ -37,6 +37,11 @@ public class LogOutputManager
         logFileStream.println(text);
     }
 
+    public static void logOutput(String text)
+    {
+        logFileStream.println(text);
+    }
+
     public static void closeLogFile()
     {
         errFileStream.close();
