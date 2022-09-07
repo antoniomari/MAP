@@ -42,6 +42,12 @@ import java.util.Set;
 public class XmlParser
 {
 
+    /**
+     * Costruisce un'ActionSequence risultata dal parsing di un file ".xml"
+     *
+     * @param scenarioPath path del file ".xml"
+     * @return ActionSequence corrispondente al contenuto del file ".xml"
+     */
     public static ActionSequence loadScenario(String scenarioPath)
     {
         Objects.requireNonNull(scenarioPath);
@@ -53,6 +59,16 @@ public class XmlParser
         return parseScenario(scenarioPath, document.getDocumentElement());
     }
 
+    /**
+     * Restituisce il valore testuale di un tag dell'elemento (xml) passato.
+     *
+     * @param xmlElement elemento (xml) di cui ricercare il valore del tag
+     * @param tagName nome del tag
+     *
+     * @return valore testuale del tag {@code tagName} nell'elemento {@code xmlElement}
+     * @throws GameException se {@code tagName} non è presente in {@code xmlElement},
+     * oppure se è duplicato.
+     */
     static String getTagValue(Element xmlElement, String tagName)
     {
         Optional<String> value = getOptionalTagValue(xmlElement, tagName);
@@ -63,6 +79,17 @@ public class XmlParser
             return value.get();
     }
 
+    /**
+     * Restituisce un Optional che contiene il valore testuale di un tag, eventualmente
+     * presente nell'elemento (xml) passato.
+     *
+     * @param xmlElement elemento (xml) di cui ricercare il valore del tag
+     * @param tagName nome del tag
+     *
+     * @return Optional che contiene il valore testuale del tag {@code tagName}, eventualmente
+     * presente in {@code xmlElement}
+     * @throws GameException se {@code tagName} è duplicato in {@code xmlElement}
+     */
     static Optional<String> getOptionalTagValue(Element xmlElement, String tagName)
     {
         NodeList elements = xmlElement.getElementsByTagName(tagName);
@@ -76,19 +103,17 @@ public class XmlParser
             return Optional.of(elements.item(0).getTextContent());
     }
 
-
-    static List<Element> getTagsList(Document xmlDocument, String tagName)
-    {
-        NodeList nodes = xmlDocument.getElementsByTagName(tagName);
-
-        List<Element> elementList = new ArrayList<>(nodes.getLength());
-
-        for(int i = 0; i < nodes.getLength(); i++)
-            elementList.add((Element) nodes.item(i));
-
-        return elementList;
-    }
-
+    /**
+     * Restituisce una lista (eventualmente vuota) contenente gli elementi xml
+     * col tag {@code tagName} presenti all'interno dell'elemento (xml) specificato.
+     *
+     * @param xmlElement elemento xml all'interno del quale cercare gli elementi
+     *                   col tag {@code tagName}
+     * @param tagName nome del tag
+     *
+     * @return una lista contenente gli elementi xml col tag {@code tagName}
+     * presenti all'interno dell'elemento (xml) specificato.
+     */
     static List<Element> getTagsList(Element xmlElement, String tagName)
     {
         NodeList nodes = xmlElement.getElementsByTagName(tagName);

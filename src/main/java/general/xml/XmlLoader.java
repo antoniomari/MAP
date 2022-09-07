@@ -13,11 +13,7 @@ import general.LogOutputManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import java.io.SequenceInputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,8 +29,8 @@ public class XmlLoader
     {
         pieceElementMap = new HashMap<>();
 
-        Document characterXml = XmlParser.openXml(CHARACTER_XML_PATH);
-        Document itemXml = XmlParser.openXml(ITEM_XML_PATH);
+        Element characterXml = XmlParser.openXml(CHARACTER_XML_PATH).getDocumentElement();
+        Element itemXml = XmlParser.openXml(ITEM_XML_PATH).getDocumentElement();
 
 
         List<Element> characterElementList = XmlParser.getTagsList(characterXml, "personaggio");
@@ -296,41 +292,6 @@ public class XmlLoader
                     targetInitState.orElse("init"),
                     targetFinalState.orElse("init"));
 
-            /*
-            Optional<String> methodName = XmlParser.getOptionalTagValue(onUseWithElement, "method");
-            if(methodName.isPresent())
-            {
-                Method method;
-                GamePiece target;
-                try
-                {
-                    target = GameManager.getPiece(targetName);
-                    method = target.getClass().getMethod(methodName.get());
-                }
-                catch(NoSuchMethodException e)
-                {
-                    throw new GameException("metodo non trovato");
-                }
-
-                // TODO: generalizzare
-                ActionSequence useWithScenario = new ActionSequence("useWithScenario", ActionSequence.Mode.INSTANT);
-                useWithScenario.append(() ->
-                {
-                    try
-                    {
-                        method.invoke(target);
-                    } catch (IllegalAccessException | InvocationTargetException e)
-                    {
-                        e.printStackTrace();
-                    }
-                });
-
-                ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
-            }
-            else
-            {
-
-             */
             String scenarioPath = XmlParser.getTagValue(onUseWithElement, "scenario");
             ActionSequence useWithScenario = XmlParser.loadScenario(scenarioPath);
 
