@@ -90,6 +90,11 @@
     </personaggio>
     <personaggio nome="Briciola">
         <spritesheet>/img/personaggi/Briciola.png</spritesheet>
+        <speakScenarios>
+            <scenario state="init">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
+            <scenario state="fatto">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
+            <scenario state="fatto">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="MA-D">
         <spritesheet>/img/personaggi/MA-D.png</spritesheet>
