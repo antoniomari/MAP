@@ -65,10 +65,11 @@ public class GameState
     {
         mainFrame = frame;
 
-        GameKeyListener escListener = new GameKeyListener(
+        mainFrame.addKeyListener(new GameKeyListener(
                 KeyEvent.VK_ESCAPE,
-                () -> mainFrame.showMenu(!mainFrame.isMenuDisplaying()), null);
-        mainFrame.addKeyListener(escListener);
+                () -> mainFrame.showMenu(!mainFrame.isMenuDisplaying()),
+                null,
+                State.PLAYING));
 
         initGameListeners();
     }
@@ -106,10 +107,7 @@ public class GameState
             }
 
             else
-                scenario.append(() ->
-                {
-                    mainFrame.setCurrentRoom(adjacent);
-                });
+                scenario.append(() -> mainFrame.setCurrentRoom(adjacent));
 
             GameManager.startScenario(scenario);
         }
@@ -146,7 +144,6 @@ public class GameState
         mainFrame.addKeyListener(closeBarListener);
 
 
-        // aggiungi esclistener
         GameKeyListener quitTestListener = new GameKeyListener(KeyEvent.VK_ESCAPE, MiniGame::quitCurrentTest,
                 null, State.TEST);
         mainFrame.addKeyListener(quitTestListener);
