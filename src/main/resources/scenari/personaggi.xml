@@ -8,7 +8,7 @@
             <sentence state="fineConferenza">Quel Robot si compo-mente strana-rta</sentence>
             <sentence state="prontoPerRegistratore">Portami il registratore.</sentence>
             <scenario state="sintesiQuest">src/main/resources/scenari/piano terra/sintesiMist.xml</scenario>
-            <sentence state="endGame">Finalmente di beve! (*) Però la Raffo fa schifo...</sentence>
+            <sentence state="endGame">Finalmente si beve! (*) Però la Raffo fa schifo...</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Antonio">

@@ -34,7 +34,7 @@
     <azione>
         <subject>Schwartz</subject>
         <method>speak</method>
-        <sentence>Devo dire che la logica dei sui (*) circuiti è abbastanza elementare </sentence>
+        <sentence>Devo dire che la logica dei (*) circuiti è abbastanza elementare </sentence>
     </azione>
     <azione>
         <subject>Schwartz</subject>
@@ -54,7 +54,7 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Vecchio pazzo!!! pensa di essere (*) il migliore solo perchè insignito </sentence>
+        <sentence>Vecchio pazzo!!! Pensa di essere (*) il migliore solo perché insignito </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
