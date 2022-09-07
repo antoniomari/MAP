@@ -9,17 +9,22 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.List;
 
 public class RecipeRestClient
 {
     private static final Client CLIENT = ClientBuilder.newClient();
     private static final String URL = "https://www.themealdb.com/api/json/v1/1/random.php";
     private static final WebTarget TARGET = CLIENT.target(URL);
-    private static final Response RESP = TARGET.request(MediaType.APPLICATION_JSON).get();
-    private static final int STATUS = 404; //RESP.getStatus();
-    private static final JSONTokener JT = new JSONTokener(RESP.readEntity(String.class));
-    private static final JSONObject JO = new JSONObject(JT);
-    private static final JSONObject MEAL = (JSONObject) JO.getJSONArray("meals").get(0);
+
+    private static final String[] DEFAULT_INGREDIENTS = {"Onion: 10 cloves",
+                                                        "Garlic: 40 cloves",
+                                                        "Basil: ",
+                                                        "Parsley: a piacere",
+                                                        "Cheese: too much",
+                                                        "Tomato sauce 20 cups"};
+
+    /*
     private String getNameRecipe()
     {
         if (STATUS == 200)
@@ -40,13 +45,27 @@ public class RecipeRestClient
         }
     }
 
-    private String[] getIngredients()
+     */
+
+    private static void generateRecipe()
+    {
+        final Response resp = TARGET.request(MediaType.APPLICATION_JSON).get();
+        final int status = resp.getStatus();
+        JSONTokener jt = new JSONTokener(resp.readEntity(String.class));
+
+        JSONObject mealJson = (JSONObject) new JSONObject(jt).getJSONArray("meals").get(0);
+
+        System.out.println(mealJson);
+    }
+
+
+    private List<String> getIngredients()
     {
         if (STATUS == 200)
         {
             String[] ingredient = new String[10];
 
-            for (int i=0; i<10; i++)
+            for (int i=0; i < Math.min(10, MEAL.length()); i++)
             {
                 ingredient[i] = (MEAL.getString("strIngredient"+(i+1))+ ": " + MEAL.getString("strMeasure" + (i+1)));
             }
@@ -58,12 +77,18 @@ public class RecipeRestClient
         }
     }
 
-    public static void main (String[] args){
+    public static void main (String[] args)
+    {
+
+        generateRecipe();
+        /*
         RecipeRestClient recipe = new RecipeRestClient();
         System.out.println(recipe.getNameRecipe());
         System.out.println(recipe.getProcedure());
         System.out.println(Arrays.toString(recipe.getIngredients()));
         System.out.println("STATUS: " + STATUS);
+
+         */
     }
 
 }
