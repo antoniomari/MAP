@@ -6,7 +6,9 @@ import database.DBManager;
 import entity.characters.PlayingCharacter;
 import events.executors.Executor;
 import general.ActionSequence;
+import general.FontManager;
 import general.GameManager;
+import general.LogOutputManager;
 import general.xml.XmlLoader;
 import graphics.SpriteManager;
 import entity.rooms.Room;
@@ -453,7 +455,7 @@ public class MainFrame extends JFrame {
                 impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
 
         JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
-                "/img/Menu iniziale/esci pressed.png", () -> System.exit(0));
+                "/img/Menu iniziale/esci pressed.png", this::exit);
         esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
                 esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
 
@@ -509,7 +511,7 @@ public class MainFrame extends JFrame {
 
 
         JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
-                "/img/Menu iniziale/esci pressed.png", () -> System.exit(0));
+                "/img/Menu iniziale/esci pressed.png", this::exit);
         esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
                     esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
 
@@ -627,6 +629,12 @@ public class MainFrame extends JFrame {
         DBManager.save();
     }
 
+    private void exit()
+    {
+        LogOutputManager.closeLogFile();
+        System.exit(0);
+    }
+
     private void loadSavings()
     {
         DBManager.loadGameData();
@@ -692,6 +700,7 @@ public class MainFrame extends JFrame {
         String initialRoomPath = "src/main/resources/scenari/piano terra/PT-B.xml";
 
         DBManager.createGameDB();
+        FontManager.loadFonts();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame(initialRoomPath).setVisible(true));

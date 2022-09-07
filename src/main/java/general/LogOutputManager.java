@@ -1,5 +1,8 @@
 package general;
 
+import java.io.*;
+import java.nio.BufferOverflowException;
+
 public class LogOutputManager
 {
     public static final String EVENT_COLOR = "\u001B[33m";
@@ -9,8 +12,34 @@ public class LogOutputManager
     public static final String XML_COLOR = "\u001B[36m";
     private static final String RESET_COLOR = "\u001B[0m";
 
+    private static final PrintWriter logFileStream;
+    private static final PrintStream errFileStream;
+
+    static
+    {
+        // reindirizza il system.err
+
+        try
+        {
+            File logFile = new File("./log.txt");
+            logFileStream = new PrintWriter(new FileWriter(logFile));
+            errFileStream = new PrintStream(new FileOutputStream(logFile));
+            System.setErr(errFileStream);
+        }
+        catch (IOException e)
+        {
+            throw new GameException("Errore nella creazione file di log");
+        }
+    }
+
     public static void logOutput(String text, String color)
     {
-        System.out.println(color + text + RESET_COLOR);
+        logFileStream.println(text);
+    }
+
+    public static void closeLogFile()
+    {
+        errFileStream.close();
+        logFileStream.close();
     }
 }

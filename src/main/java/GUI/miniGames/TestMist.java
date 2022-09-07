@@ -11,6 +11,7 @@ import GUI.GameKeyListener;
 import GUI.GameScreenPanel;
 import GUI.MainFrame;
 import GUI.gamestate.GameState;
+import general.FontManager;
 import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
@@ -53,12 +54,6 @@ public class TestMist extends MiniGame
     private final JCheckBox[] answerS = new JCheckBox[ANSWERS];
     private final JCheckBox[] answerN = new JCheckBox[ANSWERS];
 
-    public final static String QUESTION_FONT_PATH = "src/main/resources/font/AmericanTypewriter.ttf";
-    public final static String TITLE_FONT_PATH = "src/main/resources/font/FontMaledetto.ttf";
-    public final static String DESCRIPTION_FONT_PATH = "src/main/resources/font/Bookman Old Style Regular.ttf";
-    private static Font ORIGINAL_QUESTION_FONT;
-    private static Font ORIGINAL_TITLE_FONT;
-    private static Font ORIGINAL_DESCRIPTION_FONT;
 
     private Font QUESTION_FONT;
     private Font TITLE_FONT;
@@ -104,25 +99,6 @@ public class TestMist extends MiniGame
     private static final String ERROR = "ERRORE:  " +
             "controlla di aver dato una ed una sola risposta per ogni domanda.";
 
-    static
-    {
-        // Caricamento Font
-        try
-        {
-            ORIGINAL_QUESTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(QUESTION_FONT_PATH));
-            ORIGINAL_DESCRIPTION_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(DESCRIPTION_FONT_PATH));
-            ORIGINAL_TITLE_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(TITLE_FONT_PATH));
-        }
-        catch (IOException | FontFormatException e)
-        {
-            // errore nel caricamento del font
-            LogOutputManager.logOutput("Errore caricamento font TEST_MIST", LogOutputManager.EXCEPTION_COLOR);
-            // utilizza i font di default
-            throw new GameException("Errore caricamento font");
-
-        }
-    }
-
 
     public TestMist()
     {
@@ -167,9 +143,9 @@ public class TestMist extends MiniGame
                 SwingConstants.CENTER);
 
         // resize font
-        QUESTION_FONT = ORIGINAL_QUESTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 40));
-        TITLE_FONT = ORIGINAL_TITLE_FONT.deriveFont((float)(getPreferredSize().getWidth() / 25));
-        DESCRIPTION_FONT = ORIGINAL_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 50));
+        QUESTION_FONT = FontManager.MIST_QUESTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 40));
+        TITLE_FONT = FontManager.MIST_TITLE_FONT.deriveFont((float)(getPreferredSize().getWidth() / 25));
+        DESCRIPTION_FONT = FontManager.MIST_DESCRIPTION_FONT.deriveFont((float)(getPreferredSize().getWidth() / 50));
 
         questPanel = new JPanel(new GridLayout(20,1));
 
