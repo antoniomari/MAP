@@ -23,8 +23,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import restClient.RecipeRestClient;
 import sound.SoundHandler;
 
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -36,6 +38,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.zip.ZipEntry;
 
 public class XmlParser
 {
@@ -372,6 +375,9 @@ public class XmlParser
                 break;
             case "removeFromInventory":
                 actionParsed = parseRemoveFromInventory(actionElement);
+                break;
+            case "describeRandomCocktail":
+                actionParsed = parseDescribeRandomCocktail(actionElement);
                 break;
             default:
                 throw new GameException("XML contiene metodo " + methodName + " non valido");
@@ -842,6 +848,26 @@ public class XmlParser
             PlayingCharacter.getPlayer().removeFromInventory(
                     (PickupableItem) GameManager.getPiece(what));
             GameManager.continueScenario();
+        };
+    }
+
+    private static Runnable parseDescribeRandomCocktail(Element eAction)
+    {
+        String subject = getTagValue(eAction, "subject");
+
+        return () ->
+        {
+            GameCharacter speakingChar = (GameCharacter) GameManager.getPiece(subject);
+
+            RecipeRestClient.Recipe cocktailRecipe = RecipeRestClient.generateRecipe();
+
+            ActionSequence describeScenario = new ActionSequence("descrizione cocktail", ActionSequence.Mode.SEQUENCE);
+            describeScenario.append(() -> speakingChar.speak("For " + cocktailRecipe.getCategory() + " cocktail:"));
+
+            for(String ingredient : cocktailRecipe.getIngredients())
+                describeScenario.append(() -> speakingChar.speak(ingredient));
+
+            GameManager.startScenario(describeScenario);
         };
     }
 

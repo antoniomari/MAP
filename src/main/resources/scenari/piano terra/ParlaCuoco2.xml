@@ -3,6 +3,11 @@
 	<mode>sequence</mode>
 	<azione>
 		<subject>Cuoco2</subject>
+		<method>describeRandomCocktail</method>
+	</azione>
+	<!--
+	<azione>
+		<subject>Cuoco2</subject>
 		<method>animate</method>
     </azione>
 	<azione>
@@ -24,4 +29,5 @@
 		<subject>Cuoco2</subject>
 		<method>animateReverse</method>
     </azione>
+    -->
 </scenario>

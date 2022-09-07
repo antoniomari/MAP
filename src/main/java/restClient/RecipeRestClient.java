@@ -3,11 +3,13 @@ package restClient;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,80 +17,95 @@ public class RecipeRestClient
 {
     private static final Client CLIENT = ClientBuilder.newClient();
     private static final String URL = "https://www.themealdb.com/api/json/v1/1/random.php";
-    private static final WebTarget TARGET = CLIENT.target(URL);
+    private static final int MAX_INGREDIENTS = 6;
 
-    private static final String[] DEFAULT_INGREDIENTS = {"Onion: 10 cloves",
-                                                        "Garlic: 40 cloves",
-                                                        "Basil: 25 leaves",
-                                                        "Parsley: a piacere",
-                                                        "Cheese: too much",
-                                                        "Tomato sauce 20 cups"};
+    private static final String[] DEFAULT_INGREDIENTS = {"Onion - 10 cloves",
+                                                        "Garlic - 40 cloves",
+                                                        "Basil - 25 leaves",
+                                                        "Parsley - a piacere",
+                                                        "Cheese - too much",
+                                                        "Tomato sauce - 20 cups"};
 
-    /*
-    private String getNameRecipe()
+    private static final String DEFAULT_CATEGORY = "Italian";
+
+    public static class Recipe
     {
-        if (STATUS == 200)
-            return MEAL.getString("strMeal");
+        String category;
+        List<String> ingredients;
+
+        Recipe(final String category, final List<String> ingredients)
+        {
+            this.category = category;
+            this.ingredients = ingredients;
+        }
+
+        public String getCategory()
+        {
+            return category;
+        }
+
+        public List<String> getIngredients()
+        {
+            return ingredients;
+        }
+    }
+
+    public static Recipe generateRecipe()
+    {
+
+        WebTarget target = CLIENT.target(URL);
+        Response resp;
+        try
+        {
+            resp = target.request(MediaType.APPLICATION_JSON).get();
+        } catch (ProcessingException e)
+        {
+            return new Recipe(DEFAULT_CATEGORY, Arrays.asList(DEFAULT_INGREDIENTS));
+        }
+
+        int status = resp.getStatus();
+
+        if (status == 200)
+        {
+
+            JSONTokener jt = new JSONTokener(resp.readEntity(String.class));
+
+            JSONObject mealJson = (JSONObject) new JSONObject(jt).getJSONArray("meals").get(0);
+
+            // prendi categoria
+            String category = mealJson.getString("strCategory");
+
+            if(category.equals(""))
+                category = DEFAULT_CATEGORY;
+
+            List<String> ingredients = getIngredients(mealJson);
+
+            return new Recipe(category, ingredients);
+        }
         else
         {
-            return "NomeDiDefault";
+            return new Recipe(DEFAULT_CATEGORY, Arrays.asList(DEFAULT_INGREDIENTS));
         }
     }
 
-    private String getProcedure()
+
+    private static List<String> getIngredients(JSONObject mealJson)
     {
-        if (STATUS == 200)
-            return MEAL.getString("strInstructions");
-        else
+        List<String> ingredients = new ArrayList<>(MAX_INGREDIENTS);
+
+        for (int i = 1; i <= MAX_INGREDIENTS; i++)
         {
-            return "ProceduraDiDefault";
+            String name = mealJson.getString("strIngredient" + (i));
+            String measure = mealJson.getString("strMeasure" + (i));
+
+            // se hai finito gli ingredienti
+            if(name.equals(""))
+                break;
+            // aggiungi stampa ingrediente
+            ingredients.add(name + " - " + measure);
         }
-    }
 
-     */
-
-    private static void generateRecipe()
-    {
-        final Response resp = TARGET.request(MediaType.APPLICATION_JSON).get();
-        final int status = resp.getStatus();
-        JSONTokener jt = new JSONTokener(resp.readEntity(String.class));
-
-        JSONObject mealJson = (JSONObject) new JSONObject(jt).getJSONArray("meals").get(0);
-
-        System.out.println(mealJson);
-    }
-
-
-    private List<String> getIngredients()
-    {
-        if (STATUS == 200)
-        {
-            String[] ingredient = new String[10];
-
-            for (int i=0; i < Math.min(10, MEAL.length()); i++)
-            {
-                ingredient[i] = (MEAL.getString("strIngredient"+(i+1))+ ": " + MEAL.getString("strMeasure" + (i+1)));
-            }
-            return ingredient;
-        }
-        else
-        {
-            return new String[]{"Frigo","vuoto"};
-        }
-    }
-
-    public static void main (String[] args)
-    {
-
-        generateRecipe();
-        /*
-        RecipeRestClient recipe = new RecipeRestClient();
-        System.out.println(recipe.getNameRecipe());
-        System.out.println(recipe.getProcedure());
-        System.out.println(Arrays.toString(recipe.getIngredients()));
-        System.out.println("STATUS: " + STATUS);
-
-         */
+        return ingredients;
     }
 
 }
