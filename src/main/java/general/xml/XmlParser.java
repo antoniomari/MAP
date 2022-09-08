@@ -144,12 +144,27 @@ public class XmlParser
             return valueNode.getNodeValue();
     }
 
-    static ActionSequence parseInitRoomDB(String roomName, Element roomInitScenarioElement)
+    /**
+     * Esegue il parsing di un elemento xml corrispondente a uno scenario d'inizializzazione
+     * di una stanza, del quale vengono ignorate tutte le azioni tranne:
+     * <ul>
+     *     <li>{@code setNorth}</li>
+     *     <li>{@code setWest}</li>
+     *     <li>{@code setEast}</li>
+     *     <li>{@code setSouth}</li>
+     * </ul>
+     * @param scenarioName nome da assegnare allo scenario (solo fini di stampa documentativa)
+     * @param roomInitScenarioElement elemento xml il cui root tag è "scenario", corrispondente
+     *                                allo scenario di iniziliazzazione della stanza
+     * @return ActionSequence corrispondente allo scenario d'inizializzazione della stanza per
+     * l'utilizzo nel caricamento da db
+     */
+    static ActionSequence parseInitRoomDB(String scenarioName, Element roomInitScenarioElement)
     {
         // ottieni lista di azioni
         List<Element> actionList = XmlParser.getTagsList(roomInitScenarioElement, "azione");
 
-        ActionSequence scenarioSequence = new ActionSequence("Caricamento stanza db");
+        ActionSequence scenarioSequence = new ActionSequence(scenarioName);
 
         Set<String> affectedMethodNames = new HashSet<>(4);
         affectedMethodNames.add("setNorth");
@@ -166,6 +181,16 @@ public class XmlParser
         return scenarioSequence;
     }
 
+    /**
+     * Effettua il parsing di un'azione tra quelle consentite per il db
+     * nello scenario d'inizializzazione di una stanza
+     * (vedi {@link XmlParser#parseInitRoomDB(String, Element)}).
+     *
+     * @param actionElement elemento xml dell'azione di cui effettuare
+     *                      il parsing
+     * @return Runnable corrispondente all'azione di cui è effettuato
+     * il parsing
+     */
     private static Runnable parseActionLoadFromDB(Element actionElement)
     {
         // prendi nome metodo
@@ -194,81 +219,91 @@ public class XmlParser
         return actionParsed;
     }
 
-    private static Runnable parseSetEastDB(Element eAction)
+    /**
+     * Effettua il parsing di un'azione d'impostazione stanza adiacente
+     * per uno scenario di caricamento dal db.
+     *
+     * Nota: non viene eseguito lo scenario di inizializzazione della stanza
+     * adiacente, diversamente da quanto avviene nel parsing di un'azione d'impostazione
+     * stanza adiacente per uno scenario non destinato al caricamento dal db.
+     *
+     * Sintassi azione:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": nome della Room oggetto dell'azione</li>
+     *     <li>Tag "method": uno tra "setNorth", "setWest", "setEast", "setSouth"</li>
+     * </ul>
+     *
+     * @param cardinal direzione della Room oggetto dal punto di vista
+     *                 della Room oggetto.
+     * @param eAction elemento xml dell'azione di cui effettuare il parsing
+     * @return Runnable corrispondente all'azione
+     */
+    private static Runnable parseSetAdjacentRoomDB(Room.Cardinal cardinal, Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
-
         String roomName = getTagValue(eAction, "what");
+
         if(GameManager.getRoom(roomName) == null)
         {
             Room room = XmlLoader.loadRoom(roomName);
 
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
+            return () ->
+            {
+                GameManager.getRoom(subject).setAdjacentRoom(cardinal, room);
+                GameManager.continueScenario();
+            };
         }
         else
         {
             Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.EAST, room);
+            return () ->
+            {
+                GameManager.getRoom(subject).setAdjacentRoom(cardinal, room);
+                GameManager.continueScenario();
+            };
         }
+    }
+
+    private static Runnable parseSetEastDB(Element eAction)
+    {
+        return parseSetAdjacentRoomDB(Room.Cardinal.EAST, eAction);
     }
 
     private static Runnable parseSetWestDB(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-        if(GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
-        }
-        else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.WEST, room);
-        }
+        return parseSetAdjacentRoomDB(Room.Cardinal.WEST, eAction);
     }
 
     private static Runnable parseSetNorthDB(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-        if(GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
-        }
-        else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.NORTH, room);
-        }
+        return parseSetAdjacentRoomDB(Room.Cardinal.NORTH, eAction);
     }
 
     private static Runnable parseSetSouthDB(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
-
-        String roomName = getTagValue(eAction, "what");
-
-        if (GameManager.getRoom(roomName) == null)
-        {
-            Room room = XmlLoader.loadRoom(roomName);
-
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
-        } else
-        {
-            Room room = GameManager.getRoom(roomName);
-            return () -> GameManager.getRoom(subject).setAdjacentRoom(Room.Cardinal.SOUTH, room);
-        }
+        return parseSetAdjacentRoomDB(Room.Cardinal.SOUTH, eAction);
     }
 
+    /**
+     * Effettua il parsing di uno scenario partendo dall'elemento xml il cui
+     * root tag è "scenario".
+     *
+     * Se {@code scenarioElement} non contiene elementi con il tag "azione" allora
+     * viene creato uno scenario vuoto tramite {@link ActionSequence#voidScenario()};
+     * inoltre, se lo scenario contiene un elemento col tag "executeScenario" allora viene
+     * caricato lo scenario con il path corrispondente al valore dell'elemento e
+     * la sua esecuzione viene posta come ultima azione dello scenario di cui si sta
+     * effettuando il parsing.
+     *
+     * @param scenarioName nome da assegnare allo scenario (solo fini documentativi)
+     * @param scenarioElement elemento xml corrispondente allo scenario di cui si vuole
+     *                        effettuare il parsing
+     * @return ActionSequence corrispondente allo scenario
+     */
     static ActionSequence parseScenario(String scenarioName, Element scenarioElement)
     {
-        // TODO: abolire mode scenari
+
         ActionSequence scenarioSequence = new ActionSequence(scenarioName);
 
         // ottieni lista di azioni
@@ -295,6 +330,16 @@ public class XmlParser
         return scenarioSequence;
     }
 
+    /**
+     * Effettua il parsing di un elemento xml corrispondente a un'azione.
+     *
+     * Ogni elemento di questo tipo deve contenere al suo interno un elemento
+     * col tag "method" e con valore corrispondente a una delle azioni consentite
+     * dal gioco.
+     *
+     * @param actionElement elemento xml corrispondente a un'azione
+     * @return Runnable corrispondente all'azione di cui si effettua il parsing
+     */
     private static Runnable parseAction(Element actionElement)
     {
         // prendi nome metodo
@@ -316,21 +361,9 @@ public class XmlParser
             case "add":
                 actionParsed = parseAdd(actionElement);
                 break;
-                /*
-            case "updateSprite":
-                actionParsed = parseUpdateSprite(actionElement);
-                break;
-
-                 */
             case "effectAnimation":
                 actionParsed = parseEffectAnimation(actionElement);
                 break;
-                /*
-            case "addPickup":
-                actionParsed = parseAddPickup(actionElement);
-                break;
-
-                 */
             case "setEast":
                 actionParsed = parseSetEast(actionElement);
                 break;
@@ -410,27 +443,26 @@ public class XmlParser
         return actionParsed;
     }
 
+    // TODO: continuare da qua
 
     /**
-     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
-     * che contiene il valore {@code move} per il tag {@literal  <method>}
+     * Esegue il parsing di un elemento azione xml il cui "method" è "move"
      *
-     * I tag richiesti per il parsing di questo comando sono:
+     * I tag richiesti per questo comando sono:
      * <ul>
-     *    <li>{@literal <subject>} il nome del soggetto dell'azione (GamePiece)</li>
+     *    <li>"subject": nome del soggetto dell'azione (GamePiece)</li>
+     *    <li>"x": ascissa di blocco in cui subject deve muoversi</li>
      *
-     *    <li>{@literal <x>} ascissa di blocco in cui subject deve muoversi</li>
+     *    <li>"y": ordinata di blocco in cui subject deve muoversi</li>
      *
-     *    <li>{@literal <y>} ordinata di blocco in cui subject deve muoversi</li>
+     *    <li>"how": "absolute" se (x, y) sono coordinate assolute;
+     *    "relative" se sono relative alla posizione attuale di subject</li>
      *
-     *    <li>{@literal <how>} "absolute" se (x, y) sono coordinate assolute;
-     *    "relative" se sono relative alla posizione attuale di suject</li>
-     *
-     *    <li>{@literal <finalWait>} numero di millisecondi da aspettare
+     *    <li>"finalWait" numero di millisecondi da aspettare
      *    dopo l'esecuzione dell'animazione di movimento</li>
      * </ul>
      * @param eAction elemento corrispondente all'azione xml
-     * @return Runnable associata al comando move
+     * @return Runnable associata all'azione
      */
     private static Runnable parseMove(Element eAction)
     {
@@ -454,17 +486,15 @@ public class XmlParser
 
 
     /**
-     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
-     * che contiene il valore {@code speak} per il tag {@literal  <method>}
+     * Esegue il parsing di un elemento azione xml il cui "method" è "move"
      *
-     * I tag richiesti per il parsing di questo comando sono:
+     * I tag richiesti per questo comando sono:
      * <ul>
-     *    <li>{@literal <subject>} il nome del soggetto dell'azione (GameCharacter)</li>
-     *
-     *    <li>{@literal <sentence>} frase pronunciata (a capo con "(*)")</li>
+     *    <li>"subject": nome del soggetto dell'azione (GameCharacter)</li>
+     *    <li>"sentence": frase pronunciata (al massimo una newline, espressa con "(*)")</li>
      * </ul>
      * @param eAction elemento corrispondente all'azione xml
-     * @return Runnable associata al comando move
+     * @return Runnable associata all'azione
      */
     private static Runnable parseSpeak(Element eAction)
     {
@@ -472,10 +502,24 @@ public class XmlParser
         // ricava stringa da stampare
         String sentence = getTagValue(eAction, "sentence");
         // formatta stringa (spazi)
-        String sentenceNewLined = sentence.trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
+        String sentenceNewLined = formatForTextBar(sentence);
 
         // lo scenario viene mandato avanti dall'input utente (chiusura textBar)
         return () -> ((GameCharacter) GameManager.getPiece(subjectName)).speak(sentenceNewLined);
+    }
+
+    /**
+     * Formatta una stringa che dev'essere visualizzata sulla textBar.
+     * <ul>
+     *     <li>Vengono eliminati gli spazi ai bordi</li>
+     *     <li>la sequenza di caratteri "(*)" viene rimpiazzata con \n</li>
+     * </ul>
+     * @param s stringa da formattare
+     * @return stringa risultato, formattata per essere visualizzata sulla textBar
+     */
+    private static String formatForTextBar(String s)
+    {
+        return s.trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
     }
 
     private static Runnable parseItemSpeak(Element eAction)

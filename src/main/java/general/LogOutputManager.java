@@ -13,7 +13,7 @@ public class LogOutputManager
     private static final String RESET_COLOR = "\u001B[0m";
 
     private static final PrintWriter logFileStream;
-    private static final PrintStream errFileStream;
+    // private static final PrintStream errFileStream;
 
     static
     {
@@ -23,8 +23,9 @@ public class LogOutputManager
         {
             File logFile = new File("./log.txt");
             logFileStream = new PrintWriter(new FileWriter(logFile));
-            errFileStream = new PrintStream(new FileOutputStream(logFile));
-            System.setErr(errFileStream);
+
+            //errFileStream = new PrintStream(new FileOutputStream(logFile));
+            // System.setErr(errFileStream);
         }
         catch (IOException e)
         {
@@ -44,7 +45,7 @@ public class LogOutputManager
 
     public static void closeLogFile()
     {
-        errFileStream.close();
+        // errFileStream.close();
         logFileStream.close();
     }
 }
