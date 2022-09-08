@@ -105,17 +105,17 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Non solo ma gli ha dato (*) l'opportunità di attuare un processo di problem solving</sentence>
+        <sentence>Non solo ma gli ha dato (*) l'opportunità di attuare un processo di problem </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>del tutto uguale a quelle che (*) avrebbe usato un essere umano per risolvere dei </sentence>
+        <sentence>solving del tutto uguale a quelle (*) che avrebbe usato un essere umano per risolvere </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>problemi nella vita quotidiana.</sentence>
+        <sentence>dei problemi nella vita quotidiana.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -230,17 +230,17 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Scegliendo di premere il pulsante (*) di spegnimento ha dato prova di un sentimento  </sentence>
+        <sentence>Scegliendo di premere il pulsante (*) di spegnimento ha dato prova di un sentimento </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>puramente umano, l'amore verso (*) il prossimo e la capacità di prendere scelte su una </sentence>
+        <sentence>puramente umano, l'amore verso (*) il prossimo e la capacità di prendere scelte su </sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>base etica di comportamento. </sentence>
+        <sentence>una base etica di comportamento. </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -334,8 +334,11 @@
         <method>speak</method>
         <sentence>Per carità!!! preferisco bere (*) benzina piuttosto che quella robaccia.</sentence>
     </azione>
-
-
+    <azione>
+        <subject>Cameriere</subject>
+        <method>setState</method>
+        <sentence>endGame</sentence>
+    </azione>
     <azione>
         <subject>Antonio</subject>
         <method>setState</method>
