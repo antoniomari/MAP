@@ -18,6 +18,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Stato di gioco
+ */
 public class GameState
 {
     private static State currentState;
@@ -50,7 +53,6 @@ public class GameState
         MOVING,
         TEXT_BAR,
         SCENARIO_SOUND,
-        SCENARIO_TRANSITION,
         TEST,
         TEST_RESULT
     }

@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.PropertyPermission;
 
+/**
+ * Gestore per il DB di gioco, utilizzato per la memorizzazione
+ * dei salvataggi.
+ */
 public class DBManager
 {
 
@@ -32,6 +36,11 @@ public class DBManager
     private final static String[] PURE_TABLE_NAMES = {"room", "item", "gameCharacter", "inventory"};
 
 
+    /**
+     * Inizia la connessione al database di gioco.
+     *
+     * @throws SQLException se si verifica un errore nella connessione al db
+     */
     private static void startConnection() throws SQLException
     {
         if (conn == null || !conn.isValid(0))
@@ -40,6 +49,12 @@ public class DBManager
         }
     }
 
+    /**
+     * Controlla se ci sono dei salvataggi all'interno del database di gioco.
+     *
+     * @return {@code true} se esistono dei salvataggi all'interno del database,
+     * {@code false} altrimenti
+     */
     public static boolean existSavings()
     {
         try
@@ -70,6 +85,11 @@ public class DBManager
         }
     }
 
+    /**
+     * Controlla se esiste il database di gioco (chiamato "GAME")
+     *
+     * @return {@code true} se esiste il database, {@code false} altrimenti
+     */
     private static boolean existsDB()
     {
         try
@@ -97,6 +117,9 @@ public class DBManager
         }
     }
 
+    /**
+     * Chiude la connessione con il database di gioco
+     */
     private static void closeConnection()
     {
         try
@@ -111,6 +134,9 @@ public class DBManager
 
     }
 
+    /**
+     * Crea il database di gioco (col nome "GAME")
+     */
     public static void createGameDB()
     {
         try
@@ -202,11 +228,11 @@ public class DBManager
             closeConnection();
             throw new Error(e);
         }
-
-
-
     }
 
+    /**
+     * Carica i salvataggi del gioco dal database.
+     */
     public static void loadGameData()
     {
         try
@@ -225,6 +251,12 @@ public class DBManager
 
     }
 
+    /**
+     * Carica nel GameManager i GamePiece dal database di gioco,
+     * posizionandoli opportunamnete nelle stanze (che devono già essere state caricate).
+     *
+     * @throws SQLException se si verifica un errore nel caricamento
+     */
     public static void loadPieces() throws SQLException
     {
         PreparedStatement pstm= conn.prepareStatement("SELECT name, state, canUse, room, x, y FROM game.item JOIN game.itemLocation ON name=item");
@@ -275,6 +307,13 @@ public class DBManager
         pstm1.close();
     }
 
+    /**
+     * Carica nel GameManager le Room dal database di gioco, impostando
+     * i collegamenti tra di esse (recuperando l'informazione dai file .xml delle stanze)
+     * e bloccando le entrate a seconda del contenuto della tabella "LOCKENTRANCE".
+     *
+     * @throws SQLException se si verifica un errore nel caricamento
+     */
     public static void loadRooms() throws SQLException
     {
         PreparedStatement pstm = conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
@@ -294,7 +333,6 @@ public class DBManager
         rs.close();
         pstm.close();
 
-
         // load roomLocks
         PreparedStatement lockPstm = conn.prepareStatement("SELECT room, cardinal FROM game.lockEntrance");
         ResultSet lockResult = lockPstm.executeQuery();
@@ -306,11 +344,17 @@ public class DBManager
 
             GameManager.getRoom(roomName).setAdjacentLocked(Room.Cardinal.fromString(cardinal), true);
         }
+
         lockPstm.close();
         lockResult.close();
     }
 
 
+    /**
+     * Carica inventario dal database di gioco.
+     *
+     * @throws SQLException se si verifica un errore nel caricamento
+     */
     public static void loadInventory() throws SQLException
     {
         PreparedStatement pstm= conn.prepareStatement("SELECT item, index FROM game.inventory");
@@ -325,6 +369,11 @@ public class DBManager
         pstm.close();
     }
 
+    /**
+     * Salva inventario nel database di gioco.
+     *
+     * @throws SQLException se si verifica un errore nel salvataggio
+     */
     private static void saveInventory() throws SQLException
     {
         PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?)");
@@ -341,6 +390,7 @@ public class DBManager
         }
     }
 
+    // TODO: finire javadoc
     private static void saveGamePieces() throws SQLException
     {
         // gli statemente servo per preparere le diverse operazioni di aggiunta dati al database
