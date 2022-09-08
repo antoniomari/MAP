@@ -93,6 +93,31 @@
         <sentence>è stata simulare quanto (*) accaduto nella precedente edizione.</sentence>
     </azione>
     <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Permettere al cyborg Schwartz di (*) rivivere la simulazione fatta su JDBC-20 nel 2020</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>ha permesso a Schwartz di (*) prendere coscienza di se stesso.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Non solo ma gli ha dato (*) l'opportunità di attuare un processo di problem solving</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>del tutto uguale a quelle che (*) avrebbe usato un essere umano per risolvere dei </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>problemi nella vita quotidiana.</sentence>
+    </azione>
+    <azione>
         <subject>Antonio</subject>
         <method>speak</method>
         <sentence>Questo genere di test (*) fornisce la certezza matematica</sentence>
@@ -121,6 +146,101 @@
         <subject>Nicolas</subject>
         <method>speak</method>
         <sentence>ma in seguito ad una serie di (*) valutazioni effettuate sull'istanza.</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Rivivere gli errori fatti nel (*) passato da JDBC-20 ha fatto si che in Schwartz</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>crescesse un senso di empatia (*) verso il prossimo al punto da mettere a </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>repentaglio la sua vita per (*) salvare altre vite umane.</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>Nel Minimum Intelligence Signal (*) Test, ha dimostrato di essere psicologicamente stabile </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>rispondendo ad ogni domanda con (*) del buon senso comune ad un qualunque essere umano. </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Nei logic quest ha messo in (*) evidenza capacità logico-deduttive che lasciano </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>sperare bene sulle sue capacità (*) di apprendimento future, mentre nel captcha </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>ci ha dato prova del fatto che (*) gli impulsi visivi che riceve sono elaborati </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>non come delle semplici immagini (*) ma con un meccanismo di riconoscimento </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>basato su una conoscenza di (*) base già esistente. </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Quello che ci ha lasciati basiti (*) è stata la sua capacità nel piano BUG di </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>riconoscere una situazione di (*) loop cosa che prima d'oggi non era stata mai </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>raggiunta da una macchina. (*) Questo si spiega solo con la presa di coscienza. </sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Schwartz ha sbloccato la coscienza (*) il livello più profondo dell'intelligenza. </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>La presa di coscienza ha fatto (*) si che Schwartz riconoscesse il loop come una </sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>anomalia intesa come situazione (*) di scomodo dalla quale uscire.  </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>Scegliendo di premere il pulsante (*) di spegnimento ha dato prova di un sentimento  </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>puramente umano, l'amore verso (*) il prossimo e la capacità di prendere scelte su una </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>base etica di comportamento. </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -192,6 +312,30 @@
         <method>speak</method>
         <sentence>Beh ragazzi direi che è giunto (*) il momento di farsi due birre al pub.</sentence>
     </azione>
+    <azione>
+        <subject>FlashRoomFinale</subject>
+        <method>add</method>
+        <what>Cameriere</what>
+        <x>11</x>
+        <y>22</y>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>Ma perché andare al pub quando (*) ci sono qui io, vi faccio un cime on the beach</sentence>
+    </azione>
+    <azione>
+        <subject>Cameriere</subject>
+        <method>speak</method>
+        <sentence>per tutti altro che birra.</sentence>
+    </azione>
+    <azione>
+        <subject>Schwartz</subject>
+        <method>speak</method>
+        <sentence>Per carità!!! preferisco bere (*) benzina piuttosto che quella robaccia.</sentence>
+    </azione>
+
+
     <azione>
         <subject>Antonio</subject>
         <method>setState</method>
