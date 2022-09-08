@@ -104,78 +104,14 @@
             <y>9</y>
         </azione>
         <azione>
-            <subject>JDBC-20</subject>
+            <subject>Cuoco Luigi</subject>
             <method>setState</method>
-            <state>prontoPerRegistratore</state>
-        </azione>
-        <!--
-        <azione>
-            <subject>Schwartz</subject>
-            <method>speak</method>
-            <sentence>Quelle urla provengono dalla (*) stanza bloccata dal robot!</sentence>
-        </azione>
-        <azione>
-            <subject>Schwartz</subject>
-            <method>speak</method>
-            <sentence>Se voglio salvare Luigi devo riuscire (*) ad entrare a tutti i costi.</sentence>
-        </azione>
-        <azione>
-            <subject>Schwartz</subject>
-            <method>move</method>
-            <x>12</x>
-            <y>14</y>
-            <how>absolute</how>
-            <finalWait>0</finalWait>
-        </azione>
-        <azione>
-            <subject>JDBC-20</subject>
-            <method>move</method>
-            <x>8</x>
-            <y>14</y>
-            <how>absolute</how>
-            <finalWait>500</finalWait>
-        </azione>
-        <azione>
-            <subject>Schwartz</subject>
-            <method>playEmoji</method>
-            <what>provocazione</what>
-        </azione>
-        <azione>
-            <subject>Schwartz</subject>
-            <method>move</method>
-            <x>9</x>
-            <y>12</y>
-            <how>absolute</how>
-            <finalWait>0</finalWait>
-        </azione>
-        <azione>
-            <subject>JDBC-20</subject>
-            <method>move</method>
-            <x>5</x>
-            <y>12</y>
-            <how>absolute</how>
-            <finalWait>500</finalWait>
-        </azione>
-        <azione>
-            <subject>Schwartz</subject>
-            <method>playEmoji</method>
-            <what>fumo</what>
-        </azione>
-        <azione>
-            <subject>JDBC-20</subject>
-            <method>speak</method>
-            <sentence>Te l'ho detto! (*) non riuscirai mai a passare</sentence>
-        </azione>
-        <azione>
-            <subject>JDBC-20</subject>
-            <method>speak</method>
-            <sentence>Schwartz dei miei stivali</sentence>
+            <state>palleAlMuro</state>
         </azione>
         <azione>
             <subject>JDBC-20</subject>
             <method>setState</method>
             <state>prontoPerRegistratore</state>
         </azione>
-        -->
     </scenario>
 </stanza>
