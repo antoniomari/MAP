@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Classe per generare ricette di "cocktail" utilizzando
+ * il servizio REST fornito da <a href="https://www.themealdb.com">themealdb</a>
+ */
 public class RecipeRestClient
 {
     private static final Client CLIENT = ClientBuilder.newClient();
