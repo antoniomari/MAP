@@ -223,7 +223,7 @@ public class XmlParser
      * Effettua il parsing di un'azione d'impostazione stanza adiacente
      * per uno scenario di caricamento dal db.
      *
-     * Nota: non viene eseguito lo scenario di inizializzazione della stanza
+     * Nota: non viene eseguito lo scenario d'inizializzazione della stanza
      * adiacente, diversamente da quanto avviene nel parsing di un'azione d'impostazione
      * stanza adiacente per uno scenario non destinato al caricamento dal db.
      *
@@ -235,7 +235,7 @@ public class XmlParser
      * </ul>
      *
      * @param cardinal direzione della Room oggetto dal punto di vista
-     *                 della Room oggetto.
+     *                 della Room soggetto.
      * @param eAction elemento xml dell'azione di cui effettuare il parsing
      * @return Runnable corrispondente all'azione
      */
@@ -388,9 +388,6 @@ public class XmlParser
             case "addToInventory":
                 actionParsed = parseAddToInventory(actionElement);
                 break;
-            case "playMusic":
-                actionParsed = parsePlayMusic(actionElement);
-                break;
             case "playScenarioSound":
                 actionParsed = parsePlayScenarioSound(actionElement);
                 break;
@@ -443,8 +440,6 @@ public class XmlParser
         return actionParsed;
     }
 
-    // TODO: continuare da qua
-
     /**
      * Esegue il parsing di un elemento azione xml il cui "method" è "move"
      *
@@ -486,7 +481,7 @@ public class XmlParser
 
 
     /**
-     * Esegue il parsing di un elemento azione xml il cui "method" è "move"
+     * Esegue il parsing di un elemento azione xml il cui "method" è "speak"
      *
      * I tag richiesti per questo comando sono:
      * <ul>
@@ -517,47 +512,51 @@ public class XmlParser
      * @param s stringa da formattare
      * @return stringa risultato, formattata per essere visualizzata sulla textBar
      */
-    private static String formatForTextBar(String s)
+    static String formatForTextBar(String s)
     {
         return s.trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "itemSpeak"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *    <li>"subject": nome del soggetto dell'azione (può essere una qualsiasi stringa,
+     *    non è necessario che corrisponda a un Item presente)</li>
+     *    <li>"sentence": frase pronunciata (al massimo una newline, espressa con "(*)")</li>
+     * </ul>
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseItemSpeak(Element eAction)
     {
         String subjectName = getTagValue(eAction, "subject");
         // ricava stringa da stampare
         String sentence = getTagValue(eAction, "sentence");
         // formatta stringa (spazi)
-        String sentenceNewLined = sentence.trim().replaceAll("\\s\\(\\*\\)\\s", "\n");
+        String sentenceNewLined = formatForTextBar(sentence);
         String toPrint = subjectName + ": " + sentenceNewLined;
 
         // lo scenario viene mandato avanti dall'input utente (chiusura textBar)
-        // TODO: fix code
         return () -> TextBarUpdateExecutor.executeDisplay(toPrint);
     }
 
     /**
-     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
-     * che contiene il valore {@code add} per il tag {@literal  <method>}
+     * Esegue il parsing di un elemento azione xml il cui "method" è "add"
      *
-     * I tag richiesti per il parsing di questo comando sono:
+     * I tag richiesti per questo comando sono:
      * <ul>
-     *     <li>{@literal <subject>} il nome della stanza in cui caricare il GamePiece</li>
-     *
-     *    <li>{@literal <what>} il nome del del GamePiece da caricare nella stanza,
-     *    che viene caricato tramite il rispettivo file xml</li>
-     *
-     *    <li>{@literal x} ascissa dove dev'essere collocato l'angolo in basso a sinistra
-     *    dello sprite di {@literal <what>}</li>
-     *
-     *    <li>{@literal y} ordinata dove dev'essere collocato l'angolo in basso a sinistra
-     *    dello sprite di {@literal <what>}</li>
+     *    <li>"subject": nome della stanza in cui aggiungere il GamePiece</li>
+     *    <li>"what": nome del del GamePiece da aggiungere nella stanza</li>
+     *    <li>"x": ascissa dove dev'essere collocato l'angolo in basso a sinistra
+     *    dello sprite del GamePiece</li>
+     *    <li>"y": ordinata dove dev'essere collocato l'angolo in basso a sinistra
+     *    dello sprite del GamePiece</li>
      * </ul>
      *
      * @param eAction elemento corrispondente all'azione xml
-     * @return Runnable associata al comando move
-     * @throws GameException se {@literal <what>} non è stato trovato nel
-     * corrispettivo xml
+     * @return Runnable associata all'azione
      */
     private static Runnable parseAdd(Element eAction)
     {
@@ -582,6 +581,17 @@ public class XmlParser
 
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "animate"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *    <li>"subject": nome del GamePiece di cui eseguire l'animazione predefinita.</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseAnimate(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -590,6 +600,18 @@ public class XmlParser
         return () -> GameManager.getPiece(subject).animate();
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "animateReverse"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *    <li>"subject": nome del GamePiece di cui eseguire l'animazione predefinita,
+     *    al contrario.</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseAnimateReverse(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -598,24 +620,25 @@ public class XmlParser
         return () -> GameManager.getPiece(subject).animateReverse();
     }
 
-    /*
-    private static Runnable parseAddPickup(Element eAction)
-    {
-        String subject = getTagValue(eAction, "subject");
 
-        String pickupName = getTagValue(eAction, "what");
-        PickupableItem pickup = (PickupableItem) GameManager.getPiece(pickupName);
-
-        // scenario portato avanti qui
-        return () ->
-        {
-            ((Container) GameManager.getPiece(subject)).addPickup(pickup);
-            GameManager.continueScenario();
-        };
-    }
-
+    /**
+     * Effettua il parsing di un'azione d'impostazione stanza adiacente
+     *
+     * Nota: Se la stanza oggetto non è ancora stata caricata in memoria,
+     * allora viene eseguito il suo scenario d'inizializzazione.
+     *
+     * Sintassi azione:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": nome della Room oggetto dell'azione</li>
+     *     <li>Tag "method": uno tra "setNorth", "setWest", "setEast", "setSouth"</li>
+     * </ul>
+     *
+     * @param cardinal direzione della Room oggetto dal punto di vista
+     *                 della Room soggetto.
+     * @param eAction elemento xml dell'azione di cui effettuare il parsing
+     * @return Runnable corrispondente all'azione
      */
-
     private static Runnable parseSetAdjacentRoom(Element eAction, Room.Cardinal cardinal)
     {
         String subject = getTagValue(eAction, "subject");
@@ -643,27 +666,86 @@ public class XmlParser
         }
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setEast"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": nome della Room oggetto dell'azione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetEast(Element eAction)
     {
         return parseSetAdjacentRoom(eAction, Room.Cardinal.EAST);
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setWest"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": nome della Room oggetto dell'azione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetWest(Element eAction)
     {
         return parseSetAdjacentRoom(eAction, Room.Cardinal.WEST);
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setNorth"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": nome della Room oggetto dell'azione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetNorth(Element eAction)
     {
         return parseSetAdjacentRoom(eAction, Room.Cardinal.NORTH);
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setSouth"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": nome della Room oggetto dell'azione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetSouth(Element eAction)
     {
         return parseSetAdjacentRoom(eAction, Room.Cardinal.SOUTH);
     }
 
-
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "removeFromRoom"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome del GamePiece da rimuovere
+     *     dalla propria stanza di locazione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseRemoveFromRoom(Element eAction)
     {
         String subject = getTagValue(eAction,"subject");
@@ -676,6 +758,17 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "addToInventory"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "what": nome del PickupableItem da aggiungere all'inventario</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseAddToInventory(Element eAction)
     {
         String itemName = getTagValue(eAction, "what");
@@ -687,22 +780,20 @@ public class XmlParser
             PlayingCharacter.getPlayer().addToInventory(it);
             GameManager.continueScenario();
         };
-
     }
 
-
-    private static Runnable parsePlayMusic(Element eAction)
-    {
-        String musicPath = getTagValue(eAction, "what");
-
-        // lo scenario viene mandato avanti qui
-        return () ->
-        {
-            SoundHandler.playWav(musicPath, SoundHandler.Mode.MUSIC);
-            GameManager.continueScenario();
-        };
-    }
-
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "playScenarioSound"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "what": path del file audio da riprodurre in modalità
+     *     {@link SoundHandler.Mode#SCENARIO_SOUND}</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parsePlayScenarioSound(Element eAction)
     {
         String soundPath = getTagValue(eAction, "what");
@@ -711,6 +802,7 @@ public class XmlParser
         return () -> SoundHandler.playWav(soundPath, SoundHandler.Mode.SCENARIO_SOUND);
     }
 
+    // TODO: continuare da qua
     private static Runnable parseSetScenarioOnEnter(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -939,42 +1031,6 @@ public class XmlParser
         };
     }
 
-    /*
-     * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
-     * che contiene il valore {@code updateSprite} per il tag {@literal  <method>}.
-     *
-     * I tag richiesti per il parsing di questo comando sono:
-     * <ul>
-     *     <li>{@literal <subject>} il nome del soggetto dell'azione (GamePiece)</li>
-     *
-     *    <li>{@literal <spriteName>} il nome ddello sprite da caricare (presente nel json)</li>
-     * </ul>
-     *
-     * @param eAction elemento corrispondente all'azione xml
-     * @return Runnable associata al comando updateSprite
-     * @throws GameException se {@literal <subject>} non è stato trovato nel GameManager
-     *
-    private static Runnable parseUpdateSprite(Element eAction)
-    {
-        String subject = getTagValue(eAction, "subject");
-        GamePiece piece = GameManager.getPiece(subject);
-
-        if(piece == null)
-            throw new GameException("Piece non trovato");
-
-        String spriteName = getTagValue(eAction, "spriteName");
-
-        // lo scenario viene mandato avanti qui
-        return () ->
-        {
-            piece.updateSprite(spriteName);
-            GameManager.continueScenario();
-        };
-
-    }
-
-     */
-
     /**
      * Esegue il parsing di un elemento azione xml (root tag: {@literal  <action>})
      * che contiene il valore {@code effectAnimation} per il tag {@literal  <method>}.
@@ -1035,36 +1091,4 @@ public class XmlParser
             throw new GameException("Errore nel caricamento dell'xml");
         }
     }
-
-    /*
-
-    /**
-     * Crea una Room descritta nel file xml corrispondente.
-     *
-     * @param roomPath path del file xml contenente i dati della Room
-     *                 (root tag: {@literal <stanza>})
-     * @return stanza corrispondente
-
-    @Deprecated
-    public static Room loadRoom(String roomPath)
-    {
-        return XmlLoader.loadRoom(roomPath);
-    }
-
-    /**
-     * Carica lo scenario d'inizializzazione della stanza, contenuto
-     * nel file xml della stessa.
-     *
-     * @param roomPath path del file xml contenente i dati della Room
-     * @return ActionSequence che comprende le azioni d'inizializzazione stanza
-
-    @Deprecated
-    public static ActionSequence loadRoomInit(String roomPath)
-    {
-        return XmlLoader.loadRoomInit(roomPath);
-    }
-
-
-     */
-
 }

@@ -1,7 +1,5 @@
 package general;
 
-import jdk.jpackage.internal.Log;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
