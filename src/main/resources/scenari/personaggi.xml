@@ -71,6 +71,9 @@
     <personaggio nome="Cuoco Luigi">
         <spritesheet>/img/personaggi/cuochi.png</spritesheet>
         <json>/img/personaggi/cuochi.json</json>
+        <speakScenarios>
+            <sentence state="palleAlMuro">AIUTOOOO ! (*) Volevo solo cucinare gli spaghetti !</sentence>
+        </speakScenarios>
     </personaggio>
     <personaggio nome="JDBC-20">
         <spritesheet>/img/personaggi/Robot.png</spritesheet>
@@ -93,7 +96,7 @@
         <speakScenarios>
             <scenario state="init">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
             <scenario state="fatto">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
-            <scenario state="fatto">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
+            <scenario state="mangiato">src/main/resources/scenari/piano EBERT/roarBriciola.xml</scenario>
         </speakScenarios>
     </personaggio>
     <personaggio nome="MA-D">
