@@ -7,6 +7,11 @@
         <sentence>Sei troppo iNtElLiGeNtE!</sentence>
     </azione>
     <azione>
+        <subject>Tecnico</subject>
+        <method>setState</method>
+        <state>dopoCaptcha</state>
+    </azione>
+    <azione>
         <subject>AscensoreALU</subject>
         <method>setState</method>
         <state>canOpen</state>

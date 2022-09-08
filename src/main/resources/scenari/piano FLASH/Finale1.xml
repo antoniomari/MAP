@@ -75,12 +75,17 @@
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Finalmente una nostra macchina (*) dopo tutti questi anni</sentence>
+        <sentence>Il nostro Dr. Schwartz ...</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>è riuscita a passare (*) il test Global-AI-2025.</sentence>
+        <sentence>è riuscito a passare (*) il test di Turing,</sentence>
+    </azione>
+    <azione>
+        <subject>Nicolas</subject>
+        <method>speak</method>
+        <sentence>superando la prova finale (*) qui al Global-AI-2025.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -95,32 +100,22 @@
     <azione>
         <subject>Diego</subject>
         <method>speak</method>
-        <sentence>Permettere al cyborg Schwartz di (*) rivivere la simulazione fatta su JDBC-20 nel 2020</sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>ha permesso a Schwartz di (*) prendere coscienza di se stesso.</sentence>
+        <sentence>Permettere a Schwartz di (*) rivivere la simulazione fatta su JDBC-20 nel 2020</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Non solo ma gli ha dato (*) l'opportunità di attuare un processo di problem </sentence>
+        <sentence>gli ha dato l'opportunità (*) di attuare un processo di problem solving</sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>solving del tutto uguale a quelle (*) che avrebbe usato un essere umano per risolvere </sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>dei problemi nella vita quotidiana.</sentence>
+        <sentence> simulando l'intelligenza (*) di un essere umano.</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
         <method>speak</method>
-        <sentence>Questo genere di test (*) fornisce la certezza matematica</sentence>
+        <sentence>Il test di Turing fornisce (*) la certezza matematica</sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
@@ -130,22 +125,62 @@
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>Infatti abbiamo creato una (*) macchina che ha le capacità di</sentence>
+        <sentence>Nel Minimum Intelligence Signal (*) Test, ha dimostrato di possedere </sentence>
     </azione>
     <azione>
         <subject>Nicolas</subject>
         <method>speak</method>
-        <sentence>risolvere i malfunzionamenti (*) di un'altra macchina</sentence>
+        <sentence>ed elaborare conoscenza generale.</sentence>
     </azione>
     <azione>
-        <subject>Nicolas</subject>
+        <subject>Diego</subject>
         <method>speak</method>
-        <sentence>e di adempiere ad ogni richiesta, (*) non in modo meccanico, </sentence>
+        <sentence>Nei logic quest ha messo (*) in evidenza capacità logico-matematiche</sentence>
     </azione>
     <azione>
-        <subject>Nicolas</subject>
+        <subject>Diego</subject>
         <method>speak</method>
-        <sentence>ma in seguito ad una serie di (*) valutazioni effettuate sull'istanza.</sentence>
+        <sentence>e di ragionamento puro. (*) Nel Captcha ci ha dato prova </sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>della corretta elaborazione dei (*) suoi impulsi visivi, quasi meglio</sentence>
+    </azione>
+    <azione>
+        <subject>Diego</subject>
+        <method>speak</method>
+        <sentence>di come un uomo possa fare.</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Ha poi superato la prova (*) finale, ovvero il piano BUG!</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>Il piano BUG è progettato (*) per porre in un loop infinito,</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>dentro cui una macchina (*) può solo continuare ad andare avanti,</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>come gli viene ordinato. (*) Una forma superiore d'intelligenza</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>dimostra di essere cosciente (*) della situazione e di rompere il sistema</sentence>
+    </azione>
+    <azione>
+        <subject>Antonio</subject>
+        <method>speak</method>
+        <sentence>per agire di sua spontanea (*) volontà.</sentence>
     </azione>
     <azione>
         <subject>Diego</subject>
@@ -161,86 +196,6 @@
         <subject>Diego</subject>
         <method>speak</method>
         <sentence>repentaglio la sua vita per (*) salvare altre vite umane.</sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>Nel Minimum Intelligence Signal (*) Test, ha dimostrato di essere psicologicamente stabile </sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>rispondendo ad ogni domanda con (*) del buon senso comune ad un qualunque essere umano. </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>Nei logic quest ha messo in (*) evidenza capacità logico-deduttive che lasciano </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>sperare bene sulle sue capacità (*) di apprendimento future, mentre nel captcha </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>ci ha dato prova del fatto che (*) gli impulsi visivi che riceve sono elaborati </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>non come delle semplici immagini (*) ma con un meccanismo di riconoscimento </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>basato su una conoscenza di (*) base già esistente. </sentence>
-    </azione>
-    <azione>
-        <subject>Antonio</subject>
-        <method>speak</method>
-        <sentence>Quello che ci ha lasciati basiti (*) è stata la sua capacità nel piano BUG di </sentence>
-    </azione>
-    <azione>
-        <subject>Antonio</subject>
-        <method>speak</method>
-        <sentence>riconoscere una situazione di (*) loop cosa che prima d'oggi non era stata mai </sentence>
-    </azione>
-    <azione>
-        <subject>Antonio</subject>
-        <method>speak</method>
-        <sentence>raggiunta da una macchina. (*) Questo si spiega solo con la presa di coscienza. </sentence>
-    </azione>
-    <azione>
-        <subject>Antonio</subject>
-        <method>speak</method>
-        <sentence>Schwartz ha sbloccato la coscienza (*) il livello più profondo dell'intelligenza. </sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>La presa di coscienza ha fatto (*) si che Schwartz riconoscesse il loop come una </sentence>
-    </azione>
-    <azione>
-        <subject>Nicolas</subject>
-        <method>speak</method>
-        <sentence>anomalia intesa come situazione (*) di scomodo dalla quale uscire.  </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>Scegliendo di premere il pulsante (*) di spegnimento ha dato prova di un sentimento </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>puramente umano, l'amore verso (*) il prossimo e la capacità di prendere scelte su </sentence>
-    </azione>
-    <azione>
-        <subject>Diego</subject>
-        <method>speak</method>
-        <sentence>una base etica di comportamento. </sentence>
     </azione>
     <azione>
         <subject>Antonio</subject>
