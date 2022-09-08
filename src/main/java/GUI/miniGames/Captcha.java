@@ -83,7 +83,7 @@ public class Captcha extends MiniGame
         interactionPanel = new JPanel(new GridLayout(2,1));
 
         // componeti per interazione con l'utente
-        istruction = new JLabel("Digitare la parola visualizzata nell'immagine.", SwingConstants.LEFT);
+        istruction = new JLabel("Digitare la parola nell'immagine.", SwingConstants.LEFT);
         captAnswer = new JTextField();
         // captAnswer.setFocusable(false);
 
@@ -91,11 +91,9 @@ public class Captcha extends MiniGame
         description = new JLabel("Controllo di sicurezza \n  ", SwingConstants.CENTER);
 
 
-        // creazione e caricamento del coppie del dizionario e settagio dell'imagine del captcha
+        // creazione e caricamento delle coppie del dizionario e settaggio dell'immagine del captcha
         captchaMatch = initMatch();
         setIcon(captchaMatch.keySet());
-
-
 
         // TODO: da spostare nel factory method
         setup();
@@ -103,9 +101,9 @@ public class Captcha extends MiniGame
         addDetails();
 
         setMainPanel(captchaPanel);
-        captchaPanel.setBounds(getInsets().left, getInsets().top,
-                (int) captchaPanel.getPreferredSize().getWidth(),
-                (int) captchaPanel.getPreferredSize().getHeight());
+        int xOffset = (int) getPreferredSize().getWidth() / 4;
+        int yOffset = 0;
+        captchaPanel.setBounds(getInsets().left + xOffset, getInsets().top + yOffset, (int) getPreferredSize().getWidth() / 2, (int)getPreferredSize().getHeight());
     }
 
 
@@ -130,12 +128,6 @@ public class Captcha extends MiniGame
     private void setIcon(Set<String> path)
     {
         String[] pathString =  path.toArray(new String[0]);
-
-        // int num = (int) (Math.random()*10)
-        // int max = 9;
-        // int min = 0;
-        // avvolte da eccezione capire perchè
-        // (int) (Math.random()*(max-min)) + min]
         setImgKeyPath(Util.randomChoice(pathString));
 
 

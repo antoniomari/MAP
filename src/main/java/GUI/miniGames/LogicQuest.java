@@ -119,7 +119,7 @@ public class LogicQuest extends MiniGame
         // e gerarchia dei pannelli
         int xOffset = (int) getPreferredSize().getWidth() / 4;
         int yOffset = 0;
-        mainWrapper.setBounds(getInsets().left + xOffset, getInsets().top, (int) getPreferredSize().getWidth() / 2, (int)getPreferredSize().getHeight());
+        mainWrapper.setBounds(getInsets().left + xOffset, getInsets().top + yOffset, (int) getPreferredSize().getWidth() / 2, (int)getPreferredSize().getHeight());
         setMainPanel(mainWrapper);
 
 
