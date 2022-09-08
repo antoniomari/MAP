@@ -802,7 +802,18 @@ public class XmlParser
         return () -> SoundHandler.playWav(soundPath, SoundHandler.Mode.SCENARIO_SOUND);
     }
 
-    // TODO: continuare da qua
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setScenarioOnEnter"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome della Room soggetto dell'azione</li>
+     *     <li>Tag "what": path del file xml corrispondente allo scenario da impostare</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetScenarioOnEnter(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -816,6 +827,27 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "loadFloor"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "floor": nome del piano da caricare in memoria. Valori possibili:
+     *     <ul>
+     *         <li>MIST</li>
+     *         <li>ALU</li>
+     *         <li>BUG</li>
+     *         <li>EBERT</li>
+     *         <li>SERVER</li>
+     *         <li>FLASH</li>
+     *         <li>FINALE</li>
+     *     </ul></li>
+     *     <li>Tag "what": path del file xml corrispondente allo scenario da impostare</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseLoadFloor(Element eAction)
     {
         String floorName = getTagValue(eAction, "floor");
@@ -886,6 +918,18 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "playEmoji"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome del GamePiece soggetto dell'azione</li>
+     *     <li>Tag "what": nome dell'animazione da riprodurre</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parsePlayEmoji(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -898,6 +942,18 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setState"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome del GamePiece soggetto dell'azione</li>
+     *     <li>Tag "state": nuovo stato da impostare</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetState(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -911,6 +967,23 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "executeTest"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "what": nome del test da eseguire. Valori possibili:
+     *     <ul>
+     *         <li>ALU</li>
+     *         <li>MIST</li>
+     *         <li>CAPTCHA</li>
+     *     </ul></li>
+     *     <li>Tag opzionale "number": utilizzato solo per il test ALU, il valore è da 1 a 3.</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseExecuteTest(Element eAction)
     {
         String what = getTagValue(eAction, "what");
@@ -930,6 +1003,18 @@ public class XmlParser
         }
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "setCanUse"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": nome dell'Item soggetto dell'azione</li>
+     *     <li>Tag "canUse": "true"/"false"</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseSetCanUse(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -943,18 +1028,37 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "teleport"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "where": nome della stanza in cui spostare il giocatore
+     *     (dev'essere già presente nel GameManager)</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseTeleport(Element eAction)
     {
-        String subject = getTagValue(eAction, "subject");
         String roomName = getTagValue(eAction, "where");
 
         // lo scenario viene mandato avanti in setCurrentRoom, dallo scenarioOnEnter
-        return () ->
-        {
-            GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
-        };
+        return () -> GameManager.getMainFrame().setCurrentRoom(GameManager.getRoom(roomName));
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "addRoomEffect"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "what": path dell'immagine da usare come effetto per la currentRoom</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseAddRoomEffect(Element eAction)
     {
         String effectPath = getTagValue(eAction, "what");
@@ -970,6 +1074,19 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "lockEntrance"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": Room soggetto dell'azione</li>
+     *     <li>Tag "cardinal": punto cardinale dell'entrata da (s)bloccare</li>
+     *     <li>Tag "lock": "true" per bloccare/ "false" per sbloccare</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseLockEntrance(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -984,6 +1101,17 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "open"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": Openable soggetto dell'azione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseOpen(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
@@ -991,6 +1119,12 @@ public class XmlParser
         return () -> ((Openable) GameManager.getPiece(subject)).open();
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "makeSchwartzRobot"
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseMakeSchwartzRobot(Element eAction)
     {
         return () ->
@@ -1000,6 +1134,17 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "removeFromInventory"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "what": PickupableItem da rimuovere dall'inventario</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseRemoveFromInventory(Element eAction)
     {
         String what = getTagValue(eAction, "what");
@@ -1011,6 +1156,17 @@ public class XmlParser
         };
     }
 
+    /**
+     * Esegue il parsing di un elemento azione xml il cui "method" è "describeRandomCocktail"
+     *
+     * I tag richiesti per questo comando sono:
+     * <ul>
+     *     <li>Tag "subject": GameCharacter soggetto dell'azione</li>
+     * </ul>
+     *
+     * @param eAction elemento corrispondente all'azione xml
+     * @return Runnable associata all'azione
+     */
     private static Runnable parseDescribeRandomCocktail(Element eAction)
     {
         String subject = getTagValue(eAction, "subject");
