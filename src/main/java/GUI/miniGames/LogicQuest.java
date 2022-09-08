@@ -26,7 +26,7 @@ public class LogicQuest extends MiniGame
 
     private static final String[] QUEST_1_BUTTONS_TEXT = {"1", "2", "5", "7"};
     private static final String[] QUEST_2_BUTTONS_TEXT = {"3, 2, 1", "5, 4, 8", "3, 2, 5", "3, 6, 1"};
-    private static final String[] QUEST_3_BUTTONS_TEXT = {"31", "22", "12", "8"};
+    private static final String[] QUEST_3_BUTTONS_TEXT = {"11", "22", "12", "8"};
 
     private static final Map<Integer, Character> numberTypeMap;
 
