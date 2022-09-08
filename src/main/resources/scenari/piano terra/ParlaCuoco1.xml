@@ -8,17 +8,92 @@
     <azione>
         <subject>Cuoco1</subject>
         <method>speak</method>
-        <sentence>Sono il cuoco primo, (*) adesso porto il primo!</sentence>
+        <sentence>Sono DISPERATOOOO!</sentence>
     </azione>
     <azione>
         <subject>Cuoco1</subject>
         <method>speak</method>
-        <sentence>Faccio troppi dispetti, (*) son pronti gli spaghetti!</sentence>
+        <sentence>Non lo sopporto più...</sentence>
     </azione>
     <azione>
         <subject>Cuoco1</subject>
         <method>speak</method>
-        <sentence>Ora prendo la padella, (*) ci metto dentro mortadella!</sentence>
+        <sentence>Un giorno, dopo aver fritto, (*) il pavimento era oleoso</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>e lui ci è scivolato (*) sbattendo la testa sul pavimento.</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Da quel momento non (*) è più tornato lo stesso.</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Non che prima fosse (*) tanto normale...</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Ma da allora ha iniziato a (*) ripetere strane ricette</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>di cocktail improponibili</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>e a parlare un inglese terribile</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>misto a simboli alieni.</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Poi a volte accade che la sua bocca (*) non riesca a connettersi al cervello</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>e non fa altro che ripetere sempre (*) la stessa disgustosa ricetta.</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Non posso lavorare in queste condizioni...</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Devo assolutamente (*) trovare una soluzione.</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Aspetta.</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>Forse se lo facessi (*) scivolare un'altra volta</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>potrebbe tornare come prima...</sentence>
+    </azione>
+    <azione>
+        <subject>Cuoco1</subject>
+        <method>speak</method>
+        <sentence>DEVO PROCURARMI DELL'OLIO!</sentence>
     </azione>
     <azione>
         <subject>Cuoco1</subject>
