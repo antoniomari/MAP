@@ -337,7 +337,7 @@
     <azione>
         <subject>Cameriere</subject>
         <method>setState</method>
-        <sentence>endGame</sentence>
+        <state>endGame</state>
     </azione>
     <azione>
         <subject>Antonio</subject>
