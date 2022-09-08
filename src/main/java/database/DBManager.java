@@ -40,6 +40,63 @@ public class DBManager
         }
     }
 
+    public static boolean existSavings()
+    {
+        try
+        {
+            startConnection();
+
+            // controlla se esiste db
+            if(!existsDB())
+                return false;
+
+            // controlla se la tabella Room è vuota
+            PreparedStatement roomStm = conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
+            ResultSet rs = roomStm.executeQuery();
+
+            // se ha almeno una tupla allora salvataggio presente
+            boolean  result = rs.next();
+
+            rs.close();
+            roomStm.close();
+
+            return result;
+
+        }
+        catch(SQLException e)
+        {
+            closeConnection();
+            throw new Error(e);
+        }
+    }
+
+    private static boolean existsDB()
+    {
+        try
+        {
+            startConnection();
+            DatabaseMetaData databaseMetaData = conn.getMetaData();
+            ResultSet resultSet = databaseMetaData.getSchemas();
+
+            while (resultSet.next())
+            {
+                String name = resultSet.getString("TABLE_SCHEM");
+
+                // db presente
+                if(name.equalsIgnoreCase("GAME"))
+                    return true;
+            }
+
+            // db non presente
+            return false;
+        }
+        catch(SQLException e)
+        {
+            closeConnection();
+            throw new Error(e);
+        }
+    }
+
     private static void closeConnection()
     {
         try
@@ -60,19 +117,10 @@ public class DBManager
         {
             startConnection();
 
-            DatabaseMetaData databaseMetaData = conn.getMetaData();
-            ResultSet resultSet = databaseMetaData.getSchemas();
-            while (resultSet.next())
+            if(existsDB())
             {
-                String name = resultSet.getString("TABLE_SCHEM");
-
-                // db presente
-                if(name.equalsIgnoreCase("GAME"))
-                {
-                    LogOutputManager.logOutput("DB esistente", LogOutputManager.EVENT_COLOR);
-                    return;
-                }
-
+                LogOutputManager.logOutput("DB esistente", LogOutputManager.EVENT_COLOR);
+                return;
             }
 
             LogOutputManager.logOutput("Creazione DB", LogOutputManager.EVENT_COLOR);
@@ -229,8 +277,8 @@ public class DBManager
 
     public static void loadRooms() throws SQLException
     {
-        PreparedStatement pstm= conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
-        ResultSet rs= pstm.executeQuery();
+        PreparedStatement pstm = conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
+        ResultSet rs = pstm.executeQuery();
         while(rs.next())
         {
             String name = rs.getString(1);

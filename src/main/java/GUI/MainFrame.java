@@ -34,6 +34,8 @@ public class MainFrame extends JFrame {
     */
     private static final int DEFAULT_WIDTH_BLOCKS = 32;
     private static final int DEFAULT_HEIGHT_BLOCKS = 16;
+
+    private static final String INITIAL_ROOM_PATH = "src/main/resources/scenari/piano terra/PT-B.xml";
     /*
         Scaling factor e altezza in pixel corrispondenti
         alla stanza di default, variano da schermo a schermo
@@ -439,22 +441,24 @@ public class MainFrame extends JFrame {
 
         backLabel.setBounds(LEFT + xBorder, TOP, backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
-        JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
+        GameButtonLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
             "/img/Menu iniziale/continua pressed.png", () -> showMenu(false));
         continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 8) / 24,
                 continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
 
-        JLabel salvaLabel = makeMenuButton("/img/Menu iniziale/salva.png",
+        GameButtonLabel salvaLabel = makeMenuButton("/img/Menu iniziale/salva.png",
                 "/img/Menu iniziale/salva pressed.png", this::save);
         salvaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
                 salvaLabel.getIcon().getIconWidth(), salvaLabel.getIcon().getIconHeight());
 
-        JLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
+        GameButtonLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
                 "/img/Menu iniziale/impostazioni pressed.png", null);
         impostazioniLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 16) / 24,
                 impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
 
-        JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
+        impostazioniLabel.disableButtonLabel();
+
+        GameButtonLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
                 "/img/Menu iniziale/esci pressed.png", this::exit);
         esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
                 esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
@@ -493,24 +497,29 @@ public class MainFrame extends JFrame {
                 backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
         // bottoni-label
-        JLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
+        GameButtonLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
                 "/img/Menu iniziale/nuovapartita pressed.png", this::play);
         nuovaPartitaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 8) / 24,
                     nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
 
-        JLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
+        GameButtonLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
                 "/img/Menu iniziale/continua pressed.png", this::loadSavings);
         continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
                     continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
+        // se non ci sono salvataggi disabilita
+        if(!DBManager.existSavings())
+            continuaLabel.disableButtonLabel();
 
 
-        JLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
+        GameButtonLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
                 "/img/Menu iniziale/impostazioni pressed.png", null);
         impostazioniLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 16) / 24,
                     impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
+        // disabilita, attualmente non funzionante
+        impostazioniLabel.disableButtonLabel();
 
 
-        JLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
+        GameButtonLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
                 "/img/Menu iniziale/esci pressed.png", this::exit);
         esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
                     esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
@@ -555,7 +564,7 @@ public class MainFrame extends JFrame {
         startingMenuPanel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
-    private JLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
+    private GameButtonLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
     {
         // TODO: aggiustare rescalingFactor, non va bene
         GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, DEFAULT_SCALING_FACTOR / 3);
@@ -563,7 +572,12 @@ public class MainFrame extends JFrame {
         GameMouseListener buttonListener = new GameMouseListener(
                                             GameMouseListener.Button.LEFT, clickAction, null, GameState.State.INIT);
         buttonListener.setMouseEnteredAction(
-                () -> {buttonLabel.changeIcon(true); SoundHandler.playWav("src/main/resources/audio/effetti/bottone selezione mouse.wav", SoundHandler.Mode.SOUND);});
+                () ->
+                {
+                    buttonLabel.changeIcon(true);
+                    SoundHandler.playWav("src/main/resources/audio/effetti/bottone selezione mouse.wav",
+                            SoundHandler.Mode.SOUND);
+                });
 
         buttonListener.setMouseExitedAction(
                 () -> buttonLabel.changeIcon(false));
@@ -624,17 +638,27 @@ public class MainFrame extends JFrame {
         setupPlayground();
     }
 
+    /**
+     * Salva il gioco, chiudendo poi il menu di pausa.
+     */
     private void save()
     {
         DBManager.save();
+        showMenu(false);
     }
 
+    /**
+     * Chiude l'applicazione del gioco.
+     */
     private void exit()
     {
         LogOutputManager.closeLogFile();
         System.exit(0);
     }
 
+    /**
+     * Carica il salvataggio presente nel db
+     */
     private void loadSavings()
     {
         DBManager.loadGameData();
@@ -684,10 +708,10 @@ public class MainFrame extends JFrame {
          */
         try
         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
                 if ("Nimbus".equals(info.getName()))
                 {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
         }
@@ -697,12 +721,10 @@ public class MainFrame extends JFrame {
         }
         //</editor-fold>
 
-        String initialRoomPath = "src/main/resources/scenari/piano terra/PT-B.xml";
-
         DBManager.createGameDB();
         FontManager.loadFonts();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(initialRoomPath).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame(INITIAL_ROOM_PATH).setVisible(true));
     }
 }
