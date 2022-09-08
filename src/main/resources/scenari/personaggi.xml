@@ -43,6 +43,7 @@
         <speakScenarios>
             <scenario state="cocktail">src/main/resources/scenari/piano terra/ConoscenzaCameriere.xml</scenario>
             <sentence state="fineConferenza">Il robot e lo chef si sono diretti (*) verso l'ascensore</sentence>
+            <sentence state="endGame">Maleducato e vigliacco!</sentence>
         </speakScenarios>
     </personaggio>
     <personaggio nome="Tecnico">
