@@ -123,4 +123,9 @@
         <method>setState</method>
         <state>chiamaTecnico</state>
     </azione>
+    <azione>
+        <subject>MA-D</subject>
+        <method>setState</method>
+        <state>salutaFinale</state>
+    </azione>
 </scenario>

@@ -362,7 +362,6 @@ public class MainFrame extends JFrame {
     private void initGameScreenPanel()
     {
         gameScreenPanel.setInitialRoom(currentRoom);
-        // gameScreenPanel = new GameScreenPanel(currentRoom);
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         // Crea nuova label per visualizzare l'immagine di sfondo
@@ -379,8 +378,6 @@ public class MainFrame extends JFrame {
     // inizializza textBarPanel
     private void initTextBarPanel()
     {
-        // textBarPanel = new TextBarPanel(DEFAULT_SCALING_FACTOR);
-
         // nota: questi numeri sono per centrare sullo schermo la textBar
         int x_offset = (int) (SCREEN_WIDTH - textBarPanel.getPreferredSize().getWidth()) / 2;
         int y_offset = (int)(7 * DEFAULT_SCALING_FACTOR);

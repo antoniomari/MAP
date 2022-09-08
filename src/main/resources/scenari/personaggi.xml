@@ -102,6 +102,7 @@
             <scenario state="init">src/main/resources/scenari/piano EBERT/ParlaMA-D.xml</scenario>
             <scenario state="ricerca">src/main/resources/scenari/piano EBERT/ritrovoMemoria2.xml</scenario>
             <sentence state="aspettaPalla">Hai recuperato la mia memoria?</sentence>
+            <sentence state="salutaFinale">Addio, tecnico dell'ascensore!</sentence>
         </speakScenarios>
     </personaggio>
 </personaggi>
