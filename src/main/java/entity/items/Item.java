@@ -12,6 +12,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
+/**
+ * Classe che rappresenta un oggetto del gioco.
+ */
 public class Item extends GamePiece implements Observable
 {
     /** Descrizione dell'oggetto. Caricata dall'XML dell'oggetto. */

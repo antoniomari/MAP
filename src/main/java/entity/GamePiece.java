@@ -31,7 +31,7 @@ import java.util.Objects;
  * Viene utilizzata come classe base sia per i personaggi {@link GameCharacter} che per gli
  * oggetti {@link Item}
  */
-public class GamePiece
+public abstract class GamePiece
 {
 
     private final String name;
@@ -139,13 +139,36 @@ public class GamePiece
         return perpetualAnimationFrames;
     }
 
+    /**
+     * Inizializza i frame di animazione perpetua, ricavati dallo sprite-sheet
+     * indicato.
+     *
+     * Nel json i frame devono essere indicati seguendo chiavi numerate incrementali e
+     * con valori come nel seguente esempio:
+     *
+     * {@code
+     * "1":
+     *   {
+     *     "x": 0,
+     *     "y": 0,
+     *     "width": 120,
+     *     "height": 96
+     *   }
+     *   }
+     * @param spriteSheetPath
+     * @param jsonPath
+     */
     public void initPerpetualAnimationFrame(String spriteSheetPath, String jsonPath)
     {
         BufferedImage spritesheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
-
         perpetualAnimationFrames = SpriteManager.getOrderedFrames(spritesheet, jsonPath);
     }
 
+    /**
+     * Imposta lo stato di this.
+     *
+     * @param state nuovo stato
+     */
     public void setState(String state)
     {
         Objects.requireNonNull(state);
@@ -183,21 +206,6 @@ public class GamePiece
         return bHeight;
     }
 
-    /*
-    public void updateSprite(String spriteName)
-    {
-        sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, spriteName);
-
-        // setta a null così viene ricaricata
-        scaledSpriteIcon = null;
-
-        this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
-        this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
-
-        EventHandler.sendEvent(new GamePieceEvent(this, GamePieceEvent.Type.UPDATE_SPRITE));
-    }
-
-     */
 
     @Deprecated
     public void executeEffectAnimation(String animationName, int finalWait, boolean isPerpetual)
@@ -331,10 +339,6 @@ public class GamePiece
             throw new IllegalArgumentException("Valore type non valido");
     }
 
-    public void updatePosition(BlockPosition newPosition)
-    {
-        updatePosition(newPosition, 0);
-    }
     /**
      * Imposta la posizione (in blocchi) di this all'interno
      * della stanza in cui è contenuto
