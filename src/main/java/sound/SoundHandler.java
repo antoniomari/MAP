@@ -21,7 +21,6 @@ public class SoundHandler
     // clip dedicate per i suoni comuni (così da non dover
     // essere sempre ricaricati
     private static final Map<String, Clip> commonSoundsMap;
-    private static final Clip sound;
 
     private static final Clip scenarioSound;
     private static String currentMusicPath;
@@ -46,8 +45,6 @@ public class SoundHandler
 
             for(String key : commonSoundsMap.keySet())
                 openWav(key, commonSoundsMap.get(key));
-
-            sound = AudioSystem.getClip();
 
             scenarioSound = AudioSystem.getClip();
             scenarioSound.addLineListener(event ->
@@ -128,19 +125,9 @@ public class SoundHandler
 
             commonSoundClip.start();
         }
-        else  // caso suono non bufferizzato
+        else
         {
-            if(sound.isRunning())
-            {
-                sound.stop();
-            }
-
-            sound.flush();
-            sound.setFramePosition(0);
-
-            sound.close();
-            openWav(wavPath, sound);
-            sound.start();
+            throw new GameException("Suono non presente tra quelli registrati");
         }
     }
 
