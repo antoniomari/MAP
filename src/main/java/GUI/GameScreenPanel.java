@@ -331,7 +331,7 @@ public class GameScreenPanel extends JLayeredPane
         // TODO: controllare se si può aggiustare con il metodo precedente
     }
 
-    // TODO: aggiustare work in porgress
+
     public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName,
                                 BlockPosition pos, int finalWait)
     {
@@ -395,11 +395,9 @@ public class GameScreenPanel extends JLayeredPane
 
         if (piece.hasPerpetualAnimation())
         {
-            // TODO: rimuovere
             PerpetualAnimation anim = new PerpetualAnimation(pieceLabel, piece.getPerpetualAnimationFrames(),
                     100, true);
             anim.start();
-
             activePerpetualAnimation.put(piece, anim);
         }
 

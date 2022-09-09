@@ -12,8 +12,8 @@ import java.util.List;
 
 public class RoomFloor
 {
-    private List<Rectangle> walkableRectangles;
-    private List<Rectangle> obstacleRectangles;
+    private final List<Rectangle> walkableRectangles;
+    private final List<Rectangle> obstacleRectangles;
 
     public RoomFloor()
     {

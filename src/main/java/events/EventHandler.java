@@ -123,7 +123,7 @@ public class EventHandler
 
         if(e.getType() == GamePieceEvent.Type.MOVE)
         {
-            CharacterUpdateExecutor.executeMove(piece, e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
+            PieceUpdateExecutor.executeMove(piece, e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
             // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
 

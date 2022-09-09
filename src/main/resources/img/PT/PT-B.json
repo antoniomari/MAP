@@ -52,24 +52,18 @@
   "northArrow":
   {
     "x": 3,
-    "y": 12,
-    "finalX": 5,
-    "finalY": 13
+    "y": 12
   },
 
   "westArrow":
   {
     "x": 1,
-    "y": 19,
-    "finalX": 3,
-    "finalY": 18
+    "y": 19
   },
 
   "eastArrow":
   {
     "x": 36,
-    "y": 19,
-    "finalX": 36,
-    "finalY": 20
+    "y": 19
   }
 }

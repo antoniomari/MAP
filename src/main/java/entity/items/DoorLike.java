@@ -18,7 +18,6 @@ import java.util.Objects;
 
 public class DoorLike extends Item implements Openable
 {
-    private boolean isLocked;
     private boolean isOpen;
 
     private ActionSequence openScenario;
@@ -112,39 +111,29 @@ public class DoorLike extends Item implements Openable
             closeFrames.add(openFrames.get(i - 1));
     }
 
-    public void setInitialState(boolean isOpen, boolean isLocked)
-    {
-        this.isOpen = isOpen;
-        this.isLocked = isLocked;
-    }
-
     @Override
     public void open()
     {
-        if(isLocked)
-            EventHandler.sendEvent(new ItemInteractionEvent(this, "Non si apre, è bloccata"));
-        else
+
+        if(!isOpen)
         {
-            if(!isOpen)
+            if(state.equals("canOpen"))
             {
-                if(state.equals("canOpen"))
-                {
-                    // cambia stato in open
-                    isOpen = true;
-                    // esegui scenario completo
-                    GameManager.startScenario(successOpenScenario);
-                }
-                else if(openScenario != null)
-                    GameManager.startScenario(openScenario);
-                else if(openScenarioMap.containsKey(state))
-                {
-                    openScenario = XmlParser.loadScenario(openScenarioMap.get(state));
-                    GameManager.startScenario(openScenario);
-                }
-                else
-                {
-                    throw new GameException("Scenario non disponibile per l'apertura di " + getName());
-                }
+                // cambia stato in open
+                isOpen = true;
+                // esegui scenario completo
+                GameManager.startScenario(successOpenScenario);
+            }
+            else if(openScenario != null)
+                GameManager.startScenario(openScenario);
+            else if(openScenarioMap.containsKey(state))
+            {
+                openScenario = XmlParser.loadScenario(openScenarioMap.get(state));
+                GameManager.startScenario(openScenario);
+            }
+            else
+            {
+                throw new GameException("Scenario non disponibile per l'apertura di " + getName());
             }
         }
     }

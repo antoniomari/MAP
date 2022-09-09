@@ -3,6 +3,7 @@ package animation;
 import GUI.gamestate.GameState;
 import general.GameException;
 import general.GameManager;
+import general.LogOutputManager;
 import graphics.SpriteManager;
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +11,15 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Objects;
 
-// animazione statica
+/**
+ * Classe che rappresenta un'animazione perpetua di una JLabel.
+ * L'animazione data dal susseguirsi dei frames impostati viene ripetuta
+ * finché un evento esterno non la ferma.
+ */
 public class PerpetualAnimation extends StillAnimation
 {
 
     private Icon endIcon;
-    private boolean canRun = true;
     private GameState.State runningState;
     private boolean stateEnabled = false;
 
@@ -43,7 +47,7 @@ public class PerpetualAnimation extends StillAnimation
         // todo: rimpiazzare thread.sleep urgente
         try
         {
-            while(canRun)
+            while(true)
                 for (Icon frame : frameIcons)
                 {
                     // se lo stato è abilitato controlla ed eventualmente fermati
@@ -60,17 +64,9 @@ public class PerpetualAnimation extends StillAnimation
         }
         catch (InterruptedException e)
         {
-            // e.printStackTrace();
-            System.out.println("Animazione interrotta");
-
             if(endIcon != null)
-            {
-                System.out.println("Rip");
                 label.setIcon(endIcon);
-            }
-
         }
-
     }
 
     @Override
@@ -90,20 +86,6 @@ public class PerpetualAnimation extends StillAnimation
         if(thread != null)
         {
             thread.interrupt();
-
-            /*
-            canRun = false;
-            try
-            {
-                thread.join();
-                canRun = true;
-            }
-            catch(InterruptedException e)
-            {
-                throw new GameException("Errore in thread animazione");
-            }
-
-             */
         }
     }
 

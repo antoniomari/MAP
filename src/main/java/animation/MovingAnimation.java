@@ -20,7 +20,7 @@ import java.util.List;
 public class MovingAnimation extends Animation
 {
     private int delayMilliseconds;
-    private boolean initialDelay;
+    private final boolean initialDelay;
     private final double blockDistance;
     private final AbsPosition initialCoord;
     private final AbsPosition finalCoord;
@@ -32,9 +32,11 @@ public class MovingAnimation extends Animation
     private int currentIndex = 1;
 
 
-    public MovingAnimation(JLabel label, BlockPosition initialPos, BlockPosition finalPos, int millisecondWaitEnd, boolean initialDelay, List<Image> frames)
+    public MovingAnimation(JLabel label, BlockPosition initialPos,
+                           BlockPosition finalPos, int millisecondWaitEnd,
+                           boolean initialDelay, List<Image> frames)
     {
-        // TODO: aggiustare speed
+        // in futuro: aggiustare speed
         this(label, initialPos, finalPos, millisecondWaitEnd, initialDelay,0.5, frames);
     }
 
@@ -155,7 +157,6 @@ public class MovingAnimation extends Animation
     @Override
     protected void terminate()
     {
-        // GameState.changeState(GameState.State.PLAYING);
         GameManager.continueScenario();
     }
 
