@@ -2,7 +2,6 @@ package database;
 
 import entity.GamePiece;
 import entity.characters.GameCharacter;
-import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import entity.items.Item;
 import entity.items.PickupableItem;
@@ -13,15 +12,9 @@ import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
 import general.xml.XmlLoader;
-import org.h2.command.Prepared;
-import org.h2.store.fs.retry.FilePathRetryOnInterrupt;
 
-import java.io.IOError;
-import java.security.Key;
 import java.sql.*;
 import java.util.List;
-import java.util.Map;
-import java.util.PropertyPermission;
 
 /**
  * Gestore per il DB di gioco, utilizzato per la memorizzazione
@@ -29,12 +22,14 @@ import java.util.PropertyPermission;
  */
 public class DBManager
 {
-
+    /** Connessione con database GAME. */
     private static Connection conn;
+    /** Location del database per l'accesso. */
     private final static String DATABASE_PATH = "jdbc:h2:./db";
-    private final static String[] LINK_TABLE_NAMES = {"itemLocation", "characterLocation", "lockEntrance"};
+    /** Nomi di tabelle che non contengono FOREIGN KEY ad altre tabelle. */
     private final static String[] PURE_TABLE_NAMES = {"room", "item", "gameCharacter", "inventory"};
-
+    /** Nomi di tabelle che contengono FOREIGN KEY verso le precedenti. */
+    private final static String[] LINK_TABLE_NAMES = {"itemLocation", "characterLocation", "lockEntrance"};
 
     /**
      * Inizia la connessione al database di gioco.
@@ -98,6 +93,7 @@ public class DBManager
             DatabaseMetaData databaseMetaData = conn.getMetaData();
             ResultSet resultSet = databaseMetaData.getSchemas();
 
+            // controlla il nome di tutti i database risultati
             while (resultSet.next())
             {
                 String name = resultSet.getString("TABLE_SCHEM");
@@ -135,7 +131,8 @@ public class DBManager
     }
 
     /**
-     * Crea il database di gioco (col nome "GAME")
+     * Crea il database di gioco (col nome "GAME") se esso non esiste,
+     * non fa nulla altrimenti
      */
     public static void createGameDB()
     {
@@ -253,14 +250,14 @@ public class DBManager
 
     /**
      * Carica nel GameManager i GamePiece dal database di gioco,
-     * posizionandoli opportunamnete nelle stanze (che devono già essere state caricate).
+     * posizionandoli opportunamente nelle stanze (che devono già essere state caricate).
      *
      * @throws SQLException se si verifica un errore nel caricamento
      */
     public static void loadPieces() throws SQLException
     {
-        PreparedStatement pstm= conn.prepareStatement("SELECT name, state, canUse, room, x, y FROM game.item JOIN game.itemLocation ON name=item");
-        ResultSet rs= pstm.executeQuery();
+        PreparedStatement itemDataStm = conn.prepareStatement("SELECT name, state, canUse, room, x, y FROM game.item JOIN game.itemLocation ON name=item");
+        ResultSet rs = itemDataStm.executeQuery();
 
         while(rs.next())
         {
@@ -279,10 +276,10 @@ public class DBManager
             loadedItem.addInRoom(GameManager.getRoom(roomName), new BlockPosition(xPos, yPos));
         }
         rs.close();
-        pstm.close();
+        itemDataStm.close();
 
-        PreparedStatement pstm1= conn.prepareStatement("SELECT name, state, room, x, y FROM game.gameCharacter JOIN game.characterLocation ON name=gameCharacter");
-        ResultSet rs1 = pstm1.executeQuery();
+        PreparedStatement charDataStm = conn.prepareStatement("SELECT name, state, room, x, y FROM game.gameCharacter JOIN game.characterLocation ON name=gameCharacter");
+        ResultSet rs1 = charDataStm.executeQuery();
 
         while(rs1.next())
         {
@@ -304,7 +301,7 @@ public class DBManager
             }
         }
         rs1.close();
-        pstm1.close();
+        charDataStm.close();
     }
 
     /**
@@ -316,11 +313,10 @@ public class DBManager
      */
     public static void loadRooms() throws SQLException
     {
-        PreparedStatement pstm = conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
-        ResultSet rs = pstm.executeQuery();
+        PreparedStatement roomStm = conn.prepareStatement("SELECT name, xmlPath, scenarioOnEnterPath FROM game.room");
+        ResultSet rs = roomStm.executeQuery();
         while(rs.next())
         {
-            String name = rs.getString(1);
             String xmlPath = rs.getString(2);
             String scenarioOnEnterPath = rs.getString(3);
 
@@ -331,11 +327,11 @@ public class DBManager
             GameManager.startScenario(loadedRoomInitScenario);
         }
         rs.close();
-        pstm.close();
+        roomStm.close();
 
         // load roomLocks
-        PreparedStatement lockPstm = conn.prepareStatement("SELECT room, cardinal FROM game.lockEntrance");
-        ResultSet lockResult = lockPstm.executeQuery();
+        PreparedStatement lockStm = conn.prepareStatement("SELECT room, cardinal FROM game.lockEntrance");
+        ResultSet lockResult = lockStm.executeQuery();
 
         while(lockResult.next())
         {
@@ -345,20 +341,20 @@ public class DBManager
             GameManager.getRoom(roomName).setAdjacentLocked(Room.Cardinal.fromString(cardinal), true);
         }
 
-        lockPstm.close();
+        lockStm.close();
         lockResult.close();
     }
 
 
     /**
-     * Carica inventario dal database di gioco.
+     * Carica l'inventario dal database di gioco.
      *
      * @throws SQLException se si verifica un errore nel caricamento
      */
     public static void loadInventory() throws SQLException
     {
-        PreparedStatement pstm= conn.prepareStatement("SELECT item, index FROM game.inventory");
-        ResultSet rs= pstm.executeQuery();
+        PreparedStatement inventoryStm = conn.prepareStatement("SELECT item, index FROM game.inventory");
+        ResultSet rs= inventoryStm.executeQuery();
 
         while(rs.next())
         {
@@ -366,38 +362,42 @@ public class DBManager
             PlayingCharacter.getPlayer().addToInventory((PickupableItem) XmlLoader.loadPiece(name));
         }
         rs.close();
-        pstm.close();
+        inventoryStm.close();
     }
 
     /**
-     * Salva inventario nel database di gioco.
+     * Salva l'inventario nel database di gioco.
      *
      * @throws SQLException se si verifica un errore nel salvataggio
      */
     private static void saveInventory() throws SQLException
     {
-        PreparedStatement pstmInventory = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?)");
+        PreparedStatement inventoryStm = conn.prepareStatement("INSERT INTO game.inventory VALUES(?, ?)");
 
-        // cicla sugli oggetti recuperati dal Inventory e per ogni oggetto prepara la
-        // query da eseguire per il salvataggio
         for (PickupableItem it : PlayingCharacter.getPlayer().getInventory())
         {
-            pstmInventory.setString(1, it.getName());
-            pstmInventory.setInt(2, PlayingCharacter.getPlayer().
+            inventoryStm.setString(1, it.getName());
+            inventoryStm.setInt(2, PlayingCharacter.getPlayer().
                                                    getInventory().indexOf(it));
 
-            pstmInventory.executeUpdate();
+            inventoryStm.executeUpdate();
         }
     }
 
-    // TODO: finire javadoc
+    /**
+     * Salva i GamePiece registrati nel GameManager all'interno del database,
+     * nonché le loro posizioni all'interno delle stanze in cui sono contenuti.
+     *
+     * Nota: le stanze devono già essere state caricate nel database.
+     *
+     * @throws SQLException se si verifica un errore nel salvataggio
+     */
     private static void saveGamePieces() throws SQLException
     {
-        // gli statemente servo per preparere le diverse operazioni di aggiunta dati al database
-        PreparedStatement pstmItem = conn.prepareStatement("INSERT INTO game.item values(?, ?, ?)");
-        PreparedStatement pstmCharacters = conn.prepareStatement("INSERT INTO game.gamecharacter values(?, ?)");
-        PreparedStatement pstmItemLoc = conn.prepareStatement("INSERT INTO game.itemlocation values(?, ?, ?, ?)");
-        PreparedStatement pstmCharacterLoc = conn.prepareStatement("INSERT INTO game.characterlocation values(?, ?, ?, ?)");
+        PreparedStatement stmItem = conn.prepareStatement("INSERT INTO game.item values(?, ?, ?)");
+        PreparedStatement stmCharacters = conn.prepareStatement("INSERT INTO game.gamecharacter values(?, ?)");
+        PreparedStatement stmItemLoc = conn.prepareStatement("INSERT INTO game.itemlocation values(?, ?, ?, ?)");
+        PreparedStatement stmCharacterLoc = conn.prepareStatement("INSERT INTO game.characterlocation values(?, ?, ?, ?)");
 
         // ciclo che recupera ogni stanza dalla quale vengono prelevati oggetti e personaggi
         // per essere salvati nel database
@@ -405,29 +405,25 @@ public class DBManager
         {
             List<GamePiece> list = GameManager.getRoom(r).getPiecesPresent();
 
-            for( GamePiece gp : list ) {
+            for( GamePiece gp : list )
+            {
 
                 PreparedStatement chosenStatement;
 
-                if(gp instanceof Item) {
-                    pstmItem.setString(1,gp.getName());
-                    pstmItem.setString(2,gp.getState());
-                    if(((Item)gp).canUse())
-                    {
-                        pstmItem.setBoolean(3, true);
-                    }
-                    else
-                    {
-                        pstmItem.setBoolean(3, false);
-                    }
-                    pstmItem.executeUpdate();
-                    chosenStatement = pstmItemLoc;
+                if(gp instanceof Item)
+                {
+                    stmItem.setString(1,gp.getName());
+                    stmItem.setString(2,gp.getState());
+                    stmItem.setBoolean(3, ((Item) gp).canUse());
+                    stmItem.executeUpdate();
+                    chosenStatement = stmItemLoc;
                 }
-                else if(gp instanceof GameCharacter) {
-                    pstmCharacters.setString(1,gp.getName());
-                    pstmCharacters.setString(2,gp.getState());
-                    pstmCharacters.executeUpdate();
-                    chosenStatement = pstmCharacterLoc;
+                else if(gp instanceof GameCharacter)
+                {
+                    stmCharacters.setString(1,gp.getName());
+                    stmCharacters.setString(2,gp.getState());
+                    stmCharacters.executeUpdate();
+                    chosenStatement = stmCharacterLoc;
                 }
                 else
                 {
@@ -443,19 +439,27 @@ public class DBManager
         }
     }
 
+    /**
+     * Salva le stanze registrate nel GameManager all'interno del database
+     * e la presenza di eventuali entrate bloccate (tabella lockEntrance)
+     *
+     * Nota: le stanze devono già essere state caricate nel database.
+     *
+     * @throws SQLException se si verifica un errore nel salvataggio
+     */
     private static void saveRooms() throws SQLException
     {
-        PreparedStatement pstm1= conn.prepareStatement("INSERT INTO game.room values(?, ?, ?)");
+        PreparedStatement roomStm = conn.prepareStatement("INSERT INTO game.room values(?, ?, ?)");
         PreparedStatement lockStm = conn.prepareStatement("INSERT INTO game.lockEntrance values(?, ?)");
 
         for (String name : GameManager.getRoomNames())
         {
             Room room = GameManager.getRoom(name);
 
-            pstm1.setString(1,name);
-            pstm1.setString(2, room.getXmlPath());
-            pstm1.setString(3, room.getScenarioOnEnterPath());
-            pstm1.executeUpdate();
+            roomStm.setString(1,name);
+            roomStm.setString(2, room.getXmlPath());
+            roomStm.setString(3, room.getScenarioOnEnterPath());
+            roomStm.executeUpdate();
 
             // salva locks
             for(Room.Cardinal cardinal : Room.Cardinal.values())
@@ -468,6 +472,12 @@ public class DBManager
         }
     }
 
+    /**
+     * Elimina il contenuto di tutte le tabelle
+     * del database GAME.
+     *
+     * @throws SQLException se si verifica un errore durante l'operazione
+     */
     private static void deleteDatabaseContent() throws SQLException
     {
         PreparedStatement deleteStatement;
@@ -484,6 +494,10 @@ public class DBManager
         }
     }
 
+    /**
+     * Salva i dati di gioco all'interno del database
+     * GAME.
+     */
     public static void save()
     {
         try
