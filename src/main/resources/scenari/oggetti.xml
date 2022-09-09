@@ -4,8 +4,6 @@
         <classe>DoorLike</classe>
         <descrizione>Un ascensore arancione</descrizione>
         <canUse>false</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
             <scenario state="chiamaTecnico">src/main/resources/scenari/piano MIST/eseguiTest.xml</scenario>
@@ -16,8 +14,6 @@
         <classe>DoorLike</classe>
         <descrizione>Un armadio bloccato, bisogna usare la forza</descrizione>
         <canUse>false</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>true</isLocked>
         <onOpen>
             <mode>once</mode>
             <scenario state="init">src/main/resources/scenari/piano MIST/RompeArmadio.xml</scenario>
@@ -111,8 +107,6 @@
         <classe>DoorLike</classe>
         <descrizione>Un ascensore blue</descrizione>
         <canUse>false</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
             <scenario state="chiamaTecnico">src/main/resources/scenari/piano ALU/CaptchaTest.xml</scenario>
@@ -181,8 +175,6 @@
         <classe>DoorLike</classe>
         <descrizione>Un ascensore viola.</descrizione>
         <canUse>true</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>false</isLocked>
         <onOpen>
             <scenario state="arrivaTecnico">src/main/resources/scenari/piano terra/ConoscenzaTecnico.xml</scenario>
             <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
@@ -263,8 +255,6 @@
         <classe>DoorLike</classe>
         <descrizione>Un ascensore bianco</descrizione>
         <canUse>true</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
         </onOpen>
@@ -273,8 +263,6 @@
         <classe>DoorLike</classe>
         <descrizione>Una porta automatica</descrizione>
         <canUse>false</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>false</isLocked>
         <onOpen>
         </onOpen>
     </oggetto>
@@ -282,8 +270,6 @@
         <classe>DoorLike</classe>
         <descrizione>Un ascensore verde</descrizione>
         <canUse>true</canUse>
-        <isOpen>false</isOpen>
-        <isLocked>false</isLocked>
         <onOpen>
             <scenario state="init">src/main/resources/scenari/fallimentoApertura.xml</scenario>
             <scenario state="chiamaTecnico">src/main/resources/scenari/piano EBERT/apriAscensore.xml</scenario>

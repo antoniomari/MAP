@@ -239,7 +239,6 @@ public class XmlLoader
 
     private static void loadOnOpen(Element itemElement, Item itemToLoad)
     {
-        // inferenza: se trovo questo tag allora è un doorLike TODO: aggiustare
         Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
         Map<String, String> scenarioPathMap = new HashMap<>();
 
@@ -258,13 +257,6 @@ public class XmlLoader
             if(scenarioPathMap.keySet().isEmpty())
             {
                 itemToLoad.setState("canOpen");
-            }
-
-            if(itemToLoad.getClass() == DoorLike.class)
-            {
-                boolean isOpen = Boolean.parseBoolean(XmlParser.getTagValue(itemElement, "isOpen"));
-                boolean isLocked = Boolean.parseBoolean(XmlParser.getTagValue(itemElement, "isLocked"));
-                ((DoorLike) itemToLoad).setInitialState(isOpen, isLocked);
             }
         }
     }

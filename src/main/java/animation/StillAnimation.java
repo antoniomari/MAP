@@ -10,10 +10,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-// animazione statica
+/**
+ * Classe che rappresenta un'animazione di una JLabel in cui
+ * la label cambia icona ma non posizione.
+ */
 public class StillAnimation extends Animation
 {
+    /** Delay di default tra un frame e l'altro */
     private static final int DEFAULT_DELAY_MILLISECONDS = 200;
+    /** Flag per aspettare delay tra cambi di frame prima del primo cambio. */
     private static final boolean DEFAULT_INITIAL_DELAY = true;
 
     /**
@@ -30,8 +35,6 @@ public class StillAnimation extends Animation
      * Codice da eseguire alla fine dell'animazione.
      */
     protected Runnable onEndExecute;
-
-    // private boolean blocking = true;
 
 
     @Deprecated
@@ -139,17 +142,6 @@ public class StillAnimation extends Animation
      * @param animationLabel  JLabel da animare
      * @return StillAnimation creata
      */
-    public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath,
-                                                       JLabel animationLabel)
-    {
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spritesheetPath);
-        List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
-
-        // TODO: personalizzare delay milliseconds
-        return new StillAnimation(animationLabel, frames, 100, true);
-    }
-
-
     public static StillAnimation createCustomAnimation(String spritesheetPath, String jsonPath, String name,
                                                        JLabel animationLabel, double rescalingFactor)
     {

@@ -19,12 +19,6 @@ public class GameCharacter extends GamePiece
 
     private Image speakFrame;
 
-    public enum Emoji
-    {
-        ESCLAMATIVO, INTERROGATIVO, NOTA_MUSICALE,
-        CUORE, PROVOCAZIONE, GOCCIA, FUMO, PUNTINI, ENFASI, DORMI
-    }
-
     public GameCharacter(String name, String spritePath)
     {
         super(name, spritePath);

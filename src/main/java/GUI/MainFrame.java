@@ -492,34 +492,6 @@ public class MainFrame extends JFrame {
         backLabel.setBounds(LEFT + xBorder, TOP,
                 backLabel.getIcon().getIconWidth(), backLabel.getIcon().getIconHeight());
 
-        // bottoni-label
-        GameButtonLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
-                "/img/Menu iniziale/nuovapartita pressed.png", this::play);
-        nuovaPartitaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 8) / 24,
-                    nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
-
-        GameButtonLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
-                "/img/Menu iniziale/continua pressed.png", this::loadSavings);
-        continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
-                    continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
-        // se non ci sono salvataggi disabilita
-        if(!DBManager.existSavings())
-            continuaLabel.disableButtonLabel();
-
-
-        GameButtonLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
-                "/img/Menu iniziale/impostazioni pressed.png", null);
-        impostazioniLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 16) / 24,
-                    impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
-        // disabilita, attualmente non funzionante
-        impostazioniLabel.disableButtonLabel();
-
-
-        GameButtonLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
-                "/img/Menu iniziale/esci pressed.png", this::exit);
-        esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
-                    esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
-
         // imposta titolo
         BufferedImage titleImage  = SpriteManager.loadSpriteByName(
                 SpriteManager.loadSpriteSheet("/img/Menu iniziale/titolo.png"),
@@ -541,8 +513,39 @@ public class MainFrame extends JFrame {
                 "/img/Menu iniziale/titolo.png",
                 "/img/Menu iniziale/titolo.json",
                 titleLabel);
+
         titleAnimation.setDelay(100);
         titleAnimation.setFinalDelay(1000);
+
+        // bottoni-label
+        GameButtonLabel nuovaPartitaLabel = makeMenuButton("/img/Menu iniziale/nuovapartita.png",
+                "/img/Menu iniziale/nuovapartita pressed.png", () -> {play(); titleAnimation.stop();});
+        nuovaPartitaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 8) / 24,
+                    nuovaPartitaLabel.getIcon().getIconWidth(), nuovaPartitaLabel.getIcon().getIconHeight());
+
+        GameButtonLabel continuaLabel = makeMenuButton("/img/Menu iniziale/continua.png",
+                "/img/Menu iniziale/continua pressed.png", () -> {loadSavings(); titleAnimation.stop();});
+        continuaLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 12) / 24,
+                    continuaLabel.getIcon().getIconWidth(), continuaLabel.getIcon().getIconHeight());
+        // se non ci sono salvataggi disabilita
+        if(!DBManager.existSavings())
+            continuaLabel.disableButtonLabel();
+
+
+        GameButtonLabel impostazioniLabel = makeMenuButton("/img/Menu iniziale/impostazioni.png",
+                "/img/Menu iniziale/impostazioni pressed.png", null);
+        impostazioniLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 16) / 24,
+                    impostazioniLabel.getIcon().getIconWidth(), impostazioniLabel.getIcon().getIconHeight());
+        // disabilita, attualmente non funzionante
+        impostazioniLabel.disableButtonLabel();
+
+
+        GameButtonLabel esciLabel = makeMenuButton("/img/Menu iniziale/esci.png",
+                "/img/Menu iniziale/esci pressed.png", this::exit);
+        esciLabel.setBounds(LEFT + SCREEN_WIDTH / 40, TOP + (SCREEN_HEIGHT * 20) / 24,
+                    esciLabel.getIcon().getIconWidth(), esciLabel.getIcon().getIconHeight());
+
+
 
 
         startingMenuPanel.add(backLabel, Integer.valueOf(0));

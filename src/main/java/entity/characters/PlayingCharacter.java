@@ -36,7 +36,7 @@ public class PlayingCharacter extends GameCharacter
     public static PlayingCharacter getPlayer()
     {
         if(player == null)
-            player = new PlayingCharacter("Schwartz", SCHWARTZ_SPRITESHEET_PATH, SCHWARTZ_JSON_PATH);
+            player = new PlayingCharacter(PLAYER_NAME, SCHWARTZ_SPRITESHEET_PATH, SCHWARTZ_JSON_PATH);
 
         return player;
     }
@@ -50,7 +50,7 @@ public class PlayingCharacter extends GameCharacter
 
         player.removeFromRoom();
         GameManager.removePiece(player);
-        player = new PlayingCharacter("Schwartz", "/img/personaggi/Schwartz robot.png");
+        player = new PlayingCharacter(PLAYER_NAME, "/img/personaggi/Schwartz robot.png");
         Room currentRoom = GameManager.getMainFrame().getCurrentRoom();
         player.addInRoom(currentRoom, currentRoom.getDefaultPosition());
     }
