@@ -572,7 +572,7 @@ public class MainFrame extends JFrame {
                 () ->
                 {
                     buttonLabel.changeIcon(true);
-                    SoundHandler.playWav("src/main/resources/audio/effetti/bottone selezione mouse.wav",
+                    SoundHandler.playWav(SoundHandler.CLICK_SOUND_PATH,
                             SoundHandler.Mode.SOUND);
                 });
 

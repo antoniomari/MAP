@@ -7,20 +7,62 @@ import general.GameManager;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.*;
 
 public class SoundHandler
 {
     public static final String PICKUP_SOUND_PATH = "src/main/resources/audio/effetti/pickupItem.wav";
     public static final String SCROLL_BAR_PATH = "src/main/resources/audio/effetti/scroll.wav";
     public static final String EMOJI_SOUND_PATH = "src/main/resources/audio/effetti/emojiSound.wav";
-    private static Clip currentMusic;
+    public static final String CLICK_SOUND_PATH = "src/main/resources/audio/effetti/bottone selezione mouse.wav";
+
+    private static final Clip currentMusic;
+
+    // clip dedicate per i suoni comuni (così da non dover
+    // essere sempre ricaricati
+    private static final Map<String, Clip> commonSoundsMap;
+    private static final Clip sound;
+
+    private static final Clip scenarioSound;
     private static String currentMusicPath;
 
     public enum Mode
     {
         MUSIC, SOUND, SCENARIO_SOUND
     }
+
+    static
+    {
+        // apri clip per musica e sound
+        try
+        {
+            currentMusic = AudioSystem.getClip();
+
+            commonSoundsMap = new HashMap<>();
+            commonSoundsMap.put(CLICK_SOUND_PATH, AudioSystem.getClip());
+            commonSoundsMap.put(SCROLL_BAR_PATH, AudioSystem.getClip());
+
+            for(String key : commonSoundsMap.keySet())
+                openWav(key, commonSoundsMap.get(key));
+
+            sound = AudioSystem.getClip();
+
+            scenarioSound = AudioSystem.getClip();
+            scenarioSound.addLineListener(event ->
+            {
+                if (event.getType() == LineEvent.Type.STOP)
+                    GameManager.continueScenario();
+            });
+        }
+        catch(LineUnavailableException e)
+        {
+            e.printStackTrace();
+            throw new GameException("Errore nell'apertura clip audio");
+        }
+
+    }
+
+
 
     // Todo: bufferizzazione
     public static void playWav(String wavPath, Mode mode)
@@ -57,51 +99,58 @@ public class SoundHandler
         if(currentMusicPath!= null && currentMusicPath.equals(wavPath))
             return;
 
-        if(currentMusic != null)
-        {
+
+        if(currentMusic.isRunning())
             currentMusic.stop();
-        }
-
-
         currentMusicPath = wavPath;
-        currentMusic = openClip(wavPath);
+        currentMusic.close();
+
+        openWav(wavPath, currentMusic);
         currentMusic.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     private static void playSound(String wavPath)
     {
-        Clip soundClip = openClip(wavPath);
-        soundClip.start();
+        // caso suono bufferizzato
+        if(commonSoundsMap.containsKey(wavPath))
+        {
+            Clip commonSoundClip = commonSoundsMap.get(wavPath);
+
+            if (commonSoundClip.isRunning())
+                commonSoundClip.stop();
+
+
+            commonSoundClip.setFramePosition(0);
+            commonSoundClip.start();
+        }
+        else  // caso suono non bufferizzato
+        {
+            if (sound.isRunning())
+                sound.stop();
+
+            sound.close();
+            openWav(wavPath, sound);
+            sound.start();
+        }
     }
 
     private static void playScenarioSound(String wavPath)
     {
-        Clip scenarioSoundClip = openClip(wavPath);
+        scenarioSound.close();
+        openWav(wavPath, scenarioSound);
 
-        scenarioSoundClip.addLineListener(event ->
-        {
-            if (event.getType() == LineEvent.Type.STOP)
-            {
-                scenarioSoundClip.close();
-                GameManager.continueScenario();
-            }
-        });
-
-        scenarioSoundClip.start();
+        scenarioSound.start();
         GameState.changeState(GameState.State.SCENARIO_SOUND);
     }
 
-    private static Clip openClip(String wavPath)
+    private static void openWav(String wavPath, Clip targetClip)
     {
         System.out.println("Sto aprendo: " + wavPath);
         try
         {
             File file = new File(wavPath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-
-            clip.open(audioStream);
-            return clip;
+            targetClip.open(audioStream);
         }
         catch(IOException | LineUnavailableException | UnsupportedAudioFileException e)
         {
@@ -110,5 +159,7 @@ public class SoundHandler
         }
 
     }
+
+
 
 }
