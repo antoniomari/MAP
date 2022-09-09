@@ -427,7 +427,6 @@ public class MainFrame extends JFrame {
         final String MENU_BACK_PATH = "/img/computersPause.png";
 
         Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
-        //double rescalingBackgroundFactor = ((double) SCREEN_WIDTH/menuBackImage.getWidth(null));
 
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
                                                                                         SCREEN_WIDTH,SCREEN_HEIGHT ));
@@ -567,7 +566,7 @@ public class MainFrame extends JFrame {
         GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, DEFAULT_SCALING_FACTOR / 3);
 
         GameMouseListener buttonListener = new GameMouseListener(
-                                            GameMouseListener.Button.LEFT, clickAction, null, GameState.State.INIT);
+                                            GameMouseListener.Button.LEFT, () -> {clickAction.run(); buttonLabel.changeIcon(false);}, null, GameState.State.INIT);
         buttonListener.setMouseEnteredAction(
                 () ->
                 {
@@ -603,6 +602,7 @@ public class MainFrame extends JFrame {
         {
             cl.show(mainPanel, "GIOCO");
             currentDisplaying = "GIOCO";
+
             GameState.changeState(GameState.State.PLAYING);
         }
 
