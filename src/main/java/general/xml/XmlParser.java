@@ -1,7 +1,6 @@
 package general.xml;
 
 import GUI.miniGames.Captcha;
-import GUI.miniGames.ClientCap;
 import GUI.miniGames.LogicQuest;
 import GUI.miniGames.TestMist;
 import entity.GamePiece;

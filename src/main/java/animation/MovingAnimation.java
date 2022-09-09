@@ -2,7 +2,6 @@ package animation;
 
 import GUI.AbsPosition;
 import GUI.GameScreenManager;
-import GUI.gamestate.GameState;
 import entity.rooms.BlockPosition;
 import general.GameManager;
 
@@ -126,8 +125,8 @@ public class MovingAnimation extends Animation
     {
         boolean delay = initialDelay;
 
-        if(GameState.getState() != GameState.State.MOVING)
-            GameState.changeState(GameState.State.MOVING);
+        if(GameManager.getState() != GameManager.GameState.MOVING)
+            GameManager.changeState(GameManager.GameState.MOVING);
 
         for(AbsPosition c : positionsList)
         {

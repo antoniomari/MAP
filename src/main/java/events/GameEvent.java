@@ -7,6 +7,9 @@ import entity.rooms.Room;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Classe che rappresenta un evento di gioco.
+ */
 public abstract class GameEvent
 {
     protected LocalDateTime eventTime;

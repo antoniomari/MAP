@@ -1,11 +1,10 @@
 package events.executors;
 
-import GUI.gamestate.GameState;
 import animation.PerpetualAnimation;
 import animation.StillAnimation;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
-import graphics.SpriteManager;
+import general.GameManager;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class AnimationExecutor extends Executor
     }
 
     public static void executeSpeakAnimation(GamePiece piece, List<Image> frames,
-                                                           int delayMilliseconds, GameState.State runningState)
+                                                           int delayMilliseconds, GameManager.GameState runningState)
     {
         if(speakAnimation != null)
             speakAnimation.stop();

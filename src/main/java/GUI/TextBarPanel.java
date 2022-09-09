@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.gamestate.GameState;
+
 import general.GameManager;
 import general.ScenarioMethod;
 import graphics.SpriteManager;
@@ -100,7 +100,7 @@ public class TextBarPanel extends JLayeredPane
     public void showTextBar(String text)
     {
         // update gameState
-        GameState.changeState(GameState.State.TEXT_BAR);
+        GameManager.changeState(GameManager.GameState.TEXT_BAR);
 
         barLabel.setIcon(barIcon);
         textArea.setText(text);

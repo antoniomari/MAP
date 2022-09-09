@@ -1,21 +1,13 @@
 package GUI.miniGames;
 
-// TODO: possibilità di implementare il factory design pattern
 
-import GUI.gamestate.GameState;
 import general.FontManager;
 import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
-import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,7 +128,7 @@ public class LogicQuest extends MiniGame
     public static void executeTest(int number)
     {
         LogOutputManager.logOutput("Iniziando Test ALU: ", LogOutputManager.GAMESTATE_COLOR);
-        GameState.changeState(GameState.State.TEST);
+        GameManager.changeState(GameManager.GameState.TEST);
 
         MiniGame.setCurrentTest(createLogicQuest(number));
     }

@@ -1,6 +1,5 @@
 package animation;
 
-import GUI.gamestate.GameState;
 import general.GameException;
 import graphics.SpriteManager;
 

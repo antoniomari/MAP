@@ -1,6 +1,5 @@
 package GUI;
 
-import animation.Animation;
 import animation.MovingAnimation;
 import animation.PerpetualAnimation;
 import animation.StillAnimation;
@@ -19,8 +18,6 @@ import entity.rooms.Room;
 import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
-import general.ScenarioMethod;
-import general.xml.XmlParser;
 import graphics.SpriteManager;
 
 import javax.swing.*;
@@ -434,16 +431,6 @@ public class GameScreenPanel extends JLayeredPane
         add(pieceLabel, ITEM_LAYER);
 
         updatePiecePosition(piece, pos, null);
-
-        /*
-        if (piece instanceof Item)
-            addGameItem((Item) piece, pos);
-        else if (piece instanceof GameCharacter)
-            addGameCharacter((GameCharacter) piece, pos);
-        else
-            throw new GameException("GamePiece " + piece + " non valido");
-
-         */
     }
 
     /**
@@ -514,7 +501,7 @@ public class GameScreenPanel extends JLayeredPane
     /**
      * Crea l'animazione di movimento di un GamePiece, la quale parte da {@code initialPos},
      * termina in {@code finalPos} e alla fine attende {@code millisecondWaitEnd} millisecondi prima
-     * che il gioco torni nello stato {@link GUI.gamestate.GameState.State#PLAYING}.
+     * che il gioco torni nello stato {@link GameManager.GameState#PLAYING}.
      *
      * @param piece GamePiece da animare
      * @param initialPos posizione di partenza dell'animazione
@@ -537,94 +524,6 @@ public class GameScreenPanel extends JLayeredPane
 
         return new MovingAnimation(labelToAnimate,
                                     initialPos, finalPos, millisecondWaitEnd, true, frames);
-    }
-
-
-    /**
-     * Aggiunge a questo GameScreenPanel una JLabel di un Item, la quale verrà posizionata
-     * in modo tale che il suo blocco in basso a sinistra occupi la posizione {@code pos}.
-     *
-     * @param it Item del quale aggiungere la label
-     * @param pos posizione del blocco in basso a sinistra dell'Item
-     */
-    @Deprecated
-    private void addGameItem(Item it, BlockPosition pos)
-    {
-        // TODO: controllare se c'è codice duplicato
-        // recupera lo sprite della giusta dimensione
-        Icon rescaledSprite = it.getScaledIconSprite(rescalingFactor);
-
-        // crea la label corrispondente all'Item
-        JLabel itemLabel = new JLabel(rescaledSprite);
-
-        // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
-        GameMouseListener popMenuListener = new GameMouseListener(GameMouseListener.Button.RIGHT,
-                null, () -> PopMenuManager.showMenu(it, itemLabel, 0, 0));
-        itemLabel.addMouseListener(popMenuListener);
-
-        // crea listener per il tasto sinistro
-        GameMouseListener interactionListener = new GameMouseListener(GameMouseListener.Button.LEFT,
-                null,
-                () ->
-                {
-                    InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
-                    PickupableItem selectedItem = inventoryPanel.getSelectedItem();
-                    if(selectedItem != null)
-                        selectedItem.useWith(it);
-                });
-        itemLabel.addMouseListener(interactionListener);
-
-        // metti la coppia Item JLabel nel dizionario
-        pieceLabelMap.put(it, itemLabel);
-
-        // aggiungi la label nell'ITEM_LAYER
-        add(itemLabel, ITEM_LAYER);
-
-        updatePiecePosition(it, pos, null);
-    }
-
-    /**
-     * Aggiunge a questo GameScreenPanel una JLabel di un GameCharacter, la quale verrà posizionata
-     * in modo tale che il suo blocco in basso a sinistra occupi la posizione {@code pos}.
-     *
-     * @param ch GameCharacter del quale aggiungere la label
-     * @param pos posizione del blocco in basso a sinistra del GameCharacter
-     */
-    @Deprecated
-    private void addGameCharacter(GameCharacter ch, BlockPosition pos)
-    {
-        // recupera lo sprite della giusta dimensione
-        Icon rescaledSprite = ch.getScaledIconSprite(rescalingFactor);
-
-        // crea la label corrispondente all'Item
-        JLabel characterLabel = new JLabel(rescaledSprite);
-
-        // TODO: aggiustare per evitare copia
-        GameMouseListener interactionListener = new GameMouseListener(GameMouseListener.Button.LEFT,
-                null,
-                () ->
-                {
-                    InventoryPanel inventoryPanel = retrieveParentFrame().getInventoryPanel();
-                    PickupableItem selectedItem = inventoryPanel.getSelectedItem();
-                    if(selectedItem != null)
-                        selectedItem.useWith(ch);
-                });
-        characterLabel.addMouseListener(interactionListener);
-
-        if(ch instanceof NPC)
-        {
-            // crea listener per il tasto destro, che deve visualizzare il corretto menu contestuale
-            GameMouseListener popMenuListener = new GameMouseListener(GameMouseListener.Button.RIGHT,
-                    null, () -> PopMenuManager.showMenu(ch, characterLabel, 0, 0));
-            characterLabel.addMouseListener(popMenuListener);
-        }
-
-        // metti la coppia Item JLabel nel dizionario
-        pieceLabelMap.put(ch, characterLabel);
-        // aggiungi la label
-        add(characterLabel, CHARACTER_LAYER);
-
-        updatePiecePosition(ch, pos, null);
     }
 
     /**

@@ -1,9 +1,6 @@
 package animation;
 
-import GUI.gamestate.GameState;
-import general.GameException;
 import general.GameManager;
-import general.LogOutputManager;
 import graphics.SpriteManager;
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +17,7 @@ public class PerpetualAnimation extends StillAnimation
 {
 
     private Icon endIcon;
-    private GameState.State runningState;
+    private GameManager.GameState runningState;
     private boolean stateEnabled = false;
 
     public PerpetualAnimation(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay)
@@ -51,7 +48,7 @@ public class PerpetualAnimation extends StillAnimation
                 for (Icon frame : frameIcons)
                 {
                     // se lo stato è abilitato controlla ed eventualmente fermati
-                    if(stateEnabled && GameState.getState() != runningState)
+                    if(stateEnabled && GameManager.getState() != runningState)
                         return;
 
                     if (delay)
@@ -89,7 +86,9 @@ public class PerpetualAnimation extends StillAnimation
         }
     }
 
-    public static PerpetualAnimation animateWhileGameState(JLabel label, List<Image> frames, int delayMilliseconds, boolean initialDelay, GameState.State runningState)
+    public static PerpetualAnimation animateWhileGameState(JLabel label, List<Image> frames,
+                                                           int delayMilliseconds, boolean initialDelay,
+                                                           GameManager.GameState runningState)
     {
         Objects.requireNonNull(runningState);
 

@@ -1,6 +1,5 @@
 package GUI.miniGames;
 
-import GUI.gamestate.GameState;
 import general.FontManager;
 import general.GameManager;
 import general.LogOutputManager;
@@ -60,7 +59,7 @@ public class Captcha extends MiniGame
     public static void executeTest()
     {
         LogOutputManager.logOutput("Iniziando Test CAPTCHA: ", LogOutputManager.GAMESTATE_COLOR);
-        GameState.changeState(GameState.State.TEST);
+        GameManager.changeState(GameManager.GameState.TEST);
 
         MiniGame.setCurrentTest( new Captcha());
     }

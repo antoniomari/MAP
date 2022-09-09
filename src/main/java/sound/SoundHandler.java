@@ -1,6 +1,5 @@
 package sound;
 
-import GUI.gamestate.GameState;
 import general.GameException;
 import general.GameManager;
 
@@ -137,7 +136,7 @@ public class SoundHandler
         openWav(wavPath, scenarioSound);
 
         scenarioSound.start();
-        GameState.changeState(GameState.State.SCENARIO_SOUND);
+        GameManager.changeState(GameManager.GameState.SCENARIO_SOUND);
     }
 
     private static void openWav(String wavPath, Clip targetClip)

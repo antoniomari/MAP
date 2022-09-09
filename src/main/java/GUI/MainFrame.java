@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.gamestate.GameState;
 import animation.PerpetualAnimation;
 import database.DBManager;
 import entity.characters.PlayingCharacter;
@@ -16,10 +15,6 @@ import sound.SoundHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -216,7 +211,7 @@ public class MainFrame extends JFrame {
 
     /**
      * Inizializza il frame, ponendolo a schermo intero, e lo registra
-     * presso {@link Executor} e {@link GameState}.
+     * presso {@link Executor} e {@link GameManager.GameState}.
      *
      * Registra inoltre il {@link MainFrame#gameScreenPanel} presso
      * {@link GameScreenManager}.
@@ -246,7 +241,6 @@ public class MainFrame extends JFrame {
 
         // registrati presso gli Executor (eventi) e presso GameState
         Executor.setMainFrame(this);
-        GameState.setMainFrame(this);
         // registra il gameScreenPanel presso GameScreenManager
         GameScreenManager.setActivePanel(gameScreenPanel);
         GameManager.setMainFrame(this);
@@ -566,10 +560,14 @@ public class MainFrame extends JFrame {
     private GameButtonLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
     {
         // TODO: aggiustare rescalingFactor, non va bene
-        GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath, DEFAULT_SCALING_FACTOR / 3);
+        GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath,
+                DEFAULT_SCALING_FACTOR / 3);
 
         GameMouseListener buttonListener = new GameMouseListener(
-                                            GameMouseListener.Button.LEFT, () -> {clickAction.run(); buttonLabel.changeIcon(false);}, null, GameState.State.INIT);
+                                            GameMouseListener.Button.LEFT,
+                () -> {clickAction.run(); buttonLabel.changeIcon(false);},
+                null,
+                GameManager.GameState.INIT);
         buttonListener.setMouseEnteredAction(
                 () ->
                 {
@@ -599,14 +597,14 @@ public class MainFrame extends JFrame {
         {
             cl.show(mainPanel, "MENU");
             currentDisplaying = "MENU";
-            GameState.changeState(GameState.State.INIT);
+            GameManager.changeState(GameManager.GameState.INIT);
         }
         else
         {
             cl.show(mainPanel, "GIOCO");
             currentDisplaying = "GIOCO";
 
-            GameState.changeState(GameState.State.PLAYING);
+            GameManager.changeState(GameManager.GameState.PLAYING);
         }
 
     }
@@ -615,7 +613,7 @@ public class MainFrame extends JFrame {
     /** Chiamato per iniziare una nuova partita. */
     private void play()
     {
-        if(GameState.getState() != GameState.State.INIT)
+        if(GameManager.getState() != GameManager.GameState.INIT)
         {
             return;
         }
@@ -634,7 +632,7 @@ public class MainFrame extends JFrame {
         cl.show(mainPanel, "GIOCO");
         currentDisplaying = "GIOCO";
 
-        GameState.changeState(GameState.State.PLAYING);
+        GameManager.changeState(GameManager.GameState.PLAYING);
         setupPlayground();
     }
 
@@ -680,7 +678,7 @@ public class MainFrame extends JFrame {
         cl.show(mainPanel, "GIOCO");
         currentDisplaying = "GIOCO";
 
-        GameState.changeState(GameState.State.PLAYING);
+        GameManager.changeState(GameManager.GameState.PLAYING);
         SoundHandler.playWav(currentRoom.getMusicPath(), SoundHandler.Mode.MUSIC);
     }
 

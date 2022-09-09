@@ -1,7 +1,6 @@
 package GUI.miniGames;
 
 import GUI.GameScreenPanel;
-import GUI.gamestate.GameState;
 import general.GameManager;
 import general.xml.XmlParser;
 
@@ -21,7 +20,7 @@ public abstract class MiniGame extends JLayeredPane
     {
         System.out.println("PREMUTO");
         currentTest.quit();
-        GameState.changeState(GameState.State.PLAYING);
+        GameManager.changeState(GameManager.GameState.PLAYING);
         lastQuitTest = currentTest;
         currentTest = null;
     }
@@ -102,13 +101,13 @@ public abstract class MiniGame extends JLayeredPane
 
             if(win)
             {
-                GameState.changeState(GameState.State.PLAYING);
+                GameManager.changeState(GameManager.GameState.PLAYING);
                 quit();
                 GameManager.startScenario(XmlParser.loadScenario(scenarioOnWinPath));
             }
             else
             {
-                GameState.changeState(GameState.State.TEST);
+                GameManager.changeState(GameManager.GameState.TEST);
 
                 if(closeOnFail)
                 {
@@ -129,7 +128,7 @@ public abstract class MiniGame extends JLayeredPane
     protected void showResult(String msg)
     {
         mainPanel.setVisible(false);
-        GameState.changeState(GameState.State.TEST_RESULT);
+        GameManager.changeState(GameManager.GameState.TEST_RESULT);
         resultLabel.setText(msg);
         add(resultPanel, RESULT_LAYER);
 

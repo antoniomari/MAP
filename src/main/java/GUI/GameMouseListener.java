@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.gamestate.GameState;
 import general.GameManager;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ import java.util.Objects;
  * le cui istanze sono personalizzabili: è possibile
  * impostare azioni (runnable) associate a uno specifico tasto,
  * le quali vengono attivate solo in un particolare stato di gioco
- * {@link GameState.State}
+ * {@link GameManager.GameState}
  */
 public class GameMouseListener implements MouseListener
 {
@@ -28,7 +27,7 @@ public class GameMouseListener implements MouseListener
     /** Azione da eseguire all'uscita del mouse da un componente. */
     private Runnable exitAction = () -> {};
     /** Stato in cui il gioco deve trovarsi per l'esecuzione delle azioni. */
-    private final GameState.State targetState;
+    private final GameManager.GameState targetState;
 
     private boolean okFlag;
 
@@ -69,21 +68,21 @@ public class GameMouseListener implements MouseListener
     }
 
     /**
-     * Crea un GameMouseListener attivo nello stato {@link GameState.State#PLAYING}
+     * Crea un GameMouseListener attivo nello stato {@link GameManager.GameState#PLAYING}
      *
      * @param button tasto target del listener
      * @param pressAction azione da eseguire alla pressione del tasto,
      *                    quando il gioco si trova nello stato
-     *                    {@link GameState.State#PLAYING} o {@code null} per non
+     *                    {@link GameManager.GameState#PLAYING} o {@code null} per non
      *                    impostare alcuna azione
      * @param releaseAction azione da eseguire al rilascio del tasto,
      *                      quando il gioco si trova nello stato
-     *                      {@link GameState.State#PLAYING} o {@code null} per non
+     *                      {@link GameManager.GameState#PLAYING} o {@code null} per non
      *                      impostare alcuna azione
      */
     public GameMouseListener(Button button, Runnable pressAction, Runnable releaseAction)
     {
-        this(button, pressAction, releaseAction, GameState.State.PLAYING);
+        this(button, pressAction, releaseAction, GameManager.GameState.PLAYING);
     }
 
     /**
@@ -98,10 +97,10 @@ public class GameMouseListener implements MouseListener
      *                      quando il gioco si trova nello stato
      *                      {@code targetState} o {@code null} per non
      *                      impostare alcuna azione
-     * @param targetState stato di gioco {@link GameState.State} in cui
+     * @param targetState stato di gioco {@link GameManager.GameState} in cui
      *                    è attivo il GameKeyListener da creare
      */
-    public GameMouseListener(Button button, Runnable pressAction, Runnable releaseAction, GameState.State targetState)
+    public GameMouseListener(Button button, Runnable pressAction, Runnable releaseAction, GameManager.GameState targetState)
     {
         Objects.requireNonNull(button);
         Objects.requireNonNull(targetState);
@@ -159,7 +158,7 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mousePressed(MouseEvent e)
     {
-        if (GameState.getState() == targetState &&  button.checkButton(e))
+        if (GameManager.getState() == targetState &&  button.checkButton(e))
         {
             pressAction.run();
             okFlag = true;
@@ -173,7 +172,7 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mouseReleased(MouseEvent e)
     {
-        if (GameState.getState() == targetState && button.checkButton(e))
+        if (GameManager.getState() == targetState && button.checkButton(e))
         {
             if(okFlag)
                 releaseAction.run();
@@ -187,7 +186,7 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mouseEntered(MouseEvent e)
     {
-        if(GameState.getState() == targetState)
+        if(GameManager.getState() == targetState)
         {
             enterAction.run();
         }
@@ -200,10 +199,10 @@ public class GameMouseListener implements MouseListener
     @Override
     public void mouseExited(MouseEvent e)
     {
-        if (GameState.getState() == targetState)
+        if (GameManager.getState() == targetState)
             okFlag = false;
 
-        if(GameState.getState() == targetState)
+        if(GameManager.getState() == targetState)
         {
             exitAction.run();
         }

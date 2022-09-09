@@ -1,7 +1,5 @@
 package animation;
 
-import GUI.gamestate.GameState;
-import general.GameException;
 import general.GameManager;
 import general.ScenarioMethod;
 import graphics.SpriteManager;
@@ -89,8 +87,8 @@ public class StillAnimation extends Animation
     {
         boolean delay = initialDelay;
 
-        if (GameState.getState() != GameState.State.MOVING)
-            GameState.changeState(GameState.State.MOVING);
+        if (GameManager.getState() != GameManager.GameState.MOVING)
+            GameManager.changeState(GameManager.GameState.MOVING);
 
         for (Icon frame : frameIcons)
         {

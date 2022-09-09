@@ -18,11 +18,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Classe che si occupa del caricamento delle entity di gioco
+ * partendo dai file xml associati ad esse.
+ */
 public class XmlLoader
 {
+    /** Path del file xml che contiene i dati sui personaggi. */
     private static final String CHARACTER_XML_PATH = "src/main/resources/scenari/personaggi.xml";
+    /** Path del file xml che contiene i dati sugli oggetti. */
     private static final String ITEM_XML_PATH = "src/main/resources/scenari/oggetti.xml";
 
+    /** Dizionario Nome GamePiece -> Elemento xml associato. */
     private static final Map<String, Element> pieceElementMap;
 
     static
@@ -32,15 +39,17 @@ public class XmlLoader
         Element characterXml = XmlParser.openXml(CHARACTER_XML_PATH).getDocumentElement();
         Element itemXml = XmlParser.openXml(ITEM_XML_PATH).getDocumentElement();
 
-
+        // crea liste di elementi xml dei personaggi e degli oggetti
         List<Element> characterElementList = XmlParser.getTagsList(characterXml, "personaggio");
         List<Element> itemElementList = XmlParser.getTagsList(itemXml, "oggetto");
 
         // TODO: capire funzionamento flatMap
+        // unifica in un'unica lista gli elementi xml di personaggi e oggetti
         List<Element> pieceElementList = Stream.of(characterElementList, itemElementList)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
+        // aggiungi gli elementi xml dei GamePiece nel dizionario
         for(Element pieceElement : pieceElementList)
         {
             String name = XmlParser.getXmlAttribute(pieceElement, "nome");
@@ -261,6 +270,7 @@ public class XmlLoader
         }
     }
 
+
     private static void loadOnUseWith(Element itemElement, Item itemToLoad)
     {
         Element onUseWithElement = (Element) itemElement.getElementsByTagName("onUseWith").item(0);
@@ -287,8 +297,6 @@ public class XmlLoader
             ActionSequence useWithScenario = XmlParser.loadScenario(scenarioPath);
 
             ((PickupableItem) itemToLoad).setUseWithAction(useWithScenario);
-
-
         }
     }
 
@@ -341,6 +349,14 @@ public class XmlLoader
     }
 
 
+    /**
+     * Carica lo scenario d'inizializzazione della stanza per il caricamento
+     * da database.
+     *
+     * @param roomPath path del file xml contenente i dati della Room
+     * @return ActionSequence che comprende le azioni d'inizializzazione stanza
+     * ammesse per il caricamento da database
+     */
     public static ActionSequence loadRoomInitDB(String roomPath)
     {
         Document roomXml = XmlParser.openXml(roomPath);

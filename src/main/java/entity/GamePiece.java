@@ -2,8 +2,6 @@ package entity;
 
 import GUI.InventoryPanel;
 import entity.characters.GameCharacter;
-import entity.characters.PlayingCharacter;
-import events.AnimationEvent;
 import events.EventHandler;
 import events.GamePieceEvent;
 import events.ItemInteractionEvent;
@@ -226,13 +224,13 @@ public abstract class GamePiece
 
     public void animate()
     {
-        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
+        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
     }
 
     public void animateReverse()
     {
         Collections.reverse(animateFrames);
-        EventHandler.sendEvent(new AnimationEvent(this, animateFrames));
+        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
         Collections.reverse(animateFrames);
     }
 
