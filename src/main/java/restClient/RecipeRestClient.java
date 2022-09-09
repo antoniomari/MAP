@@ -19,19 +19,29 @@ import java.util.List;
  */
 public class RecipeRestClient
 {
+    /** Client per eseguire chiamate REST. */
     private static final Client CLIENT = ClientBuilder.newClient();
+
+    /** Indirizzo per la chiamata REST per ottenere le informazioni sui "cocktail". */
     private static final String URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+    /** Numero massimo di ingredienti del "cocktail". */
     private static final int MAX_INGREDIENTS = 6;
 
+    /** Ingredienti di DEFAULT (utilizzati in caso di errore o di mancata connessione). */
     private static final String[] DEFAULT_INGREDIENTS = {"Onion - 10 cloves",
                                                         "Garlic - 40 cloves",
                                                         "Basil - 25 leaves",
                                                         "Parsley - a piacere",
                                                         "Cheese - too much",
                                                         "Tomato sauce - 20 cups"};
-
+    /** Categoria di DEFAULT (utilizzati in caso di errore o di mancata connessione). */
     private static final String DEFAULT_CATEGORY = "Italian";
 
+    /**
+     *  Classe che rappresenta una ricetta per "cocktail", costituita
+     *  dalla categoria di appartenenza nonché dalla lista d'ingredienti.
+     */
     public static class Recipe
     {
         String category;
@@ -54,34 +64,41 @@ public class RecipeRestClient
         }
     }
 
+    /**
+     * Genera una ricetta casuale (tramite chiamata
+     * REST all'indirizzo {@link RecipeRestClient#URL}).
+     *
+     * @return ricetta casuale generata
+     */
     public static Recipe generateRecipe()
     {
-
         WebTarget target = CLIENT.target(URL);
         Response resp;
         try
         {
             resp = target.request(MediaType.APPLICATION_JSON).get();
-        } catch (ProcessingException e)
+        } catch (ProcessingException e) // in caso di errore nella richiesta
         {
             return new Recipe(DEFAULT_CATEGORY, Arrays.asList(DEFAULT_INGREDIENTS));
         }
 
         int status = resp.getStatus();
 
+        // se la richiesta è anaata a buon fine
         if (status == 200)
         {
 
             JSONTokener jt = new JSONTokener(resp.readEntity(String.class));
-
             JSONObject mealJson = (JSONObject) new JSONObject(jt).getJSONArray("meals").get(0);
 
             // prendi categoria
             String category = mealJson.getString("strCategory");
 
+            // caso: categoria assente
             if(category.equals(""))
                 category = DEFAULT_CATEGORY;
 
+            // prendi ingredienti
             List<String> ingredients = getIngredients(mealJson);
 
             return new Recipe(category, ingredients);
@@ -92,7 +109,15 @@ public class RecipeRestClient
         }
     }
 
-
+    /**
+     * Recupera una lista d'ingredienti (con dosi) per il cocktail dal
+     * {@code mealJson}.
+     *
+     * Il numero massimo d'ingredienti è  {@link RecipeRestClient#MAX_INGREDIENTS}.
+     *
+     * @param mealJson json della ricetta (dev'essere stato restituito dalla chiamata rest)
+     * @return una lista contenente stringhe della forma "[ingrediente] - [quantità]"
+     */
     private static List<String> getIngredients(JSONObject mealJson)
     {
         List<String> ingredients = new ArrayList<>(MAX_INGREDIENTS);
