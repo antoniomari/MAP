@@ -41,6 +41,8 @@ public class SoundHandler
             commonSoundsMap = new HashMap<>();
             commonSoundsMap.put(CLICK_SOUND_PATH, AudioSystem.getClip());
             commonSoundsMap.put(SCROLL_BAR_PATH, AudioSystem.getClip());
+            commonSoundsMap.put(PICKUP_SOUND_PATH, AudioSystem.getClip());
+            commonSoundsMap.put(EMOJI_SOUND_PATH, AudioSystem.getClip());
 
             for(String key : commonSoundsMap.keySet())
                 openWav(key, commonSoundsMap.get(key));
@@ -96,7 +98,7 @@ public class SoundHandler
     {
 
         // se il path è lo stesso continua la riproduzione attuale
-        if(currentMusicPath!= null && currentMusicPath.equals(wavPath))
+        if(currentMusicPath != null && currentMusicPath.equals(wavPath))
             return;
 
 
@@ -116,17 +118,25 @@ public class SoundHandler
         {
             Clip commonSoundClip = commonSoundsMap.get(wavPath);
 
-            if (commonSoundClip.isRunning())
+            if(commonSoundClip.isRunning())
+            {
                 commonSoundClip.stop();
+            }
 
-
+            commonSoundClip.flush();
             commonSoundClip.setFramePosition(0);
+
             commonSoundClip.start();
         }
         else  // caso suono non bufferizzato
         {
-            if (sound.isRunning())
+            if(sound.isRunning())
+            {
                 sound.stop();
+            }
+
+            sound.flush();
+            sound.setFramePosition(0);
 
             sound.close();
             openWav(wavPath, sound);

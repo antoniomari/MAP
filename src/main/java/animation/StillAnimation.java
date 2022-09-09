@@ -105,7 +105,7 @@ public class StillAnimation extends Animation
             }
         }
 
-        GameState.changeState(GameState.State.PLAYING);
+        //GameState.changeState(GameState.State.PLAYING);
     }
 
     /**
