@@ -634,9 +634,61 @@ creata ed eseguita.
 - Nel titolo della schermata iniziale del gioco
 - Nella creazione di animazioni personalizzate sui GamePiece.
 
+## 2.10 SWING
+### 2.10.1 MainFrame
+Il `MainFrame` è una classe che estende il JFrame e rappresenta il frame di gioco. La sua dimensione è adattata sulla 
+base delle dimensioni dello schermo. Esso contiene al suo interno il `MainPanel`, ovvero il pannello padre di tutti gli 
+altri pannelli di gioco. Il MainPanel utilizza il card layout per alternar ela visualizzazione di:
+- `gamePanel`, il gamePanel è il pannello visualizzato durante la fase di gioco e contiene al suo interno
+  - `gameScreenPanel`, il pannello della schermata di gioco, visualizza completamente la stanza corrente, 
+costantemente visualizzato
+  - `textBarPanel`, pannello che contiene la barra di testo per i dialoghi, viene mostrato o nascosto a seconda 
+dell'andamento del gioco
+  - `inventoryPanel`, pannello contenente la barra dell'inventario, costantemente visualizzato
+- `menuPanel`, pannello che costituisce il menu di pausa, contenente i tasti "Continua", "Salva", "Impostazioni", "Esci"
+- `startingMenuPanel`, pannello che costituisce il menu iniziale e contiene i tasti "Nuova Partita", "Continua", "Impostazioni", "Esci"
 
+Nota: Attualmente in entrambi i menu il tasto "Impostazioni" è disabilitato in quanto non vi sono impostazioni di gioco 
+modificabili.
 
+Nota: Tutte le immagini visualizzate, vengono riscalate secondo un certo fattore di riscalamento: infatti le dimensioni 
+delle stanze devono adattarsi alla dimensione dello schermo per poter aver la stessa esperienza di gioco anche su 
+schermi diversi. Per tale motivo in molti componenti grafici viene utilizzato un valore `scalingFactor` 
+(o `rescalingFactor`). Questo valore varia a seconda della stanza correntemente caricata e viene utilizzato anche da 
+classi di altri package (ad esempio le animazioni).
+Ogni calcolo di posizionamento di componenti grafici deve tener conto di tale valore moltiplicativo.
 
+### 2.10.2 GameScreenPanel
+È una classe che rappresenta il pannello/schermata di gioco, il quale non comprende la barra dell'inventario.
+Tale classe estende `JLayeredPane` in quanto le etichette relative ai vari elementi di gioco devono essere impostate
+a profondità differenti. In ordine dal più basso al più alto:
+- `GARBAGE_LAYER`, utilizzato per spostare i GamePiece alla loro rimozione
+- `BACKGROUND_LAYER`, utilizzato per contenere l'immagine di sfondo della stanza
+- `PIECE_INITIAL_LAYER`, utilizzato all'inserimento dei GamePiece nella stanza
+- `BASE_GAMEPIECE_LAYER`, partendo da questo layer assieme a ulteriori successivi, i GamePiece sono posizionati e 
+continuamente spostati per far si che in ogni momento qualsiasi GamePiece avente ordinata maggiore
+rispetto ad un altro (quindi più in basso nella stanza) gli appaia davanti.
+- `EFFECT_LAYER`, utilizzato per gli effetti animati
+- `TEXT_BAR_LEVEL`, utilizzato per visualizzare la barra di testo
+- `BLACK_SCREEN_LEVEL`, utilizzato per stampare lo screenshot per il caricamento (durante il cambio stanza)
+
+Il gameScreenPanel mantiene un dizionario che contiene coppie <gamePiece, JLabel>, ovvero mantiene riferimenti
+a tutte le label corrispondenti ai GamePiece presenti nella `currenRoom`, ovvero la stanza in cui si trova correntemente 
+il giocare, quindi visualizzata a schermo.
+Questa classe mette a disposizione metodi per poter modificare la visualizzazione degli elementi di gioco sullo schermo.
+Per far ciò utilizza i servizi messi a disposizione dal `GameScreenManager`, l'unico che si occupa di effettuare 
+conversioni tra `AbsPosition` e `BlockPosition`, nonché dell'effettivo posizionamento delle JLabel.
+
+### 2.10.3 InventoryPanel
+È una classe che estende JLayeredPane e rappresenta il pannello che costituisce la barra dell'inventario. 
+I layer su cui è organizzata, dal basso verso l'alto, sono:
+- `BAR_LEVEL`, contiene le immagini della barra e dei bottoni
+- `SELECTION_LEVEL`, selection level contiene l'immagine della casella dell'inventario selezionata
+- `ITEM_LEVEL`, contiene gli sprite degli oggetti presenti nell'inventario
+
+Per scorrere l'inventario è possibile utilizzare i bottoni presenti a sinistra della barra dell'inventario in quanto la 
+capienza è superiore alle caselle mostrate. Alla destra della barra vi è una casella più larga adibita alla visualizzione
+del nome dell'oggetto selezionato nell'inventario.
 
 
 
