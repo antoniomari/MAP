@@ -1,6 +1,7 @@
 package animation;
 
 import general.GameException;
+import general.LogOutputManager;
 import graphics.SpriteManager;
 
 import javax.swing.*;
@@ -60,7 +61,7 @@ public abstract class Animation
             }
             catch (InterruptedException e)
             {
-                throw new GameException("Errore nel thread di animazione");
+                LogOutputManager.logOutput("Animazione interrotta");
             }
 
             // template
