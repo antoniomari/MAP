@@ -12,7 +12,9 @@ import java.util.Objects;
  */
 public abstract class GameEvent
 {
+    /** Orario preciso in cui è stato generato l'evento. */
     protected LocalDateTime eventTime;
+    /** Stringa stampabile riguardante l'evento. */
     protected String toPrint;
 
     public GameEvent(String toPrint)

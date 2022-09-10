@@ -124,7 +124,6 @@ public class EventHandler
         if(e.getType() == GamePieceEvent.Type.MOVE)
         {
             PieceUpdateExecutor.executeMove(piece, e.getOldPosition(), e.getNewPosition(), e.getMillisecondWaitEnd());
-            // lavora sulla currentRoom TODO: migliorare quest'aspetto
         }
 
         if(e.getType() == GamePieceEvent.Type.UPDATE_SPRITE)

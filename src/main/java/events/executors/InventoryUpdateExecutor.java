@@ -2,6 +2,10 @@ package events.executors;
 
 import entity.items.PickupableItem;
 
+/**
+ * Esecutore per aggiornare la visualizzazione dell'inventario
+ * sullo schermo.
+ */
 public class InventoryUpdateExecutor extends Executor
 {
 

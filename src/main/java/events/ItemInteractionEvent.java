@@ -1,11 +1,14 @@
 package events;
 
-import animation.StillAnimation;
 import entity.items.Item;
 
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Rappresenta un evento generato dall'interazione
+ * del giocatore con un oggetto.
+ */
 public class ItemInteractionEvent extends GameEvent
 {
     private final Item itemInvolved;
@@ -26,17 +29,9 @@ public class ItemInteractionEvent extends GameEvent
 
     public ItemInteractionEvent(Item item, Type type)
     {
-        this(item, type.toString());
-        this.type = type;
-
-    }
-
-
-    public ItemInteractionEvent(Item item, String toPrint)
-    {
-        super(toPrint);
+        super(type.toString());
         itemInvolved = item;
-
+        this.type = type;
 
     }
 

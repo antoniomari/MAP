@@ -4,6 +4,10 @@ import entity.GamePiece;
 import entity.rooms.BlockPosition;
 import general.GameManager;
 
+/**
+ * Esecutore per aggiornare la visualizzazione
+ * dei GamePiece sullo schermo.
+ */
 public class PieceUpdateExecutor extends Executor
 {
     public static void executeUpdateSprite(GamePiece piece)

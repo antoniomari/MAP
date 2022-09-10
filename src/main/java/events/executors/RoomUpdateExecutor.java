@@ -6,6 +6,10 @@ import entity.rooms.Room;
 
 import javax.swing.plaf.IconUIResource;
 
+/**
+ * Esecutore per aggiornare la presenza
+ * di GamePiece nelle stanze.
+ */
 public class RoomUpdateExecutor extends Executor
 {
 

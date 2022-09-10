@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Classe che rappresenta un evento di gioco legato a un {@link entity.GamePiece},
- * inviato da un metodo di tale classe all'{@link EventHandler}.
+ * Classe che rappresenta un evento di gioco legato a un {@link entity.GamePiece}.
  */
 public class GamePieceEvent extends GameEvent
 {
@@ -31,12 +30,6 @@ public class GamePieceEvent extends GameEvent
         /**
          * Rappresenta il fatto che un GamePiece si è spostato da una posizione
          * a un'altra nella stanza.
-         *
-         * Un evento di questo tipo utilizza:
-         * <ul>
-         *     <li>{@link GamePieceEvent#pieceInvolved}</li>
-         *     <li>{@link GamePieceEvent#newPosition}</li>
-         * </ul>
          */
         MOVE
                 {
@@ -46,6 +39,7 @@ public class GamePieceEvent extends GameEvent
                         return "si è spostato";
                     }
                 },
+        /** Rappresenta l'aggiornamento di sprite di un GamePiece. */
         UPDATE_SPRITE
                 {
                     public String toString()
@@ -53,6 +47,7 @@ public class GamePieceEvent extends GameEvent
                         return " aggiornato sprite";
                     }
                 },
+        /** Rappresenta il dover eseguire l'animazione personalizzata del GamePiece. */
         PIECE_ANIMATION
                 {
                     public String toString()
@@ -60,6 +55,7 @@ public class GamePieceEvent extends GameEvent
                         return " animato";
                     }
                 },
+        /** Rappresenta il dover eseguire un effetto animato sul GamePiece. */
         EFFECT_ANIMATION
                 {
                     public String toString()
@@ -67,6 +63,7 @@ public class GamePieceEvent extends GameEvent
                         return " effetto animato";
                     }
                 },
+        /** Rappresenta il dover eseguire un effetto animato perpetuo sul GamePiece. */
         PERPETUAL_EFFECT_ANIMATION
                 {
                     public String toString()
@@ -83,13 +80,19 @@ public class GamePieceEvent extends GameEvent
         this.pieceInvolved = pieceInvolved;
     }
 
-    public GamePieceEvent(GamePiece pieceInvolved, List<Image> frames, Type type)
+    private GamePieceEvent(GamePiece pieceInvolved, List<Image> frames, Type type)
     {
         super(type.toString());
         this.type = type;
         this.pieceInvolved = pieceInvolved;
         this.frames = frames;
     }
+
+    public static GamePieceEvent makePieceAnimationEvent(GamePiece pieceInvolved, List<Image> frames)
+    {
+        return new GamePieceEvent(pieceInvolved, frames, Type.PIECE_ANIMATION);
+    }
+
 
     public List<Image> getFrames()
     {
@@ -146,6 +149,13 @@ public class GamePieceEvent extends GameEvent
             return pre;
     }
 
+    /**
+     * Imposta parametri dell'animazione.
+     *
+     * @param spritesheetPath path dello sprite-sheet contenente i frames
+     * @param jsonPath path del json relativo allo sprite-sheet
+     * @param animationName nome dell'animazione
+     */
     public void setAnimationInfo(String spritesheetPath, String jsonPath, String animationName)
     {
         this.spritesheetPath = Objects.requireNonNull(spritesheetPath);

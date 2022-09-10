@@ -1,20 +1,26 @@
 package events;
 
 import entity.GamePiece;
-import entity.characters.GameCharacter;
-import entity.items.Item;
 import entity.rooms.BlockPosition;
 import entity.rooms.Room;
 
+/**
+ * Rappresenta un evento generato dall'aggiunta
+ * o dalla rimozione di un GamePiece in una stanza.
+ */
 public class RoomEvent extends GameEvent
 {
-    private Type type;
-    private GamePiece pieceInvolved;
-    private Room roomInvolved;
-    private BlockPosition pos;
+    private final Type type;
+    private final GamePiece pieceInvolved;
+    private final Room roomInvolved;
+    private final BlockPosition pos;
 
+    /**
+     * Tipo di evento RoomEvent.
+     */
     public enum Type
     {
+        /** Aggiunta di un GamePiece nella stanza. */
         ADD_PIECE_IN_ROOM
         {
             public String toString()
@@ -23,6 +29,7 @@ public class RoomEvent extends GameEvent
             }
         },
 
+        /** Rimozione di un GamePiece dalla stanza. */
         REMOVE_PIECE_FROM_ROOM
         {
             @Override
@@ -33,12 +40,18 @@ public class RoomEvent extends GameEvent
         }
     }
 
-    public RoomEvent(Room room, GamePiece p, Type type)
+
+    public static RoomEvent makeRemoveEvent(Room room, GamePiece piece)
     {
-        this(room, p, null, type);
+        return new RoomEvent(room, piece, null, Type.REMOVE_PIECE_FROM_ROOM);
     }
 
-    public RoomEvent(Room room, GamePiece p, BlockPosition pos, Type type)
+    public static RoomEvent makeAddEvent(Room room, GamePiece piece, BlockPosition pos)
+    {
+        return new RoomEvent(room, piece, pos, Type.ADD_PIECE_IN_ROOM);
+    }
+
+    private RoomEvent(Room room, GamePiece p, BlockPosition pos, Type type)
     {
         super(type.toString());
 
@@ -49,6 +62,7 @@ public class RoomEvent extends GameEvent
         this.pos = pos;
 
     }
+
     public Room getRoomInvolved()
     {
         return roomInvolved;

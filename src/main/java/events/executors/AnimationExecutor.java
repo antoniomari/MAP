@@ -10,9 +10,14 @@ import java.util.List;
 
 import java.awt.*;
 
+/**
+ * Esecutore per effettuare animazioni
+ * sullo schermo.
+ */
 public class AnimationExecutor extends Executor
 {
 
+    /** Animazione di speaking corrente. */
     private static PerpetualAnimation speakAnimation;
 
     public static void executeAnimation(GamePiece piece, List<Image> frames)

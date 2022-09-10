@@ -10,6 +10,7 @@ import general.GameManager;
 import general.ScenarioMethod;
 import general.xml.XmlParser;
 import graphics.SpriteManager;
+import jdk.jfr.Event;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -349,8 +350,7 @@ public class Room
             safePieceInsert(p, pos);
 
         // Evento dalla prospettiva della stanza: Un GamePiece è stato aggiunto alla stanza
-
-        EventHandler.sendEvent(new RoomEvent(this, p, pos, RoomEvent.Type.ADD_PIECE_IN_ROOM));
+        EventHandler.sendEvent(RoomEvent.makeAddEvent(this, p, pos));
     }
 
     /**
@@ -448,7 +448,7 @@ public class Room
         Objects.requireNonNull(p);
 
         pieceLocationMap.remove(p);
-        EventHandler.sendEvent(new RoomEvent(this, p, RoomEvent.Type.REMOVE_PIECE_FROM_ROOM));
+        EventHandler.sendEvent(RoomEvent.makeRemoveEvent(this, p));
     }
 
 

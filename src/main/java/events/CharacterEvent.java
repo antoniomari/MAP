@@ -18,6 +18,7 @@ public class CharacterEvent extends GameEvent
 
     public enum Type
     {
+        /** GameCharacter che parla. */
         SPEAK
                 {
                     @Override
@@ -26,6 +27,7 @@ public class CharacterEvent extends GameEvent
                         return "ha parlato";
                     }
                 },
+        /** GameCharacter che riproduce un'emoji. */
         EMOJI
                 {
                     @Override

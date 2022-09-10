@@ -308,7 +308,7 @@ public abstract class GamePiece
      */
     public void animate()
     {
-        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
+        EventHandler.sendEvent(GamePieceEvent.makePieceAnimationEvent(this, animateFrames));
     }
 
     /**
@@ -317,7 +317,7 @@ public abstract class GamePiece
     public void animateReverse()
     {
         Collections.reverse(animateFrames);
-        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
+        EventHandler.sendEvent(GamePieceEvent.makePieceAnimationEvent(this, animateFrames));
         Collections.reverse(animateFrames);
     }
 
