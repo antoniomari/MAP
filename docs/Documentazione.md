@@ -29,25 +29,35 @@ mouse è possibile interagire con oggetti presenti nel gioco e con i personaggi,
 su di un oggetto o su di un personaggio è possibile visualizzare un piccolo menù a tendina che mostra le possibili 
 interazioni.
 
-![interazioni](../docs/immaginiDocumentazione/2.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/2.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 Per gli oggetti il menù mostra l’opzione “osserva”, che permette di visualizzare una finestra di testo 
 nella quale è presente la descrizione dell’oggetto in questione.
-![osserva](../docs/immaginiDocumentazione/2.1.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/2.1.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 L’opzione “raccogli” permette di spostare l’oggetto nella barra dell’inventario presente alla base dello scenario.
-![raccogli](../docs/immaginiDocumentazione/2.2.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/2.2.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 Quest’ultimo mostra gli oggetti che il giocatore possiede e sul lato sinistro sono presenti due bottoni con il simbolo di frecce che servono a 
 scorrere l’inventario, cliccandoci con il tasto sinistro del mouse, nel qual caso gli oggetti raccolti non siano tutti 
 visualizzabili. Un oggetto presente nell’inventario può essere selezionato con il clic del tasto sinistro del mouse, 
 una volta selezionato il riquadro che lo contiene cambia colore passando dal viola al fucsia acceso e il box a destra 
 dell'inventario mostra il nome dell'oggetto.
-![inventario](../docs/immaginiDocumentazione/3.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/3.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 Una volta selezionato è possibile utilizzare l’oggetto cliccando su di un altro oggetto o su di un personaggio affinché si 
 inneschi un effetto.
-![utilizzo](../docs/immaginiDocumentazione/4.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/4.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 Per il controllo degli spostamenti del personaggio è possibile utilizzare le frecce direzionali 
 presenti sulla tastiera la cui digitazione provoca lo spostamento del personaggio da una stanza del gioco ad un'altra. 
@@ -55,28 +65,35 @@ I movimenti sono controllati, questo significa che non è possibile muoversi lib
 solo passare di stanza in stanza. La possibilità di cambiare stanza nel gioco è messa in risalto da delle frecce 
 presenti sul pavimento della stanza in cui si trova il giocatore, esse sono delle indicazioni che avvertono della 
 possibilità di cambiare stanza premendo la freccia della tastiera orientata nello stesso verso.
-![frecce](../docs/immaginiDocumentazione/5.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/5.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 Durante tutto il gioco il giocatore incontra vari personaggi con i quali interagisce parlando, per poter parlare con un 
 personaggio è sufficiente cliccare con il tasto destro del mouse sul personaggio desiderato e dal menù a tendina che si apre 
 cliccare con il tasto sinistro sull’ opzione parla. Quando il personaggio inizia a parlare compare una finestra color
-lilla contenente il testo del dialogo per poter proseguire nel dialogo si deve premere una volta il tasto spazio della 
+lilla contenente il testo del dialogo per poter proseguire nel dialogo si deve premere una volta la barra spaziatrice della 
 tastiera. Le finestre di dialogo contengono solo due righe di testo, perciò, una volta lette si deve premere spazio
 per proseguire nella lettura del testo.
-![dialogo](../docs/immaginiDocumentazione/6.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/6.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 All’avvio del gioco si apre una schermata di benvenuto con il titolo del gioco e quattro pulsanti contenenti le opzioni 
 nuova partita, carica, impostazioni ed esci per iniziare si necessita cliccare con il tasto sinistro sul pulsante nuova 
 partita, il quale provoca l’avvio del la scena iniziale del gioco. Il pulsante carica serve nel momento in cui avendo 
 salvato la partita in un dato momento del gioco si desidera riprenderla per continuare l’avventura in un altro momento.
-![interazioni](../docs/immaginiDocumentazione/8.jpeg)
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/8.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 Quando la partita è iniziata premendo il tasto esc è possibile accedere al menù di pausa nel quale saranno disponibili 
 sempre quattro opzioni rispettivamente continua per riprendere la partita, salva per salvare i dati del gioco, 
 impostazioni ed esci per abbandonare la partita attualmente in corso. Attualmente il pulsante impostazione non ha alcuna
 funzione.
-![interazioni](../docs/immaginiDocumentazione/9.jpeg)
-
+<p align="center">
+  <img src="../docs/immaginiDocumentazione/9.jpeg" alt="modello di dominio" width="800"/>
+</p>
 
 ## 1.3 Trama del gioco
 Siamo nel 2025 e tre scienziati informatici dalle grandi ambizioni stanno lavorando al progetto della loro vita che 
