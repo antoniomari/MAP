@@ -201,7 +201,7 @@ public class XmlLoader
 
         if(perpetualAnimationJson.isPresent())
         {
-            itemToLoad.initPerpetualAnimationFrame(perpetualAnimationPath.get(), perpetualAnimationJson.get());
+            itemToLoad.initPerpetualAnimationFrames(perpetualAnimationPath.get(), perpetualAnimationJson.get());
         }
 
         loadOnUse(itemElement, itemToLoad);

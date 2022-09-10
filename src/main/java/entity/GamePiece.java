@@ -29,28 +29,36 @@ import java.util.Objects;
  */
 public abstract class GamePiece
 {
-
-    private final String name;
-
-    /** Stato utilizzato per associare il comportamento del GamePiece. */
+    /** Nome (univoco) del GamePiece. */
+    private String name;
+    /** Stato utilizzato per far variare il comportamento del GamePiece. */
     protected String state = "init";
-    protected final Image sprite;
+    /** Sprite del GamePiece. */
+    protected Image sprite;
+    /** Larghezza in blocchi del GamePiece. */
+    protected int bWidth;
+    /** Altezza in blocchi del GamePiece. */
+    protected int bHeight;
 
-    protected int bWidth;  // larghezza in blocchi dell'elemento
-    protected int bHeight;  // altezza in blocchi dell'elemento
-
-    private Room locationRoom;  // stanza in cui è contenuto
+    /** Stanza in cui il GamePiece è presente. */
+    private Room locationRoom;
 
     // Per bufferizzazione sprite
+    /** Fattore di riscalamento salvato per lo sprite bufferizzato. */
     private double scalingFactor;
+    /** Sprite riscalato secondo rescalingFactor, salvato per la bufferizzazione. */
     private Icon scaledSpriteIcon;
 
-    private BufferedImage spriteSheet;
-    private String jsonPath;
-
+    /** Lista di frame per l'animazione di movimento verso sinistra. */
     protected List<Image> leftMovingFrames;
+    /** Lista di frame per l'animazione di movimento verso destra. */
     protected List<Image> rightMovingFrames;
+    /**
+     * Lista di frame per l'eventuale animazione personalizzata
+     * (metodo {@link GamePiece#animate()} e {@link GamePiece#animateReverse()}
+     */
     protected List<Image> animateFrames;
+    /** Lista di frame per l'eventuale animazione perpetua personalizzata. */
     protected List<Image> perpetualAnimationFrames;
 
 
@@ -58,33 +66,27 @@ public abstract class GamePiece
     // direttamente istanziabile dall'esterno
 
     /**
-     * Costruttore da utilizzare quando l'immagine appartiene
-     * a un unico file.
+     * Costruttore da utilizzare quando viene fornito al GamePiece
+     * un unico sprite e non uno sprite-sheet (non è quindi necessario un json).
      *
-     * @param name nome da assegnare a this
+     * Alla costruzione, il GamePiece è automaticamente registrato nel GameManager.
+     *
+     * @param name nome da assegnare al GamePiece
      * @param spritePath path dell'immagine (sprite)
      */
     protected GamePiece(String name, String spritePath)
     {
-        this.name = name;
-        this.sprite = SpriteManager.loadSpriteSheet(spritePath);
-
-        this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
-        this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
-
-        fakeInitMovingFrames();
-
-        // aggiungi nel gameManager
-        GameManager.addPiece(this);
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(spritePath);
+        pieceInit(name, SpriteManager.loadSpriteSheet(spritePath));
     }
-
-
-    // TODO : unificare costruttori
 
     /**
      * Costruttore da utilizzare quando l'immagine appartiene a uno
-     * spritesheet ed esiste un Json con le informazioni sullo sprite
+     * sprite-sheet ed esiste un Json con le informazioni sullo sprite
      * da caricare.
+     *
+     * Alla costruzione, il GamePiece è automaticamente registrato nel GameManager.
      *
      * @param name nome da assegnare a this
      * @param spriteSheet lo spriteSheet intero
@@ -97,39 +99,103 @@ public abstract class GamePiece
         Objects.requireNonNull(spriteSheet);
         Objects.requireNonNull(jsonPath);
 
+        pieceInit(name, SpriteManager.loadSpriteByName(spriteSheet, jsonPath, name));
+
+    }
+
+    // inizializzazione per costruttore
+    private void pieceInit(String name, Image sprite)
+    {
         this.name = name;
-        this.spriteSheet = spriteSheet;
-        this.jsonPath = jsonPath;
-        sprite = SpriteManager.loadSpriteByName(spriteSheet, jsonPath, name);
+        this.sprite = sprite;
 
         this.bWidth = sprite.getWidth(null) / GameManager.BLOCK_SIZE;
         this.bHeight = sprite.getHeight(null) / GameManager.BLOCK_SIZE;
 
-        fakeInitMovingFrames();
+        initDefaultMovingFrames();
 
         // aggiungi nel gameManager
         GameManager.addPiece(this);
     }
 
-    public void initAnimateFrames(String spritesheetPath, String jsonPath)
+    @Override
+    public boolean equals(Object o)
     {
-        BufferedImage spritesheet = SpriteManager.loadSpriteSheet(spritesheetPath);
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        GamePiece gamePiece = (GamePiece) o;
+        return name.equals(gamePiece.name);
+    }
 
-        animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, "animate");
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(name);
+    }
+
+
+    /**
+     * Inizializzazione di default per
+     * {@link GamePiece#leftMovingFrames} e
+     * {@link GamePiece#rightMovingFrames}.
+     *
+     * Conterranno solamente lo sprite principale,
+     * in modo tale che durante l'animazione di
+     * movimento non si percepiranno cambiamenti
+     * nello sprite.
+     */
+    private void initDefaultMovingFrames()
+    {
+        leftMovingFrames = new ArrayList<>();
+        leftMovingFrames.add(sprite);
+
+        rightMovingFrames = leftMovingFrames;
+    }
+
+    /**
+     * Inizializza i frame dell'animazione personalizzata di this.
+     *
+     * Cerca gli oggetti json le cui chiavi sono {@code "animate1", "animate2", ...}.
+     * Se questi non vengono trovati allora cerca gli oggetti json le cui chiavi sono
+     * {@code "[name]animate1", "[name]animate2", ...}, dove {@code [name]} è il nome
+     * di this.
+     *
+     * @param spriteSheetPath path dello sprite-sheet contenente i frame da caricare
+     * @param jsonPath path del json contenente i dati sui frame da caricare
+     */
+    public void initAnimateFrames(String spriteSheetPath, String jsonPath)
+    {
+        Objects.requireNonNull(spriteSheetPath);
+        Objects.requireNonNull(jsonPath);
+
+        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+
+        animateFrames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, "animate");
 
         if(animateFrames.isEmpty())
         {
-            animateFrames = SpriteManager.getKeywordOrderedFrames(spritesheet, jsonPath, getName() + "animate");
+            animateFrames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, getName() + "animate");
         }
-
-        // animateFrames.add(0, getSprite());
     }
 
+    /**
+     * Restituisce {@code true} se this ha frame impostati per l'animazione perpetua.
+     * 
+     * @return {@code true} se this ha frame impostati per l'animazione perpetua,
+     * {@code false} altrimenti.
+     */
     public boolean hasPerpetualAnimation()
     {
         return perpetualAnimationFrames != null;
     }
 
+    /**
+     * Restituisce i frame di animazione perpetua di this.
+     * 
+     * @return frame di animazione perpetua di this, {@code null} se non sono stati impostati
+     */
     public List<Image> getPerpetualAnimationFrames()
     {
         return perpetualAnimationFrames;
@@ -151,20 +217,18 @@ public abstract class GamePiece
      *     "height": 96
      *   }
      *   }
-     * @param spriteSheetPath
-     * @param jsonPath
+     * @param spriteSheetPath path dello sprite-sheet contenente i frame da caricare
+     * @param jsonPath path del json contenente i dati sui frame da caricare
      */
-    public void initPerpetualAnimationFrame(String spriteSheetPath, String jsonPath)
+    public void initPerpetualAnimationFrames(String spriteSheetPath, String jsonPath)
     {
-        BufferedImage spritesheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
-        perpetualAnimationFrames = SpriteManager.getOrderedFrames(spritesheet, jsonPath);
+        Objects.requireNonNull(spriteSheetPath);
+        Objects.requireNonNull(jsonPath);
+
+        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        perpetualAnimationFrames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
     }
 
-    /**
-     * Imposta lo stato di this.
-     *
-     * @param state nuovo stato
-     */
     public void setState(String state)
     {
         Objects.requireNonNull(state);
@@ -202,36 +266,6 @@ public abstract class GamePiece
         return bHeight;
     }
 
-
-    @Deprecated
-    public void executeEffectAnimation(String animationName, int finalWait, boolean isPerpetual)
-    {
-        Pair<String, String> animationPaths = SpriteManager.getAnimationPaths(animationName);
-
-        String spritesheetPath = animationPaths.getObject1();
-        String jsonPath = animationPaths.getObject2();
-
-        GamePieceEvent.Type eventType = isPerpetual ?
-                GamePieceEvent.Type.PERPETUAL_EFFECT_ANIMATION :
-                GamePieceEvent.Type.EFFECT_ANIMATION;
-
-        GamePieceEvent effectEvent = new GamePieceEvent( this, eventType);
-        effectEvent.setAnimationInfo(spritesheetPath, jsonPath, animationName);
-        EventHandler.sendEvent(effectEvent);
-    }
-
-    public void animate()
-    {
-        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
-    }
-
-    public void animateReverse()
-    {
-        Collections.reverse(animateFrames);
-        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
-        Collections.reverse(animateFrames);
-    }
-
     public List<Image> getLeftMovingFrames()
     {
         return leftMovingFrames;
@@ -242,22 +276,56 @@ public abstract class GamePiece
         return rightMovingFrames;
     }
 
-
-    private void fakeInitMovingFrames()
+    /**
+     * Esegue un effetto animato su this.
+     *
+     * Sprite-sheet e json dell'effetto animato vengono ricavati dall'animationName
+     * tramite {@link SpriteManager#getAnimationPaths(String)}.
+     *
+     * @param animationName nome dell'animazione
+     * @param isPerpetual flag che indica se l'animazione dev'essere perpetua
+     */
+    public void executeEffectAnimation(String animationName, boolean isPerpetual)
     {
-        leftMovingFrames = new ArrayList<>();
-        leftMovingFrames.add(sprite);
+        Pair<String, String> animationPaths = SpriteManager.getAnimationPaths(animationName);
 
-        rightMovingFrames = leftMovingFrames;
+        String spriteSheetPath = animationPaths.getObject1();
+        String jsonPath = animationPaths.getObject2();
+
+        GamePieceEvent.Type eventType = isPerpetual ?
+                GamePieceEvent.Type.PERPETUAL_EFFECT_ANIMATION :
+                GamePieceEvent.Type.EFFECT_ANIMATION;
+
+        // genera evento di animazione
+        GamePieceEvent effectEvent = new GamePieceEvent( this, eventType);
+        effectEvent.setAnimationInfo(spriteSheetPath, jsonPath, animationName);
+        EventHandler.sendEvent(effectEvent);
     }
 
+    /**
+     * Esegue l'animazione personalizzata di this.
+     */
+    public void animate()
+    {
+        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
+    }
+
+    /**
+     * Esegue l'animazione personalizzata di this, al contrario.
+     */
+    public void animateReverse()
+    {
+        Collections.reverse(animateFrames);
+        EventHandler.sendEvent(new GamePieceEvent(this, animateFrames, GamePieceEvent.Type.PIECE_ANIMATION));
+        Collections.reverse(animateFrames);
+    }
 
     /**
      * Imposta la stanza in cui è presente this.
      *
      * Se this è il giocatore allora come side effect, per la chiamata
      * a {@link Room#addPiece(GamePiece, BlockPosition)} allora viene
-     * iniziato lo scenario di ingresso nella stanza;
+     * iniziato lo scenario d'ingresso nella stanza;
      * altrimenti viene continuato lo scenario in corso (se presente).
      *
      * @param room la stanza in cui aggiungere l'oggetto
@@ -322,8 +390,19 @@ public abstract class GamePiece
         return scaledSpriteIcon;
     }
 
+    /**
+     * Muove this nella stanza.
+     *
+     * @param finalPos posizione finale di this nella stanza
+     * @param type "absolute" se finalPos è una posizione assoluta nella stanza,
+     *             "relative" se finalPos è una posizione relativa a quella attuale di this
+     * @param millisecondWaitEnd millisecondi da attendere alla fine del movimento
+     */
     public void move(BlockPosition finalPos, String type, int millisecondWaitEnd)
     {
+        Objects.requireNonNull(finalPos);
+        Objects.requireNonNull(type);
+
         if(this.getPosition() == null)
             throw new GameException("Personaggio non posizionato");
 
@@ -341,7 +420,7 @@ public abstract class GamePiece
      *
      * @param newPosition posizione del blocco in basso a sinistra del GamePiece
      */
-    public void updatePosition(BlockPosition newPosition, int millisecondWaitEnd)
+    private void updatePosition(BlockPosition newPosition, int millisecondWaitEnd)
     {
         Objects.requireNonNull(newPosition);
 
@@ -353,7 +432,6 @@ public abstract class GamePiece
         // aggiorna posizione nella stanza
         try
         {
-            // TODO: invalidare l'animazione sbagliata
             locationRoom.setPiecePosition(this, newPosition);
 
             GamePieceEvent moveEvent = new GamePieceEvent(this, GamePieceEvent.Type.MOVE);
@@ -365,13 +443,12 @@ public abstract class GamePiece
         }
         catch(GameException e)
         {
-            // TODO : controllare
             throw new GameError(e);
         }
     }
 
     /**
-     * Restituisce la posizione di this all'interno della stanza
+     * Restituisce la posizione di this all'interno della stanza.
      *
      * @return la posizione nella stanza, {@code null} se this è
      *          presente in una stanza ma la posizione non è stata impostata
@@ -384,10 +461,4 @@ public abstract class GamePiece
 
         return locationRoom.getPiecePosition(this);
     }
-
-
 }
-
-
-
-
