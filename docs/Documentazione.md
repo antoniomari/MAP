@@ -1,4 +1,4 @@
-# 1. Introduzione al gioco
+# 1 Introduzione al gioco
 Dr. Schwartz è un gioco di avventura in modalità punta e clicca con narrazione testuale degli eventi che accadono 
 durante la partita. Il gioco è pensato per essere in modalità single-player e narra le peripezie di un rinomato 
 professore di intelligenza artificiale che ha un segreto da svelare.
@@ -147,6 +147,7 @@ A questo punto è giunto il momento di tornare nella MIST-A per prendere l’asc
 si deve passare un test psicologico con delle domande a risposta vero o falso selezionabili cliccando con il tasto 
 sinistro del mouse sull'icona corrispondente alla risposta che si desidera dare.
 Le risposte al test sono le seguenti :	
+
 1- si, 2- no, 3- no, 4- si, 5- no, 6- si, 7- si, 8- no, 9- no, 10- si, 11- no, 12- no, 13- si, 14- no, 15- si, 15- no, 
 16- no, 17- si, 18- no, 19- no, 20- no.
 
@@ -208,12 +209,12 @@ sul quale non sveleremo nulla dal momento che il gioco termina già con lo shut-
 
 
 
-# 2. Struttura del software e scelte implementative.
+# 2 Struttura del software e scelte implementative.
 
 ## 2.1 Scenari
 Uno scenario è una sequenza di azioni programmabili che avvengono automaticamente all’interno del gioco. 
 L’esecuzione degli scenari è gestita dal GameManager e possono essere creati all’interno del codice del gioco
-oppure essere codificati all’interno di un file XML per poter essere caricati tramite la classe XmlParser. 
+oppure essere codificati all’interno di un file XML per poter essere caricati tramite la classe `XmlParser`. 
 La classe utilizzata per rappresentare uno scenario è General.ActionSequence.
 Ogni oggetto di ActionSequence corrisponde concettualmente ad una sequenza di runnable, affinché sia generale e 
 ogni runnable contenuta all’interno di essa dovrà contenere una chiamata al metodo GameManage::ContinueScenario. 
@@ -235,16 +236,18 @@ Il root tag del file xml deve essere <scenario>, al suo interno vi sarà un nume
 <azione>. Ogni nodo <azione> contiene al suo interno almeno un nodo <method>, inoltre può contenere nodi con tag 
 particolari seguendo la sintassi prevista dalla primitiva ((dare nome a primitiva)) specificata dal contenuto 
 dell’elemento <method>.
+
 Ogni xml di una stanza deve contenere all’interno dell’elemento stanza, obbligatoriamente, un elemento scenario: 
-lo scenario di inizializzazione della stanza. Può essere eventualmente vuoto e viene utilizzato in genere per 
+lo scenario d'inizializzazione della stanza. Può essere eventualmente vuoto e viene utilizzato in genere per 
 specificare i collegamenti tra le stanze o per aggiungere un game peace alla stanza stessa.
 Consultare la documentazione delle “primitiva” per la sintassi.
 Quando una stanza viene caricata per la prima volta nella partita (non salvataggio caricato da database), gli scenari 
-di inizializzazione vengono eseguiti per intero. Mentre quando le stanze vengono caricate da database allora del suo 
-scenario di inizializzazione vengono ignorate tutte le azioni tranne i metodi “setNorth”, “setSouth”, “setWest” e “setEast”.
+d'inizializzazione vengono eseguiti per intero. Mentre quando le stanze vengono caricate da database allora del suo 
+scenario d'inizializzazione vengono ignorate tutte le azioni tranne i metodi “setNorth”, “setSouth”, “setWest” e “setEast”.
+
 L’inizializzazione delle stanze procede come una visita in profondità di un grafo, infatti appena viene eseguita 
 un’azione qualsiasi che riporta uno dei quattro metodi elencati sopra, viene caricata la stanza oggetto e viene eseguito 
-il relativo scenario di inizializzazione, a seguito dello scenario della prima. 
+il relativo scenario d'inizializzazione, a seguito dello scenario della prima. 
 
 ## 2.2 Salvataggi e Database
 Il database GAME viene utilizzato per memorizzare in maniera persistente tutte le informazioni al momento del 
@@ -276,7 +279,7 @@ Nella tabella GAMECHARACTER vengono salvati:
 
 Nelle tabelle ITEMLOCATION e CHARACTERLOCATION vengono memorizzate le presenze e posizioni di, rispettivamente, 
 Item e gameCharacter, all’interno delle stanze. Queste tabelle sono uguali, ma separate in quanto impossibile creare 
-un vincolo di integrità referenziale verso più tabelle contemporaneamente.
+un vincolo d'integrità referenziale verso più tabelle contemporaneamente.
 
 Nella tabella INVENTORY vengono salvati i nomi dei PickupableItem presenti all’interno dell'inventario del giocatore 
 al momento del salvataggio.
@@ -294,11 +297,11 @@ salvataggio, poi vengono salvate, in ordine, le informazioni su Room, GamePiece 
 ## 2.3 API REST
 È stato utilizzato il servizio api fornito dal sito https://www.themealdb.com, il quale, in seguito ad una chiamata, 
 restituisce un JSON che contiene le informazioni relative ad una ricetta casuale.
-La classe RecipeRestClient è basata sull’utilizzo del framework fornito dalla libreria Jersey per effettuare la 
+La classe `RecipeRestClient` è basata sull’utilizzo del framework fornito dalla libreria Jersey per effettuare la 
 richiesta al server ed ottenere la relativa risposta.
 Dal JSON contenente la risposta vengono prelevate le informazioni da utilizzare all’interno del gioco, quali la 
 categoria della ricetta e gli ingredienti con le relative dosi.
-In caso di insuccesso della chiamata, vengono utilizzati dei valori di default sostitutivi.
+In caso d'insuccesso della chiamata, vengono utilizzati dei valori di default sostitutivi.
 
 
 ## 2.4 Eventi e Architettura del sistema
@@ -306,6 +309,7 @@ Il GameManager è una classe adibita alla gestione di strutture dati fondamental
 Esso contiene variabili e costanti utilizzati da diverse classi per diversi scopi.
 Ad esempio, blockSize è il numero di pixel che costituisce il lato di un blocco, oppure il riferimento al mainFrame 
 del gioco.
+
 Contiene riferimenti a tutti i GamePiece e Room caricati in memoria e gestisce lo stack degli scenari. 
 Alla costruzione di un nuovo GamePiece o di una nuova Room, essi vengono automaticamente registrati rendendo possibile 
 il loro utilizzo da parte di tutti i metodi di ogni package riferendosi per nome. È dunque importante che non vi siano 
@@ -321,12 +325,13 @@ che potrebbe tornare allo stato playing). Per tale motivo abbiamo implementato i
 determinato gameState, denominato targetState.
 
 ## 2.5 Listener
-Alcuni listener vengono creati staticamente dalla classe GameState: sono listener che operano su tutto il frame di 
+Alcuni listener vengono creati staticamente dalla classe `GameState`: sono listener che operano su tutto il frame di 
 gioco e corrispondono a comandi ben definiti, ad esempio le frecce direzionali utilizzate per cambiare stanza nello 
 stato “playing” oppure la barra spaziatrice per chiudere la text-bar.
 Esistono inoltre listener creati dinamicamente sul gameScreen che corrispondono a diversi elementi nel gioco, ve n'è 
 almeno uno per ogni gamePiece (in quanto deve essere almeno possibile premere il tasto destro sul personaggio e 
 mostrare il menu con le possibili interazioni con esso).
+
 La creazione di queste liste avviene nel GameScreenPanel.
 Per il cambio di stato viene mantenuta una variabile statica che identifichi lo stato corrente del gioco. 
 Il metodo changeState permette di cambiare il suo valore e ha la key word “synchronize”, così come il metodo getState, 
@@ -349,15 +354,15 @@ Interface.
 Tali executors sono gli unici ad avere riferimento al mainFrame in modo tale da essere l’unico collegamento 
 entity -> gui.
 
-- la rappresentazione di input (gui -> entity) è possibile grazie alla classe PopMenuManager. 
-Tramite il metodo addPieceOnScreen della classe GameScreenPanel, quando viene aggiunta la label con lo sprite di un 
+- la rappresentazione di input (gui -> entity) è possibile grazie alla classe `PopMenuManager`. 
+Tramite il metodo addPieceOnScreen della classe `GameScreenPanel`, quando viene aggiunta la label con lo sprite di un 
 GamePiece, viene creato un listener per il tasto destro che prevede la chiamata al metodo showMenu di PopMenuManager, 
 passando sia il GamePiece che la label corrispondente. Il PopMenuManager crea un menu contestuale aggiungendo vari tasti 
 corrispondenti alle varie interazioni possibili, in base alla classe effettiva del GamePiece passato. Infatti crea 
 staticamente delle Action per ogni interazione possibile con qualsiasi GamePiece, in modo tale che cliccando sul tasto 
 corrispondente venga eseguito il metodo relativo all’interazione per GamePiece sul quale si è cliccato.
 Ad esempio, se il GamePiece è un’istanza di Item verrà abilitata una useAction in modo tale che venga chiamato il 
-metodo Use dell’oggetto della classe Item.
+metodo Use dell’oggetto della classe `Item`.
 
 ## 2.6 Entity
 Le classi del package entity rappresentano i principali elementi del dominio di gioco, i quali non dipendono
@@ -371,7 +376,7 @@ comprensione del dominio di gioco.
 
 
 ### 2.6.1 GamePiece
-Un oggetto della classe astratta *GamePiece* rappresenta un qualsiasi elemento fisico del gioco che ha uno sprite e può 
+Un oggetto della classe astratta `GamePiece` rappresenta un qualsiasi elemento fisico del gioco che ha uno sprite e può 
 essere presente all’interno di una stanza, in pratica un oggetto o un personaggio. La classe è astratta in quanto ogni 
 oggetto deve necessariamente estendere una delle sottoclassi dirette (`Item` e `GameCharacter`).
 - Ogni GamePiece ha un nome univoco ed uno stato, ovvero una stringa utilizzata per 
@@ -418,10 +423,11 @@ rimosso.
 
 #### 2.6.4 DoorLike
 Un oggetto della classe `DoorLike` è un item le cui funzionalità sono assimilabili a quelle di una porta (infatti implementa 
-l’interfaccia Openable).
-- È possibile impostare uno scenario da eseguire all'interazione "open" che verrà eseguito se l'oggetto si trova in
+l’interfaccia Openable). Per ogni oggetto della classe DoorLike vi sono le interazioni "Open" e "Close", che sono 
+unificate nel menu contestuale.
+- È possibile impostare uno scenario da eseguire all'interazione "Open" che verrà eseguito se l'oggetto si trova in
 particolare stato. Vi è uno stato riservato, ovvero "canOpen", durante il quale lo scenario eseguito all'interazione
-"open" sarà l’effettiva apertura dell'oggetto DoorLike. 
+"Open" sarà l’effettiva apertura dell'oggetto DoorLike. 
 - Non è invece possibile impostare uno scenario personalizzato per l’interazione Close, che risulterà sempre nella 
 chiusura dell'oggetto doorLike.
 
@@ -433,17 +439,8 @@ Ogni oggetto DoorLike presenta due liste d'immagini:
 - Immagini `openFrames`, utilizzate per l'animazione di apertura dell'oggetto DoorLike
 - Immagini `closeFrames`, utilizzate per l'animazione di chiusura dell'oggetto DoorLike
 
-
 Queste liste sono inizializzate durante la creazione dell'oggetto DoorLike, ricercando nel file JSON gli oggetti JSON 
 con chiavi del tipo "\[name]Open1", "\[name]Open2", ..., e un oggetto JSON con chiave "\[name]Closed".
-
-
---------------------------------------------
-Per ogni oggetto della classe DoorLike vi sono le interazioni "Open" e "Close", che sono unificate nel
-menu contestuale.
---------------------------------------------
-
-
 
 ### 2.6.3 GameCharacter
 I `GameCharacter` sono GamePiece che rappresentano i personaggi all’interno del gioco.
@@ -475,7 +472,7 @@ makePlayerFinalForm il quale sostituisce il personaggio giocante con uno dallo s
 
 Un oggetto PlayingCharacter possiede un inventario, ovvero una struttura dati (attualmente una lista) che contiene un 
 certo numero di PikupableItem. Notare che tale inventario ha una diretta rappresentazione grafica nella classe 
-InventoryPanel e l’inventario del PlayingCharacter quando viene aggiornato, notifica tramite InventoryEvent 
+`InventoryPanel` e l’inventario del PlayingCharacter quando viene aggiornato, notifica tramite InventoryEvent 
 l’inventory panel il quale a sua volta modifica la visualizzazione delle icone degli oggetti.
 
 ### 2.6.6 Rooms
@@ -505,7 +502,7 @@ verso destra e le ordinate dall’alto verso il basso.
 
 Notare che, dal momento in cui tali coordinate sono logiche e non fisiche, non hanno alcuna dipendenza dallo schermo 
 (quindi rendono i dati portabili) e risulta molto semplice lavorarci.
-Sarà compito della classe GameScreenManager la conversione da block position ad abs position 
+Sarà compito della classe `GameScreenManager` la conversione da block position ad abs position 
 (vedi Sezione GameScreenManager).
 
 
@@ -516,7 +513,9 @@ dei rettangoli descritti nel json del pavimento, all’interno della quale il pe
 però ulteriori rettangoli dati dalla voce ostacoli che rappresentano aree del pavimento su cui il giocatore non può 
 muoversi. Ciononostante attualmente l’utilizzo del RoomFloor è parziale in quanto non è presente un algoritmo di 
 movimento che ricalcoli il percorso da un punto di partenza ad uno di arrivo tenendo conto degli ostacoli ed 
-aggirandoli. Attualmente viene utilizzato il metodo getNearestPlacement di RoomFloor per far sì che anche se dovesse 
+aggirandoli. 
+
+Attualmente viene utilizzato il metodo getNearestPlacement di RoomFloor per far sì che anche se dovesse 
 essere impostato il movimento del giocatore in un punto in cui lo sprite non entra perfettamente allora questo viene 
 comunque posizionato, occupando la posizione più vicina che è possibile occupare.
 
@@ -525,7 +524,7 @@ comunque posizionato, occupando la posizione più vicina che è possibile occupa
 Per i suoni è stata utilizzata la libreria javax.sound.sampled, la quale permette di riprodurre file in formato wav. 
 
 Si distinguono tre tipologie di audio nel gioco, che corrispondono a modalità di riproduzione accettate dalla classe 
-SoundHandler:
+`SoundHandler`:
 - music, modalità utilizzata per riprodurre le musiche di sottofondo delle stanze le quali sono messe a loop e vengono 
 stoppate solamente al passaggio in una stanza in cui la musica impostata è diversa.
 - sound, modalità utilizzata per riprodurre suoni di gioco generati da input del giocatore, attualmente i suoni di questo
@@ -547,7 +546,7 @@ Il package animazioni contiene la classe astratta animation e le sue implementaz
 la sua posizione.
 - movingAnimation, rappresenta un’animazione in cui cambia la posizione di una JLabel e può cambiare contestualmente 
 anche la sua icona.
-- perpetualAnimation, sottoclasse di stillAnimation e rappresenta un’animazione in cui non cambia la posizione di una 
+- perpetualAnimation, sottoclasse di `stillAnimation` e rappresenta un’animazione in cui non cambia la posizione di una 
 JLabel ma la stessa animazione viene ripetuta in loop all’infinito finché non viene interrotta da un qualche evento 
 esterno.
 
@@ -679,6 +678,8 @@ Questa classe mette a disposizione metodi per poter modificare la visualizzazion
 Per far ciò utilizza i servizi messi a disposizione dal `GameScreenManager`, l'unico che si occupa di effettuare 
 conversioni tra `AbsPosition` e `BlockPosition`, nonché dell'effettivo posizionamento delle JLabel.
 
+NOTA: `AbsPosition` è una classe che rappresenta la posizione assoluta misurata in pixel sullo schermo.
+
 ### 2.10.3 InventoryPanel
 È una classe che estende JLayeredPane e rappresenta il pannello che costituisce la barra dell'inventario. 
 I layer su cui è organizzata, dal basso verso l'alto, sono:
@@ -687,20 +688,36 @@ I layer su cui è organizzata, dal basso verso l'alto, sono:
 - `ITEM_LEVEL`, contiene gli sprite degli oggetti presenti nell'inventario
 
 Per scorrere l'inventario è possibile utilizzare i bottoni presenti a sinistra della barra dell'inventario in quanto la 
-capienza è superiore alle caselle mostrate. Alla destra della barra vi è una casella più larga adibita alla visualizzione
-del nome dell'oggetto selezionato nell'inventario.
+capienza è superiore alle caselle mostrate. Alla destra della barra vi è una casella più larga adibita alla 
+visualizzazione del nome dell'oggetto selezionato nell'inventario.
+Ogni casella dell'inventario contiene dei listener per selezionare l'oggetto contenuto (tasto sinistro) e per 
+mostrarne la descrizione (tasto destro).
+ 
+### 2.10.4 TextBarPanel
+Classe che rappresenta la barra di dialogo del gioco, estende LayeredPane sviluppandosi su due livelli:
+- `BAR_LEVEL`, livello per visualizzare la barra di testo
+- `TEXT_LEVEL`, per visualizzare il testo
+viene visualizzata sulla parte superiore del livello textbar del GameScreenPanel e può far visualizzare fino a due righe di testo. 
+In generale viene utilizzata per i dialoghi e per visualizzare la descrizione degli oggetti.
+
+### 2.10.5 MiniGame
+La classe astratta `MiniGame` che rappresenta un pannello dedicato all'esecuzione di un mini gioco all'interno del gioco. 
+Estende JLayered pane ed il suo contenuto cambia a seconda del mini gioco da visualizzare. Ma in comune, tutti i mini 
+giochi, hanno in comune il fatto che quando si invia una risposta viene aperto un pannello su un layer superiore che mostra
+il risultato.
+
+I tre mini giochi esistenti, tutte sottoclassi di MiniGame, sono:
+- TestMist: rappresenta un mini gioco in cui si visualizza un test di venti domande vere o false di cultura generale.
+- LogicQuest: rappresenta un mini gioco in cui si visualizza un'immagine di equazioni matematiche da risolvere ed è possibile
+premere quattro bottoni per le risposte. Solo uno di essi rappresenta la risposta giusta.
+- Captcha: rappresenta un mini gioco in cui si visualizzano delle immagini distorte ed il giocatore deve riuscire a capire 
+la scritta alfanumerica rappresentata.
 
 
-
-
-
-
-
-
-
-## 2.... XML
-I dati su tutti gli oggetti esistenti nel gioco sono presenti nel file oggetti.xml, questo file ha come root-tag 
-oggetti all’interno del quale ci sono nodi xml con tag oggetto e attributo nome = nome dell’oggetto.
+## 2.11 XML
+### 2.11.1 XML degli oggetti
+I dati su tutti gli oggetti esistenti nel gioco sono presenti nel file `oggetti.xml`: questo file ha come root-tag 
+`oggetti`, all’interno del quale ci sono nodi xml con tag `oggetto` e attributo `nome = [nome dell’oggetto]`.
 I dati degli oggetti sono descritti con i tag:
 - \<classe>: Classe effettiva dell’oggetto
 - \<descrizione>: Descrizione
@@ -724,9 +741,9 @@ Nota: ci possono essere più tag <useScenario> per associare comportamenti diver
 - \<onOpen>: che a sua volta contiene i tag:
   - \<Scenario state = “nameState”>: path dello scenario da eseguire quando si chiama il metodo open
 
-## XML dei personaggi
-Questo file ha come root-tag “personaggi”, all’interno del quale ci sono nodi xml con tag “personaggio” e attributo 
-“nome=nome personaggio”. I tag possibili sono:
+### 2.11.2 XML dei personaggi
+Questo file ha come root-tag `personaggi`, all’interno del quale ci sono nodi xml con tag `personaggio` e attributo 
+`nome=[nome personaggio]`. I tag possibili sono:
 - \<spriteSheet>: path dello sprite sheet o dello sprite del personaggio
 - \<json>: (opzionale) path del json corrispondente allo spritesheet
 - \<speakScenarios>: che a sua volta contiene i tag
