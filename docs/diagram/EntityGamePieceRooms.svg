@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 948 660" style="enable-background:new 0 0 948 660;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;fill:#C0C0C0;enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'Arial-BoldMT';}
+	.st4{font-size:13px;}
+	.st5{font-family:'ArialMT';}
+</style>
+<g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="599" y="39" class="st0" width="325.4" height="85"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="592" y="32" class="st1" width="325.4" height="85"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M592,32h325.4v85H592V32z"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M592,57h325.4"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M592,95h325.4"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 715.6646 51.5)" class="st3 st4">BlockPosition</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 597 74.5)" class="st5 st4">-x:int {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 597 89.5)" class="st5 st4">-y:int {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 597 112.5)" class="st5 st4">+relativePosition(offsetX:int, offsetY:int):BlockPosition()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="87" y="271" class="st0" width="339.6" height="280"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="80" y="264" class="st1" width="339.6" height="280"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M80,264h339.6v280H80V264z"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M80,289h339.6"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M80,417h339.6"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 232.4448 283.5)" class="st3 st4">Room</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 306.5)" class="st5 st4">-roomName:String {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 321.5)" class="st5 st4">-scenarioOnEnterPath:String</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 336.5)" class="st5 st4">-musicPath:String {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 351.5)" class="st5 st4">-backgroundImage:BufferedImage</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 366.5)" class="st5 st4">-pieceLocation:Map&gt;GamePiece, BlocPosition&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 381.5)" class="st5 st4">-bWidth:int</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 396.5)" class="st5 st4">-bHeight:int</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 411.5)" class="st5 st4">-xmlPath:String</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 434.5)" class="st5 st4">+startScenarioOnEnter():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 449.5)" class="st5 st4">-safePieceInsert(p:GamePiece, pos:BlockPosition):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 464.5)" class="st5 st4">-canGo(p:GamePiece, pos:BlockPosition): boolean()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 479.5)" class="st5 st4">-canFit(p:GamePiece, pos:BlockPosition):boolean()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 494.5)" class="st5 st4">+removePiece(p:GamePiece):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 509.5)" class="st5 st4">+getPiecePosition(p:GamePiece) : BlockPosition()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 85 524.5)" class="st5 st4">+getPiecesPresent():List&lt;GamePiece&gt;()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="615" y="343" class="st0" width="400" height="145"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="608" y="336" class="st1" width="400" height="145"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M608,336h400v145H608V336z"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M608,361h400"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M608,399h400"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 775.8523 355.5)" class="st3 st4">RoomFloor</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 378.5)" class="st5 st4">-walkableRectangles:List&lt;Rectangles&gt; {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 393.5)" class="st5 st4">-obstacleRectangles:List&lt;Rectangles&gt; {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 416.5)" class="st5 st4">+addWalkable(int, int,int,int): void()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 431.5)" class="st5 st4">+addObstacleRectangles(int, int, int, int): void()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 446.5)" class="st5 st4">+isWalkable(xBlock: int, yBlock:int): boolean() {query}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 461.5)" class="st5 st4">-intersectsObstacle(xBlock:int, yBlock:int):boolean() {query}</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 476.5)" class="st5 st4">+getNearestPlacement(BlockPosition, GamePiece):BlockPosition()</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M421,405l186,2"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M596.8,411.1L607,407l-10.1-4.3"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 499.5 397.5)" class="st5 st4">-floor</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="383" y="607" class="st0" width="168" height="72"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="376" y="600" class="st1" width="168" height="72"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M376,600h168v72H376V600z"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M376,638h168"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M376,661h168"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 436.5105 617.5)" class="st5 st4">«enum»</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 435.7932 632.5)" class="st3 st4">Cardinal</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 381 655.5)" class="st5 st4">-opposite:Cardinal</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="183" y="47" class="st0" width="138.7" height="72"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<rect x="176" y="40" class="st1" width="138.7" height="72"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M176,40h138.7v72H176V40z"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M176,78h138.7"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M176,101h138.7"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 222.9531 57.5)" class="st5 st4">«static»</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 219.3381 72.5)" class="st3 st4">Entrance</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 181 95.5)" class="st5 st4">-isLocked:boolean</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M316,76l275-1"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M580.9,79.2L591,75l-10.2-4.2"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 411.1313 66.5)" class="st5 st4">-arrowPosition</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M245,113l2,150"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M242.7,252.9L247,263l4.1-10.2"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 121.1313 139.5)" class="st5 st4">-adjacentRoom</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M421,292l266-174"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M680.8,127.1l6.2-9.1l-10.8,2"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 500.1313 198.5)" class="st5 st4">-defaultPosition</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M377,545l49,54"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M416.1,594.3l9.9,4.7l-3.7-10.4"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 432.1313 588.5)" class="st5 st4">-entranceMap:Map&lt;Cardinal, Entrance&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M247,263l-2-150"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<path class="st2" d="M249.3,123.1L245,113l-4.1,10.2"/>
+	</g>
+	<g transform="translate(-70,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 255.5 235.5)" class="st5 st4">-entranceMap:Map&lt;Cardinal, Entrance&gt;</text>
+		</g>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1079.2 661" style="enable-background:new 0 0 1079.2 661;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;fill:#C0C0C0;enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'Arial-BoldItalicMT';}
+	.st4{font-size:13px;}
+	.st5{font-family:'Arial-BoldMT';}
+	.st6{font-family:'ArialMT';}
+</style>
+<g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="391" y="15" class="st0" width="119.1" height="48"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="384" y="8" class="st1" width="119.1" height="48"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M384,8h119.1v48H384V8z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M384,33h119.1"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M384,43h119.1"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 413.5972 27.5)" class="st3 st4">GamePiece</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="263" y="135" class="st0" width="384.4" height="208"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="256" y="128" class="st1" width="384.4" height="208"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M256,128h384.4v208H256V128z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M256,153h384.4"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M256,281h384.4"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 435.5493 147.5)" class="st5 st4">Item</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 170.5)" class="st6 st4">-description:String {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 185.5)" class="st6 st4">-OBJECT_SPRITESHEET_PATH:String {readOnly}</text>
+			<path class="st2" d="M261,185.5h295.7"/>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 200.5)" class="st6 st4">-JSON_PATH:String {readOnly}</text>
+			<path class="st2" d="M261,200.5h181.6"/>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 215.5)" class="st6 st4">-SPRITESHEET:BufferedImage {readOnly}</text>
+			<path class="st2" d="M261,215.5h246.9"/>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 230.5)" class="st6 st4">-canUse:boolean</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 245.5)" class="st6 st4">-useActionName:String</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 260.5)" class="st6 st4">-useScenarioMap:Map&lt;String, String&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 275.5)" class="st6 st4">-useScenario:ActionSequence</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 298.5)" class="st6 st4">+loadUseScenario( useScenarioMap:Map&lt;String, String&gt;): void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 313.5)" class="st6 st4">+use():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 261 328.5)" class="st6 st4">+observe():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="47" y="455" class="st0" width="276" height="160"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="40" y="448" class="st1" width="276" height="160"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M40,448h276v160H40V448z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M40,473h276"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M40,556h276"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 133.5417 467.5)" class="st5 st4">PickupableItem</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 490.5)" class="st6 st4">-keepOnUseWith:boolean</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 505.5)" class="st6 st4">-useWithScenario:ActionSequence</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 520.5)" class="st6 st4">-targetPieceName:String</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 535.5)" class="st6 st4">-targetPieceInitState:String</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 550.5)" class="st6 st4">-targetPieceFinalState:String</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 573.5)" class="st6 st4">+pickup():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 588.5)" class="st6 st4">+drop(room:Room, pos:BlockPosition) : void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 45 603.5)" class="st6 st4">+useWith(gamePiece:GamePiece): void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="703" y="391" class="st0" width="403.2" height="265"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<rect x="696" y="384" class="st1" width="403.2" height="265"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M696,384h403.2v265H696V384z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M696,409h403.2"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M696,567h403.2"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 871.5789 403.5)" class="st5 st4">DoorLike</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 426.5)" class="st6 st4">-isOpen:boolean</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 441.5)" class="st6 st4">-openScenario:ActionSequence</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 456.5)" class="st6 st4">-openScenarioMap:Map&lt;String, String&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 471.5)" class="st6 st4">-successOpenScenario:ActionSequence {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 486.5)" class="st6 st4">-closeScenario:ActionSequence {readOnly}</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 501.5)" class="st6 st4">-SPRITESHEET_PATH:String</text>
+			<path class="st2" d="M701,501.5h172.2"/>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 516.5)" class="st6 st4">-JSON_PATH:String</text>
+			<path class="st2" d="M701,516.5h116.5"/>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 531.5)" class="st6 st4">-SPRTESHEET:BufferedImage</text>
+			<path class="st2" d="M701,531.5h178"/>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 546.5)" class="st6 st4">-openFrames:List&lt;Image&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 561.5)" class="st6 st4">-closeFrames:List&lt;Image&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 584.5)" class="st6 st4">+loadOpenScenarios(openScenarioMap:MAP&lt;String, String&gt;):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 599.5)" class="st6 st4">-initFrames():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 614.5)" class="st6 st4">+open():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 629.5)" class="st6 st4">+close()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 701 644.5)" class="st6 st4">-initScenarios():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st0" d="M267.4,50.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5S285.3,62,278.9,62S267.4,56.9,267.4,50.5z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st1" d="M260.4,43.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5S278.3,55,271.9,55S260.4,49.9,260.4,43.5z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M260.4,43.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5S278.3,55,271.9,55S260.4,49.9,260.4,43.5z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 238.6677 74.5)" class="st5 st4">Observable</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st0" d="M894.7,234.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S894.7,240.9,894.7,234.5z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st1" d="M887.7,227.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S887.7,233.9,887.7,227.5z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M887.7,227.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S887.7,233.9,887.7,227.5z"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 871.02 258.5)" class="st5 st4">Openable</text>
+		</g>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M251,447l101-110"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st1" d="M344.5,357.7L352,337l-19.9,9.3"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M344.5,357.7L352,337l-19.9,9.3L344.5,357.7"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M695,388l-81-51"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st1" d="M635.7,340.7L614,337l12.7,18"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M635.7,340.7L614,337l12.7,18L635.7,340.7"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M445,127l-1-70"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st1" d="M452.7,77.2L444,57l-8.1,20.4"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M452.7,77.2L444,57l-8.1,20.4L452.7,77.2"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M898,383l1-144"/>
+	</g>
+	<g transform="translate(-30,2) scale(1,1)">
+		<path class="st2" d="M342,127l-63.1-72"/>
+	</g>
+</g>
+</svg>

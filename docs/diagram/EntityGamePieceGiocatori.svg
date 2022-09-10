@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1039.9 752" style="enable-background:new 0 0 1039.9 752;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;fill:#C0C0C0;enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'Arial-BoldMT';}
+	.st4{font-size:13px;}
+	.st5{font-family:'ArialMT';}
+	.st6{font-family:'Arial-BoldItalicMT';}
+</style>
+<g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="439" y="367" class="st0" width="221" height="205"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="432" y="360" class="st1" width="221" height="205"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M432,360h221v205H432V360z"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M432,385h221"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M432,438h221"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 496.2791 379.5)" class="st3 st4">GameCharacter</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 402.5)" class="st5 st4">-jsonPath:String</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 417.5)" class="st5 st4">-spritesheet:BufferImage</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 432.5)" class="st5 st4">-speakFrame:Image</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 455.5)" class="st5 st4">-initMovingFrame():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 470.5)" class="st5 st4">-initAnimateFrames():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 485.5)" class="st5 st4">-initSpeakFrame():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 500.5)" class="st5 st4">-defaultInitSpeakFrame():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 515.5)" class="st5 st4">+getSpeakFrames():List&lt;Image&gt;()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 530.5)" class="st5 st4">+speak(sentence:String):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 437 545.5)" class="st5 st4">+playEmoji(emojiName:String):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="55" y="567" class="st0" width="250.7" height="130"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="48" y="560" class="st1" width="250.7" height="130"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M48,560h250.7v130H48V560z"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M48,585h250.7"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M48,638h250.7"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 159.6421 579.5)" class="st3 st4">NPC</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 53 602.5)" class="st5 st4">-speakScenarioMap:Map&lt;String, String&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 53 617.5)" class="st5 st4">-speakSentenceMap:Map&lt;String, String&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 53 632.5)" class="st5 st4">~speakScenario:ActionSequence</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 53 655.5)" class="st5 st4">+loadSpeakScenario():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 53 670.5)" class="st5 st4">+setState(state:String):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 53 685.5)" class="st5 st4">+speak():void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M300,569l131-58"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st1" d="M415.8,526.9L431,511l-22,0.5"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M415.8,526.9L431,511l-22,0.5L415.8,526.9"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="791" y="543" class="st0" width="283.9" height="220"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="784" y="536" class="st1" width="283.9" height="220"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M784,536h283.9v220H784V536z"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M784,561h283.9"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M784,674h283.9"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 879.7063 555.5)" class="st3 st4">PlayingCharcter</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 578.5)" class="st5 st4">+INVENTORY_SIZEe:int=16</text>
+			<path class="st2" d="M789,578.5h165.7"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 593.5)" class="st5 st4">-SCHWARTZ_SPRIESHEET_PATH:String</text>
+			<path class="st2" d="M789,593.5h244.4"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 608.5)" class="st5 st4">-SCHARTZ_JSON_PATH:String</text>
+			<path class="st2" d="M789,608.5h184.9"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 623.5)" class="st5 st4">~inventory:List&lt;PickupableItem&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 638.5)" class="st5 st4">-player:PlayingCharacter</text>
+			<path class="st2" d="M789,638.5h143.1"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 653.5)" class="st5 st4">-PLAYER_NAME:String=Schwartz</text>
+			<path class="st2" d="M789,653.5h198.1"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 668.5)" class="st5 st4">-SCHWARTZ_ROBOT_SPRITE_PATH:String</text>
+			<path class="st2" d="M789,668.5h262.5"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 691.5)" class="st5 st4">+makePlayerFinalForm():void()</text>
+			<path class="st2" d="M789,691.5h179.5"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 706.5)" class="st5 st4">+addToInventory(i:PickupableItem):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 721.5)" class="st5 st4">+removeFromInventory(i:PickupableItem):void()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 736.5)" class="st5 st4">+getInventory():List&lt;PickupableItem&gt;()</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 789 751.5)" class="st5 st4">+getPlayerName():String()</text>
+			<path class="st2" d="M789,751.5h152.1"/>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M783,578l-129-62"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st1" d="M676,517.2l-22-1.2l14.7,16.4"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M676,517.2l-22-1.2l14.7,16.4L676,517.2"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="423" y="31" class="st0" width="247.8" height="252"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<rect x="416" y="24" class="st1" width="247.8" height="252"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M416,24h247.8v252H416V24z"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M416,49h247.8"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M416,237h247.8"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 509.9575 43.5)" class="st6 st4">GamePiece</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 66.5)" class="st5 st4">-name:String</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 81.5)" class="st5 st4">#state:String</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 96.5)" class="st5 st4">#sprite:Image</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 111.5)" class="st5 st4">#bWidth:int</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 126.5)" class="st5 st4">#bHeight:int</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 141.5)" class="st5 st4">-locationRoom:Room</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 156.5)" class="st5 st4">-scalingFactor:double</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 171.5)" class="st5 st4">-scaledSpriteIcon:Icon</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 186.5)" class="st5 st4">#leftMovingFrames:List&lt;Image&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 201.5)" class="st5 st4">#rightMovingFrames:List&lt;Image&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 216.5)" class="st5 st4">#animateFrames:List&lt;Image&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 421 231.5)" class="st5 st4">#perpetualAnimationFrames:List&lt;Image&gt;</text>
+		</g>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M541,359l-1-82"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st1" d="M548.7,297.2L540,277l-8.2,20.4"/>
+	</g>
+	<g transform="translate(-38,-14) scale(1,1)">
+		<path class="st2" d="M548.7,297.2L540,277l-8.2,20.4L548.7,297.2"/>
+	</g>
+</g>
+</svg>

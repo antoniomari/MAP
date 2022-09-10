@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1172 660" style="enable-background:new 0 0 1172 660;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;fill:#C0C0C0;enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'Arial-BoldItalicMT';}
+	.st4{font-size:13px;}
+	.st5{font-family:'Arial-BoldMT';}
+	.st6{font-family:'ArialMT';}
+	.st7{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-dasharray:3;}
+</style>
+<g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="503" y="39" class="st0" width="200" height="72"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="496" y="32" class="st1" width="200" height="72"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M496,32h200v72H496V32z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M496,57h200"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 566.0454 51.5)" class="st3 st4">GamePiece</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M361,139l134-40"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M477.9,112.9L495,99l-21.9-2.3"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M477.9,112.9L495,99l-21.9-2.3L477.9,112.9"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="39" y="247" class="st0" width="144" height="112"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="32" y="240" class="st1" width="144" height="112"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M32,240h144v112H32V240z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M32,265h144"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 90.2764 259.5)" class="st5 st4">NPC</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="207" y="359" class="st0" width="168" height="136"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="200" y="352" class="st1" width="168" height="136"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M200,352h168v136H200V352z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M200,377h168"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 234.1423 371.5)" class="st5 st4">PlayingCharacter</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M177,241l43-32"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M208.7,227.9L220,209l-21.3,5.4"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M208.7,227.9L220,209l-21.3,5.4L208.7,227.9"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M283,351l-2-142"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M289.7,229.2L281,209l-8.1,20.4"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M289.7,229.2L281,209l-8.1,20.4L289.7,229.2"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="511" y="391" class="st0" width="184" height="96"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="504" y="384" class="st1" width="184" height="96"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M504,384h184v96H504V384z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M504,409h184"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 583.3586 403.5)" class="st5 st4">Item</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M596,383V105"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M604.4,125.3L596,105l-8.4,20.3"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M604.4,125.3L596,105l-8.4,20.3H604.4"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="615" y="567" class="st0" width="168" height="112"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="608" y="560" class="st1" width="168" height="112"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M608,560h168v112H608V560z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M608,585h168"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 665.9873 579.5)" class="st5 st4">DoorLike</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="335" y="559" class="st0" width="216" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="328" y="552" class="st1" width="216" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M328,552h216v88H328V552z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M328,577h216"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 391.5601 571.5)" class="st5 st4">PickupableItem</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M480,551l68-70"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M539.9,501.4L548,481l-20.2,8.7"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M539.9,501.4L548,481l-20.2,8.7L539.9,501.4"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M662,559l-40-78"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M638.8,495.2L622,481l1.8,21.9"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M638.8,495.2L622,481l1.8,21.9L638.8,495.2"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st0" d="M523.4,298.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S523.4,304.9,523.4,298.5z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M516.4,291.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S516.4,297.9,516.4,291.5z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M516.4,291.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S516.4,297.9,516.4,291.5z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 494.6677 322.5)" class="st5 st4">Observable</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st0" d="M742.7,506.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5c0,6.4-5.1,11.5-11.5,11.5S742.7,512.9,742.7,506.5
+			z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M735.7,499.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S735.7,505.9,735.7,499.5z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M735.7,499.5c0-6.4,5.1-11.5,11.5-11.5s11.5,5.1,11.5,11.5s-5.1,11.5-11.5,11.5S735.7,505.9,735.7,499.5z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 719.02 530.5)" class="st5 st4">Openable</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M570,383l-38.9-80"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M722,559l20.9-48"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="1007" y="103" class="st0" width="184" height="96"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="1000" y="96" class="st1" width="184" height="96"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M1000,96h184v96h-184V96z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M1000,121h184"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 1052.981 115.5)" class="st5 st4">BlockPosition</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="735" y="295" class="st0" width="152" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="728" y="288" class="st1" width="152" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M728,288h152v88H728V288z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M728,313h152"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 786.6614 307.5)" class="st5 st4">Room</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="919" y="519" class="st0" width="128" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="912" y="512" class="st1" width="128" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M912,512h128v88H912V512z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M912,550h128"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 932.636 529.5)" class="st6 st4">«enumeration»</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path d="M0,0"/>
+			<text transform="matrix(1 0 0 1 951.7932 544.5)" class="st5 st4">Cardinal</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="975" y="303" class="st0" width="208" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="968" y="296" class="st1" width="208" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M968,296h208v88H968V296z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M968,321h208"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 1039.8523 315.5)" class="st5 st4">RoomFloor</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="727" y="95" class="st0" width="152" height="56"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="720" y="88" class="st1" width="152" height="56"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M720,88h152v56H720V88z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M720,113h152"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 769.9841 107.5)" class="st5 st4">Entrance</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M797,145l5,142"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M797.4,277l4.6,10l3.8-10.3"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 809.1313 180.5)" class="st6 st4">-adjacentRoom</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M873,123l126,12"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M988.5,138.2L999,135l-9.7-5.2"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 895.1313 120.5)" class="st6 st4">-arrowPosition</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M881,334l86,3"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M956.7,340.9L967,337l-10-4.6"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 909.1313 326.5)" class="st6 st4">-floor</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st7" d="M839,377l102,134"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M931.5,505.5l9.5,5.5l-2.8-10.6"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="200" y="120" class="st1" width="160" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M200,120h160v88H200V120z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M200,145h160"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 233.7605 139.5)" class="st5 st4">GameCharacter</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="200" y="144" class="st1" width="160" height="64"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M200,144h160v64H200V144z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 205 162)" class="st6 st4">Definisce i personaggi del</text>
+			<text transform="matrix(1 0 0 1 205 175)" class="st6 st4">gioco e gestisce i loro</text>
+			<text transform="matrix(1 0 0 1 205 188)" class="st6 st4">frame di movimento.</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="32" y="264" class="st1" width="144.9" height="89"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M32,264h144.9v89H32V264z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 37 282)" class="st6 st4">Definisce i</text>
+			<text transform="matrix(1 0 0 1 37 295)" class="st6 st4">non-playable-character,</text>
+			<text transform="matrix(1 0 0 1 37 308)" class="st6 st4">con cui è possibile</text>
+			<text transform="matrix(1 0 0 1 37 321)" class="st6 st4">interagire (interazione</text>
+			<text transform="matrix(1 0 0 1 37 334)" class="st6 st4">&quot;speak&quot;).</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="200" y="376" class="st1" width="168" height="115"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M200,376h168v115H200V376z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 205 394)" class="st6 st4">Classe singoletto che</text>
+			<text transform="matrix(1 0 0 1 205 407)" class="st6 st4">definisce l&apos;unico</text>
+			<text transform="matrix(1 0 0 1 205 420)" class="st6 st4">personaggio giocabile. E&apos;</text>
+			<text transform="matrix(1 0 0 1 205 433)" class="st6 st4">in relazione con</text>
+			<text transform="matrix(1 0 0 1 205 446)" class="st6 st4">PickupableItem in quanto</text>
+			<text transform="matrix(1 0 0 1 205 459)" class="st6 st4">tiene traccia degli oggetti</text>
+			<text transform="matrix(1 0 0 1 205 472)" class="st6 st4">che ha a disposizione il</text>
+			<text transform="matrix(1 0 0 1 205 485)" class="st6 st4">giocatore.</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="504" y="408" class="st1" width="184" height="76"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M504,408h184v76H504V408z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 509 426)" class="st6 st4">Definisce gli oggetti presenti</text>
+			<text transform="matrix(1 0 0 1 509 439)" class="st6 st4">nel gioco, con cui è possibile</text>
+			<text transform="matrix(1 0 0 1 509 452)" class="st6 st4">interagire (interazione &quot;use&quot;).</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="328" y="576" class="st1" width="216" height="76"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M328,576h216v76H328V576z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 333 594)" class="st6 st4">Definisce gli oggetti che possono</text>
+			<text transform="matrix(1 0 0 1 333 607)" class="st6 st4">essere raccolti dal giocatore, che</text>
+			<text transform="matrix(1 0 0 1 333 620)" class="st6 st4">permettono l&apos;interazione con altri</text>
+			<text transform="matrix(1 0 0 1 333 633)" class="st6 st4">GamePiece (interazione&quot;useWith ).</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="608" y="584" class="st1" width="168" height="88"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M608,584h168v88H608V584z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 613 602)" class="st6 st4">Definisce oggetti</text>
+			<text transform="matrix(1 0 0 1 613 615)" class="st6 st4">assimilabili a porte, inoltre</text>
+			<text transform="matrix(1 0 0 1 613 628)" class="st6 st4">realizza l&apos;interfaccia</text>
+			<text transform="matrix(1 0 0 1 613 641)" class="st6 st4">Openable per realizzare le</text>
+			<text transform="matrix(1 0 0 1 613 654)" class="st6 st4">interazioni &quot;open&quot; e</text>
+			<text transform="matrix(1 0 0 1 613 667)" class="st6 st4">&quot;close&quot;.</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="1000" y="120" class="st1" width="184" height="76"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M1000,120h184v76h-184V120z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 1005 138)" class="st6 st4">Definisce le coordinate e le</text>
+			<text transform="matrix(1 0 0 1 1005 151)" class="st6 st4">posizioni misurate in blocchi</text>
+			<text transform="matrix(1 0 0 1 1005 164)" class="st6 st4">(24*24 pixel delle immagini</text>
+			<text transform="matrix(1 0 0 1 1005 177)" class="st6 st4">originali delle stanze)</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="968" y="320" class="st1" width="208" height="63"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M968,320h208v63H968V320z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 973 338)" class="st6 st4">Definisce i pavimenti delle stanze</text>
+			<text transform="matrix(1 0 0 1 973 351)" class="st6 st4">, aree di gioco calpestabili dai</text>
+			<text transform="matrix(1 0 0 1 973 364)" class="st6 st4">personaggi.</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="728" y="312" class="st1" width="152" height="64"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M728,312h152v64H728V312z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 733 330)" class="st6 st4">Definisce le stanze,</text>
+			<text transform="matrix(1 0 0 1 733 343)" class="st6 st4">all&apos;interno delle quali</text>
+			<text transform="matrix(1 0 0 1 733 356)" class="st6 st4">vengono collocati</text>
+			<text transform="matrix(1 0 0 1 733 369)" class="st6 st4">oggetti e personaggi.</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="912" y="552" class="st1" width="128" height="50"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M912,552h128v50H912V552z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 917 570)" class="st6 st4">Definisce e gestisce</text>
+			<text transform="matrix(1 0 0 1 917 583)" class="st6 st4">i 4 punti cardinali</text>
+			<text transform="matrix(1 0 0 1 917 596)" class="st6 st4">dello spazio</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="496" y="56" class="st1" width="200" height="63"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M496,56h200v63H496V56z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 501 74)" class="st6 st4">Classe astratta che rappresenta</text>
+			<text transform="matrix(1 0 0 1 501 87)" class="st6 st4">il concetto di pezzo del gioco</text>
+			<text transform="matrix(1 0 0 1 501 100)" class="st6 st4">(tutto ciò che ha uno sprite ed è</text>
+			<text transform="matrix(1 0 0 1 501 113)" class="st6 st4">presente in una stanza).</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<rect x="720" y="112" class="st1" width="152" height="37"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M720,112h152v37H720V112z"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 725 130)" class="st6 st4">Definisce l&apos;entrata di una</text>
+			<text transform="matrix(1 0 0 1 725 143)" class="st6 st4">stanza.</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M802,287l-5-142"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M801.6,155l-4.6-10l-3.8,10.3"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 697.1313 268.5)" class="st6 st4">-entranceMap</text>
+		</g>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st1" d="M624,184h132.8l10,10v52H624V184"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M624,184h132.8l10,10v52H624V184L624,184"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<path class="st2" d="M756.8,184v10h10L756.8,184"/>
+	</g>
+	<g transform="translate(-22,-22) scale(1,1)">
+		<g>
+			<path class="st2" d="M0,0"/>
+			<text transform="matrix(1 0 0 1 629 202)" class="st6 st4">ogni stanza può avere</text>
+			<text transform="matrix(1 0 0 1 629 215)" class="st6 st4">fino a 4 entrate, una</text>
+			<text transform="matrix(1 0 0 1 629 228)" class="st6 st4">per ogni punto</text>
+			<text transform="matrix(1 0 0 1 629 241)" class="st6 st4">cardinale</text>
+		</g>
+	</g>
+</g>
+</svg>
