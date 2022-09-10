@@ -7,7 +7,6 @@ import events.EventHandler;
 import events.RoomEvent;
 import general.GameException;
 import general.GameManager;
-import general.ScenarioMethod;
 import general.xml.XmlParser;
 import graphics.SpriteManager;
 import org.json.JSONObject;
@@ -18,8 +17,47 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Classe che rappresenta una stanza del gioco.
+ */
 public class Room
 {
+    /** Nome della stanza. */
+    private final String roomName;
+
+    /** Dizionario che contiene la posizione delle frecce per il cambio stanza
+     * per i punti cardinali disponibili a seconda della stanza.
+     * Queste informazioni vengono caricate sulla base del JSON della stanza. */
+    private final Map<Cardinal, Entrance> entranceMap = new HashMap<>(Cardinal.values().length);
+
+    /** Path dell'xml della stanza. */
+    private String xmlPath;
+    /** Path dello scenario da eseguire nel momento in cui si entra nella stanza. */
+    private String scenarioOnEnterPath;
+
+
+    /** Path della musica della stanza. Viene caricato dall'XML della stanza. */
+    private final String musicPath;
+    /** Immagine di background della stanza. */
+    private final BufferedImage backgroundImage;
+
+
+    /** Dizionario contenente tutti i GamePiece presenti nella stanza, assieme alle loro posizioni (in blocchi). */
+    private final Map<GamePiece, BlockPosition> pieceLocationMap;
+
+    /** Pavimento della stanza, viene caricato dal JSON della stanza. */
+    private final RoomFloor floor;
+    /** Larghezza in blocchi. */
+    private final int bWidth;
+    /** Altezza in blocchi. */
+    private final int bHeight;  // altezza in blocchi
+
+    /** Posizione di default della stanza. */
+    private final BlockPosition defaultPosition;
+
+    /**
+     * Punto cardinale.
+     */
     public enum Cardinal
     {
         NORTH,
@@ -27,8 +65,16 @@ public class Room
         EAST,
         SOUTH;
 
+        /** Punto cardinale opposto. */
         private Cardinal opposite;
 
+        /**
+         * Restituisce il punto cardinale corrispondente
+         * alla stringa (case insensitive).
+         *
+         * @param cardinal punto cardinale sotto forma di stringa
+         * @return punto cardinale corrispondente
+         */
         public static Cardinal fromString(String cardinal)
         {
             // ignore spaces
@@ -48,22 +94,38 @@ public class Room
             EAST.setOpposite(WEST);
         }
 
+        /**
+         * Imposta il punto cardinale opposto.
+         *
+         * @param opposite punto cardinale opposto
+         */
         private void setOpposite(Cardinal opposite)
         {
             this.opposite = opposite;
         }
 
+        /**
+         * Restituisce il punto cardinale opposto.
+         *
+         * @return punto cardinale opposto
+         */
         public Cardinal getOpposite()
         {
             return opposite;
         }
     }
 
+    /**
+     * Classe che rappresenta l'entrata di una stanza.
+     */
     private static class Entrance
     {
+        /** Stanza alla quale porta l'entrata. */
         private Room adjacentRoom;
+        /** Flag che indica se l'entrata è chiusa. */
         private boolean isLocked;
-        private BlockPosition arrowPosition;
+        /** Posizione della freccia relativa all'entrata (nel background della stanza). */
+        private final BlockPosition arrowPosition;
 
         Entrance(BlockPosition arrowPosition)
         {
@@ -77,50 +139,21 @@ public class Room
     }
 
 
-    private final String roomName;
-
-
-    /** Dizionario che contiene la posizione delle frecce per il cambio stanza
-     * per i punti cardinali disponibili a seconda della stanza.
-     * Queste informazioni vengono caricate sulla base del JSON della stanza. */
-
-    private final Map<Cardinal, Entrance> entranceMap = new HashMap<>(Cardinal.values().length);
-
-    /** Path dell'xml della stanza. */
-    private String xmlPath;
-    /** Path dello scenario da eseguire nel momento in cui si entra nella stanza. */
-    private String scenarioOnEnterPath;
-
-
-    /** Path della musica della stanza. Viene caricato dall'XML della stanza. */
-    private final String MUSIC_PATH;
-    /** Path dell'immagine di background della stanza. Viene caricato dall'XML della stanza. */
-    private final String BACKGROUND_PATH;
-    /** Immagine di background della stanza. */
-    private BufferedImage backgroundImage;
-
-
-    /** Dizionario contenente tutti i GamePiece presenti nella stanza, assieme alle loro posizioni (in blocchi). */
-    private final Map<GamePiece, BlockPosition> pieceLocationMap;
-
-    /** Pavimento della stanza, viene caricato dal JSON della stanza. */
-    private final RoomFloor floor;
-
-    private final int bWidth;  // larghezza in blocchi
-    private final int bHeight;  // altezza in blocchi
-
-    // posizione di default all'entrata del protagonista
-    private final BlockPosition defaultPosition;
-
-
-    public Room(String name, String path, String jsonPath, String MUSIC_PATH)
+    /**
+     * Crea una Room.
+     *
+     * @param name nome da assegnare alla Room
+     * @param path path dell'immagine di background
+     * @param jsonPath path del json della Room
+     * @param musicPath path della musica di sottofondo
+     */
+    public Room(String name, String path, String jsonPath, String musicPath)
     {
         this.roomName = name;
         pieceLocationMap = new HashMap<>();
 
-        this.MUSIC_PATH = MUSIC_PATH;
-        BACKGROUND_PATH = path;
-        backgroundImage = SpriteManager.loadImage(BACKGROUND_PATH);
+        this.musicPath = musicPath;
+        backgroundImage = SpriteManager.loadImage(path);
         floor = RoomFloor.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 
@@ -167,7 +200,12 @@ public class Room
 
     public String getMusicPath()
     {
-        return MUSIC_PATH;
+        return musicPath;
+    }
+
+    public BufferedImage getBackgroundImage()
+    {
+        return backgroundImage;
     }
 
     public void setScenarioOnEnter(String scenarioPath)
@@ -215,6 +253,13 @@ public class Room
         return entrance == null? null : entrance.adjacentRoom;
     }
 
+    /**
+     * Imposta la stanza collegata al punto cardinale specificato rispetto
+     * a this.
+     *
+     * @param cardinal punto cardinale a cui room dev'essere collegata rispetto a this
+     * @param room stanza da collegare
+     */
     public void setAdjacentRoom(Cardinal cardinal, Room room)
     {
         Objects.requireNonNull(cardinal);
@@ -243,7 +288,12 @@ public class Room
         return entranceMap.containsKey(cardinal) && entranceMap.get(cardinal).isLocked;
     }
 
-    @ScenarioMethod
+    /**
+     * Imposta il blocco di un'entrata della stanza.
+     *
+     * @param cardinal punto cardinale dell'entrata
+     * @param locked {@code true} per bloccare l'entrata, {@code false} per sbloccarla
+     */
     public void setAdjacentLocked(Cardinal cardinal, boolean locked)
     {
         Objects.requireNonNull(cardinal);
@@ -279,13 +329,12 @@ public class Room
         return floor;
     }
 
-
-    public BlockPosition getInitialPlayerPosition()
-    {
-        return defaultPosition;
-    }
-
-    // TODO: aggiungere controllo sul pavimento
+    /**
+     * Aggiunge un GamePiece nella stanza.
+     *
+     * @param p GamePiece da aggiungere
+     * @param pos posizione alla quale aggiungere il GamePiece
+     */
     public void addPiece(GamePiece p, BlockPosition pos)
     {
         Objects.requireNonNull(p);
@@ -294,7 +343,7 @@ public class Room
             throw new GameException(p + " già presente in " + this);
 
         if(pos == null)
-            pieceLocationMap.put(p, pos);
+            pieceLocationMap.put(p, null);
         else
             safePieceInsert(p, pos);
 
@@ -313,7 +362,6 @@ public class Room
      */
     public void startScenarioOnEnter()
     {
-        // TODO: pre-caricare per ridurre delay?
         if(scenarioOnEnterPath != null)
         {
             GameManager.startScenario(XmlParser.loadScenario(scenarioOnEnterPath));
@@ -323,9 +371,14 @@ public class Room
         {
             GameManager.continueScenario();
         }
-
     }
 
+    /**
+     * Effettua controllo sulla posizione d'inserimento del GamePiece.
+     *
+     * @param p GamePiece da posizionare
+     * @param pos posizione d'inserimento
+     */
     private void safePieceInsert(GamePiece p, BlockPosition pos)
     {
         if(canGo(p, pos) || !(p instanceof PlayingCharacter))
@@ -335,14 +388,21 @@ public class Room
     }
 
 
+    /**
+     * Restituisce {@code true} se il GamePiece può essere posizionato in posizione pos.
+     *
+     * @param p GamePiece che si sta provando a posizionare
+     * @param pos posizione alla quale si vuole posizionare il GamePiece
+     * @return {@code true} se il GamePiece può essere posizionato in posizione pos,
+     * {@code false} altrimenti.
+     */
     private boolean canGo(GamePiece p, BlockPosition pos)
     {
-        // TODO: controllare
         boolean fit = canFit(p, pos);
 
         if(p instanceof Item)
             return fit;
-        else // if(p instanceof GameCharacter)
+        else
         {
             BlockPosition nearest = floor.getNearestPlacement(pos, p.getBWidth(), p.getBHeight());
 
@@ -364,8 +424,6 @@ public class Room
      */
     private boolean canFit(GamePiece p, BlockPosition pos)
     {
-        // TODO: controllare
-
         Objects.requireNonNull(p);
         Objects.requireNonNull(pos);
 
@@ -378,6 +436,11 @@ public class Room
     }
 
 
+    /**
+     * Rimuove un GamePiece dalla stanza.
+     *
+     * @param p GamePiece da rimuovere
+     */
     public void removePiece(GamePiece p)
     {
         Objects.requireNonNull(p);
@@ -387,6 +450,12 @@ public class Room
     }
 
 
+    /**
+     * Restituisce la posizione di un GamePiece presente nella stanza.
+     *
+     * @param p GamePiece di cui restituire la posizione
+     * @return posizione del GamePiece nella stanza
+     */
     public BlockPosition getPiecePosition(GamePiece p)
     {
         if(!pieceLocationMap.containsKey(p))
@@ -417,6 +486,13 @@ public class Room
 
     }
 
+    /**
+     * Restituisce la posizione della freccia (background della stanza)
+     * relativa all'entrata della stanza in un punto cardinale.
+     *
+     * @param cardinal punto cardinale dell'entrata
+     * @return posizione in blocchi della freccia
+     */
     public BlockPosition getArrowPosition(Cardinal cardinal)
     {
         Objects.requireNonNull(cardinal);
@@ -429,12 +505,6 @@ public class Room
         {
             return entranceMap.get(cardinal).arrowPosition;
         }
-    }
-
-
-    public BufferedImage getBackgroundImage()
-    {
-        return backgroundImage;
     }
 
 }

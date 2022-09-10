@@ -18,7 +18,6 @@ public abstract class MiniGame extends JLayeredPane
 
     public static void quitCurrentTest()
     {
-        System.out.println("PREMUTO");
         currentTest.quit();
         GameManager.changeState(GameManager.GameState.PLAYING);
         lastQuitTest = currentTest;

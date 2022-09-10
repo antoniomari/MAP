@@ -134,7 +134,6 @@ public class Captcha extends MiniGame
         // Rimpiazzare set immagine
 
         image = new JLabel(icon, JLabel.CENTER);
-        System.out.println(image.getIcon().toString());
     }
 
     private static Map<String, String> initMatch()
@@ -227,8 +226,8 @@ public class Captcha extends MiniGame
             @Override
             public void keyPressed(KeyEvent e)
             {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    System.out.println(captAnswer.getText());
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
 
                     GameManager.getMainFrame().requestFocus();
 

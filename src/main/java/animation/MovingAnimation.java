@@ -116,8 +116,6 @@ public class MovingAnimation extends Animation
         delayMilliseconds = (int) Math.round(1000.0 / FPS);
         int numFrames = (int) (FPS * blockDistance / (1000 * speed));
 
-        System.out.println("Num frame animazione: " + numFrames);
-
         double deltaX = (double)(finalX - initialX) / numFrames;
         double deltaY = (double)(finalY - initialY) / numFrames;
 

@@ -211,7 +211,7 @@ public class GameScreenPanel extends JLayeredPane
 
         // aggiungi il personaggio giocante nella stanza
         if(cardinal == null)
-            PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getInitialPlayerPosition());
+            PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getDefaultPosition());
         else
             PlayingCharacter.getPlayer() // TODO: aggiustare qua il piazzamento
                     .addInRoom(newRoom, newRoom.getFloor().getNearestPlacement(

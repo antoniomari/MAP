@@ -1,16 +1,37 @@
 package entity.rooms;
 
+/**
+ * Classe che rappresenta una posizione, misurata in blocchi.
+ */
 public class BlockPosition
 {
-    private int x;
-    private int y;
+    /** Ascissa. */
+    private final int x;
+    /** Ordinata. */
+    private final int y;
 
+    /**
+     * Crea un oggetto BlockPosition.
+     *
+     * @param x ascissa
+     * @param y ordinata
+     */
     public BlockPosition(int x, int y)
     {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Restituisce una BlockPosition le cui coordinate
+     * {@code offsetX} e {@code offsetY} sono calcolate
+     * relativamente alle coordinate di this.
+     *
+     * @param offsetX ascissa
+     * @param offsetY ordinata
+     * @return BlockPosition con coordinate relative rispetto
+     * a this
+     */
     public BlockPosition relativePosition(int offsetX, int offsetY)
     {
         return new BlockPosition(this.getX() + offsetX, this.getY() + offsetY);

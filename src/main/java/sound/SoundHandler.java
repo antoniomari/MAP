@@ -2,6 +2,7 @@ package sound;
 
 import general.GameException;
 import general.GameManager;
+import general.LogOutputManager;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -178,7 +179,7 @@ public class SoundHandler
      */
     private static void openWav(String wavPath, Clip targetClip)
     {
-        System.out.println("Sto aprendo: " + wavPath);
+        LogOutputManager.logOutput("Sto aprendo: " + wavPath);
         try
         {
             File file = new File(wavPath);
