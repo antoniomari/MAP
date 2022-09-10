@@ -1,9 +1,8 @@
 package general.xml;
 
-import GUI.miniGames.Captcha;
-import GUI.miniGames.ClientCap;
-import GUI.miniGames.LogicQuest;
-import GUI.miniGames.TestMist;
+import gui.miniGames.Captcha;
+import gui.miniGames.LogicQuest;
+import gui.miniGames.TestMist;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.PlayingCharacter;
@@ -26,7 +25,6 @@ import org.xml.sax.SAXException;
 import restClient.RecipeRestClient;
 import sound.SoundHandler;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -1194,7 +1192,6 @@ public class XmlParser
      * I tag richiesti per il parsing di questo comando sono:
      * <ul>
      *     <li>{@literal <subject>} il nome del soggetto dell'azione (GamePiece)</li>
-     *
      *    <li>{@literal <animationName>} il nome dell'animazione da eseguire</li>
      * </ul>
      *
@@ -1207,13 +1204,12 @@ public class XmlParser
 
         // recupera il nome dell'animazione
         String animationName = getTagValue(eAction, "animationName");
-        int finalWait = Integer.parseInt(getTagValue(eAction, "finalWait"));
         boolean isPerpetual = Boolean.parseBoolean(getTagValue(eAction, "isPerpetual"));
 
         // lo scenario viene mandato avanti dall'animazione (o qui se essa è perpetua)f
         return () ->
         {
-            GameManager.getPiece(subject).executeEffectAnimation(animationName, finalWait, isPerpetual);
+            GameManager.getPiece(subject).executeEffectAnimation(animationName, isPerpetual);
 
             if(isPerpetual)
                 GameManager.continueScenario();

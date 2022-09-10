@@ -1,4 +1,4 @@
-package GUI.miniGames;
+package gui.miniGames;
 
 /**
  *  Mini gioco del test psicologico versione finale da integrare sul progetto di MAP
@@ -7,23 +7,13 @@ package GUI.miniGames;
  */
 // TODO: possibilità di applicare factory design pattern
 
-import GUI.GameKeyListener;
-import GUI.GameScreenPanel;
-import GUI.MainFrame;
-import GUI.gamestate.GameState;
 import general.FontManager;
-import general.GameException;
 import general.GameManager;
 import general.LogOutputManager;
-import general.xml.XmlParser;
 import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 
 public class TestMist extends MiniGame
 {
@@ -161,7 +151,7 @@ public class TestMist extends MiniGame
     public static void executeTest()
     {
         LogOutputManager.logOutput("Iniziando Test MIST: ", LogOutputManager.GAMESTATE_COLOR);
-        GameState.changeState(GameState.State.TEST);
+        GameManager.changeState(GameManager.GameState.TEST);
 
         MiniGame lastTest = MiniGame.getLastQuitTest();
 
@@ -242,13 +232,11 @@ public class TestMist extends MiniGame
             // caso in cui siano marcati sia il SI che il NO
             if (answerS[i].isSelected() && answerN[i].isSelected()) {
                 completed = false;
-                //System.out.println("Sono marcati sia il si che il no");
                 showResult(ERROR);
                 break;
                 // caso in cui non si sia selezionato nè il SI nè il NO
             } else if (!answerS[i].isSelected()  && !answerN[i].isSelected()) {
                 completed = false;
-                //System.out.println("Non sono marcati nè il si nè il no");
                 showResult(ERROR);
                 break;
             } else {
@@ -258,7 +246,6 @@ public class TestMist extends MiniGame
 
             if (counter == ANSWERS) {
                 completed = true;
-                //System.out.println("si è completato il test");
                 if(checkTestResult())
                 {
 

@@ -1,22 +1,28 @@
 package events;
 
-import GUI.gamestate.GameState;
-import animation.Animation;
-import java.util.List;
-
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import events.executors.*;
 import entity.items.PickupableItem;
+import general.GameManager;
 import general.LogOutputManager;
 import sound.SoundHandler;
 
-import java.awt.*;
-import java.util.ArrayList;
-
+/**
+ * Classe che si occupa della gestione degli eventi, smistando
+ * ogni GameEvent a seconda del tipo effettivo e delegando l'esecuzione
+ * alle opportune classi Executor.
+ */
 public class EventHandler
 {
 
+    /**
+     * Invia un evento, indirizzandolo agli esecutori che si occuperanno
+     * di aggiornare la gui in modo coerente alle informazioni inviate
+     * dall'evento.
+     *
+     * @param ge evento di gioco da inoltrare
+     */
     public static void sendEvent(GameEvent ge)
     {
         // stampa per logger
@@ -36,9 +42,6 @@ public class EventHandler
 
         if(ge instanceof GamePieceEvent)
             executeGamePieceEvent((GamePieceEvent) ge);
-
-        if(ge instanceof AnimationEvent)
-            executeAnimationEvent((AnimationEvent) ge);
     }
 
     public static void executeItemInteractionEvent(ItemInteractionEvent e)
@@ -82,7 +85,7 @@ public class EventHandler
         if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
         {
             TextBarUpdateExecutor.executeDisplay(e.getSentence());
-            AnimationExecutor.executeSpeakAnimation(ch, ch.getSpeakFrames(), 300, GameState.State.TEXT_BAR);
+            AnimationExecutor.executeSpeakAnimation(ch, ch.getSpeakFrames(), 300, GameManager.GameState.TEXT_BAR);
         }
         else if(e.getType() == CharacterEvent.Type.EMOJI)
         {
@@ -129,11 +132,9 @@ public class EventHandler
 
         if(e.getType() == GamePieceEvent.Type.UPDATE_SPRITE)
             PieceUpdateExecutor.executeUpdateSprite(piece);
-    }
 
-    public static void executeAnimationEvent(AnimationEvent e)
-    {
-        AnimationExecutor.executeAnimation(e.getPieceInvolved(), e.getFrames());
+        if(e.getType() == GamePieceEvent.Type.PIECE_ANIMATION)
+            AnimationExecutor.executeAnimation(e.getPieceInvolved(), e.getFrames());
     }
 
 }

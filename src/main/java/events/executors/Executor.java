@@ -1,8 +1,8 @@
 package events.executors;
 
-import GUI.GameScreenPanel;
-import GUI.InventoryPanel;
-import GUI.MainFrame;
+import gui.GameScreenPanel;
+import gui.InventoryPanel;
+import gui.MainFrame;
 
 import java.util.Objects;
 

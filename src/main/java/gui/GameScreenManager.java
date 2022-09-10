@@ -1,8 +1,6 @@
-package GUI;
+package gui;
 
-import GUI.gamestate.GameState;
 import entity.rooms.BlockPosition;
-import entity.rooms.RoomFloor;
 import general.GameManager;
 
 import javax.swing.*;

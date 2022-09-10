@@ -1,6 +1,5 @@
 package entity.characters;
 
-import entity.GamePiece;
 import entity.items.PickupableItem;
 import entity.rooms.Room;
 import events.EventHandler;

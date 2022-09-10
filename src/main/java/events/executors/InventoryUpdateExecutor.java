@@ -1,7 +1,5 @@
 package events.executors;
 
-import GUI.InventoryPanel;
-import GUI.MainFrame;
 import entity.items.PickupableItem;
 
 public class InventoryUpdateExecutor extends Executor

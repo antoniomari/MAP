@@ -1,22 +1,17 @@
 package graphics;
 
-import GUI.InventoryPanel;
 import general.GameException;
 import general.Pair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import entity.rooms.RoomFloor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SpriteManager

@@ -1,6 +1,7 @@
-package GUI;
+package gui;
 
-import GUI.gamestate.GameState;
+
+import general.GameManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,7 +12,7 @@ import java.util.Objects;
  * le cui istanze sono personalizzabili: è possibile
  * impostare azioni (runnable) associate a uno specifico tasto,
  * le quali vengono attivate solo in un particolare stato di gioco
- * {@link GameState.State}
+ * {@link general.GameManager.GameState}
  */
 public class GameKeyListener implements KeyListener
 {
@@ -24,7 +25,7 @@ public class GameKeyListener implements KeyListener
     /** Azione da eseguire al rilascio del tasto. */
     private Runnable releaseAction = () -> {};
     /** Stato in cui il gioco deve trovarsi per l'esecuzione delle azioni. */
-    private final GameState.State targetState;
+    private final GameManager.GameState targetState;
 
     /**
      * Crea un GameKeyListener.
@@ -38,10 +39,10 @@ public class GameKeyListener implements KeyListener
      *                      quando il gioco si trova nello stato
      *                      {@code targetState} o {@code null} per non
      *                      impostare alcuna azione
-     * @param targetState stato di gioco {@link GameState.State} in cui
+     * @param targetState stato di gioco {@link GameManager.GameState} in cui
      *                    è attivo il GameKeyListener da creare
      */
-    public GameKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction, GameState.State targetState)
+    public GameKeyListener(int keyCode, Runnable pressAction, Runnable releaseAction, GameManager.GameState targetState)
     {
         Objects.requireNonNull(targetState);
 
@@ -80,7 +81,7 @@ public class GameKeyListener implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        if (GameState.getState() == targetState &&  e.getKeyCode() == keyCode)
+        if (GameManager.getState() == targetState &&  e.getKeyCode() == keyCode)
         {
             if(!pressed)
             {

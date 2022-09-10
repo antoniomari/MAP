@@ -1,7 +1,6 @@
 package entity.characters;
 
 import entity.GamePiece;
-import events.AnimationEvent;
 import events.CharacterEvent;
 import events.EventHandler;
 import graphics.SpriteManager;

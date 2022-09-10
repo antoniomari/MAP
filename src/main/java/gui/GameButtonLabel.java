@@ -1,6 +1,5 @@
-package GUI;
+package gui;
 
-import general.GameManager;
 import graphics.SpriteManager;
 
 import javax.swing.*;

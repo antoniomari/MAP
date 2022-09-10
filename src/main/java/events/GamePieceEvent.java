@@ -3,6 +3,8 @@ package events;
 import entity.GamePiece;
 import entity.rooms.BlockPosition;
 
+import java.awt.*;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,6 +23,8 @@ public class GamePieceEvent extends GameEvent
     private String spritesheetPath;
     private String jsonPath;
     private String animationName;
+
+    private List<Image> frames;
 
     public enum Type
     {
@@ -49,6 +53,13 @@ public class GamePieceEvent extends GameEvent
                         return " aggiornato sprite";
                     }
                 },
+        PIECE_ANIMATION
+                {
+                    public String toString()
+                    {
+                        return " animato";
+                    }
+                },
         EFFECT_ANIMATION
                 {
                     public String toString()
@@ -70,6 +81,19 @@ public class GamePieceEvent extends GameEvent
         super(type.toString());
         this.type = type;
         this.pieceInvolved = pieceInvolved;
+    }
+
+    public GamePieceEvent(GamePiece pieceInvolved, List<Image> frames, Type type)
+    {
+        super(type.toString());
+        this.type = type;
+        this.pieceInvolved = pieceInvolved;
+        this.frames = frames;
+    }
+
+    public List<Image> getFrames()
+    {
+        return frames;
     }
 
     public void setNewPosition(BlockPosition newPosition)
@@ -115,11 +139,11 @@ public class GamePieceEvent extends GameEvent
     @Override
     public String getEventString()
     {
+        String pre = "[" + eventTime.toString() + "] -> " + " [" + pieceInvolved + "] " + type;
         if(type == GamePieceEvent.Type.MOVE)
-            return eventTime.toString() + " -> " + " [" + pieceInvolved + "] " + type
-                    + " in posizione " + newPosition;
+            return pre + " in posizione " + newPosition;
         else
-            return "NON PRESENTE";
+            return pre;
     }
 
     public void setAnimationInfo(String spritesheetPath, String jsonPath, String animationName)
