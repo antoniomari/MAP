@@ -202,7 +202,6 @@ recuperare l’AXC8.
 A questo punto il giocatore si deve dirigere all’ascensore, ma per poterlo utilizzare deve superare un altro mini gioco 
 consistente nella risoluzione di un captcha, ovvero si deve riuscire a digitare correttamente una parola mostrata da 
 un’immagine che si apre in una finestra.
-Le seguenti parole sono le possibili soluzione del captcha: --------------------------
 
 Terminato questo minigioco e preso l’ascensore si raggiunge la stanza EBERT-A del piano EBERT, dalla quale è possibile 
 accedere alla stanza EBERT-B nella quale si deve interagire con il robot presente. 
@@ -242,8 +241,6 @@ piano server. Per farlo è sufficiente prendere ancora una volta l’ascensore e
 Qui compariranno i tre scienziati che avviseranno il giocatore di non spegnere il server, ma per terminare il 
 gioco si deve procedere allo spegnimento. Una volta spento il server parte lo scenario finale dai risvolti entusiasmanti
 sul quale non sveleremo nulla dal momento che il gioco termina già con lo shut-down dei computer centrali.
-
-
 
 # 2 Struttura del software e scelte implementative.
 
@@ -412,8 +409,22 @@ esistono solo per un fattore di ordine e pulizia nella struttura del codice.
 Si riporta di seguito il diagramma delle classi di questi packages, in quanto si ritiene un aspetto cardine per la 
 comprensione del dominio di gioco.
 
----- diagramma delle classi 
+Diagramma delle classi del package characters
+![Giocatori](../docs/diagram/EntityGamePieceGiocatori.svg)
 
+Diagramma delle classi del package items
+![Items](../docs/diagram/EntityGamePieceItems.svg)
+
+Diagramma delle classi del package rooms
+![Rooms](../docs/diagram/EntityGamePieceRooms.svg)
+
+Diagramma del package entity e dei suoi sottopackage
+![EntityPackageResponsibility](../docs/diagram/EntityPackageResponsibility.svg)
+
+Diagramma del package entity
+<p align="center">
+  <img src="../docs/diagram/PackageDiagramEntityCharactersItemsRoom.svg" alt="modello di dominio" width="300"/>
+</p>
 
 ### 2.6.1 GamePiece
 Un oggetto della classe astratta `GamePiece` rappresenta un qualsiasi elemento fisico del gioco che ha uno sprite e può 
@@ -793,3 +804,41 @@ Questo file ha come root-tag `personaggi`, all’interno del quale ci sono nodi 
 Di questi ultimi due tag ce ne possono essere in numero arbitrario, purché non ce ne siano due con lo stesso attributo
 associato al valore “state”.
 
+## 3. Specifica Algebrica
+Si riporta la specifica algebrica della struttura dati dizionario (Map), utilizzata nella classe GameManager per 
+tenere traccia dei GamePiece registrati.
+
+Le operazioni sono adattate rispetto a quelle presenti nel codice per facilitare la scrittura della specifica.
+### 3.1 SPECIFICA SINTATTICA
+
+sorts: Map, GamePiece, String, boolean
+
+Nota: sappiamo che è definita l'operazione getName(GamePiece)->String.
+
+Operations:
+
+[COSTRUTTORI]
+- new() -> Map
+- addPiece(Map, GamePiece) -> Map
+
+[OSSERVATORI]
+- getPiece(Map, String) -> GamePiece
+- remove(Map, String) -> GamePiece
+- hasPiece(Map, String) -> boolean
+- isEmpty(Map) -> boolean
+
+### 3.2 SPECIFICA SEMANTICA:
+
+declare m: Map, p: GamePiece
+
+- getPiece(addPiece(m, p), getName(p)) = p
+- remove(addPiece(m, p), getName(p)) = m
+- hasPiece(addPiece(m, p), getName(p)) = true
+- hasPiece(new, getName(p)) = false
+- isEmpty(new) = true
+- isEmpty(addPiece(m, p)) = false
+
+### 3.3 SPECIFICA DI RESTRIZIONE:
+- remove(new, getName(p)) = errore
+- getPiece(new, getName(p)) = errore
+ 
