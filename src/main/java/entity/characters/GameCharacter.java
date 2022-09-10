@@ -156,7 +156,7 @@ public class GameCharacter extends GamePiece
     public void speak(String sentence)
     {
         String toPrint =  getName() + ": " + sentence;
-        EventHandler.sendEvent(new CharacterEvent(this, toPrint, CharacterEvent.Type.NPC_SPEAKS));
+        EventHandler.sendEvent(new CharacterEvent(this, toPrint, CharacterEvent.Type.SPEAK));
     }
 
     /**

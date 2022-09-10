@@ -82,9 +82,9 @@ public class EventHandler
     {
         GameCharacter ch = e.getCharacterInvolved();
 
-        if(e.getType() == CharacterEvent.Type.NPC_SPEAKS)
+        if(e.getType() == CharacterEvent.Type.SPEAK)
         {
-            TextBarUpdateExecutor.executeDisplay(e.getSentence());
+            TextBarUpdateExecutor.executeDisplay(e.getContent());
             AnimationExecutor.executeSpeakAnimation(ch, ch.getSpeakFrames(), 300, GameManager.GameState.TEXT_BAR);
         }
         else if(e.getType() == CharacterEvent.Type.EMOJI)
@@ -95,9 +95,8 @@ public class EventHandler
             SoundHandler.playWav(SoundHandler.EMOJI_SOUND_PATH, SoundHandler.Mode.SOUND);
 
             AnimationExecutor.executeEffectAnimation(e.getCharacterInvolved(), EMOJI_SPRITESHEET_PATH, EMOJI_JSON_PATH,
-                    e.getSentence(), e.getCharacterInvolved().getPosition().relativePosition(1, - e.getCharacterInvolved().getBHeight()),
+                    e.getContent(), e.getCharacterInvolved().getPosition().relativePosition(1, - e.getCharacterInvolved().getBHeight()),
                     500);
-            // TODO: generalizzare, fuori e.getSentence, dentro nome animazione
         }
     }
 

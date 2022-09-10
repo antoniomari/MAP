@@ -6,6 +6,11 @@ import gui.MainFrame;
 
 import java.util.Objects;
 
+/**
+ * Un esecutore ha il compito di mantenere aggiornata
+ * la GUI con i cambiamenti che avvengono nelle entity
+ * (classi di dominio) del gioco.
+ */
 public class Executor
 {
     protected static MainFrame mainFrame;

@@ -15,7 +15,6 @@ public abstract class GameEvent
     protected LocalDateTime eventTime;
     protected String toPrint;
     protected Item itemInvolved;
-    protected GameCharacter characterInvolved;
     protected Room roomInvolved;
     protected BlockPosition pos;
 
