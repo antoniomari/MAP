@@ -189,7 +189,6 @@ public class MainFrame extends JFrame {
         this.currentRoom = newRoom;
         rescalingFactor = calculateScalingFactor(currentRoom.getBWidth(), currentRoom.getBHeight());
 
-        // solo per stanze più grandi TODO: abilitare
         gameScreenPanel.setScalingFactor(rescalingFactor);
 
         gameScreenPanel.changeRoom(newRoom, SCREEN_WIDTH);
@@ -268,7 +267,6 @@ public class MainFrame extends JFrame {
         int roomWidthBlocks = currentRoom.getBWidth();
         int roomHeightBlocks = currentRoom.getBHeight();
 
-        // TODO: rivedere commenti interni
         // per calcolare lo scaling factor serve ottenere il rapporto tra
         // la larghezza dello schermo e quella dell'immagine della stanza;
         // in seguito si aggiusta in modo tale che la grandezza di ogni blocco
@@ -335,8 +333,6 @@ public class MainFrame extends JFrame {
 
     }
 
-    // setup scena iniziale di gioco TODO: deprecare
-    // TODO: posticipare correttamente caricamento, non deve avvenire all'inizio dell'esecuzione
     // ma solo all'inizio del gioco
     private void setupPlayground()
     {
@@ -552,7 +548,6 @@ public class MainFrame extends JFrame {
 
     private GameButtonLabel makeMenuButton(String buttonImagePath, String buttonPressedImagePath, Runnable clickAction)
     {
-        // TODO: aggiustare rescalingFactor, non va bene
         GameButtonLabel buttonLabel = new GameButtonLabel(buttonImagePath, buttonPressedImagePath,
                 DEFAULT_SCALING_FACTOR / 3);
 
@@ -656,7 +651,6 @@ public class MainFrame extends JFrame {
 
         currentRoom = PlayingCharacter.getPlayer().getLocationRoom();
 
-        // TODO: evitare copia
         // inizializzazione immagine di sfondo
         setupBackground();
         // inizializzazione componenti

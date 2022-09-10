@@ -110,7 +110,6 @@ public class LogicQuest extends MiniGame
 
 
         setupListener();
-        // TODO: modificare size
         imagePanel.setBackground(Color.BLUE);
         optionPanel.setBackground(Color.DARK_GRAY);
         this.setBackground(Color.BLUE);

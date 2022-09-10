@@ -557,7 +557,6 @@ public class GameScreenPanel extends JLayeredPane
         JLabel pieceLabel = pieceLabelMap.get(piece);
         // se è un oggetto può andare sulle pareti, se è un personaggio no
         boolean canGoOnWall = piece instanceof Item || piece instanceof NPC;
-        // TODO: controllare NPC
 
         if(pieceLabel == null)
             throw new IllegalArgumentException("GamePiece non presente nella stanza");
