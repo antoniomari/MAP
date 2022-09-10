@@ -11,12 +11,17 @@ import java.util.List;
  */
 public class ItemInteractionEvent extends GameEvent
 {
+    /** Item coinvolto nell'evento. */
     private final Item itemInvolved;
+    /** Frames per eventuale animazione. */
     private List<Image> frames;
+    /** Tipo di evento. */
     private Type type;
 
+    /** Tipo di evento ItemInteractionEvent. */
     public enum Type
     {
+        /** Evento osserva oggetto. */
         OBSERVE
         {
             public String toString()

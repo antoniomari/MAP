@@ -10,9 +10,13 @@ import entity.rooms.Room;
  */
 public class RoomEvent extends GameEvent
 {
+    /** Tipo di evento. */
     private final Type type;
+    /** GamePiece coinvolto nell'evento. */
     private final GamePiece pieceInvolved;
+    /** Room coinvolta nell'evento. */
     private final Room roomInvolved;
+    /** Posizione di riferimento. */
     private final BlockPosition pos;
 
     /**

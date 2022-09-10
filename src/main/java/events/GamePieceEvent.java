@@ -12,17 +12,26 @@ import java.util.Objects;
  */
 public class GamePieceEvent extends GameEvent
 {
+    /** Tipo di evento. */
     private final Type type;
+    /** Posizione iniziale. */
     private BlockPosition oldPosition;
+    /** Posizione finale. */
     private BlockPosition newPosition;
+    /** GamePiece coinvolto nell'evento. */
     private final GamePiece pieceInvolved;
+    /** millisecondi da attendere alla fine di un'animazione. */
     private int millisecondWaitEnd;
 
     // dati per mandare informazioni sull'animazione da eseguire (eventuale)
+    /** Path sprite-sheet per frame animazione. */
     private String spritesheetPath;
+    /** Path json relativo allo sprite-sheet. */
     private String jsonPath;
+    /** Nome dell'animazione. */
     private String animationName;
 
+    /** Frames per un'animazione. */
     private List<Image> frames;
 
     public enum Type
