@@ -7,6 +7,7 @@ import events.EventHandler;
 import events.RoomEvent;
 import general.GameException;
 import general.GameManager;
+import general.ScenarioMethod;
 import general.xml.XmlParser;
 import graphics.SpriteManager;
 import org.json.JSONObject;
@@ -360,6 +361,7 @@ public class Room
      * per cui è necessario mandare avanti lo scenario corrente se non vi è
      * alcun scenarioOnEnter da eseguire.
      */
+    @ScenarioMethod
     public void startScenarioOnEnter()
     {
         if(scenarioOnEnterPath != null)
