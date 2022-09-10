@@ -15,10 +15,10 @@ public class GameButtonLabel extends JLabel
     public GameButtonLabel(String buttonIconPath, String hoverIconPath, double scalingFactor)
     {
         super();
-        this.buttonIcon = SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(buttonIconPath),
+        this.buttonIcon = SpriteManager.rescaledImageIcon(SpriteManager.loadImage(buttonIconPath),
                                 scalingFactor);
 
-        this.hoverIcon = SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(hoverIconPath),
+        this.hoverIcon = SpriteManager.rescaledImageIcon(SpriteManager.loadImage(hoverIconPath),
                 scalingFactor);
 
         setIcon(buttonIcon);

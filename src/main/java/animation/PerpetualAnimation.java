@@ -161,7 +161,7 @@ public class PerpetualAnimation extends StillAnimation
         Objects.requireNonNull(jsonPath);
         Objects.requireNonNull(animationLabel);
 
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        BufferedImage spriteSheet = SpriteManager.loadImage(spriteSheetPath);
         List<Image> frames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
 
         // in futuro: personalizzare delayMilliseconds
@@ -192,7 +192,7 @@ public class PerpetualAnimation extends StillAnimation
         Objects.requireNonNull(name);
         Objects.requireNonNull(animationLabel);
 
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        BufferedImage spriteSheet = SpriteManager.loadImage(spriteSheetPath);
         List<Image> frames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, name);
 
         // TODO: personalizzare delay milliseconds

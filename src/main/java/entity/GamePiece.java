@@ -78,7 +78,7 @@ public abstract class GamePiece
     {
         Objects.requireNonNull(name);
         Objects.requireNonNull(spritePath);
-        pieceInit(name, SpriteManager.loadSpriteSheet(spritePath));
+        pieceInit(name, SpriteManager.loadImage(spritePath));
     }
 
     /**
@@ -170,7 +170,7 @@ public abstract class GamePiece
         Objects.requireNonNull(spriteSheetPath);
         Objects.requireNonNull(jsonPath);
 
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        BufferedImage spriteSheet = SpriteManager.loadImage(spriteSheetPath);
 
         animateFrames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, "animate");
 
@@ -225,7 +225,7 @@ public abstract class GamePiece
         Objects.requireNonNull(spriteSheetPath);
         Objects.requireNonNull(jsonPath);
 
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        BufferedImage spriteSheet = SpriteManager.loadImage(spriteSheetPath);
         perpetualAnimationFrames = SpriteManager.getOrderedFrames(spriteSheet, jsonPath);
     }
 

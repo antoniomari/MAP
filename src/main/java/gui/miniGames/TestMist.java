@@ -110,7 +110,7 @@ public class TestMist extends MiniGame
                 testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
 
 
-        Image backgroundImage = SpriteManager.loadSpriteSheet("/img/ImageMiniGames/sfondofoglio.jpg");
+        Image backgroundImage = SpriteManager.loadImage("/img/ImageMiniGames/sfondofoglio.jpg");
         backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(backgroundImage, testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
 
         backgroundLabel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,

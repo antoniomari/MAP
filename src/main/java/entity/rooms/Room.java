@@ -5,7 +5,6 @@ import entity.characters.PlayingCharacter;
 import entity.items.Item;
 import events.EventHandler;
 import events.RoomEvent;
-import general.ActionSequence;
 import general.GameException;
 import general.GameManager;
 import general.ScenarioMethod;
@@ -121,7 +120,7 @@ public class Room
 
         this.MUSIC_PATH = MUSIC_PATH;
         BACKGROUND_PATH = path;
-        backgroundImage = SpriteManager.loadSpriteSheet(BACKGROUND_PATH);
+        backgroundImage = SpriteManager.loadImage(BACKGROUND_PATH);
         floor = RoomFloor.loadFloorFromJson(jsonPath);
         JSONObject json = SpriteManager.getJsonFromFile(jsonPath);
 

@@ -86,10 +86,10 @@ public class InventoryPanel extends JLayeredPane
     static
     {
         // Caricamento immagini barra, bottoni e cella di selezione
-        BAR_IMAGE = SpriteManager.loadSpriteSheet(BAR_PATH);
-        BUTTON_SPRITESHEET = SpriteManager.loadSpriteSheet(BUTTON_SPRITESHEET_PATH);
-        SELECTION_IMAGE = SpriteManager.loadSpriteSheet(SELECTION_ITEM_PATH);
-        TEXT_BOARD_IMAGE = SpriteManager.loadSpriteSheet(TEXT_BOARD_PATH);
+        BAR_IMAGE = SpriteManager.loadImage(BAR_PATH);
+        BUTTON_SPRITESHEET = SpriteManager.loadImage(BUTTON_SPRITESHEET_PATH);
+        SELECTION_IMAGE = SpriteManager.loadImage(SELECTION_ITEM_PATH);
+        TEXT_BOARD_IMAGE = SpriteManager.loadImage(TEXT_BOARD_PATH);
     }
 
     @Override

@@ -157,7 +157,7 @@ public class StillAnimation extends Animation
         Objects.requireNonNull(name);
         Objects.requireNonNull(animationLabel);
 
-        BufferedImage spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        BufferedImage spriteSheet = SpriteManager.loadImage(spriteSheetPath);
         List<Image> frames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, name);
 
         // in futuro: dare la possibilità di personalizzare delayMilliseconds

@@ -42,8 +42,8 @@ public class GameCharacter extends GamePiece
      */
     public GameCharacter(String name, String spriteSheetPath, String jsonPath)
     {
-        super(name, SpriteManager.loadSpriteSheet(spriteSheetPath), jsonPath);
-        spriteSheet = SpriteManager.loadSpriteSheet(spriteSheetPath);
+        super(name, SpriteManager.loadImage(spriteSheetPath), jsonPath);
+        spriteSheet = SpriteManager.loadImage(spriteSheetPath);
         this.jsonPath = jsonPath;
         initAnimateFrames();
         initMovingFrames();

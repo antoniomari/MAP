@@ -23,7 +23,7 @@ public class DoorLike extends Item implements Openable
     /** Path del json associato allo sprite-sheet per gli oggetti DoorLike. */
     private final static String JSON_PATH = "/img/tileset/porte.json";
     /** Sprite-sheet per gli oggetti DoorLike. */
-    private final static BufferedImage SPRITESHEET = SpriteManager.loadSpriteSheet(SPRITESHEET_PATH);
+    private final static BufferedImage SPRITESHEET = SpriteManager.loadImage(SPRITESHEET_PATH);
 
     /** Flag che indica se this è aperto. */
     private boolean isOpen;

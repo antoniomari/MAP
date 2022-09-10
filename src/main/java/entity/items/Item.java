@@ -38,7 +38,7 @@ public class Item extends GamePiece implements Observable
     // CARICAMENTO SPRITESHEET IN MEMORIA
     static
     {
-        SPRITESHEET = SpriteManager.loadSpriteSheet(OBJECT_SPRITESHEET_PATH);
+        SPRITESHEET = SpriteManager.loadImage(OBJECT_SPRITESHEET_PATH);
     }
 
     /**

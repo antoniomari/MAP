@@ -119,7 +119,7 @@ public class MainFrame extends JFrame {
         DEFAULT_GAME_HEIGHT =  (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR);
 
         // caricamento sfondo nero per transizioni
-        BLACK_SCREEN = SpriteManager.loadSpriteSheet(BLACK_SCREEN_PATH).getSubimage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        BLACK_SCREEN = SpriteManager.loadImage(BLACK_SCREEN_PATH).getSubimage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public InventoryPanel getInventoryPanel()
@@ -251,7 +251,7 @@ public class MainFrame extends JFrame {
     {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension cursorDimension = toolkit.getBestCursorSize(32,32);
-        Image cursorImage = SpriteManager.loadSpriteSheet(CURSOR_PATH).getScaledInstance(cursorDimension.width, cursorDimension.height, Image.SCALE_SMOOTH);
+        Image cursorImage = SpriteManager.loadImage(CURSOR_PATH).getScaledInstance(cursorDimension.width, cursorDimension.height, Image.SCALE_SMOOTH);
         Cursor c = toolkit.createCustomCursor(cursorImage , new Point(0,0), "img");
         setCursor(c);
     }
@@ -259,10 +259,10 @@ public class MainFrame extends JFrame {
     private void initIcons()
     {
         List<Image> iconsList = new ArrayList<>();
-        iconsList.add(SpriteManager.loadSpriteSheet(ICON16_PATH));
-        iconsList.add(SpriteManager.loadSpriteSheet(ICON32_PATH));
-        iconsList.add(SpriteManager.loadSpriteSheet(ICON64_PATH));
-        iconsList.add(SpriteManager.loadSpriteSheet(ICON128_PATH));
+        iconsList.add(SpriteManager.loadImage(ICON16_PATH));
+        iconsList.add(SpriteManager.loadImage(ICON32_PATH));
+        iconsList.add(SpriteManager.loadImage(ICON64_PATH));
+        iconsList.add(SpriteManager.loadImage(ICON128_PATH));
 
         setIconImages(iconsList);
     }
@@ -420,9 +420,9 @@ public class MainFrame extends JFrame {
 
         final String MENU_BACK_PATH = "/img/computersPause.png";
 
-        Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
+        Image menuBackImage = SpriteManager.loadImage(MENU_BACK_PATH);
 
-        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
+        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadImage(MENU_BACK_PATH),
                                                                                         SCREEN_WIDTH,SCREEN_HEIGHT ));
 
         final int xBorder = (SCREEN_WIDTH - backLabel.getIcon().getIconWidth()) / 2;
@@ -474,8 +474,8 @@ public class MainFrame extends JFrame {
 
         String MENU_BACK_PATH = "/img/Menu iniziale/background.png";
 
-        Image menuBackImage = SpriteManager.loadSpriteSheet(MENU_BACK_PATH);
-        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadSpriteSheet(MENU_BACK_PATH),
+        Image menuBackImage = SpriteManager.loadImage(MENU_BACK_PATH);
+        JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadImage(MENU_BACK_PATH),
                 SCREEN_WIDTH, SCREEN_HEIGHT ));
 
         final int LEFT = startingMenuPanel.getInsets().left;
@@ -488,7 +488,7 @@ public class MainFrame extends JFrame {
 
         // imposta titolo
         BufferedImage titleImage  = SpriteManager.loadSpriteByName(
-                SpriteManager.loadSpriteSheet("/img/Menu iniziale/titolo.png"),
+                SpriteManager.loadImage("/img/Menu iniziale/titolo.png"),
                 "/img/Menu iniziale/titolo.json", "1");
         final double titleRescalingFactor = (double) SCREEN_WIDTH / (1.5 * titleImage.getWidth());
         final int titleXOffset = (int) (SCREEN_WIDTH - titleImage.getWidth() * titleRescalingFactor) / 2;
@@ -497,7 +497,7 @@ public class MainFrame extends JFrame {
         titleLabel.setBounds(LEFT + titleXOffset, TOP, titleLabel.getIcon().getIconWidth(), titleLabel.getIcon().getIconHeight());
 
 
-        BufferedImage titleBackImage  = SpriteManager.loadSpriteSheet("/img/Menu iniziale/muro titolo.png");
+        BufferedImage titleBackImage  = SpriteManager.loadImage("/img/Menu iniziale/muro titolo.png");
         JLabel titleBackLabel = new JLabel(SpriteManager.rescaledImageIcon(titleBackImage, titleRescalingFactor));
 
         titleBackLabel.setBounds(LEFT + titleXOffset, TOP, titleBackLabel.getIcon().getIconWidth(), titleBackLabel.getIcon().getIconHeight());

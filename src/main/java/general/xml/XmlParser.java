@@ -1066,7 +1066,7 @@ public class XmlParser
         {
             GameManager.getMainFrame()
                 .getGameScreenPanel()
-                .addCurrentRoomEffect(SpriteManager.loadSpriteSheet(effectPath));
+                .addCurrentRoomEffect(SpriteManager.loadImage(effectPath));
 
             GameManager.continueScenario();
         };

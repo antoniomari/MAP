@@ -42,7 +42,7 @@ public class TextBarPanel extends JLayeredPane
     static
     {
         // Caricamento immagini barra, bottoni e cella di selezione
-        TEXT_BAR_IMAGE = SpriteManager.loadSpriteSheet(TEXT_BAR_PATH);
+        TEXT_BAR_IMAGE = SpriteManager.loadImage(TEXT_BAR_PATH);
 
         // Caricamento Font
         try
