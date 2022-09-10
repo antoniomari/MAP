@@ -3,7 +3,6 @@ package animation;
 import general.GameManager;
 import general.ScenarioMethod;
 import graphics.SpriteManager;
-import org.glassfish.jersey.jaxb.internal.AbstractCollectionJaxbProvider;
 
 import javax.swing.*;
 import java.awt.*;
