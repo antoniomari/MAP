@@ -3,7 +3,6 @@ package entity;
 import entity.characters.GameCharacter;
 import events.EventHandler;
 import events.GamePieceEvent;
-import general.GameError;
 import general.GameException;
 import general.GameManager;
 import general.Pair;
@@ -432,21 +431,14 @@ public abstract class GamePiece
         BlockPosition oldPosition = getPosition();
 
         // aggiorna posizione nella stanza
-        try
-        {
-            locationRoom.setPiecePosition(this, newPosition);
+        locationRoom.setPiecePosition(this, newPosition);
 
-            GamePieceEvent moveEvent = new GamePieceEvent(this, GamePieceEvent.Type.MOVE);
-            moveEvent.setOldPosition(oldPosition);
-            moveEvent.setNewPosition(newPosition);
-            moveEvent.setMillisecondWaitEnd(millisecondWaitEnd);
+        GamePieceEvent moveEvent = new GamePieceEvent(this, GamePieceEvent.Type.MOVE);
+        moveEvent.setOldPosition(oldPosition);
+        moveEvent.setNewPosition(newPosition);
+        moveEvent.setMillisecondWaitEnd(millisecondWaitEnd);
 
-            EventHandler.sendEvent(moveEvent);
-        }
-        catch(GameException e)
-        {
-            throw new GameError(e);
-        }
+        EventHandler.sendEvent(moveEvent);
     }
 
     /**

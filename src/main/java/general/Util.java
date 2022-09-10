@@ -2,6 +2,9 @@ package general;
 
 import java.util.Random;
 
+/**
+ * Classe che contiene metodi di utility.
+ */
 public class Util
 {
     public static <T>  T randomChoice(T[] array)

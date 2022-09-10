@@ -9,8 +9,11 @@ import java.util.Objects;
  */
 public class ActionSequence
 {
+    /** Lista di Runnable, che costituiscono le azioni dell'ActionSequence. */
     private final List<Runnable> actionList;
+    /** Indice per ricordarsi dell'ultima azione correntemente eseguita. */
     private int index;
+    /** Nome dell'ActionSequence a fini di documentazione. */
     private final String name;
 
     /**

@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Classe che si occupa del caricamento dei font utilizzati nel gioco
+ */
 public class FontManager
 {
     private final static String MIST_QUESTION_PATH = "src/main/resources/font/AmericanTypewriter.ttf";
@@ -19,6 +22,9 @@ public class FontManager
     public static Font LOGIC_DESCRIPTION_FONT;
     public static Font CAPTCHA_DESCRIPTION_FONT;
 
+    /**
+     * Carica tutti i font utilizzati nel gioco, segnalando eventuali problemi.
+     */
     public static void loadFonts()
     {
         LogOutputManager.logOutput("[##### Caricamento Font #####]", LogOutputManager.EVENT_COLOR);

@@ -10,23 +10,33 @@ import java.util.*;
 
 public class SoundHandler
 {
+    // PATH DI SUONI BUFFERIZZATI
     public static final String PICKUP_SOUND_PATH = "src/main/resources/audio/effetti/pickupItem.wav";
     public static final String SCROLL_BAR_PATH = "src/main/resources/audio/effetti/scroll.wav";
     public static final String EMOJI_SOUND_PATH = "src/main/resources/audio/effetti/emojiSound.wav";
     public static final String CLICK_SOUND_PATH = "src/main/resources/audio/effetti/bottone selezione mouse.wav";
 
+    /** Clip utilizzata per la riproduzione della musica di sottofondo delle stanze. */
     private static final Clip currentMusic;
-
-    // clip dedicate per i suoni comuni (così da non dover
-    // essere sempre ricaricati
-    private static final Map<String, Clip> commonSoundsMap;
-
-    private static final Clip scenarioSound;
+    /** Path della musica di sottofondo delle stanze attualmente in esecuzione. */
     private static String currentMusicPath;
 
+    /** Dizionario path->clip per recuperare le clip relative ai suoni bufferizzati. */
+    private static final Map<String, Clip> commonSoundsMap;
+    /** Clip utilizzata per la riproduzione di suoni riprodotti tramite scenari. */
+    private static final Clip scenarioSound;
+
+    /**
+     * Modalità di riproduzione del file .wav
+     */
     public enum Mode
     {
-        MUSIC, SOUND, SCENARIO_SOUND
+        /** Modalità utilizzata per le musiche di sottofondo delle stanze. */
+        MUSIC,
+        /** Modalità utilizzata per i suoni generati da input del giocatore. */
+        SOUND,
+        /** Modalità utilizzata per i suoni riprodotti tramite scenari. */
+        SCENARIO_SOUND
     }
 
     static
@@ -61,8 +71,12 @@ public class SoundHandler
     }
 
 
-
-    // Todo: bufferizzazione
+    /**
+     * Riproduce un file wav.
+     *
+     * @param wavPath path del file wav da riprodurre
+     * @param mode modalità con cui riprodurre il file wav
+     */
     public static void playWav(String wavPath, Mode mode)
     {
         Objects.requireNonNull(wavPath);
@@ -86,7 +100,8 @@ public class SoundHandler
 
     /**
      * Riproduce in loop audio di sottofondo. Se uno è attualmente
-     * in riproduzione, lo sostituisce.
+     * in riproduzione (diverso da quello che si vuole riprodurre),
+     * lo sostituisce.
      *
      * @param wavPath path dell'audio da riprodurre
      */
@@ -107,6 +122,13 @@ public class SoundHandler
         currentMusic.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
+    /**
+     * Riproduce l'audio aperto tramite un file wav,
+     * il cui path dev'essere stato registrato tra
+     * i path degli audio bufferizzati.
+     *
+     * @param wavPath path del file .wav da riprodurre
+     */
     private static void playSound(String wavPath)
     {
         // caso suono bufferizzato
@@ -130,6 +152,15 @@ public class SoundHandler
         }
     }
 
+    /**
+     * Riproduce l'audio aperto tramite file wav
+     * utilizzando la clip {@link SoundHandler#scenarioSound}.
+     *
+     * Chiude inizialmente la clip, per poi riaprirla con il nuovo
+     * file wav.
+     *
+     * @param wavPath path del file .wav da riprodurre
+     */
     private static void playScenarioSound(String wavPath)
     {
         scenarioSound.close();
@@ -139,6 +170,12 @@ public class SoundHandler
         GameManager.changeState(GameManager.GameState.SCENARIO_SOUND);
     }
 
+    /**
+     * Apre file wav sulla clip specificata.
+     *
+     * @param wavPath path del file .wav da aprire
+     * @param targetClip clip su cui caricare l'audio
+     */
     private static void openWav(String wavPath, Clip targetClip)
     {
         System.out.println("Sto aprendo: " + wavPath);
@@ -155,7 +192,4 @@ public class SoundHandler
         }
 
     }
-
-
-
 }
