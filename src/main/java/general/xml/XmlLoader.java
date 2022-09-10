@@ -224,24 +224,14 @@ public class XmlLoader
             // imposta nome azione
             itemToLoad.setUseActionName(XmlParser.getTagValue(onUseElement, "actionName"));
 
+            List<Element> effetti = XmlParser.getTagsList(onUseElement, "useScenario");
 
-            Optional<String> scenarioPath = XmlParser.getOptionalTagValue(onUseElement, "effetto");
-
-            if(scenarioPath.isPresent())
+            for(Element effettoElement : effetti)
             {
-                // imposta useAction
-                itemToLoad.setUseAction(XmlParser.loadScenario(scenarioPath.get()));
+                String state = XmlParser.getXmlAttribute(effettoElement, "state");
+                scenarioPathMap.put(state, effettoElement.getTextContent());
             }
-            else
-            {
-                List<Element> effetti = XmlParser.getTagsList(onUseElement, "useScenario");
 
-                for(Element effettoElement : effetti)
-                {
-                    String state = XmlParser.getXmlAttribute(effettoElement, "state");
-                    scenarioPathMap.put(state, effettoElement.getTextContent());
-                }
-            }
         }
         itemToLoad.loadUseScenarios(scenarioPathMap);
     }

@@ -287,6 +287,8 @@ public abstract class GamePiece
      */
     public void executeEffectAnimation(String animationName, boolean isPerpetual)
     {
+        Objects.requireNonNull(animationName);
+
         Pair<String, String> animationPaths = SpriteManager.getAnimationPaths(animationName);
 
         String spriteSheetPath = animationPaths.getObject1();

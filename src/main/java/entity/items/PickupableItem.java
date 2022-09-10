@@ -4,8 +4,6 @@ package entity.items;
 import entity.GamePiece;
 import general.ActionSequence;
 import entity.characters.PlayingCharacter;
-import entity.rooms.BlockPosition;
-import entity.rooms.Room;
 import general.GameManager;
 
 public class PickupableItem extends Item
@@ -20,24 +18,30 @@ public class PickupableItem extends Item
     private String targetPieceName;
     /** Stato in cui il target si deve trovare per poter eseguire lo scenario dell'azione useWith. */
     private String targetPieceInitState;
-
-    /** Stato in cui il target si trova alla fine dell'azione useWith */
-    @Deprecated
-    // TODO: controllare la deprecaggine
+    /** Stato in cui il target si trova alla fine dell'azione useWith. */
     private String targetPieceFinalState;
 
-    // costruttore che inizializza l'oggetto come presente nell'inventario
+    /**
+     * Crea un PickupableItem
+     *
+     * @param name nome da dare al PickupableItem
+     * @param description descrizione da dare al PickupableItem
+     * @param canUse {@code true} se è inizialmente possibile eseguire
+     *                           l'interazione personalizzata "usa",
+     *                           {@code false} altrimenti
+     */
     public PickupableItem(String name, String description, boolean canUse)
     {
         super(name, description, canUse);
     }
 
-
+    /**
+     * Rimuove this dalla stanza in cui è contenuto e lo aggiunge all'inventario
+     * del personaggio giocante.
+     */
     public void pickup()
     {
-        // generato evento togliStanza
-        removeFromRoom(); // setta a null la stanza
-
+        removeFromRoom();
         PlayingCharacter.getPlayer().addToInventory(this);
     }
 
@@ -46,20 +50,20 @@ public class PickupableItem extends Item
         this.keepOnUseWith = b;
     }
 
-    public void drop(Room room, BlockPosition pos)
-    {
-        //aggiungi alla stanza
-        addInRoom(room, pos);
-
-        // rimuovi dall'inventario
-        PlayingCharacter.getPlayer().removeFromInventory(this);
-    }
-
     public void setUseWithAction(ActionSequence useWithScenario)
     {
         this.useWithScenario = useWithScenario;
     }
 
+    /**
+     * Imposta le informazioni sul targetPiece dell'interazione useWith.
+     *
+     * @param pieceName nome del targetPiece
+     * @param initState stato in cui dev'essere il targetPiece per il
+     *                  successo dell'interazione
+     * @param finalState stato in cui si troverà il targetPiece dopo
+     *                   l'esecuzione dell'interazione
+     */
     public void setTargetPiece(String pieceName, String initState, String finalState)
     {
         targetPieceName = pieceName;
@@ -67,7 +71,15 @@ public class PickupableItem extends Item
         targetPieceFinalState = finalState;
     }
 
-
+    /**
+     * Esegue l'interazione useWith, controllando se {@code gamePiece} è il target
+     * e se esso è nello stato corretto.
+     *
+     * Alla fine dell'interazione this viene eventualmente rimosso dall'inventario e
+     * {@code gamePiece} viene portato allo stato finale previsto dall'interazione.
+     *
+     * @param gamePiece GamePiece con cui si prova a eseguire l'interazione.
+     */
     public void useWith(GamePiece gamePiece)
     {
         if(gamePiece.equals(GameManager.getPiece(targetPieceName)) && gamePiece.getState().equals(targetPieceInitState))
@@ -77,12 +89,7 @@ public class PickupableItem extends Item
             if(!keepOnUseWith)
                 PlayingCharacter.getPlayer().removeFromInventory(this);
 
-            // imposta stato alla fine
-            // TODO: capire qua
             gamePiece.setState(targetPieceFinalState);
         }
-
     }
-
-    // TODO: useWith(Item)
 }

@@ -41,7 +41,7 @@ public class DoorLike extends Item implements Openable
 
     public DoorLike(String name, String description)
     {
-        super(name, description, SPRITESHEET, JSON_PATH);
+        super(name, description, SPRITESHEET, JSON_PATH, false);
 
         // inizializza frames di animazione
         initFrames();
