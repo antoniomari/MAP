@@ -1,3 +1,18 @@
+# Documentazione progetto "DR.Schwartz" 
+## Team: Antonio Mari, Diego Miccoli, Nicolas Pinto.
+
+### Indice dei riferimenti ai requisiti richiesti con corrispondenti sezioni del documento:
+
+- Database: 2.2 Salvataggi e Database
+- Utilizzo dei file: 2.11 XML
+- Programmazione concorrente (Thread): 2.9 Animazioni
+- Swing: 2.10 SWING
+- Lambda Expressions: 2.1 Scenari
+- RESTful: 2.3 API REST
+
+Per le richieste di utilizzo file e le lambda expressions i paragrafi indicati sono 
+esemplificativi, ma il loro utilizzo è distribuito omogeneamente all'interno dell'intero codice.
+
 # 1 Introduzione al gioco
 Dr. Schwartz è un gioco di avventura in modalità punta e clicca con narrazione testuale degli eventi che accadono 
 durante la partita. Il gioco è pensato per essere in modalità single-player e narra le peripezie di un rinomato 
