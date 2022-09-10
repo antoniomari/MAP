@@ -8,12 +8,9 @@ import java.util.List;
 
 public class ItemInteractionEvent extends GameEvent
 {
+    private final Item itemInvolved;
     private List<Image> frames;
     private Type type;
-    private String whatAnimation;
-    private String spritesheetPath;
-    private String jsonPath;
-    private int finalWait;
 
     public enum Type
     {
@@ -34,15 +31,6 @@ public class ItemInteractionEvent extends GameEvent
 
     }
 
-    public String getSpritesheetPath()
-    {
-        return spritesheetPath;
-    }
-
-    public String getJsonPath()
-    {
-        return jsonPath;
-    }
 
     public ItemInteractionEvent(Item item, String toPrint)
     {
@@ -59,6 +47,11 @@ public class ItemInteractionEvent extends GameEvent
         this.frames = frames;
     }
 
+    public Item getItemInvolved()
+    {
+        return itemInvolved;
+    }
+
     public boolean hasAnimation()
     {
         return frames != null;
@@ -72,11 +65,6 @@ public class ItemInteractionEvent extends GameEvent
     public Type getType()
     {
         return type;
-    }
-
-    public int getFinalWait()
-    {
-        return finalWait;
     }
 
     @Override

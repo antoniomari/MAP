@@ -10,6 +10,8 @@ public class RoomEvent extends GameEvent
 {
     private Type type;
     private GamePiece pieceInvolved;
+    private Room roomInvolved;
+    private BlockPosition pos;
 
     public enum Type
     {

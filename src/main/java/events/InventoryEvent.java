@@ -2,39 +2,51 @@ package events;
 
 import entity.items.PickupableItem;
 
+/**
+ * Evento che rappresenta la modifica dell'inventario
+ * del giocatore.
+ */
 public class InventoryEvent extends GameEvent
 {
+    /** Tipo dell'evento. */
+    private final Type type;
+    /** PickupableItem coinvolto nell'evento. */
+    private final PickupableItem pickupInvolved;
 
-    private Type type;
+    /**
+     * Tipo di evento InventoryEvent
+     */
     public enum Type
     {
-        ADD_ITEM {
-            public String toString()
-            {
-                return "aggiunto all'inventario";
-            }
-        },
+        /** Aggiunta all'inventario. */
+        ADD_ITEM
+                {
+                    public String toString()
+                    {
+                        return "aggiunto all'inventario";
+                    }
+                },
+        /** Rimozione dall'inventario. */
         USE_ITEM
-        {
-            @Override
-            public String toString()
-            {
-                return "utilizzato dall'inventario";
-            }
-        }
+                {
+                    @Override
+                    public String toString()
+                    {
+                        return "utilizzato dall'inventario";
+                    }
+                }
     }
 
     public InventoryEvent(PickupableItem item, Type type)
     {
-        this(item, type.toString());
+        super(type.toString());
+        this.pickupInvolved = item;
         this.type = type;
     }
 
-
-    public InventoryEvent(PickupableItem item, String toPrint)
+    public PickupableItem getPickupInvolved()
     {
-        super(toPrint);
-        itemInvolved = item;
+        return pickupInvolved;
     }
 
 
@@ -47,7 +59,7 @@ public class InventoryEvent extends GameEvent
     @Override
     public String getEventString()
     {
-        return eventTime + " -> " + "[" + itemInvolved + "] " + type;
+        return eventTime + " -> " + "[" + pickupInvolved + "] " + type;
     }
 
 }

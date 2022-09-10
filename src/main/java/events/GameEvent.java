@@ -14,10 +14,6 @@ public abstract class GameEvent
 {
     protected LocalDateTime eventTime;
     protected String toPrint;
-    protected Item itemInvolved;
-    protected Room roomInvolved;
-    protected BlockPosition pos;
-
 
     public GameEvent(String toPrint)
     {
@@ -32,8 +28,4 @@ public abstract class GameEvent
         return eventTime.toString();
     }
 
-    public Item getItemInvolved()
-    {
-        return itemInvolved;
-    }
 }
