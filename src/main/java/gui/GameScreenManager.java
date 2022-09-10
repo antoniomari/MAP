@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * Classe che si occupa della conversione tra
+ * coordinate assolute e coordinate in blocchi, nonché
+ * dell'effettivo posizionamento delle JLabel sullo schermo.
+ */
 public class GameScreenManager
 {
 
+    /** GameScreenPanel attivo. */
     private static GameScreenPanel active_panel;
-
-    private GameScreenManager()
-    {
-        // costruttore privato per non permettere l'istanziazione
-    }
 
     public static void setActivePanel(GameScreenPanel gsp)
     {
@@ -26,12 +26,11 @@ public class GameScreenManager
         active_panel = gsp;
     }
 
-    // TODO: calcolare massimi xBlock e yBlock per la stanza
-
     /**
-     * Restituisce la coordinata del pixel in alto a sinistra del blocco
-     * @param pos
-     * @return
+     * Restituisce la coordinata del pixel in alto a sinistra del blocco.
+     *
+     * @param pos blocco di cui calcolare le coordinate assolute
+     * @return coordinate assolute relative al blocco pos
      */
     public static AbsPosition calculateCoordinates(BlockPosition pos)
     {
@@ -69,15 +68,14 @@ public class GameScreenManager
         int x = (int) Math.round((double) absPos.getX() / (GameManager.BLOCK_SIZE * active_panel.getScalingFactor()));
         int y = (int) Math.round((double) absPos.getY() / (GameManager.BLOCK_SIZE * active_panel.getScalingFactor())) - 1;
 
-        // todo: controllare
         return new BlockPosition(Math.max(x, 0), y);
     }
 
-
     /**
+     *  Aggiorna la posizione di una JLabel sullo schermo.
      *
-     * @param label
-     * @param pos angolo in basso a sinistra
+     * @param label label su cui lavorare
+     * @param pos posizione in blocchi dell'angolo in basso a sinistra
      */
     public static void updateLabelPosition(JLabel label, BlockPosition pos)
     {
@@ -85,6 +83,7 @@ public class GameScreenManager
     }
 
     /**
+     *  Aggiorna la posizione di una JLabel sullo schermo.
      *
      * @param label label su cui lavorare
      * @param pos posizione assoluta dell'angolo in basso a sinistra
@@ -99,7 +98,7 @@ public class GameScreenManager
         // imposta layer corretto
         BlockPosition bp = calculateBlocks(pos);
 
-        // aggiorna layer per le label che non sono nell'effect layer TODO: documentare la scelta
+        // aggiorna layer per le label che non sono nell'effect layer
         if(GameScreenPanel.getLayer(label) != GameScreenPanel.EFFECT_LAYER && GameScreenPanel.getLayer(label) % 2 == 0)
             active_panel.setLayer(label, bp.getY() * 2 + GameScreenPanel.BASE_GAMEPIECE_LAYER);
 
@@ -109,23 +108,15 @@ public class GameScreenManager
                         label.getIcon().getIconHeight());
     }
 
+    // nota: questo metodo dovrà essere modificato in futuro per calcolare il percorso
+    // tra due posizioni considerando gli ostacoli, attualmente restituisce sempre il percorso diretto
+    // tra initialPos e finalPos (ovvero un'unica fermata, direttamente finalPos)
     public static List<BlockPosition> calculatePath(BlockPosition initialPos, BlockPosition finalPos)
-    {
-        return calculatePathNPC(initialPos, finalPos);
-    }
-
-
-
-
-
-    public static List<BlockPosition> calculatePathNPC(BlockPosition initialPos, BlockPosition finalPos)
     {
         List<BlockPosition> positions = new ArrayList<>();
         positions.add(finalPos);
 
         return positions;
     }
-
-
 
 }

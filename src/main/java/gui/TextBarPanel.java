@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 
+/**
+ * Classe che rappresenta la barra di dialogo del gioco.
+ */
 public class TextBarPanel extends JLayeredPane
 {
     // Path risorse //
@@ -19,11 +22,15 @@ public class TextBarPanel extends JLayeredPane
     public final static String FONT_PATH = "src/main/resources/font/text font.ttf";
 
     // Immagini png (da caricare) //
+    /** Immagine della barra di testo. */
     private final static BufferedImage TEXT_BAR_IMAGE;
-    private static Font DIALOG_FONT;
+    /** */
+    private static final Font DIALOG_FONT;
 
     // Livelli del LayeredPane inventario //
+    /** Livello per la visualizzazione della barra di testo. */
     private final static Integer BAR_LEVEL = 1;
+    /** Livello per la visualizzazione del testo. */
     private final static Integer TEXT_LEVEL = 2;
 
     //**************************************************
@@ -31,13 +38,12 @@ public class TextBarPanel extends JLayeredPane
     //**************************************************
 
     // Componenti swing //
+    /** Label della barra di testo. */
     public JLabel barLabel;
-    private JTextArea textArea;
-    private Icon barIcon;
-    private Font dialogFont;
-
-    /** Fattore di riscalamento per tutte le icone */
-    private final double scalingFactor;
+    /** Area di testo. */
+    private final JTextArea textArea;
+    /** Icona della barra di testo. */
+    private final Icon barIcon;
 
     static
     {
@@ -61,10 +67,7 @@ public class TextBarPanel extends JLayeredPane
     {
         super();
 
-        // lo scalingFactor è il rapporto tra l'altezza del menu e quella delle icone originali
-        this.scalingFactor = scalingFactor;
-
-         barIcon = SpriteManager.rescaledImageIcon(TEXT_BAR_IMAGE, scalingFactor);
+        barIcon = SpriteManager.rescaledImageIcon(TEXT_BAR_IMAGE, scalingFactor);
 
          barLabel = new JLabel();
          barLabel.setBounds(0, 0,
@@ -96,6 +99,11 @@ public class TextBarPanel extends JLayeredPane
          add(textArea, TEXT_LEVEL);
     }
 
+    /**
+     * Visualizza barra di testo.
+     *
+     * @param text testo da visualizzare
+     */
     public void showTextBar(String text)
     {
         // update gameState
@@ -106,6 +114,9 @@ public class TextBarPanel extends JLayeredPane
         textArea.setVisible(true);
     }
 
+    /**
+     * Nascondi barra di testo.
+     */
     public void hideTextBar()
     {
         barLabel.setIcon(null);

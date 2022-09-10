@@ -16,13 +16,20 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Classe che rappresenta il pannello che costituisce la barra dell'inventario.
+ */
 public class InventoryPanel extends JLayeredPane
 {
     // Dimensioni (nota: utilizziamo la costante pubblica della classe PlayingCharacter) //
-    private final static int BAR_SIZE = 8;  // numero di oggetti nella barra
+    /** Numero di oggetti nella barra */
+    private final static int BAR_SIZE = 8;
+    /** Capacità dell'inventario. */
     private final static int INVENTORY_SIZE = PlayingCharacter.INVENTORY_SIZE;
-    private final static int MAX_BAR = INVENTORY_SIZE / BAR_SIZE;  // numero di barre
-    private final static int ORIGINAL_ITEM_SIZE = 48;  // dimensione lato sprite oggetti (quadrato)
+    /** Numero di barre */
+    private final static int MAX_BAR = INVENTORY_SIZE / BAR_SIZE;
+    /** Dimensione lato sprite oggetti (quadrato) */
+    private final static int ORIGINAL_ITEM_SIZE = 48;
 
     // Path immagini e json //
     private final static String BAR_PATH = "/img/inventario/Barra oggetti inventario.png";
@@ -459,6 +466,11 @@ public class InventoryPanel extends JLayeredPane
             itemLabelList.get(j).setIcon(null);
     }
 
+    /**
+     * Visualizza la barra dell'inventario
+     * successiva rispetto a quella attualmente
+     * visualizzata.
+     */
     public void visualizeNextBar()
     {
         if(currentBar < MAX_BAR)
@@ -469,6 +481,11 @@ public class InventoryPanel extends JLayeredPane
         // altrimenti non puoi andare avanti
     }
 
+    /**
+     * Visualizza la barra dell'inventario
+     * precedente rispetto a quella attualmente
+     * visualizzata.
+     */
     public void visualizePreviousBar()
     {
         if(currentBar > 1)
@@ -479,11 +496,19 @@ public class InventoryPanel extends JLayeredPane
         // altrimenti non puoi andare indietro
     }
 
+    /**
+     * Mostra testo sulla textBoard.
+     *
+     * @param text testo da mostrare
+     */
     public void showTextOnBoard(String text)
     {
         textLabel.setText(text);
     }
 
+    /**
+     * Nascondi il testo dalla textBoard.
+     */
     public void hideTextOnBoard()
     {
         textLabel.setText(null);

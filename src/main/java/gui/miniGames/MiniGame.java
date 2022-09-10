@@ -7,6 +7,10 @@ import general.xml.XmlParser;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Pannello dedicato all'esecuzione di un mini gioco all'interno
+ * del gioco.
+ */
 public abstract class MiniGame extends JLayeredPane
 {
 
@@ -124,6 +128,11 @@ public abstract class MiniGame extends JLayeredPane
         add(mainPanel, TEST_LAYER);
     }
 
+    /**
+     * Visualizza finestra che stampa il risultato del miniGame.
+     *
+     * @param msg messaggio da visualizzare
+     */
     protected void showResult(String msg)
     {
         mainPanel.setVisible(false);

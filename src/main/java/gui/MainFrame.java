@@ -19,6 +19,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe che rappresenta il Frame di gioco.
+ */
 public class MainFrame extends JFrame {
 
     /*
@@ -65,9 +68,6 @@ public class MainFrame extends JFrame {
     /** Dimensione in pixel dell'altezza dello schermo. */
     public static int SCREEN_HEIGHT;
 
-    private static final BufferedImage BLACK_SCREEN;
-    private static final String BLACK_SCREEN_PATH = "/img/sfondo nero.png";
-
     /** Dimensione in pixel della larghezza della schermata di gioco. */
     private int gameWidth;
     /** Dimensione in pixel dell'altezza della schermata di gioco. */
@@ -100,7 +100,7 @@ public class MainFrame extends JFrame {
 
     /** Pannello padre di tutti gli altri.
      * Usa CardLayout per alternare la visualizzazione di
-     * {@link MainFrame#gamePanel} e {@link MainFrame#menuPanel}
+     * {@link MainFrame#gamePanel}, {@link MainFrame#menuPanel} e {@link MainFrame#startingMenuPanel}.
      * */
     private JPanel mainPanel;
 
@@ -118,8 +118,6 @@ public class MainFrame extends JFrame {
         DEFAULT_SCALING_FACTOR = calculateScalingFactor(DEFAULT_WIDTH_BLOCKS, DEFAULT_HEIGHT_BLOCKS);
         DEFAULT_GAME_HEIGHT =  (int) (DEFAULT_HEIGHT_BLOCKS * GameManager.BLOCK_SIZE * DEFAULT_SCALING_FACTOR);
 
-        // caricamento sfondo nero per transizioni
-        BLACK_SCREEN = SpriteManager.loadImage(BLACK_SCREEN_PATH).getSubimage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public InventoryPanel getInventoryPanel()
@@ -142,10 +140,6 @@ public class MainFrame extends JFrame {
         return currentRoom;
     }
 
-    public Image getBlackScreen()
-    {
-        return BLACK_SCREEN;
-    }
 
     /**
      * Calcola il fattore di riscalamento per una stanza di dimensioni
@@ -420,7 +414,6 @@ public class MainFrame extends JFrame {
 
         final String MENU_BACK_PATH = "/img/computersPause.png";
 
-        Image menuBackImage = SpriteManager.loadImage(MENU_BACK_PATH);
 
         JLabel backLabel = new JLabel(SpriteManager.rescaledImageIcon(SpriteManager.loadImage(MENU_BACK_PATH),
                                                                                         SCREEN_WIDTH,SCREEN_HEIGHT ));

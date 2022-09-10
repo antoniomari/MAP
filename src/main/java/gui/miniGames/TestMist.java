@@ -1,11 +1,7 @@
 package gui.miniGames;
 
-/**
- *  Mini gioco del test psicologico versione finale da integrare sul progetto di MAP
- *  serve definire un meccanismo di avvio del mini gioco
- *
- */
-// TODO: possibilità di applicare factory design pattern
+
+
 
 import general.FontManager;
 import general.GameManager;
@@ -14,13 +10,15 @@ import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ *  Mini gioco del test psicologico versione finale da integrare sul progetto di MAP
+ *  serve definire un meccanismo di avvio del mini gioco
+ *
+ */
 public class TestMist extends MiniGame
 {
 
 
-    //JLabel e ImageIcon per creazione background
-    private JLabel backgroundLabel;
     private JScrollPane scrollPane;
 
     //JLabel per il titolo e l'intestazione del test
@@ -111,7 +109,8 @@ public class TestMist extends MiniGame
 
 
         Image backgroundImage = SpriteManager.loadImage("/img/ImageMiniGames/sfondofoglio.jpg");
-        backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(backgroundImage, testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
+        //JLabel e ImageIcon per creazione background
+        JLabel backgroundLabel = new JLabel(SpriteManager.rescaledImageIcon(backgroundImage, testPanel.getPreferredSize().width, testPanel.getPreferredSize().height));
 
         backgroundLabel.setBounds(testPanelWrapper.getInsets().left, testPanelWrapper.getInsets().top,
                 testPanel.getPreferredSize().width, testPanel.getPreferredSize().height);
@@ -127,7 +126,7 @@ public class TestMist extends MiniGame
 
 
 
-        headingPanel = new JPanel(new GridLayout(2,1));;
+        headingPanel = new JPanel(new GridLayout(2,1));
         title = new JLabel("Minimum intelligence signal text", SwingConstants.CENTER);
         description = new JLabel("Test psicologico intelletivo somministrato dalla Dott.ssa Gastani Frinzi.",
                 SwingConstants.CENTER);
@@ -166,7 +165,8 @@ public class TestMist extends MiniGame
     private void setup()
     {
         // settaggio dei jcheckBox per risposte si e no
-        for (int i = 0; i < ANSWERS; i++) {
+        for (int i = 0; i < ANSWERS; i++)
+        {
             answerPanel[i] = new JPanel(new GridLayout(1,2));
             answerS[i] = new JCheckBox("SI");
             answerS[i].setFocusable(false);
@@ -184,11 +184,10 @@ public class TestMist extends MiniGame
         // settaggio delle singole label che formeranno una domanda con
         // i 2 checkbox associati il tutto racchiuso in questPanel
         // un JPanell dedicato al wrapping di tali componenti
-        for (int j = 0; j < ANSWERS; j++) {
+        for (int j = 0; j < ANSWERS; j++)
+        {
             questWrapper[j] = new JLabel();
             questWrapper[j].setLayout(new FlowLayout());
-            //questions[j].setLayout(new BorderLayout());
-            //questions[j].add(answerPanel[j],BorderLayout.EAST);
             questions[j].setOpaque(false);
             questions[j].setFont(QUESTION_FONT);
             questWrapper[j].add(questions[j]);
@@ -216,12 +215,13 @@ public class TestMist extends MiniGame
     }
 
 
-    private void setupListener() {
-
+    private void setupListener()
+    {
         checkTest.addActionListener((ae) -> checkTestCompleted());
     }
 
-    protected void checkTestCompleted() {
+    protected void checkTestCompleted()
+    {
         // elaborazione del test
         boolean completed = false;
         int counter = 1;
@@ -230,21 +230,25 @@ public class TestMist extends MiniGame
         for (int i = 0; i < ANSWERS; i++) {
 
             // caso in cui siano marcati sia il SI che il NO
-            if (answerS[i].isSelected() && answerN[i].isSelected()) {
+            if (answerS[i].isSelected() && answerN[i].isSelected())
+            {
                 completed = false;
                 showResult(ERROR);
                 break;
                 // caso in cui non si sia selezionato nè il SI nè il NO
-            } else if (!answerS[i].isSelected()  && !answerN[i].isSelected()) {
+            } else if (!answerS[i].isSelected()  && !answerN[i].isSelected())
+            {
                 completed = false;
                 showResult(ERROR);
                 break;
-            } else {
+            } else
+            {
                 // controllo con un array contenente le rix esatte
                 counter++;
             }
 
-            if (counter == ANSWERS) {
+            if (counter == ANSWERS)
+            {
                 completed = true;
                 if(checkTestResult())
                 {
@@ -259,7 +263,8 @@ public class TestMist extends MiniGame
         }
     }
 
-    protected boolean checkTestResult() {
+    protected boolean checkTestResult()
+    {
         boolean checkSingleAnswer = true;
 
         for (int i = 0; i < ANSWERS; i++)
