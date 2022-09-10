@@ -195,7 +195,6 @@ public class PerpetualAnimation extends StillAnimation
         BufferedImage spriteSheet = SpriteManager.loadImage(spriteSheetPath);
         List<Image> frames = SpriteManager.getKeywordOrderedFrames(spriteSheet, jsonPath, name);
 
-        // TODO: personalizzare delay milliseconds
         return new PerpetualAnimation(animationLabel, frames, 100, true, DEFAULT_END_MILLISECONDS,
                 rescalingFactor);
     }

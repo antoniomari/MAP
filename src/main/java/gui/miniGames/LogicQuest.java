@@ -13,6 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * La classe LogicQuest rappresenta un mini gioco in cui
+ * si visualizza un'immagine di equazioni matematiche da
+ * risolvere, ed è possibile premere 4 bottoni per le risposte,
+ * dei quali sono uno è quello vincente.
+ */
 public class LogicQuest extends MiniGame
 {
 
@@ -24,24 +30,10 @@ public class LogicQuest extends MiniGame
 
    // private final JPanel this;
 
-    private JPanel mainWrapper;
-    private JPanel container;
-
-    // titolo del primo enigma
-    private JLabel description;
-
-    // componeti per la gestione dell'immagine
-    private JPanel imagePanel;
     private JLabel image;
 
-    // Pannello per il layout dei buttoni
-    private JPanel optionPanel;
-
-    // TODO: parametrizzare
     private JButton[] buttons;
     private String winButtonText;
-
-    private int questNumber;
 
     static
     {
@@ -66,16 +58,18 @@ public class LogicQuest extends MiniGame
 
     private void initContent(int questNumber, String[] buttonTexts, String iconPath)
     {
-        this.questNumber = questNumber;
-        mainWrapper = new JPanel(new BorderLayout());
+        JPanel mainWrapper = new JPanel(new BorderLayout());
 
         // creazione pannelli principali
-        container = new JPanel(new GridLayout(2,1,0,30));
-        optionPanel = new JPanel(new GridLayout(2, 2,50,50));
-        imagePanel = new JPanel(new GridLayout(1,1));
+        JPanel container = new JPanel(new GridLayout(2, 1, 0, 30));
+        // Pannello per il layout dei buttoni
+        JPanel optionPanel = new JPanel(new GridLayout(2, 2, 50, 50));
+        // componeti per la gestione dell'immagine
+        JPanel imagePanel = new JPanel(new GridLayout(1, 1));
 
         // creazione titolo del minigioco
-        description = new JLabel("Circuito logico type " + numberTypeMap.get(questNumber), SwingConstants.CENTER);
+        // titolo del primo enigma
+        JLabel description = new JLabel("Circuito logico type " + numberTypeMap.get(questNumber), SwingConstants.CENTER);
 
         initButtons(buttonTexts);
         setIcon(iconPath);
@@ -116,7 +110,6 @@ public class LogicQuest extends MiniGame
 
 
         setupListener();
-        // TODO: modificare size
         imagePanel.setBackground(Color.BLUE);
         optionPanel.setBackground(Color.DARK_GRAY);
         this.setBackground(Color.BLUE);

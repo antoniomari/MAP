@@ -574,7 +574,6 @@ public class XmlParser
             piece.removeFromRoom();
             piece.addInRoom(GameManager.getRoom(subject), new BlockPosition(x, y));
             GameManager.continueScenario();
-            // TODO: controllare correttezza nel caso in cui venga aggiunto schwartz
         };
 
     }

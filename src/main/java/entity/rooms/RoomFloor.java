@@ -90,7 +90,6 @@ public class RoomFloor
         // controlli su parametri
         if(leftBlock < 0 || topBlock < 0 || width <= 0 || height <= 0)
             throw new IllegalArgumentException();
-        // TODO: completare controlli
 
         walkableRectangles.add(new Rectangle(leftBlock, topBlock, width, height));
     }
@@ -100,7 +99,6 @@ public class RoomFloor
         // controlli su parametri
         if(leftBlock < 0 || topBlock < 0 || width <= 0 || height <= 0)
             throw new IllegalArgumentException();
-        // TODO: completare controlli
 
         obstacleRectangles.add(new Rectangle(leftBlock, topBlock, width, height));
     }

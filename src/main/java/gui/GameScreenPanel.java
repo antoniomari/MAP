@@ -24,6 +24,10 @@ import java.awt.*;
 import java.util.List;
 
 
+/**
+ * Classe che rappresenta il pannello/schermata di gioco, il quale non comprende
+ * la barra dell'inventario.
+ */
 public class GameScreenPanel extends JLayeredPane
 {
     /*
@@ -33,10 +37,8 @@ public class GameScreenPanel extends JLayeredPane
     public static final Integer GARBAGE_LAYER = 0;
     /** Utilizzato per contenere l'immagine di sfondo della stanza. */
     public static final Integer BACKGROUND_LAYER = 1;
-    /** Utilizzato per inserire Item nella stanza. */
-    public static final Integer ITEM_LAYER = 2;
-    /** Utilizzato per inserire GameCharacter nella stanza. */
-    public static final Integer CHARACTER_LAYER = 3;
+    /** Utilizzato all'inserimento dei GamePiece nella stanza. */
+    public static final Integer PIECE_INITIAL_LAYER = 2;
     /*
         Nota: il layer dal 10 in poi (fino a 99) vengono utilizzati per il corretto posizionamento dei pezzi
         sullo schermo: il layer 2y + 10 corrisponde a tutti i GamePiece posizionati alla ordinata y nella stanza
@@ -50,7 +52,7 @@ public class GameScreenPanel extends JLayeredPane
     public static final Integer EFFECT_LAYER = 100;
     /** Utilizzato per visualizzare la barra di testo. */
     public static final Integer TEXT_BAR_LEVEL = 101;
-    /** Utilizzato per stampare lo schermo nero per caricamento. */
+    /** Utilizzato per stampare screenshot per il caricamento (durante il cambio stanza). */
     public static final Integer BLACK_SCREEN_LEVEL = 102;
 
     /** Stanza in cui si trova il Player. */
@@ -114,12 +116,11 @@ public class GameScreenPanel extends JLayeredPane
         return new AbsPosition(x, y);
     }
 
-    public Room getCurrentRoom()
-    {
-        return currentRoom;
-    }
-
-
+    /**
+     * Aggiungi un effetto (immagine sovrapposta) alla currentRoom.
+     *
+     * @param effectImage immagine da sovrapporre come effetto.
+     */
     public void addCurrentRoomEffect(Image effectImage)
     {
         Objects.requireNonNull(effectImage);
@@ -137,6 +138,9 @@ public class GameScreenPanel extends JLayeredPane
         add(roomEffectLabel, EFFECT_LAYER);
     }
 
+    /**
+     * Rimuovi l'effetto (immagine sovrapposta) dalla currentRoom.
+     */
     public void removeCurrentRoomEffect()
     {
         if(roomEffectLabel != null)
@@ -198,7 +202,7 @@ public class GameScreenPanel extends JLayeredPane
         // setta nuovo background
         backgroundLabel.setIcon(SpriteManager.rescaledImageIcon(newRoom.getBackgroundImage(), rescalingFactor));
 
-        // posiziona opportunamente il background TODO: aggiustare
+        // posiziona opportunamente il background
         int xOffset = (screenWidth - backgroundLabel.getIcon().getIconWidth()) / 2;
         backgroundLabel.setBounds(getInsets().left + xOffset,
                 getInsets().top,
@@ -213,7 +217,7 @@ public class GameScreenPanel extends JLayeredPane
         if(cardinal == null)
             PlayingCharacter.getPlayer().addInRoom(newRoom, newRoom.getDefaultPosition());
         else
-            PlayingCharacter.getPlayer() // TODO: aggiustare qua il piazzamento
+            PlayingCharacter.getPlayer()
                     .addInRoom(newRoom, newRoom.getFloor().getNearestPlacement(
                             newRoom.getArrowPosition(cardinal).relativePosition(-2,0),
                             PlayingCharacter.getPlayer()));
@@ -272,8 +276,11 @@ public class GameScreenPanel extends JLayeredPane
     }
 
     /**
-     * NOTA: non usare per cicli
-     * @param piece
+     * Rimuove un GamePiece dallo schermo.
+     *
+     * NOTA: non usare per cicli.
+     *
+     * @param piece GamePiece da rimuovere dallo scherm
      */
     public void removePieceFromScreen(GamePiece piece)
     {
@@ -322,12 +329,18 @@ public class GameScreenPanel extends JLayeredPane
             anim.stop();
         }
         activePerpetualAnimation = new HashMap<>();
-
-        // TODO: controllare se si può aggiustare con il metodo precedente
     }
 
-
-    public void effectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName,
+    /**
+     * Crea ed esegue un effetto animato non perpetuo.
+     *
+     * @param spritesheetPath path dello sprite-sheet per recuperare i frame dell'effeto animato
+     * @param jsonPath path del json relativo allo sprite-sheet
+     * @param animationName nome dell'effetto animato da eseguire
+     * @param pos posizione in blocchi alla quale eseguire l'effetto animato
+     * @param finalWait millisecondi di attesa alla fine dell'effetto animato
+     */
+    public void effectAnimation(String spritesheetPath, String jsonPath, String animationName,
                                 BlockPosition pos, int finalWait)
     {
         JLabel effectLabel = new JLabel();
@@ -350,11 +363,21 @@ public class GameScreenPanel extends JLayeredPane
 
     }
 
+    /**
+     * Crea ed esegue un effetto animato perpetuo.
+     *
+     * @param piece GamePiece da animare
+     * @param spritesheetPath path dello sprite-sheet per recuperare i frame dell'effeto animato
+     * @param jsonPath path del json relativo allo sprite-sheet
+     * @param animationName nome dell'effetto animato da eseguire
+     * @param pos posizione in blocchi alla quale eseguire l'effetto animato
+     * @param finalWait millisecondi di attesa alla fine dell'effetto animato
+     */
     public void perpetualEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath, String animationName,
                                          BlockPosition pos, int finalWait)
     {
         JLabel effectLabel = new JLabel();
-        add(effectLabel, Integer.valueOf(getLayer(pieceLabelMap.get(piece)) + 1)); // TODO: aggiustare
+        add(effectLabel, Integer.valueOf(getLayer(pieceLabelMap.get(piece)) + 1));
 
         PerpetualAnimation effectAnimation = PerpetualAnimation.createPerpetualAnimation(
                         spritesheetPath, jsonPath, animationName, effectLabel, rescalingFactor);
@@ -425,8 +448,8 @@ public class GameScreenPanel extends JLayeredPane
         // metti la coppia Item JLabel nel dizionario
         pieceLabelMap.put(piece, pieceLabel);
 
-        // aggiungi la label nell'ITEM_LAYER TODO: cambiare in ITEMLAYER e CHARACTERLAYER ???
-        add(pieceLabel, ITEM_LAYER);
+        // aggiungi la label nel PIECE_INITIAL_LAYER
+        add(pieceLabel, PIECE_INITIAL_LAYER);
 
         updatePiecePosition(piece, pos, null);
     }
@@ -449,10 +472,7 @@ public class GameScreenPanel extends JLayeredPane
 
         List<BlockPosition> positions;
 
-        if(piece instanceof PlayingCharacter)
-            positions = GameScreenManager.calculatePath(initialPos, finalPos);
-        else
-            positions = GameScreenManager.calculatePathNPC(initialPos, finalPos);
+        positions = GameScreenManager.calculatePath(initialPos, finalPos);
 
         if(!withAnimation)
         {
@@ -537,7 +557,6 @@ public class GameScreenPanel extends JLayeredPane
         JLabel pieceLabel = pieceLabelMap.get(piece);
         // se è un oggetto può andare sulle pareti, se è un personaggio no
         boolean canGoOnWall = piece instanceof Item || piece instanceof NPC;
-        // TODO: controllare NPC
 
         if(pieceLabel == null)
             throw new IllegalArgumentException("GamePiece non presente nella stanza");

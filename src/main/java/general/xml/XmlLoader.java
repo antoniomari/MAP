@@ -320,7 +320,7 @@ public class XmlLoader
         Element roomElement = roomXml.getDocumentElement();
         String name = XmlParser.getXmlAttribute(roomElement, "nome");
 
-        if(GameManager.getRoom(name) != null) // se la room è stata già caricata TODO: documentare
+        if(GameManager.getRoom(name) != null) // se la room è stata già caricata
             return GameManager.getRoom(name);
         else
         {

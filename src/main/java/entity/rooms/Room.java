@@ -10,7 +10,6 @@ import general.GameManager;
 import general.ScenarioMethod;
 import general.xml.XmlParser;
 import graphics.SpriteManager;
-import jdk.jfr.Event;
 import org.json.JSONObject;
 
 import java.awt.*;

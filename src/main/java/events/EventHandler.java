@@ -92,7 +92,7 @@ public class EventHandler
 
             SoundHandler.playWav(SoundHandler.EMOJI_SOUND_PATH, SoundHandler.Mode.SOUND);
 
-            AnimationExecutor.executeEffectAnimation(e.getCharacterInvolved(), EMOJI_SPRITESHEET_PATH, EMOJI_JSON_PATH,
+            AnimationExecutor.executeEffectAnimation(EMOJI_SPRITESHEET_PATH, EMOJI_JSON_PATH,
                     e.getContent(), e.getCharacterInvolved().getPosition().relativePosition(1, - e.getCharacterInvolved().getBHeight()),
                     500);
         }
@@ -103,7 +103,7 @@ public class EventHandler
         GamePiece piece = e.getPieceInvolved();
         if(e.getType() == GamePieceEvent.Type.EFFECT_ANIMATION)
         {
-            AnimationExecutor.executeEffectAnimation(piece,
+            AnimationExecutor.executeEffectAnimation(
                     e.getAnimationSpritesheet(),
                     e.getAnimationJson(),
                     e.getAnimationName(),

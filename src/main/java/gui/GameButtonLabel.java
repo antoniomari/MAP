@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.event.MouseListener;
 import java.util.function.Predicate;
 
+/**
+ * Classe che rappresenta un Tasto utilizzato nel menù
+ * (sottoclasse di JLabel).
+ */
 public class GameButtonLabel extends JLabel
 {
     private Icon buttonIcon;

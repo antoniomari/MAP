@@ -42,10 +42,10 @@ public class AnimationExecutor extends Executor
         speakAnimation.start();
     }
 
-    public static void executeEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath,
+    public static void executeEffectAnimation(String spritesheetPath, String jsonPath,
                                               String whatAnimation, BlockPosition pos, int finalWait)
     {
-        gameScreenPanel.effectAnimation(piece, spritesheetPath, jsonPath, whatAnimation, pos, finalWait);
+        gameScreenPanel.effectAnimation(spritesheetPath, jsonPath, whatAnimation, pos, finalWait);
     }
 
     public static void executePerpetualEffectAnimation(GamePiece piece, String spritesheetPath, String jsonPath,

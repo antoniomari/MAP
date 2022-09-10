@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Gestisce i menu contestuali visualizzati premendo il tasto destro
+ * su un GamePiece.
+ */
 public class PopMenuManager
 {
     private static final JPopupMenu menu;
@@ -23,7 +27,6 @@ public class PopMenuManager
         }
     };
 
-    // TODO : migliorare nome
     private final static Action OPEN_CLOSE_ACTION = new AbstractAction("Apri/Chiudi")
     {
         @Override
@@ -81,6 +84,14 @@ public class PopMenuManager
     }
 
 
+    /**
+     * Mostra menu contestuale associato a un oggetto.
+     *
+     * @param o oggetto della cui classe mostrare menu
+     * @param invoker componente su cui invocare il menu contestuale
+     * @param x ascissa dell'invoker alla quale invocare il menu
+     * @param y ordinata dell'invoker alla quale invocare il menu
+     */
     public static void showMenu(Object o, Component invoker, int x, int y)
     {
         selected = o;
@@ -89,6 +100,13 @@ public class PopMenuManager
     }
 
 
+    /**
+     * Restituisce il menu corrispondente all'oggetto o, in base
+     * alla sua classe effettiva.
+     *
+     * @param o oggetto del quale mostrare menu contestuale
+     * @return menu contestuale corrispondente
+     */
     public static JPopupMenu getPopupMenu(Object o)
     {
         menu.removeAll();

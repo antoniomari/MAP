@@ -1,5 +1,9 @@
 package gui;
 
+/**
+ * Classe che rappresenta una posizione assoluta (misurata in pixel)
+ * sullo schermo.
+ */
 public class AbsPosition
 {
     private final int x;

@@ -40,7 +40,7 @@ public class ActionSequence
      * Da utilizzare nel caso in cui si debba costruire uno scenario
      * che non fa nulla.
      *
-     * Nota: non creare uno scenario senza aggiungere azioni: TODO: aggiungere eccezione
+     * Nota: non creare uno scenario senza aggiungere azioni:
      */
     public static ActionSequence voidScenario()
     {

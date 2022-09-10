@@ -94,7 +94,6 @@ public class Captcha extends MiniGame
         captchaMatch = initMatch();
         setIcon(captchaMatch.keySet());
 
-        // TODO: da spostare nel factory method
         setup();
         setupListener();
         addDetails();
@@ -201,18 +200,7 @@ public class Captcha extends MiniGame
     final void addDetails()
     {
         captchaPanel.setPreferredSize(new Dimension(700, 700));
-        // TODO: da reimpostare setModal per frezzare le sottostanti finestre aperte
-        // captchaPanel.setModal(true);
 
-        /*
-        captchaPanel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        captchaPanel.setResizable(false);
-
-         */
-
-        // imposta come "figlio"
-        // captchaPanel.setLocationRelativeTo(GameManager.getMainFrame());
-        // (new Color 16, 44, 84) blue navy dark color
         imagePanel.setBackground((new Color (16, 44, 84)));
         captchaPanel.setBackground((new Color( 16, 44, 84)));
         captchaPanel.setBackground((new Color (16, 44, 84)));
