@@ -1,8 +1,7 @@
-package GUI;
+package gui;
 
 
 import general.GameManager;
-import general.ScenarioMethod;
 import graphics.SpriteManager;
 import sound.SoundHandler;
 

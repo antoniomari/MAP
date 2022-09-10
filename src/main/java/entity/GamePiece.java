@@ -1,10 +1,8 @@
 package entity;
 
-import GUI.InventoryPanel;
 import entity.characters.GameCharacter;
 import events.EventHandler;
 import events.GamePieceEvent;
-import events.ItemInteractionEvent;
 import general.GameError;
 import general.GameException;
 import general.GameManager;

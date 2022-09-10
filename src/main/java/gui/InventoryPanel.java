@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import animation.StillAnimation;
 import entity.characters.PlayingCharacter;
@@ -310,13 +310,13 @@ public class InventoryPanel extends JLayeredPane
         upFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "upPressed"));
         upFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "up"));
 
-        UP_BUTTON_PRESS = new StillAnimation(upButtonLabel, upFrames, 100, false);
+        UP_BUTTON_PRESS = new StillAnimation(upButtonLabel, upFrames, 100, false, StillAnimation.DEFAULT_DELAY_MILLISECONDS);
 
         List<Image> downFrames = new ArrayList<>();
         downFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "downPressed"));
         downFrames.add(SpriteManager.loadSpriteByName(BUTTON_SPRITESHEET, BUTTON_JSON_PATH, "down"));
 
-        DOWN_BUTTON_PRESS = new StillAnimation(downButtonLabel, downFrames, 100, false);
+        DOWN_BUTTON_PRESS = new StillAnimation(downButtonLabel, downFrames, 100, false, StillAnimation.DEFAULT_DELAY_MILLISECONDS);
     }
 
     /**

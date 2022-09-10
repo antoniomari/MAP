@@ -16,11 +16,10 @@ import java.util.List;
  */
 public abstract class Animation
 {
+    /** Valore di default per i millisecondi di attesa alla fine dell'animazione. */
     protected static int DEFAULT_END_MILLISECONDS = 0;
     /** JLabel su cui eseguire l'animazione. */
     protected JLabel label;
-
-    protected int numFrames;
 
     /** Lista di fotogrammi dell'animazione. */
     private final List<Image> frames;
@@ -30,25 +29,24 @@ public abstract class Animation
     /** Indice (nella lista) del fotogramma visualizzato correntemente. */
     private int currentIndex = 0;
 
-    /** Millisecondi da attendere alla fine dell'animazione
-     * (prima di tornare nel GameState Playing)
-     */
+    /** Millisecondi da attendere alla fine dell'animazione. */
     protected int millisecondWaitEnd = DEFAULT_END_MILLISECONDS;
 
+    /** Thread dedicato all'esecuzione dell'animazione. */
     protected AnimationThread thread;
 
     /**
-     * Thread di esecuzione dell'animazione.
+     * Classe che rappresenta un thread di esecuzione dell'animazione.
      *
-     * Il metodo run è un template-method che include le chiamate ai metodi
-     * astratti {@link Animation#execute()} e {@link Animation#terminate()}.
      *
-     * All'inizio imposta lo stato di gioco Moving, viene eseguita l'animazione,
-     * vengono attesi {@link Animation#millisecondWaitEnd} e infine viene terminata.
      */
     protected class AnimationThread extends Thread
     {
 
+        /**
+         * Il metodo run è un template-method che include le chiamate ai metodi
+         * astratti {@link Animation#execute()} e {@link Animation#terminate()}.
+         */
         @Override
         public void run()
         {
@@ -73,19 +71,46 @@ public abstract class Animation
     }
 
     /**
+     * Esecuzione dell'animazione, chiamato unicamente nel metodo
+     * run della classe AnimationThread.
+     */
+    protected abstract void execute();
+
+    /**
+     * Codice da eseguire al termine dell'animazione, chiamato
+     * unicamente nel metodo run della classe AnimationThread.
+     */
+    protected abstract void terminate();
+
+
+    /**
      * Crea un'animazione.
+     *
+     * Nota: il fattore di riscalamento per i frames viene calcolato
+     * automaticamente
      *
      * @param labelToAnimate JLabel da animare
      * @param frames lista dei fotogrammi da utilizzare nell'animazione
      */
     protected Animation(JLabel labelToAnimate, List<Image> frames)
     {
+        Objects.requireNonNull(labelToAnimate);
+        Objects.requireNonNull(frames);
+
         this.label = labelToAnimate;
         this.frames = frames;
         resizeFrames();
         this.currentIndex = 0;
     }
 
+    /**
+     * Crea un'animazione in cui i frame vengono riscalati secondo un fattore
+     * di riscalamento fornito.
+     *
+     * @param labelToAnimate JLabel da animare
+     * @param frames lista dei fotogrammi da utilizzare nell'animazione
+     * @param rescalingFactor fattore di riscalamento per i frames
+     */
     protected Animation(JLabel labelToAnimate, List<Image> frames, double rescalingFactor)
     {
         this.label = labelToAnimate;
@@ -115,8 +140,8 @@ public abstract class Animation
 
 
     /**
-     * Imposta frameIcons creando icone riscalate per adattarsi
-     * alle dimensioni della label
+     * Inizializza frameIcons creando icone riscalate, adattandosi
+     * automaticamente alle dimensioni della label.
      */
     private void resizeFrames()
     {
@@ -128,6 +153,12 @@ public abstract class Animation
             frameIcons.add(SpriteManager.rescaledImageIcon(i, rescalingFactor));
     }
 
+    /**
+     * Inizializza frameIcons creando icone riscalate, utilizzando
+     * un fattore di riscalamento dato.
+     *
+     * @param rescalingFactor fattore di riscalamento
+     */
     private void resizeFrames(double rescalingFactor)
     {
         frameIcons = new ArrayList<>(frames.size());
@@ -159,27 +190,12 @@ public abstract class Animation
     }
 
     /**
-     * Esegue l'animazione, creando un thread dedicato.
+     * Esegue l'animazione, creando un AnimationThread dedicato.
      */
     public void start()
     {
         thread = new Animation.AnimationThread();
         thread.start();
     }
-
-
-    /**
-     * Esecuzione dell'animazione, chiamato unicamente nel metodo
-     * run dell'AnimationThread.
-     */
-    protected abstract void execute();
-
-    /**
-     * Codice da eseguire al termine dell'animazione, chiamato
-     * unicamente nel metodo run dell'AnimationThread.
-     */
-    protected abstract void terminate();
-
-
 
 }

@@ -18,7 +18,7 @@ public class EventHandler
 
     /**
      * Invia un evento, indirizzandolo agli esecutori che si occuperanno
-     * di aggiornare la GUI in modo coerente alle informazioni inviate
+     * di aggiornare la gui in modo coerente alle informazioni inviate
      * dall'evento.
      *
      * @param ge evento di gioco da inoltrare

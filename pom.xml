@@ -103,7 +103,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>GUI.MainFrame</mainClass>
+                            <mainClass>gui.MainFrame</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

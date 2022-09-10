@@ -1,8 +1,8 @@
 package general;
 
-import GUI.GameKeyListener;
-import GUI.MainFrame;
-import GUI.miniGames.MiniGame;
+import gui.GameKeyListener;
+import gui.MainFrame;
+import gui.miniGames.MiniGame;
 import entity.GamePiece;
 import entity.characters.PlayingCharacter;
 import entity.rooms.BlockPosition;
@@ -31,7 +31,7 @@ public class GameManager
         /** Inizializz*/
         INIT,
         PLAYING,
-        MOVING,
+        ANIMATION,
         TEXT_BAR,
         SCENARIO_SOUND,
         TEST,
@@ -212,7 +212,7 @@ public class GameManager
 
         if (adjacent != null)
         {
-            changeState(GameState.MOVING);
+            changeState(GameState.ANIMATION);
             ActionSequence scenario = new ActionSequence("vai a " + cardinal.toString());
 
             BlockPosition entrancePos = currentRoom.getFloor()

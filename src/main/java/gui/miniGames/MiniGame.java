@@ -1,6 +1,6 @@
-package GUI.miniGames;
+package gui.miniGames;
 
-import GUI.GameScreenPanel;
+import gui.GameScreenPanel;
 import general.GameManager;
 import general.xml.XmlParser;
 

@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import entity.characters.GameCharacter;
 import entity.characters.NPC;

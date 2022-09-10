@@ -1,8 +1,8 @@
 package general.xml;
 
-import GUI.miniGames.Captcha;
-import GUI.miniGames.LogicQuest;
-import GUI.miniGames.TestMist;
+import gui.miniGames.Captcha;
+import gui.miniGames.LogicQuest;
+import gui.miniGames.TestMist;
 import entity.GamePiece;
 import entity.characters.GameCharacter;
 import entity.characters.PlayingCharacter;
@@ -25,7 +25,6 @@ import org.xml.sax.SAXException;
 import restClient.RecipeRestClient;
 import sound.SoundHandler;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

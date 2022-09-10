@@ -1,4 +1,4 @@
-package GUI.miniGames;
+package gui.miniGames;
 
 /**
  *  Mini gioco del test psicologico versione finale da integrare sul progetto di MAP

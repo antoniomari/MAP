@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import animation.MovingAnimation;
 import animation.PerpetualAnimation;
@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 
 import entity.GamePiece;
-import entity.characters.GameCharacter;
 import entity.characters.NPC;
 import entity.characters.PlayingCharacter;
 import entity.items.Item;
@@ -22,7 +21,6 @@ import graphics.SpriteManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 
@@ -439,7 +437,7 @@ public class GameScreenPanel extends JLayeredPane
      * @param piece GamePiece da spostare sullo schermo
      * @param initialPos posizione iniziale del GamePiece, misurata in blocchi
      * @param finalPos posizione finale del GamePiece, misurata in blocchi
-     * @param millisecondWaitEnd millisecondi da attendere dopo lo spostamento (gioco bloccato nello stato MOVING)
+     * @param millisecondWaitEnd millisecondi da attendere dopo lo spostamento (gioco bloccato nello stato ANIMATION)
      * @param withAnimation {@code true} per eseguire l'animazione di movimento, {@code false} altrimenti
      */
     public void movePiece(GamePiece piece, BlockPosition initialPos,
@@ -523,7 +521,7 @@ public class GameScreenPanel extends JLayeredPane
 
 
         return new MovingAnimation(labelToAnimate,
-                                    initialPos, finalPos, millisecondWaitEnd, true, frames);
+                                    initialPos, finalPos, millisecondWaitEnd, frames);
     }
 
     /**

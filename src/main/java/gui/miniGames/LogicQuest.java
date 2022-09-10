@@ -1,4 +1,4 @@
-package GUI.miniGames;
+package gui.miniGames;
 
 
 import general.FontManager;

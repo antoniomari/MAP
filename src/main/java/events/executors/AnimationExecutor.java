@@ -23,7 +23,7 @@ public class AnimationExecutor extends Executor
     public static void executeAnimation(GamePiece piece, List<Image> frames, int delayMilliseconds)
     {
         new StillAnimation(
-                gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, true).start();
+                gameScreenPanel.getLabelAssociated(piece), frames, delayMilliseconds, true, StillAnimation.DEFAULT_DELAY_MILLISECONDS).start();
     }
 
     public static void executeSpeakAnimation(GamePiece piece, List<Image> frames,

@@ -134,9 +134,9 @@ quando aggiornati, generino eventi specifici e li inviino alla classe EventHandl
 vari tipi di eventi e di delegare a classi executor il compito di aggiornare in modo coerente con l’accaduto la User 
 Interface.
 Tali executors sono gli unici ad avere riferimento al mainFrame in modo tale da essere l’unico collegamento 
-entity -> GUI.
+entity -> gui.
 
-- la rappresentazione di input (GUI -> entity) è possibile grazie alla classe PopMenuManager. 
+- la rappresentazione di input (gui -> entity) è possibile grazie alla classe PopMenuManager. 
 Tramite il metodo addPieceOnScreen della classe GameScreenPanel, quando viene aggiunta la label con lo sprite di un 
 GamePiece, viene creato un listener per il tasto destro che prevede la chiamata al metodo showMenu di PopMenuManager, 
 passando sia il GamePiece che la label corrispondente. Il PopMenuManager crea un menu contestuale aggiungendo vari tasti 

@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import entity.rooms.BlockPosition;
 import general.GameManager;

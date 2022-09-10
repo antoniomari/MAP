@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import animation.PerpetualAnimation;
 import database.DBManager;
