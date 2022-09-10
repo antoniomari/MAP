@@ -43,7 +43,6 @@ public class XmlLoader
         List<Element> characterElementList = XmlParser.getTagsList(characterXml, "personaggio");
         List<Element> itemElementList = XmlParser.getTagsList(itemXml, "oggetto");
 
-        // TODO: capire funzionamento flatMap
         // unifica in un'unica lista gli elementi xml di personaggi e oggetti
         List<Element> pieceElementList = Stream.of(characterElementList, itemElementList)
                 .flatMap(Collection::stream)
@@ -96,26 +95,17 @@ public class XmlLoader
     }
 
     /**
-     * Carica un GameCharacter dal rispettivo file (personaggi.xml).
-     *
-     * Cerca il GameCharacter (elemento xml con tag {@literal <personaggio>} il cui nome
-     * è {@code name}. Nella costruzione dell'oggetto utilizza il contenuto dei seguenti tag:
-     * <ul>
-     *     <li>{@literal <spritesheet>} path dello spritesheet del personaggio</li>
-     *
-     *    <li>{@literal <json>} path del json associato allo spritesheet del personaggio</li>
-     * </ul>
+     * Carica un GameCharacter dal rispettivo elemento xml.
      *
      * @param characterElement elemento XML del GameCharacter da caricare
-     * @return il GameCharacter caricato, {@code null} se non esiste un GameCharacter
-     * il cui nome sia {@code name}
+     * @return il GameCharacter caricato
      */
     private static GameCharacter loadCharacter(Element characterElement)
     {
 
         String name = XmlParser.getXmlAttribute(characterElement, "nome");
 
-        String spritesheetPath = XmlParser.getTagValue(characterElement, "spritesheet");
+        String spriteSheetPath = XmlParser.getTagValue(characterElement, "spritesheet");
         Optional<String> jsonPath = XmlParser.getOptionalTagValue(characterElement, "json");
 
         GameCharacter loaded;
@@ -123,16 +113,15 @@ public class XmlLoader
         if(jsonPath.isPresent())
         {
             if(name.equals(PlayingCharacter.getPlayerName()))
-                loaded = new GameCharacter(name, spritesheetPath, jsonPath.get());
+                loaded = new GameCharacter(name, spriteSheetPath, jsonPath.get());
             else
-                loaded = new NPC(name, spritesheetPath, jsonPath.get());
+                loaded = new NPC(name, spriteSheetPath, jsonPath.get());
         }
         else
         {
-            loaded = new NPC(name, spritesheetPath);
+            loaded = new NPC(name, spriteSheetPath);
         }
 
-        // carica animazioni TODO
         // carica speakScenarios
         Element scenariosNode = (Element) characterElement.getElementsByTagName("speakScenarios").item(0);
         Map<String, String> scenarioPathMap = new HashMap<>();
@@ -164,7 +153,12 @@ public class XmlLoader
         return loaded;
     }
 
-    // TODO : documentazion e modularizzazione
+    /**
+     * Carica un Item dal rispettivo elemento xml.
+     *
+     * @param itemElement elemento XML dell'Item da caricare
+     * @return l'Item caricato
+     */
     private static Item loadItem(Element itemElement)
     {
 
@@ -173,23 +167,26 @@ public class XmlLoader
         String description = XmlParser.formatForTextBar(XmlParser.getTagValue(itemElement, "descrizione"));
         boolean canUse = Boolean.parseBoolean(XmlParser.getTagValue(itemElement, "canUse"));
 
-        // TODO: caricare l'opportuna classe IMPORTANTEEEEE!"!!!!!!1
         Item itemToLoad;
-        if(className.equals("Item"))
-            itemToLoad = new Item(name, description, canUse);
-        else if (className.equals("PickupableItem"))
-            itemToLoad = new PickupableItem(name, description, canUse);
-        else if (className.equals("DoorLike"))
-            itemToLoad = new DoorLike(name, description);
-        else
-            throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
-        // TODO : rimpiazzare if-else
+        switch (className)
+        {
+            case "Item":
+                itemToLoad = new Item(name, description, canUse);
+                break;
+            case "PickupableItem":
+                itemToLoad = new PickupableItem(name, description, canUse);
+                break;
+            case "DoorLike":
+                itemToLoad = new DoorLike(name, description);
+                break;
+            default:
+                throw new GameException("Classe oggetto [" + className + "] ancora non supportata");
+        }
 
         // caricamento animazione
         Optional<String> animationSpritesheetPath = XmlParser.getOptionalTagValue(itemElement, "animationSpritesheet");
         Optional<String> animationJsonPath = XmlParser.getOptionalTagValue(itemElement, "animationJson");
 
-        // TODO: controlli??
         if(animationSpritesheetPath.isPresent())
         {
             itemToLoad.initAnimateFrames(animationSpritesheetPath.get(), animationJsonPath.get());
@@ -213,6 +210,12 @@ public class XmlLoader
         return itemToLoad;
     }
 
+    /**
+     * Carica l'elemento onUse di un Item.
+     *
+     * @param itemElement elemento xml dell'Item
+     * @param itemToLoad item su cui lavorare
+     */
     private static void loadOnUse(Element itemElement, Item itemToLoad)
     {
         // setup onUse action
@@ -236,6 +239,12 @@ public class XmlLoader
         itemToLoad.loadUseScenarios(scenarioPathMap);
     }
 
+    /**
+     * Carica l'elemento onOpen di un Item.
+     *
+     * @param itemElement elemento xml dell'Item
+     * @param itemToLoad item su cui lavorare
+     */
     private static void loadOnOpen(Element itemElement, Item itemToLoad)
     {
         Element onOpenElement = (Element) itemElement.getElementsByTagName("onOpen").item(0);
@@ -260,7 +269,12 @@ public class XmlLoader
         }
     }
 
-
+    /**
+     * Carica l'elemento onUseWith di un Item.
+     *
+     * @param itemElement elemento xml dell'Item
+     * @param itemToLoad item su cui lavorare
+     */
     private static void loadOnUseWith(Element itemElement, Item itemToLoad)
     {
         Element onUseWithElement = (Element) itemElement.getElementsByTagName("onUseWith").item(0);
