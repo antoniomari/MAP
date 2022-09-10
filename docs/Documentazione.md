@@ -12,35 +12,56 @@ società, ovvero l’autocoscienza di una macchina e le sue possibili implicazio
 Per giocare e interagire con i vari elementi del gioco servono il mouse e la tastiera del pc. In particolare, con il 
 mouse è possibile interagire con oggetti presenti nel gioco e con i personaggi, cliccando con il tasto destro del mouse 
 su di un oggetto o su di un personaggio è possibile visualizzare un piccolo menù a tendina che mostra le possibili 
-interazioni. Per gli oggetti il menù mostra l’opzione “osserva”, che permette di visualizzare una finestra di testo 
-nella quale è presente la descrizione dell’oggetto in questione oppure l’altra opzione ove è presente “raccogli” che 
-permette di spostare l’oggetto nella barra dell’inventario presente alla base dello scenario. Quest’ultimo mostra gli 
-oggetti che il giocatore possiede e sul lato sinistro sono presenti due bottoni con il simbolo di frecce che servono a 
+interazioni.
+
+![interazioni](../docs/immaginiDocumentazione/2.jpeg)
+
+Per gli oggetti il menù mostra l’opzione “osserva”, che permette di visualizzare una finestra di testo 
+nella quale è presente la descrizione dell’oggetto in questione.
+![osserva](../docs/immaginiDocumentazione/2.1.jpeg)
+
+L’opzione “raccogli” permette di spostare l’oggetto nella barra dell’inventario presente alla base dello scenario.
+![raccogli](../docs/immaginiDocumentazione/2.2.jpeg)
+
+Quest’ultimo mostra gli oggetti che il giocatore possiede e sul lato sinistro sono presenti due bottoni con il simbolo di frecce che servono a 
 scorrere l’inventario, cliccandoci con il tasto sinistro del mouse, nel qual caso gli oggetti raccolti non siano tutti 
 visualizzabili. Un oggetto presente nell’inventario può essere selezionato con il clic del tasto sinistro del mouse, 
-una volta selezionato il riquadro che lo contiene cambia colore passando dal viola al fucsia acceso e una volta 
-selezionato è possibile utilizzare l’oggetto cliccando su di un altro oggetto o su di un personaggio affinché si 
-inneschi un effetto. Per il controllo degli spostamenti del personaggio è possibile utilizzare le frecce direzionali 
+una volta selezionato il riquadro che lo contiene cambia colore passando dal viola al fucsia acceso e il box a destra 
+dell'inventario mostra il nome dell'oggetto.
+![inventario](../docs/immaginiDocumentazione/3.jpeg)
+
+Una volta selezionato è possibile utilizzare l’oggetto cliccando su di un altro oggetto o su di un personaggio affinché si 
+inneschi un effetto.
+![utilizzo](../docs/immaginiDocumentazione/4.jpeg)
+
+Per il controllo degli spostamenti del personaggio è possibile utilizzare le frecce direzionali 
 presenti sulla tastiera la cui digitazione provoca lo spostamento del personaggio da una stanza del gioco ad un'altra. 
 I movimenti sono controllati, questo significa che non è possibile muoversi liberamente in una stanza ma è possibile 
 solo passare di stanza in stanza. La possibilità di cambiare stanza nel gioco è messa in risalto da delle frecce 
 presenti sul pavimento della stanza in cui si trova il giocatore, esse sono delle indicazioni che avvertono della 
-possibilità di cambiare stanza premendo la freccia della tastiera orientata nello stesso verso. Durante tutto il gioco 
-il giocatore incontra vari personaggi con i quali interagisce parlando, per poter parlare con un personaggio è 
-sufficiente cliccare con il tasto destro del mouse sul personaggio desiderato e dal menù a tendina che si apre 
+possibilità di cambiare stanza premendo la freccia della tastiera orientata nello stesso verso.
+![frecce](../docs/immaginiDocumentazione/5.jpeg)
+
+Durante tutto il gioco il giocatore incontra vari personaggi con i quali interagisce parlando, per poter parlare con un 
+personaggio è sufficiente cliccare con il tasto destro del mouse sul personaggio desiderato e dal menù a tendina che si apre 
 cliccare con il tasto sinistro sull’ opzione parla. Quando il personaggio inizia a parlare compare una finestra color
 lilla contenente il testo del dialogo per poter proseguire nel dialogo si deve premere una volta il tasto spazio della 
 tastiera. Le finestre di dialogo contengono solo due righe di testo, perciò, una volta lette si deve premere spazio
 per proseguire nella lettura del testo.
+![dialogo](../docs/immaginiDocumentazione/6.jpeg)
 
 All’avvio del gioco si apre una schermata di benvenuto con il titolo del gioco e quattro pulsanti contenenti le opzioni 
 nuova partita, carica, impostazioni ed esci per iniziare si necessita cliccare con il tasto sinistro sul pulsante nuova 
-partita, il quale provoca l’avvio del la scena iniziale del gioco. Il pulsante carica  serve nel momento in cui avendo 
-salvato la partita in un dato momento del gioco si desidera riprenderla per continuare l’avventura in un altro momento. 
+partita, il quale provoca l’avvio del la scena iniziale del gioco. Il pulsante carica serve nel momento in cui avendo 
+salvato la partita in un dato momento del gioco si desidera riprenderla per continuare l’avventura in un altro momento.
+![interazioni](../docs/immaginiDocumentazione/8.jpeg)
+
 Quando la partita è iniziata premendo il tasto esc è possibile accedere al menù di pausa nel quale saranno disponibili 
 sempre quattro opzioni rispettivamente continua per riprendere la partita, salva per salvare i dati del gioco, 
 impostazioni ed esci per abbandonare la partita attualmente in corso. Attualmente il pulsante impostazione non ha alcuna
 funzione.
+![interazioni](../docs/immaginiDocumentazione/9.jpeg)
+
 
 ## 1.3 Trama del gioco
 Siamo nel 2025 e tre scienziati informatici dalle grandi ambizioni stanno lavorando al progetto della loro vita che 
@@ -53,7 +74,7 @@ volta. Questo lo si ottiene facendo vivere a JDBC-20 la simulazione di quanto ac
 Global-AI 2020, e capire se è in grado non solo di non commettere lo stesso errore, ma persino risolvere il guaio 
 causato da JDBC-15, appunto, la macchina da testare al Global-AI 2020.
 
-In tale simulazione  il congresso è tenuto in un prestigioso e particolare edificio nel quale hanno sede i laboratori 
+In tale simulazione il congresso è tenuto in un prestigioso e particolare edificio nel quale hanno sede i laboratori 
 di ricerca dei tre informatici. JDBC-15 è la macchina che deve essere sottoposta a valutazione da parte JDBC-20 che 
 crederà di essere il Dr. Schwartz, massimo esponente a livello mondiale di AI.
 Durante la simulazione, diversi imprevisti metteranno JDBC-20 a dura prova, spingendo al massimo le proprie capacità 
@@ -304,10 +325,10 @@ categoria della ricetta e gli ingredienti con le relative dosi.
 In caso d'insuccesso della chiamata, vengono utilizzati dei valori di default sostitutivi.
 
 
-## 2.4 Eventi e Architettura del sistema
+## 2.4 Architettura del sistema
 Il GameManager è una classe adibita alla gestione di strutture dati fondamentali per far funzionare il gioco. 
 Esso contiene variabili e costanti utilizzati da diverse classi per diversi scopi.
-Ad esempio, blockSize è il numero di pixel che costituisce il lato di un blocco, oppure il riferimento al mainFrame 
+Ad esempio, `BLOCK_SIZE` è il numero di pixel che costituisce il lato di un blocco, oppure il riferimento al mainFrame 
 del gioco.
 
 Contiene riferimenti a tutti i GamePiece e Room caricati in memoria e gestisce lo stack degli scenari. 
@@ -315,54 +336,58 @@ Alla costruzione di un nuovo GamePiece o di una nuova Room, essi vengono automat
 il loro utilizzo da parte di tutti i metodi di ogni package riferendosi per nome. È dunque importante che non vi siano 
 più GamePiece o Room con lo stesso nome.
 
-## 2.4.1 Sezione GAMESTATE (forse da unire sopra)
+### 2.4.1 GameState
 Un GameState è uno stato in cui si può trovare il gioco e determina quali azioni sono possibili e quali no. 
-Ad esempio nello stato “palying” il giocatore può liberamente muoversi all’interno delle stanze ed interagire con 
-oggetti e personaggi, mentre nello stato “textBar” non sarà possibile effettuare nessuna di queste interazioni, ma il 
+Ad esempio nello stato `PLAYING` il giocatore può liberamente muoversi all’interno delle stanze ed interagire con 
+oggetti e personaggi, mentre nello stato `TEXT_BAR` non sarà possibile effettuare nessuna di queste interazioni, ma il 
 giocatore potrà unicamente premere il tasto Barra Spaziatrice per chiudere la text-bar (mandando avanti il gioco, 
 che potrebbe tornare allo stato playing). Per tale motivo abbiamo implementato i listener di tastiera e mouse 
 (rispettivamente GameKeyListener e GameMouseListener) in modo tale che questi siano attivi e funzionino solo in un 
-determinato gameState, denominato targetState.
+determinato GameState, denominato targetState.
 
-## 2.5 Listener
+### 2.4.2 Listener
 Alcuni listener vengono creati staticamente dalla classe `GameState`: sono listener che operano su tutto il frame di 
 gioco e corrispondono a comandi ben definiti, ad esempio le frecce direzionali utilizzate per cambiare stanza nello 
 stato “playing” oppure la barra spaziatrice per chiudere la text-bar.
-Esistono inoltre listener creati dinamicamente sul gameScreen che corrispondono a diversi elementi nel gioco, ve n'è 
-almeno uno per ogni gamePiece (in quanto deve essere almeno possibile premere il tasto destro sul personaggio e 
+Esistono inoltre listener creati dinamicamente sul gameScreenPanel che corrispondono a diversi elementi nel gioco, ve n'è 
+almeno uno per ogni GamePiece (in quanto deve essere almeno possibile premere il tasto destro sul personaggio e 
 mostrare il menu con le possibili interazioni con esso).
 
-La creazione di queste liste avviene nel GameScreenPanel.
+La creazione di questi listener avviene nel GameScreenPanel.
 Per il cambio di stato viene mantenuta una variabile statica che identifichi lo stato corrente del gioco. 
-Il metodo changeState permette di cambiare il suo valore e ha la key word “synchronize”, così come il metodo getState, 
-in quanto lettura e scrittura dello stato possono avvenire su thread diversi (ad esempio, il thread di un’animazione di 
-movimento all’inizio imposta il gameState a “moving”).
+Il metodo changeState (classe GameManager) permette di cambiare il suo valore e ha la key-word “synchronize”, 
+così come il metodo getState, in quanto lettura e scrittura dello stato possono avvenire su thread diversi
+(ad esempio, il thread di un’animazione di movimento all’inizio imposta il gameState a “moving”).
 
-Gli elementi di gioco hanno due rappresentazioni:
+### 2.4.3 Eventi
 
-- la rappresentazione di dominio in cui possono essere pensati come entità e ciò riguarda il package entity. 
-I metodi e le interazioni tra le classi di questo package non fanno in alcun modo riferimento all’interfaccia che viene 
+Gli elementi di gioco hanno due rappresentazioni: la rappresentazione di dominio in cui possono essere pensati come 
+entità (package entity) e il loro corrispettivo grafico. 
+I metodi e le interazioni tra le classi del package entity non fanno in alcun modo riferimento all’interfaccia che viene 
 utilizzata per giocare. Sono dunque indipendenti dall’interfaccia ed esprimono unicamente i concetti e gli oggetti 
-“fisici” del gioco. Tuttavia bisogna trovare un modo per far sì che essi abbiano una rappresentazione nella User 
-Interface e bisogna aver stabilito precise regole di interazione in modo che l’input dell’utente tramite UI abbia 
+“fisici” del gioco. 
+
+Tuttavia bisogna trovare un modo per far sì che essi abbiano una rappresentazione nella User 
+Interface e bisogna stabilire precise regole di interazione in modo che l’input dell’utente tramite UI abbia 
 effetti sulle entity, mentre aggiornamenti sulle entity siano correttamente propagati nelle loro rappresentazioni
 relativamente alla user interface. Per questo coordinamento è stato pensato un sistema ad eventi, creando una classe 
 astratta generica GameEvent che viene specializzata tramite le sue sottoclassi in modo tale che gli oggetti entity, 
-quando aggiornati, generino eventi specifici e li inviino alla classe EventHandler, la quale si occupa di distinguere i 
-vari tipi di eventi e di delegare a classi executor il compito di aggiornare in modo coerente con l’accaduto la User 
-Interface.
+quando aggiornati, generino eventi specifici e li inviino alla classe `EventHandler`. 
+
+La classe EventHandler si occupa di distinguere i vari tipi di eventi e di delegare a classi `Executor` il compito di 
+aggiornare in modo coerente con l’accaduto la User Interface.
 Tali executors sono gli unici ad avere riferimento al mainFrame in modo tale da essere l’unico collegamento 
 entity -> gui.
 
-- la rappresentazione di input (gui -> entity) è possibile grazie alla classe `PopMenuManager`. 
-Tramite il metodo addPieceOnScreen della classe `GameScreenPanel`, quando viene aggiunta la label con lo sprite di un 
-GamePiece, viene creato un listener per il tasto destro che prevede la chiamata al metodo showMenu di PopMenuManager, 
+La rappresentazione di input (gui -> entity) è possibile grazie alla classe `PopMenuManager`:
+tramite il metodo `addPieceOnScreen` della classe `GameScreenPanel`, quando viene aggiunta la label con lo sprite di un 
+GamePiece, viene creato un listener per il tasto destro del mouse che prevede la chiamata al metodo showMenu di PopMenuManager, 
 passando sia il GamePiece che la label corrispondente. Il PopMenuManager crea un menu contestuale aggiungendo vari tasti 
 corrispondenti alle varie interazioni possibili, in base alla classe effettiva del GamePiece passato. Infatti crea 
 staticamente delle Action per ogni interazione possibile con qualsiasi GamePiece, in modo tale che cliccando sul tasto 
 corrispondente venga eseguito il metodo relativo all’interazione per GamePiece sul quale si è cliccato.
-Ad esempio, se il GamePiece è un’istanza di Item verrà abilitata una useAction in modo tale che venga chiamato il 
-metodo Use dell’oggetto della classe `Item`.
+Ad esempio, se il GamePiece è un’istanza di Item verrà abilitato un tasto nel menù contestuale in modo tale che venga 
+chiamato il metodo `Use` dell’oggetto della classe `Item`.
 
 ## 2.6 Entity
 Le classi del package entity rappresentano i principali elementi del dominio di gioco, i quali non dipendono
@@ -494,7 +519,7 @@ Ad ogni room è associato un file JSON con la seguente struttura:
 - Un oggetto DefaultPosition che contiene X e Y
 - Per ogni entrata nella stanza, un oggetto con nome punto_cardinaleArrow (es. northArrow) contenente a sua volta X e Y.
 
-#### 2.6.6 BlockPosition
+#### 2.6.6.1 BlockPosition
 Tutte le posizioni, le coordinate e le dimensioni relative ai GamePiece e alle Room sono espresse in blocchi: un blocco 
 corrisponde ad un tile nell’immagine della stanza e le coordinate in una qualsiasi stanza si contano considerando 
 l’angolo in alto a sinistra della stanza, avente coordinate spaziali (0,0) ed incrementando le ascisse da sinistra 
